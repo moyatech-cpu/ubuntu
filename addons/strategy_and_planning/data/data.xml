@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="sequence_strategic_goals" model="ir.sequence">
+            <field name="name">Strategic Goals</field>
+            <field name="code">strategic.goals</field>
+            <field name="prefix">SG</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="sequence_app_annual_target" model="ir.sequence">
+            <field name="name">APP Annual Target</field>
+            <field name="code">app.annual.performance.plan</field>
+            <field name="prefix">APP-AT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!--        Annual Target Sequence-->
+
+        <record id="sequence_exe_annual_target" model="ir.sequence">
+            <field name="name">EXE Annual Target</field>
+            <field name="code">exe.annual.performance.plan</field>
+            <field name="prefix">EXE-AT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="sequence_app_annual_target" model="ir.sequence">
+            <field name="name">APP Annual Target</field>
+            <field name="code">app.annual.performance.plan</field>
+            <field name="prefix">APP-AT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!--quarter Sequence-->
+        <record id="sequence_exe_quarter_target" model="ir.sequence">
+            <field name="name">EXE Quarter Target</field>
+            <field name="code">exe.quarter.target</field>
+            <field name="prefix">EXE-QT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="sequence_app_quarter_target" model="ir.sequence">
+            <field name="name">APP Quarter Target</field>
+            <field name="code">app.quarter.target</field>
+            <field name="prefix">APP-QT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!--month Sequence-->
+        <record id="sequence_exe_month_target" model="ir.sequence">
+            <field name="name">EXE Month Target</field>
+            <field name="code">exe.month.target</field>
+            <field name="prefix">EXE-MT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="sequence_app_month_target" model="ir.sequence">
+            <field name="name">APP Month Target</field>
+            <field name="code">app.month.target</field>
+            <field name="prefix">APP-MT</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</odoo>

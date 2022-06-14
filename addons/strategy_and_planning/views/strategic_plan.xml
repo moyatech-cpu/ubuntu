@@ -1,0 +1,96 @@
+<odoo>
+    <record model="ir.ui.view" id="view_strategic_plan_form">
+        <field name="name">view_strategic_plan_form</field>
+        <field name="model">strategic.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button name="action_approve" string="Team Approve" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'new')]}"/>
+<!--                                groups="strategy_and_planning.group_ceo,base.group_system"/>-->
+                        <button name="action_reject" string="Reject" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '=', 'rejected')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,approved,rejected"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-outdent"
+                                name="view_outcome_smart_button" string="View Outcome">
+                            <!--                            <field name="note_button" widget="statinfo" string="NOTE!!"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                name="create_outcome_smart_button" string="Create Outcome">
+                            <!--                            <field name="note_button" widget="statinfo" string="NOTE!!"/>-->
+                        </button>
+<!--                        <button class="oe_stat_button" type="object" icon="fa-th-list"-->
+<!--                                name="" string="Create Objective">-->
+<!--                            &lt;!&ndash;                            <field name="meter_data" widget="statinfo" string="METER DATA!!"/>&ndash;&gt;-->
+<!--                        </button>-->
+                    </div>
+                    <group>
+                        <field name="name" required="1"/>
+                        <!--                        <field name="type_bool" widget="radio"/>-->
+                    </group>
+                    <group>
+                        <group>
+                            <field name="from_year" required="1"/>
+                        </group>
+                        <group>
+                            <field name="to_year" required="1"/>
+                        </group>
+                    </group>
+<!--                    <group>-->
+<!--                        <field name="strategic_goal_ids" readonly="1" />-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <field name="strategic_objective_ids" readonly="1" />-->
+<!--                    </group>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_strategic_plan_tree">
+        <field name="name">view_strategic_plan_tree</field>
+        <field name="model">strategic.plan</field>
+        <field name="arch" type="xml">
+            <tree string="Strategic plan tree" toolbar="1">
+                <field name="name" required="1"/>
+                <field name="from_year" required="1"/>
+                <field name="to_year" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_strategic_plan">
+        <field name="name">Strategic Plan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">strategic.plan</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--    <record model="ir.actions.act_window" id="action_app_plan">-->
+    <!--        <field name="name">APP Plan</field>-->
+    <!--        <field name="type">ir.actions.act_window</field>-->
+    <!--        <field name="res_model">strategic.plan</field>-->
+    <!--        <field name="view_type">form</field>-->
+    <!--        <field name="context" eval="{'default_type_bool': 'app'}"/>-->
+    <!--        <field name="domain">[("type_bool", "=", "app")]</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--    </record>-->
+
+    <menuitem id="menu_planning_root" name="Planning" sequence="9"
+              web_icon="strategy_and_planning,static/description/icon.png"/>
+
+    <menuitem id="menu_execution_plan" name="Strategic Planning" parent="menu_planning_root" sequence="1"/>
+
+    <menuitem id="menu_strategic_plan_sub" name='Strategic Plan' parent="menu_execution_plan"
+              action="action_strategic_plan"
+              sequence="5"/>
+    <!--    <menuitem id="menu_app_plan_sub" name='APP Plan' parent="menu_execution_plan"-->
+    <!--              action="action_app_plan"-->
+    <!--              sequence="3"/>-->
+
+
+</odoo>

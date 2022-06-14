@@ -1,0 +1,53 @@
+/*main*/
+.bg-lightgreen
+{
+    background-color: #00a09d !important;
+}
+.bg-orange
+{
+    background-color: orange !important;
+}
+.text-orange
+{
+    color: orange !important;
+}
+.bg-light
+{
+    background-color: white !important;
+}
+.h-120{
+    height: 120px;
+}
+.h-90{
+    height: 90px;
+}
+.p-20
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.m-2
+{
+    margin: 2px !important;
+}
+.mt-10{
+    margin-top: 10px;
+}
+.m-0{
+    margin: 0px;
+}
+.m-2{
+    margin:2px;
+}
+.c-white{
+    color: white;
+}
+.h-80{
+    height: 80px;
+}
+.h-100{
+    height: 100px;
+}
+.pointer{
+    cursor: pointer;
+}

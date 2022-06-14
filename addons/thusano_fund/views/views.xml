@@ -1,0 +1,189 @@
+<odoo>
+  <data>
+    <!-- explicit kanban view definition -->
+    
+        <record id="general_memo_kanban" model="ir.ui.view">
+        <field name="name">thusano.fund.kanban</field>
+        <field name="model">thusano.fund</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" colors="green:state=='Accepted';red:state=='Decline';yellow:state=='New';" create="false" edit="false" import="false">
+                <field name="state"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                            </strong>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                    	
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="thusano_fund.list">
+      <field name="name">thusano.fund.list</field>
+      <field name="model">thusano.fund</field>
+      <field name="arch" type="xml">
+        <tree create="false" edit="false" import="false">
+          <field name="application_date"/>
+          <field name="name"/>
+          <field name="surname"/>
+          <field name="gender" />
+          <field name="id_number"/>
+          <field name="email"/>
+          <field name="physical_address"/>
+          <field name="state"/>
+          <field name="user_type"/>
+        </tree>
+      </field>
+    </record>
+   
+      <record model="ir.ui.view" id="thusano_fund.form">
+      
+      <field name="name">thusano.fund.form.view</field>
+      <field name="model">thusano.fund</field>
+      
+      <field name="arch" type="xml">
+      <form string="Thusano Fund Application Form" create="false" edit="" import="false">
+      	<header>
+      	     <field name="state" widget="statusbar"  statusbar_visible="new,accepted,decline,shortlisted" />
+      	</header>
+      	<sheet>
+      		<button string="shortlist" attrs = "{'invisible':[('state','!=','new')]}" style="margin-right:10px;" type="object" name="shortlist_state" class="oe_highlight"/>
+			<button string="Accept" attrs = "{'invisible':['|',('state','=','decline'),('state','=','accepted')]}" style="margin-right:10px;"   type="object" name="accept_state" class="oe_highlight"/>
+			<button string="Decline" attrs = "{'invisible':['|',('state','=','decline'),('state','=','accepted')]}" type="object" name="decline_state" class="oe_highlight" /> 		
+		 
+		<div id="o_memo_container">
+        	<div id="o_memo_main">
+                <group name="personal_details" string="Personal Details">
+                	<group>
+                			<field name="name"  readonly='1'/>
+                      		<field name="surname" readonly='1'/>
+                     	 	<field name="gender" readonly='1'/>
+ 					  		<field name="email" readonly='1'/>
+ 					  		<field name="user_type" readonly='1' />
+ 					  </group>
+ 					  <group name="application_details">
+                            <field name="cell_phone_number" readonly='1'/>
+                            <field name="alternative_number" readonly='1'/>
+                            <field name="id_number" readonly='1'/>
+    
+                        </group>
+ 				</group>
+ 				<group name="application_details" string="Application Details">
+                        <group>
+                        	<field name="application_date" readonly='1'/>
+                        	<field name="appl_amount" readonly='1'/>
+                        	<field name="approved_amount" />
+                            <field name='reg_fees' readonly='1'/>
+                            <field name="ngo_ngo_funding" readonly='1'/>
+                            <field name="short_courses_technical_training" readonly='1'/>
+                            <field name="other_related_funding" readonly='1'/>
+                        </group>
+                        
+                    </group>
+ 					
+         	</div>
+       </div>
+       <notebook colspan="8">
+       
+       					<page name="further_information" string="Information">
+                            <group name="container_row_2">
+                            	<field name="has_sponsor" attrs = "{'invisible':1}"/>
+                            	<field name="sponsor_name" readonly="1" attrs = "{'invisible':[('has_sponsor','=','True')]}"/>
+                            	<field name="sponsor_amount" readonly="1" attrs = "{'invisible':[('has_sponsor','=','True')]}"/>
+                            	<field name="self_support_statement" readonly="1"/>
+                            	<field name="motivation_statement" readonly="1"/>
+                             </group>
+                        </page>
+                        <page name="uploaded_documents" string="Uploaded Documents">
+                        	<group name="container_row_2">
+                            	<field name="certified_identity_document_applicant" readonly="1"/>
+                            	<field name="letter_stating_financial_need" readonly="1"/>
+                            	<field name="academic_record_acceptance_letter" readonly="1"/>
+                            	<field name="income_proof" readonly="1"/>
+                            	<field name="affidavit" readonly="1"/>
+                            	<field name="institution_invoice_quotation" readonly="1"/>
+                            </group>
+                        </page>
+                        <page name="Parent/Gaurdian Information" string="Parent/Gaurdian Information">
+                            <group name="container_row_2">
+                            	<field name="parent_name" readonly="1"/>
+                            	<field name="parent_id_number" readonly="1"/>
+                            	<field name="gross_income" readonly="1"/>
+                            	<field name="second_parent_name" readonly="1"/>
+                            	<field name="second_parent_id_number" readonly="1"/>
+                            	
+                             </group>
+                        </page>
+        </notebook>
+        </sheet>
+        <div class="oe_chatter" >
+    		<field name="message_follower_ids" widget="mail_followers"/>
+    		<field name="message_ids" widget="mail_thread"/>
+		</div>
+    	</form>
+      </field>
+      </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="thusano_fund.action_window">
+      <field name="name">Applications List</field>
+      <field name="res_model">thusano.fund</field>
+      <field name="view_mode">tree,kanban,form</field>
+    </record> 
+    
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="thusano_fund.action_server">
+      <field name="name">thusano_fund server</field>
+      <field name="model_id" ref="model_thusano_fund_thusano_fund"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="thusano_fund" id="thusano_fund.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="thusano_fund.menu_1" parent="thusano_fund.menu_root"/>
+    <menuitem name="Menu 2" id="thusano_fund.menu_2" parent="thusano_fund.menu_root"/>
+    -->
+    				
+    <record id="menu_thusano_fund" model="website.menu">
+    	<field name="name">Thusano Fund Application </field>
+    	<field name="url">/form</field>
+    	<field name="parent_id" ref="website.main_menu"/>
+    	<field name="sequence" type="int">22</field>    
+   </record>
+    
+    			<!-- actions -->
+    <menuitem name="Thusano Fund" id="thusano_fund.menu" groups="thusano_fund.thusano_fund_manager_user" web_icon="thusano_fund,static/description/form.png"/>
+    <menuitem name="Fund Application" id="thusano_fund.submenu" groups="thusano_fund.thusano_fund_manager_user"  parent="thusano_fund.menu"  sequence="0" action="thusano_fund.action_window"/>
+    
+  </data>
+</odoo>

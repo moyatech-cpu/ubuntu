@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Meeting Room Booking Tree View-->
+        <record model="ir.ui.view" id="meeting_room_booking_tree_view">
+            <field name="name">meeting.room.booking.tree.view</field>
+            <field name="model">meeting.room.booking</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="meeting_room_id"/>
+                    <field name="meeting_date"/>
+                    <field name="meeting_end_time"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Meeting Room Booking Form View-->
+        <record model="ir.ui.view" id="meeting_room_booking_form_view">
+            <field name="name">meeting.room.booking.form.view</field>
+            <field name="model">meeting.room.booking</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="book_room" string="Book Room" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('state', '=', 'booked')]}"/>
+                        <button name="cancel_room" string="Cancel Room" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('state', '=', 'cancelled')]}"/>
+                    </header>
+                    <sheet>
+                        <group string="Booking Details" name="booking_details">
+                            <group>
+                                <field name="booking_user_id" readonly="1"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                                <field name="user_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="position_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="division_id" options="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="meeting_date" required="1"/>
+                                <field name="meeting_room_id" options="{'no_create': True}" required="1"/>
+                                <field name="cancellation_user_id" readonly="1"/>
+                                <field name="meeting_end_time" required="1"/>
+                                <field name="state" readonly="1"/>
+                                <field name="type" invisible="1"/>
+                                <field name="rescheduled_room" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Calendar view for Room Bookings-->
+        <record id="calendar_room_bookings" model="ir.ui.view">
+            <field name="name">calendar.meeting.room.booking</field>
+            <field name="model">meeting.room.booking</field>
+            <field name="arch" type="xml">
+                <calendar string="Viewing Meeting Room Booking" date_start="meeting_date" date_stop="meeting_end_time"
+                          mode="month" color="user_id">
+                    <field name="name"/>
+                    <field name="meeting_room_id"/>
+                    <field name="user_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!--kanban view for Upcoming booking-->
+            <record model="ir.ui.view" id="view_upcoming_bookings_kanban">
+            <field name="name">meeting.room.booking.kanban</field>
+            <field name="model">meeting.room.booking</field>
+            <field name="arch" type="xml">
+                <kanban class="o_event_kanban_view">
+                    <field name="user_id"/>
+                    <field name="meeting_room_id"/>
+                    <field name="meeting_date"/>
+                    <field name="meeting_end_time"/>
+                    <field name="name"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.deletable">
+                                            <li><a type="delete">Delete</a></li>
+                                        </t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.meeting_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.meeting_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.meeting_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.meeting_date.raw_value).format('LT')"/></div>
+                                </div>
+                                <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title"><field name="name"/></h4>
+                                    <div>
+                                        <t t-if="record.meeting_room_id.raw_value"> Room Name : <b> <field name="meeting_room_id"/> </b> <br/> </t>
+                                        <t t-if="record.user_id.raw_value"> Booked By : <b> <field name="user_id"/> </b> <br/> </t> <br></br>
+                                        <i class="fa fa-clock-o"/>
+                                        <b>To</b> <t t-esc="moment(record.meeting_end_time.raw_value).format('lll')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action for Meeting Room Booking Upcoming-->
+        <record model="ir.actions.act_window" id="action_meeting_room_booking_upcoming">
+            <field name="name">All Upcoming Booking</field>
+            <field name="res_model">meeting.room.booking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="domain">[('type', '=', 'upcoming')]</field>
+            <field name="context">{'default_type': 'upcoming'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a new room booking.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for My Meeting Room Booking Upcoming-->
+        <record model="ir.actions.act_window" id="action_my_meeting_room_booking_upcoming">
+            <field name="name">My Upcoming Booking</field>
+            <field name="res_model">meeting.room.booking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="domain">[('type', '=', 'upcoming'), ('user_id', '=', uid)]</field>
+            <field name="context">{'default_type': 'upcoming'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a new room booking.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for Meeting Room Booking History-->
+        <record model="ir.actions.act_window" id="action_meeting_room_booking_history">
+            <field name="name">History Booking</field>
+            <field name="res_model">meeting.room.booking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="domain">[('type', '=', 'history')]</field>
+            <field name="context">{'default_type': 'history'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a new room booking.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for Booked Rooms-->
+        <record model="ir.actions.act_window" id="action_booked_rooms">
+            <field name="name">Booked Rooms</field>
+            <field name="res_model">meeting.room.booking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="domain">[('state', '=', 'booked')]</field>
+            <field name="context">{'default_state': 'booked'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a new room booking.
+                </p>
+            </field>
+        </record>
+
+        <!--Menu for Meeting Room Booking-->
+        <menuitem name="Facility" id="main_menu_meeting_room" web_icon="facility,static/description/icon.png"
+			groups="base.group_system,facility.facility_manager,facility.facility_officer,facility.end_user"/>
+                  
+		<!-- Meeting Rooms -->
+        <menuitem name="Meeting Rooms" id="menu_meeting_rooms" 
+			parent="facility.main_menu_meeting_room" sequence="2" />	
+			                  
+        <menuitem name="Meeting Room Bookings" id="menu_meeting_room_booking" 
+			parent="facility.menu_meeting_rooms" sequence="4"/>
+        
+        <menuitem name="All Upcoming Bookings" id="menu_meeting_room_booking_upcoming" sequence="1"
+			parent="facility.menu_meeting_room_booking" action="action_meeting_room_booking_upcoming"/>
+                  
+        <menuitem name="My Upcoming Bookings" id="menu_my_meeting_room_booking_upcoming" sequence="1"
+			parent="facility.menu_meeting_room_booking" action="action_my_meeting_room_booking_upcoming"/>
+                  
+        <menuitem name="Booking History" id="menu_meeting_room_booking_history" sequence="2"
+			parent="facility.menu_meeting_room_booking" action="action_meeting_room_booking_history"/>
+                  
+        <menuitem name="Booked Rooms" id="menu_booked_rooms" sequence="3"
+			parent="facility.menu_meeting_room_booking" action="action_booked_rooms"/>
+                  
+    </data>
+</odoo>

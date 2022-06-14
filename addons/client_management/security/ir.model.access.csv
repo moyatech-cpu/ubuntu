@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_partner_enquiry,access_partner_enquiry,model_partner_enquiry,,1,1,1,1
+access_youth_enquiry,access_youth_enquiry,model_youth_enquiry,,1,1,1,1
+access_youth_enquiry,access_youth_enquiry,model_youth_enquiry,client_management.group_branch_beneficiary,1,1,1,1
+access_res_district,access_res_district,model_res_district,,1,1,1,1
+access_res_municipality,access_res_municipality,model_res_municipality,,1,1,1,1
+access_res_branch,access_res_branch,model_res_branch,,1,1,1,1
+access_enquiry_team,access_enquiry_team,model_enquiry_team,,1,1,1,1
+access_enquiry_team_members,access_enquiry_team_members,model_enquiry_team_members,base.group_user,1,1,1,1
+access_res_metro_municipality,access_res_metro_municipality,model_res_metro_municipality,base.group_user,1,1,1,1
+access_mentor_sectors,access_mentor_sectors,model_mentor_sectors,,1,1,1,1
+

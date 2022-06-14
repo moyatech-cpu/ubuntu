@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_report_wiz_form" model="ir.ui.view">
+        <field name="name">report.wiz.form</field>
+        <field name="model">report.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Submit Report">
+                <group>
+                    <field name="employee_id" readonly="1"/>
+                    <field name="risk_id" required="1"/>
+                    <field name="monitoring_intervals" required="1"/>
+                    <field name="monitoring_month" attrs="{'invisible': [('monitoring_intervals','!=','monthly')], 'required': [('monitoring_intervals','=','monthly')]}"/>
+                    <field name="monitoring_quarter" attrs="{'invisible': [('monitoring_intervals','!=','quarterly')], 'required': [('monitoring_intervals','=','quarterly')]}"/>
+                    <field name="monitoring_year" attrs="{'invisible': [('monitoring_intervals','!=','annually')], 'required': [('monitoring_intervals','=','annually')]}"/>
+                    <field name="store_report_name" invisible="1"/>
+                    <field name="report_doc" widget="binary" filename="store_report_name" required="1"/>
+                    <field name="store_p_o_e_name" invisible="1"/>
+                    <field name="p_o_e_doc" widget="binary" filename="store_p_o_e_name" required="1"/>
+                </group>
+                <field name="note" placeholder="Description.."/>
+                <footer>
+                    <button name="submit_report" string="Submit Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_assign_team" model="ir.actions.act_window">
+        <field name="name">Submit Report</field>
+        <field name="res_model">report.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_report_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+	
+	<!--  
+    <menuitem id="menu_submit_report"
+              name="Submit Report"
+              parent="menu_risk_reporting"
+              action="action_assign_team"
+              sequence="19"/>
+	-->
+
+</odoo>

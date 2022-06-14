@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="inherit_mail_template_form" model="ir.ui.view">
+            <field name="name">inherit.mail.template.form</field>
+            <field name="model">mail.template</field>
+            <field name="inherit_id" ref="mail.email_template_form"/>
+            <field name="arch" type="xml">
+                <field name="model_id" position="after">
+                	<field name="type"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

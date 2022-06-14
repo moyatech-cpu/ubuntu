@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_risk_management_manager,access_risk_management manager,model_risk_management,nyda_risk_management.risk_manager,1,1,1,1
+access_risk_management_user,access_risk_management user,model_risk_management,nyda_risk_management.risk_user,1,1,1,0
+access_risk_support_document,access_risk_support_document,model_risk_support_document,,1,1,1,1
+access_legislation_log,access_legislation_log,model_legislation_log,,1,1,1,1
+access_lost_assets,access_lost_assets,model_lost_assets,,1,1,1,1
+access_deliverable_log,access_deliverable_log,model_deliverable_log,,1,1,1,1
+access_loss_damage_assets,access_loss_damage_assets,model_loss_damage_assets,,1,1,1,1
+access_risk_compliance,access_risk_compliance,model_risk_compliance,,1,1,1,1
+access_risk_report,access_risk_report,model_risk_report,,1,1,1,1
+access_particular_claims,access_particular_claims,model_particular_claims,,1,1,1,1
+access_insurance_excess,access_insurance_excess,model_insurance_excess,,1,1,1,1
+access_recovery,access_recovery,model_recovery,,1,1,1,1
+access_risk_insurance,access_risk_insurance,model_risk_insurance,,1,1,1,1
+access_risk_compliance_review,access_risk_compliance_review,model_risk_compliance_review,nyda_risk_management.risk_user,1,1,0,0

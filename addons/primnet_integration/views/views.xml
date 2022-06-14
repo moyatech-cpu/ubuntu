@@ -1,0 +1,121 @@
+<odoo>
+  <data>
+    <!-- Overall Performance Form -->
+    <record model="ir.ui.view" id="primnet_integration.overall_performance_form">
+      <field name="name">Overall Performance</field>
+      <field name="model">monitoring</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" edit="false" create="false">
+			<field name="overall_dashboard" readonly="1" />
+		</form>
+      </field>
+    </record>
+
+    <!-- Organisational Plan Form -->
+    <record model="ir.ui.view" id="primnet_integration.organisational_plan_form">
+      <field name="name">Organisational Plans</field>
+      <field name="model">monitoring</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="org_plans" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="primnet_integration.window_period_form">
+      <field name="name">Window Period</field>
+      <field name="model">monitoring</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="window_period" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="primnet_integration.quarterly_report_form">
+      <field name="name">Quarterly Report</field>
+      <field name="model">monitoring</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="quarterly_report" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="primnet_integration.organisational_report_form">
+      <field name="name">Organisational Report</field>
+      <field name="model">monitoring</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="org_report" readonly="1" />
+		</form>
+      </field>
+    </record>
+	              
+    <!-- Overal Performance ACtion -->
+    <record model="ir.actions.act_window" id="primnet_integration.overall_performance_action">
+      <field name="name">Overal Performance</field>
+      <field name="res_model">monitoring</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.overall_performance_form"/>
+    </record>
+
+    <!-- Organisational Plan Action -->
+    <record model="ir.actions.act_window" id="primnet_integration.org_plan_action">
+      <field name="name">Organisational Plan</field>
+      <field name="res_model">monitoring</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.organisational_plan_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="primnet_integration.window_period_action">
+      <field name="name">Window Period</field>
+      <field name="res_model">monitoring</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.window_period_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="primnet_integration.quarterly_report_action">
+      <field name="name">Quarterly Report</field>
+      <field name="res_model">monitoring</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.quarterly_report_form"/>
+    </record>  
+
+    <record model="ir.actions.act_window" id="primnet_integration.org_report_action">
+      <field name="name">Organisational Report</field>
+      <field name="res_model">monitoring</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.organisational_report_form"/>
+    </record>
+    
+    <!-- Top menu item -->
+    <menuitem id="primnet_integration.menu_root" name="Monitoring" sequence="1"
+              web_icon="primnet_integration,static/description/icon.png"/>
+              
+    <menuitem name="Dashboard" id="primnet_integration.dashboard" parent="primnet_integration.menu_root"/>
+    
+    <menuitem name="Overall Performance" id="primnet_integration.menu_overall_performance" parent="primnet_integration.dashboard"
+			action="primnet_integration.overall_performance_action"/>
+                  
+    <menuitem name="Organisational Plan" id="primnet_integration.org_plan" parent="primnet_integration.menu_root"
+			action="primnet_integration.org_plan_action"/>
+    			
+    <menuitem name="Window Period" id="primnet_integration.window_period" parent="primnet_integration.menu_root"
+			action="primnet_integration.window_period_action"/>
+			    
+    <menuitem name="Reports" id="primnet_integration.reports" parent="primnet_integration.menu_root"/>
+    
+    <menuitem name="Quarterly Report" id="primnet_integration.quarterly_report" parent="primnet_integration.reports"
+			action="primnet_integration.quarterly_report_action"/>
+
+    <menuitem name="Organisational Report" id="primnet_integration.org_report" parent="primnet_integration.reports"
+			action="primnet_integration.org_report_action"/>
+
+  </data>
+</odoo>

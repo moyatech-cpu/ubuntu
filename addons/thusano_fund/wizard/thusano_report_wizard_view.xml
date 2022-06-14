@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    
+     <!--HR Employee Report Form View-->
+    <record model="ir.ui.view" id="thusano_fund_report_form_view">
+        <field name="name">thusano.fund.report.for.view</field>
+        <field name="model">thusano.fund.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+            		<group>
+						  <field name="state"/>          		
+            		</group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                
+                <footer>
+                    <button string="Get Report" name="get_application_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action for Employee Report-->
+    <record model="ir.actions.act_window" id="action_thusano_fund_report">
+        <field name="name">Thusano Fund Report</field>
+        <field name="res_model">thusano.fund.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="thusano_fund_report_form_view"/>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem name="Reports" parent="thusano_fund.menu" id="menu_thuso_fund_report" groups="thusano_fund.thusano_fund_manager_user" action="action_thusano_fund_report"/>           	                                                                       
+    </data>
+</odoo>

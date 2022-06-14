@@ -1,0 +1,862 @@
+<odoo>
+    <template id="buizb.banner" name="Banner">
+       <section style="background: url(/buizb/static/src//images/bg/bg.jpg) repeat scroll center center / cover;">
+            <div class="welcome-image-area">
+                <div class="display-table">
+                    <div class="display-table-cell">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <h2>We build your website</h2>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+                                    <a class="slide-btn smoth-scroll" href="#about">learn more</a>
+                                    <a class="slide-btn smoth-scroll" href="#contact">get in touch</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </section>
+    </template>
+
+    <template id="buizb.about-us" name="About">
+        <section id="about" class="about-us-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title text-center">
+                            <h2>About us</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- START ABOUT US TEXT DESIGN AREA -->
+                    <div class="col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.1s" data-wow-offset="0">
+                        <div class="about-text">
+                            <h4>welcome to <span>buizb</span></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentiallyIt has survived not only five centuriesLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            <a href="#" class="read-more">Read more</a>
+                        </div>
+                    </div>
+                    <!-- / END ABOUT US TEXT DESIGN AREA -->
+
+                    <div class="col-md-6 wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.5s" data-wow-offset="0">
+                        <div class="about-image-area">
+                            <img src="/buizb/static/src/images/about.png" alt=""/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.our_service" name="Service">
+        <section id="service" class="service-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title text-center">
+                            <h2>What we do?</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- START SINGLE SERVICES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="single-service">
+                            <i class="fa fa-camera fa-3x"></i>
+                            <h4>photography</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE SERVICES DESIGN AREA -->
+                    <!-- START SINGLE SERVICES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
+                        <div class="single-service">
+                            <i class="fa fa-laptop fa-3x"></i>
+                            <h4>Web Design</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE SERVICES DESIGN AREA -->
+                    <!-- START SINGLE SERVICES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
+                        <div class="single-service">
+                            <i class="fa fa-code fa-3x"></i>
+                            <h4>Development</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE SERVICES DESIGN AREA -->
+                    <!-- START SINGLE SERVICES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                        <div class="single-service">
+                            <i class="fa fa-connectdevelop fa-3x"></i>
+                            <h4>Social Media</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE SERVICES DESIGN AREA -->
+                    <!-- START SINGLE SERVICES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="1s">
+                        <div class="single-service">
+                            <i class="fa fa-flask fa-3x"></i>
+                            <h4>Easy to customize</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE SERVICES DESIGN AREA -->
+                    <!-- START SINGLE SERVICES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="1.2s">
+                        <div class="single-service">
+                            <i class="fa fa-users fa-3x"></i>
+                            <h4>Full support</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE SERVICES DESIGN AREA -->
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.our_team" name="Team">
+        <section id="team" class="team-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>our team</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="myQuoteCarousel" class="carousel quotecarousel slide s_banner" data-interval="10000"> 
+                          <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myQuoteCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myQuoteCarousel" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="testimonial-container">
+                                    <div class="team-list">
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".2s">
+                                            <img src="/buizb/static/src/images/team/team1.jpg" alt=""/>
+                                            <h4>tanvir rahman</h4>
+                                            <h6 class="text-muted">CEO/Founder</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".4s">
+                                            <img src="/buizb/static/src/images/team/team2.jpg" alt=""/>
+                                            <h4>jannat toyonte</h4>
+                                            <h6 class="text-muted">graphics designer</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".6s">
+                                            <img src="/buizb/static/src/images/team/team3.jpg" alt=""/>
+                                            <h4>john doe</h4>
+                                            <h6 class="text-muted">wordpress expert</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".8s">
+                                            <img src="/buizb/static/src/images/team/team4.jpg" alt=""/>
+                                            <h4>nidhi rahman</h4>
+                                            <h6 class="text-muted">Marketing expert</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="testimonial-container">
+                                    <div class="team-list">
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".2s">
+                                            <img src="/buizb/static/src/images/team/team1.jpg" alt=""/>
+                                            <h4>tanvir rahman</h4>
+                                            <h6 class="text-muted">CEO/Founder</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".4s">
+                                            <img src="/buizb/static/src/images/team/team2.jpg" alt=""/>
+                                            <h4>jannat toyonte</h4>
+                                            <h6 class="text-muted">graphics designer</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".6s">
+                                            <img src="/buizb/static/src/images/team/team3.jpg" alt=""/>
+                                            <h4>john doe</h4>
+                                            <h6 class="text-muted">wordpress expert</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 single-team wow fadeInUp" data-wow-delay=".8s">
+                                            <img src="/buizb/static/src/images/team/team4.jpg" alt=""/>
+                                            <h4>nidhi rahman</h4>
+                                            <h6 class="text-muted">Marketing expert</h6>
+                                            <div class="team-social">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.design_area" name="Design">
+        <section class="get-started section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="get-text text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                            <h2>are you ready to get started?</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed elit tortor. Quisque bibendum mauris velit, sed tincidunt massa lacinia nec.</p>
+                            <a href="#contact" class="read-more">get started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.why_choose_us" name="Why Us">
+        <section class="why-choose-us-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>why choose us</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 wow fadeInLeft" data-wow-duration="2s" data-wow-delay="0.5s" data-wow-offset="0">
+                        <div class="why-chosse-image">
+                            <img src="/buizb/static/src/images/why-choose-us.jpg" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.5s" data-wow-offset="0">
+                        <div class="why-choose-us-text">
+                            <div class="according-area">
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <!-- START SINGLE PANEL DESIGN AREA -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-target="#collapseOne" data-parent="#accordion" aria-expanded="true" aria-controls="collapseOne">
+                                              Clean code
+                                            </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div class="panel-body">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod dignissim massa ut venenatis. Vivamus eleifend sem id ligula sollicitudin feugiat.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / END SINGLE PANEL DESIGN AREA -->
+                                    <!-- START SINGLE PANEL DESIGN AREA -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                              Great design out of box
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod dignissim massa ut venenatis. Vivamus eleifend sem id ligula sollicitudin feugiat.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / END SINGLE PANEL DESIGN AREA -->
+                                    <!-- START SINGLE PANEL DESIGN AREA -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                              Fit on all devices
+                                            </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod dignissim massa ut venenatis. Vivamus eleifend sem id ligula sollicitudin feugiat.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / END SINGLE PANEL DESIGN AREA -->
+                                    <!-- START SINGLE PANEL DESIGN AREA -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingfour">
+                                            <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                                              Made with passion
+                                            </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
+                                            <div class="panel-body">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod dignissim massa ut venenatis. Vivamus eleifend sem id ligula sollicitudin feugiat.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / END SINGLE PANEL DESIGN AREA -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.our_story" name="Story">
+        <section class="video-area" data-stellar-background-ratio="0.6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="video-area-text text-center wow bounceIn">
+                            <a href="/buizb/static/src/video/Envato.mp4" class="video-play mfp-iframe" iframefit="fitCont">
+                                <i class="fa fa-play"></i>
+                            </a>
+                            <h2>Watch Our Story</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.our_works" name="Works">
+        <section id="works">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>our works</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="container">
+                <div class="row">
+                    <div align="center">
+                        <button class="btn btn-default filter-button" data-filter="all">All</button>
+                        <button class="btn btn-default filter-button" data-filter="hdpe">Graphic</button>
+                        <button class="btn btn-default filter-button" data-filter="sprinkle">Photography</button>
+                        <button class="btn btn-default filter-button" data-filter="spray">Typography</button>
+                        <button class="btn btn-default filter-button" data-filter="irrigation">Web Design</button>
+                    </div>
+                    <br/>
+                    <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray sprinkle hdpe">
+                        <img src="/buizb/static/src/images/work/1.jpg" class="img-responsive"/>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation sprinkle">
+                        <img src="/buizb/static/src/images/work/2.jpg" class="img-responsive"/>
+                    </div>
+
+                    <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray hdpe">
+                        <img src="/buizb/static/src/images/work/3.jpg" class="img-responsive"/>
+                    </div>
+                    <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray hdpe">
+                        <img src="/buizb/static/src/images/work/4.jpg" class="img-responsive"/>
+                    </div>
+                    <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray hdpe">
+                        <img src="/buizb/static/src/images/work/5.jpg" class="img-responsive"/>
+                    </div>
+                    <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray hdpe">
+                        <img src="/buizb/static/src/images/work/6.jpg" class="img-responsive"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.our_facts" name="Facts">
+        <section class="project-complete-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-project-complete">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            <h2 class="counter-num">1200</h2>
+                            <h6 class="text-muted">project complete</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-project-complete">
+                            <i class="fa fa-users"></i>
+                            <h2 class="counter-num">1000</h2>
+                            <h6 class="text-muted">Happy Clients</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-project-complete">
+                            <i class="fa fa-code"></i>
+                            <h2 class="counter-num">56090</h2>
+                            <h6 class="text-muted">Line Of Coding</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-project-complete">
+                            <i class="fa fa-angellist"></i>
+                            <h2 class="counter-num">31</h2>
+                            <h6 class="text-muted">Awwards Won</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.our_testimonial" name="Client">
+        <section id="testimonial" class="testimonial-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>our <span>clients</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="myQuoteCarousel" class="carousel quotecarousel slide s_banner" data-interval="10000"> 
+                          <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myQuoteCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myQuoteCarousel" data-slide-to="1"></li>
+                            <li data-target="#myQuoteCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- START SINGLE TESTIMONIAL DESIGN AREA -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="testimonial-container">
+                                    <div class="single-testimonial text-center">
+                                        <img src="/buizb/static/src/images/testimonial/1.jpg" class="img-circle" alt=""/>
+                                        <h6 class="text-muted">john doe</h6>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        <h5>CEO of google</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- / END SINGLE TESTIMONIAL DESIGN AREA -->
+                        <!-- START SINGLE TESTIMONIAL DESIGN AREA -->
+                            <div class="item">
+                                <div class="testimonial-container">
+                                    <div class="single-testimonial text-center">
+                                        <img src="/buizb/static/src/images/testimonial/2.jpg" class="img-circle" alt=""/>
+                                        <h6 class="text-muted">john doe</h6>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        <h5>CEO of microsoft</h5>
+                                        <div class="rating">
+                                            <ul>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- / END SINGLE TESTIMONIAL DESIGN AREA -->
+                        <!-- START SINGLE TESTIMONIAL DESIGN AREA -->
+                            <div class="item">
+                                <div class="testimonial-container">
+                                    <div class="single-testimonial text-center">
+                                        <img src="/buizb/static/src/images/testimonial/3.jpg" class="img-circle" alt=""/>
+                                        <h6 class="text-muted">john doe</h6>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        <h5>CEO of apple</h5>
+                                        <div class="rating">
+                                            <ul>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                                <li><i class="fa fa-star"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / END SINGLE TESTIMONIAL DESIGN AREA -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.pricing" name="Pricing">
+        <section id="pricing" class="pricing-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>our <span>pricing</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- START SINGLE PRICING DESIGN AREA -->
+                    <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-box">
+                            <div class="pricing-header">
+                                <div class="plan-title">
+                                    <h4>basic plan</h4>
+                                </div>
+                                <div class="plan-price">
+                                    $99
+                                </div>
+                                <div class="plan-month text-muted">
+                                    per month
+                                </div>
+                            </div>
+                            <ul class="list-unstyled plan-features">
+                                <li>Basic Updates</li>
+                                <li>Basic Features</li>
+                                <li>Community Support</li>
+                                <li>Real time Monitoring</li>
+                            </ul>
+                            <a class="read-more" href="#">buy now</a>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE PRICING DESIGN AREA -->
+                    <!-- START SINGLE PRICING DESIGN AREA -->
+                    <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
+                        <div class="pricing-box">
+                            <div class="pricing-header">
+                                <div class="plan-title">
+                                    <h4>standard plan</h4>
+                                </div>
+                                <div class="plan-price">
+                                    $199
+                                </div>
+                                <div class="plan-month text-muted">
+                                    per month
+                                </div>
+                            </div>
+                            <ul class="list-unstyled plan-features">
+                                <li>Basic Updates</li>
+                                <li>Basic Features</li>
+                                <li>Community Support</li>
+                                <li>Real time Monitoring</li>
+                            </ul>
+                            <a class="read-more" href="#">buy now</a>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE PRICING DESIGN AREA -->
+                    <!-- START SINGLE PRICING DESIGN AREA -->
+                    <div class="col-md-3  col-sm-6 wow fadeInUp" data-wow-delay=".6s">
+                        <div class="pricing-box">
+                            <div class="pricing-header">
+                                <div class="plan-title">
+                                    <h4>premium plan</h4>
+                                </div>
+                                <div class="plan-price">
+                                    $299
+                                </div>
+                                <div class="plan-month text-muted">
+                                    per month
+                                </div>
+                            </div>
+                            <ul class="list-unstyled plan-features">
+                                <li>Basic Updates</li>
+                                <li>Basic Features</li>
+                                <li>Community Support</li>
+                                <li>Real time Monitoring</li>
+                            </ul>
+                            <a class="read-more" href="#">buy now</a>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE PRICING DESIGN AREA -->
+                    <!-- START SINGLE PRICING DESIGN AREA -->
+                    <div class="col-md-3  col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                        <div class="pricing-box">
+                            <div class="pricing-header">
+                                <div class="plan-title">
+                                    <h4>Extra premium</h4>
+                                </div>
+                                <div class="plan-price">
+                                    $399
+                                </div>
+                                <div class="plan-month text-muted">
+                                    per month
+                                </div>
+                            </div>
+                            <ul class="list-unstyled plan-features">
+                                <li>Basic Updates</li>
+                                <li>Basic Features</li>
+                                <li>Community Support</li>
+                                <li>Real time Monitoring</li>
+                            </ul>
+                            <a class="read-more" href="#">buy now</a>
+                        </div>
+                    </div>
+                    <!-- / END SINGLE PRICING DESIGN AREA -->
+                </div>
+            </div>
+        </section>
+        <section class="get-started section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="get-text text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                            <h2>so what are you waiting for?</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed elit tortor. Quisque bibendum mauris velit, sed tincidunt massa lacinia nec.</p>
+                            <a href="#contact" class="read-more">get started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.blogs" name="Blog">
+        <section id="blog" class="blog-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>Latest Blog</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <t t-foreach="website.get_blog_post()" t-as="blog">
+                    <!-- START SINGLE BLOG DESIGN AREA -->
+                        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                            <div class="single-blog">
+                                <img src="/buizb/static/src/images/blog/blog1.jpg" alt="" class="img-responsive"/>
+                                <a href="#"><h4><a href="#"/><span t-field="blog.name"/></h4></a>
+                                <h6 class="text-muted"><i class="fa fa-clock-o"></i><span class="blog-date"><t t-esc="time.strftime('%d',time.strptime(blog.write_date,'%Y-%m-%d %H:%M:%S'))"></t> <span t-esc="time.strftime('%B, %Y',time.strptime(blog.write_date,'%Y-%m-%d %H:%M:%S'))"/></span></h6>
+                                <p><span t-field="blog.subtitle"/></p>
+                                <a href="#" class="read-more">Read more</a>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.contact" name="Contact">
+        <section id="contact" class="contact-area section-padding">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="section-title">
+                            <h2>contact <span>us</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 no-padding wow fadeInUp" data-wow-delay=".8s">
+                        <!-- START MAP DESIGN AREA -->
+                        <div class="map"><img src="/buizb/static/src/images/map.png" style=" height: 100%;"/></div>
+                        <!-- / END MAP DESIGN AREA -->
+                    </div>
+                    <!-- START CONTACT FORM DESIGN AREA -->
+                    <div class="col-md-7 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.1s" data-wow-offset="0">
+                        <div class="contact-form">
+                            <div class="row">
+                                <!-- START CONTACT DETAILS DESIGN AREA -->
+                                <div class="contact-details">
+                                    <div class="col-md-4">
+                                        <div class="single-contact">
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            <p class="text-muted"><span t-field="res_company.street" itemprop="name"/><t t-if="res_company.street2">
+                                            <span t-field="res_company.street2" itemprop="name"/>
+                                            </t>
+                                            <span t-field="res_company.city" itemprop="name"/>
+                                            <span> </span><span t-field="res_company.zip" itemprop="name"/><br></br>
+                                            <span t-field="res_company.state_id.name" itemprop="name"/>
+                                            <span t-field="res_company.country_id.name" itemprop="name"/><br></br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="single-contact">
+                                            <t t-if="res_company.phone"><i class="fa fa-phone" aria-hidden="true"></i>
+                                            <p class="text-muted"><span t-field="res_company.phone" itemprop="name"/></p></t>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="single-contact">
+                                            <t t-if="res_company.email"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <p class="text-muted"><span t-field="res_company.email" itemprop="name"/></p></t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / END CONTACT DETAILS DESIGN AREA -->
+                            </div>
+                            <div class="row">
+                                <!-- START CONTACT FORM DESIGN AREA -->
+                                <form action="/contact_us_lead" id="contact_form" method="post" enctype="multipart/form-data">
+                                    <div class="form-group col-md-6">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name" data-validation-required-message="Please enter your name."/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" data-validation-required-message="Please enter your email address."/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone"/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <textarea rows="6" name="message" class="form-control" id="message" placeholder="Your Message" data-validation-required-message="Please enter a message."></textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="actions">
+                                            <input type="button" id="submit_contact" value="Send message" name="submit" class="btn btn-lg btn-contact-bg contact-button" title="Submit Your Message!"/>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- / END CONTACT FORM DESIGN AREA -->
+                            </div>
+                        </div>
+                        <div id='contact_us_message' style="text-align: center;color: green; margin-top:10px;"></div>
+                    </div>
+                    <!-- /END  CONTACT DETAILS DESIGN AREA -->
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="buizb.snippets_inherit" inherit_id="website.snippets" name="Snippets" >
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_custom" class="o_panel">
+                <div class="o_panel_header">
+                    <span class="fa-stack">
+                        <i class="fa fa-mercury fa-stack-1x"></i>
+                    </span> Advance Snippets
+                </div>
+                <div class="o_panel_body">
+                    <t t-snippet="buizb.banner" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.about-us" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.our_service" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.our_team" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.design_area" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.why_choose_us" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.our_story" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.our_works" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.our_facts" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.our_testimonial" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.pricing" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.blogs" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                    <t t-snippet="buizb.contact" t-thumbnail="/buizb/static/src/images/sni_icon.png" height="79" width="100"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

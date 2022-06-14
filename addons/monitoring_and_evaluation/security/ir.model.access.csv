@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_monitoring_report,access_monitoring_report,model_monitoring_report,,1,1,1,1
+access_monitoring_report_audit,access_monitoring_report_audit,model_monitoring_report,monitoring_and_evaluation.group_internal_audit,1,1,1,1
+
+access_employee_monitoring_report,access_employee_monitoring_report,model_employee_monitoring_report,,1,1,1,1
+access_employee_monitoring_report_audit,access_employee_monitoring_report_audit,model_employee_monitoring_report,monitoring_and_evaluation.group_internal_audit,1,1,1,1

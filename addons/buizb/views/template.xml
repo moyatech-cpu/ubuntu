@@ -1,0 +1,128 @@
+<odoo>
+    <!-- Css File -->
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="buizb">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/buizb/static/src/css/custom_buizb.css" type="text/css"/>
+            <link rel="stylesheet" href="/buizb/static/src/css/component.css"/>
+            <link rel="stylesheet" href="/buizb/static/src/css/animate.min.css"/>
+            <link rel="stylesheet" href="/buizb/static/src/css/responsive.css"/>
+            <link rel="stylesheet" href="/buizb/static/src/css/set2.css"/>
+            <link rel="stylesheet" href="/buizb/static/src/css/style.css"/>
+            <link rel="stylesheet" href="/buizb/static/src/css/YTPlayer.css"/>
+        </xpath>
+    </template>
+
+    <template id="clean_script" inherit_id="website.assets_frontend" name="Clean scripts">
+        <xpath expr="/t" position="inside">
+            <script type="text/javascript" src="/buizb/static/src/js/custom_buizb.js"></script>
+            <script type="text/javascript" src="/buizb/static/src/js/subscribe_contactus.js"></script>
+            <script src="/buizb/static/src/js/scripts.js"></script>
+            <script src="/buizb/static/src/js/wow.min.js"></script>
+        </xpath>       
+    </template>
+
+    <template id="customize_header" inherit_id="website.layout" name="Customize Header">
+        <xpath expr="//header" position="before">
+            <div class="header-top-information-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="header-top-info-left">
+                                <span class="header-top1"><t t-if="res_company.phone"><i class="fa fa-phone"></i><span t-field="res_company.phone" itemprop="name"/></t></span>
+                                <span class="header-top1"><t t-if="res_company.email"><i class="fa fa-envelope"></i><span t-field="res_company.email" itemprop="name"/></t></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" >
+                            <div class="header-top-info-right">
+                                <ul class="header-social">
+                                    <li> <a class="facebook" t-att-href="website.social_facebook" t-if="website.social_facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li><a class="twitter" t-att-href="website.social_twitter" t-if="website.social_twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li><a class="linkedin" t-att-href="website.social_linkedin" t-if="website.social_linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                    <li><a class="google-plus" t-att-href="website.social_googleplus" t-if="website.social_googleplus" rel="publisher" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="top_header" inherit_id="website.layout" name="top_header">
+        <xpath expr="//footer" position="after">
+            <div id="return-to-top">
+                <a href="#" class="scrollup"></a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="website_blog.header_footer_custom" inherit_id="website.footer_default" name="Footer News Blog Link">
+        <xpath expr="//div[@id='info']/ul" position="inside">
+        </xpath>
+    </template>
+        
+    <template id="website.footer_default" inherit_id="website.footer_custom" customize_show="True" name="Automatic Footer">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="container hidden-print">
+                <div class="row">
+                    <div class="col-md-4 col-lg-3">
+                        <h4>Our Products &amp; Services</h4>
+                        <ul class="list-unstyled" id="products">
+                            <li><a href="/">Home</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4  col-lg-3" id="info">
+                        <h4>Connect with us</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#contact">Contact us</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li t-ignore="true"><i class="fa fa-phone"></i> <span t-field="res_company.phone"></span></li>
+                            <li t-ignore="true"><i class="fa fa-envelope"></i>  <span t-field="res_company.email"></span></li>
+                        </ul>
+                        <h2>
+                            <a t-att-href="website.social_facebook" t-if="website.social_facebook"><i class="fa fa-facebook-square"/></a>
+                            <a t-att-href="website.social_twitter" t-if="website.social_twitter"><i class="fa fa-twitter"/></a>
+                            <a t-att-href="website.social_linkedin" t-if="website.social_linkedin"><i class="fa fa-linkedin"/></a>
+                            <a t-att-href="website.social_youtube" t-if="website.social_youtube"><i class="fa fa-youtube-play"/></a>
+                            <a t-att-href="website.social_googleplus" t-if="website.social_googleplus" rel="publisher"><i class="fa fa-google-plus-square"/></a>
+                            <a t-att-href="website.social_github" t-if="website.social_github"><i class="fa fa-github"/></a>
+                        </h2>
+                    </div>
+                    <div class="col-md-4 col-lg-5 col-lg-offset-1">
+                        <h4>
+                            <span t-field="res_company.name" />
+                            <small> - <a href="#about">About us</a></small>
+                        </h4>
+                        <div>
+                            <p>
+                                We are a team of passionate people whose goal is to improve everyone's
+                                life through disruptive products. We build great products to solve your
+                                business problems.
+                            </p>
+                            <p>
+                                Our products are designed for small to medium size companies willing to optimize
+                                their performance.
+                            </p>
+                        </div>
+                        <t t-call="website.language_selector"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="website.layout_footer_copyright" inherit_id="website.layout" name="Footer Copyright">
+        <xpath expr="//footer" position="inside">
+            <div class="container mt16 mb8">
+                <div class="pull-left text-muted" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                    Copyright &amp;copy; <a t-att-href="res_company.website" class="comapny_color"><span t-field="res_company.name" itemprop="name">Company name</span></a>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

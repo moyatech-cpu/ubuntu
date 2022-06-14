@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Risk Management Reporting mail template -->
+        <record id="risk_management_reporting_email_template" model="mail.template">
+            <field name="name">Risk Management Reporting Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="nyda_risk_management.model_risk_management"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.risk_owner.login}</field>
+            <field name="email_to">${object.action_owner.login},${object.risk_owner.login},${object.create_uid.login}
+            </field>
+            <field name="subject"><![CDATA[Regarding Risk management reporting.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a remaider for you.</p>
+    <p>Time of Risk management reporting has been started.</p>
+    <p>Please submit your report respectively.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+
+        <record id="email_template_edi_risk" model="mail.template">
+            <field name="name">Reminder Send by Email</field>
+            <field name="email_from">${object.risk_owner.login}</field>
+            <field name="subject"><![CDATA[Regarding Reminder Risk management reporting.]]></field>
+            <field name="partner_to">${object.risk_owner.partner_id.id},${object.action_owner.partner_id.id}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_management"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>New Risk ${object.name} has been created for objective ${object.strategic_objective_id.strategic_objective}</p>
+<p>Description for this Risk:</p>
+<p>${object.risk_description}</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+
+         <record id="email_template_risk_report_approve" model="mail.template">
+            <field name="name">Risk Report Approve</field>
+            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>
+            <field name="subject"><![CDATA[Regarding Your Risk Report.]]></field>
+            <field name="email_to">${object.employee_id.work_email}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_report"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>${object.risk_id.name} risk has been evaluted and Approved.</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+        <record id="email_template_risk_report_reject" model="mail.template">
+            <field name="name">Risk Report Reject</field>
+            <field name="email_from">${user.email}</field>
+            <field name="subject">Reject Risk Report</field>
+            <field name="model_id" ref="nyda_risk_management.model_wiz_report_reject_comment"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+         <record id="email_template_risk_compliance_submit" model="mail.template">
+            <field name="name">Risk Compliance Submit Form</field>
+            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>
+            <field name="subject"><![CDATA[Regarding Risk Compliance Submit Form]]></field>
+            <field name="email_to">${ctx['u'].work_email}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_compliance"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>${object.name} Risk Compliance has been created by ${object.responsible_person.name}.</p>
+ <p>Kindly check that Risk Compliance.</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+        <record id="email_template_risk_compliance_sign_ed" model="mail.template">
+            <field name="name">Risk Compliance Executive Director Sign</field>
+            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>
+            <field name="subject"><![CDATA[Regarding Risk Compliance Executive Director Sign]]></field>
+            <field name="email_to">${ctx['u'].work_email}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_compliance"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>${object.name} Risk Compliance has been signed by Executive Director.</p>
+ <p>Kindly check that Risk Compliance.</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+        <record id="email_template_risk_compliance_sign_risk_manager" model="mail.template">
+            <field name="name">Risk Compliance Manager Sign</field>
+            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>
+            <field name="subject"><![CDATA[Regarding Risk Manager Sign]]></field>
+            <field name="email_to">${ctx['u'].work_email}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_compliance"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>${object.name} Risk Compliance has been signed by Risk Manager.</p>
+ <p>Kindly check that Risk Compliance.</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+        <record id="email_template_risk_compliance_sign_ceo" model="mail.template">
+            <field name="name">Risk Compliance CEO Sign</field>
+            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>
+            <field name="subject"><![CDATA[Regarding Risk Compliance CEO Sign]]></field>
+            <field name="email_to">${object.responsible_person.work_email}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_compliance"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>${object.name} Risk Compliance has been evaluted and Approve.</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+         <record id="email_template_risk_compliance_reject" model="mail.template">
+            <field name="name">Risk Compliance Reject</field>
+            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>
+            <field name="subject"><![CDATA[Regarding Your Risk Compliance Reject.]]></field>
+            <field name="email_to">${object.responsible_person.work_email}</field>
+            <field name="model_id" ref="nyda_risk_management.model_risk_compliance"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>${object.name} Risk Compliance has been evaluted and Reject.</p>
+<p>Regards, </p>
+    <p>NYDA</p>
+
+]]></field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Report Wizard Form View-->
+    <record model="ir.ui.view" id="report_wizard_form_view">
+        <field name="name">report.wizard.form.view</field>
+        <field name="model">report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Booked Rooms Report" name="get_rooms_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','booked')]}"/>
+                    <button string="Download Cancelled Rooms Report" name="get_rooms_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','cancelled')]}"/>
+                    <button string="Download Rescheduled Rooms Report" name="get_rooms_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','rescheduled')]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Booked Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_booked">
+        <field name="name">Booked Rooms Report Wizard</field>
+        <field name="res_model">report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'booked'}"/>
+    </record>
+
+    <!-- Action for Rescheduled Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_rescheduled">
+        <field name="name">Rescheduled Rooms Report Wizard</field>
+        <field name="res_model">report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'rescheduled'}"/>
+    </record>
+
+    <!-- Action for Cancelled Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_cancelled">
+        <field name="name">Cancelled Rooms Report Wizard</field>
+        <field name="res_model">report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'cancelled'}"/>
+    </record>
+
+    <!--Menu for Meeting Room-->
+    <menuitem name="Report" parent="facility.menu_meeting_rooms" id="menu_facility_reports" sequence="6"
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+    <menuitem name="Booked Rooms Report" id="menu_booked_rooms_reports" parent="facility.menu_facility_reports"
+              action="action_report_wizard_booked" sequence="1"/>
+    <menuitem name="Rescheduled Rooms Report" id="menu_rescheduled_rooms_reports" parent="facility.menu_facility_reports"
+              action="action_report_wizard_rescheduled" sequence="2"/>
+    <menuitem name="Cancelled Rooms Report" id="menu_cancelled_rooms_reports" parent="facility.menu_facility_reports"
+              action="action_report_wizard_cancelled" sequence="3"/>
+
+    </data>
+</odoo>

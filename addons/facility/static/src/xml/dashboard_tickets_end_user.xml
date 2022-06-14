@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="facility.tickets_dashboard_end_user">
+        <div class="container-fluid" id="main_tickets_dashboard">
+            <div class="row">
+                <!-- Dashboard box for My Tickets -->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="p-5 col-md-3 text-left">
+                            <h3>My Tickets</h3>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_tickets"/>
+                            </h2>
+                            <p>Tickets</p>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_normal_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_nt"/>
+                            </h2>
+                            <p>Normal(<span class="fa fa-star" style="color: gold"></span>)
+                            </p>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_hp_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_hpt"/>
+                            </h2>
+                            <p>High Priority(
+                                <span class="fa fa-star" style="color: gold"></span>
+                                <span class="fa fa-star" style="color: gold"></span>)
+                            </p>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_urgent_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_ut"/>
+                            </h2>
+                            <p>Urgent(
+                                <span class="fa fa-star" style="color: gold"></span>
+                                <span class="fa fa-star" style="color: gold"></span>
+                                <span class="fa fa-star" style="color: gold"></span>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard box 3 for Tickets according to stages-->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row bg-light m-0">
+                                <div class="col-md-12">
+                                    <h3>Ticket Stages</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr/>
+                                </div>
+                                <t t-foreach="widget.tickets_data.stages" t-as="stage">
+                                    <t t-value="stage['image']" t-set="image"/>
+                                    <div class="col-md-3 text-center tickets_view" t-att-id="stage['id']">
+                                        <img t-att-src="'data:image/png;base64,'+stage['image']"
+                                             class="img img-fluid mx-auto h-80 pointer"
+                                             alt="stage"/>
+                                        <h4 class="pointer"><span t-esc="stage['name']"/></h4>
+                                        <h4 class="pointer"><span t-esc="stage['total_tickets']"/></h4>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </t>
+</template>

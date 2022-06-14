@@ -1,0 +1,90 @@
+<odoo>
+    <record model="ir.ui.view" id="view_strategic_plan_objectives_form">
+        <field name="name">view_strategic_plan_objectives_form</field>
+        <field name="model">strategic.plan.objectives</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-outdent"
+                                name="view_app_target_smart_button" string="View APP Targets">
+                          </button>
+                        <button class="oe_stat_button" type="object" icon="fa-outdent"
+                                name="app_targets_smart_button" string="APP Targets">
+                            <!--                            <field name="note_button" widget="statinfo" string="NOTE!!"/>-->
+                        </button>
+                    </div>
+                    <group>
+<!--                        <group>-->
+							<field name="strategic_goal_id" required="1" readonly="1"/>
+                            <field name="strategic_objective" required="1"/>
+                            <field name="objective_statement" required="1"/>
+                            <field name="baseline"/>
+                            <field name="justification"/>
+<!--                            <field name="risk"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--							<field name="cause"/>-->
+<!--                            <field name="impact"/>-->
+<!--                            <field name="impact_scale"/>-->
+<!--                            <field name="likelihood"/>-->
+<!--                            <field name="inherent_risk"/>-->
+<!--							<field name="controls"/>-->
+<!--                        </group>-->
+                    </group>
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="control_effectiveness"/>-->
+<!--                            <field name="risidual_risk"/>-->
+<!--							<field name="action_plans"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="implementation_date"/>-->
+<!--                            <field name="risk_elevation_reason"/>-->
+<!--                            <field name="budget"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+                    <p>
+                        <b>Expected Outcome over 5 years</b>
+                    </p>
+                    <group>
+                        <field name="expected_outcome" nolabel="1"/>
+                    </group>
+                    <group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_strategic_plan_objectives_tree">
+        <field name="name">view_strategic_goals_tree</field>
+        <field name="model">strategic.plan.objectives</field>
+        <field name="arch" type="xml">
+            <tree toolbar="1" create="0">
+                <field name="strategic_goal_id"/>
+                <field name="strategic_objective"/>
+                <field name="objective_statement"/>
+                <field name="justification"/>
+                <!--				<field name = "strategic_goals"/>-->
+<!--                <field name="Programme"/>-->
+<!--                <field name="budget"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_strategic_plan_objectives">
+        <field name="name">Strategic Plan Objectives</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">strategic.plan.objectives</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_strategic_plan_objectives" name='Strategic Plan Objectives' parent="menu_execution_plan"
+              action="action_strategic_plan_objectives"
+              sequence="12"/>
+</odoo>

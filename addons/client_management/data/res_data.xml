@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Branches -->
+        <record id="branch_port_elizabeth" model="res.branch">
+            <field name="name">Port Elizabeth</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_east_london" model="res.branch">
+            <field name="name">East London</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_joburg" model="res.branch">
+            <field name="name">Joburg</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_tshwane" model="res.branch">
+            <field name="name">Tshwane</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_durban" model="res.branch">
+            <field name="name">Durban</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_polokwane" model="res.branch">
+            <field name="name">Polokwane</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_cape_town" model="res.branch">
+            <field name="name">Cape Town</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_nelspruit" model="res.branch">
+            <field name="name">Nelspruit</field>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_secunda" model="res.branch">
+            <field name="name">Secunda</field>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_emalahlni_witbank" model="res.branch">
+            <field name="name">Emalahlni/Witbank</field>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_bloemfontein" model="res.branch">
+            <field name="name">Bloemfontein</field>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_kimberly" model="res.branch">
+            <field name="name">Kimberly</field>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_rustenburg" model="res.branch">
+            <field name="name">Rustenburg</field>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_randfontein" model="res.branch">
+            <field name="name">Randfontein</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_thulamela" model="res.branch">
+            <field name="name">Thulamela</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_richards_bay" model="res.branch">
+            <field name="name">Richards Bay</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="branch_newcastle" model="res.branch">
+            <field name="name">Newcastle</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+
+        <!-- Metro Municipalities -->
+        <record id="bfl_city" model="res.metro.municipality">
+            <field name="name">Buffalo City</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="city_cape_town" model="res.metro.municipality">
+            <field name="name">City of Cape Town</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="ekurhuleni_metropolitan_municipality" model="res.metro.municipality">
+            <field name="name">Ekurhuleni Metropolitan Municipality</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="city_of_eThekwini" model="res.metro.municipality">
+            <field name="name">City of eThekwini</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="city_of_johannesburg" model="res.metro.municipality">
+            <field name="name">City of Johannesburg</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mangaung_municipality" model="res.metro.municipality">
+            <field name="name">Mangaung Municipality</field>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="nelson_mandela_metropolitan_municipality" model="res.metro.municipality">
+            <field name="name">Nelson Mandela Metropolitan Municipality</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="city of_tshwane" model="res.metro.municipality">
+            <field name="name">City of Tshwane</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+
+        <!-- District Data -->
+<!--        <record id="dis_zululand" model="res.district">-->
+<!--            <field name="name">Zululand</field>-->
+<!--            <field name="state_id" ref="base.state_za_nl"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_gert_sibande" model="res.district">-->
+<!--            <field name="name">Gert Sibande</field>-->
+<!--            <field name="state_id" ref="base.state_za_mp"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_uthukela" model="res.district">-->
+<!--            <field name="name">Uthukela</field>-->
+<!--            <field name="state_id" ref="base.state_za_nl"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_amathole" model="res.district">-->
+<!--            <field name="name">Amathole</field>-->
+<!--            <field name="state_id" ref="base.state_za_ec"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_mopani" model="res.district">-->
+<!--            <field name="name">Mopani</field>-->
+<!--            <field name="state_id" ref="base.state_za_lp"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_central_karoo" model="res.district">-->
+<!--            <field name="name">Central Karoo</field>-->
+<!--            <field name="state_id" ref="base.state_za_wc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_waterberg" model="res.district">-->
+<!--            <field name="name">Waterberg</field>-->
+<!--            <field name="state_id" ref="base.state_za_lp"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_west_coast" model="res.district">-->
+<!--            <field name="name">West Coast</field>-->
+<!--            <field name="state_id" ref="base.state_za_wc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_umkhanyakude" model="res.district">-->
+<!--            <field name="name">Umkhanyakude</field>-->
+<!--            <field name="state_id" ref="base.state_za_nl"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_garden_route" model="res.district">-->
+<!--            <field name="name">Garden Route</field>-->
+<!--            <field name="state_id" ref="base.state_za_wc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_capricorn" model="res.district">-->
+<!--            <field name="name">Capricorn</field>-->
+<!--            <field name="state_id" ref="base.state_za_lp"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_sarah_baartman" model="res.district">-->
+<!--            <field name="name">Sarah Baartman</field>-->
+<!--            <field name="state_id" ref="base.state_za_ec"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_cape_winelands" model="res.district">-->
+<!--            <field name="name">Cape Winelands</field>-->
+<!--            <field name="state_id" ref="base.state_za_wc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_alfred_nzo" model="res.district">-->
+<!--            <field name="name">Alfred Nzo</field>-->
+<!--            <field name="state_id" ref="base.state_za_ec"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_amajuba" model="res.district">-->
+<!--            <field name="name">Amajuba</field>-->
+<!--            <field name="state_id" ref="base.state_za_nl"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_amathole" model="res.district">-->
+<!--            <field name="name">Amathole</field>-->
+<!--            <field name="state_id" ref="base.state_za_ec"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_bojanala_platinum" model="res.district">-->
+<!--            <field name="name">Bojanala Platinum</field>-->
+<!--            <field name="state_id" ref="base.state_za_nw"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_chris_hani" model="res.district">-->
+<!--            <field name="name">Chris Hani</field>-->
+<!--            <field name="state_id" ref="base.state_za_ec"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_dr_kenneth" model="res.district">-->
+<!--            <field name="name">Dr Kenneth Kaunda</field>-->
+<!--            <field name="state_id" ref="base.state_za_nw"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_dr_ruth" model="res.district">-->
+<!--            <field name="name">Dr Ruth Segomotsi Mompati</field>-->
+<!--            <field name="state_id" ref="base.state_za_nw"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_ehlanzeni" model="res.district">-->
+<!--            <field name="name">Ehlanzeni</field>-->
+<!--            <field name="state_id" ref="base.state_za_mp"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_fezile_dabi" model="res.district">-->
+<!--            <field name="name">Fezile Dabi</field>-->
+<!--            <field name="state_id" ref="base.state_za_fs"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_frances_baard" model="res.district">-->
+<!--            <field name="name">Frances Baard</field>-->
+<!--            <field name="state_id" ref="base.state_za_nc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_cape_winelands" model="res.district">-->
+<!--            <field name="name">Cape Winelands</field>-->
+<!--            <field name="state_id" ref="base.state_za_wc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+<!--        <record id="dis_cape_winelands" model="res.district">-->
+<!--            <field name="name">Cape Winelands</field>-->
+<!--            <field name="state_id" ref="base.state_za_wc"/>-->
+<!--            <field name="country_id" ref="base.za"/>-->
+<!--        </record>-->
+
+        <record id="dis_zululand" model="res.district">
+            <field name="name">Zululand</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_gert_sibande" model="res.district">
+            <field name="name">Gert Sibande</field>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_uthukela" model="res.district">
+            <field name="name">Uthukela</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_amathole" model="res.district">
+            <field name="name">Amathole</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_mopani" model="res.district">
+            <field name="name">Mopani</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_central_karoo" model="res.district">
+            <field name="name">Central Karoo</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_waterberg" model="res.district">
+            <field name="name">Waterberg</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_west_coast" model="res.district">
+            <field name="name">West Coast</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_umkhanyakude" model="res.district">
+            <field name="name">Umkhanyakude</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_umzinyathi" model="res.district">
+            <field name="name">Umzinyathi</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_garden_route" model="res.district">
+            <field name="name">Garden Route</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_capricorn" model="res.district">
+            <field name="name">Capricorn</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_sarah_baartman" model="res.district">
+            <field name="name">Sarah Baartman</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_cape_winelands" model="res.district">
+            <field name="name">Cape Winelands</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_alfred_nzo" model="res.district">
+            <field name="name">Alfred Nzo</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_amajuba" model="res.district">
+            <field name="name">Amajuba</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_bojanala_platinum" model="res.district">
+            <field name="name">Bojanala Platinum</field>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_chris_hani" model="res.district">
+            <field name="name">Chris Hani</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_dr_kenneth_kaunda" model="res.district">
+            <field name="name">Dr Kenneth Kaunda</field>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_dr_ruth" model="res.district">
+            <field name="name">Dr Ruth Segomotsi Mompati</field>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_ehlanzeni" model="res.district">
+            <field name="name">Ehlanzeni</field>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_fezile_dabi" model="res.district">
+            <field name="name">Fezile Dabi</field>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_frances_baard" model="res.district">
+            <field name="name">Frances Baard</field>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_nkangala" model="res.district">
+            <field name="name">Nkangala</field>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_joe_gqabi" model="res.district">
+            <field name="name">Joe Gqabi</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_ugu" model="res.district">
+            <field name="name">Ugu</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_harry_gwala" model="res.district">
+            <field name="name">Harry Gwala</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_ilembe" model="res.district">
+            <field name="name">iLembe</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_john_taolo_gaetswe" model="res.district">
+            <field name="name">John Taolo Gaetswe</field>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_zf_Mgcawu" model="res.district">
+            <field name="name">ZF Mgcawu</field>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_west_rand" model="res.district">
+            <field name="name">West Rand</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_thabo_mofutsanyana" model="res.district">
+            <field name="name">Thabo Mofutsanyana</field>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_sedibeng" model="res.district">
+            <field name="name">Sedibeng</field>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_or_tambo" model="res.district">
+            <field name="name">OR Tambo</field>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_ngaka_modiri_molema" model="res.district">
+            <field name="name">Ngaka modiri Molema</field>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_pixley_ka_seme" model="res.district">
+            <field name="name">Pixley ka Seme</field>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_umgungundlovu" model="res.district">
+            <field name="name">uMgungundlovu</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_king_cetshwayo" model="res.district">
+            <field name="name">King Cetshwayo</field>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_lejweleputswa" model="res.district">
+            <field name="name">Lejweleputswa</field>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_xhariep" model="res.district">
+            <field name="name">Xhariep</field>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_vhembe" model="res.district">
+            <field name="name">Vhembe</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_sekhukhune" model="res.district">
+            <field name="name">Sekhukhune</field>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_overberg" model="res.district">
+            <field name="name">Overberg</field>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="dis_namakwa" model="res.district">
+            <field name="name">Namakwa</field>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+
+        <!-- Districts -->
+        <record id="mun_abaqulusi" model="res.municipality">
+            <field name="name">Abaqulusi</field>
+            <field name="district_id" ref="dis_zululand"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_albert_luthuli" model="res.municipality">
+            <field name="name">Albert Luthuli</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_alfred_duma" model="res.municipality">
+            <field name="name">Alfred Duma</field>
+            <field name="district_id" ref="dis_uthukela"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_amahlathi" model="res.municipality">
+            <field name="name">Amahlathi</field>
+            <field name="district_id" ref="dis_amathole"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ba-phalaborwa" model="res.municipality">
+            <field name="name">Ba-Phalaborwa</field>
+            <field name="district_id" ref="dis_mopani"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_beaufort_west" model="res.municipality">
+            <field name="name">Beaufort West</field>
+            <field name="district_id" ref="dis_central_karoo"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_bela-bela" model="res.municipality">
+            <field name="name">Bela-Bela</field>
+            <field name="district_id" ref="dis_waterberg"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_bergrivier" model="res.municipality">
+            <field name="name">Bergrivier</field>
+            <field name="district_id" ref="dis_west_coast"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_big_five_hlabisa" model="res.municipality">
+            <field name="name">Big Five Hlabisa</field>
+            <field name="district_id" ref="dis_umkhanyakude"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_bitou" model="res.municipality">
+            <field name="name">Bitou</field>
+            <field name="district_id" ref="dis_garden_route"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_blouberg" model="res.municipality">
+            <field name="name">Blouberg</field>
+            <field name="district_id" ref="dis_capricorn"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_blue_crane_route" model="res.municipality">
+            <field name="name">Blue Crane Route</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_breede_valley" model="res.municipality">
+            <field name="name">Breede Valley</field>
+            <field name="district_id" ref="dis_cape_winelands"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_bushbuckridge" model="res.municipality">
+            <field name="name">Bushbuckridge</field>
+            <field name="district_id" ref="dis_ehlanzeni"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_cape_agulhas" model="res.municipality">
+            <field name="name">Cape Agulhas</field>
+            <field name="district_id" ref="dis_overberg"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_cederberg" model="res.municipality">
+            <field name="name">Cederberg</field>
+            <field name="district_id" ref="dis_west_coast"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_city_of_matlosana" model="res.municipality">
+            <field name="name">City of Matlosana</field>
+            <field name="district_id" ref="dis_dr_kenneth_kaunda"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_collins_chabane" model="res.municipality">
+            <field name="name">Collins Chabane</field>
+            <field name="district_id" ref="dis_vhembe"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dannhauser" model="res.municipality">
+            <field name="name">Dannhauser</field>
+            <field name="district_id" ref="dis_amajuba"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dawid_kruiper" model="res.municipality">
+            <field name="name">Dawid Kruiper</field>
+            <field name="district_id" ref="dis_zf_Mgcawu"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dihlabeng" model="res.municipality">
+            <field name="name">Dihlabeng</field>
+            <field name="district_id" ref="dis_thabo_mofutsanyana"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dikgatlong" model="res.municipality">
+            <field name="name">Dikgatlong</field>
+            <field name="district_id" ref="dis_frances_baard"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dipaleseng" model="res.municipality">
+            <field name="name">Dipaleseng</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ditsobotla" model="res.municipality">
+            <field name="name">Ditsobotla</field>
+            <field name="district_id" ref="dis_ngaka_modiri_molema"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dr_beyers_naudé " model="res.municipality">
+            <field name="name">Dr Beyers Naudé</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dr_js_moroka " model="res.municipality">
+            <field name="name">Dr JS Moroka</field>
+            <field name="district_id" ref="dis_nkangala"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dr_nkosazana_dlamini_zuma " model="res.municipality">
+            <field name="name">Dr Nkosazana Dlamini Zuma</field>
+            <field name="district_id" ref="dis_harry_gwala"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_dr_drakenstein " model="res.municipality">
+            <field name="name">Drakenstein</field>
+            <field name="district_id" ref="dis_cape_winelands"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun__edumbe " model="res.municipality">
+            <field name="name">eDumbe</field>
+            <field name="district_id" ref="dis_zululand"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_elias_motsoaledi " model="res.municipality">
+            <field name="name">Elias Motsoaledi</field>
+            <field name="district_id" ref="dis_sekhukhune"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_elundini " model="res.municipality">
+            <field name="name">Elundini</field>
+            <field name="district_id" ref="dis_joe_gqabi"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_emadlangeni " model="res.municipality">
+            <field name="name">eMadlangeni</field>
+            <field name="district_id" ref="dis_amajuba"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_emakhazeni " model="res.municipality">
+            <field name="name">Emakhazeni</field>
+            <field name="district_id" ref="dis_nkangala"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_emalahleni " model="res.municipality">
+            <field name="name">Emalahleni</field>
+            <field name="district_id" ref="dis_chris_hani"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_emfuleni " model="res.municipality">
+            <field name="name">Emfuleni</field>
+            <field name="district_id" ref="dis_sedibeng"/>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_emthanjeni" model="res.municipality">
+            <field name="name">Emthanjeni</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_endumeni" model="res.municipality">
+            <field name="name">Endumeni</field>
+            <field name="district_id" ref="dis_umzinyathi"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_engcobo" model="res.municipality">
+            <field name="name">Engcobo</field>
+            <field name="district_id" ref="dis_chris_hani"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_enoch_mgijima" model="res.municipality">
+            <field name="name">Enoch Mgijima</field>
+            <field name="district_id" ref="dis_chris_hani"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ephraim_mogale" model="res.municipality">
+            <field name="name">Ephraim Mogale</field>
+            <field name="district_id" ref="dis_sekhukhune"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_fetakgomo/greater_tubatse" model="res.municipality">
+            <field name="name">Fetakgomo/Greater Tubatse</field>
+            <field name="district_id" ref="dis_sekhukhune"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ga-segonyana" model="res.municipality">
+            <field name="name">Ga-Segonyana</field>
+            <field name="district_id" ref="dis_john_taolo_gaetswe"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_gamagara" model="res.municipality">
+            <field name="name">Gamagara</field>
+            <field name="district_id" ref="dis_john_taolo_gaetswe"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_george" model="res.municipality">
+            <field name="name">George</field>
+            <field name="district_id" ref="dis_garden_route"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_govan_mbeki" model="res.municipality">
+            <field name="name">Govan Mbeki</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_great_kei" model="res.municipality">
+            <field name="name">Great Kei</field>
+            <field name="district_id" ref="dis_amathole"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_greater_kokstad" model="res.municipality">
+            <field name="name">Greater Kokstad</field>
+            <field name="district_id" ref="dis_harry_gwala"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_greater_letaba" model="res.municipality">
+            <field name="name">Greater Letaba</field>
+            <field name="district_id" ref="dis_mopani"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_greater_taung" model="res.municipality">
+            <field name="name">Greater Taung</field>
+            <field name="district_id" ref="dis_dr_ruth"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_greater_tzaneen" model="res.municipality">
+            <field name="name">Greater Tzaneen</field>
+            <field name="district_id" ref="dis_mopani"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_hantam" model="res.municipality">
+            <field name="name">Hantam</field>
+            <field name="district_id" ref="dis_namakwa"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_hessequa" model="res.municipality">
+            <field name="name">Hessequa</field>
+            <field name="district_id" ref="dis_garden_route"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_impendle" model="res.municipality">
+            <field name="name">Impendle</field>
+            <field name="district_id" ref="dis_umgungundlovu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ingquza_hillimpendle" model="res.municipality">
+            <field name="name">Ingquza Hill</field>
+            <field name="district_id" ref="dis_or_tambo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_inkosi_langalibalele" model="res.municipality">
+            <field name="name">Inkosi Langalibalele</field>
+            <field name="district_id" ref="dis_uthukela"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_intsika_yethu" model="res.municipality">
+            <field name="name">Intsika Yethu</field>
+            <field name="district_id" ref="dis_chris_hani"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_inxuba_yethemba" model="res.municipality">
+            <field name="name">Inxuba Yethemba</field>
+            <field name="district_id" ref="dis_chris_hani"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_jb_marks" model="res.municipality">
+            <field name="name">JB Marks</field>
+            <field name="district_id" ref="dis_dr_kenneth_kaunda"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_joe_morolong" model="res.municipality">
+            <field name="name">Joe Morolong</field>
+            <field name="district_id" ref="dis_john_taolo_gaetswe"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_jozini" model="res.municipality">
+            <field name="name">Jozini</field>
+            <field name="district_id" ref="dis_umkhanyakude"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kagisano-molopo" model="res.municipality">
+            <field name="name">Kagisano-Molopo</field>
+            <field name="district_id" ref="dis_dr_ruth"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kai_!garib" model="res.municipality">
+            <field name="name">Kai !Garib</field>
+            <field name="district_id" ref="dis_zf_Mgcawu"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kamiesberg" model="res.municipality">
+            <field name="name">Kamiesberg</field>
+            <field name="district_id" ref="dis_namakwa"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kannaland" model="res.municipality">
+            <field name="name">Kannaland</field>
+            <field name="district_id" ref="dis_garden_route"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kareeberg" model="res.municipality">
+            <field name="name">Kareeberg</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_karoo_hoogland" model="res.municipality">
+            <field name="name">Karoo Hoogland</field>
+            <field name="district_id" ref="dis_namakwa"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kgatelopele" model="res.municipality">
+            <field name="name">Kgatelopele</field>
+            <field name="district_id" ref="dis_zf_Mgcawu"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kgetlengrivier" model="res.municipality">
+            <field name="name">Kgetlengrivier</field>
+            <field name="district_id" ref="dis_bojanala_platinum"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_khâi-,agetlengrivier" model="res.municipality">
+            <field name="name">Khâi-Ma</field>
+            <field name="district_id" ref="dis_namakwa"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_!kheis" model="res.municipality">
+            <field name="name">!Kheis</field>
+            <field name="district_id" ref="dis_zf_Mgcawu"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_king_sabata" model="res.municipality">
+            <field name="name">King Sabata</field>
+            <field name="district_id" ref="dis_or_tambo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_knysna" model="res.municipality">
+            <field name="name">Knysna</field>
+            <field name="district_id" ref="dis_garden_route"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kopanong" model="res.municipality">
+            <field name="name">Kopanong</field>
+            <field name="district_id" ref="dis_xhariep"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kou-kamma" model="res.municipality">
+            <field name="name">Kou-Kamma</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kouga" model="res.municipality">
+            <field name="name">Kouga</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_kwadukuza" model="res.municipality">
+            <field name="name">KwaDukuza</field>
+            <field name="district_id" ref="dis_ilembe"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_laingsburg" model="res.municipality">
+            <field name="name">Laingsburg</field>
+            <field name="district_id" ref="dis_central_karoo"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_langeberg" model="res.municipality">
+            <field name="name">Langeberg</field>
+            <field name="district_id" ref="dis_cape_winelands"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_lekwa" model="res.municipality">
+            <field name="name">Lekwa</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_lekwa-teemane" model="res.municipality">
+            <field name="name">Lekwa-Teemane</field>
+            <field name="district_id" ref="dis_dr_ruth"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_lepelle-nkumpi" model="res.municipality">
+            <field name="name">Lepelle-Nkumpi</field>
+            <field name="district_id" ref="dis_capricorn"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_lephalale" model="res.municipality">
+            <field name="name">Lephalale</field>
+            <field name="district_id" ref="dis_waterberg"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_lesedi" model="res.municipality">
+            <field name="name">Lesedi</field>
+            <field name="district_id" ref="dis_sedibeng"/>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_letsemeng" model="res.municipality">
+            <field name="name">Letsemeng</field>
+            <field name="district_id" ref="dis_xhariep"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_madibeng" model="res.municipality">
+            <field name="name">Madibeng</field>
+            <field name="district_id" ref="dis_bojanala_platinum"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mafube" model="res.municipality">
+            <field name="name">Mafube</field>
+            <field name="district_id" ref="dis_fezile_dabi"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_magareng" model="res.municipality">
+            <field name="name">Magareng</field>
+            <field name="district_id" ref="dis_frances_baard"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mahikeng" model="res.municipality">
+            <field name="name">Mahikeng</field>
+            <field name="district_id" ref="dis_ngaka_modiri_molema"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_makana" model="res.municipality">
+            <field name="name">Makana</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_makhado" model="res.municipality">
+            <field name="name">Makhado</field>
+            <field name="district_id" ref="dis_vhembe"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_makhuduthamaga" model="res.municipality">
+            <field name="name">Makhuduthamaga</field>
+            <field name="district_id" ref="dis_sekhukhune"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_maluti-a-phofung" model="res.municipality">
+            <field name="name">Maluti-a-Phofung</field>
+            <field name="district_id" ref="dis_thabo_mofutsanyana"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mamusa" model="res.municipality">
+            <field name="name">Mamusa</field>
+            <field name="district_id" ref="dis_dr_ruth"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mandeni" model="res.municipality">
+            <field name="name">Mandeni</field>
+            <field name="district_id" ref="dis_ilembe"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mantsopa" model="res.municipality">
+            <field name="name">Mantsopa</field>
+            <field name="district_id" ref="dis_thabo_mofutsanyana"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_maphumulo" model="res.municipality">
+            <field name="name">Maphumulo</field>
+            <field name="district_id" ref="dis_ilembe"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_maquassi_hills" model="res.municipality">
+            <field name="name">Maquassi Hills</field>
+            <field name="district_id" ref="dis_dr_kenneth_kaunda"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_maruleng" model="res.municipality">
+            <field name="name">Maruleng</field>
+            <field name="district_id" ref="dis_mopani"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_masilonyana" model="res.municipality">
+            <field name="name">Masilonyana</field>
+            <field name="district_id" ref="dis_lejweleputswa"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_matatiele" model="res.municipality">
+            <field name="name">Matatiele</field>
+            <field name="district_id" ref="dis_alfred_nzo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_matjhabeng" model="res.municipality">
+            <field name="name">Matjhabeng</field>
+            <field name="district_id" ref="dis_lejweleputswa"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_matzikama" model="res.municipality">
+            <field name="name">Matzikama</field>
+            <field name="district_id" ref="dis_west_coast"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mbhashe" model="res.municipality">
+            <field name="name">Mbhashe</field>
+            <field name="district_id" ref="dis_amathole"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mbizana" model="res.municipality">
+            <field name="name">Mbizana</field>
+            <field name="district_id" ref="dis_alfred_nzo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mbombela" model="res.municipality">
+            <field name="name">Mbombela</field>
+            <field name="district_id" ref="dis_ehlanzeni"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_merafong" model="res.municipality">
+            <field name="name">Merafong</field>
+            <field name="district_id" ref="dis_west_rand"/>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_metsimaholo" model="res.municipality">
+            <field name="name">Metsimaholo</field>
+            <field name="district_id" ref="dis_fezile_dabi"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mhlontlo" model="res.municipality">
+            <field name="name">Mhlontlo</field>
+            <field name="district_id" ref="dis_or_tambo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_midvaal" model="res.municipality">
+            <field name="name">Midvaal</field>
+            <field name="district_id" ref="dis_sedibeng"/>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mkhambathini" model="res.municipality">
+            <field name="name">Mkhambathini</field>
+            <field name="district_id" ref="dis_umgungundlovu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mkhondo" model="res.municipality">
+            <field name="name">Mkhondo</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mnquma" model="res.municipality">
+            <field name="name">Mnquma</field>
+            <field name="district_id" ref="dis_amathole"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_modimolle/mookgophong" model="res.municipality">
+            <field name="name">ModimolleMookgophong</field>
+            <field name="district_id" ref="dis_waterberg"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mogalakwena" model="res.municipality">
+            <field name="name">Mogalakwena</field>
+            <field name="district_id" ref="dis_waterberg"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mogale_city" model="res.municipality">
+            <field name="name">Mogale City</field>
+            <field name="district_id" ref="dis_west_coast"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mohokare" model="res.municipality">
+            <field name="name">Mohokare</field>
+            <field name="district_id" ref="dis_xhariep"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_molemole" model="res.municipality">
+            <field name="name">Molemole</field>
+            <field name="district_id" ref="dis_capricorn"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_moqhaka" model="res.municipality">
+            <field name="name">Moqhaka</field>
+            <field name="district_id" ref="dis_fezile_dabi"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_moretele" model="res.municipality">
+            <field name="name">Moretele</field>
+            <field name="district_id" ref="dis_bojanala_platinum"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_moses_kotane" model="res.municipality">
+            <field name="name">Moses Kotane</field>
+            <field name="district_id" ref="dis_bojanala_platinum"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_abaqulusi" model="res.municipality">
+            <field name="name">Abaqulusi</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_witzenberg" model="res.municipality">
+            <field name="name">Witzenberg</field>
+            <field name="district_id" ref="dis_cape_winelands"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_walte_sisulu" model="res.municipality">
+            <field name="name">Walter Sisulu</field>
+            <field name="district_id" ref="dis_cape_winelands"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_victor khanye " model="res.municipality">
+            <field name="name">Victor Khanye</field>
+            <field name="district_id" ref="dis_nkangala"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_uphongolo" model="res.municipality">
+            <field name="name">uPhongolo</field>
+            <field name="district_id" ref="dis_zululand"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umzumbe" model="res.municipality">
+            <field name="name">Umzumbe</field>
+            <field name="district_id" ref="dis_ugu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umzimvubu" model="res.municipality">
+            <field name="name">Umzimvubu</field>
+            <field name="district_id" ref="dis_alfred_nzo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umzimkhulu" model="res.municipality">
+            <field name="name">Umzimkhulu</field>
+            <field name="district_id" ref="dis_harry_gwala"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umvoti" model="res.municipality">
+            <field name="name">Umvoti</field>
+            <field name="district_id" ref="dis_umzinyathi"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umuziwabantu" model="res.municipality">
+            <field name="name">uMuziwabantu</field>
+            <field name="district_id" ref="dis_ugu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umsobomvu" model="res.municipality">
+            <field name="name">Umsobomvu</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umshwathi" model="res.municipality">
+            <field name="name">uMshwathi</field>
+            <field name="district_id" ref="dis_umgungundlovu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umngeni" model="res.municipality">
+            <field name="name">uMngeni</field>
+            <field name="district_id" ref="dis_umgungundlovu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umlalazi" model="res.municipality">
+            <field name="name">uMlalazi</field>
+            <field name="district_id" ref="dis_king_cetshwayo"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umhlathuze" model="res.municipality">
+            <field name="name">uMhlathuze</field>
+            <field name="district_id" ref="dis_king_cetshwayo"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_uMhlabuyalingana" model="res.municipality">
+            <field name="name">uMhlabuyalingana</field>
+            <field name="district_id" ref="dis_umkhanyakude"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umfolozi" model="res.municipality">
+            <field name="name">uMngeni</field>
+            <field name="district_id" ref="dis_king_cetshwayo"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_umdoni" model="res.municipality">
+            <field name="name">Umdoni</field>
+            <field name="district_id" ref="dis_ugu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ulundi" model="res.municipality">
+            <field name="name">Ulundi</field>
+            <field name="district_id" ref="dis_zululand"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ubuntu" model="res.municipality">
+            <field name="name">Ubuntu</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ubuhlebezwe" model="res.municipality">
+            <field name="name">Ubuhlebezwe</field>
+            <field name="district_id" ref="dis_harry_gwala"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_tswelopele" model="res.municipality">
+            <field name="name">Tswelopele</field>
+            <field name="district_id" ref="dis_lejweleputswa"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_tswaing" model="res.municipality">
+            <field name="name">Tswaing</field>
+            <field name="district_id" ref="dis_ngaka_modiri_molema"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_tsantsabane" model="res.municipality">
+            <field name="name">Tsantsabane</field>
+            <field name="district_id" ref="dis_zf_Mgcawu"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_tokologo" model="res.municipality">
+            <field name="name">Tokologo</field>
+            <field name="district_id" ref="dis_lejweleputswa"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_thulamela" model="res.municipality">
+            <field name="name">Thulamela</field>
+            <field name="district_id" ref="dis_vhembe"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_thembisile_hani " model="res.municipality">
+            <field name="name">Thembisile Hani</field>
+            <field name="district_id" ref="dis_nkangala"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_thembelihle" model="res.municipality">
+            <field name="name">Thembelihle</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_theewaterskloof" model="res.municipality">
+            <field name="name">Theewaterskloof</field>
+            <field name="district_id" ref="dis_overberg"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_thabazimbi" model="res.municipality">
+            <field name="name">Thabazimbi</field>
+            <field name="district_id" ref="dis_waterberg"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_thaba_chweu" model="res.municipality">
+            <field name="name">Thaba Chweu</field>
+            <field name="district_id" ref="dis_ehlanzeni"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_swellendam" model="res.municipality">
+            <field name="name">Swellendam</field>
+            <field name="district_id" ref="dis_overberg"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_swartland" model="res.municipality">
+            <field name="name">Swartland</field>
+            <field name="district_id" ref="dis_west_coast"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_sundays_river_valley" model="res.municipality">
+            <field name="name">Sundays River Valley</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_steve_tshwete" model="res.municipality">
+            <field name="name">Steve Tshwete</field>
+            <field name="district_id" ref="dis_nkangala"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_stellenbosch" model="res.municipality">
+            <field name="name">Stellenbosch</field>
+            <field name="district_id" ref="dis_cape_winelands"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_sol_plaatje " model="res.municipality">
+            <field name="name">Sol Plaatje</field>
+            <field name="district_id" ref="dis_frances_baard"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_siyathemba" model="res.municipality">
+            <field name="name">Siyathemba</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_siyancuma" model="res.municipality">
+            <field name="name">Siyancuma</field>
+            <field name="district_id" ref="dis_pixley_ka_seme"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_setsoto" model="res.municipality">
+            <field name="name">Setsoto</field>
+            <field name="district_id" ref="dis_thabo_mofutsanyana"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_senqu" model="res.municipality">
+            <field name="name">Senqu</field>
+            <field name="district_id" ref="dis_joe_gqabi"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_saldanha_bay" model="res.municipality">
+            <field name="name">Saldanha Bay</field>
+            <field name="district_id" ref="dis_west_coast"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_sakhisizwe" model="res.municipality">
+            <field name="name">Sakhisizwe</field>
+            <field name="district_id" ref="dis_chris_hani"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_rustenburg" model="res.municipality">
+            <field name="name">Rustenburg</field>
+            <field name="district_id" ref="dis_bojanala_platinum"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_richtersveld" model="res.municipality">
+            <field name="name">Richtersveld</field>
+            <field name="district_id" ref="dis_namakwa"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_richmond" model="res.municipality">
+            <field name="name">Richmond</field>
+            <field name="district_id" ref="dis_umgungundlovu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_raymond_mhlaba" model="res.municipality">
+            <field name="name">Raymond Mhlaba</field>
+            <field name="district_id" ref="dis_amathole"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ray_nkonyenid" model="res.municipality">
+            <field name="name">Ray Nkonyeni</field>
+            <field name="district_id" ref="dis_ugu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ratlou" model="res.municipality">
+            <field name="name">Ratlou</field>
+            <field name="district_id" ref="dis_ngaka_modiri_molema"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_rand_west_city" model="res.municipality">
+            <field name="name">Rand West City</field>
+            <field name="district_id" ref="dis_west_rand"/>
+            <field name="state_id" ref="base.state_za_gt"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ramotshere_moiloa" model="res.municipality">
+            <field name="name">Ramotshere Moiloa</field>
+            <field name="district_id" ref="dis_ngaka_modiri_molema"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_prince_albert" model="res.municipality">
+            <field name="name">Prince Albert</field>
+            <field name="district_id" ref="dis_central_karoo"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_port_st_johns" model="res.municipality">
+            <field name="name">Port St Johns</field>
+            <field name="district_id" ref="dis_or_tambo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_polokwane" model="res.municipality">
+            <field name="name">Polokwane</field>
+            <field name="district_id" ref="dis_capricorn"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_pixley_ka_seme" model="res.municipality">
+            <field name="name">Pixley ka Seme</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_phumelela" model="res.municipality">
+            <field name="name">Phumelela</field>
+            <field name="district_id" ref="dis_thabo_mofutsanyana"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_phokwane" model="res.municipality">
+            <field name="name">Phokwane</field>
+            <field name="district_id" ref="dis_capricorn"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_overstrand" model="res.municipality">
+            <field name="name">Overstrand</field>
+            <field name="district_id" ref="dis_overberg"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_oudtshoorn" model="res.municipality">
+            <field name="name">Oudtshoorn</field>
+            <field name="district_id" ref="dis_garden_route"/>
+            <field name="state_id" ref="base.state_za_wc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_okhahlamba" model="res.municipality">
+            <field name="name">Okhahlamba</field>
+            <field name="district_id" ref="dis_uthukela"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nyandeni" model="res.municipality">
+            <field name="name">Nyandeni</field>
+            <field name="district_id" ref="dis_or_tambo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ntabankulu" model="res.municipality">
+            <field name="name">Ntabankulu</field>
+            <field name="district_id" ref="dis_alfred_nzo"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nqutu" model="res.municipality">
+            <field name="name">Nqutu</field>
+            <field name="district_id" ref="dis_umzinyathi"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nongoma" model="res.municipality">
+            <field name="name">Nongoma</field>
+            <field name="district_id" ref="dis_zululand"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nkomazi" model="res.municipality">
+            <field name="name">Nkomazi</field>
+            <field name="district_id" ref="dis_ehlanzeni"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nketoana" model="res.municipality">
+            <field name="name">Nketoana</field>
+            <field name="district_id" ref="dis_thabo_mofutsanyana"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nkandla" model="res.municipality">
+            <field name="name">Nkandla</field>
+            <field name="district_id" ref="dis_king_cetshwayo"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ngwathe" model="res.municipality">
+            <field name="name">Ngwathe</field>
+            <field name="district_id" ref="dis_fezile_dabi"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ngqushwa" model="res.municipality">
+            <field name="name">Ngqushwa</field>
+            <field name="district_id" ref="dis_amathole"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_newcastle" model="res.municipality">
+            <field name="name">Newcastle</field>
+            <field name="district_id" ref="dis_amajuba"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ndwedwe" model="res.municipality">
+            <field name="name">Ndwedwe</field>
+            <field name="district_id" ref="dis_ilembe"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_ndlambe" model="res.municipality">
+            <field name="name">Ndlambe</field>
+            <field name="district_id" ref="dis_sarah_baartman"/>
+            <field name="state_id" ref="base.state_za_ec"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nama_khoi" model="res.municipality">
+            <field name="name">Nama Khoi</field>
+            <field name="district_id" ref="dis_namakwa"/>
+            <field name="state_id" ref="base.state_za_nc"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_naledi" model="res.municipality">
+            <field name="name">Naledi</field>
+            <field name="district_id" ref="dis_dr_ruth"/>
+            <field name="state_id" ref="base.state_za_nw"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_nala" model="res.municipality">
+            <field name="name">Nala</field>
+            <field name="district_id" ref="dis_lejweleputswa"/>
+            <field name="state_id" ref="base.state_za_fs"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_musina" model="res.municipality">
+            <field name="name">Musina</field>
+            <field name="district_id" ref="dis_vhembe"/>
+            <field name="state_id" ref="base.state_za_lp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mtubatuba" model="res.municipality">
+            <field name="name">Mtubatuba</field>
+            <field name="district_id" ref="dis_umkhanyakude"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_mthonjaneni" model="res.municipality">
+            <field name="name">Mthonjaneni</field>
+            <field name="district_id" ref="dis_king_cetshwayo"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_msunduzi" model="res.municipality">
+            <field name="name">Msunduzi</field>
+            <field name="district_id" ref="dis_umgungundlovu"/>
+            <field name="state_id" ref="base.state_za_nl"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+        <record id="mun_msukaligwa" model="res.municipality">
+            <field name="name">Msukaligwa</field>
+            <field name="district_id" ref="dis_gert_sibande"/>
+            <field name="state_id" ref="base.state_za_mp"/>
+            <field name="country_id" ref="base.za"/>
+        </record>
+
+        <!-- Teams -->
+        <record id="team_nys" model="enquiry.team">
+            <field name="name">NYS</field>
+        </record>
+        <record id="team_corp_investment" model="enquiry.team">
+            <field name="name">Corporate Investment</field>
+        </record>
+        <record id="team_voucher" model="enquiry.team">
+            <field name="name">Voucher</field>
+        </record>
+        <record id="team_grant" model="enquiry.team">
+            <field name="name">Grant</field>
+        </record>
+        <record id="team_jobs_oppor" model="enquiry.team">
+            <field name="name">Jobs/Opportunities</field>
+        </record>
+        <record id="team_job_prep" model="enquiry.team">
+            <field name="name">Job Preparedness</field>
+        </record>
+        <record id="team_digi_skills" model="enquiry.team">
+            <field name="name">Digital Skills Training</field>
+        </record>
+        <record id="team_bmt" model="enquiry.team">
+            <field name="name">BMT</field>
+        </record>
+        <record id="team_life_skills" model="enquiry.team">
+            <field name="name">Life Skills Training</field>
+        </record>
+        <record id="team_mentorship" model="enquiry.team">
+            <field name="name">Mentorship</field>
+        </record>
+        <record id="team_market_linkage" model="enquiry.team">
+            <field name="name">Market Linkage</field>
+        </record>
+
+
+        <!--    Data for Sectors-->
+
+        <record id="mentor_sectors_object0" model="mentor.sectors">
+            <field name="name">Retail / Wholesale</field>
+        </record>
+        <record id="mentor_sectors_object1" model="mentor.sectors">
+            <field name="name">Service</field>
+        </record>
+        <record id="mentor_sectors_object2" model="mentor.sectors">
+            <field name="name">Manufacturing</field>
+        </record>
+        <record id="mentor_sectors_object3" model="mentor.sectors">
+            <field name="name">Franchising</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <record id="module_category_service_desk" model="ir.module.category">
+            <field name="name">Service Desk</field>
+            <field name="sequence">100</field>
+        </record>
+
+        <record id="group_service_desk_employee" model="res.groups">
+            <field name="name">Employee</field>
+            <field name="category_id" ref="module_category_service_desk"/>
+        </record>
+
+        <record id="group_service_desk_agent" model="res.groups">
+            <field name="name">Service Desk Agent</field>            
+            <field name="category_id" ref="module_category_service_desk"/>
+        </record>
+
+        <record id="group_service_desk_manager" model="res.groups">
+            <field name="name">Service Desk Manager</field>
+            <field name="implied_ids" eval="[(4, ref('group_service_desk_agent'))]"/>
+            <field name="category_id" ref="module_category_service_desk"/>
+        </record>
+        
+        <record id="group_service_desk_administration" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="implied_ids" eval="[(4, ref('group_service_desk_manager'))]"/>
+            <field name="category_id" ref="module_category_service_desk"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+        
+                
+    </data>
+</odoo>

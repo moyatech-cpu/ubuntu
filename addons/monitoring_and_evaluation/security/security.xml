@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_monitoring_and_evaluation">
+            <field name="name">Monitoring and Evaluation</field>
+            <field name="sequence">150</field>
+        </record>
+
+        <record id="group_monitoring_user" model="res.groups">
+            <field name="name">Monitoring User</field>
+            <field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>
+        </record>
+
+         <record id="group_business_unit_head" model="res.groups">
+            <field name="name">Business Unit Head</field>
+            <field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>
+        </record>
+
+        <record id="group_me_personnal" model="res.groups">
+            <field name="name">M&amp;E personnel</field>
+            <field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>
+        </record>
+
+        <!--<record id="group_executive_director" model="res.groups">-->
+            <!--<field name="name">Executive director</field>-->
+            <!--<field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>-->
+        <!--</record>-->
+
+        <record id="group_internal_audit" model="res.groups">
+            <field name="name">Internal Audit</field>
+            <field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>
+        </record>
+
+        <record id="group_nyda_employees" model="res.groups">
+            <field name="name">NYDA Employees</field>
+            <field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>
+        </record>
+
+        <record id="group_senior_manager" model="res.groups">
+            <field name="name">Senior Manager</field>
+            <field name="category_id" ref="monitoring_and_evaluation.module_category_monitoring_and_evaluation"/>
+        </record>
+
+    </data>
+</odoo>

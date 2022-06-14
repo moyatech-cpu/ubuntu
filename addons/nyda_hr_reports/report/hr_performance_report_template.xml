@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_hr_performance_agreement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_hr_reports.report_hr_performance_agreement_template"/>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_hr_performance_agreement_template">
+    
+	    <t t-call="web.external_layout">
+	        <style>
+	            table, th, td {
+	            border: 1px solid black;
+	            border-collapse: collapse;
+	            }
+	            th, td {
+	            padding: 5px;
+	            text-align: left;
+	            }
+	            .t-center{
+	            text-align:center;
+	            }
+	            .t-right{
+	            text-align:right;
+	            }
+	            .r-color{
+	            color: indianred;
+	            }
+	        </style>          
+	        <div class="page">
+	            <div class="oe_structure"/>
+	            <div class="row">
+	                <div class="col-lg-12 text-center">
+	                    <h1>Performance Agreements</h1>
+	                </div>
+	                <t t-value="doc.get_hr_performance_agreement_report_data()" t-set="data"/>
+                    <div>
+                        <t t-if="data['start_date']">
+                            <h4>Start Date :
+                                <t t-esc="data['start_date']"/>
+                            </h4>
+                        </t>
+                        <t t-if="data['end_date']">
+                            <h4>End Date :
+                                <t t-esc="data['end_date']"/>
+                            </h4>
+                        </t>
+                    </div>
+	            </div>
+	            <br/>
+	            <t t-if="data['performance_data']">
+	                <div class="row">
+	                    <div class="text-center p8">
+	                        <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+	                            <thead>
+	                                <tr style="background: lightblue;">
+	                                  <th class="t-center">No.</th>                                   
+	                                    <th class="t-center">Employee</th>
+	                                    <th class="t-center">Position</th>
+	                                    <th class="t-center">Line Manager</th>
+	                                    <th class="t-center">Line Manager Position</th>
+	                                    <th class="t-center">Division</th>
+	                                    <th class="t-center">Stage</th>
+	                                    <th class="t-center">Created Date</th>
+	                                </tr>
+	                            </thead>
+	                            <t t-set="rec_no" t-value="1"/>
+	                            <t t-set="total_agreements" t-value="0"/>
+	                            <t t-foreach="data['performance_data']" t-as="rec_data">
+	                                <tbody>
+	                                    <tr>
+	                                        <td class="t-center">
+	                                           <t t-esc="rec_no"/>
+	                                        </td>
+	                                        <t t-set="rec_no" t-value="rec_no + 1"/>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data.x_employee.name"/> <t t-esc="rec_data.x_employee.surname"/>
+	                                        </td>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data.x_employee_position.name"/>
+	                                        </td>	                                        
+	                                        <td>
+	                                            <t t-esc="rec_data.x_line_manager.name"/> <t t-esc="rec_data.x_line_manager.surname"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.x_line_manager_position.name"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.x_employee_department.name"/>
+	                                        </td>	                                        
+	                                        <td>
+	                                            <t t-esc="rec_data.stage_id.name"/>
+	                                        </td>	                                        
+	                                        <td>
+	                                            <t t-esc="rec_data.create_date"/>
+	                                        </td>	                                        
+	                                    </tr>
+	                                </tbody>
+	                                <!-- <t t-set="total_agreements" t-value="10000.00" /> -->
+	                            </t>                              
+	                        </table>
+	                    </div>
+	                </div>
+	            </t>
+	            <t t-else="">
+	                <div class="row">
+	                    <div class="text-center">
+	                        <h3>There are no performance agreements on the selected criteria.</h3>
+	                    </div>
+	                </div>
+	            </t>
+	            <div class="oe_structure"/>
+	        </div>
+	    </t>
+    </template>
+                 
+    <template id="report_hr_employees">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_hr_reports.report_hr_employees_template"/>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_hr_employees_template">
+    
+	    <t t-call="web.external_layout">
+	        <style>
+	            table, th, td {
+	            border: 1px solid black;
+	            border-collapse: collapse;
+	            }
+	            th, td {
+	            padding: 5px;
+	            text-align: left;
+	            }
+	            .t-center{
+	            text-align:center;
+	            }
+	            .t-right{
+	            text-align:right;
+	            }
+	            .r-color{
+	            color: indianred;
+	            }
+	        </style>          
+	        <div class="page">
+	            <div class="oe_structure"/>
+	            <div class="row">
+	                <div class="col-lg-12 text-center">
+	                    <h1>Employee Reports</h1>
+	                </div>
+	                <t t-value="doc.get_hr_employee_report_data()" t-set="data"/>
+                    <div>
+                        <t t-if="data['division']">
+                            <h4>Division :
+                                <t t-esc="data['division']"/>
+                            </h4>
+                        </t>
+                    </div>
+	            </div>
+	            <br/>
+	            <t t-if="data['employee_data']">
+	                <div class="row">
+	                    <div class="text-center p8">
+	                        <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+	                            <thead>
+	                                <tr style="background: lightblue;">
+	                                  <th class="t-center">No.</th>                                   
+	                                    <th class="t-center">Employee</th>
+	                                    <th class="t-center">ID No.</th>
+	                                    <th class="t-center">Employee Number</th>
+	                                    <th class="t-center">Gender</th>
+	                                    <th class="t-center">Race</th>
+	                                    <th class="t-center">Stage</th>
+	                                    <th class="t-center">Position</th>
+	                                    <th class="t-center">Line Manager</th>
+	                                    <th class="t-center">Division</th>
+	                                    <th class="t-center">Start Date</th>
+	                                </tr>
+	                            </thead>
+	                            <t t-set="rec_no" t-value="1"/>
+	                            <t t-set="total_employees" t-value="0"/>
+	                            <t t-foreach="data['employee_data']" t-as="rec_data">
+	                                <tbody>
+	                                    <tr>
+	                                        <td class="t-center">
+	                                           <t t-esc="rec_no"/>
+	                                        </td>
+	                                        <t t-set="rec_no" t-value="rec_no + 1"/>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data.name"/>
+	                                        </td>    
+	                                        <td>
+	                                            <t t-esc="rec_data.identification_id"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.employee_number"/>
+	                                        </td>	                                        		                                                                              
+	                                        <td>
+	                                            <t t-esc="rec_data.gender"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.race"/>
+	                                        </td>	                                        	                                        
+	                                        <td>
+	                                            <t t-esc="rec_data.job_id.name"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.department_id.name"/>
+	                                        </td>	                                                                                
+	                                        <td>
+	                                            <t t-esc="rec_data.joining_date"/>
+	                                        </td>	                                        
+	                                    </tr>
+	                                </tbody>
+	                                <!-- <t t-set="total_agreements" t-value="10000.00" /> -->
+	                            </t>                              
+	                        </table>
+	                    </div>
+	                </div>
+	            </t>
+	            <t t-else="">
+	                <div class="row">
+	                    <div class="text-center">
+	                        <h3>There are no employees on the selected criteria.</h3>
+	                    </div>
+	                </div>
+	            </t>
+	            <div class="oe_structure"/>
+	        </div>
+	    </t>
+    </template>       
+    
+    <template id="report_hr_performance_agreement_details">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_hr_reports.report_hr_performance_agreement_details_template"/>
+            </t>
+        </t>
+    </template>
+        
+    <template id="report_hr_performance_agreement_details_template">
+
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_hr_performance_agreement_report_details_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Performance Agreement</h1>
+                    </div>
+                    <t t-if="data['division']">
+                      <h4>Division : <t t-esc="data['division']"/></h4>
+                    </t>                    
+               
+                    <br/>
+                </div>
+                <br/>
+                
+                <t t-if="data['agreements']">
+                    <div class="row">
+                        <div class="text-left p8">
+                          <t t-set="rec_no" t-value="1"/>
+                                
+                          <t t-foreach="data['agreements']" t-as="rec_data">
+                          
+                            <table style="width:50%;border: 1px solid black;border-collapse: collapse;">
+                            	<!--  
+                                <tr style="background: lightblue;">
+                                    <td class="t-left">No.</td>
+                                    <td class="t-center">
+                                        <t t-esc="rec_no"/>
+                                    </td>
+                                    <t t-set="rec_no" t-value="rec_no + 1"/>                                    
+                                </tr>
+                                -->                                
+                                <tr>
+                              		<td class="t-left">Employee</td>
+                                    <td>
+                                        <t t-esc="rec_data['employee']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>                
+                                	<td class="t-left">Position</td>                    
+                                    <td>
+                                        <t t-esc="rec_data['position']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>   
+                                	<td class="t-left">Division</td>                                 
+                                    <td>
+                                        <t t-esc="rec_data['division']"/>
+                                    </td>
+                                </tr>         
+                                <tr>   
+                                	<td class="t-left">Line Manager</td>                                 
+                                    <td>
+                                        <t t-esc="rec_data['x_line_manager']"/>
+                                    </td>
+                                </tr>                                                       
+                                <tr>        
+                                	<td class="t-left">Create Date</td>                            
+                                    <td>
+                                        <t t-esc="rec_data['create_date']"/>
+                                    </td>
+                                </tr>                                
+                            </table>                            
+                          	<t t-set="line_no" t-value="1"/>
+							<br/><b>Key Performance Areas</b><br/>                                                       	
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Perspective</th>
+                                    <th class="t-center">KPA</th>
+                                    <th class="t-center">KPI</th>
+                                    <th class="t-center">Weight</th>
+                                </tr>                            
+	                            <t t-foreach="rec_data['agreement_lines']" t-as="line_data">
+	                                <tr>
+	                                    <td class="t-center">
+	                                        <t t-esc="line_no"/>
+	                                    </td>
+	                                    <t t-set="line_no" t-value="line_no + 1"/>                              
+	                                    <td>
+	                                        <t t-esc="line_data['x_perspective']"/>
+	                                    </td>                                        
+	                                    <td>
+	                                        <t t-esc="line_data['x_kpa']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_kpi']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_weight']"/>
+	                                    </td>                                  	                                    
+	                                </tr>
+	                            </t> 
+                            </table>
+              				
+              				<t t-set="line_no" t-value="1"/>
+              				<br/><b>Personal Development Plan</b><br/>
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                	<th class="t-center">No.</th>
+                                    <th class="t-center">Training Type</th>
+                                    <th class="t-center">Competence</th>
+                                    <th class="t-center">Method</th>
+                                    <th class="t-center">Responsibility</th>
+                                    <th class="t-center">Time Frame</th>
+                                    <th class="t-center">Expected Outcome</th>
+                                    <th class="t-center">Anticipated Cost</th>
+                                </tr>                            
+	                            <t t-foreach="rec_data['personal_development_lines']" t-as="line_data">
+	                                <tr>
+	                                    <td class="t-center">
+	                                        <t t-esc="line_no"/>
+	                                    </td>
+	                                    <t t-set="line_no" t-value="line_no + 1"/>                              
+	                                    <td>
+	                                        <t t-esc="line_data['x_training_type']"/>
+	                                    </td>                                        
+	                                    <td>
+	                                        <t t-esc="line_data['x_name']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_method']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_responsibility']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_time_frame']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_expected_outcome']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_anticipated_cost']"/>
+	                                    </td>	                                    	                                    	                                                                       
+	                                </tr>
+	                            </t> 
+                            </table>                            
+                            
+                            <br/><b>Signed-Off: </b>
+                            <table style="width:50%;border: 1px solid black;border-collapse: collapse;">                         
+                                <tr>
+                              		<td class="t-left">Line Manager</td>
+                                    <td>
+                                    	<t t-if="rec_data['stage_id'] == 663 or rec_data['stage_id'] == 227">
+                                        	<t t-esc="rec_data['x_line_manager']"/>
+                                        </t>
+                                        <t t-else="">
+                                        	Pending
+                                        </t>
+                                    </td>
+                                </tr> 
+                                <tr>
+                              		<td class="t-left">Executive Director</td>
+                                    <td>
+                                    	<t t-if="rec_data['stage_id'] == 227">
+                                        	<t t-esc="rec_data['x_employee_director']"/>
+                                        </t>
+                                        <t t-else="">
+                                        	Pending
+                                        </t>
+                                    </td>
+                                </tr>     
+                                <tr>
+                              		<td class="t-left">Date Updated</td>
+                                    <td>
+                                       	<t t-esc="rec_data['write_date']"/>
+                                    </td>
+                                </tr>                                                         
+                            </table>                             
+                            <br /><br />
+                            
+                          </t>
+                            
+                        </div>
+                   
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>    
+
+    </template>
+                 
+</odoo>

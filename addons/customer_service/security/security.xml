@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="customer_service.module_category_customer_service">
+        <field name="name">Customer Service</field>
+        <field name="description">Assists the organisation's contact center to better manage enquiries</field>
+        <field name="sequence">14</field>
+    </record>
+
+    <record id="group_customer_service_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="customer_service.module_category_customer_service"/>
+    </record>
+
+    <record id="group_customer_service_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="customer_service.module_category_customer_service"/>
+        <field name="implied_ids" eval="[(4, ref('group_customer_service_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+</odoo>

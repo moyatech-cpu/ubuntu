@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+	<template id="government_sector_error" name="cannot_apply">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/thusano_fund/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <h2>We Are Sorry!, Government Sector Employees Cannot Apply For This Fund!.</h2>
+                    <a href="#" class="contact-btn">Contact us</a>
+                </div>
+            </div>
+        </t>
+    </template>
+	
+
+	<template id="not_applicable_form" name="Login Required">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/thusano_fund/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <h2>We are sorry, but you must be Beneficiary/Service Provider to access this page.</h2>
+                    <a href="#" class="contact-btn">Contact us</a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+	<record id="thusano_form_submit_success" model="website.page">
+        <field name="name">Thanks</field>
+        <field name="type">qweb</field>
+        <field name="url">/form-submit-success</field>
+        <field name="website_published">True</field>
+        <field name="key">thusano_fund.thusano_form_submit_success</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="thusano_fund.thusano_form_submit_success">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="oe_structure" id="oe_structure_website_crm_contact_us_thanks_1"/>
+                        <div class="container">
+                            <h1>We Will Take It From Here!</h1>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="alert alert-success" role="status">
+                                        Thank you! Application has been successfully captured
+                                        <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <t t-call="website.company_description"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+    
+    <template id="temp_thusano_form" name="Thusano Fund Application Form">
+        <t t-call="website.layout">
+        <link rel="stylesheet" href="/thusano_fund/static/src/css/thusano_style.css"/>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">THUSANO FUND APPLICATION FORM</h1>
+                        <hr/>
+                    </div>
+            	</div>
+                <form id="regForm" method="post" action="/form/submit" enctype="multipart/form-data">
+                      
+                   <div class="tab" style="display:block">
+                    <div class="demo_header">
+                        <h4>
+                            <b>PERSONAL DETAILS</b>
+                        </h4>
+                    </div>
+                     
+                       <div class="row">
+                        <div class="col-md-6">
+                            Name:
+                            <p>
+                                <input placeholder="First name..." name="name"
+                                		t-att-value="applicant.name" readonly="1"/>
+                            </p>
+                        </div>
+                      
+                         <div class="col-md-6">
+                            Surname:
+                            <p>
+                                <input placeholder="Last name..." name="surname"
+                                t-att-value="applicant.surname" readonly="1"/>
+                            </p>
+                        </div>
+                        </div>
+
+						<div class="row">
+                       <div class="col-md-6">
+                            Gender:
+                            <p>
+                                <select name="gender" class="select_style">
+                                    <t t-if="applicant.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                    </t>
+                                    <t t-if="applicant.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                    </t>
+                                </select>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                                    Employment Status
+                                <select class="select_style" id="employment_status" name="employment_status" required="required">
+                                    <option value="unemployed" selected="selected">
+                                        Unemployed
+                                    </option>
+                                    <option value="employed">
+                                        Employed
+                                    </option>
+                                    <option value="self-employed">
+                                        Self-Employed  
+                                    </option>
+                                    <option value="other">
+                                        Other
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                         <div class="col-md-6" id="position_div" style="display: none;">
+                            Please Specify Position:
+                            <p>
+                                <input placeholder="Employment Position..." name="position"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6" id="sector_div" style="display: none;">
+                            Please Specify Sector:
+                            <select class="select_style employment_sector req" id="emp_sect"  name="empl_sector" required="required">
+                                    <option value="private">
+                                        Private Sector
+                                    </option>
+                                    <option value="government" >
+                                        Government Sector
+                                    </option>
+                             </select>
+                        </div>
+                        </div>
+                 		
+                 		<div class="row">
+                        <div class="col-md-6 ">
+                                    Applicant’s identity number
+                                <input id="id_number" name="id_number" placeholder="ID Number" 
+                                t-att-value="applicant.id_number" readonly="1"/>
+                            </div>
+                        
+                        <div class="col-md-6">
+                                    Do you have a sponsor? 
+                                <select class="select_style" id="has_sponsor" name="has_sponsor" required="required">
+                                    <option value="True">Yes, I have a sponsor</option>
+                                    <option value="False" selected="selected">No, I do not have a sponsor</option>
+                                    
+                                </select>
+                            </div>
+                            </div>
+                            
+                         <div class="row">
+                         <div class="col-md-6" id="sponsor_div" style="display: none;">
+                            Sponsor Name:
+                            <p>
+                                <input placeholder="Name of sponsor..." name="sponsor_name"/>
+                            </p>
+                            Sponsor Contribution Amount:
+                            <p>
+                                <input placeholder="Sponsor contribution..." name="sponsor_amount"/>
+                            </p>
+                        </div>
+                        </div>
+                    
+                          <div class="row">
+                        <div class="col-md-6">
+                            Cell Phone No:
+                            <p>
+                                <input placeholder="Cell Phone No..."  id="cellphone" name="cellphone" 
+                                t-att-value="applicant.cell_phone_number" readonly="1"/>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                           Alternative number:
+                            <p>
+                                <input placeholder="Alternative number..." id="alterphone" name="alterphone"
+                                t-att-value="applicant.alternative_number"/>
+                            </p>
+                        </div>
+                        </div>
+              
+                     <div class="row">
+                            <div class="col-md-6">
+                                    Email
+                                <input  id="email" name="email" placeholder="Email"
+                                 t-att-value="applicant.email" readonly="1"/>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <select class="select_style req" id="user_type" name="user_type" >
+                                    <option hidden="hidden" value="student" selected="selected">Student</option>
+                                </select>
+                            </div>
+                     </div>
+                    
+                     
+                     <div class="row">	
+                     	<div class="col-md-6">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="physical_address"
+                                          name="physical_address" rows="5">
+                                </textarea>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                               Postal Address:
+                               <p>
+                                <textarea class="form-control req" cols="40" id="postal_address" name="postal_address"
+                                          rows="5">
+                               </textarea>
+								</p>
+                         </div>
+                   </div>
+                       
+                </div>
+                   <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>DETAILS OF APPLICATION</b>
+                        </h4>
+                    </div>
+                       <div class="row">
+                            <div class="col-md-12">
+                                <h4>Please select (check box) to indicate the type of application</h4>
+                                 
+                               	 <div class="row">
+                               	 	<div class="col-md-12"><div class="col-md-5">
+                               	 	 	<label for="reg_fees" class="">1. Registration Fees:</label></div><div class="col-md-4">
+                                		<input type="checkbox" id="reg_fees" name="reg_fees" value="True" class="form-control req" /></div>
+                                	</div>
+                                	
+                                	<div class="col-md-12"><div class="col-md-5">
+										<label for="outstanding_fees">2. Outstanding fees University/FET/<br /> 
+																college fees(only First up to Final Year undergraduates Students):</label>
+<br/></div><br/>
+										<div class="col-md-4"><input type="checkbox" id="outstanding_fees" class="form-control req" name="outstanding_fees" value="True"/></div>
+									 </div>
+								</div>
+								<div class="col-md-5"><label for="ngo_ngo_funding">3. NGO/ NPO funding (youth development initiatives):</label>
+</div>
+								<div class="col-md-4"><input type="checkbox" id="ngo_ngo_funding" class="form-control req" name="ngo_ngo_funding" value="True"/>
+</div>
+								<div class="col-md-5"><label for="short_courses_technical_training">4. Short courses / technical training over a period of 2 years or less:</label>
+    <br/></div><br/>
+								<div class="col-md-4"><input type="checkbox" id="short_courses_technical_training" class="form-control req" name="short_courses_technical_training" value="True"/></div>
+								
+                        	</div>
+                        	<div class="col-md-12">
+                        		How much are you applying for:
+                        		<p>
+                                <input placeholder="Amount..." class="req" name="appl_amount" type="text"/>
+                            </p>
+                        	</div>
+<br/>
+                        </div>
+                        </div>
+                      
+                      <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>FAMILY INCOME</b>
+                        </h4>
+                    </div>
+                    
+                      <div class="row">
+                        <div class="col-md-6">
+                            First Parent/Guardian's Name:
+                            <p>
+                                <input placeholder="First name..." class="req" name="parent_name" type="text"/>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6 ">
+                                First Parent/Guardian’s identity number
+                                <input id="parent_id_number" name="parent_id_number" class="req" placeholder="Parent's ID Number"
+                                  type="text" minlength="13" maxlength='13'/>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            Second Parent/Guardian's Name:
+                            <p>
+                                <input placeholder="First name..."  name="second_parent_name" type="text"/>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6 ">
+                                Second Parent/Guardian’s identity number
+                                <input id="second_parent_id_number" name="second_parent_id_number" placeholder="Parent's ID Number"
+                                  type="text" minlength="13" maxlength='13' />
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            Family Gross Income Amount
+                            <p>
+                                <input placeholder="Your Total Family Income..." id="gross_income" class="req" name="gross_income" type="text" 
+                       />
+                            </p>
+                        </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4> Self-support (briefly explain how you support yourself)</h4>
+                                <p>
+                                    <textarea class="form-control req" cols="40" name="self_support_statement"
+                                              
+                                             rows="3" >
+                                   </textarea>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4> Motivate how Thusano fund can help you and improve your situation.</h4>
+                                <p>
+                                    <textarea class="form-control req" cols="40" name="motivation_statement"
+                                              
+                                              rows="3"></textarea>
+                                </p>
+                            </div>
+                        </div>  
+                      </div>
+                       
+                    <div class="tab">
+                    <div class="row">
+                        <div class="col-md-12" style="color:red">
+                            <h5>
+                                <b>Please Note : Only attach PDF files with your application.</b>
+                            </h5>
+                        </div>
+                   </div>
+                    <div class="demo_header">
+                        <h4>
+                            <b>DOCUMENTS UPLOAD</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                       <div class="col-md-6">
+                            <h4>Motivation or application letter stating the financial need
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="letter_stating_financial_need" type="file" id="file"  accept=".pdf" class="file-upload-field identity file_upload"/>
+                                </div>
+                            </div>
+                        </div>
+                 
+                        <div class="col-md-6">
+                            <h4>Academic Record not less than 3 months or acceptance letter
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="academic_record_acceptance_letter" type="file" id="file"  accept=".pdf" class="file-upload-field identity file_upload"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   	<div class="row">
+                        <div class="col-md-6">
+                            <h4>ID Copy - 3 months certified copy 
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="certified_identity_document_applicant" type="file" id="file"  accept=".pdf" class="file-upload-field identity file_upload"/>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    
+                        <div class="col-md-6">
+                            <h4>Proof of income for guardian or parents (for academic purposes) 
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="income_proof" type="file" id="file"  accept=".pdf" class="file-upload-field identity file_upload"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Affidavit 
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="affidavit" type="file" id="file"  accept=".pdf"  class="file-upload-field identity file_upload"/>
+                                </div>
+                            </div>
+                        </div>
+                  
+                        <div class="col-md-6">
+                            <h4>Invoice or quotation from the institution of choice
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="institution_invoice_quotation" type="file" id="file" accept=".pdf" class="file-upload-field identity file_upload"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    	 <div class="row">
+                        <div class="col-md-12" style="color:red">
+                            <h3>
+                                <b>Declaration :</b>
+                            </h3>
+                        </div>
+                        <div class="col-md-10" style="color:rebeccapurple">
+                            <h5>1.By submitting, I&#160;<t t-esc="applicant.name"/>&#160;<t t-esc="applicant.surname"/>&#160; hereby declare that the information provided in this form is correct 
+                            	and that I read and understand all Thusano Fund guidelines.
+                            </h5>
+                            <h5>2.By submitting this application, you give NYDA permission to process your personal
+                            	  information in terms of the POPI Act no 4 of 2013 and you acknowledge that you understand
+                            	  the purpose for which it is required and for which it will be used.
+                            	  Furthermore, you declare that all personal information supplied to the NYDA for the purposes of this agreement is accurate,
+                            	  up to date, not misleading and that it is complete in all respects.
+                            </h5>
+                            <h5>3.Kindly Note, if any information submitted including supporting documents is not correct the application will be rejected.
+                            </h5>
+                        </div>
+                 	   </div>
+                 	   </div>
+                   
+                     <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn">Previous</button>
+                        <button type="button" id="nextBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                    <!--                    <span class="step"></span>-->
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+                </form>
+                 <div id="div_loading"/>
+            </div>
+
+        </t>
+    </template>
+</odoo>

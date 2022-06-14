@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+   	<record id="view_users_form_inherit_view" model="ir.ui.view">
+		<field name="name">pddd.settings</field>
+        <field name="model">res.users</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+           <form string="Users">
+                    <header>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;}"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" required="1"/></h1>
+                            <field name="email" invisible="1"/>
+                            <label for="login" class="oe_edit_only" string="Email Address"/>
+                            <h2><field name="login"/></h2>
+                            <group>
+                                <field name="partner_id" readonly="1" required="0" groups="base.group_no_one" attrs="{'invisible': [('id', '=', False)]}"/>
+                            </group>
+                        </div>
+                        <notebook colspan="4">
+                        	<page string="Access Rights">
+                        		<group>
+                                    <group string="Generic" name="Generic">
+                                        <field name="sel_groups_418"/> <!-- BTM Training Management -->
+                                        <field name="in_group_9"/> <!-- Portal -->
+                                    </group>
+                                </group>
+                                <group>
+                                	<group string="Client Management" name="Client_Management">
+                                        <field name="in_group_326"/> <!-- Beneficiary -->
+                                        <field name="in_group_324"/> <!-- Branch Manager -->
+                                        <field name="in_group_327"/> <!-- Partner Service Provider -->
+                                        <field name="in_group_323"/> <!-- Branch Admin -->
+                                        <field name="in_group_328"/> <!-- Co-ordinator -->
+                                    </group>
+                                </group>
+                                <group>
+                                	<group string="Jobs and Opportunities" name="jobs_opportunitites">
+                                        <field name="in_group_442"/> <!-- Job officer -->
+                                        <field name="in_group_441"/> <!-- Opportunity Provider -->
+                                    </group>
+                                </group>
+                                <group>
+                                	<group string="Training" name="Training">
+                                        <field name="in_group_419"/> <!-- Head Office Admin -->
+                                        <field name="in_group_420"/> <!-- Head Office Manager -->
+                                        <field name="in_group_421"/> <!-- NYDA Specialist -->
+                                        <field name="in_group_129"/> <!-- Job training -->
+                                        <field name="in_group_259"/> <!-- Sales Training Branch Manager -->
+                                        <field name="in_group_260"/> <!-- Sales Training HO Manager -->
+                                        <field name="in_group_258"/> <!-- Sales Training Officer -->
+                                        <field name="in_group_257"/> <!-- Sales Training Trainer -->
+                                        <field name="in_group_256"/> <!-- Sales Training Student -->
+                                    </group>
+                                </group>
+                                <group>
+                                	<group string="Job Prepardness" name="job_preparedness">
+                                        <field name="in_group_134"/> <!-- Job Preparedness Branch Manager -->
+                                        <field name="in_group_138"/> <!-- Job Preparedness HO Manager -->
+                                        <field name="in_group_131"/> <!-- Job Preparedness Trainer -->
+                                        <field name="in_group_132"/> <!-- Job Preparedness Coordinator -->
+                                        <field name="in_group_133"/> <!-- Job Preparedness Learner/Beneficiary -->
+                                        <field name="in_group_127"/> <!-- Job Seeker -->
+                                        <field name="in_group_129"/> <!-- Job training -->
+                                    </group>
+                                </group>
+                                <group>
+                                	<group string="Mentorship" name="Mentorship">
+                                        <field name="in_group_415"/> <!-- Business Branch Officer -->
+                                        <field name="in_group_416"/> <!-- Business Head Officer -->
+                                        <field name="in_group_417"/> <!-- Head Office User -->
+                                    </group>
+                                </group>
+                                <group>
+                                	<group string="Grant and Voucher" name="grant_voucher" colspan="4">
+                                        <group>
+                                        	<field name="in_group_428"/> <!-- BCS -->
+                                        	<field name="in_group_424"/> <!-- BDO -->
+                                        	<field name="in_group_430"/> <!-- EDM -->
+                                        	<field name="in_group_423"/> <!-- Finance Admin -->
+                                        	<field name="in_group_435"/> <!-- Head of Department(HOD) -->
+                                        	<field name="in_group_436"/> <!-- Manager BSCVP -->
+                                        	<field name="in_group_429"/> <!-- QAO -->
+                                        	<field name="in_group_432"/> <!-- Redemption Officer/ Manager(RO) -->
+                                        	<field name="in_group_431"/> <!-- Service Provider(SP) -->
+                                        </group>
+                                        <group>
+                                        	<field name="in_group_422"/> <!-- BDA -->
+                                        	<field name="in_group_426"/> <!-- BGARC -->
+                                        	<field name="in_group_437"/> <!-- External Auditor -->
+                                        	<field name="in_group_427"/> <!-- HOGAC -->
+                                        	<field name="in_group_438"/> <!-- Internal Auditor -->
+                                        	<field name="in_group_425"/> <!-- PC/BC -->
+                                        	<field name="in_group_433"/> <!-- Redemption Administrator(RA) -->
+                                        	<field name="in_group_434"/> <!-- Service Provider Network Administrator(SP Admin) -->
+                                        </group>
+                                        
+                                    </group>
+                                </group>
+                        		
+                        	</page>
+                           
+                        </notebook>
+                    </sheet>
+                </form> 
+        </field>
+    </record>
+    <record id="view_pddd_settings_users_id" model="ir.ui.view">
+        <field name="name">PDDD Users</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree string="Users">
+                    <field name="name"/>
+                    <field name="login"/>
+                    <field name="lang"/>
+                    <field name="login_date"/>
+        	</tree>
+        </field>
+    </record>
+    <record id="action_pddd_settings_users" model="ir.actions.act_window">
+        <field name="name">PDDD Users</field>
+        <field name="res_model">res.users</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_users_form_inherit_view"/>
+        <field name="form_view_id" ref="view_users_form_inherit_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_pddd_settings_users_id')}),
+    (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit_view')})]"/>
+        <field name="domain">[('employee_id.department_id.name', '=', 'PDDD')]</field>
+        <!--<field name="context">[('employee_ids', '!=', False)]</field> 
+        <field name="view_ids"
+               eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('pddd_settings.view_pddd_settings_users_id')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('pddd_settings.view_users_form_inherit')})]"/>-->
+    </record>
+
+    
+    <menuitem name="PDDD Settings" id="pddd_settings.menu_root" groups="base.group_system,group_system_pddd_admin" web_icon="pddd_settings,static/src/img/icon.png" />
+    <menuitem name="PDDD Settings" id="pddd_settings.menu_1" parent="pddd_settings.menu_root" groups="base.group_system,pddd_settings.group_system_pddd_admin"/>
+    <menuitem name="User roles" id="pddd_settings.menu_2" action="action_pddd_settings_users" parent="pddd_settings.menu_1" groups="base.group_system,pddd_settings.group_system_pddd_admin"/>
+    
+  </data>
+</odoo>

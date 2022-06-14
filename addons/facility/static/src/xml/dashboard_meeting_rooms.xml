@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="facility.meeting_rooms_dashboard">
+        <div class="container-fluid" id="main_tickets_dashboard">
+            <div class="row">
+                <!-- Dashboard box for My Tickets -->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-5 m-2 bg-light pointer" id="new_booking">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="facility/static/description/new_booking.png"
+                                         class="img img-fluid mx-auto h-120" alt="new"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="text-black">New Booking</h3>
+                                    <p>Book your next meeting room, day office or training room</p>
+                                    <p class="text-muted">Book now
+                                        <i class="fa fa-angle-right text-orange" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"/>
+                        <div class="col-md-5 m-2 bg-light pointer" id="cancelled_bookings">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="facility/static/description/cancel_booking.png"
+                                         class="img img-fluid mx-auto h-120" alt="new"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="text-black">Cancelled Bookings</h3>
+                                    <p>There are <span t-esc="widget.meeting_data.total_cancelled_bookings"/> cancelled booking</p>
+                                    <p class="text-muted">View cancelled rooms
+                                        <i class="fa fa-angle-right text-orange" aria-hidden="true"></i>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-5 m-2 bg-light pointer" id="rescheduled_bookings">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="facility/static/description/rescheduled.png"
+                                         class="img img-fluid mx-auto h-120" alt="new"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="text-black">Rescheduled Bookings</h3>
+                                    <p>There are <span t-esc="widget.meeting_data.total_rescheduled_bookings"/> rescheduled rooms</p>
+                                    <p class="text-muted">View rescheduled rooms
+                                        <i class="fa fa-angle-right text-orange" aria-hidden="true"></i>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"/>
+                        <div class="col-md-5 m-2 bg-light pointer" id="history_bookings">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="facility/static/description/history.png"
+                                         class="img img-fluid mx-auto h-120" alt="new"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="text-black">Booking History</h3>
+                                    <p>There are <span t-esc="widget.meeting_data.total_history_bookings"/> previous bookings</p>
+                                    <p class="text-muted">View history
+                                        <i class="fa fa-angle-right text-orange" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-5 m-2 bg-light pointer" id="confirmed_bookings">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="facility/static/description/confirmed.png"
+                                         class="img img-fluid mx-auto h-100" alt="new"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="text-black">Confirmed Bookings</h3>
+                                    <p>There are <span t-esc="widget.meeting_data.total_confirmed_bookings"/> confirmed rooms</p>
+                                    <p class="text-muted">View confirmed rooms
+                                        <i class="fa fa-angle-right text-orange" aria-hidden="true"></i>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dashboard box 2 for Failed SLA Tickets -->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row m-0">
+                                <div class="p-5 col-md-12">
+                                    <h3><span t-esc="widget.meeting_data.total_upcoming_bookings"/> Upcoming Bookings</h3>
+                                </div>
+                                <div class="col-md-12 bg-light">
+                                    <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Topic</th>
+                                            <th>Booked by</th>
+                                            <th>Room Name</th>
+                                            <th>Start Date and time</th>
+                                            <th>End Date and time</th>
+                                        </tr>
+                                    </thead>
+                                    <t t-foreach="widget.meeting_data.upcoming_booking_records" t-as="data">
+                                        <tbody>
+                                            <tr class="single_record pointer" t-att-id="data['id']">
+                                                <td>
+                                                    <span t-esc="data['name']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data['user']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data['room_name']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data['start_date']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data['end_date']"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </t>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dashboard box 3 for Tickets according to category-->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row m-0">
+                                <div class="col-md-12">
+                                    <h3>Room wise bookings</h3>
+                                </div>
+                                <t t-foreach="widget.meeting_data.single_rooms" t-as="rooms">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-11 bg-light m-2">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h2><span t-esc="rooms['name']"/></h2>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button t-att-id="rooms['id']"
+                                                                type="button"
+                                                                class="btn btn-primary room_button pointer">
+                                                            Rooms
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4 class="booked_room_link pointer"
+                                                            t-att-id="rooms['id']">
+                                                            <span t-esc="rooms['total_booked']"/>
+                                                            times booked
+                                                        </h4>
+                                                        <h4 class="cancelled_room_link pointer"
+                                                            t-att-id="rooms['id']">
+                                                            <span t-esc="rooms['total_cancelled']"/>
+                                                            times cancelled
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>

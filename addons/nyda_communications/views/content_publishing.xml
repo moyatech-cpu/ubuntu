@@ -1,0 +1,155 @@
+<odoo>
+  <data>
+  
+ <record id="nyda_content_publishing_kanban" model="ir.ui.view">
+        <field name="name">nyda.content.publishing.kanban.view</field>
+        <field name="model">content.publishing</field>
+        <field name="arch" type="xml"> 
+		<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';red:state=='Senior Manager Review';yellow:state=='Approved';green:state=='Published';" disable_drag_drop_record="true" import="false" >
+                    <field name="publisher"/>
+                    <field name="create_date"/>
+                    <field name="content_deadline"/>
+                    <field name="state"/>
+                    <field name="color"/>
+                    <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.deletable">
+                                            <li><a type="delete">Delete</a></li>
+                                        </t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                                </div>
+                                <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title"><field name="serial_number"/></h4>
+                                    <div>
+                                        <t t-if="record.publisher.raw_value"> <b class="o_kanban_record_subtitle"> <field name="publisher"/> </b> <br/> </t>
+                                        <i class="fa fa-clock-o"/>
+                                        <b>Deadline</b> <t t-esc="moment(record.content_deadline.raw_value).format('lll')"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </field>
+      </record>
+  
+  
+    <record model="ir.ui.view" id="nyda_communications_tree_view">
+      <field name="name">nyda.communications.tree.view</field>
+      <field name="model">content.publishing</field>
+      <field name="arch" type="xml">
+        <tree >
+          <field name="publisher"/>
+          <field name="content_deadline"/>
+          
+        </tree>
+      </field>
+    </record>
+  
+      <record model="ir.ui.view" id="nyda_content_publishing_form_view">
+      
+      <field name="name">nyda.content.publishing.form.view</field>
+      <field name="model">content.publishing</field>
+      
+      <field name="arch" type="xml">
+      <form string="Content Publishing Form">
+      	<header>
+      		 <button string="Proceed" attrs = "{'invisible':[('state','!=','new')]}" style="margin-right:10px;"
+      		  	type="object" name="submit_button" class="oe_highlight" groups="nyda_communications.nyda_comms_publisher,base.group_system"/>
+      		  
+			 <button string="Approve" attrs = "{'invisible':[('state','!=','sm_review')]}" style="margin-right:10px;" 
+			   	type="object" name="approve_sm_review_button" class="oe_highlight" groups="nyda_communications.nyda_comms_manager,nyda_communications.nyda_comms_snr_manager,base.group_system"/>
+			   
+			 <button string="Reject" attrs = "{'invisible':[('state','!=','sm_review')]}" style="margin-right:10px;"  
+			  	type="object" name="reject_sm_review_button" class="oe_highlight" groups="nyda_communications.nyda_comms_manager,nyda_communications.nyda_comms_snr_manager,base.group_system"/>
+			  
+			 <button string="Approve" attrs = "{'invisible':[('state','!=','ed_review')]}" style="margin-right:10px;" 
+			   	type="object" name="approve_ed_review_button" class="oe_highlight" groups="nyda_communications.nyda_comms_executive_director,base.group_system"/>
+			   
+			 <button string="Reject" attrs = "{'invisible':[('state','!=','ed_review')]}" style="margin-right:10px;"  
+			  	type="object" name="reject_ed_review_button" class="oe_highlight" groups="nyda_communications.nyda_comms_executive_director,base.group_system"/>
+			  
+		     <button string="Published" attrs = "{'invisible':[('state','!=','approved')]}" style="margin-right:10px;" 
+		     	 type="object" name="publish_button" class="oe_highlight" groups="nyda_communications.nyda_comms_publisher,base.group_system"/>
+		     	 
+		   
+      	     <field name="state" widget="statusbar"  statusbar_visible="new,sm_review,ed_review,approved,published" />
+      	</header>
+      	<sheet>
+      		<!--  <div class="oe_button_box" name="button_box">
+                   
+                        <button name="toggle_active" type="object" groups="base.group_user" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+           </div>-->		  
+		<div id="o_memo_container">
+        	<div id="o_memo_main">
+                    <div class="oe_title">
+                        <h1 class="o_row">
+                            <field name="content_title" placeholder="Content Title..." required="True" />
+                        </h1>
+                    </div>
+                <group name="request_details" string="Request Details">
+                	<group>
+                			<field name="publisher"  readonly='1'/>
+                      		<field name="publisher_branch" readonly='1'/>
+ 					  </group>
+ 					  <group name="request_deadline">
+                            <field name="content_deadline"  required="1"/>
+    
+                        </group>
+ 				</group>
+ 				
+         	</div>
+       </div>
+       <notebook colspan="8">
+       
+       					<page name="description" string="Description">
+                            <group name="container_row_2">
+                            	<field name="description" required="1"/>
+                             </group>
+                        </page>
+                        
+        </notebook>
+        </sheet>
+        <div class="oe_chatter" >
+    		<field name="message_follower_ids" widget="mail_followers"/>
+    		<field name="message_ids" widget="mail_thread"/>
+		</div>
+    	</form>
+      </field>
+      </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="nyda_communications.content_publishing">
+      <field name="name">Content Publishing</field>
+      <field name="res_model">content.publishing</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record> 
+    
+   
+    
+    			<!-- actions -->
+    <menuitem name="Content Publishing" id="nyda_communications.submenu_content_req" parent="nyda_communications.menu"  sequence="0" action="nyda_communications.content_publishing"  groups="nyda_communications.nyda_comms_publisher,base.group_system"/>
+    
+  </data>
+</odoo>

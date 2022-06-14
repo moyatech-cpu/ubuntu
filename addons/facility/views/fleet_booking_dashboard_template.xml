@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+         <!--Default View for Fleet Dashboard-->
+        <record model="ir.ui.view" id="fleet_booking_dashboard_view">
+            <field name="name">Dashboard</field>
+            <field name="model">fleet.dashboard</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--<field name="name"/>-->
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Client Action For Fleet Dashboard -->
+        <record id="action_fleet_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">facility.fleet_dashboard</field>
+        </record>
+
+        <!-- Fleet Dashboard -->
+        <template id="fleet_assets_backend" name="Fleet Dashboard" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/facility/static/src/js/fleet_dashboard.js"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<record id="comms_content_requester_record_rule" model="ir.rule">
+        <field name="name">Content Requester Allowed records</field>
+        <field ref="model_content_request" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_requester'))]"/>
+    </record>
+    
+    <record id="comms_content_publish_record_rule" model="ir.rule">
+        <field name="name">Content Publish Requester Allowed records</field>
+        <field ref="model_content_publishing" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_publisher'))]"/>
+    </record>
+    
+    <record id="comms_content_requester_officer_record_rule" model="ir.rule">
+        <field name="name">Content Request Officer Requester Allowed records</field>
+        <field ref="model_content_request" name="model_id"/>
+        <field name="domain_force">[('requester_branch', '=', user.branch_id.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_officer'))]"/>
+    </record>
+    
+    <record id="comms_content_publishing_branch_view_record_rule" model="ir.rule">
+        <field name="name">Content Publishing Branch View</field>
+        <field ref="model_content_publishing" name="model_id"/>
+        <field name="domain_force">[('publisher_branch', '=', user.branch_id.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_manager'))]"/>
+    </record>
+    
+    <record id="comms_content_publishing_snr_manager_view_record_rule" model="ir.rule">
+        <field name="name">Content Publishing Snr Manager Branch View</field>
+        <field ref="model_content_publishing" name="model_id"/>
+        <field name="domain_force">[('publisher_branch', '=', user.branch_id.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_snr_manager'))]"/>
+    </record>
+    
+    <record id="comms_content_publishing_ed_view_record_rule" model="ir.rule">
+        <field name="name">Content Publishing ED Branch View</field>
+        <field ref="model_content_publishing" name="model_id"/>
+        <field name="domain_force">[('publisher_branch', '=', user.branch_id.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_executive_director'))]"/>
+    </record>
+    
+    <record id="comms_content_publishing_officer_view_record_rule" model="ir.rule">
+        <field name="name">Content Publishing Content Officer Branch View</field>
+        <field ref="model_content_publishing" name="model_id"/>
+        <field name="domain_force">[('publisher_branch', '=', user.branch_id.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_comms_officer'))]"/>
+    </record>
+    
+</odoo>

@@ -1,0 +1,1476 @@
+<odoo>
+    <report id="recap_report"
+            model="attendance.recap.report.wizard"
+            string="Attendance Recap Report"
+            report_type="qweb-html"
+            name="cj_custom_report.attendance_recap_report_view"
+            menu="False"/>
+
+    <template id="attendance_recap_report_view">
+        <div class="header" style="border-bottom: 2px solid black">
+            <h3 class="text-center">Cash Flow Statement Report</h3>
+            <h4 class="text-center">
+                <strong>From</strong>:
+                <t t-esc="date_start"/>
+                <strong>To</strong>:
+                <t t-esc="date_end"/>
+            </h4>
+        </div>
+        <div class="article">
+            <table class="table table-condensed table-bordered" style="width: 100%; font-type: Verdana; font-size: 10px">
+                <thead>
+                    <th class="text-center">Details</th>
+                    <th class="text-center">Month 1</th>
+                    <th class="text-center">Month 2</th>                    
+                    <th class="text-center">Month 3</th>
+                    <th class="text-center">Month 4</th>
+                    <th class="text-center">Month 5</th>                    
+                    <th class="text-center">Month 6</th>
+                    <th class="text-center">Month 7</th>
+                    <th class="text-center">Month 8</th>                    
+                    <th class="text-center">Month 9</th>
+                    <th class="text-center">Month 10</th>
+                    <th class="text-center">Month 11</th>
+                    <th class="text-center">Month 12</th>
+                    <th class="text-center">TOTAL</th>                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="13">
+							<H3>PROJECTED</H3>
+                        </td>                                    
+                    </tr>	                
+                    <tr>
+                        <td>
+							SALES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							PURCHASES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                     
+                    </tr>
+                    <tr>
+	                    <td colspan='14'></td>
+	                </tr>                                         
+                    <tr>
+                        <td>
+							OPENING BANK BALANCE
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                       
+                    </tr>    
+                    <tr>
+                        <td colspan="14">
+							<H3>CASH RECEIPTS</H3>
+                        </td>                                    
+                    </tr>
+                    <tr>
+                        <td>
+							OPENING BANK BALANCE
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                        
+                    </tr> 
+                    <tr>
+                        <td>
+							CASH SALES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							DEBTORS
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                       
+                    </tr>
+                    <tr>
+                        <td>
+							INCOME FROM other Activities
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							NYDA Grant
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							NYDA Grant Tranch Payments
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+                    <tr>
+                        <td>
+							OTHER
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							<h3>TOTAL</h3>
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                        
+                    </tr>                                                                                                                        
+                    <tr>
+                        <td colspan="13">
+							<H3>CASH PAYMENTS</H3>
+                        </td>                                    
+                    </tr>
+                    <tr>
+                        <td>
+							RENT
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>   
+                    <tr>
+                        <td>
+							EQUIPMENT
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                        
+                    </tr> 
+                    <tr>
+                        <td>
+							PURCHASES (STOCK/MATERIALS)
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                        
+                    </tr>
+                    <tr>
+                        <td>
+							WATER AND ELECTRICITY
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                        
+                    </tr>
+                    <tr>
+                        <td>
+							INSURANCE
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                       
+                    </tr>
+                    <tr>
+                        <td>
+							SECURITY
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							ACCOUNTING FEES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    <tr>
+                        <td>
+							PETROL/TRANSPORT
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+                     <tr>
+                        <td>
+							MAINTENANCE
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+					<tr>
+                        <td>
+							SALARIES AND WAGES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+					<tr>
+                        <td>
+							OWNER'S DRAWINGSS
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+
+					<tr>
+                        <td>
+							UIF CONTRIBUTIONS
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+
+					<tr>
+                        <td>
+							TELEPHONE /FAX /POSTAGE
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+
+					<tr>
+                        <td>
+							STATIONERY
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+                    
+					<tr>
+                        <td>
+							LOAN REPAYMENT (OTHER)
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+                    
+					<tr>
+                        <td>
+							CONSUMERABLES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+                    
+					<tr>
+                        <td>
+							SUNDRY EXPENSES
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+      
+					<tr>
+                        <td>
+							VAT
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+					<tr>
+                        <td>
+							<b>TOTAL</b>
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                          
+                    </tr>
+					<tr>
+                        <td>
+							<b>SURPLUS\DEFICIT</b>
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                    
+					<tr>
+                        <td>
+							<b>CLOSING BANK BALANCE</b>
+                        </td>
+                        <td>
+	                        R 15 000.00
+                        </td>
+                        <td>	
+	                        R 15 000.00						
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                        
+                        <td>
+	                        R 15 000.00							
+                        </td>
+                        <td>
+	                        R 15 000.00							
+                        </td>                                          
+                        <td>
+	                        <b>R 125 000.00</b>					
+                        </td>                                                                                                                                                                                                                                                                         
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+</odoo>

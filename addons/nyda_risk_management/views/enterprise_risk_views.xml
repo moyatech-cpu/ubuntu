@@ -1,0 +1,284 @@
+<odoo>
+  <data>
+    <!-- Overall Performance Form -->
+    <record model="ir.ui.view" id="nyda_risk_management.all_risks_form">
+      <field name="name">all_risks</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" edit="false" create="false">
+			<field name="all_risks" readonly="1" />
+		</form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="nyda_risk_management.strategic_risks_form">
+      <field name="name">strategic_risks</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="strategic_risks" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="primnet_integration.operational_risks_form">
+      <field name="name">operational_risks</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="operational_risks" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="primnet_integration.risk_overview_form">
+      <field name="name">risk_overview</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_overview" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.risk_appetite_form">
+      <field name="name">risk_appetite</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_appetite" readonly="1" />
+		</form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="nyda_risk_management.risk_trend_report_form">
+      <field name="name">risk_trend</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_trend" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.heat_map_report_form">
+      <field name="name">heat_map</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="heat_map" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.risk_advice_report_form">
+      <field name="name">risk_advice</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_advice" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.risk_mitigations_form">
+      <field name="name">risk_mitigations</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_mitigations" readonly="1" />
+		</form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="nyda_risk_management.risk_reviews_form">
+      <field name="name">risk_reviews</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_reviews" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.performance_report_form">
+      <field name="name">performance_report</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="performance_report" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.performance_dashboard_form">
+      <field name="name">performance_dashboard</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="performance_dashboard" readonly="1" />
+		</form>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="nyda_risk_management.risk_settings_form">
+      <field name="name">risk_settings</field>
+      <field name="model">enterprise_risk</field>
+      <field name="arch" type="xml">
+		<form string="Embedded Webpage" version="7.0" edit="false" create="false">
+			<field name="risk_settings" readonly="1" />
+		</form>
+      </field>
+    </record>                        
+        	              
+    <record model="ir.actions.act_window" id="nyda_risk_management.all_risks_action">
+      <field name="name">All Risks</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.all_risks_form"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="nyda_risk_management.strategic_risks_action">
+      <field name="name">Strategic Risks</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.strategic_risks_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.operational_risks_action">
+      <field name="name">Operational Risks</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.operational_risks_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_overview_action">
+      <field name="name">Risk Overview</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="primnet_integration.risk_overview_form"/>
+    </record>  
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_appetite_action">
+      <field name="name">Risk Appetite</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.risk_appetite_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_trend_report_action">
+      <field name="name">Risk Trend</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.risk_trend_report_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.heat_map_report_action">
+      <field name="name">Heat Map</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.heat_map_report_form"/>
+    </record>                
+
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_advice_report_action">
+      <field name="name">Risk Advice</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.risk_advice_report_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_mitigations_action">
+      <field name="name">Risk Mitigations</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.risk_mitigations_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_reviews_action">
+      <field name="name">Risk Reviews</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.risk_reviews_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.performance_report_action">
+      <field name="name">Performance Report</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.performance_report_form"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="nyda_risk_management.performance_dashboard_action">
+      <field name="name">Performance Dashboard</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.performance_dashboard_form"/>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_risk_management.risk_settings_action">
+      <field name="name">Risk Settings</field>
+      <field name="res_model">enterprise_risk</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="nyda_risk_management.risk_settings_form"/>
+    </record>
+            
+    <menuitem name="Risks" id="enterprise_risk" parent="menu_risk_management_root"/>
+    
+    <menuitem name="All Risks" id="primnet_integration.menu_overall_performance" parent="nyda_risk_management.enterprise_risk"
+			action="nyda_risk_management.all_risks_action"/>
+                  
+    <menuitem name="Strategic Risks" id="strategic_risks" parent="nyda_risk_management.enterprise_risk"
+			action="nyda_risk_management.strategic_risks_action"/>
+
+    <menuitem name="Operational Risks" id="operational_risks" parent="nyda_risk_management.enterprise_risk"
+			action="nyda_risk_management.operational_risks_action"/>    			
+			    
+    <menuitem name="Reports" id="enterprise_risk_reports" parent="nyda_risk_management.enterprise_risk"/>
+    
+    <menuitem name="Overview" id="risk_overview" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_overview_action"/>
+
+    <menuitem name="Risk Appetite" id="risk_appetite" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_appetite_action"/>
+
+    <menuitem name="Risk Trend" id="risk_trend" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_trend_report_action"/>
+
+    <menuitem name="Heat Map" id="heat_map" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.heat_map_report_action"/>
+			
+    <menuitem name="Risk Advice" id="risk_advice" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_advice_report_action"/>
+
+    <menuitem name="Risk Mitigations" id="risk_mitigations" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_mitigations_action"/>
+			
+    <menuitem name="Risk Reviews" id="risk_reviews" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_reviews_action"/>
+
+    <menuitem name="Performance Report" id="performance_report" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.performance_report_action"/>
+			
+    <menuitem name="Performance Dashboard" id="performance_dashboard" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.performance_dashboard_action"/>
+			
+    <menuitem name="Configuration" id="enterprise_risk_config" parent="nyda_risk_management.enterprise_risk"/>
+    
+    <menuitem name="Settings" id="risk_settings" parent="nyda_risk_management.enterprise_risk_reports"
+			action="nyda_risk_management.risk_settings_action"/>																	
+			
+  </data>
+</odoo>

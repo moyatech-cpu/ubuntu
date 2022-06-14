@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Report Wizard Form View-->
+    <record model="ir.ui.view" id="fleet_report_wizard_form_view">
+        <field name="name">fleet.report.wizard.form.view</field>
+        <field name="model">fleet.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Booked Fleet Report" name="get_fleet_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','booked')]}"/>
+                    <button string="Download Approved Fleet Report" name="get_fleet_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','approved')]}"/>
+                    <button string="Download Rejected Fleet Report" name="get_fleet_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','rejected')]}"/>                                                        
+                    <button string="Download Cancelled Rooms Report" name="get_fleet_report" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','cancelled')]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Booked Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_fleet_booked">
+        <field name="name">Booked Fleet Report Wizard</field>
+        <field name="res_model">fleet.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'booked'}"/>
+    </record>
+
+    <!-- Action for Approved Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_fleet_approved">
+        <field name="name">Approved Fleet Report Wizard</field>
+        <field name="res_model">fleet.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'approved'}"/>
+    </record>
+
+    <!-- Action for Rejected Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_fleet_rejected">
+        <field name="name">Rejected Fleet Report Wizard</field>
+        <field name="res_model">fleet.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'rejected'}"/>
+    </record>
+    
+    <!-- Action for Cancelled Rooms Report Wizard -->
+    <record model="ir.actions.act_window" id="action_report_wizard_fleet_cancelled">
+        <field name="name">Cancelled Rooms Report Wizard</field>
+        <field name="res_model">fleet.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_type': 'cancelled'}"/>
+    </record>
+
+    <!--Menu for Meeting Room-->
+    <menuitem name="Fleet Booking Reports" parent="facility.menu_fleet" id="menu_facility_fleet_reports" sequence="6"
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+              
+    <menuitem name="Booked Fleet Report" id="menu_facility_fleet_booked_reports" parent="facility.menu_facility_fleet_reports"
+              action="action_report_wizard_fleet_booked" sequence="1" 
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+              
+    <menuitem name="Approved Fleet Report" id="menu_facility_fleet_approved_reports" parent="facility.menu_facility_fleet_reports"
+              action="action_report_wizard_fleet_approved" sequence="1" 
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+              
+    <menuitem name="Rejected Fleet Report" id="menu_facility_fleet_rejected_reports" parent="facility.menu_facility_fleet_reports"
+              action="action_report_wizard_fleet_rejected" sequence="1" 
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+              
+    <menuitem name="Cancelled Fleet Report" id="menu_facility_fleet_cancelled_reports" parent="facility.menu_facility_fleet_reports"
+              action="action_report_wizard_fleet_cancelled" sequence="1" 
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>                                          
+
+    </data>
+</odoo>

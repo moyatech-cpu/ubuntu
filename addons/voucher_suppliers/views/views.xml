@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+    
+    <record id="action_voucher_suppliers" model="ir.actions.act_window">
+        <field name="name">Voucher Suppliers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('x_voucher_vendor', '=', True)]</field>
+        <!--  
+		<field name="view_id" ref="view_users_form_inherit_view"/>
+        <field name="form_view_id" ref="view_users_form_inherit_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+	    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_pddd_settings_users_id')}),
+	    (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit_view')})]"/>
+	    -->        
+    </record>
+
+    <menuitem name="Voucher Suppliers" id="voucher_suppliers.menu_root" groups="base.group_system,voucher_suppliers.group_voucher_supplier_admin" web_icon="voucher_suppliers,static/src/img/icon.png" />
+    <menuitem name="Voucher Suppliers" id="voucher_suppliers.list" parent="voucher_suppliers.menu_root" groups="base.group_system,voucher_suppliers.group_voucher_supplier_admin"
+			  action = "voucher_suppliers.action_voucher_suppliers"/>
+    
+  </data>
+</odoo>

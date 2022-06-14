@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Tickets Report Wizard Form View-->
+    <record model="ir.ui.view" id="ticket_report_wizard_form_view">
+        <field name="name">ticket.report.wizard.form.view</field>
+        <field name="model">ticket.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Download Ticket Reports" name="get_ticketing_report" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Tickets Report Wizard -->
+    <record model="ir.actions.act_window" id="action_ticket_report_wizard">
+        <field name="name">Tickets Report Wizard</field>
+        <field name="res_model">ticket.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menu for Ticketing Report-->
+    <menuitem name="Ticketing Report" parent="facility.menu_facility_reports" id="menu_ticket_reports" sequence="5"
+              action="facility.action_ticket_report_wizard"
+              groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+
+    </data>
+</odoo>

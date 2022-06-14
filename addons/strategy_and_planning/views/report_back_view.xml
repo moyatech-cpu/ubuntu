@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_report_back_form">
+            <field name="name">Report Back Form View</field>
+            <field name="model">report.back</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="progress" widget="radio"/>
+                            <field name="monthly_id"/>
+                            <field name="quarter_id"/>
+                            <field name="annual_id"/>
+                            <field name="risk_id"/>
+                            <field name="actual_performance"/>
+                            <field name="reg_not_achieved"/>
+                            <field name="update_previous_month"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="cost"/>
+                            </group>
+                            <group>
+                                <field name="report_acc"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_report_back_tree">
+            <field name="name">Report Back Tree View</field>
+            <field name="model">report.back</field>
+            <field name="arch" type="xml">
+                <tree string="Report Back Tree" toolbar="1">
+                    <field name="progress" widget="radio"/>
+                    <field name="actual_performance"/>
+                    <field name="reg_not_achieved"/>
+                    <field name="update_previous_month"/>
+                    <field name="cost"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_report_back">
+            <field name="name">Report Back</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.back</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

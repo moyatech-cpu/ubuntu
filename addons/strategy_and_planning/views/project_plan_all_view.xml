@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- project.plan.all views -->
+        <record id="view_project_plan_all_form" model="ir.ui.view">
+            <field name="name">project.plan.all</field>
+            <field name="model">project.plan.all</field>
+            <field name="arch" type="xml">
+                <form string="Project Plan all">
+                    <sheet>
+                        <group>
+                            <field name="strategic_plan_id"/>
+                            <field name="from_year"/>
+                            <field name="to_year"/>
+<!--                            <field name="goal_statement_id"/>-->
+<!--                            <field name="strategic_objective"/>-->
+                        </group>
+                        <group>
+<!--                            <field name="app_strategic_objective"/>-->
+<!--                            <field name="app_target"/>-->
+<!--                            <field name="action_project_linkage"/>-->
+                            <field name="delegation"/>
+                            <field name="target"/>
+                            <field name="dependencies"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- project.plan.all tree -->
+        <record id="view_project_plan_all_tree" model="ir.ui.view">
+            <field name="name">project.plan.all</field>
+            <field name="model">project.plan.all</field>
+            <field name="arch" type="xml">
+                <tree string="Project Plan all">
+                    <field name="strategic_plan_id"/>
+                    <field name="from_year"/>
+                    <field name="to_year"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- project.plan.all action -->
+        <record id="action_project_plan_all" model="ir.actions.act_window">
+            <field name="name">Project Plan All</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.plan.all</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
+        </record>
+
+        <!-- MenuItem for project.plan.all -->
+
+        <menuitem id="sub_menu_project_plan_all" name="Project Plan All"
+                  parent="menu_project_plan_linkage" action="action_project_plan_all"
+                  sequence="5"/>
+    </data>
+</odoo>

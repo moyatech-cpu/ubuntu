@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Risk Report Views -->
+    <record id="view_risk_report_form" model="ir.ui.view">
+        <field name="name">view.risk.report.form</field>
+        <field name="model">risk.report</field>
+        <field name="arch" type="xml">
+            <form string="Risk Report">
+                <header>
+                    <button name="action_approve" string="Approve" type="object" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                    <button name="action_reject" string="Reject" type="object" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="employee_id" readonly="1"/>
+                        <field name="risk_id"/>
+                        <field name="store_report_name" invisible="1"/>
+                        <field name="report_doc" widget="binary" filename="store_report_name"/>
+                        <field name="store_p_o_e_name" invisible="1"/>
+                        <field name="p_o_e_doc" widget="binary" filename="store_p_o_e_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_report_tree" model="ir.ui.view">
+        <field name="name">view.risk.report.tree</field>
+        <field name="model">risk.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="risk_id"/>
+                <field name="store_report_name" invisible="1"/>
+                <field name="report_doc" widget="binary" filename="store_report_name"/>
+                <field name="store_p_o_e_name" invisible="1"/>
+                <field name="p_o_e_doc" widget="binary" filename="store_p_o_e_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_risk_report" model="ir.actions.act_window">
+        <field name="name">Risk Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">risk.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Add Risk Report for Planning from here.
+            </p>
+        </field>
+    </record>
+
+    <!--    <menuitem id="menu_risk_report"-->
+    <!--              name="Report"-->
+    <!--              parent="menu_risk_reporting"-->
+    <!--              action="action_risk_report"-->
+    <!--              sequence="19"/>-->
+
+</odoo>

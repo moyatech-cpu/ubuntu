@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Inherit Helpdesk Lite Ticket Form View -->
+        <record id="view_helpdesk_stage_form_inherit" model="ir.ui.view">
+            <field name="name">view.helpdesk_lite.stage.form.inherit</field>
+            <field name="model">helpdesk_lite.stage</field>
+            <field name="inherit_id" ref="helpdesk_lite.helpdesk_stage_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[1]/field[@name='fold']" position="after">
+                    <field name="dashboard_icon" required="1" filename="icon_file_name"/>
+                    <field name="icon_file_name" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

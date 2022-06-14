@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="register" model="website.menu">
+            <field name="name">Register</field>
+            <field name="url">/register</field>
+            <field name="parent_id" ref="website.main_menu"/>
+        </record>
+
+        <!-- Cron to check for pending enquiry -->
+        <record id="youth_enquiry_remainder_cron" model="ir.cron">
+            <field name="name">Youth Enquiry Remainder Cron</field>
+            <field name="model_id" ref="model_youth_enquiry"/>
+            <field name="state">code</field>
+            <field name="code">model.check_acceptance()</field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <!-- Cron to check for pending enquiry -->
+        <record id="partner_enquiry_remainder_cron" model="ir.cron">
+            <field name="name">Partner Enquiry Remainder Cron</field>
+            <field name="model_id" ref="model_partner_enquiry"/>
+            <field name="state">code</field>
+            <field name="code">model.check_acceptance()</field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

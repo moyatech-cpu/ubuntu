@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- MenuItem for Main screen for Mentorship module -->
+    <menuitem id="menu_mentorship_root" name="Client Management" sequence="8"
+              groups="client_management.group_branch_admin,client_management.group_branch_manager,client_management.group_admin_user,client_management.group_branch_beneficiary"
+              web_icon="client_management,static/description/icon.png"/>
+
+    <!-- MenuItem for Mentorship Configuration. -->
+    <menuitem id="menu_mentorship_config" name="Configuration" parent="menu_mentorship_root" sequence="100"/>
+
+    <!-- MenuItem for Localization. -->
+    <menuitem id="menu_res_localization" name="Localization" parent="menu_mentorship_config" sequence="10"/>
+
+    <!-- MenuItem for Team Data -->
+    <menuitem id="menu_res_teams" name="Teams" parent="menu_mentorship_config" sequence="11"/>
+
+    <record id="view_res_district_form" model="ir.ui.view">
+        <field name="name">res.district.form</field>
+        <field name="model">res.district</field>
+        <field name="arch" type="xml">
+            <form string="Districts">
+                <group>
+                    <field name="name"/>
+                    <field name='state_id'/>
+                    <field name='country_id'/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_district_tree" model="ir.ui.view">
+        <field name="name">res.district.tree</field>
+        <field name="model">res.district</field>
+        <field name="arch" type="xml">
+            <tree string="Districts">
+                <field name="name"/>
+                <field name="state_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_district" model="ir.actions.act_window">
+        <field name="name">Districts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.district</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- MenuItem for res.district -->
+    <menuitem id="menu_res_district" name="Districts" parent="menu_res_localization" action="action_res_district" sequence="1"/>
+
+    <!-- res.branch views -->
+    <record id="view_res_branch_form" model="ir.ui.view">
+        <field name="name">res.branch.form</field>
+        <field name="model">res.branch</field>
+        <field name="arch" type="xml">
+            <form string="Branch">
+                <group>
+                    <field name='sequence'/>
+                    <field name="name" required="1"/>
+                    <field name="state_id" required="1"/>
+                    <field name="country_id"/>
+                    <field name="manager_id" invisible="1"/>
+                    <field name="branch_admin_id" invisible="1"/>
+                    <field name="communication_agent" invisible="0"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_branch_tree" model="ir.ui.view">
+        <field name="name">res.branch.tree</field>
+        <field name="model">res.branch</field>
+        <field name="arch" type="xml">
+            <tree string="Branches">
+                <field name="name"/>
+                <field name="state_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_branch" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.branch</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- MenuItem for res.district -->
+    <menuitem id="menu_res_branch"
+              name="Branches"
+              parent="menu_res_localization"
+              action="action_res_branch"
+              sequence="10"/>
+
+    <!-- res.municipality views -->
+    <record id="view_res_municipality_form" model="ir.ui.view">
+        <field name="name">res.municipality.form</field>
+        <field name="model">res.municipality</field>
+        <field name="arch" type="xml">
+            <form string="Municipality">
+                <group>
+                    <field name="name"/>
+                    <field name="district_id"/>
+                    <field name='state_id'/>
+                    <field name='country_id'/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_municipality_tree" model="ir.ui.view">
+        <field name="name">res.municipality.tree</field>
+        <field name="model">res.municipality</field>
+        <field name="arch" type="xml">
+            <tree string="Municipalities">
+                <field name="name"/>
+                <field name="district_id"/>
+                <field name="state_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_municipality" model="ir.actions.act_window">
+        <field name="name">Municipalities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.municipality</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- MenuItem for res.district -->
+    <menuitem id="menu_res_municipality"
+              name="Municipalities"
+              parent="menu_res_localization"
+              action="action_res_municipality"
+              sequence="3"/>
+
+    <!-- Metro Municipality views -->
+    <record id="view_res_metro_municipality_form" model="ir.ui.view">
+        <field name="name">res.metro.municipality.form</field>
+        <field name="model">res.metro.municipality</field>
+        <field name="arch" type="xml">
+            <form string="Metro Municipality">
+                <group>
+                    <field name="name"/>
+                    <field name='state_id'/>
+                    <field name='country_id'/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_metro_municipality_tree" model="ir.ui.view">
+        <field name="name">res.metro.municipality.tree</field>
+        <field name="model">res.metro.municipality</field>
+        <field name="arch" type="xml">
+            <tree string="Municipalities">
+                <field name="name"/>
+                <field name="state_id"/>
+                <field name='country_id'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_metro_municipality" model="ir.actions.act_window">
+        <field name="name">Metro Municipalities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.metro.municipality</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- MenuItem for res.district -->
+    <menuitem id="menu_res_metro_municipality"
+              name="Metro Municipalities"
+              parent="menu_res_localization"
+              action="action_res_metro_municipality"
+              sequence="4"/>
+
+    <!-- Views for Teams -->
+    <record id="view_enquiry_team_form" model="ir.ui.view">
+        <field name="name">enquiry.team.form</field>
+        <field name="model">enquiry.team</field>
+        <field name="arch" type="xml">
+            <form string="Teams">
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="team_member_ids">
+                            <tree editable="bottom">
+                                <field name="user_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_enquiry_team_tree" model="ir.ui.view">
+        <field name="name">enquiry.team.tree</field>
+        <field name="model">enquiry.team</field>
+        <field name="arch" type="xml">
+            <tree string="Teams">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_enquiry_team" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">enquiry.team</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_enquiry_team"
+              name="Teams"
+              parent="menu_res_teams"
+              action="action_enquiry_team"
+              sequence="1"
+    />
+
+</odoo>

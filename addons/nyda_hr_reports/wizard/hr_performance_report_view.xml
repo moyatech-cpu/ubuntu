@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    
+    <!--HR Performance Agreement Form View-->
+    <record model="ir.ui.view" id="hr_performance_overview_report_form_view">
+        <field name="name">hr.performance.report.form.view</field>
+        <field name="model">hr.performance.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="division" required="0" string="Division"/>
+                    </group>
+                    <group>
+                        <field name="business_unit_id" required="0" string="Business Unit"/>
+                    </group>                    
+                </group>      
+                <group>
+                    <group>
+                        <field name="branch" required="0" string="Branch"/>
+                    </group>                  
+                </group>                                       
+                <footer>
+                    <button string="Download Performance Agreements" name="get_hr_performance_agreement_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!--HR Performance Agreement Details Form View-->
+    <record model="ir.ui.view" id="hr_performance_details_report_form_view">
+        <field name="name">hr.performance.report.form.view</field>
+        <field name="model">hr.performance.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="division" required="0"/>
+                    </group>
+                    <group>
+                        <field name="manager" required="0" string="Employee"/>
+                    </group>                    
+                </group>                            
+                <footer>
+                    <button string="Download Performance Agreement Details" name="get_hr_performance_agreement_details_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>    
+    
+    <!--HR Employees Report Form View-->
+    <record model="ir.ui.view" id="hr_employees_overview_report_form_view">
+        <field name="name">hr.employees.report.form.view</field>
+        <field name="model">hr.performance.report</field>
+        <field name="arch" type="xml">
+            <form>    
+                <group>
+                    <group>
+                        <field name="division" required="0"/>
+                    </group>
+                    <group>
+                        <field name="branch" required="0"/>
+                    </group>                    
+                    <group>
+                        <field name="manager" required="0"/>
+                    </group>
+                </group>    
+                <group>
+                    <group>
+                        <field name="gender" required="0"/>
+                    </group>
+                    
+                    <group>
+                        <field name="race" required="0"/>
+                    </group>
+                </group>                               
+                <footer>
+                    <button string="Download Employees Report" name="get_hr_employees_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+        
+    <!--HR Grievance Report Form View-->
+    <record model="ir.ui.view" id="hr_grievance_overview_report_form_view">
+        <field name="name">hr.grievance.report.form.view</field>
+        <field name="model">hr.performance.report</field>
+        <field name="arch" type="xml">
+            <form>    
+                <group>
+                    <group>
+                        <field name="division" required="0"/>
+                    </group>           
+                    <group>
+                        <field name="manager" required="0"/>
+                    </group>
+                </group>                  
+                <footer>
+                    <button string="Download Grievance Report" name="get_hr_performance_agreement_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--HR Disciplinary Report Form View-->
+    <record model="ir.ui.view" id="hr_disciplinary_overview_report_form_view">
+        <field name="name">hr.disciplinary.report.form.view</field>
+        <field name="model">hr.performance.report</field>
+        <field name="arch" type="xml">
+            <form>    
+                <group>
+                    <group>
+                        <field name="division" required="0"/>
+                    </group>              
+                    <group>
+                        <field name="manager" required="0"/>
+                    </group>
+                </group>                  
+                <footer>
+                    <button string="Download Disciplinary Report" name="get_hr_performance_agreement_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+            
+    <record model="ir.actions.act_window" id="action_hr_performance_overview_report">
+        <field name="name">Performance Agreements</field>
+        <field name="res_model">hr.performance.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_performance_overview_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_performance_details_report">
+        <field name="name">Performance Agreement Details</field>
+        <field name="res_model">hr.performance.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_performance_details_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_employee_overview_report">
+        <field name="name">Employees Report</field>
+        <field name="res_model">hr.performance.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_employees_overview_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+                        
+	<record id="paperformat_report_hr_report" model="report.paperformat">
+		<field name="name">Report Landscape</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">25</field>
+		<field name="margin_bottom">15</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">15</field>
+		<field name="dpi">90</field>
+	</record>
+	            
+    <menuitem name="Print Reports" parent="__export__.ir_ui_menu_885"
+              id="menu_hr_reports" sequence="10" groups="base.group_system"/>
+                            	
+    <menuitem name="Performance Agreement Overview" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_performance_agreement_report" sequence="1"
+              action="nyda_hr_reports.action_hr_performance_overview_report" groups="base.group_system"/>
+
+    <menuitem name="Performance Agreement Details" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_performance_agreement_details_report" sequence="1"
+              action="nyda_hr_reports.action_hr_performance_details_report" groups="base.group_system"/>
+
+<!--               
+    <menuitem name="Employees Report" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_employee_report" sequence="1"
+              action="nyda_hr_reports.action_hr_employee_overview_report" groups="base.group_system"/>
+
+    <menuitem name="Vacancies Report" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_vacancies_report" sequence="1"
+              action="nyda_hr_reports.action_hr_employee_overview_report" groups="base.group_system"/>
+                            	
+    <menuitem name="Recruitment Report" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_recruitment_report" sequence="1"
+              action="nyda_hr_reports.action_hr_employee_overview_report" groups="base.group_system"/>
+
+ 
+    <menuitem name="Grievance Report" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_grievance_report" sequence="1"
+              action="nyda_hr_reports.action_hr_employee_overview_report" groups="base.group_system"/>
+              
+    <menuitem name="Discilpinary Report" parent="nyda_hr_reports.menu_hr_reports"
+              id="menu_hr_discilpinary_report" sequence="1"
+              action="nyda_hr_reports.action_hr_employee_overview_report" groups="base.group_system"/>                                                                                           
+-->
+                                                                                 	                                                                       
+    </data>
+</odoo>

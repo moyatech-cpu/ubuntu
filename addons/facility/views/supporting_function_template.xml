@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+ 
+ 		<!-- 
+        <menuitem name="Maintenance" id="menu_maintenance" 
+			parent="facility.main_menu_meeting_room" sequence="0" />
+
+        <menuitem name="Dashboard" id="menu_maintenance_dashboard" 
+			parent="facility.menu_maintenance" sequence="1" action="maintenance.maintenance_dashboard_action" />
+
+        <menuitem name="Requests" id="menu_maintenance_requests" 
+			parent="facility.menu_maintenance" sequence="2" action="maintenance.hr_equipment_request_action" />
+
+        <menuitem name="Calendar" id="menu_maintenance_calendar" 
+			parent="facility.menu_maintenance" sequence="3" action="maintenance.hr_equipment_request_action_cal" />
+
+        <menuitem name="Configuration" id="menu_meeting_room_config" parent="facility.menu_maintenance" />
+			        
+        <menuitem name="Maintenance Groups" id="menu_config_maintenance_groups" parent="facility.menu_meeting_room_config" 
+        	action="maintenance.maintenance_team_action_settings" />			
+
+        <menuitem name="Equipment Categories" id="menu_config_equip_categories" parent="facility.menu_meeting_room_config" 
+        	action="maintenance.hr_equipment_category_action" />	
+
+        <menuitem name="Maintenance Stages" id="menu_config_maintenance_stages" parent="facility.menu_meeting_room_config" 
+        	action="maintenance.hr_equipment_stage_action" />
+         -->
+         	
+		<!-- Stock Management -->
+		<menuitem name="Stock Management" id="menu_stock_management" parent="facility.main_menu_meeting_room" 
+			sequence="4" groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+			
+	    <menuitem id="menu_stock_warehouse_mgmt" name="Operations" parent="facility.menu_stock_management" sequence="2"/>
+
+	    <menuitem name="Stock Receipts" id="menu_stock_receipts" parent="facility.menu_stock_warehouse_mgmt" 
+	    	action="stock.action_picking_tree_all" sequence="1" />
+	
+	    <menuitem name="Stock Taking" id="menu_stock_taking" parent="facility.menu_stock_warehouse_mgmt" 
+	    	action="stock.action_inventory_form" sequence="2" />		
+
+	    <menuitem name="Products" id="menu_stock_product" parent="facility.menu_stock_management" sequence="4"/>
+	    
+	    <menuitem name="Product Categories" id="menu_stock_receipts" parent="facility.menu_stock_product" 
+	    	action="product.product_category_action_form" sequence="1" />
+
+	    <menuitem name="Master Data" id="menu_stock_master_data" parent="facility.menu_stock_management" sequence="4"/>
+
+	    <menuitem name="Products" id="menu_stock_products" parent="facility.menu_stock_master_data" 
+	    	action="stock.product_template_action_product" sequence="1" />
+
+	    <menuitem name="Storeroom Management" id="menu_storeroom_management" parent="facility.menu_stock_management" sequence="4"/>
+
+	    <menuitem name="Storerooms" id="menu_storerooms" parent="facility.menu_storeroom_management" 
+	    	action="stock.action_warehouse_form" sequence="1" />
+	    	
+	    <menuitem name="Operations Types" id="menu_operations_types" parent="facility.menu_storeroom_management" 
+	    	action="stock.action_picking_type_list" sequence="1" />
+
+	    <menuitem name="Reporting" id="menu_stock_reporting" parent="facility.menu_stock_management" sequence="99"/>
+	    	
+		<menuitem name="Stock on Hand" id="menu_stock_on_hand" parent="facility.menu_stock_reporting" 
+			action="stock.action_stock_quantity_history" sequence="4"/>	    	
+			
+		<menuitem name="Stock Moves" id="menu_stock_moves" parent="facility.menu_stock_reporting" 
+			action="stock.stock_move_action" sequence="4"/>
+			
+		<menuitem name="Stock Received Report" id="menu_stock_received_report" parent="facility.menu_stock_reporting" 
+			action="stock.stock_move_line_action" sequence="4"/>						    		
+    		
+	    <menuitem name="Configuration" id="menu_stock_configuration" parent="facility.menu_stock_management" sequence="99"/>
+	    	
+		<menuitem name="Settings" id="menu_stock_on_hand" parent="facility.menu_stock_configuration" 
+			action="stock.action_stock_config_settings" sequence="4"/>
+			    		
+		<!-- Surveys -->
+		<menuitem name="Surveys" id="menu_surveys" action="maintenance.hr_equipment_category_action" parent="facility.main_menu_meeting_room" 
+			sequence="5" groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+
+        <!-- Left menu elements: Survey -->
+        <menuitem name="Surveys" id="menu_survey_form" action="survey.action_survey_form" 
+        	parent="facility.menu_surveys" sequence="1"/>
+        <menuitem name="Answers" id="menu_survey_type_form1" action="survey.action_survey_user_input" 
+        	parent="facility.menu_surveys" sequence="1"/>
+
+        <!-- Left menu elements: Technical Configuration -->
+        <menuitem name="Configuration" id="menu_surveys_configuration" 
+        	parent="facility.menu_surveys" groups="base.group_no_one" sequence="100" />
+        <menuitem name="Pages" id="menu_survey_page_form1" action="survey.action_survey_page_form" 
+        	parent="facility.menu_surveys_configuration" sequence="1"/>
+        <menuitem name="Questions" id="menu_survey_question_form1" action="survey.action_survey_question_form" 
+        	parent="facility.menu_surveys_configuration" sequence="2"/>
+        <menuitem name="Labels" id="menu_survey_label_form1" action="survey.action_survey_label_form"
+        	parent="facility.menu_surveys_configuration" sequence="3"/>
+        <menuitem name="User Input Lines" id="menu_survey_response_line_form" action="survey.action_survey_user_input_line" 
+        	parent="facility.menu_surveys_configuration" sequence="4"/>			
+		
+		<!-- Fleet -->
+		<menuitem name="Fleet" id="menu_fleet" parent="facility.main_menu_meeting_room" sequence="6" />
+			 
+        <menuitem name="Fleet Bookings" id="menu_fleet_booking" 
+        	parent="facility.menu_fleet" sequence="4"/>
+
+        <menuitem name="Booking Dashboard" id="menu_fleet_dashboard" sequence="1"
+			parent="facility.menu_fleet_booking" action="action_fleet_dashboard"/>
+                  			        
+        <menuitem name="All Upcoming Bookings" id="menu_fleet_booking_upcoming" sequence="1"
+			parent="facility.menu_fleet_booking" action="action_fleet_booking_upcoming"/>
+                  
+        <menuitem name="My Upcoming Bookings" id="menu_my_fleet_booking_upcoming" sequence="1"
+			parent="facility.menu_fleet_booking" action="action_my_fleet_booking_upcoming"/>
+                  
+        <menuitem name="Booking History" id="menu_fleet_booking_history" sequence="2"
+			parent="facility.menu_fleet_booking" action="action_fleet_booking_history"/>
+                  
+        <menuitem name="Booked Fleet" id="menu_booked_rooms" sequence="3"
+			parent="facility.menu_fleet_booking" action="action_booked_fleet"/>
+		
+    	<menuitem name="Vehicles" parent="facility.menu_fleet" id="fleet_vehicles" sequence="2"
+    	groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+    	
+    	<menuitem name="Vehicles" action="fleet.fleet_vehicle_action" parent="facility.fleet_vehicles" 
+    		id="fleet_vehicle_menu" />
+    		
+		<menuitem name="Vehicles Odometer" action="fleet.fleet_vehicle_odometer_action" parent="facility.fleet_vehicles" 
+			id="fleet_vehicle_odometer_menu" />
+			
+		<menuitem name="Vehicles Costs" action="fleet.fleet_vehicle_costs_action" parent="facility.fleet_vehicles" 
+			id="fleet_vehicle_costs_menu" />
+			
+		<menuitem name="Vehicles Contracts" action="fleet.fleet_vehicle_log_contract_action" 
+			parent="facility.fleet_vehicles" id="fleet_vehicle_log_contract_menu" />
+			
+		<menuitem name="Vehicles Fuel Logs" action="fleet.fleet_vehicle_log_fuel_action" 
+			parent="facility.fleet_vehicles" id="fleet_vehicle_log_fuel_menu" />`
+			
+		<menuitem name="Vehicles Service Logs" action="fleet.fleet_vehicle_log_services_action" 
+			parent="facility.fleet_vehicles" id="fleet_vehicle_log_services_menu" />
+		
+	    <menuitem name="Reporting" parent="facility.menu_fleet" id="menu_fleet_reporting" sequence="99" 
+	    	groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+	
+	    <menuitem name="Costs Report" id="menu_fleet_reporting_costs"
+	              parent="facility.menu_fleet_reporting"
+	              action="fleet.fleet_costs_reporting_action" sequence="1"/>
+	              
+	    <menuitem name="Indicative Costs" id="menu_fleet_reporting_indicative_costs"
+	              parent="facility.menu_fleet_reporting"
+	              action="fleet.fleet_costs_reporting_non_effective_action" sequence="2"/>			 
+
+		<menuitem name="Configuration" id="fleet_vehicle_configuration" parent="facility.menu_fleet" sequence="112"
+			groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+
+		<menuitem name="Vehicle Model" action="fleet.fleet_vehicle_model_action" 
+			parent="facility.fleet_vehicle_configuration" id="fleet_vehicle_model_menu" sequence="1"/>	
+
+		<menuitem name="Model make of vehicle" action="fleet.fleet_vehicle_model_brand_action" 
+			parent="facility.fleet_vehicle_configuration" id="fleet_model_make_vehicle_menu" sequence="2"/>
+							
+		<menuitem name="Service Types" action="fleet.fleet_vehicle_service_types_action" 
+			parent="facility.fleet_vehicle_configuration" id="fleet_service_types_menu" sequence="3"/>
+
+		<menuitem name="Contract Types" action="fleet.fleet_vehicle_contract_types_action" 
+			parent="facility.fleet_vehicle_configuration" id="fleet_contract_types_menu" sequence="4"/>
+								
+		<menuitem name="Vehicles Status" action="fleet.fleet_vehicle_state_action" 
+			parent="facility.fleet_vehicle_configuration" id="fleet_vehicle_status_menu" sequence="5"/>
+			
+		<menuitem name="Vehicles Tags" action="fleet.fleet_vehicle_tag_action" 
+			parent="facility.fleet_vehicle_configuration" id="fleet_vehicle_tags_menu" sequence="6"/>			
+			                  
+    </data>
+</odoo>

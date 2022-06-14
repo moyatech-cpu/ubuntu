@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Helpdesk Category Tree View-->
+        <record model="ir.ui.view" id="helpdesk_category_tree_view">
+            <field name="name">helpdesk.category.tree.view</field>
+            <field name="model">helpdesk.category</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                    <field name="sub_category_id" options="{'no_open': True,'no_create': True}" required="1"/>
+                    <field name="facility_manager_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                    <field name="facility_officer_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                    <field name="team_leader_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Helpdesk Category -->
+        <record model="ir.actions.act_window" id="action_helpdesk_category">
+            <field name="name">Category</field>
+            <field name="res_model">helpdesk.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for Helpdesk Category-->
+        <menuitem name="Category" id="menu_helpdesk_category" parent="facility.menu_ticket_configuration"
+                  action="action_helpdesk_category"
+                  groups="base.group_system,facility.facility_manager"/>
+
+        <!--Helpdesk Sub Category Tree View-->
+        <record model="ir.ui.view" id="helpdesk_sub_category_tree_view">
+            <field name="name">helpdesk.subcategory.tree.view</field>
+            <field name="model">helpdesk.subcategory</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Sub Category -->
+        <record model="ir.actions.act_window" id="action_helpdesk_subcategory">
+            <field name="name">Sub Category</field>
+            <field name="res_model">helpdesk.subcategory</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for Helpdesk Category-->
+        <menuitem name="Sub Category" id="menu_helpdesk_sub_category" parent="facility.menu_ticket_configuration"
+                  action="action_helpdesk_subcategory"
+                  groups="base.group_system,facility.facility_manager"/>
+
+    </data>
+</odoo>

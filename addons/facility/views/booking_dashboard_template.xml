@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+         <!--Default View for Meeting Dashboard-->
+        <record model="ir.ui.view" id="booking_dashboard_view">
+            <field name="name">Dashboard</field>
+            <field name="model">meeting.dashboard</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--<field name="name"/>-->
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Client Action For Meeting Dashboard -->
+        <record id="action_meeting_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">facility.meeting_rooms_dashboard</field>
+        </record>
+
+        <!-- Menu Meeting Dashboard -->
+        <menuitem id="menu_meeting_dashboard"
+                  name="Dashboard"
+                  parent="facility.menu_meeting_rooms"
+                  sequence="0"
+                  action="action_meeting_dashboard"/>
+
+        <!-- Meeting Rooms Dashboard -->
+        <template id="meeting_assets_backend" name="Meeting Rooms Dashboard" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/facility/static/src/js/meeting_rooms_dashboard.js"/>
+                <!--<link rel="stylesheet" href="/facility/static/src/css/design.css"/>-->
+            </xpath>
+        </template>
+    </data>
+</odoo>

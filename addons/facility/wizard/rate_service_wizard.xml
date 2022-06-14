@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Report Service Form View-->
+    <record model="ir.ui.view" id="rate_service_view">
+        <field name="name">rate.service.form.view</field>
+        <field name="model">rate.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="service_level" widget="priority"
+                           attrs="{'required': [('type', '=', 'solved')], 'invisible': [('type', '!=', 'solved')]}"/>
+                    <field name="description"
+                           attrs="{'required': [('type', '=', 'solved')], 'invisible': [('type', '!=', 'solved')]}"/>
+                    <field name="cancellation_reason"
+                           attrs="{'required': [('type', '=', 'cancel')], 'invisible': [('type', '!=', 'cancel')]}"/>
+                </group>
+                <footer>
+                    <button string="Cancel Ticket" name="cancel_tickets" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','cancel')]}"/>
+                    <button string="Submit Feedback" name="submit_feedback" type="object" class="btn-primary"
+                            attrs="{'invisible':[('type', '!=','solved')]}"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    </data>
+</odoo>

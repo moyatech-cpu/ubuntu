@@ -1,0 +1,134 @@
+<odoo>
+    <record model="ir.ui.view" id="view_monitoring_report_form">
+        <field name="name">view_monitoring_report_form</field>
+        <field name="model">monitoring.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!--<button class="oe_stat_button" type="object" name="setToDraft" string='Set To Draft'-->
+                            <!--groups="base.group_system,base.group_user,hr.group_hr_manager,monitoring_and_evaluation.group_me_personnal"-->
+                            <!--states="reject"/>-->
+                    <!--attrs="{'invisible': ['|', ('is_submit', '!=', True), ('state', '=', 'new')]}"-->
+                    <button class="oe_stat_button" type="object" name="submit_report" string='Submit'
+                            groups="base.group_system,base.group_user,hr.group_hr_manager,monitoring_and_evaluation.group_me_personnal"
+                            states="new,reject"/>
+                    <button class="oe_stat_button" type="object" name="reviewFuncation" string='Review'
+                            groups="strategy_and_planning.group_line_manager,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="submitted"/>
+                    <button class="oe_stat_button" type="object" name="acceptedFuncation" string='Approve'
+                            groups="strategy_and_planning.group_line_manager,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="review,sm_reject"/>
+                    <button class="oe_stat_button" type="object" name="rejectedFuncation" string='Reject'
+                            groups="strategy_and_planning.group_line_manager,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="review,sm_reject"/>
+                    <button class="oe_stat_button" type="object" name="SmReviewFunction" string='Senior Review'
+                            groups="monitoring_and_evaluation.group_senior_manager,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="approve"/>
+                    <button class="oe_stat_button" type="object" name="SmAcceptedFunction" string='Senior Approve'
+                            groups="monitoring_and_evaluation.group_senior_manager,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="sm_review,ed_reject"/>
+                    <button class="oe_stat_button" type="object" name="SmRejectedFunction" string='Senior Reject'
+                            groups="monitoring_and_evaluation.group_senior_manager,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="sm_review,ed_reject"/>
+                    <button class="oe_stat_button" type="object" name="EdReviewFunction" string='Executive Director Review'
+                            groups="strategy_and_planning.group_executive_director,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="sm_approve"/>
+                    <button class="oe_stat_button" type="object" name="EdAcceptedFunction" string='Executive Director Approve'
+                            groups="strategy_and_planning.group_executive_director,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="ed_review"/>
+                    <button class="oe_stat_button" type="object" name="EdRejectedFunction" string='Executive Director Reject'
+                            groups="strategy_and_planning.group_executive_director,base.group_system,monitoring_and_evaluation.group_me_personnal"
+                            states="ed_review"/>
+                    <field name='state' widget='statusbar' statusbar_visible='new,submitted'/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="strategic_plan_id" required="1"/>
+                        <field name="is_perfomance_deadline_mailed" invisible="1"/>
+                        <field name="is_submit" invisible="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="employee_id" required="1" options="{'no_create': True}"/>
+                            <field name="type" required="1"/>
+                            <field name="department_id" required="1"/>
+                            <field name="executive_director_id" required="1" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="from_date"
+                                   attrs="{'readonly': [('is_me_personnal', '=', False)], 'required': [('is_me_personnal', '=', True)]}"/>
+                            <field name="to_date"
+                                   attrs="{'readonly': [('is_me_personnal', '=', False)], 'required': [('is_me_personnal', '=', True)]}"/>
+                            <field name="line_manager_id" options="{'no_create': True}" domain="[('dept_id', '=', department_id)]"
+                                   attrs="{'required': [('department_id' , '!=', False)], 'invisible': [('department_id' , '=', False)]}"/>
+                            <field name="senior_manager_id" required="1" options="{'no_create': True}"/>
+                            <field name="is_me_personnal" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="sign" widget="signature" groups="strategy_and_planning.group_line_manager,base.group_system"/>
+                    </group>
+                    <notebook>
+                        <page name="employee_monitoring_report" string="Employee Monitoring Report">
+                            <group>
+                                <field name="employee_monitoring_report_ids" nolabel="1">
+                                    <tree editable="top">
+                                        <field name="monitoring_report_id" invisible="1"/>
+                                        <field name="file" filename="filename" widget="download" required="1"/>
+                                        <field name="filename" invisible="1"/>
+                                        <field name="poe_file" filename="poe_filename" widget="download" required="1"/>
+                                        <field name="poe_filename" invisible="1"/>
+                                        <field name="comments" attrs="{'readonly': [('is_nyda_employee', '=', True)]}"/>
+                                        <field name="is_nyda_employee" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_monitoring_report_tree">
+        <field name="name">view_monitoring_report_tree</field>
+        <field name="model">monitoring.report</field>
+        <field name="arch" type="xml">
+            <tree string="Monitoring Report tree" toolbar="1">
+                <field name="name"/>
+                <field name="strategic_plan_id"/>
+                <field name="state"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="employee_id"/>
+                <field name="line_manager_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_monitoring_report">
+        <field name="name">Monitoring Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">monitoring.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_monitoring_root" name="Monitoring" sequence="10" groups="base.group_system"
+              web_icon="monitoring_and_evaluation,static/description/icon.png"/>
+
+    <!--	 <menuitem id="menu_execution_plan" name="Execution plan" parent="menu_planning_root" sequence="1"/>-->
+
+    <menuitem id="menu_monitoring_sub" name='Monitoring Report' parent="monitoring_and_evaluation.menu_monitoring_root"/>
+
+    <menuitem id="menu_monitoring" name='Monitoring Report' parent="monitoring_and_evaluation.menu_monitoring_sub"
+          action="action_monitoring_report"
+          sequence="1"/>
+
+</odoo>

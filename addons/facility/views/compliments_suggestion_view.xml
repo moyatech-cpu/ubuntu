@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Compliments And Suggestions Tree View-->
+        <record model="ir.ui.view" id="compliments_suggestions_tree_view">
+            <field name="name">compliments.suggestions.tree.view</field>
+            <field name="model">compliments.suggestions</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="user_id"/>
+                    <field name="send_to_user_id"/>
+                    <field name="contact_number"/>
+                    <field name="e_mail"/>
+                    <field name="type"/>
+                    <field name="create_date" string="Added on"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Compliments and Suggestions Form View-->
+        <record model="ir.ui.view" id="compliments_suggestions_form_view">
+            <field name="name">compliments.suggestions.form.view</field>
+            <field name="model">compliments.suggestions</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="send_mail" string="Send Mail" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <group string="Details" name="details">
+                            <group>
+                                <field name="user_id" invisible="1"/>
+                                <field name="send_to_user_id" required="1"
+                                       options="{'no_open': True,'no_create': True}"/>
+                                <field name="contact_number"/>
+                                <field name="create_date" string="Added on" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="e_mail" required="1"/>
+                                <field name="type" required="1"/>
+                                <field name="facility_officer_id" required="1"
+                                       options="{'no_open': True,'no_create': True}"/>
+                            </group>
+                        </group>
+                        <group string="Comments">
+                            <field name="comment" nolabel="1" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Compliments Action-->
+        <record model="ir.actions.act_window" id="action_compliments">
+            <field name="name">Compliments</field>
+            <field name="res_model">compliments.suggestions</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_type':'Compliments'}</field>
+            <field name="domain">[('type', '=', 'Compliments')]</field>
+        </record>
+
+        <!--Suggestions Action-->
+        <record model="ir.actions.act_window" id="action_suggestions">
+            <field name="name">Suggestions</field>
+            <field name="res_model">compliments.suggestions</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_type':'Suggestions'}</field>
+            <field name="domain">[('type', '=', 'Suggestions')]</field>
+        </record>
+
+        <!--Complain Action-->
+        <record model="ir.actions.act_window" id="action_complain">
+            <field name="name">Complain</field>
+            <field name="res_model">compliments.suggestions</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_type':'Complain'}</field>
+            <field name="domain">[('type', '=', 'Complain')]</field>
+        </record>
+
+		<!--
+        	<menuitem name="Compliments" id="compliments_menu"
+                  parent="facility.compliments_suggestions_menu"
+                  sequence="1"/>
+		
+		
+	        <menuitem name="Suggestions" id="suggestions_menu"
+	                  parent="facility.compliments_suggestions_menu"
+	                  action="action_suggestions"
+	                  sequence="2"/>
+	
+	        <menuitem name="Complain" id="complain_menu"
+	                  parent="facility.compliments_suggestions_menu"
+	                  action="action_complain"
+	                  sequence="3"/>
+        -->
+    </data>
+</odoo>

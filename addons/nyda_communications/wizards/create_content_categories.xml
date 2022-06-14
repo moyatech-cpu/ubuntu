@@ -1,0 +1,41 @@
+<odoo>
+  <data>
+  
+      <record model="ir.ui.view" id="content_category_creation_wizard_view">
+      
+      <field name="name">create.content.category.form.view</field>
+      <field name="model">content.categories</field>
+      
+      <field name="arch" type="xml">
+      <form string="Create Content Category">
+     	<sheet>		  
+		<div id="o_memo_container">
+        	<div id="o_memo_main">
+                	<group>
+                			<field name="category_name" />
+                			<field name="sub_category_id" />
+                      		<field name="category_description"/>
+                     	 	<field name="category_officer" />
+ 					  		
+ 					  </group>
+ 			</div>
+       </div>
+       
+        </sheet>
+    	</form>
+      </field>
+      </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="action_category_creation_comms">
+      <field name="name">create.content.wizard.action</field>
+      <field name="res_model">content.categories</field>
+      <field name="view_mode">form</field>
+    </record>
+    
+        <menuitem name="Configuration" id="nyda_communications.submenu_config" parent="nyda_communications.menu"  sequence="0" groups="base.group_system"/>
+     	<menuitem name="Categories" id="nyda_communications.submenu_categories" parent="nyda_communications.submenu_config"  sequence="0" action="action_category_creation_comms"/>
+     
+    
+  </data>
+</odoo>

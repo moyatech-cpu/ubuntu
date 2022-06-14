@@ -1,0 +1,411 @@
+<odoo>
+	<template id="divisional_execution_plan_report_external_layout_standard">
+		<div class="header hidden">
+		</div>
+		<div class="article o_report_layout_standard">
+			<t t-raw="0" />
+		</div>
+		<div class="footer hidden">
+		</div>
+	</template>
+<!-- divisional_execution_plan_report_view.xml -->
+	<template id="divisional_execution_plan_form_report">
+		<t t-call="strategy_and_planning.divisional_execution_plan_report_external_layout_standard">
+			<div class="row">
+				<div class='col-xs-12' align="center">
+					<div class='col-xs-12'>
+						<div class="row"><!-- env.user.company_id.logo -->
+							<img src="strategy_and_planning/static/src/img/nyda_logo.png" />
+							<!-- <img t-attf-src="data:image;base64,{{/strategy_and_planning/static/src/img/dcog_logo.png}}" width="350" height="250"/>  style="float: right;" -->
+						</div>
+
+ 						<div class="row">
+							<p><b><h3>TITLE: NYDA DIVISIONAL EXECUTION PLAN 2019/2020</h3></b></p>
+							<p><b><h3>DIVISION:</h3></b></p>
+							<p><b><h3>EXECUTIVE DIRECTOR RESPONSIBLE:</h3></b></p>
+						</div>
+					</div>
+				</div>
+<!-- 				<div class="row">
+
+				</div> -->
+			</div>
+			<t t-foreach="docs" t-as="o">
+				<div class="row">
+					<div class='col-xs-12'>
+						<p><b>Introduction</b></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<p>The NYDA approved Strategy is managed through a Strategy Planning and Management Framework that articulates a process 
+						from strategy thinking, planning, designing, development, execution, reporting, monitoring and evaluation process. 
+						The Management Forum serves as a platform that reports back to NYDA leadership (EDC) on progress against Annual 
+						Performance Plan. With the 2019/2020 Annual Performance Plan awaiting approval from the Executive Authority, 
+						this necessitates a process of developing Divisional Execution Plans. </p>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<p>These plans also cover key deliverables and performance targets for each Division to achieve at an APP
+						 and non-APP level. These plans will equally serve as the main communication tool to ensure that strategy 
+						 is cascaded to all levels of the organization and will aid the Management Forum to track and monitor 
+						 key and critical performance measures that have been developed for each Strategic objective against 
+						 expected performance.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<p><b>Objectives of the Divisional Execution Plans:</b></p>
+						<p>
+							<ul>
+								<li>
+									Create a standard format in cascading organizational strategy to all levels
+								</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<li>
+									Enforce divisional and individual accountability on all strategic objectives
+								</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<li>
+									Outline areas of responsibilities per division
+								</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<li>
+									Understand capacity and resource constraints against envisaged strategic objectives
+								</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<li>
+									Understand organizational challenges and opportunities through execution
+								</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<li>
+									Ability to identify and mitigate risks during implementation
+								</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<table class="table text-center" align="center" width="100%" style='font-size:12px !important; border:1px;border: 1px solid black;border-collapse: collapse;'>
+							<tr>
+								<td style="border:1px solid black">
+									<b>Overall Purpose of the National Youth Service Division:</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black">
+								</td>
+							</tr>
+						</table>
+						<table class="table text-center" align="center" width="100%" style='font-size:12px !important; border:1px;border: 1px solid black;border-collapse: collapse;'>
+							<tr>
+								<td style="border:1px solid black">
+									<b>Key Components of the Division</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<h4><center><b>SECTION 1: PLANNING FOR DELIVERABLES NOT ON THE ANNUAL PERFORMANCE PLAN</b></center></h4>
+						<br/>
+						<h4><center><b>QUARTERLY DELIVERABLES: NATIONAL YOUTH SERVICE</b></center></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<table class="table text-center" align="center" width="100%" style='font-size:12px !important; border:1px;border: 1px solid black;border-collapse: collapse;'>
+							<tr>
+								<th rowspan="2" style="border:1px solid black">
+									<b>Key Deliverables</b>
+								</th>
+								<th rowspan="2" style="border:1px solid black">
+									<b>Performance Standard/Target</b>
+								</th>
+								<td rowspan="1" colspan="4" style="border:1px solid black">
+									<b>QUARTERLY OUTPUTS</b>
+								</td>
+							</tr>
+							<tr>
+								<td rowspan="1" style="border:1px solid black">
+									<b>Quarter 1</b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b>Quarter 2</b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b>Quarter 3</b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b>Quarter 4</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<h4><center><b>SECTION 2: EXECUTION PLAN AGAINST 2019/2020 ANNUAL PERFORMANCE PLAN</b></center></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<table class="table text-center" align="center" width="100%" style='font-size:12px !important; border:1px;border: 1px solid black;border-collapse: collapse;'>
+							<tr>
+								<th rowspan="2" style="border:1px solid black">
+									<b>Performance Indicator</b>
+								</th>
+								<th rowspan="2" style="border:1px solid black">
+									<b>Annual target 2019/20 (APP)</b>
+								</th>
+								<td rowspan="1" colspan="12" style="border:1px solid black">
+									<b>MONTHLY OUTPUTS</b>
+								</td>
+							</tr>
+							<tr>
+								<td rowspan="1" style="border:1px solid black">
+									<b> APR </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> MAY </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> JUN </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> JUL </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> AUG </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> SEP </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> OCT </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> NOV </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> DEC </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> JAN </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> FEB </b>
+								</td>
+								<td rowspan="1" style="border:1px solid black">
+									<b> MAR </b>
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+								<td style="border:1px solid black">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<h4><center><b>SECTION 3: OVERALL MANAGEMENT OF THE DIVISION FOR THE 12 MONTHS </b></center></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<table class="table text-center" align="center" width="100%" style='font-size:12px !important; border:1px;border: 1px solid black;border-collapse: collapse;'>
+							<tr>
+								<td style="border:1px solid black">
+									<b>MANAGEMENT AREA</b>
+								</td>
+								<td style="border:1px solid black">
+									<b>KEY TASK</b>
+								</td>
+								<td style="border:1px solid black">
+									<b>Performance Indicator</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black" rowspan="2">
+									<b>STRATEGIC RISK REGISTER</b>
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Divisional Risk Register developed
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Risk Register developed
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black" rowspan="1">
+									Implement mitigating actions and monitor risks
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Monitor Risks
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black">
+									<b>INTERNAL / EXTERNAL AUDIT</b>
+								</td>
+								<td style="border:1px solid black">
+									All Internal / External Audit findings resolved
+								</td>
+								<td style="border:1px solid black">
+									Resolve IA/EA findings
+								</td>
+							</tr>
+							<tr>
+								<td rowspan="3" style="border:1px solid black">
+									<b>FINANCE</b>
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Divisional Budget developed and loaded on EPICOR
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Monitoring of budget and Performance and Expenditure analysis report submitted to Division
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black" rowspan="1">
+									Monitoring of divisional Expenditure and taking corrective action
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Monitoring of monthly expenditure
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black" rowspan="1">
+									Analyse Management Accounts and provide variance explanations
+								</td>
+								<td style="border:1px solid black" rowspan="1">
+									Analysis and variance explanation provided
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class='col-xs-12'>
+						<p><b>REVIEWED BY : </b> </p>
+						<br/>
+						<div class='col-xs-4' align="center">
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Name</b>
+						</div>
+						<div class='col-xs-4'>
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Executive Director: Corporate Strategy and Planning</b>
+						</div>
+						<div class='col-xs-4'>
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Date</b>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class='col-xs-12'>
+						<p><b>COMPLETED BY : </b></p>
+						<br/>
+						<div class='col-xs-4' align="center">
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Name</b>
+						</div>
+						<div class='col-xs-4'>
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Executive Director: National Youth Service</b>
+						</div>
+						<div class='col-xs-4'>
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Date</b>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class='col-xs-12'>
+						<p><b>APPROVED BY : </b> </p>
+						<br/>
+						<div class='col-xs-4' align="center">
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Name</b>
+						</div>
+						<div class='col-xs-4'>
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Chief Executive Officer</b>
+						</div>
+						<div class='col-xs-4'>
+							<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+							<b>Date</b>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

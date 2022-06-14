@@ -1,0 +1,167 @@
+<odoo>
+    <record model="ir.ui.view" id="view_strategic_goals_form">
+        <field name="name">view_strategic_goals_form</field>
+        <field name="model">strategic.goals</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                         <button class="oe_stat_button" type="object" icon="fa-outdent"
+                                name="view_objective_smart_button" string="View Objective">
+                            <!--                            <field name="note_button" widget="statinfo" string="NOTE!!"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                name="create_objective_smart_button" string="Create Objective">
+                            <!--                            <field name="meter_data" widget="statinfo" string="METER DATA!!"/>-->
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="automated_numbering" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="strategic_plan_id" readonly="1"/>
+                        <field name="strategic_goal" required="1"/>
+                        <field name="goal_statement" required="1"/>
+                        <field name="justification" required="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="programme_id"/>
+
+                            <!--						<field name ="strategic_goal_link" required="1"/>-->
+                        </group>
+                        <group>
+                            <field name="budget" required="1"/>
+                            <field name="expenses" invisible="1"/>
+                            <!--						<field name ="number_of_additional_links" required="1"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <field name="government_outcomes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_strategic_goals_form2">
+        <field name="name">view_strategic_goals_form</field>
+        <field name="model">strategic.goals</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                          <button class="oe_stat_button" type="object" icon="fa-outdent"
+                                name="view_objective_smart_button" string="View Objective">
+                          </button>
+                        <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                name="create_objective_smart_button" string="Create Objective">
+                            <!--                            <field name="meter_data" widget="statinfo" string="METER DATA!!"/>-->
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="automated_numbering" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="strategic_plan_id" readonly="1"/>
+                        <field name="strategic_goal" required="1"/>
+                        <field name="goal_statement" required="1"/>
+                        <field name="justification" required="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="programme_id"/>
+
+                            <!--						<field name ="strategic_goal_link" required="1"/>-->
+                        </group>
+                        <group>
+                            <field name="budget" required="1"/>
+                            <field name="expenses" invisible="1"/>
+                            <!--						<field name ="number_of_additional_links" required="1"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <field name="government_outcomes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_strategic_goals_tree">
+        <field name="name">view_strategic_goals_tree</field>
+        <field name="model">strategic.goals</field>
+        <field name="arch" type="xml">
+            <tree string="Strategic Goals Tree" toolbar="1" create="0">
+                <field name="automated_numbering"/>
+                <field name="strategic_goal"/>
+                <field name="goal_statement"/>
+                <field name="justification"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_strategic_goals_tree2">
+        <field name="name">view_strategic_goals_tree</field>
+        <field name="model">strategic.goals</field>
+        <field name="arch" type="xml">
+            <tree string="Strategic Goals Tree" toolbar="1" create="0">
+                <field name="automated_numbering"/>
+                <field name="strategic_goal"/>
+                <field name="goal_statement"/>
+                <field name="justification"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_strategic_goals_search" model="ir.ui.view">
+        <field name="name">view_strategic_goals_search</field>
+        <field name="model">strategic.goals</field>
+        <field name="arch" type="xml">
+            <search>
+                <group>
+                    <filter name="group_strategic_plan" string="Strategic Plan"
+                            context="{'group_by':'strategic_plan_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_strategic_goals">
+        <field name="name">Strategic Outcome</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">strategic.goals</field>
+        <field name="context">{'search_default_group_strategic_plan': True}</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_strategic_goals2">
+        <field name="name">Strategic Outcome</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">strategic.goals</field>
+        <field name="context">{'search_default_group_strategic_plan': True}</field>
+        <field name="view_type">form</field>
+        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_strategic_goals_tree2')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_strategic_goals_form2')})
+                          ]"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_strategic_goals" name='Strategic Outcome' parent="menu_execution_plan"
+              action="action_strategic_goals"
+              sequence="3"/>
+</odoo>

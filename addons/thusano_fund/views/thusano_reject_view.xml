@@ -1,0 +1,30 @@
+<odoo>
+
+    <record id="thusano_reject_form" model="ir.ui.view">
+        <field name="name">thusano.reject.form</field>
+        <field name="model">thusano.reject.reason</field>
+        <field name="arch" type="xml">
+            <form string="Thusano Fund Rejection Reason">
+                <group>
+                	  <field name="applicant_name" invisible="1"/>
+                	  <field name="email_recipient" readonly="1"/>
+                      <field name="rejection_reason" required="1"/>
+                      <field name="applicaiton_id" readonly="1" />
+                </group>
+                <footer>
+                    <button name="submit_reason" string="Send Email" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_thusano_reject_form" model="ir.actions.act_window">
+        <field name="name">thusano.reject.form</field>
+        <field name="res_model">thusano.reject.reason</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="thusano_reject_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

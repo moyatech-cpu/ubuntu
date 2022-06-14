@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_strategic_plan_objectives,access_strategic_plan_objectives,model_strategic_plan_objectives,,1,1,1,1
+access_strategic_plan,access_strategic_plan,model_strategic_plan,,1,1,1,1
+access_strategic_goals,access_strategic_goals,model_strategic_goals,,1,1,1,1
+
+access_annual_performance_plan,access_annual_performance_plan,model_annual_performance_plan,,1,1,1,1
+access_annual_performance_plan_target,access_annual_performance_plan_target,model_annual_performance_plan_target,,1,1,1,1
+access_project_plan_linkage,access_project_plan_linkage,model_project_plan_linkage,,1,1,1,1
+access_project_plan_target,access_project_plan_target,model_project_plan_target,,1,1,1,1
+access_project_plan_all,access_project_plan_all,model_project_plan_all,,1,1,1,1
+
+access_monthly_target_main,access_monthly_target_main,model_monthly_target_main,,1,1,1,1
+access_monthly_target,access_monthly_target,model_monthly_target,,1,1,1,1
+access_quarterly_target,access_quarterly_target,model_quarterly_target,,1,1,1,1

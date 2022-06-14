@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="action_performance_agreement_report"
+                string="Performance Agreement Report"
+                model="hr.performance.report"
+                report_type="qweb-pdf"
+                file="nyda_hr_reports.report_hr_performance_agreement"
+                name="nyda_hr_reports.report_hr_performance_agreement"
+                paperformat="paperformat_report_hr_report"
+                menu="False" />                                     
+
+        <report
+                id="action_performance_agreement_details_report"
+                string="Performance Agreement Details Report"
+                model="hr.performance.report"
+                report_type="qweb-pdf"
+                file="nyda_hr_reports.report_hr_performance_agreement_details"
+                name="nyda_hr_reports.report_hr_performance_agreement_details"
+                paperformat="paperformat_report_hr_report"
+                menu="False" />            
+
+        <report
+                id="action_hr_employees_report"
+                string="Employee Overview Report"
+                model="hr.performance.report"
+                report_type="qweb-pdf"
+                file="nyda_hr_reports.report_hr_employees"
+                name="nyda_hr_reports.report_hr_employees"
+                paperformat="paperformat_report_hr_report"
+                menu="False" />                
+    </data>
+</odoo>

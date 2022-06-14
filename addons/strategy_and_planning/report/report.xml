@@ -1,0 +1,51 @@
+<odoo>
+	<record id="performance_report_paper_formate" model="report.paperformat">
+		<field name="name">performance Report</field>
+		<field name="default" eval="True" />
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">5</field>
+		<field name="margin_bottom">5</field>
+		<field name="margin_left">0</field>
+		<field name="margin_right">0</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">6</field>
+		<field name="dpi">80</field>
+	</record>
+
+	<report id="performance_report_form_report_id"
+			string="Performance Report" 
+			model="strategic.plan"
+			report_type="qweb-pdf"
+			name="strategy_and_planning.performance_report_export_form_report"
+			file="strategy_and_planning.performance_report_export_view"
+			paperformat="performance_report_paper_formate" />
+
+
+	<record id="divisional_execution_report_paper_formate" model="report.paperformat">
+		<field name="name">Divisional</field>
+		<field name="default" eval="True" />
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">5</field>
+		<field name="margin_bottom">5</field>
+		<field name="margin_left">0</field>
+		<field name="margin_right">0</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">6</field>
+		<field name="dpi">80</field>
+	</record>
+
+	<report id="divisional_execution_form_report_id"
+			string="Divisional Execution Plan" 
+			model="strategic.plan"
+			report_type="qweb-pdf"
+			name="strategy_and_planning.divisional_execution_plan_form_report"
+			file="strategy_and_planning.divisional_execution_plan_report_view"
+			paperformat="divisional_execution_report_paper_formate" />
+
+</odoo>

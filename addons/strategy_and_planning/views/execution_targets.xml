@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <!-- execution.plan annual action -->
+        <record id="action_execution_annual_target" model="ir.actions.act_window">
+            <field name="name">Execution Plan Annual Target</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">annual.performance.plan</field>
+            <field name="view_type">form</field>
+            <field name="context" eval="{'default_type_bool': 'exe'}"/>
+            <field name="domain">[("type_bool", "=", "exe")]</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <!-- execution.plan.target quarterly action -->
+        <record id="action_execution_plan_target" model="ir.actions.act_window">
+            <field name="name">Execution Plan Quarter Target</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">annual.performance.plan.target</field>
+            <field name="view_type">form</field>
+            <field name="domain">[("annual_performance_plan_id.type_bool", "=", "exe")]</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <!-- execution.plan.target monthly action -->
+        <record id="action_execution_plan_monthly_target" model="ir.actions.act_window">
+            <field name="name">Execution Plan Monthly Target</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">monthly.target.main</field>
+            <field name="view_type">form</field>
+            <field name="domain">[("annual_target.type_bool", "=", "exe")]</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <!-- MenuItem for execution.plan-->>
+
+        <menuitem id="execution_target_main" name="Execution Plan" parent="menu_planning_root"
+                  sequence="11"/>
+
+        <menuitem id="sub_one_menu_execution_plan" name="Annual Target"
+                  parent="execution_target_main" sequence="14"
+                  action="action_execution_annual_target"/>
+
+<!--        <menuitem id="sub_two_menu_execution_plan" name="Quarter Target"-->
+<!--                  parent="execution_target_main" sequence="24"-->
+<!--                  action="action_execution_plan_target"/>-->
+
+<!--        <menuitem id="sub_three_menu_execution_plan" name="Monthly Target"-->
+<!--                  parent="execution_target_main" sequence="34"-->
+<!--                  action="action_execution_plan_monthly_target"/>-->
+
+    </data>
+</odoo>

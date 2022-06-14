@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_report_booked_rooms_register"
+                string="Booked Rooms Report"
+                model="report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_booked_rooms"
+                name="facility.report_booked_rooms"
+                menu="False"
+        />
+
+        <report
+                id="action_report_cancelled_rooms_register"
+                string="Cancelled Rooms Report"
+                model="report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_cancelled_rooms"
+                name="facility.report_cancelled_rooms"
+                menu="False"
+        />
+
+        <report
+                id="action_report_rescheduled_rooms_register"
+                string="Rescheduled Rooms Report"
+                model="report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_rescheduled_rooms"
+                name="facility.report_rescheduled_rooms"
+                menu="False"
+        />
+
+    </data>
+</odoo>

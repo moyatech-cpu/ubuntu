@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Insurance Excess form view -->
+    <record id="insurance_excess_form" model="ir.ui.view">
+        <field name="name">insurance.excess.form</field>
+        <field name="model">insurance.excess</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Excess">
+                <sheet>
+                    <group string="Insurance Details">
+                        <group>
+                            <field name="loss_damage_assets_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                            <field name="employee_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                            <field name="id_number"/>
+                            <field name="employee_number"/>
+                            <field name="installments_period" required="1"/>
+                            <field name="insurance_date" required="1"/>
+                        </group>
+                        <group>
+                            <field name="position_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="cluster"/>
+                            <field name="deduction_amount" required="1"/>
+                            <field name="deduction_amount_in_words" required="1"/>
+                            <field name="month" required="1"/>
+                        </group>
+                        <group>
+                            <field name="digital_sign" required="1" widget="signature"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Insurance Excess tree view -->
+    <record id="view_insurance_excess_tree" model="ir.ui.view">
+        <field name="name">Insurance Excess Tree View</field>
+        <field name="model">insurance.excess</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="loss_damage_assets_id"/>
+                <field name="employee_id"/>
+                <field name="deduction_amount"/>
+                <field name="insurance_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Insurance Excess action -->
+    <record id="action_insurance_excess" model="ir.actions.act_window">
+        <field name="name">Insurance Excess</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">insurance.excess</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu of Insurance Excess
+    <menuitem id="menu_insurance_excess" name="Insurance Excess"
+          parent="nyda_risk_management.menu_loss_damage_assets_main"
+          action="action_insurance_excess"/>
+	 -->
+</odoo>

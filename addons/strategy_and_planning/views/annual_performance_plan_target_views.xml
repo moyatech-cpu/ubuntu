@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- annual.performance.plan.target views -->
+        <record id="view_annual_performance_plan_target_form" model="ir.ui.view">
+            <field name="name">annual.performance.plan.target</field>
+            <field name="model">annual.performance.plan.target</field>
+            <field name="arch" type="xml">
+                <form string="Annual Performance Plan Target" create="0">
+                    <header>
+                        <button name="action_team_approve" string="Team Approve" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                        <button name="action_ceo_approve" string="CEO Approve" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'team_approved')]}"/>
+                        <button name="action_reject" string="Reject" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '=', 'reject')]}"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="new,team_approved,ceo_approved,reject"/>
+                    </header>
+                    <sheet>
+
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                    name="create_monthly_smart_button" string="Monthly Targets">
+                                <!--                                 attrs="{'invisible': [('related_type_bool', '=', 'exe')]}"-->
+                            </button>
+                            <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                    name="view_monthly_exe_target_smart_button" string="View Monthly Targets"
+                                    attrs="{'invisible': [('related_type_bool', '=', 'app')]}">
+                            </button>
+                            <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                    name="view_monthly_app_target_smart_button" string="View Monthly Targets"
+                                    attrs="{'invisible': [('related_type_bool', '=', 'exe')]}">
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="app_quarter_target_seq" readonly="1"
+                                       attrs="{'invisible': [('related_type_bool', '=', 'exe')]}"/>
+                                <field name="exe_quarter_target_seq" readonly="1"
+                                       attrs="{'invisible': [('related_type_bool', '=', 'app')]}"/>
+                            </h1>
+                        </div>
+                        <!--                        <group string="Annual Performance Plan Quarterly Target">-->
+                        <!--                            <field name="strategic_plan_id"/>-->
+                        <!--                            <field name="from_year"/>-->
+                        <!--                            <field name="to_year"/>-->
+                        <!--                            <field name="related_type_bool" invisible='1'/>-->
+                        <!--                        </group>-->
+                        <!--                        <notebook>-->
+                        <!--                            <page string="Quarter Target">-->
+                        <!--                                <field name="quarterly_target_ids"/>-->
+                        <!--                            </page>-->
+                        <!--                            <page string="Strategic Goals">-->
+                        <!--                                <field name="strategic_goal_ids"/>-->
+                        <!--                            </page>-->
+                        <!--                            <page string="Strategic Objective">-->
+                        <!--                                <field name="strategic_plan_objectives_ids"/>-->
+                        <!--                            </page>-->
+                        <!--                        </notebook>-->
+                        <group>
+                            <!--                            <group>-->
+                            <!--                                <field name="name" required="1"/>-->
+                            <field name="annual_performance_plan_id" readonly="1"/>
+                            <!--                                <field name="objective_statement"/>-->
+                            <!--                                <field name="target"/>-->
+                            <field name="baseline" invisible="1"/>
+                            <field name="indicator" invisible="1"/>
+                            <field name="related_type_bool" invisible='1'/>
+                            <!--                            </group>-->
+                            <!--                            <group>-->
+                            <!--                                <field name="justification"/>-->
+
+
+                            <!--                                <field name="risk"/>-->
+                            <field name="evidence" invisible="1"/>
+                            <field name="programme" invisible="1"/>
+                            <field name="employee_id" invisible="0" readonly="1"/>
+                            <field name="budget" invisible="1"/>
+                            <!--                            </group>-->
+                        </group>
+                        <group>
+                            <field name="quarterly_target_ids">
+                                <tree editable="bottom">
+                                    <field name="annual_performance_plan_quarterly_id" invisible="1"/>
+                                    <field name="quarter"/>
+                                    <field name="quarter_target"/>
+                                    <field name="quarter_budget"/>
+                                    <field name="quarter_evidence"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <!--                        <group string="Please select a branch you are dependent on">-->
+                        <!--                            <group>-->
+                        <!--                                <field name="dependent_branch_1"/>-->
+                        <!--                                <field name="target_1"/>-->
+                        <!--                                <field name="dependent_branch_2"/>-->
+                        <!--                                <field name="target_2"/>-->
+                        <!--                                <field name="dependent_branch_3"/>-->
+                        <!--                            </group>-->
+                        <!--                            <group>-->
+                        <!--                                <field name="target_3"/>-->
+                        <!--                                <field name="dependent_branch_4"/>-->
+                        <!--                                <field name="target_4"/>-->
+                        <!--                                <field name="dependent_branch_5"/>-->
+                        <!--                                <field name="target_5"/>-->
+                        <!--                                <field name="external_dependencies"/>-->
+                        <!--                            </group>-->
+                        <!--                        </group>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- annual.performance.plan.target tree -->
+        <record id="view_annual_performance_plan_target_tree" model="ir.ui.view">
+            <field name="name">annual.performance.plan.target</field>
+            <field name="model">annual.performance.plan.target</field>
+            <field name="arch" type="xml">
+                <tree string="Annual Performance Plan Target" create="0">
+                    <field name="annual_performance_plan_id"/>
+                    <field name="employee_id"/>
+                    <field name="quarterly_target_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- annual.performance.plan.target action -->
+        <record id="action_annual_performance_plan_target" model="ir.actions.act_window">
+            <field name="name">APP Quarter Target</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">annual.performance.plan.target</field>
+            <field name="view_type">form</field>
+            <field name="domain">[("annual_performance_plan_id.type_bool", "=", "app")]</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+
+        <!-- MenuItem for annual.performance.plan-->>
+
+        <!--        <menuitem id="sub_two_menu_annual_performance_plan" name="Quarterly Target"-->
+        <!--                  parent="sub_menu_annual_performance_plan" sequence="22"-->
+        <!--                  action="action_annual_performance_plan_target"/>-->
+
+
+        <!-- quarterly.target views -->
+        <record id="view_app_quarter_target_form" model="ir.ui.view">
+            <field name="name">quarterly.target</field>
+            <field name="model">quarterly.target</field>
+            <field name="arch" type="xml">
+                <form string="Quarterly Target">
+                    <group>
+                        <field name="quarter"/>
+                        <field name="quarter_target"/>
+                        <field name="quarter_budget"/>
+                        <field name="quarter_evidence"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- quarterly.target tree -->
+        <record id="view_app_quarter_target_tree" model="ir.ui.view">
+            <field name="name">quarterly.target</field>
+            <field name="model">quarterly.target</field>
+            <field name="arch" type="xml">
+                <tree string="Quarterly Target">
+                    <field name="quarter"/>
+                    <field name="quarter_target"/>
+                    <field name="quarter_budget"/>
+                    <field name="quarter_evidence"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- monthly.target.main views -->
+        <record id="view_app_monthly_target_main_form" model="ir.ui.view">
+            <field name="name">monthly.target.main</field>
+            <field name="model">monthly.target.main</field>
+            <field name="arch" type="xml">
+                <form string="monthly Target" create="0">
+                    <header>
+                        <button name="action_team_approve" string="Team Approve" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                        <button name="action_ceo_approve" string="CEO Approve" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'team_approved')]}"/>
+                        <button name="action_reject" string="Reject" type="object" class="btn-primary"
+                                attrs="{'invisible': [('state', '=', 'reject')]}"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="new,team_approved,ceo_approved,reject"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="app_month_target_seq" readonly="1"
+                                       attrs="{'invisible': [('type_bool', '=', 'exe')]}"/>
+                                <field name="exe_month_target_seq" readonly="1"
+                                       attrs="{'invisible': [('type_bool', '=', 'app')]}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <!--                        <group>-->
+                            <!--                            <field name="name" required="1"/>-->
+                            <field name="annual_target" readonly="1"/>
+                            <field name="target_name" invisible="1"/>
+                            <field name="quarterly_target" readonly="1"/>
+
+                            <!--                            <field name="description"/>-->
+                            <field name="date" invisible="1"/>
+                            <!--                        </group>-->
+                            <!--                        <group>-->
+                            <field name="performance_indicator" invisible="1"/>
+                            <field name="responsible_employee_id"/>
+                            <field name="reportback_id"/>
+                            <field name="type_bool" widget="radio" invisible="1"/>
+                            <!--                            <field name="quarterly_target"/>-->
+                            <!--                        </group>-->
+                        </group>
+                        <group>
+                            <field name="monthly_target_ids">
+                                <tree editable="bottom">
+                                    <field name="quarter_main_id" invisible="1"/>
+                                    <field name="quarterly_target__id" context="{'xyz': quarter_main_id}"/>
+                                    <field name="quarter_select" readonly="1"/>
+                                    <field name="monthly"/>
+                                    <field name="monthly_target"/>
+                                    <field name="monthly_evidence"/>
+                                    <field name="monthly_bugget"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- monthly.target.main tree -->
+        <record id="view_app_monthly_target_main_tree" model="ir.ui.view">
+            <field name="name">monthly.target.main</field>
+            <field name="model">monthly.target.main</field>
+            <field name="arch" type="xml">
+                <tree string="monthly Target" create="0">
+                    <!--                    <field name="name"/>-->
+                    <!--                    <field name="description"/>-->
+                    <field name="annual_target"/>
+                    <field name="responsible_employee_id"/>
+                    <field name="monthly_target_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- monthly.target.main action -->
+        <record id="action_monthly_target_main_target" model="ir.actions.act_window">
+            <field name="name">APP Month Target</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">monthly.target.main</field>
+            <field name="view_type">form</field>
+            <field name="domain">[("annual_target.type_bool", "=", "app")]</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <!--        &lt;!&ndash; MenuItem for monthly.target.main&ndash;&gt;>-->
+        <!--        <menuitem id="sub_three_menu_monthly_target_main" name="Monthly Target"-->
+        <!--                  parent="sub_menu_annual_performance_plan" sequence="23"-->
+        <!--                  action="action_monthly_target_main_target"/>-->
+
+    </data>
+</odoo>

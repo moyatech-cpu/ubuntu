@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_booked_fleet_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Booked Fleet Report</h1>
+                    </div>
+                    <t t-value="doc.get_booked_fleet_report()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['fleet']">
+                                <h4>Total Fleet Booked :
+                                    <t t-esc="len(data['fleet'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div><br/>
+                <t t-if="data['fleet']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Topic</th>
+                                        <th>Fleet</th>
+                                        <th>Booked By</th>
+                                        <th>Start Date and time</th>
+                                        <th>End Date and time</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['fleet']" t-as="data">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="data.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.vehicle_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.user_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_end_time"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no bookings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_approved_fleet_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Approved Fleet Report</h1>
+                    </div>
+                    <t t-value="doc.get_approved_fleet_report()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['fleet']">
+                                <h4>Total Fleet Booked :
+                                    <t t-esc="len(data['fleet'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div><br/>
+                <t t-if="data['fleet']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Topic</th>
+                                        <th>Fleet</th>
+                                        <th>Booked By</th>
+                                        <th>Start Date and time</th>
+                                        <th>End Date and time</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['fleet']" t-as="data">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="data.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.vehicle_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.user_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_end_time"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no bookings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+    
+    <template id="report_rejected_fleet_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Rejected Fleet Report</h1>
+                    </div>
+                    <t t-value="doc.get_rejected_fleet_report()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['fleet']">
+                                <h4>Total Fleet Booked :
+                                    <t t-esc="len(data['fleet'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div><br/>
+                <t t-if="data['fleet']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Topic</th>
+                                        <th>Fleet</th>
+                                        <th>Booked By</th>
+                                        <th>Start Date and time</th>
+                                        <th>End Date and time</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['fleet']" t-as="data">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="data.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.vehicle_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.user_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_end_time"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no bookings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>    
+
+    <template id="report_cancelled_fleet_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Cancelled Fleet Report</h1>
+                    </div>
+                    <t t-value="doc.get_cancelled_fleet_report()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['fleet']">
+                                <h4>Total Fleet Booked :
+                                    <t t-esc="len(data['fleet'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div><br/>
+                <t t-if="data['fleet']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Topic</th>
+                                        <th>Fleet</th>
+                                        <th>Booked By</th>
+                                        <th>Start Date and time</th>
+                                        <th>End Date and time</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['fleet']" t-as="data">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="data.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.vehicle_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.user_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.booking_end_time"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no bookings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template> 
+    
+    <template id="report_booked_fleet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="facility.report_booked_fleet_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_approved_fleet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="facility.report_approved_fleet_document"/>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_rejected_fleet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="facility.report_rejected_fleet_document"/>
+            </t>
+        </t>
+    </template>
+        
+    <template id="report_cancelled_fleet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="facility.report_cancelled_fleet_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

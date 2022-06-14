@@ -1,0 +1,31 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_meeting_room,access_meeting_room,model_meeting_room,,1,1,1,1
+
+access_meeting_room_booking_eu,access_meeting_room_booking_eu,model_meeting_room_booking,facility.end_user,1,1,1,1
+access_meeting_room_booking_fm,access_meeting_room_booking_fm,model_meeting_room_booking,facility.facility_manager,1,1,1,1
+access_meeting_room_booking_fo,access_meeting_room_booking_fo,model_meeting_room_booking,facility.facility_officer,1,1,1,1
+access_meeting_room_booking_admin,access_meeting_room_booking_admin,model_meeting_room_booking,base.group_system,1,1,1,1
+
+access_helpdesk_category_fmanager,access_helpdesk_category,model_helpdesk_category,facility.facility_manager,1,1,1,1
+access_helpdesk_category_admin,access_helpdesk_category,model_helpdesk_category,base.group_system,1,1,1,1
+
+access_helpdesk_lite_end_user,helpdesk_lite.ticket manager,model_helpdesk_lite_ticket,facility.end_user,1,1,1,1
+access_helpdesk_lite_fmanager,helpdesk_lite.ticket manager,model_helpdesk_lite_ticket,facility.facility_manager,1,1,1,1
+access_helpdesk_lite_fofficer,helpdesk_lite.ticket manager,model_helpdesk_lite_ticket,facility.facility_officer,1,1,1,1
+
+
+access_compliment_suggestions,access_compliments_suggestions,model_compliments_suggestions,,1,1,1,1
+
+access_ticket_dashboard,access_ticket_dashboard,model_ticket_dashboard,,1,1,1,1
+
+access_helpdesk_subcategory,access_helpdesk_subcategory,model_helpdesk_subcategory,,1,1,1,1
+
+access_fleet_booking_eu,access_fleet_booking_eu,model_fleet_booking,facility.end_user,1,1,1,1
+access_fleet_booking_fm,access_fleet_booking_fm,model_fleet_booking,facility.facility_manager,1,1,1,1
+access_fleet_booking_fo,access_fleet_booking_fo,model_fleet_booking,facility.facility_officer,1,1,1,1
+access_fleet_booking_admin,access_fleet_booking_admin,model_fleet_booking,base.group_system,1,1,1,1
+
+access_fleet_dashboard_eu,access_fleet_dashboard_eu,model_fleet_dashboard,facility.end_user,1,1,1,1
+access_fleet_dashboard_fm,access_fleet_dashboard_fm,model_fleet_dashboard,facility.facility_manager,1,1,1,1
+access_fleet_dashboard_fo,access_fleet_dashboard_fo,model_fleet_dashboard,facility.facility_officer,1,1,1,1
+access_fleet_dashboard_admin,access_fleet_dashboard_admin,model_fleet_dashboard,base.group_system,1,1,1,1

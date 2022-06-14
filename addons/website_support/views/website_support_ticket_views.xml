@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+      <record id="website_support_ticket_view_form" model="ir.ui.view">
+          <field name="name">website.support.ticket.form.view</field>
+          <field name="model">website.support.ticket</field>
+          <field name="arch" type="xml">
+			<form duplicate="0">
+			    <header>
+			        <button type="action" name="816" context="{'default_ticket_id': active_id, 'default_partner_id': partner_id, 'default_email':email, 'default_subject':subject}" string="Reply" attrs="{'invisible' :[('write_date', '==', False )]}" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			        <button type="action" name="816" context="{'default_ticket_id': active_id, 'default_partner_id': partner_id, 'default_email':x_create_user_email, 'default_subject':subject}" string="Open / Reply" attrs="{'invisible' :[('close_time', '=', False )]}" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			        <button type="object" name="open_close_ticket_wizard" string="Close Ticket" attrs="{'invisible' :[('write_date', '==', False )]}" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			        <button type="action" name="1558" string="Cancel Ticket" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager" attrs="{'invisible' :[('write_date', '==', False )]}" />
+			        <button type="object" name="pause_sla" string="Pause SLA" attrs="{'invisible' :[('sla_active', '==', False )]}" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			        <button type="object" name="resume_sla" string="Resume SLA" attrs="{'invisible' :[('sla_active', '==', False )]}" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			        <button type="object" name="send_survey" string="Send Survey" attrs="{'invisible' :[('write_date', '==', False )]}" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			        <button type="object" name="request_approval" string="Request Approval" attrs="{'invisible' :[('write_date', '==', False )]}" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager"/>
+			    </header>
+			    <sheet>
+			        <group>
+			        	  <!--   <field name="check_group" invisible="1"/>-->
+			            <field name="write_date" invisible="1"/>
+			            <field name="ticket_number" readonly="1"/>
+			            <field name="channel" readonly="1"/>
+						
+						<field name="partner_id"/>
+			            <field name="create_user_id" string="Ticket Logger" readonly="1" />
+			            <field name="x_create_user_email" string="Email" readonly="1" />
+			            <field name="x_create_user_division" string="Division" readonly="1" />
+			            <field name="x_create_user_job" string="Designation" readonly="1" />                          
+			            
+			            <!-- <field name="user_id" groups="website_support.group_service_desk_manager"/> -->
+			            <field name="category" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager" />
+			            <field name="sub_category_id" domain="[('parent_category_id','=',category)]" options="{'no_create': True, 'no_create_edit':True, 'no_open':False, 'limit':1, 'selected':True}" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager" />			            
+			            <field name="x_subcat_owner" invisible="1"/>
+			            <field name="user_id" domain="[('id','=',x_subcat_owner)]" widget="radio" context="{'default_user_id': x_subcat_owner}" options="{'no_create': True, 'no_create_edit':True, 'no_open':False, 'limit':1, 'selected':True}" string="Assign Agent" />
+			            
+			            <field name="priority_id" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager" />
+			            <field name="state" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager" />
+			            <field name="x_ticket_type"/>
+			            <field name="approval_id" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager" />
+			            <field name="subject"/>
+			            <field name="description" widget="html"/>
+			            <field name="x_attachment"/>
+			            <field name="support_rating" readonly="1" attrs="{'invisible' : [('state', 'not in', ('New','Open'))]}" />
+			            <field name="support_comment" readonly="1" attrs="{'invisible' : [('state', 'not in', ('New','Open'))]}" />
+			            <field name="close_comment" attrs="{'invisible' : [('state', 'not in', ('New','Open','Service Agent Replied'))]}" />
+			            <field name="close_time" attrs="{'invisible' : [('state', 'not in', ('New','Open','Service Agent Replied'))]}" />
+			            
+			            <field name="state" invisible="1" />
+			            <field name="partner_id" invisible="1" />
+			            <field name="person_name" string="Ticket Logger" invisible="1" />
+			            <field name="email" invisible="1" />
+			            <field name="tag_ids" widget="many2many_tags" invisible="1" />
+			                                  
+			        </group>
+			        <notebook>
+			            <page string="SLA" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager">
+			                <group>
+			                    <field name="sla_id"/>
+			                    <field name="sla_active"/>
+			                    <field name="sla_timer" widget="float_time"/>
+			                    <field name="sla_response_category_id" domain="[('vsa_id','=',sla_id)]"/>
+			                </group>
+			            </page>
+			        </notebook>
+			    </sheet>
+			    <div class="oe_chatter">
+			        <style>
+			            .o_chatter_button_new_message {
+			                display: none;
+			            }
+			        </style>
+			        <field name="message_follower_ids" widget="mail_followers"/>
+			        <field name="message_ids" widget="mail_thread"/>
+			    </div>
+			</form>
+          </field>
+      </record>
+
+      <record id="website_support_ticket_view_kanban" model="ir.ui.view">
+          <field name="name">website.support.ticket.kanban.view</field>
+          <field name="model">website.support.ticket</field>
+          <field name="arch" type="xml">
+			<kanban class="o_res_partner_kanban" default_group_by="state" create="true">
+			    <field name="x_colour"/>
+			    <field name="subject"/>
+			    <field name="priority_id"/>
+			    <field name="state" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager" readonly="1" />
+			    <field name="category"/>
+			    <field name="description"/>
+			    <progressbar field="state" colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}" />
+			    <templates>
+			        <t t-name="kanban-box">
+			            <div t-attf-class="#{kanban_color(record.x_colour.raw_value)} oe_kanban_global_click">
+			                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+			                <div class="oe_kanban_details">
+			                    <strong class="oe_partner_heading"><field name="subject"/></strong>
+			                    <ul>
+			                        <li t-if="record.priority_id.raw_value"><field name="priority_id"/></li>
+			                        <li t-if="record.state.raw_value"><field name="state" readonly="1" groups="website_support.group_service_desk_agent,website_support.group_service_desk_manager" /></li>
+			                        <li t-if="record.category.raw_value"><field name="category"/></li>
+			                        <li t-if="record.description.raw_value"><t t-raw="record.description.raw_value"/></li>
+			                    </ul>
+			                    <div class="oe_kanban_partner_links"/>
+			                </div>
+			            </div>
+			        </t>
+			    </templates>
+			</kanban>
+          </field>
+      </record>
+      
+      <record id="website_support_ticket_view_search" model="ir.ui.view">
+          <field name="name">website.support.ticket.form.search</field>
+          <field name="model">website.support.ticket</field>
+          <field name="arch" type="xml">
+              <search>
+                  <field name="subject"/>
+                  <field name="tag_ids"/>
+                  <field name="partner_id"/>
+                  <field name="create_user_id"/>
+                  <field name="user_id"/>
+                  
+                  <filter string="My Tickets" name="my_tickets" domain="['|', ('create_user_id', '=', uid ), ('user_id', '=', uid )]" />
+                  <!-- 
+                  	<filter string="My Requests" name="my_requests" domain="['|', ('employee_id.user_id', '=', uid), ('department_id.manager_id.user_id', '=', uid)]"/>
+                   -->
+                  <filter name="group_by_category" string="Category" domain="[]"  context="{'group_by':'category'}"/>
+                  <filter name="group_by_user" string="User" domain="[]"  context="{'group_by':'user_id'}"/>
+              </search>
+          </field>
+      </record>
+
+      <record id="website_support_ticket_view_graph" model="ir.ui.view">
+          <field name="name">website.support.ticket.form.graph</field>
+          <field name="model">website.support.ticket</field>
+          <field name="arch" type="xml">
+              <graph stacked="False">
+                  <field name="create_date" interval="day" string="Create Date"/>
+              </graph>
+          </field>
+      </record>
+
+      <record id="website_support_ticket_view_tree" model="ir.ui.view">
+          <field name="name">website.support.ticket tree view</field>
+          <field name="model">website.support.ticket</field>
+          <field name="arch" type="xml">
+              <tree colors="black:ticket_color==False">
+                  <field name="create_user_id" invisible="True"/>
+                  <field name="ticket_color" invisible="True"/>
+                  <field name="ticket_number_display"/>
+                  <field name="priority_id"/>
+                  <field name="person_name"/>
+                  <field name="category"/>
+                  <field name="state"/>
+                  <field name="email"/>
+                  <field name="subject"/>
+                  <field name="sla_active"/>
+                  <field name="sla_timer" widget="float_time"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="website_support_ticket_action_partner" model="ir.actions.act_window">
+          <field name="name">Support Tickets</field>
+          <field name="res_model">website.support.ticket</field>
+          <field name="view_mode">kanban,tree,form,graph,pivot</field>
+          <field name="help" type="html">
+              <p>
+                  No Support Tickets found
+              </p>
+          </field>
+      </record>
+
+      <record id="website_support_ticket_action" model="ir.actions.act_window">
+          <field name="name">Support Tickets</field>
+          <field name="res_model">website.support.ticket</field>
+          <field name="view_mode">kanban,tree,form,graph,pivot</field>
+          <field name="context">{"search_default_my_tickets":1, 'auto_refresh': 1, 'default_create_user_id': uid, 'default_partner_id': uid}</field>
+          <field name="help" type="html">
+              <p>
+                  No Support Tickets found
+              </p>
+          </field>
+      </record>
+
+      <menuitem id="website_support_parent_menu" name="Service Desk" sequence="90" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager" />
+      <menuitem id="website_support_ticket_menu" name="Support Tickets" parent="website_support_parent_menu" action="website_support_ticket_action" sequence="10" groups="website_support.group_service_desk_employee,website_support.group_service_desk_agent,website_support.group_service_desk_manager" />
+      <menuitem id="website_support_config_parent_menu" name="Configuration" parent="website_support_parent_menu" sequence="80" groups="group_service_desk_manager" />
+
+    </data>
+</odoo>

@@ -1,0 +1,94 @@
+<odoo>
+	<template id="performance_report_external_layout_standard">
+		<div class="header hidden">
+		</div>
+		<div class="article o_report_layout_standard">
+			<t t-raw="0" />
+		</div>
+		<div class="footer hidden">
+		</div>
+	</template>
+
+	<template id="performance_report_export_form_report">
+		<t t-call="strategy_and_planning.performance_report_external_layout_standard">
+			<div class="row">
+				<div class='col-xs-12' align="center">
+					<div class='col-xs-12'>
+						<div class="row"><!-- env.user.company_id.logo -->
+							<img width="320" height="220" src="strategy_and_planning/static/src/img/dcog_logo.png" />
+							<!-- <img t-attf-src="data:image;base64,{{/strategy_and_planning/static/src/img/dcog_logo.png}}" width="350" height="250"/>  style="float: right;" -->
+						</div>
+						<div class="row">
+							<h2 style='color:#616161;'>ORGANIZATIONAL PERFORMANCE REPORT : Quarter 4 </h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<t t-foreach="docs" t-as="o">
+				<div class="row">
+					<div class='col-xs-12'>
+						<table class="table text-center" align="center" width="100%" style='font-size:12px !important; border:1px;border: 1px solid black;border-collapse: collapse;'>
+							<tr>
+								<th rowspan="2" style="border:1px solid black">
+									<b>Programme / Sub-Programme / Performance Indicators</b>
+								</th>
+								<th rowspan="2" style="border:1px solid black">
+									<b>0 Annual Target as per Annual Performance Plan (APP)</b>
+								</th>
+	 							<td rawspan="1" style="border:1px solid black" colspan="4">
+									<b>Quarter 4 Progress</b>									
+								</td>
+								<td rawspan="1" style="border:1px solid black" colspan="2">
+									<b>Comments</b>									
+								</td>
+								<th rowspan="2" style="border:1px solid black">
+									<b>Annual Progress</b>
+								</th>
+							</tr>
+							<tr>
+								<td rawspan="1" style="border:1px solid black">
+									<b>Quarter 4 Target as per APP</b>
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+									<b>Quarter 4 Output - Preliminary</b>
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+									<b>Deviation (Actual)</b>
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+									<b>Deviation (%)</b>
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+									<b>Reason for Deviation</b>
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+									<b>Corrective Action</b>
+								</td>
+							</tr>
+							<tr>
+								<th rowspan="1" style="border:1px solid black">
+								</th>
+								<th rowspan="1" style="border:1px solid black">
+								</th>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+								<td rawspan="1" style="border:1px solid black">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>

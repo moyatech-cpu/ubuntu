@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_thusano_fund_template">
+			<t t-name="thusano_fund.report_thusano_fund_template">
+            <t t-call="web.html_container">
+    	
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <t t-call="web.internal_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="docs.get_report_values()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                    	<h1> Thusano Fund Report</h1>
+                    </div>
+                    
+                    <h4>State :
+                        <t t-esc="data['state']"/>
+                    </h4>
+                    <h4>Start Date :
+                        <t t-esc="data['start_date']"/>
+                    </h4>
+                    <h4>End Date :
+                        <t t-esc="data['end_date']"/>
+                    </h4>
+                    <br/>
+                    <div class="article">
+                     <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                	<th class="t-center">No.</th>
+                                    <th class="t-center">Application Date</th>
+                                    <th class="t-center">Name</th>
+                                    <th class="t-center">Surname</th>
+                                    <th class="t-center">ID No.</th>
+                                    <th class="t-center">Email</th>
+                                    <th class="t-center">Gender</th>
+                                    <th class="t-center">Application Status</th>
+                                    <th class="t-center">Approved</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_amount" t-value="0"/>
+                                <t t-foreach="data['applicant']" t-as="data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <t t-set="total_amount" t-value="total_amount + data['approved_amount']"/>
+                                        <td>
+                                            <t t-esc="data['applicant_date']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data['applicant_name']"/>
+                                        </td>
+                                      	<td>
+                                            <t t-esc="data['applicant_surname']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data['applicant_ID']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data['applicant_email']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data['applicant_gender']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data['applicant_state']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data['approved_amount']"/>
+                                        </td>
+                                       
+                                    </tr>
+                                    	
+                                    </t>
+                                    <tr style="background: lightblue;">
+                                    	<th class="t-center">Total Amount </th>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td></td>
+                                    	<td>R<t t-esc="total_amount"/></td>
+                                    </tr>
+                               
+                            </table>
+                    
+                <br/>
+             <div class="oe_structure"/>
+           </div> 
+           </div>
+           </div> 
+        </t>
+        </t>
+        </t>
+    </template>
+    
+    <template id="report_thusano_fund">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="thusano_fund.report_thusano_fund_template"/>
+            </t>
+        </t>
+    </template>
+</odoo>

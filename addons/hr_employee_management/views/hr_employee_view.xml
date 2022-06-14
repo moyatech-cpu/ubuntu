@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr.view_employee_form_emp_management">
+            <field name="name">hr.employee.form.emp.management</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+				<form string="Employee" >
+				    <sheet>
+				        <div class="oe_button_box" name="button_box">
+				
+				            <button name="toggle_active" type="object" groups="hr.group_hr_user" class="oe_stat_button" icon="fa-archive">
+				                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+				            </button>
+				          
+				        </div>
+				        <div id="o_employee_container"><div id="o_employee_main">
+				        <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;:&quot;image_medium&quot;}"/>
+				        <div class="oe_title">
+				            <label for="name" string="Surname"/>
+				            <h1>
+				                <field name="name" placeholder="Surname" required="True"/>
+				            </h1>
+				            
+				            <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="e.g. Part Time" groups="hr.group_hr_user" invisible="1"/>
+				        </div>
+				        <notebook>
+				            <!-- <page name="personal_information" string="Personal Information" groups="hr.group_hr_user"> -->
+				            <page name="personal_information" string="Personal Information">
+				                <group>
+				                    <group>
+				                        <field name="title" required="True" placeholder="Title"/>
+				                        <field name="initials"/>
+				                        <field name="preferred_name"/>
+				                        <field name="identification_id" />
+				                        <field name="gender"/>
+				                        <field name="marital"/>
+				                        <field name="birthday"/>
+				                        <field name="home_language"/>
+				                        <field name="disability"/>
+				                        <field name="disability_details" attrs="{'invisible': [('disability','=', 'No')]}"/>
+				                        <field name="bank_account_id" invisible="1"/>
+				                    </group>
+				                    <group>
+				                        <field name="first_name"/>
+				                        <field name="second_name"/>
+				                        <field name="employee_number" readonly="1"/>
+				                        <field name="receivers_office"/>
+				                        <field name="drivers_licence_code"/>
+				                        <field name="religion"/>
+				                        <field name="passport_id" />
+				                        <field name="citizenship" />
+				                        <field name="race"/>
+				                        <field name="membership_affiliation"/>
+				                        
+				                        <field name="race_other" attrs="{'invisible': [('race','!=', 'Other')]}"/>
+				                        <field name="address_home_id" invisible="1"/>
+				                    </group>                                    
+				                </group>
+				                <group name="foreign_nationals" string="Visa Details" attrs="{'invisible': [('citizenship','=', 'Yes')]}">
+				                  <group>
+				                    <field name="country_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+				                    <field name="visa_no" string="Permit Number" />
+				                    <field name="visa_issue_date" />
+				                  </group>                                  
+				                  <group>
+				                    <field name="residence_type" />
+				                    <field name="visa_expire" />
+				                    <field name="passport_held" />
+				                  </group> 
+				                </group>                                  
+				                <group name="address_information">
+				                  <group string="Physical Address">
+				                    <field name="street_address_1"/>
+				                    <field name="suburb"/>
+				                    <field name="city"/>
+				                    <field name="postal_code"/>
+				                    <field name="municipality"/>
+				                    <field name="province"/>
+				                  </group>                                  
+				                  <group string="Postal Address">
+				                    <field name="postal_address_1"/>
+				                    <field name="postal_ad_city" />
+				                    <field name="postal_ad_code" />
+				                    <field name="email"/>
+				                    <field name="home_tel"/>
+				                    <field name="personal_mobile"/>
+				                  </group> 
+				                </group>   
+				                <group name="emergency_contact" colspan="4" string="Emergency Information">
+				                  <group>  
+				                    <field name="doctor_name"/>
+				                    <field name="allergies"/>
+				                  </group>  
+				                  <group>
+				                    <field name="doctor_phone_number" />
+				                    <field name="known_conditions"/>
+				                  </group>
+				                  <h4>Next of Kin</h4>
+				                  <field name="emergency_contact" string="Next of Kin">
+				                      <tree editable="bottom">
+				                          <!-- <field name="name"/> -->
+				                          <field name="number"/>
+				                          <field name="relation" string="Relation"/>
+				                      </tree>
+				                  </field>
+				                </group> 
+				                <group name="employee_dependants" colspan="4" string="Employee Dependants">
+				                  <field name="relative_ids" nolabel="1" >
+				                    <tree string="Relative">
+				                        <field name="employee_id" invisible="1"/>
+				                        <field name="relative_type"/>
+				                        <field name="name" placeholder="Enter Name"/>
+				                        <field name="birthday" placeholder="Enter Date of Birth"/>
+				                        <field name="id_number" placeholder="Enter Identity Number"/>
+				                    </tree>
+				                  </field>
+				                </group>
+				                <group name="education_qualifications" colspan="4" string="Qualifications">
+				                  <field name="education_ids" nolabel="1" >
+				                    <tree>
+				                      <field name="grade" string="Qualification"/>
+				                      <field name="qualification_type" string="Type"/>
+				                      <field name="school_name" string="Institution"/>
+				                      <field name="to_date" string="Completed"/>
+				                    </tree>
+				                  </field>
+				                </group>                                
+				            </page>        
+				            <!--  
+				            <page name="public" string="Declation of Interest" invisible="1">
+				                <group name="private_work_declaration" colspan="4" string="1. Private Work">
+				                  <field name="private_work_declaration" nolabel="1" editable="bottom">
+				                    <tree>
+				                      <field name="particulars"/>
+				                      <field name="start_date" />
+				                      <field name="annual_income" />
+				                      <field name="time_allocated" />
+				                    </tree>
+				                  </field>
+				                </group>
+				                
+				                <group name="service_provider_declaration" colspan="4" string="2. Service Provider Declaration">
+				                  <field name="service_provider_declaration" nolabel="1" editable="bottom">
+				                    <tree>
+				                      <field name="service_provider"/>
+				                      <field name="related_person" />
+				                      <field name="relationship_nature" />
+				                    </tree>
+				                  </field>
+				                </group>
+					
+				                <group name="direct_interest_declaration" colspan="4" string="3. Direct Interest Declaration">
+				                  <field name="direct_interest_declaration" nolabel="1" editable="bottom">
+				                    <tree>
+				                      <field name="entity_type"/>
+				                      <field name="company_name" />
+				                      <field name="company_reg_no" />
+				                      <field name="position" />
+				                      <field name="appointment_date" />
+				                      <field name="interest" />
+				                    </tree>
+				                  </field>
+				                </group>                                
+				            </page>
+				            -->
+				            
+				            <page name="public" string="Position Information">
+				                <group>
+				                    <group string="Contact Information">
+				                        <field name="joining_date" string="Date Started"/>
+				                        <field name="years_of_service"/>
+				                        <field name="branch_id" options="{'no_create_edit': True}"/>
+				                        <field name="address_id" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>
+				                        <field name="work_location" string="Location"/>
+				                        <field name="work_email" widget="email" string="Email"/>
+				                        <field name="mobile_phone" string="Mobile"/>
+				                        <field name="work_phone" string="Phone"/>
+				                    </group>
+				                    <group string="Position">
+				                        <field name="department_id" string="Division"/>
+				                        <field name="job_id" string="Job Title" options="{'no_create_edit': True}"/>
+				                        <field name="position_code"/>
+				                        <field name="position_start"/>
+				                        <field name="cost_center"/>
+				                        <field name="reports_to" string="Reports to" options="{'no_create_edit': True}"/>
+				                        <field name="parent_id" />
+				                        <field name="coach_id" invisible="1"/>
+				                        <field name="resource_calendar_id"/>
+				                    </group>
+				                </group>
+				                <group string="Other Information">
+				                  <field name="notes" placeholder="Other Information ..." colspan="4" nolabel="1" />
+				                </group>
+				            </page>
+				            <page name="bank_details" string="Payment Information" >
+				                <group>
+				                  <group string="Payment Instructions">
+				                    <field name="payment_intervals"/>
+				                    <field name="payment_method" />
+				                    <field name="payment_point" />
+				                    <field name="payment_point_description" />
+				                  </group>                                  
+				                  <group string="Banking Details">
+				                    <field name="bank_account_id" invisible="1"/>
+				                    <field name="bank_name"/>
+				                    <field name="bank_account_number" />
+				                    <field name="bank_account_type" />
+				                    <field name="bank_account_name" string="Account Holder"/>
+				                    <field name="bank_branch_name" />
+				                    <field name="bank_branch_code" />
+				                  </group> 
+				                </group>
+				                <group string="Tax Information">
+				                  <group>
+				                    <field name="tax_status"/>
+				                    <field name="tax_method" />
+				                    <field name="tax_directive" />
+				                    <field name="tax_depends" />
+				                    <field name="company_car_value" />
+				                    <field name="nature_person" />
+				                  </group>                                  
+				                  <group>
+				                    <field name="tax_number"/>
+				                    <field name="tax_office" />
+				                    <field name="tax_certificate_issued_date" />
+				                    <field name="tax_certificate_number" />
+				                    <field name="prev_tax_certificate_no" />
+				                    <field name="company_no" />
+				                    <field name="foreign_income_tax_emp" />
+				                  </group> 
+				                </group>
+				                
+				            </page>
+				            <page name="public" string="Beneficiary List">
+				                <group name="education_qualifications" colspan="4" string="Contact Person">
+				                  <group>
+				                   <field name="funeral_contact_name" string="Full Name"/>
+				                   <field name="funeral_contact_relationship" />
+				                  </group>
+				                  <group>
+				                   <field name="funeral_contact_number" />
+				                   <field name="funeral_contact_email" />
+				                  </group>
+				                </group>
+				                <group string="Beneficiary List" colspan="4">
+				                 <field name="employee_funeral_beneficiary" nolabel="1" editable="bottom">
+				                   <tree>
+				                    <field name="name" />
+				                    <field name="relationship" />
+				                    <field name="contact_no" />
+				                    <field name="contact_email" />
+				                   </tree>
+				                 </field>
+				                </group>                                
+				            </page>       
+				            <page name="hr_settings" string="HR Settings" invisible="0">
+				                <group>
+				                    <group string="Status" name="active_group">
+				                        <field name="company_id" groups="base.group_multi_company"/>
+				                        <field name="user_id" string="Related User"/>
+				                        <field name="category_ids" widget="many2many_tags"/>
+				                    </group>
+				                </group>
+				            </page>
+				            
+				        </notebook>
+				        </div></div>
+				    </sheet>
+				    <div class="oe_chatter">
+				        <field name="message_follower_ids" widget="mail_followers"/>
+				        <field name="message_ids" widget="mail_thread"/>
+				    </div>
+				</form>
+                
+            </field>
+        </record>
+        
+        <!--  
+	    <record id="hr.hr_hr_employee_view_form" model="ir.ui.view">
+	        <field name="name">hr.employee.view.form.inherit</field>
+	        <field name="model">hr.employee</field>
+	        <field name="inherit_id" ref="hr.view_employee_form"/>
+	        <field name="arch" type="xml">
+	
+	            <xpath expr="//page[@name='public']" position="after">
+	                <page string="Received Badges" invisible="1">
+	                    <field name="has_badges" invisible="1"/>
+	                    <button string="Grant a Badge" type="action" name="%(action_reward_wizard)d"/> to reward this employee for a good action
+	                    <div class="oe_view_nocontent" attrs="{'invisible': [('has_badges', '=', True)]}">
+	                        <p class="oe_view_nocontent_create">
+	                            Click to grant this employee his first badge
+	                        </p><p class="oe_grey">
+	                            Badges are rewards of good work. Give them to people you believe deserve it.
+	                        </p>
+	                    </div>
+	                    <field name="badge_ids" mode="kanban" widget="many2many"/>
+	                </page>
+	            </xpath>
+	
+	        </field>
+	    </record>        
+        -->
+        
+    </data>
+</odoo>

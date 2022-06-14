@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_front_register" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <link href="/client_management/static/src/css/style.css" rel="stylesheet"/>
+            <script type="text/javascript" src="/client_management/static/src/js/jquery-validate.js"></script>
+            <script type="text/javascript" src="/client_management/static/src/js/form-validate.js"></script>
+        </xpath>
+    </template>
+</odoo>

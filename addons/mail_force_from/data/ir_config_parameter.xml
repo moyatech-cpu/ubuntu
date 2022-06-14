@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="email_force_from" model="ir.config_parameter">
+        <field name="key">email.force_from</field>
+        <field name="value">email@example.com</field>
+    </record>
+</odoo>

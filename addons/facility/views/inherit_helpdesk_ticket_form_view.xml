@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Inherit Helpdesk Lite Ticket Form View -->
+        <record id="view_helpdesk_lite_ticket_form_inherit" model="ir.ui.view">
+            <field name="name">view.helpdesk.lite.ticket.form.inherit</field>
+            <field name="model">helpdesk_lite.ticket</field>
+            <field name="inherit_id" ref="helpdesk_lite.helpdesk_ticket_form_view"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="end_user_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                </field>
+                <field name="email_from" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="partner_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="contact_number"/>
+                </field>
+                <field name="contact_name" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <button name="takeit" position="attributes">
+                    <attribute name="attrs">{'invisible': [('user_id', '!=', False)]}</attribute>
+                    <attribute name="groups">base.group_system,facility.facility_officer</attribute>
+                </button>
+                <xpath expr="//form/sheet/group/group[2]/field[@name='date_done']" position="after">
+                    <field name="helpdesk_category_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                    <field name="subcategory_id"/>
+                    <field name="facility_officer_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                    <field name="facility_manager_id" required="1" options="{'no_open': True,'no_create': True}"/>
+                    <field name="service" widget="priority" attrs="{'invisible': [('is_solved_stage', '!=', True)]}"/>
+                    <field name="is_new_stage" invisible="1"/>
+                    <field name="is_progress_stage" invisible="1"/>
+                    <field name="is_solved_stage" invisible="1"/>
+                    <field name="is_solved_officer_stage" invisible="1"/>
+                </xpath>
+                <!--<field name="user_id" position="attributes">-->
+                    <!--<attribute name="groups">base.group_system,facility.facility_manager,facility.facility_officer-->
+                    <!--</attribute>-->
+                <!--</field>-->
+                <field name="team_id" position="attributes">
+                    <attribute name="groups">base.group_system,facility.facility_manager,facility.facility_officer
+                    </attribute>
+                </field>
+                <field name="create_date" position="attributes">
+                    <attribute name="string">Date</attribute>
+                </field>
+                <field name="date_deadline" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <button name="takeit" position="after">
+                    <button string="Start working" type="object" name="working_state" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('status' , '=', 'not_working'), ('is_progress_stage', '!=', True)]}"/>
+                    <button string="Stop working" type="object" name="not_working_state" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('status' , '=', 'not_working'), ('is_progress_stage', '!=', True)]}"/>
+                    <button string="Mark solved" type="object" name="mark_solved" class="oe_highlight"
+                            groups="base.group_system,facility.end_user"
+                            attrs="{'invisible': [('is_solved_officer_stage', '!=', True)]}"/>
+                    <button string="Cancel Tickets" type="object" name="cancel_tickets" class="oe_highlight"
+                            attrs="{'invisible': [('is_progress_stage', '!=', True)]}"/>
+                    <button string="Mark In Progress" type="object" name="mark_in_progress" class="oe_highlight"
+                            attrs="{'invisible': [('is_new_stage', '!=', True)]}"
+                            groups="base.group_system,facility.facility_officer"/>
+                    <button string="Solved By Officer" type="object" name="solved_by_officer" class="oe_highlight"
+                            attrs="{'invisible': [('is_progress_stage', '!=', True)]}"
+                            groups="base.group_system,facility.facility_officer"/>
+                </button>
+                <field name="team_id" position="after">
+                    <field name="sla_time" groups="facility.facility_manager,base.group_system"/>
+                    <field name="is_mailed_sla"
+                           groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+                    <field name="status" required="1" attrs="{'invisible': [('is_progress_stage', '!=', True)]}"/>
+                </field>
+                <xpath expr="//form/sheet/group[1]" position="after">
+                    <group>
+                        <field name="cancellation_reason" readonly="1"
+                               attrs="{'invisible': [('is_progress_stage', '!=', True)]}"/>
+                        <field name="service_description" readonly="1"
+                               attrs="{'invisible': [('is_solved_stage', '!=', True)]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!--Inherit Helpdesk Lite Ticket Kanban View -->
+        <record id="view_helpdesk_lite_ticket_kanban_inherit" model="ir.ui.view">
+            <field name="name">view.helpdesk.lite.ticket.kanban.inherit</field>
+            <field name="model">helpdesk_lite.ticket</field>
+            <field name="inherit_id" ref="helpdesk_lite.helpdesk_ticket_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban[@class='o_kanban_small_column']/field[@name='color']" position="after">
+                    <field name="status"/>
+                </xpath>
+                <xpath expr="//t[@t-name='kanban-tooltip']" position="replace"/>
+                <xpath expr="//div[@class='o_dropdown_kanban dropdown']" position="replace"/>
+                <xpath expr="//div[@class='oe_kanban_content']" position="replace">
+                    <div>
+                        <b>
+                            <field name="name"/>(#<field name="id"/>)
+                        </b>
+                    </div>
+                    <div class="oe_kanban_bottom_left">
+                        <field name="priority" widget="priority"/>
+                        <t t-if="record.message_needaction_counter.raw_value">
+                            <span class="oe_kanban_mail_new" title="Unread Messages">
+                                <i class="fa fa-comments"/>
+                                <t t-raw="record.message_needaction_counter.raw_value"/>
+                            </span>
+                        </t>
+                        <t t-if="record.status.value == 'Not Working'">
+                            <button class="fa fa-play btn btn-success" name="working_state" type="object"></button>
+                        </t>
+                        <t t-if="record.status.value == 'Working'">
+                            <button class="fa fa-stop btn btn-danger" type="object" name="not_working_state"></button>
+                        </t>
+                        <div class="pull-right" groups="base.group_user">
+                            <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)"
+                                 t-att-title="record.user_id.value" width="24" height="24"
+                                 class="oe_kanban_avatar pull-right"/>
+                            <field name="kanban_state" widget="kanban_state_selection"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!--colors="red:notes!=False'"-->
+        <!--inherit_id="helpdesk_lite.helpdesk_ticket_tree_view"-->
+        <!--Inherit Helpdesk Lite Ticket Form View -->
+        <record id="view_helpdesk_lite_ticket_tree_inherit" model="ir.ui.view">
+            <field name="name">view.helpdesk.lite.ticket.tree.inherit</field>
+            <field name="model">helpdesk_lite.ticket</field>
+            <field name="inherit_id" ref="helpdesk_lite.helpdesk_ticket_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="id" position="after">
+                    <field name="is_mailed_sla" invisible="1"/>
+                </field>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">is_mailed_sla!=False</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!--<record id="crm_case_tree_view_job_inherit" model="ir.ui.view">-->
+            <!--<field name="name">hr.applicant.tree.inherit</field>-->
+            <!--<field name="model">hr.applicant</field>-->
+            <!--<field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<xpath expr="//field[@name='source_id']" position="after">-->
+                    <!--<field name="survey_id" invisible="1"/>-->
+                    <!--<field name="response_id" invisible="1"/>-->
+                <!--</xpath>-->
+            <!--</field>-->
+        <!--</record>-->
+
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_nyda_communications">
+            <field name="name">Communications</field>
+            <field name="description">NYDA Organizational Communications Facilitation</field>
+            <field name="sequence">50</field>
+    </record>
+    
+    
+    <record id="nyda_comms_executive_director" model="res.groups">
+        <field name="name">Executive Director</field>
+        <field name="category_id" ref="model_category_nyda_communications"/>
+        <field name="description">Executive Director Of Communications</field>
+        
+    </record>
+    
+    <record id="nyda_comms_publisher" model="res.groups">
+        <field name="name">Content Publisher</field>
+        <field name="category_id" ref="model_category_nyda_communications"/>
+        <field name="description">Content Publisher Of Communications</field>
+        
+    </record>
+    
+     <record id="nyda_comms_snr_manager" model="res.groups">
+        <field name="name">Senior Manager</field>
+        <field name="category_id" ref="model_category_nyda_communications"/>
+        <field name="description">Senior Manager Of Communications</field>
+        
+    </record>
+    
+    <record id="nyda_comms_manager" model="res.groups">
+        <field name="name">Communications Manager</field>
+        <field name="category_id" ref="model_category_nyda_communications"/>
+        <field name="description">Manager Of Communications</field>
+        
+    </record>
+    
+    <record id="nyda_comms_officer" model="res.groups">
+        <field name="name">Communications Officer</field>
+        <field name="category_id" ref="model_category_nyda_communications"/>
+        <field name="description">Communications Officer</field>
+        
+    </record>
+    
+    <record id="nyda_comms_requester" model="res.groups">
+        <field name="name">Communications Requester</field>
+        <field name="category_id" ref="model_category_nyda_communications"/>
+        <field name="description">Requester Of Communications</field>
+        
+    </record>
+
+</data>

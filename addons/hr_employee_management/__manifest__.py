@@ -1,0 +1,22 @@
+{
+    'name': 'Employee Management',
+    'version': '1.0',
+    'summary': """Employee Management for managing employee records.""",
+    'description': 'This module helps you to add more information in employee records.',
+    'category': 'Human Resources',
+    'author': 'MOYATECH',
+    'company': 'MOYATECH',
+    'website': "http://www.moyatech.co.za",
+    'depends': ['base', 'hr', 'mail', 'hr_gamification'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/hr_employee_view.xml',
+        'views/hr_notification.xml',
+    ],
+    'demo': [],
+    'images': ['static/description/banner.jpg'],
+    'license': 'AGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

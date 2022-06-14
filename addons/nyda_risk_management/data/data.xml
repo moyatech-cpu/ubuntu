@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Cron to check for risk management reporting -->
+        <record id="risk_management_reporting_cron" model="ir.cron">
+            <field name="name">Risk Management Reporting Cron</field>
+            <field name="model_id" ref="model_risk_management"/>
+            <field name="state">code</field>
+            <field name="code">model.check_reporting_timeline()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <!-- Sequence for Loss/Damage Assets -->
+        <record id="sequence_loss_damage_assets" model="ir.sequence">
+            <field name="name">Assets Claim</field>
+            <field name="code">loss.damage.assets</field>
+            <field name="prefix">LDAC</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</odoo>

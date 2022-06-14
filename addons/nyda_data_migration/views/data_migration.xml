@@ -1,0 +1,2224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+	<data>
+
+	    <!--Data Migration Menu-->
+	    <menuitem name="Data Migration" id="menu_data_migration" sequence="10" 
+	    web_icon="openeducat_admission,static/description/icon.png" groups="base.group_system"/>
+		
+		<!-- HR Section -->
+	    <menuitem name="Human Resources" parent="nyda_data_migration.menu_data_migration"
+	              id="menu_data_hr" sequence="1"/>
+
+        <!--Job Codes Tree View -->
+        <record model="ir.ui.view" id="hr_job_codes_tree_view">
+            <field name="name">job.codes.tree.view</field>
+            <field name="model">job_codes</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="JobTitlesCode"/>
+                    <field name="JobGradesCode"/>
+                    <field name="JobFunctionsCode"/>
+                    <field name="JobGeneralCode"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!--Job Codes Form View -->
+        <record model="ir.ui.view" id="hr_job_codes_form_view">
+            <field name="name">job.codes.form.view</field>
+            <field name="model">job_codes</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="JobTitlesCode"/>
+		                    <field name="JobGradesCode"/>
+		                    <field name="JobFunctionsCode"/>
+		                    <field name="JobGeneralCode"/>		                    
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+	    <!-- Action for Job Codes-->
+	    <record model="ir.actions.act_window" id="action_data_migration_job_codes">
+	        <field name="name">Job Codes</field>
+	        <field name="res_model">job_codes</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record> 
+	
+	    <menuitem name="Job Codes" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_job_codes" sequence="0"
+	              action="nyda_data_migration.action_data_migration_job_codes" />
+
+        <!--Job Titles Tree View -->
+        <record model="ir.ui.view" id="hr_job_titles_tree_view">
+            <field name="name">job.titles.tree.view</field>
+            <field name="model">job_titles</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!--Job Titles Form View -->
+        <record model="ir.ui.view" id="hr_job_titles_form_view">
+            <field name="name">job.titles.form.view</field>
+            <field name="model">job_titles</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+	    <!-- Action for Job Codes-->
+	    <record model="ir.actions.act_window" id="action_data_migration_job_titles">
+	        <field name="name">Job Titles</field>
+	        <field name="res_model">job_titles</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record> 
+	
+	    <menuitem name="Job Titles" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_job_titles" sequence="0"
+	              action="nyda_data_migration.action_data_migration_job_titles" />
+	              
+        <!--Job Codes Tree View -->
+        <record model="ir.ui.view" id="hr_contract_types_tree_view">
+            <field name="name">contract.types.tree.view</field>
+            <field name="model">contract_types</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!--Job Codes Form View -->
+        <record model="ir.ui.view" id="hr_contract_types_form_view">
+            <field name="name">contract.types.form.view</field>
+            <field name="model">contract_types</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="name"/>
+		                    <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+	    <!-- Action for Contract Types-->
+	    <record model="ir.actions.act_window" id="action_data_migration_contract_types">
+	        <field name="name">Contract Types</field>
+	        <field name="res_model">contract_types</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record> 
+	    
+	    <menuitem name="Contract Types" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_contract_types" sequence="0"
+	              action="nyda_data_migration.action_data_migration_contract_types" />
+
+        <!--Job Codes Tree View -->
+        <record model="ir.ui.view" id="hr_departments_tree_view">
+            <field name="name">departments.tree.view</field>
+            <field name="model">departments</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!--Job Codes Form View -->
+        <record model="ir.ui.view" id="hr_departments_form_view">
+            <field name="name">departments.form.view</field>
+            <field name="model">departments</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="name"/>
+		                    <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+	    <!-- Action for Departments-->
+	    <record model="ir.actions.act_window" id="action_data_migration_departments">
+	        <field name="name">Departments</field>
+	        <field name="res_model">departments</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>     
+
+	    <menuitem name="Departments" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_departments" sequence="0"
+	              action="nyda_data_migration.action_data_migration_departments" />
+     
+        <!--Employee Codes Tree View -->
+        <record model="ir.ui.view" id="hr_employee_codes_tree_view">
+            <field name="name">employee.codes.tree.view</field>
+            <field name="model">employee_codes</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                    <field name="Title"/>
+                    <field name="Initials"/>
+                    <field name="FirstName"/>
+                    <field name="LastName"/>
+                    <field name="KnownAsName"/>
+                    <field name="EmployeeID"/>
+                    <field name="BirthDate"/>
+                    <field name="DateJoinedGroup"/>
+                    <field name="DateJoinedCompany"/>
+                    <field name="Gender"/>
+                    <field name="MaritalStatus"/>
+                    <field name="TelephoneNumber"/>
+                    <field name="FaxNumber"/>
+                    <field name="CellphoneNumber"/>
+                    <field name="WorkphoneNumber"/>
+                    <field name="EmailAddress"/>
+                    <field name="LanguageCode"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!--Employee Codes Form View -->
+        <record model="ir.ui.view" id="hr_employee_codes_form_view">
+            <field name="name">employee.codes.form.view</field>
+            <field name="model">employee_codes</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="Title"/>
+		                    <field name="Initials"/>
+		                    <field name="FirstName"/>
+		                    <field name="LastName"/>
+		                    <field name="KnownAsName"/>
+		                    <field name="EmployeeID"/>
+		                    <field name="BirthDate"/>
+		                    <field name="DateJoinedGroup"/>
+		                    <field name="DateJoinedCompany"/>
+		                    <field name="Gender"/>
+		                    <field name="MaritalStatus"/>
+		                    <field name="TelephoneNumber"/>
+		                    <field name="FaxNumber"/>
+		                    <field name="CellphoneNumber"/>
+		                    <field name="WorkphoneNumber"/>
+		                    <field name="EmailAddress"/>
+		                    <field name="LanguageCode"/>
+		                    <field name="ContractNumber"/>
+		                    <field name="ContractType"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         
+	    <!-- Action for Employee Codes-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_codes">
+	        <field name="name">Employee Codes</field>
+	        <field name="res_model">employee_codes</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Employee Codes" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_codes" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_codes" />
+	    
+        <!--Employee Disciplinary Grievance Description Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_disciplinary_grievance_description_tree_view">
+            <field name="name">employee.disciplinary.grievance.description.tree.view</field>
+            <field name="model">employee_disciplinary_grievance_description</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                    <field name="EmployeeDisciplinaryGrievanceTypeCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!--Employee Disciplinary Grievance Description Form View -->
+        <record model="ir.ui.view" id="hr_employee_disciplinary_grievance_description_form_view">
+            <field name="name">employee.disciplinary.grievance.description.form.view</field>
+            <field name="model">employee_disciplinary_grievance_description</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="EmployeeDisciplinaryGrievanceTypeCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	    
+	    <!-- Action for Employee Disciplinary Grievance Description-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_disciplinary_grievance_description">
+	        <field name="name">Employee Disciplinary Grievance Description</field>
+	        <field name="res_model">employee_disciplinary_grievance_description</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Employee Disciplinary Grievance Description" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_disciplinary_grievance_description" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_disciplinary_grievance_description" />
+	    
+        <!-- Employee Document Description Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_document_description_tree_view">
+            <field name="name">employee.document.description.tree.view</field>
+            <field name="model">employee_document_description</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                    <field name="EmployeeDocumentTypeCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!-- Employee Document Description Form View  -->
+        <record model="ir.ui.view" id="hr_employee_document_description_form_view">
+            <field name="name">employee.document.description.form.view</field>
+            <field name="model">employee_document_description</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="EmployeeDocumentTypeCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	    
+	    <!-- Action for Employee Document Description-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_document_description">
+	        <field name="name">Employee Document Description</field>
+	        <field name="res_model">employee_document_description</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field> 
+	    </record>
+	    
+	    <menuitem name="Employee Document Description" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_document_description" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_document_description" />
+	    
+        <!-- Employee Family Relationship Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_document_description_tree_view">
+            <field name="name">employee.family.relationship.tree.view</field>
+            <field name="model">employee_family_relationship</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!-- Employee Family Relationship Form View  -->
+        <record model="ir.ui.view" id="hr_employee_document_description_form_view">
+            <field name="name">employee.family.relationship.form.view</field>
+            <field name="model">employee_family_relationship</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	    
+	    <!-- Action for Employee Family Relationship-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_family_relationship">
+	        <field name="name">Employee Family Relationship</field>
+	        <field name="res_model">employee_family_relationship</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Employee Family Relationship" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_family_relationship" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_family_relationship" />
+	              	   
+        <!-- Employee Items Issued Description Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_document_description_tree_view">
+            <field name="name">employee.items.issued.description.tree.view</field>
+            <field name="model">employee_items_issued_description</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                    <field name="EmployeeItemsIssuedTypeCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!-- Employee Items Issued Description Form View  -->
+        <record model="ir.ui.view" id="hr_employee_document_description_form_view">
+            <field name="name">employee.items.issued.description.form.view</field>
+            <field name="model">employee_items_issued_description</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+		                    <field name="EmployeeItemsIssuedTypeCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for Employee Items Issued Description-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_items_issued_description">
+	        <field name="name">Employee Items Issued Description</field>
+	        <field name="res_model">employee_items_issued_description</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+            	(0, 0, {'view_mode': 'tree', 'view_id': ref('hr_employee_document_description_tree_view')}),
+				(0, 0, {'view_mode': 'form', 'view_id': ref('hr_employee_document_description_form_view')})]"/>
+	    </record>
+
+	    <menuitem name="Employee Items Issued Description" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_items_issued_description" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_items_issued_description" />
+
+        <!-- Employee Items Issued Type Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_document_description_tree_view">
+            <field name="name">employee.items.issued.description.tree.view</field>
+            <field name="model">employee_items_issued_type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+        
+		<!-- Employee Items Issued Type Form View  -->
+        <record model="ir.ui.view" id="hr_employee_document_description_form_view">
+            <field name="name">employee.items.issued.description.form.view</field>
+            <field name="model">employee_items_issued_type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="name"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for Employee Items Issued Type-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_items_issued_type">
+	        <field name="name">Employee Items Issued Type</field>
+	        <field name="res_model">employee_items_issued_type</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Employee Items Issued Type" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_items_issued_type" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_items_issued_type" />
+	              
+
+        <!-- Employee Position History Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_position_history_tree_view">
+            <field name="name">employee.position.history.tree.view</field>
+            <field name="model">employee_position_history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="EmployeeID"/>
+                    <field name="PositionID"/>
+                    <field name="PositionNumber"/>
+                    <field name="CompanyID"/>
+                    <field name="StartDate"/>
+                    <field name="TerminateDate"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Employee Position History Form View  -->
+        <record model="ir.ui.view" id="hr_employee_position_history_form_view">
+            <field name="name">employee.position.history.form.view</field>
+            <field name="model">employee_position_history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="EmployeeID"/>
+		                    <field name="PositionID"/>
+		                    <field name="PositionNumber"/>
+		                    <field name="CompanyID"/>
+		                    <field name="StartDate"/>
+		                    <field name="TerminateDate"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for Employee Position History-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_position_history">
+	        <field name="name">Employee Position History</field>
+	        <field name="res_model">employee_position_history</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Employee Position History" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_position_history" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_position_history" />
+	              
+        <!-- Employee Bank Link Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_bank_link_tree_view">
+            <field name="name">employee.bank.link.tree.view</field>
+            <field name="model">employee_bank_link</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="EmployeeID"/>
+                    <field name="Priority"/>
+                    <field name="BankAccountNumber"/>
+                    <field name="BankAccountType"/>
+                    <field name="BankClearanceNumber"/>
+                    <field name="PaymentMethodID"/>
+                    <field name="BankAccountHolderName"/>
+                    <field name="BankAccountRelationship"/>
+                    <field name="BankName"/>
+                    <field name="BankBranchName"/>
+                    <field name="SwiftCode"/>
+                    <field name="AdditionalPayInfo1"/>
+                    <field name="AdditionalPayInfo2"/>
+                    <field name="Amount"/>
+                    <field name="BankAccountHolderName"/>
+                    <field name="PercentageSplit"/>
+                    <field name="AmountEnc"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+    
+		<!-- Employee Bank Link Form View  -->
+        <record model="ir.ui.view" id="hr_employee_bank_link_form_view">
+            <field name="name">employee.bank.link.form.view</field>
+            <field name="model">employee_bank_link</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="EmployeeID"/>
+		                    <field name="Priority"/>
+		                    <field name="BankAccountNumber"/>
+		                    <field name="BankAccountType"/>
+		                    <field name="BankClearanceNumber"/>
+		                    <field name="PaymentMethodID"/>
+		                    <field name="BankAccountHolderName"/>
+		                    <field name="BankAccountRelationship"/>
+		                    <field name="BankName"/>
+		                    <field name="BankBranchName"/>
+		                    <field name="SwiftCode"/>
+		                    <field name="AdditionalPayInfo1"/>
+		                    <field name="AdditionalPayInfo2"/>
+		                    <field name="Amount"/>
+		                    <field name="BankAccountHolderName"/>
+		                    <field name="PercentageSplit"/>
+		                    <field name="AmountEnc"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for Employee Bank Link-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_bank_link">
+	        <field name="name">Employee Bank Link</field>
+	        <field name="res_model">employee_bank_link</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+			    (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_employee_bank_link_tree_view')}),
+			    (0, 0, {'view_mode': 'form', 'view_id': ref('hr_employee_bank_link_form_view')})]"/>            
+	    </record>
+
+	    <menuitem name="Employee Bank Link" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_bank_link" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_bank_link" />
+
+        <!-- EmployeevsFamilyLink Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_family_link_tree_view">
+            <field name="name">employee.family.link.tree.view</field>
+            <field name="model">employee_family_link</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ReminderType"/>
+                    <field name="EmployeeID"/>
+                    <field name="FirstName"/>
+                    <field name="LastName"/>
+                    <field name="RelationshipCode"/>
+                    <field name="ContactPersonCode"/>
+                    <field name="IDNumber"/>
+                    <field name="BirthDate"/>
+                    <field name="TelephoneNumber"/>
+                    <field name="CellphoneNumber"/>
+                    <field name="WorkphoneNumber"/>
+                    <field name="EmailAddress"/>
+                    <field name="PostalAddress01"/>
+                    <field name="PostalAddress02"/>
+                    <field name="PostalAddress03"/>
+                    <field name="PostalCode"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- EmployeevsFamilyLink Form View  -->
+        <record model="ir.ui.view" id="hr_employee_family_link_form_view">
+            <field name="name">employee.family.link.form.view</field>
+            <field name="model">employee_family_link</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="ReminderType"/>
+		                    <field name="EmployeeID"/>
+		                    <field name="FirstName"/>
+		                    <field name="LastName"/>
+		                    <field name="RelationshipCode"/>
+		                    <field name="ContactPersonCode"/>
+		                    <field name="IDNumber"/>
+		                    <field name="BirthDate"/>
+		                    <field name="TelephoneNumber"/>
+		                    <field name="CellphoneNumber"/>
+		                    <field name="WorkphoneNumber"/>
+		                    <field name="EmailAddress"/>
+		                    <field name="PostalAddress01"/>
+		                    <field name="PostalAddress02"/>
+		                    <field name="PostalAddress03"/>
+		                    <field name="PostalCode"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for EmployeevsFamilyLink-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_family_link">
+	        <field name="name">Employee vs Family Link</field>
+	        <field name="res_model">employee_family_link</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Employee Family Link" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_family_link" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_family_link" />
+
+        <!-- EmployeevsPositionLink Tree View --> 
+        <record model="ir.ui.view" id="hr_employee_position_link_tree_view">
+            <field name="name">employee.position.link.tree.view</field>
+            <field name="model">employee_position_link</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="EmployeeID"/>
+                    <field name="Company"/>
+                    <field name="PositionNumber"/>
+                    <field name="PositionID"/>
+                    <field name="PositionStartDate"/>
+                    <field name="PositionEndDate"/>
+                    <field name="NewPositionID"/>
+                    <field name="NewPositionStartDate"/>
+                    <field name="LastChanged"/>
+                    <field name="EmployeevsPositionLinkType"/>
+                    <field name="ReasonCode"/>
+                    <field name="UserID"/>
+                    <field name="RecruitProjectManagerID"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- EmployeevsPositionLink Form View  -->
+        <record model="ir.ui.view" id="hr_employee_position_link_form_view">
+            <field name="name">employee.position.link.form.view</field>
+            <field name="model">employee_position_link</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="EmployeeID"/>
+		                    <field name="Company"/>
+		                    <field name="PositionNumber"/>
+		                    <field name="PositionID"/>
+		                    <field name="PositionStartDate"/>
+		                    <field name="PositionEndDate"/>
+		                    <field name="NewPositionID"/>
+		                    <field name="NewPositionStartDate"/>
+		                    <field name="LastChanged"/>
+		                    <field name="EmployeevsPositionLinkType"/>
+		                    <field name="ReasonCode"/>
+		                    <field name="UserID"/>
+		                    <field name="RecruitProjectManagerID"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>    
+         	              
+	    <!-- Action for EmployeevsPositionLink-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employee_position_link">
+	        <field name="name">Employee vs Position Link</field>
+	        <field name="res_model">employee_position_link</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Employee Position Link" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_position_link" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_position_link" />
+
+        <!-- Employment Status Tree View --> 
+        <record model="ir.ui.view" id="hr_employment_status_tree_view">
+            <field name="name">employment.status.tree.view</field>
+            <field name="model">employment_status</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Code"/>
+                    <field name="EquityEmploymentStatusCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Employment Status Form View  -->
+        <record model="ir.ui.view" id="hr_employment_status_form_view">
+            <field name="name">employment.status.form.view</field>
+            <field name="model">employment_status</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="Code"/>
+		                    <field name="EquityEmploymentStatusCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record> 
+         	              	    
+	    <!-- Action for EmploymentStatus-->
+	    <record model="ir.actions.act_window" id="action_data_migration_employment_status">
+	        <field name="name">Employment Status</field>
+	        <field name="res_model">employment_status</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Employee Position Link" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_employee_position_link" sequence="0"
+	              action="nyda_data_migration.action_data_migration_employee_position_link" />
+
+        <!-- Equity Analysis Code Link Tree View --> 
+        <record model="ir.ui.view" id="hr_equity_analysis_code_link_tree_view">
+            <field name="name">equity.analysis.code.link.tree.view</field>
+            <field name="model">equity_analysis_code_link</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="CompanyID"/>
+                    <field name="JobGradesCode"/>
+                    <field name="JobTitlesCode"/>
+                    <field name="DepartmentCode"/>
+                    <field name="BranchCode"/>
+                    <field name="BusinessUnitCode"/>
+                    <field name="JobGeneralCode"/>
+                    <field name="JobFunctionsCode"/>
+                    <field name="OccupationalLevelCode"/>
+                    <field name="OccupationalCategoryCode"/>
+                    <field name="WorkplaceCode"/>
+                    <field name="ProvinceCode"/>
+                    <field name="EquityJobFunctionCode"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Equity Analysis Code Link Form View  -->
+        <record model="ir.ui.view" id="hr_equity_analysis_code_link_form_view">
+            <field name="name">equity.analysis.code.link.form.view</field>
+            <field name="model">equity_analysis_code_link</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="CompanyID"/>
+		                    <field name="JobGradesCode"/>
+		                    <field name="JobTitlesCode"/>
+		                    <field name="DepartmentCode"/>
+		                    <field name="BranchCode"/>
+		                    <field name="BusinessUnitCode"/>
+		                    <field name="JobGeneralCode"/>
+		                    <field name="JobFunctionsCode"/>
+		                    <field name="OccupationalLevelCode"/>
+		                    <field name="OccupationalCategoryCode"/>
+		                    <field name="WorkplaceCode"/>
+		                    <field name="ProvinceCode"/>
+		                    <field name="EquityJobFunctionCode"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record> 
+         	              	    
+	    <!-- Action for EquityAnalysisCodeLink-->
+	    <record model="ir.actions.act_window" id="action_data_migration_equity_analysis_code_link">
+	        <field name="name">Equity Analysis Code Link</field>
+	        <field name="res_model">equity_analysis_code_link</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+			    (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_equity_analysis_code_link_tree_view')}),
+			    (0, 0, {'view_mode': 'form', 'view_id': ref('hr_equity_analysis_code_link_form_view')})]"/>            
+	    </record>
+	    
+	    <menuitem name="Equity Analysis Code Link" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_equity_analysis_code_link" sequence="0"
+	              action="nyda_data_migration.action_data_migration_equity_analysis_code_link" />
+
+        <!-- EquityDisciplinaryGrievance Tree View --> 
+        <record model="ir.ui.view" id="hr_equity_disciplinary_grievance_tree_view">
+            <field name="name">equity.disciplinary.grievance.tree.view</field>
+            <field name="model">equity_disciplinary_grievance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="EquityEmploymentStatusCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- EquityDisciplinaryGrievance Form View  -->
+        <record model="ir.ui.view" id="hr_equity_disciplinary_grievance_form_view">
+            <field name="name">equity.disciplinary.grievance.form.view</field>
+            <field name="model">equity_disciplinary_grievance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="name"/>
+		                    <field name="EquityEmploymentStatusCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record> 
+         	              	    
+	    <!-- Action for EquityDisciplinaryGrievance-->
+	    <record model="ir.actions.act_window" id="action_data_migration_equity_disciplinary_grievance">
+	        <field name="name">Equity Disciplinary Grievance</field>
+	        <field name="res_model">equity_disciplinary_grievance</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Equity Disciplinary Grievance" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_equity_disciplinary_grievance" sequence="0"
+	              action="nyda_data_migration.action_data_migration_equity_disciplinary_grievance" />	    
+
+        <!-- EquityEmploymentStatus Tree View --> 
+        <record model="ir.ui.view" id="hr_equity_employment_status_tree_view">
+            <field name="name">equity.employment.status.tree.view</field>
+            <field name="model">equity_employment_status</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="EquityEmploymentStatusCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- EquityEmploymentStatus Form View  -->
+        <record model="ir.ui.view" id="hr_equity_employment_status_form_view">
+            <field name="name">equity.employment.status.form.view</field>
+            <field name="model">equity_employment_status</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="name"/>
+		                    <field name="EquityEmploymentStatusCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record> 
+         	    
+	    <!-- Action for EquityEmploymentStatus-->
+	    <record model="ir.actions.act_window" id="action_data_migration_equity_employment_status">
+	        <field name="name">Equity Employment Status</field>
+	        <field name="res_model">equity_employment_status</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Equity Employment Status" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_equity_employment_status" sequence="0"
+	              action="nyda_data_migration.action_data_migration_equity_employment_status" />
+
+        <!-- Equity Remuneration History Tree View --> 
+        <record model="ir.ui.view" id="hr_equity_remuneration_history_tree_view">
+            <field name="name">equity.remuneration.history.tree.view</field>
+            <field name="model">equity_remuneration_history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="EmployeeID"/>
+                    <field name="PositionID"/>
+                    <field name="RemunerationTrnDate"/>
+                    <field name="OccupationalLevelCode"/>
+                    <field name="OccupationalCategoryCode"/>
+                    <field name="EquityJobFunctionCode"/>
+                    <field name="CitizenshipCode"/>
+                    <field name="TypeOfEmploymentCode"/>
+                    <field name="DisciplinaryCount"/>
+                    <field name="SkillsTrainingCount"/>
+                    <field name="EquityRemunerationEnc"/>
+                    <field name="LastChanged"/>
+                    <field name="EquityRemuneration"/>
+                    <field name="FixedAmountAnnualValue"/>
+                    <field name="FixedAmountAnnualValueEnc"/>
+                    <field name="VariableAmountToBeAnnualised"/>
+                    <field name="VariableAmountToBeAnnualisedEnc"/>
+                    <field name="VariableAmountAnnualValue"/>
+                    <field name="VariableAmountAnnualValueEnc"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Equity Remuneration History Form View  -->
+        <record model="ir.ui.view" id="hr_equity_remuneration_history_form_view">
+            <field name="name">equity.remuneration.history.form.view</field>
+            <field name="model">equity_remuneration_history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="EmployeeID"/>
+		                    <field name="PositionID"/>
+		                    <field name="RemunerationTrnDate"/>
+		                    <field name="OccupationalLevelCode"/>
+		                    <field name="OccupationalCategoryCode"/>
+		                    <field name="EquityJobFunctionCode"/>
+		                    <field name="CitizenshipCode"/>
+		                    <field name="TypeOfEmploymentCode"/>
+		                    <field name="DisciplinaryCount"/>
+		                    <field name="SkillsTrainingCount"/>
+		                    <field name="EquityRemunerationEnc"/>
+		                    <field name="LastChanged"/>
+		                    <field name="EquityRemuneration"/>
+		                    <field name="FixedAmountAnnualValue"/>
+		                    <field name="FixedAmountAnnualValueEnc"/>
+		                    <field name="VariableAmountToBeAnnualised"/>
+		                    <field name="VariableAmountToBeAnnualisedEnc"/>
+		                    <field name="VariableAmountAnnualValue"/>
+		                    <field name="VariableAmountAnnualValueEnc"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record> 
+             	              	    
+	    <!-- Action for EquityRemunerationHistory-->
+	    <record model="ir.actions.act_window" id="action_data_migration_equity_remuneration_history">
+	        <field name="name">Equity Remuneration History</field>
+	        <field name="res_model">equity_remuneration_history</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Equity Remuneration History" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_equity_remuneration_history" sequence="0"
+	              action="nyda_data_migration.action_data_migration_equity_remuneration_history" />
+    
+        <!-- EquityEmploymentStatus Tree View --> 
+        <record model="ir.ui.view" id="hr_kpa_rating_tree_view">
+            <field name="name">kpa.rating.tree.view</field>
+            <field name="model">kpa_rating</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="KPARatingID"/>
+                    <field name="KPARatingTypeCode"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="Rating"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- EquityEmploymentStatus Form View  -->
+        <record model="ir.ui.view" id="hr_kpa_rating_form_view">
+            <field name="name">kpa.rating.form.view</field>
+            <field name="model">kpa_rating</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                	<field name="KPARatingID"/>
+		                    <field name="KPARatingTypeCode"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="Rating"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>      	    
+	    <!-- Action for KPARating-->
+	    <record model="ir.actions.act_window" id="action_data_migration_kpa_rating">
+	        <field name="name">KPA Rating</field>
+	        <field name="res_model">kpa_rating</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+			    (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_kpa_rating_tree_view')}),
+			    (0, 0, {'view_mode': 'form', 'view_id': ref('hr_kpa_rating_form_view')})]"/>            
+	    </record>
+	    
+	    <menuitem name="KPA Rating" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_kpa_rating" sequence="0"
+	              action="nyda_data_migration.action_data_migration_kpa_rating" />
+	              	    
+        <!-- Medica Aid Tree View --> 
+        <record model="ir.ui.view" id="hr_medical_aid_tree_view">
+            <field name="name">medical.aid.tree.view</field>
+            <field name="model">medical_aid</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Code"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Medica Aid Form View  -->
+        <record model="ir.ui.view" id="hr_medical_aid_form_view">
+            <field name="name">medical.aid.form.view</field>
+            <field name="model">medical_aid</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="Code"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for MedicalAid-->
+	    <record model="ir.actions.act_window" id="action_data_migration_medical_aid">
+	        <field name="name">Medica Aid</field>
+	        <field name="res_model">medical_aid</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Medica Aid" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_medical_aid" sequence="0"
+	              action="nyda_data_migration.action_data_migration_medical_aid" />
+
+        <!-- Pension Fund Tree View --> 
+        <record model="ir.ui.view" id="hr_pension_fund_tree_view">
+            <field name="name">pension.fund.tree.view</field>
+            <field name="model">pension_fund</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Code"/>
+                    <field name="LongDescription"/>
+                    <field name="ShortDescription"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Pension Fund Form View  -->
+        <record model="ir.ui.view" id="hr_pension_fund_form_view">
+            <field name="name">pension.fund.form.view</field>
+            <field name="model">pension_fund</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="Code"/>
+		                    <field name="LongDescription"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for PensionFund-->
+	    <record model="ir.actions.act_window" id="action_data_migration_pension_fund">
+	        <field name="name">Pension Fund</field>
+	        <field name="res_model">pension_fund</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Pension Fund" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_pension_fund" sequence="0"
+	              action="nyda_data_migration.action_data_migration_pension_fund" />
+
+        <!-- Position Codes Tree View --> 
+        <record model="ir.ui.view" id="hr_position_codes_tree_view">
+            <field name="name">position.codes.tree.view</field>
+            <field name="model">position_codes</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Code"/>
+                    <field name="Company"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="JobTitlesCode"/>
+                    <field name="JobGradesCode"/>
+                    <field name="JobFunctionsCode"/>
+                    <field name="JobGeneralCode"/>
+                    <field name="JobCode"/>
+                    <field name="Status"/>
+                    <field name="VacancyDate"/>
+                    <field name="ReserveDate"/>
+                    <field name="BranchCode"/>
+                    <field name="DepartmentCode"/>
+                    <field name="BusinessUnitCode"/>
+                    <field name="ZoneCode"/>
+                    <field name="KPARatingTypeCode"/>
+                    <field name="CompetenceRatingTypeCode"/>
+                    <field name="LastChanged"/>
+                    <field name="RecruitProcessTemplateID"/>
+                    <field name="RecruitAdminCheckTemplateID"/>
+                    <field name="OldVacancyDate"/>
+                    <field name="OldReserveDate"/>
+                    <field name="OldStatus"/>
+                    <field name="SalarySurveyPattersonGradeCode"/>
+                    <field name="SalarySurveyJobFamilyCode"/>
+                    <field name="SalarySurveyJobCode"/>
+                    <field name="UseKPIWeight"/>
+                    <field name="HoldStatus"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Pension Codes Form View  -->
+        <record model="ir.ui.view" id="hr_position_codes_form_view">
+            <field name="name">position.codes.form.view</field>
+            <field name="model">position_codes</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="Code"/>
+		                    <field name="Company"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="JobTitlesCode"/>
+		                    <field name="JobGradesCode"/>
+		                    <field name="JobFunctionsCode"/>
+		                    <field name="JobGeneralCode"/>
+		                    <field name="JobCode"/>
+		                    <field name="Status"/>
+		                    <field name="VacancyDate"/>
+		                    <field name="ReserveDate"/>
+		                    <field name="BranchCode"/>
+		                    <field name="DepartmentCode"/>
+		                    <field name="BusinessUnitCode"/>
+		                    <field name="ZoneCode"/>
+		                    <field name="KPARatingTypeCode"/>
+		                    <field name="CompetenceRatingTypeCode"/>
+		                    <field name="LastChanged"/>
+		                    <field name="RecruitProcessTemplateID"/>
+		                    <field name="RecruitAdminCheckTemplateID"/>
+		                    <field name="OldVacancyDate"/>
+		                    <field name="OldReserveDate"/>
+		                    <field name="OldStatus"/>
+		                    <field name="SalarySurveyPattersonGradeCode"/>
+		                    <field name="SalarySurveyJobFamilyCode"/>
+		                    <field name="SalarySurveyJobCode"/>
+		                    <field name="UseKPIWeight"/>
+		                    <field name="HoldStatus"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+             	              
+	    <!-- Action for PositionCodes-->
+	    <record model="ir.actions.act_window" id="action_data_migration_position_codes">
+	        <field name="name">Position Codes</field>
+	        <field name="res_model">position_codes</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Position Codes" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_position_codes" sequence="0"
+	              action="nyda_data_migration.action_data_migration_position_codes" />
+
+        <!-- Position Codes Tree View --> 
+        <record model="ir.ui.view" id="hr_recruit_position_applied_for_status_code_tree_view">
+            <field name="name">recruit.position.applied.status.code.tree.view</field>
+            <field name="model">recruit_position_applied_for_status_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Pension Codes Form View  -->
+        <record model="ir.ui.view" id="hr_recruit_position_applied_for_status_code_form_view">
+            <field name="name">recruit.position.applied.status.code.form.view</field>
+            <field name="model">recruit_position_applied_for_status_code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for RecruitPositionAppliedForStatusCode-->
+	    <record model="ir.actions.act_window" id="action_data_migration_recruit_position_applied_for_status_code">
+	        <field name="name">Recruit Position Applied For Status Code</field>
+	        <field name="res_model">recruit_position_applied_for_status_code</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Recruit Position Applied For Status Code" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_recruit_position_applied_for_status_code" sequence="0"
+	              action="nyda_data_migration.action_data_migration_recruit_position_applied_for_status_code" />
+
+        <!-- Recruit Posting Status Code Tree View --> 
+        <record model="ir.ui.view" id="hr_recruit_posting_status_code_tree_view">
+            <field name="name">recruit.posting.status.code.tree.view</field>
+            <field name="model">recruit_posting_status_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Recruit Posting Status Code Form View  -->
+        <record model="ir.ui.view" id="hr_recruit_posting_status_code_form_view">
+            <field name="name">recruit.posting.status.code.form.view</field>
+            <field name="model">recruit_posting_status_code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for RecruitPostingStatusCode-->
+	    <record model="ir.actions.act_window" id="action_data_migration_recruit_posting_status_code">
+	        <field name="name">Recruit Posting Status Code</field>
+	        <field name="res_model">recruit_posting_status_code</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Recruit Posting Status Code" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_recruit_posting_status_code" sequence="0"
+	              action="nyda_data_migration.action_data_migration_recruit_posting_status_code" />
+
+        <!-- Recruit Posting Status Code Tree View --> 
+        <record model="ir.ui.view" id="hr_recruit_process_code_tree_view">
+            <field name="name">recruit.process.code.tree.view</field>
+            <field name="model">recruit_process_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Recruit Posting Status Code Form View  -->
+        <record model="ir.ui.view" id="hr_recruit_process_code_form_view">
+            <field name="name">recruit.process.code.form.view</field>
+            <field name="model">recruit_process_code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for RecruitProcessCode-->
+	    <record model="ir.actions.act_window" id="action_data_migration_recruit_process_code">
+	        <field name="name">Recruit Process Code</field>
+	        <field name="res_model">recruit_process_code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+				(0, 0, {'view_mode': 'tree', 'view_id': ref('hr_recruit_process_code_tree_view')}),
+				(0, 0, {'view_mode': 'form', 'view_id': ref('hr_recruit_process_code_form_view')})]"/>            
+	    </record>
+	    
+	    <menuitem name="Recruit Process Code" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_recruit_process_code" sequence="0"
+	              action="nyda_data_migration.action_data_migration_recruit_process_code" />
+
+        <!-- Recruit Source Code Tree View --> 
+        <record model="ir.ui.view" id="hr_recruit_source_code_tree_view">
+            <field name="name">recruit.source.code.tree.view</field>
+            <field name="model">recruit_source_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Recruit Source Code Form View  -->
+        <record model="ir.ui.view" id="hr_recruit_source_code_form_view">
+            <field name="name">recruit.source.code.form.view</field>
+            <field name="model">recruit_source_code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for RecruitSourceCode-->
+	    <record model="ir.actions.act_window" id="action_data_migration_recruit_source_code">
+	        <field name="name">Recruit Source Code</field>
+	        <field name="res_model">recruit_source_code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+				(0, 0, {'view_mode': 'tree', 'view_id': ref('hr_recruit_source_code_tree_view')}),
+				(0, 0, {'view_mode': 'form', 'view_id': ref('hr_recruit_source_code_form_view')})]"/>      
+	    </record>
+	    
+	    <menuitem name="Recruit Source Code" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_recruit_source_code" sequence="0"
+	              action="nyda_data_migration.action_data_migration_recruit_source_code" />
+
+        <!-- Recruit Status Code Tree View --> 
+        <record model="ir.ui.view" id="hr_recruit_status_code_tree_view">
+            <field name="name">recruit.status.code.tree.view</field>
+            <field name="model">recruit_status_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Recruit Status Code Form View  -->
+        <record model="ir.ui.view" id="hr_recruit_status_code_form_view">
+            <field name="name">recruit.status.code.form.view</field>
+            <field name="model">recruit_status_code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for RecruitStatusCode-->
+	    <record model="ir.actions.act_window" id="action_data_migration_recruit_status_code">
+	        <field name="name">Recruit Status Code</field>
+	        <field name="res_model">recruit_status_code</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+				(0, 0, {'view_mode': 'tree', 'view_id': ref('hr_recruit_status_code_tree_view')}),
+				(0, 0, {'view_mode': 'form', 'view_id': ref('hr_recruit_status_code_form_view')})]"/>            
+	    </record>
+	    
+	    <menuitem name="Recruit Status Code" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_recruit_status_code" sequence="0"
+	              action="nyda_data_migration.action_data_migration_recruit_status_code" />
+
+        <!-- Intervention Type Tree View --> 
+        <record model="ir.ui.view" id="hr_intervention_type_tree_view">
+            <field name="name">intervention.type.tree.view</field>
+            <field name="model">intervention_type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Intervention Type Form View  -->
+        <record model="ir.ui.view" id="hr_intervention_type_form_view">
+            <field name="name">intervention.type.form.view</field>
+            <field name="model">intervention_type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for InterventionType-->
+	    <record model="ir.actions.act_window" id="action_data_migration_intervention_type">
+	        <field name="name">Intervention Type</field>
+	        <field name="res_model">intervention_type</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Intervention Type" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_intervention_type" sequence="0"
+	              action="nyda_data_migration.action_data_migration_intervention_type" />
+
+        <!-- Job Functions Tree View --> 
+        <record model="ir.ui.view" id="hr_job_functions_tree_view">
+            <field name="name">job.functions.tree.view</field>
+            <field name="model">job_functions</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Job Functions Form View  -->
+        <record model="ir.ui.view" id="hr_job_functions_form_view">
+            <field name="name">job.functions.form.view</field>
+            <field name="model">job_functions</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for JobFunctions-->
+	    <record model="ir.actions.act_window" id="action_data_migration_job_functions">
+	        <field name="name">Job Functions</field>
+	        <field name="res_model">job_functions</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Job Functions" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_job_functions" sequence="0"
+	              action="nyda_data_migration.action_data_migration_job_functions" />
+
+        <!-- Job General Tree View --> 
+        <record model="ir.ui.view" id="hr_job_general_tree_view">
+            <field name="name">job.general.tree.view</field>
+            <field name="model">job_general</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Job General Form View  -->
+        <record model="ir.ui.view" id="hr_job_general_form_view">
+            <field name="name">job.general.form.view</field>
+            <field name="model">job_general</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for JobGeneral-->
+	    <record model="ir.actions.act_window" id="action_data_migration_job_general">
+	        <field name="name">Job General</field>
+	        <field name="res_model">job_general</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="Job General" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_job_general" sequence="0"
+	              action="nyda_data_migration.action_data_migration_job_general" />
+
+        <!-- Job Grades Tree View --> 
+        <record model="ir.ui.view" id="hr_job_grades_tree_view">
+            <field name="name">job.grades.tree.view</field>
+            <field name="model">job_grades</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="name"/>
+                	<field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Job Grades Form View  -->
+        <record model="ir.ui.view" id="hr_job_grades_form_view">
+            <field name="name">job.grades.form.view</field>
+            <field name="model">job_grades</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for JobGrades-->
+	    <record model="ir.actions.act_window" id="action_data_migration_job_grades">
+	        <field name="name">Job Grades</field>
+	        <field name="res_model">job_grades</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Job Grades" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_job_grades" sequence="0"
+	              action="nyda_data_migration.action_data_migration_job_grades" />
+
+        <!-- JobvsKeyPerformanceLink Tree View --> 
+        <record model="ir.ui.view" id="hr_jobvs_key_performance_link_tree_view">
+            <field name="name">job.key.performance.link.tree.view</field>
+            <field name="model">jobvs_key_performance_link</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="JobCode"/>
+                    <field name="KeyPerformanceAreaCode"/>
+                    <field name="Weight"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- JobvsKeyPerformanceLink Form View  -->
+        <record model="ir.ui.view" id="hr_jobvs_key_performance_link_form_view">
+            <field name="name">job.key.performance.link.form.view</field>
+            <field name="model">jobvs_key_performance_link</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                	<field name="JobCode"/>
+		                    <field name="KeyPerformanceAreaCode"/>
+		                    <field name="Weight"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for JobvsKeyPerformanceLink-->
+	    <record model="ir.actions.act_window" id="action_data_migration_jobvs_key_performance_link">
+	        <field name="name">Job vs Key Performance Link</field>
+	        <field name="res_model">jobvs_key_performance_link</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="HR Job vs Key Performance Link" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_recruit_source_code" sequence="0"
+	              action="nyda_data_migration.action_data_migration_jobvs_key_performance_link" />
+
+        <!-- KeyPerformanceArea Tree View --> 
+        <record model="ir.ui.view" id="hr_key_performance_area_tree_view">
+            <field name="name">key.performance.area.tree.view</field>
+            <field name="model">key_performance_area</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- KeyPerformanceArea Form View  -->
+        <record model="ir.ui.view" id="hr_key_performance_area_form_view">
+            <field name="name">key.performance.area.form.view</field>
+            <field name="model">key_performance_area</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for KeyPerformanceArea-->
+	    <record model="ir.actions.act_window" id="action_data_migration_key_performance_area">
+	        <field name="name">Key Performance Area</field>
+	        <field name="res_model">key_performance_area</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+			    (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_key_performance_area_tree_view')}),
+			    (0, 0, {'view_mode': 'form', 'view_id': ref('hr_key_performance_area_form_view')})]"/>         
+	    </record>
+
+	    <menuitem name="Key Performance Area" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_key_performance_area" sequence="0"
+	              action="nyda_data_migration.action_data_migration_key_performance_area" />
+
+        <!-- KeyPerformanceIndicator Tree View --> 
+        <record model="ir.ui.view" id="hr_key_performance_indicator_tree_view">
+            <field name="name">key.performance.indicator.tree.view</field>
+            <field name="model">key_performance_indicator</field>
+            <field name="arch" type="xml">
+                <tree>
+                	<field name="Code"/>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                    <field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- KeyPerformanceIndicator Form View  -->
+        <record model="ir.ui.view" id="hr_key_performance_indicator_form_view">
+            <field name="name">key.performance.indicator.form.view</field>
+            <field name="model">key_performance_indicator</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for KeyPerformanceIndicator-->
+	    <record model="ir.actions.act_window" id="action_data_migration_key_performance_indicator">
+	        <field name="name">Key Performance Indicator</field>
+	        <field name="res_model">key_performance_indicator</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Key Performance Indicator" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_key_performance_indicator" sequence="0"
+	              action="nyda_data_migration.action_data_migration_key_performance_indicator" />
+	              	    
+        <!-- Learnership Tree View --> 
+        <record model="ir.ui.view" id="hr_learnership_tree_view">
+            <field name="name">learnership.tree.view</field>
+            <field name="model">learnership</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ShortDescription"/>
+                    <field name="LongDescription"/>
+                    <field name="Comments"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Learnership Form View  -->
+        <record model="ir.ui.view" id="hr_learnership_form_view">
+            <field name="name">learnership.form.view</field>
+            <field name="model">learnership</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for Learnership-->
+	    <record model="ir.actions.act_window" id="action_data_migration_learnership">
+	        <field name="name">Learnership</field>
+	        <field name="res_model">learnership</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>	    
+
+	    <menuitem name="Learnership" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_learnership" sequence="0"
+	              action="nyda_data_migration.action_data_migration_learnership" />
+
+        <!-- NQFBand Tree View --> 
+        <record model="ir.ui.view" id="hr_nqf_band_tree_view">
+            <field name="name">nqf.band.tree.view</field>
+            <field name="model">nqf_band</field>
+            <field name="arch" type="xml">
+                <tree>
+                    	<field name="Code"/>
+	                   	<field name="ShortDescription"/>
+	                   	<field name="LongDescription"/>
+	                   	<field name="Comments"/>
+	                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- NQFBand Form View  -->
+        <record model="ir.ui.view" id="hr_nqf_band_form_view">
+            <field name="name">nqf.band.form.view</field>
+            <field name="model">nqf_band</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              
+	    <!-- Action for NQFBand-->
+	    <record model="ir.actions.act_window" id="action_data_migration_nqf_band">
+	        <field name="name">NQF Band</field>
+	        <field name="res_model">nqf_band</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+	    
+	    <menuitem name="NQF Band" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_nqf_band" sequence="0"
+	              action="nyda_data_migration.action_data_migration_nqf_band" />
+
+        <!-- NQFLevel Tree View --> 
+        <record model="ir.ui.view" id="hr_nqf_level_tree_view">
+            <field name="name">nqf.level.tree.view</field>
+            <field name="model">nqf_level</field>
+            <field name="arch" type="xml">
+                <tree>
+                    	<field name="Code"/>
+	                   	<field name="ShortDescription"/>
+	                   	<field name="LongDescription"/>
+	                   	<field name="Comments"/>
+	                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- NQFLevel Form View  -->
+        <record model="ir.ui.view" id="hr_nqf_level_form_view">
+            <field name="name">nqf.level.form.view</field>
+            <field name="model">nqf_level</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for NQFLevel-->
+	    <record model="ir.actions.act_window" id="action_data_migration_nqf_level">
+	        <field name="name">NQFLevel</field>
+	        <field name="res_model">nqf_level</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="NQF Level" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_nqf_level" sequence="0"
+	              action="nyda_data_migration.action_data_migration_nqf_level" />
+	              	    
+        <!-- OccupationalCategory Tree View --> 
+        <record model="ir.ui.view" id="hr_occupational_category_tree_view">
+            <field name="name">occupational.category.tree.view</field>
+            <field name="model">occupational_category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    	<field name="Code"/>
+	                   	<field name="ShortDescription"/>
+	                   	<field name="LongDescription"/>
+	                   	<field name="Comments"/>
+	                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- OccupationalCategory Form View  -->
+        <record model="ir.ui.view" id="hr_occupational_category_form_view">
+            <field name="name">occupational.category.form.view</field>
+            <field name="model">occupational_category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for OccupationalCategory-->
+	    <record model="ir.actions.act_window" id="action_data_migration_occupational_category">
+	        <field name="name">Occupational Category</field>
+	        <field name="res_model">occupational_category</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Occupational Category" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_occupational_category" sequence="0"
+	              action="nyda_data_migration.action_data_migration_occupational_category" />
+
+        <!-- OFOCategory Tree View --> 
+        <record model="ir.ui.view" id="hr_ofo_category_tree_view">
+            <field name="name">ofo.category.tree.view</field>
+            <field name="model">ofo_category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    	<field name="Code"/>
+	                   	<field name="ShortDescription"/>
+	                   	<field name="LongDescription"/>
+	                   	<field name="Comments"/>
+	                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- OFOCategory Form View  -->
+        <record model="ir.ui.view" id="hr_ofo_category_form_view">
+            <field name="name">ofo.category.form.view</field>
+            <field name="model">ofo_category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for OFOCategory-->
+	    <record model="ir.actions.act_window" id="action_data_migration_ofo_category">
+	        <field name="name">OFO Category</field>
+	        <field name="res_model">ofo_category</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="OFO Category" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_ofo_category" sequence="0"
+	              action="nyda_data_migration.action_data_migration_ofo_category" />
+
+        <!-- SalarySurveyPattersonGrade Tree View --> 
+        <record model="ir.ui.view" id="hr_salary_survey_patterson_grade_tree_view">
+            <field name="name">salary.survey.patterson.grade.tree.view</field>
+            <field name="model">salary_survey_patterson_grade</field>
+            <field name="arch" type="xml">
+                <tree>
+                   	<field name="Code"/>
+                   	<field name="Band"/>
+                   	<field name="SubBand"/>
+                   	<field name="Description"/>
+                   	<field name="DecisionType"/>
+                   	<field name="CorrelateEquate"/>
+                   	<field name="CorrelatePeromnes"/>
+                   	<field name="Comments"/>
+                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- SalarySurveyPattersonGrade Form View  -->
+        <record model="ir.ui.view" id="hr_salary_survey_patterson_grade_form_view">
+            <field name="name">salary.survey.patterson.grade.form.view</field>
+            <field name="model">salary_survey_patterson_grade</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+		                   	<field name="Code"/>
+		                   	<field name="Band"/>
+		                   	<field name="SubBand"/>
+		                   	<field name="Description"/>
+		                   	<field name="DecisionType"/>
+		                   	<field name="CorrelateEquate"/>
+		                   	<field name="CorrelatePeromnes"/>
+		                   	<field name="Comments"/>
+		                   	<field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+           
+	    <!-- Action for SalarySurveyPattersonGrade-->
+	    <record model="ir.actions.act_window" id="action_data_migration_salary_survey_patterson_grade">
+	        <field name="name">Salary Survey Patterson Grade</field>
+	        <field name="res_model">salary_survey_patterson_grade</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+			    (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_salary_survey_patterson_grade_tree_view')}),
+			    (0, 0, {'view_mode': 'form', 'view_id': ref('hr_salary_survey_patterson_grade_form_view')})]"/>            
+	    </record>
+
+	    <menuitem name="Salary Survey Patterson Grade" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_salary_survey_patterson_grade" sequence="0"
+	              action="nyda_data_migration.action_data_migration_salary_survey_patterson_grade" />
+
+        <!-- SETA Tree View --> 
+        <record model="ir.ui.view" id="hr_seta_tree_view">
+            <field name="name">seta.tree.view</field>
+            <field name="model">seta</field>
+            <field name="arch" type="xml">
+                <tree>
+                    	<field name="Code"/>
+	                   	<field name="ShortDescription"/>
+	                   	<field name="LongDescription"/>
+	                   	<field name="Comments"/>
+	                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- SETA Form View  -->
+        <record model="ir.ui.view" id="hr_seta_form_view">
+            <field name="name">seta.form.view</field>
+            <field name="model">seta</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for SETA-->
+	    <record model="ir.actions.act_window" id="action_data_migration_seta">
+	        <field name="name">SETA</field>
+	        <field name="res_model">seta</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="SETA" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_seta" sequence="0"
+	              action="nyda_data_migration.action_data_migration_seta" />
+
+        <!-- Type of Learning Tree View --> 
+        <record model="ir.ui.view" id="hr_type_of_learning_tree_view">
+            <field name="name">type.of.learning.tree.view</field>
+            <field name="model">type_of_learning</field>
+            <field name="arch" type="xml">
+                <tree>
+                    	<field name="Code"/>
+	                   	<field name="ShortDescription"/>
+	                   	<field name="LongDescription"/>
+	                   	<field name="Comments"/>
+	                   	<field name="LastChanged"/>
+                </tree>
+            </field>
+        </record>
+
+		<!-- Type of Learning Form View  -->
+        <record model="ir.ui.view" id="hr_type_of_learning_form_view">
+            <field name="name">type.of.learning.form.view</field>
+            <field name="model">type_of_learning</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                        	<field name="Code"/>
+		                    <field name="ShortDescription"/>
+		                    <field name="LongDescription"/>
+		                    <field name="Comments"/>
+		                    <field name="LastChanged"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+         	              	    
+	    <!-- Action for Learnership-->
+	    <record model="ir.actions.act_window" id="action_data_migration_type_of_learning">
+	        <field name="name">Type of Learning</field>
+	        <field name="res_model">type_of_learning</field>
+	        <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem name="Type Of Learning" parent="nyda_data_migration.menu_data_hr"
+	              id="menu_data_hr_type_of_learning" sequence="0"
+	              action="nyda_data_migration.action_data_migration_type_of_learning" />
+                            
+	</data>              
+</odoo>

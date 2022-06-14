@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Recovery form view -->
+    <record id="recovery_form" model="ir.ui.view">
+        <field name="name">recovery.form</field>
+        <field name="model">recovery</field>
+        <field name="arch" type="xml">
+            <form string="Recovery">
+                <sheet>
+                    <group string="Recovery Details">
+                        <group>
+                            <field name="loss_damage_assets_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                            <field name="employee_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                        <group>
+                            <field name="date_lost_damaged"/>
+                            <field name="previous_loss_damage_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description_of_stolen"/>
+                    </group>
+                    <group>
+                        <field name="describe_the_cause"/>
+                    </group>
+                    <notebook>
+                        <page name="emp_mot" string="Employee Motivation">
+                            <group>
+                                <field name="employee_motivation"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="emp_digital_sign" widget="signature"/>
+                                </group>
+                                <group>
+                                    <field name="emp_date"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="recc_cfo" string="CFO Recommendations">
+                            <group>
+                                <field name="rec_cfo"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="cfo_digital_sign" widget="signature"/>
+                                </group>
+                                <group>
+                                    <field name="cfo_date"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="app_ceo" string="CEO Approval Details">
+                            <group>
+                                <field name="app_ceo"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="ceo_digital_sign" widget="signature"/>
+                                </group>
+                                <group>
+                                    <field name="ceo_date"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Recovery tree view -->
+    <record id="view_recovery_tree" model="ir.ui.view">
+        <field name="name">Recovery Tree View</field>
+        <field name="model">recovery</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="loss_damage_assets_id"/>
+                <field name="employee_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Recovery action -->
+    <record id="action_recovery" model="ir.actions.act_window">
+        <field name="name">Recovery</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">recovery</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu of Recovery -->
+    <menuitem id="menu_recovery" name="Recovery"
+          parent="nyda_risk_management.menu_loss_damage_assets_main"
+          action="action_recovery"/>
+</odoo>

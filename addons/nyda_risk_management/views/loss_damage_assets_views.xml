@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Internal Assets Loss/Damage views -->
+    <record id="view_loss_damage_assets_form" model="ir.ui.view">
+        <field name="name">view.loss.damage.assets.form</field>
+        <field name="model">loss.damage.assets</field>
+        <field name="arch" type="xml">
+            <form string="Loss/Damage Assets Claim">
+                <header>
+                    <button class="oe_primary" type="object" name="line_manager_submitted" string="Submit to Line Manger"
+                            states="new,rejected_by_lm" groups="base.group_system,monitoring_and_evaluation.group_nyda_employees"/>
+                    <button class="oe_primary" type="object" name="line_manager_approved" string="Line Manger Approve"
+                            states="review_by_lm" groups="base.group_system,strategy_and_planning.group_line_manager"/>
+                    <button class="oe_primary" type="object" name="line_manager_rejected" string="Line Manger Rejcted"
+                            states="review_by_lm" groups="base.group_system,strategy_and_planning.group_line_manager"/>
+                    <button class="oe_primary" type="object" name="line_manager_review" string="Line Manger Review"
+                            states="submitted" groups="base.group_system,strategy_and_planning.group_line_manager"/>
+                    <button class="oe_primary" type="object" name="risk_officer_review" string="Risk Officer Review"
+                            states="approved_by_lm" groups="base.group_system,nyda_risk_management.risk_officer"/>
+                    <button class="oe_primary" type="object" name="risk_manager_submit" string="Submit to Risk Manager"
+                            states="review_by_ro" groups="base.group_system,nyda_risk_management.risk_officer"/>
+                    <button class="oe_primary" type="object" name="risk_manager_review" string="Risk Manager Review"
+                            states="submitted_to_rm" groups="base.group_system,nyda_risk_management.risk_manager"/>
+                    <button class="oe_primary" type="object" name="submit_to_ed" string="Submit To Executive Director"
+                            states="review_by_rm" groups="base.group_system,nyda_risk_management.risk_manager"/>
+                    <button class="oe_primary" type="object" name="approved_by_exe_dir" string="Approved By Executive Director"
+                            states="submitted_to_ed" groups="base.group_system,strategy_and_planning.group_executive_director"/>
+                    <button class="oe_primary" type="object" name="review_by_asset_man" string="Review By Asset Manager"
+                            states="approved_by_ed,rej_cfo,rej_ceo"
+                            groups="base.group_system,nyda_risk_management.assets_manager"/>
+                    <button class="oe_primary" type="object" name="req_perm_cfo" string="Request Permission by CFO"
+                            states="review_by_am" groups="base.group_system,nyda_risk_management.assets_manager"/>
+                    <button class="oe_primary" type="object" name="cfo_approved" string="CFO Approved"
+                            states="req_cfo" groups="base.group_system,nyda_risk_management.risk_cfo"/>
+                    <button class="oe_primary" type="object" name="cfo_rejected" string="CFO Rejected"
+                            states="req_cfo" groups="base.group_system,nyda_risk_management.risk_cfo"/>
+                    <button class="oe_primary" type="object" name="review_ceo" string="CEO Review"
+                            states="app_cfo" groups="base.group_system,strategy_and_planning.group_ceo"/>
+                    <button class="oe_primary" type="object" name="approve_ceo" string="CEO Approved"
+                            states="rev_ceo" groups="base.group_system,strategy_and_planning.group_ceo"/>
+                    <button class="oe_primary" type="object" name="reject_ceo" string="CEO Rejected"
+                            states="rev_ceo" groups="base.group_system,strategy_and_planning.group_ceo"/>
+                    <button class="oe_primary" type="object" name="asset_dis_rec" string="Asset Recovered/Disposes"
+                            states="app_ceo" groups="base.group_system,strategy_and_planning.group_ceo"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,submitted"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                states="review_by_rm,submitted_to_rm,review_by_ro,submitted_to_ed,approved_by_ed,review_by_am,req_cfo,app_cfo,rej_cfo,rev_ceo,rej_ceo,app_ceo"
+                                groups="base.group_system,strategy_and_planning.group_ceo,strategy_and_planning.group_executive_director,nyda_risk_management.risk_officer,nyda_risk_management.risk_manager,nyda_risk_management.risk_cfo,nyda_risk_management.assets_manager"
+                                name="create_view_insurance_excess" string="Insurance Excess">
+                        </button>
+                        <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                states="review_by_am,req_cfo,app_cfo,rej_cfo,rev_ceo,rej_ceo,app_ceo"
+                                groups="base.group_system,strategy_and_planning.group_ceo,nyda_risk_management.risk_cfo,nyda_risk_management.assets_manager"
+                                name="create_view_assessment" string="Assessment">
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Serial No."/>
+                        <h2>
+                            <field name="name" readonly="1"/>
+                        </h2>
+                    </div>
+                    <group string="General Details">
+                        <group>
+                            <field name="report_type" required="1"/>
+                            <field name="employee_id" required="1"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="type_of_incident" required="1"/>
+                            <field name="poe_for_damaged_incident" filename="poe_for_damaged_incident_filename"
+                                   attrs="{'invisible': [('type_of_incident', '!=', 'damaged')], 'required': [('type_of_incident', '=', 'damaged')]}"/>
+                            <field name="poe_for_damaged_incident_filename" invisible="1"/>
+                            <field name="branch_id" required="1"/>
+                        </group>
+                    </group>
+                    <group string="Details of Loss/Damage">
+                        <group>
+                            <field name="date_of_loss"/>
+                            <field name="place_where_occurred"/>
+                            <field name="doors_locked" attrs="{'invisible': [('report_type', '!=', 'internal')]}"/>
+                            <field name="when_occupied"/>
+                            <field name="previously_lodged_claim"/>
+                            <field name="description_previous_claim" attrs="{'invisible': [('previously_lodged_claim', '=', False)]}"/>
+                            <field name="cause_of_the_loss"/>
+                            <field name="how_the_premises_were_occupied"/>
+                            <field name="insured_against_the_loss_or_damage"/>
+                            <field name="name_of_fire_ins_company"/>
+                            <field name="details_of_previous_losses"/>
+                        </group>
+                        <group>
+                            <field name="time_of_discovery"/>
+                            <field name="entry"/>
+                            <field name="last_location"/>
+                            <field name="by_whom"/>
+                            <field name="address_premises"/>
+                            <field name="were_premises_inhabited"/>
+                            <field name="sole_onwer"/>
+                            <field name="amount_of_fire_insurance"/>
+                            <field name="steps_taken_to_prevent_loss"/>
+                        </group>
+                    </group>
+                    <group string="CAUSE OF LOSS/DAMAGE">
+                        <label for="full_description"/>
+                        <field name="full_description"/>
+                        <group class="mt32">
+                            <field name="is_by_someone"/>
+                        </group>
+                        <label for="description_another_party" attrs="{'invisible': [('is_by_someone', '=', False)]}"/>
+                        <field name="description_another_party" attrs="{'invisible': [('is_by_someone', '=', False)]}"/>
+                    </group>
+                    <group string="POLICE CASE DETAILS (STOLEN/LOST ASSETS)" attrs="{'invisible': [('type_of_incident', '!=', 'loss_theft')]}">
+                        <group>
+                            <field name="is_police_reported"/>
+                            <field name="not_reported_reason"
+                                   attrs="{'invisible': [('is_police_reported', '=', True)], 'required': [('is_police_reported', '=', False), ('type_of_incident', '=', 'loss_theft')]}"/>
+                            <field name="police_station" attrs="{'invisible': [('is_police_reported', '=', False)]}"/>
+                            <field name="police_reference_no" attrs="{'invisible': [('is_police_reported', '=', False)]}"/>
+                            <field name="date_reported" attrs="{'invisible': [('is_police_reported', '=', False)]}"/>
+                            <field name="police_report_affidavit" attrs="{'invisible': [('is_police_reported', '=', False)], 'required': [('is_police_reported', '=', True)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="payment_method" attrs="{'invisible': [('is_police_reported', '=', False)]}"/>
+                        <field name="payment_option"
+                               attrs="{'invisible': ['|', ('is_police_reported', '=', False) ,('payment_method', '!=', 'excess_payable_by_employee')], 'required': [('is_police_reported', '=', True), ('payment_method', '=', 'excess_payable_by_employee')]}"/>
+                        <field name="payment_description" attrs="{'invisible': [('is_police_reported', '=', False)]}"/>
+                    </group>
+                    <group string="Checklist of documents to be submitted(to be completed by employee)">
+                        <group>
+                            <field name="is_proof_of_forcible_entry"/>
+                            <field name="is_police_case_number"/>
+                            <field name="is_affidavit_from_police"/>
+                            <field name="is_copy_of_invoice"/>
+                        </group>
+                        <group>
+                            <field name="is_assets_general_information"/>
+                            <field name="is_quotation_of_similar_asset"/>
+                            <field name="is_itc_number"/>
+                            <field name="is_damaged_report"/>
+                        </group>
+                    </group>
+                    <group name="particulars_of_the_claim" string="Particulars of the claim">
+                        <field name="loss_damage_assets_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="description_of_property_damaged" required="1"/>
+                                <field name="date_of_purchase"/>
+                                <field name="cost_price"/>
+                                <field name="depreciation"/>
+                                <field name="depreciated_value_of_property"/>
+                                <field name="value_of_salvage"/>
+                                <field name="amount_claimed"/>
+                                <field name="loss_damage_assets_id" invisible="1"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <field name="claim_date"/>
+                        </group>
+                        <group>
+                            <field name="insureds_vat_reg_number"/>
+                        </group>
+                        <group>
+                            <field name="insured_signature" widget="signature"/>
+                        </group>
+                    </group>
+                    <group name="banking_details" string="Banking Details">
+                        <group>
+                            <field name="acc_holders_full_name"/>
+                            <field name="bank_name"/>
+                        </group>
+                        <group>
+                            <field name="acc_number"/>
+                            <field name="branch_code"/>
+                        </group>
+                    </group>
+                    <group string="Signatures : ">
+                        <group>
+                            <field name="employee_sign" widget="signature"/>
+                            <field name="employee_sign_date"/>
+                        </group>
+                        <group>
+                            <field name="line_manager_sign" widget="signature"/>
+                            <field name="line_manager_sign_date"/>
+                        </group>
+                        <group>
+                            <field name="branch_manager_sign" widget="signature"/>
+                            <field name="branch_manager_sign_date"/>
+                        </group>
+                        <group>
+                            <field name="hod_sign" widget="signature"/>
+                            <field name="hod_sign_date"/>
+                        </group>
+                        <group>
+                            <field name="risk_manager_sign" widget="signature"/>
+                            <field name="risk_manager_sign_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_loss_damage_assets_tree" model="ir.ui.view">
+        <field name="name">view.loss.damage.assets.tree</field>
+        <field name="model">loss.damage.assets</field>
+        <field name="arch" type="xml">
+            <tree string="Loss/Damage Assets Claims">
+                <field name="name"/>
+                <field name="report_type"/>
+                <field name="type_of_incident"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_loss_damage_assets" model="ir.actions.act_window">
+        <field name="name">Loss/Damage Assets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">loss.damage.assets</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_loss_damage_assets_main"
+              name="Assets"
+              parent="menu_risk_management_root"
+    />
+
+    <menuitem id="menu_loss_damage_assets"
+              name="Lost/Damage Assets Claim"
+              parent="menu_loss_damage_assets_main"
+              action="action_loss_damage_assets"
+    />
+
+</odoo>

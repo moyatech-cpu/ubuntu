@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data noupdate="1">
+    <menuitem name="Customer Service" id="customer_service.menu_root" groups="base.group_system,group_customer_service_user,group_customer_service_manager" web_icon="customer_service,static/src/img/icon.png" />
+    
+    <!-- Client Management -->
+    <menuitem name="Client Management" id="customer_service.client_management" parent="customer_service.menu_root"/>
+    <menuitem id="customer_service.menu_youth_enquiry" name="Youth Enquiry" parent="customer_service.client_management" 
+    			action="client_management.action_youth_enquiry" sequence="1"/>
+    <menuitem id="customer_service.menu_partner_enquiry" name="Partner Enquiry" parent="customer_service.client_management" 
+    			action="client_management.action_partner_enquiry" sequence="2"/>
+    
+    <!-- Market Linkage -->        
+    <menuitem name="Market Linkage" id="customer_service.market_linkage" parent="customer_service.menu_root"/>
+    
+    <menuitem name="Opportunity" action="market_linkage.action_register_opportunity" 
+    			id="customer_service.market_linkage_opp" parent="customer_service.market_linkage"/>
+    			
+    <menuitem name="Beneficiary Database" action="market_linkage.action_mkl_beneficiary" 
+    			id="customer_service.beneficiary_database" parent="customer_service.market_linkage"/>
+
+    <!-- Mentorship -->        
+    <menuitem name="Mentorship" id="customer_service.mentorship" parent="customer_service.menu_root"/>
+    
+    <menuitem name="Mentee Enquiries" action="mentorship.action_mentee_enquiry" 
+    			id="mentorship.mentee_enquiry" parent="customer_service.mentorship"/>
+    			
+    <menuitem name="Mentor Enquiries" action="mentorship.action_mentor_enquiry" 
+    			id="mentorship.mentor_enquiry" parent="customer_service.mentorship"/>
+    			
+    <menuitem name="Mentor Application" action="mentorship.action_mentor_application" 
+    			id="mentorship.mentor_application" parent="customer_service.mentorship"/>
+    			
+    <menuitem name="Mentor Database" action="mentorship.action_mentor_database" 
+    			id="mentorship.mentor_database" parent="customer_service.mentorship"/>
+    			
+    <menuitem name="Mentorship Agreement" action="mentorship.action_mentorship_agreement" 
+    			id="mentorship.mentorship_agreement" parent="customer_service.mentorship" />
+    			
+    <menuitem name="Matched" action="mentorship.action_mentorship_agreement_matched" 
+    			id="mentorship.voucher_application_request" parent="customer_service.mentorship"/>
+
+    <!-- National Youth Service -->        
+    <menuitem name="National Youth Service" id="customer_service.nys" parent="customer_service.menu_root"/>
+    
+    <menuitem name="Enquiries" action="__export__.ir_act_window_959" 
+    			id="customer_service.nys_enquiries" parent="customer_service.nys"/>
+    			
+    <menuitem name="Project Application" action="__export__.ir_act_window_957" 
+    			id="customer_service.nys_project_application" parent="customer_service.nys"/>
+    			
+    <menuitem name="Project Management" action="__export__.ir_act_window_958" 
+    			id="customer_service.nys_project_management" parent="customer_service.nys"/>
+    			
+    <menuitem name="Project Opportunities" id="customer_service.nys_project_opportunities" 
+    			parent="customer_service.nys"/>
+    			
+    <menuitem name="Events/Campaigns" action="event.event_event_nys_action" 
+    			id="customer_service.nys_events" parent="customer_service.nys"/>
+    			
+    <menuitem name="Skills Training Projects" action="__export__.ir_act_window_2086" 
+    			id="customer_service.nys_skills" parent="customer_service.nys"/>
+    			
+    <menuitem name="Volunteer Database" action="__export__.ir_act_window_1876" 
+    			id="customer_service.volunteer_database" parent="customer_service.nys"/>
+    			
+    <menuitem name="Partner Database" action="__export__.ir_act_window_1878" 
+    			id="customer_service.partner_database" parent="customer_service.nys"/>
+    
+    <!-- Training -->        
+    <menuitem name="Training" id="customer_service.training" parent="customer_service.menu_root"/>
+    
+	<menuitem name="Pitch Default Training" action="bmt_training.action_pddd_training" 
+			id="customer_service.voucher_application_request" parent="customer_service.training"/>
+	                      
+    <menuitem name="Training Modules" id="customer_service.training_menu" parent="customer_service.training" sequence="2"/>
+
+    <menuitem name="Sales Pitch Training" id="customer_service.sales_pitch_another_training_menu" parent="customer_service.training_menu"
+          	action="bmt_training.action_sales_pitch_another_training" sequence="3"/>
+
+    <menuitem name="BBBEE Training" id="customer_service.bbbee_training_menu" parent="customer_service.training_menu"
+			action="bmt_training.action_bbbee_training" sequence="4"/>
+
+    <menuitem name="Job Preparedness Training" id="customer_service.job_preparedness_training_menu" parent="customer_service.training_menu"
+            action="bmt_training.action_job_preparedness_training" sequence="5"/>
+
+    <menuitem name="Life Skills Training" id="customer_service.life_skills_training_menu" parent="customer_service.training_menu"
+            action="bmt_training.action_life_skills_training" sequence="6"/>
+
+    <menuitem name="Digital Skills Training" id="customer_service.digital_skills_training_menu" parent="customer_service.training_menu" sequence="7"
+			action="bmt_training.action_digital_skills_training"/>
+
+	<!-- Technical Training -->		
+	<menuitem name="Technical Training" id="customer_service.technical_training" parent="customer_service.training"/>
+	
+	<menuitem name="Short Skills Programme" id="customer_service.technical_training_short_skills" parent="customer_service.technical_training"
+				action="bmt_training.action_technical_training_short_skills"/>
+				
+	<menuitem name="Learnership Programme" id="customer_service.technical_training_leanership" parent="customer_service.technical_training"
+                  action="bmt_training.action_technical_training_leanership"/>
+                  
+	<menuitem id="customer_service.menu_tech_training_appren"
+	          name="Apprenticeship Programme"
+	          parent="customer_service.technical_training"/>
+	
+	<menuitem name="First Year"
+	          id="technical_training_apprenticeship"
+	          parent="customer_service.menu_tech_training_appren"
+	          action="bmt_training.action_technical_training_apprenticeship"/>
+	
+	<menuitem name="Second Year"
+	          id="technical_training_apprenticeship_sy"
+	          parent="customer_service.menu_tech_training_appren"
+	          action="bmt_training.action_technical_training_apprenticeship_sy"/>
+	
+	<menuitem name="Third Year"
+	          id="technical_training_apprenticeship_ty"
+	          parent="customer_service.menu_tech_training_appren"
+	          action="bmt_training.action_technical_training_apprenticeship_ty"/>
+	          
+	<menuitem name="Others" id="others_menu" parent="customer_service.training"/>
+	
+	<menuitem name="Enrolled Users" id="enrolled_users_menu" parent="customer_service.training"
+	          action="bmt_training.action_technical_training_enrolled_users" />
+	          
+	<menuitem name="Link Service Provider" id="link_service_provider_menu" parent="customer_service.training"
+	          action="bmt_training.action_link_service_provider" />	          
+
+     <menuitem name="BMT" id="customer_service.bmt" parent="customer_service.training" />
+
+     <menuitem name="Business Management Training" id="business_mgmt_training" parent="customer_service.bmt"
+				action="bmt_training.action_business_mgmt_training" />
+               
+      <menuitem name="BMT Training Application" id="bmt_training_application_menu" parent="customer_service.bmt"
+                action="bmt_training.action_bmt_training_application" />
+                
+	<menuitem name="BMT Pitching" id="business_mgmt_training_pitching" parent="customer_service.bmt"
+				action="bmt_training.action_business_mgmt_training_pitching" />
+	          
+	<menuitem name="BMT Participants" id="bmt_participants" parent="customer_service.bmt" 
+				action="bmt_training.action_bmt_participants" />
+	          
+	<menuitem name="BMT Pitching Participants" id="bmt_pitching_participants" parent="customer_service.bmt" 
+				action="bmt_training.action_bmt_pitching_participants" />                                    
+
+    <!-- Grant Management -->
+    <menuitem name="Grant Management" id="customer_service.grant_management" parent="customer_service.menu_root"/>
+    
+    <menuitem name="Pre-Assessment" action="nyda_grant_and_voucher.action_client_preassessment" 
+    			id="customer_service.client_preassessment" parent="customer_service.grant_management"/>
+    			
+    <menuitem name="Applications" id="customer_service.grant_applications" parent="customer_service.grant_management"/>    
+    <menuitem name="Grant Applications" action="nyda_grant_and_voucher.action_grant_application_main" 
+    			id="customer_service.grant_application_main" parent="customer_service.grant_management"/>
+    			
+    <menuitem name="After-Care" action="nyda_grant_and_voucher.action_after_care_record_grant" 
+    			id="customer_service.after_care_record_grant" parent="customer_service.grant_management"/>
+    			
+    <menuitem name="Investment Memo" action="nyda_grant_and_voucher.action_grant_programme" 
+    			id="customer_service.investment_memo" parent="customer_service.grant_management"/>    			
+    			    			
+    <menuitem name="Voucher Management" id="customer_service.voucher_management" parent="customer_service.menu_root"/>
+    
+    <menuitem name="Enquiries" action="nyda_grant_and_voucher.action_voucher_enq_main" 
+    			id="customer_service.voucher_enquiries" parent="customer_service.voucher_management"/>
+    			            
+    <menuitem name="Applications" action="nyda_grant_and_voucher.action_voucher_application_main" 
+    			id="customer_service.voucher_applications" parent="customer_service.voucher_management"/>
+
+    <menuitem name="History" action="nyda_grant_and_voucher.action_voucher_application_history" 
+    			id="customer_service.voucher_history" parent="customer_service.voucher_management"/>
+
+    <menuitem name="After Care" action="nyda_grant_and_voucher.action_after_care_record_voucher" 
+    			id="customer_service.voucher_after_care" parent="customer_service.voucher_management"/>
+
+    <menuitem name="Voucher Assessment" action="nyda_grant_and_voucher.action_voucher_assessment" 
+    			id="customer_service.voucher_after_care" parent="customer_service.voucher_management"/>
+	            
+  </data>
+</odoo>

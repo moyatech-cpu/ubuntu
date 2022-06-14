@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Risk Compliance Views -->
+    <record id="view_risk_compliance_form" model="ir.ui.view">
+        <field name="name">view.risk.compliance.form</field>
+        <field name="model">risk.compliance</field>
+        <field name="arch" type="xml">
+            <form string="Risk Compliance">
+                <header>
+                    <button name="action_submit" string="Submit" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                    <button name="action_sign_ed" string="Sign by ED" type="object" class="btn-primary"
+                            groups="strategy_and_planning.group_executive_director" attrs="{'invisible': [('state', '!=', 'submit')]}"/>
+                    <button name="action_reject_ed" string="Reject" type="object" class="btn-primary"
+                            groups="strategy_and_planning.group_executive_director" attrs="{'invisible': [('state', '!=', 'submit')]}"/>
+                    <button name="action_sign_risk_manager" string="Sign by Risk Manager" type="object" class="btn-primary"
+                            groups="nyda_risk_management.risk_manager" attrs="{'invisible': [('state', '!=', 'sign_ed')]}"/>
+                    <button name="action_reject_manager" string="Reject" type="object" class="btn-primary"
+                            groups="nyda_risk_management.risk_manager" attrs="{'invisible': [('state', '!=', 'sign_ed')]}"/>
+                    <button name="action_sign_ceo" string="Sign by CEO" type="object" class="btn-primary"
+                            groups="strategy_and_planning.group_ceo" attrs="{'invisible': [('state', '!=', 'sign_line_manager')]}"/>
+                    <button name="action_reject_ceo" string="Reject" type="object" class="btn-primary"
+                            groups="strategy_and_planning.group_ceo" attrs="{'invisible': [('state', '!=', 'sign_line_manager')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,submit,sign_ed,sign_line_manager,sign_ceo"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Please Enter Compliance Title..." required="1"/>
+                        </h1>
+                    </div>
+                    <group string="Details / Questions">
+                        <field name="details" nolabel="1" required="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Review" name="review" attrs="{'invisible':[('state','=','new')]}">
+                            <field name="review_ids">
+                                <tree>
+                                    <field name="employee_id"/>
+                                    <field name="answer"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="employee_id" readonly="1"/>
+                                        </group>
+                                        <group></group>
+                                        <field name="answer" placeholder="Answer" required="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Assign Person" name="assign_person" groups="nyda_risk_management.risk_manager">
+                            <field name="assign_emp_ids" attrs="{'readonly':[('state','!=','new')]}"/>
+                        </page>
+                        <page string="Extra Info" name="extra_info">
+                            <group>
+                                <group>
+                                    <field name="responsible_person" readonly="1"/>
+                                    <field name="assign_department_id"/>
+                                    <field name="assign_person_id" domain="[('department_id','=',assign_department_id)]"/>
+                                </group>
+                                <group>
+                                    <field name="risk_id"/>
+                                    <field name="plan_id"/>
+                                    <field name="attachment_id"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_compliance_tree" model="ir.ui.view">
+        <field name="name">view.risk.compliance.tree</field>
+        <field name="model">risk.compliance</field>
+        <field name="arch" type="xml">
+            <tree string="Risk Compliance">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_risk_compliance" model="ir.actions.act_window">
+        <field name="name">Risk Compliance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">risk.compliance</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Add Risk Compliance for Planning from here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Risk Compliance Menu 
+    <menuitem id="menu_risk_compliance"
+              name="Risk Compliance"
+              parent="menu_risk_management_root"
+              action="action_risk_compliance"
+              sequence="13"/>
+	-->
+</odoo>

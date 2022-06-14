@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="enquiry_thanks" model="website.page">
+        <field name="name">Thanks</field>
+        <field name="type">qweb</field>
+        <field name="url">/enquiry-thank-you</field>
+        <field name="website_published">True</field>
+        <field name="key">client_management.enquiry_thanks</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="client_management.enquiry_thanks">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="oe_structure" id="oe_structure_website_crm_contact_us_thanks_1"/>
+                        <div class="container">
+                            <h1>Thanks!</h1>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="alert alert-success" role="status">
+                                        Thank you for your enquiry, an email will be sent to you shortly
+                                        <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <t t-call="website.company_description"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <template id="duplicate_enquiry" name="Already Registered">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row mt64">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="alert alert-success" role="status">
+                            <h4 class="text-center">You already have applied with provided details.</h4>
+                            <p>You can login with provided email id.</p>
+                            <p>Contact us if you are having any trouble with login.</p>
+                            <p class="text-center">Thank you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="register_form" name="Register Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="container bg_gray">
+                    <div class="row pt_30 pl_24_sm">
+                        <div class="col-md-7 col-md-offset-1">
+                            <h2>Youth Network</h2>
+                            <p class="fs_16">Join our portal and gain access to a world of opportunities</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/register-youth" class="btn btn-primary mt_34" role="button">Youth
+                                Enquiry/Registration
+                                <i class='fa fa-angle-right fs_18_bold'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row pt_30 pb_30 pl_24_sm">
+                        <div class="col-md-7 col-md-offset-1">
+                            <h2>Partner Network</h2>
+                            <p class="fs_16">Join our network and help provide services to young people.<br/>Are you a
+                                Service Provider,Donor or simply a company with<br/>opportunities for young people.
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/register-partner" class="btn btn-primary mt_34" role="button">Partner
+                                Enquiry/Registration
+                                <i class='fa fa-angle-right fs_18_bold'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="register_form_youth" name="Register Form Youth">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Youth Enquiry/Registration Form</h1>
+                    </div>
+                </div>
+
+                <form id="youthRegister" method="post" action="/youth-enquiry-submit" data-success_page="/youth-enquiry-submit">
+
+                    <div class="row pt_30">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <div class="form-group ">
+                                <label class="control-label" for="select">
+                                    Title
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="select">
+                                    <option value="Mr">
+                                        Mr
+                                    </option>
+                                    <option value="Ms">
+                                        Ms
+                                    </option>
+                                    <option value="Mrs">
+                                        Mrs
+                                    </option>
+                                    <option value="Miss">
+                                        Miss
+                                    </option>
+                                    <option value="Dr">
+                                        Dr
+                                    </option>
+                                    <option value="Prof">
+                                        Prof
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-sm-5 col-xs-5">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="name">
+                                    Name
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-5">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="name1">
+                                    Surname
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="name1" name="name1" placeholder="Surname" type="text" required="required"/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="email">
+                                    Email
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required="required"/>
+                                <label id="email-error" class="error hidden" for="email">Please enter valid email.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group" id="div_radio">
+                                <label class="control-label" for="radio">
+                                    Gender
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input name="radio" type="radio" value="male" checked="checked"/>
+                                        Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input name="radio" type="radio" value="female"/>
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="cellphone">
+                                    Cell phone number
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="cellphone" name="cellphone" placeholder="Cell phone number" type="tel" minlength="10" maxlength="10" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label " for="alterphone">
+                                    Alternative number
+                                </label>
+                                <input class="form-control" id="alterphone" name="alterphone" placeholder="Alternative number" type="tel" minlength="10" maxlength="10"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="id_number">
+                                    ID Number
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="id_number" name="id_number" placeholder="ID Number" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="select">
+                                    Population Group
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="select_population" required="required">
+                                    <option value="">Please Select Population Group</option>
+                                    <option value="african">
+                                        African
+                                    </option>
+                                    <option value="asian">
+                                        Asian
+                                    </option>
+                                    <option value="coloured">
+                                        Coloured
+                                    </option>
+                                    <option value="indian">
+                                        Indian
+                                    </option>
+                                    <option value="white">
+                                        White
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="select">
+                                    Level of Education
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" name="level_of_education" id="level_of_education" required="required">
+                                    <option value="">Please Select Population Group</option>
+                                    <option value="below_8">
+                                        Below Grade 8
+                                    </option>
+                                    <option value="below_12">
+                                        Below Matric/Grade 12
+                                    </option>
+                                    <option value="grade_12">
+                                        Matric/Grade 12
+                                    </option>
+                                    <option value="scc">
+                                        Short Course Certificate
+                                    </option>
+                                    <option value="hc">
+                                        Higher Certificate
+                                    </option>
+                                    <option value="diploma">
+                                        Diploma
+                                    </option>
+                                    <option value="degree">
+                                        Degree/Honours/Doctorate
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 hidden">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="province">
+                                    Sector
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="sector" name="sector" required="required">
+                                    <option value="">Please Select Sector</option>
+                                    <t t-foreach="sectors" t-as="sector">
+                                        <option t-att-value="sector.id">
+                                            <t t-esc="sector.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="select">
+                                    Product Information Type
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" name="select_info_type" id="select_info_type" required="required">
+                                    <option value="">Please Select Product Information Type</option>
+                                    <option value="voucher">
+                                        Voucher Programme
+                                    </option>
+                                    <option value="grant">
+                                        Grant Programme
+                                    </option>
+                                    <option value="jobs-opportunities">
+                                        Job Opportunities
+                                    </option>
+                                    <option value="training">
+                                        Training
+                                    </option>
+                                    <option value="mentorship">
+                                        Mentorship Programme
+                                    </option>
+                                    <option value="market-linkage">
+                                        Market Linkage Programme
+                                    </option>
+                                    <option value="nys">
+                                        National Youth Services
+                                    </option>
+                                    <option value="thusano-fund">
+                                        Thusano Fund
+                                    </option>                             
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6" id="traning_div" style="display: none;">
+                            <div class="form-group ">
+                                <label class="control-label" for="select">
+                                    Training 
+                                </label>
+                                <select class="select form-control" id="product_info_training" name="product_info_training">
+                                    <option value="">Please Select Training </option>
+                                    <option value="job_preparedness">
+                                        Job preparedness
+                                    </option>
+                                    <option value="digital_skills">
+                                        Digital skills
+                                    </option>
+                                    <option value="bbbee">
+                                        BBBEE and sales pitch training
+                                    </option>
+                                    <option value="lst">
+                                        Life skills training
+                                    </option>
+                                    <option value="technical">
+                                        Technical training
+                                    </option>
+                                    <option value="bmt">
+                                        Business Management Training
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="geo_loc">
+                                    Geographic Location
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="geo_loc" required="required">
+                                    <option value="">Please Select Geographic Location</option>
+                                    <option value="urban">
+                                        Urban
+                                    </option>
+                                    <option value="peri-urban">
+                                        Peri Urban
+                                    </option>
+                                    <option value="rural-area-villages">
+                                        Rural area - Villages
+                                    </option>
+                                    <option value="rural-area-farms">
+                                        Rural area - Farms
+                                    </option>
+                                    <option value="informa-settlement">
+                                        Informa settlement
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="province">
+                                    Province
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="province" required="required">
+                                    <option value="">Please Select Province</option>
+                                    <t t-foreach="provinces" t-as="province">
+                                        <option t-att-value="province.id">
+                                            <t t-esc="province.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 hidden" id="metro_municipality_div">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="metro_municipality">
+                                    Metro Municipality
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="metro_municipality" name="metro_municipality" required="required">
+                                    <option value="">Please Select Metro Municipality</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="district">
+                                    District
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="district" required="required">
+                                    <option value="">Please Select District</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="municipality">
+                                    Municipality
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="municipality" name="municipality" required="required">
+                                    <option value="">Please Select Municipality</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="near_branch">
+                                    Nearest Branch
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="branches" name="near_branch">
+                                    <option value="" selected="selected">Please Select Municipality</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="phy_address">
+                                    Physical Address
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <textarea class="form-control" cols="40" id="message" name="phy_address" placeholder="Physical Address" rows="5" required="required"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="question">
+                                    Your Enquiry
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <textarea class="form-control" cols="40" id="question" name="question" placeholder="Your Enquiry" rows="5" required="required"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <div>
+                                    <button class="btn btn-primary " name="submit" type="submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="register_form_partner" name="Register Form Partner">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Partner Enquiry/Registration Form</h1>
+                    </div>
+                </div>
+                <form id="partnerRegister" method="post" action="/partner-enquiry-submit" data-success_page="/partner-enquiry-submit">
+                    <div class="row pt_30">
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="entityname">
+                                    Entity name
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="entityname" name="entityname" placeholder="Entity name" type="text" required="required"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="company_register_number">
+                                    Company registration number
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="company_register_number" name="company_register_number" placeholder="Company registration number" type="text" required="required"/>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <div class="form-group ">
+                                <label class="control-label" for="select">
+                                    Title
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="select">
+                                    <option value="Mr">
+                                        Mr
+                                    </option>
+                                    <option value="Ms">
+                                        Ms
+                                    </option>
+                                    <option value="Mrs">
+                                        Mrs
+                                    </option>
+                                    <option value="Miss">
+                                        Miss
+                                    </option>
+                                    <option value="Dr">
+                                        Dr
+                                    </option>
+                                    <option value="Prof">
+                                        Prof
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-5">
+                            <div class="form-group ">
+                                <label class="control-label " for="entity_representative">
+                                    Name of entity representative
+                                </label>
+                                <input class="form-control" id="entity_representative" name="entity_representative" placeholder="Name of entity representative" type="text" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-5">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="name1">
+                                    Surname
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="name1" name="name1" placeholder="Surname" type="text" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="email">
+                                    Email
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group" id="div_radio">
+                                <label class="control-label " for="radio">
+                                    Gender
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input name="radio" type="radio" value="male" checked="checked"/>
+                                        Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input name="radio" type="radio" value="female"/>
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="cellphone">
+                                    Cell phone number
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="cellphone" name="cellphone" placeholder="Cell phone number" type="text" minlength="10" maxlength="10" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label " for="alterphone">
+                                    Alternative number
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="alterphone" name="alterphone" placeholder="Alternative number" type="text" minlength="10" maxlength="10" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="job_title">
+                                    Job Title
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="job_title" name="job_title" placeholder="Job Title" type="text" required="required"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label " for="landline">
+                                    Landline
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <input class="form-control" id="landline" name="landline" placeholder="Landline" type="text" minlength="10" maxlength="10" required="required"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="select">
+                                    Enquiry type
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="enquiry" name="enquiry" required="required">
+                                    <option value="">Select Enquiry type</option>
+                                    <option value="partner-with-us">
+                                        Partner with us
+                                    </option>
+                                    <option value="become-service-provider">
+                                        Become a service provider
+                                    </option>
+                                    <option value="donate">
+                                        Donate  
+                                    </option>
+                                    <option value="other">
+                                        Other
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="geo_loc">
+                                    Geographic Location
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="geo_loc" required="required">
+                                    <option value="">Select Geographic Location</option>
+                                    <option value="urban">
+                                        Urban
+                                    </option>
+                                    <option value="peri-urban">
+                                        Peri Urban
+                                    </option>
+                                    <option value="rural-area-villages">
+                                        Rural area - Villages
+                                    </option>
+                                    <option value="rural-area-farms">
+                                        Rural area - Farms
+                                    </option>
+                                    <option value="informa-settlement">
+                                        Informa settlement
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6" id="enquire_div" style="display: none;">
+                            <div class="form-group ">
+                                <label class="control-label " for="entity_representative">
+                                    Other
+                                </label>
+                                <input class="form-control" id="other_enquire_type" name="other_enquire_type" placeholder="Other" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="province">
+                                    Province
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="province_id" name="province" required="required">
+                                    <option value="">Select Province</option>
+                                    <t t-foreach="provinces" t-as="province">
+                                        <option t-att-value="province.id">
+                                            <t t-esc="province.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 hidden" id="metro_municipality_div">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="metro_municipality">
+                                    Metro Municipality
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="metro_municipality" name="metro_municipality" required="required">
+                                    <option value="">Please Select Metro Municipality</option>
+                                    <!--                                    <t t-foreach="metro_municipalities" t-as="metro_municipality">-->
+                                    <!--                                            <option t-att-value="metro_municipality.id">-->
+                                    <!--                                                <t t-esc="metro_municipality.name"/>-->
+                                    <!--                                            </option>-->
+                                    <!--                                    </t>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="district">
+                                    District
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="district_id" name="district" required="required">
+                                    <option value="">Please Select Municipality</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="municipality">
+                                    Municipality
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="municipality_id" name="municipality" required="required">
+                                    <option value="">Please Select Municipality</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="near_branch">
+                                    Nearest Branch
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="branches" name="near_branch" required="required">
+                                    <option value="" selected="selected">Please Select Nearest Branch</option>
+                                    <t t-foreach="branches" t-as="branch">
+                                        <option t-att-value="branch.id">
+                                            <!--                                             t-att-selected="branch.id == (branch and branch.id or 0)"-->
+                                            <t t-esc="branch.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="phy_address">
+                                    Physical Address
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <textarea class="form-control" cols="40" id="phy_address" name="phy_address" placeholder="Physical Address" rows="5" required="required"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group ">
+                                <label class="control-label requiredField" for="question">
+                                    Your Enquiry
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <textarea class="form-control" cols="40" id="question" name="question" placeholder="Your Enquiry" rows="5" required="required"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <div>
+                                    <button class="btn btn-primary " name="submit" type="submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>
+
+
+

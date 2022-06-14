@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Meeting Room Tree View-->
+        <record model="ir.ui.view" id="meeting_room_tree_view">
+            <field name="name">meeting.room.tree.view</field>
+            <field name="model">meeting.room</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Meeting Room Form View-->
+        <record model="ir.ui.view" id="meeting_room_form_view">
+            <field name="name">meeting.room.form.view</field>
+            <field name="model">meeting.room</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <div>
+                            <label for="room_location" class="oe_edit_only"/>
+                            <field name="room_location"/>
+                        </div>
+                        <notebook>
+                            <page name="meeting_room_details" string="Meeting Room Details">
+                                <group>
+                                    <field name="meeting_room_booking_ids" nolabel="1">
+                                        <tree create="false" delete="false">
+                                            <field name="name"/>
+                                            <field name="user_id"/>
+                                            <field name="meeting_room_id"/>
+                                            <field name="meeting_date"/>
+                                            <field name="meeting_end_time"/>
+                                            <field name="state"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Meeting Room -->
+        <record model="ir.actions.act_window" id="action_meeting_room">
+            <field name="name">Meeting Room</field>
+            <field name="res_model">meeting.room</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for Configuration-->
+        <menuitem name="Configuration" id="menu_meeting_room_config_id" parent="facility.menu_meeting_room_booking" />
+			        
+        <menuitem name="Meeting Room Config" id="menu_meeting_room" parent="facility.menu_meeting_room_config_id" 
+        	action="action_meeting_room" groups="base.group_system,facility.facility_manager,facility.facility_officer"/>
+
+    </data>
+</odoo>

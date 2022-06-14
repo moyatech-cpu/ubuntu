@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="facility.tickets_dashboard_officer">
+        <div class="container-fluid" id="main_tickets_dashboard">
+            <div class="row">
+            <!-- 
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="p-5 col-md-3 text-left">
+                            <h2>My Tickets</h2>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_tickets"/>
+                            </h2>
+                            <p>Tickets</p>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_normal_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_nt"/>
+                            </h2>
+                            <p>Normal(<span class="fa fa-star" style="color: gold"></span>)
+                            </p>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_hp_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_hpt"/>
+                            </h2>
+                            <p>High Priority(
+                                <span class="fa fa-star" style="color: gold"></span>
+                                <span class="fa fa-star" style="color: gold"></span>)
+                            </p>
+                        </div>
+                        <div class="text-center bg-lightgreen m-2 c-white col-md-2 pointer" id="my_tickets_urgent_view">
+                            <h2>
+                                <span t-esc="widget.tickets_data.total_ut"/>
+                            </h2>
+                            <p>Urgent(
+                                <span class="fa fa-star" style="color: gold"></span>
+                                <span class="fa fa-star" style="color: gold"></span>
+                                <span class="fa fa-star" style="color: gold"></span>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="p-5 col-md-3 text-left">
+                            <h3>My Failed SLA Tickets</h3>
+                        </div>
+                        <t t-if="widget.tickets_data.failed_sla_total_tickets == 0">
+                            <div t-attf-class="text-center bg-lightgreen m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_tickets"/>
+                                </h2>
+                                <p>Tickets</p>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div t-attf-class="text-center bg-orange m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_tickets"/>
+                                </h2>
+                                <p>Tickets</p>
+                            </div>
+                        </t>
+                        <t t-if="widget.tickets_data.failed_sla_total_nt == 0">
+                            <div t-attf-class="text-center bg-lightgreen m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_normal_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_nt"/>
+                                </h2>
+                                <p>Normal(
+                                    <span class="fa fa-star" style="color: gold"></span>)
+                                </p>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div t-attf-class="text-center bg-orange m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_normal_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_nt"/>
+                                </h2>
+                                <p>Normal(
+                                    <span class="fa fa-star" style="color: gold"></span>)
+                                </p>
+                            </div>
+                        </t>
+                        <t t-if="widget.tickets_data.failed_sla_total_hpt == 0">
+                            <div t-attf-class="text-center bg-lightgreen m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_high_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_hpt"/>
+                                </h2>
+                                <p>High Priority(
+                                    <span class="fa fa-star" style="color: gold"></span>
+                                    <span class="fa fa-star" style="color: gold"></span>)
+                                </p>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div t-attf-class="text-center bg-orange m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_high_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_hpt"/>
+                                </h2>
+                                <p>High Priority(
+                                    <span class="fa fa-star" style="color: gold"></span>
+                                    <span class="fa fa-star" style="color: gold"></span>)
+                                </p>
+                            </div>
+                        </t>
+                        <t t-if="widget.tickets_data.failed_sla_total_ut == 0">
+                            <div t-attf-class="text-center bg-lightgreen m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_urgent_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_ut"/>
+                                </h2>
+                                <p>Urgent(
+                                    <span class="fa fa-star" style="color: gold"></span>
+                                    <span class="fa fa-star" style="color: gold"></span>
+                                    <span class="fa fa-star" style="color: gold"></span>)
+                                </p>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div t-attf-class="text-center bg-orange m-2 c-white col-md-2 pointer"
+                                 id="my_sla_failed_urgent_tickets_view">
+                                <h2>
+                                    <span t-esc="widget.tickets_data.failed_sla_total_ut"/>
+                                </h2>
+                                <p>Urgent(
+                                    <span class="fa fa-star" style="color: gold"></span>
+                                    <span class="fa fa-star" style="color: gold"></span>
+                                    <span class="fa fa-star" style="color: gold"></span>)
+                                </p>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                -->
+                <!-- Dashboard box 3 for Tickets according to stages-->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row bg-light m-0">
+                                <div class="col-md-12">
+                                    <h3>Ticket Stages</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr/>
+                                </div>
+                                <t t-foreach="widget.tickets_data.stages" t-as="stage">
+                                    <t t-value="stage['image']" t-set="image"/>
+                                    <div class="col-md-3 text-center tickets_view" t-att-id="stage['id']">
+                                        <img t-att-src="'data:image/png;base64,'+stage['image']"
+                                             class="img img-fluid mx-auto h-80 pointer"
+                                             alt="stage"/>
+                                        <h4 class="pointer"><span t-esc="stage['name']"/></h4>
+                                        <h4 class="pointer"><span t-esc="stage['total_tickets']"/></h4>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dashboard box 4 for Tickets according to category-->
+                <div class="col-xs-12 col-md-12 col-lg-12 col-sm-8 mt-10" >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row m-0">
+
+                                <t t-if="widget.next_action">
+                                    <div class="col-md-12">
+                                        <h3>Ticket Categories</h3>
+                                    </div>
+                                    <t t-foreach="widget.tickets_data.categories" t-as="category">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-11 bg-light m-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h2><span t-esc="category['name']"/></h2>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button t-att-id="category['categ_id']"
+                                                                    type="button"
+                                                                    class="btn btn-primary category_button pointer">
+                                                                Tickets
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h4 class="category_unassigned_link pointer"
+                                                                t-att-id="category['categ_id']">
+                                                                <span t-esc="category['unassigned_tickets']"/>
+                                                                Unassigned Tickets
+                                                            </h4>
+                                                            <h4 class="category_high_priority_link pointer"
+                                                                t-att-id="category['categ_id']">
+                                                                <span t-esc="category['high_priority_ticekts']"/>
+                                                                High Priority Tickets
+                                                            </h4>
+                                                            <h4 class="category_urgent_link pointer"
+                                                                t-att-id="category['categ_id']">
+                                                                <span t-esc="category['urgent_tickets']"/>
+                                                                Urgent Tickets
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </t>
+</template>

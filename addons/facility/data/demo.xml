@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="module_facility" model="ir.module.category">
+            <field name="name">Facility</field>
+        </record>
+
+        <record id="facility_manager" model="res.groups">
+            <field name="name">Facility Manager</field>
+            <field name="category_id" ref="facility.module_facility"/>
+            <field name="implied_ids" eval="[(4,ref('base.group_user')),(4,ref('fleet.fleet_group_manager')),
+            (4,ref('helpdesk_lite.group_helpdesk_lite_manager')),(4,ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <record id="facility_officer" model="res.groups">
+            <field name="name">Facility Officer</field>
+            <field name="category_id" ref="facility.module_facility"/>
+            <field name="implied_ids" eval="[(4,ref('base.group_user')),(4,ref('fleet.fleet_group_manager')),
+            (4,ref('helpdesk_lite.group_helpdesk_lite_manager')),(4,ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <record id="end_user" model="res.groups">
+            <field name="name">End User</field>
+            <field name="category_id" ref="facility.module_facility"/>
+            <field name="implied_ids" eval="[(4,ref('base.group_user')),(4,ref('fleet.fleet_group_manager')),
+            (4,ref('helpdesk_lite.group_helpdesk_lite_manager')),(4,ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <record id="team_leader" model="res.groups">
+            <field name="name">Team Leader</field>
+            <field name="category_id" ref="facility.module_facility"/>
+        </record>
+
+        <record id="end_user_rule" model="ir.rule">
+            <field name="name">End User Rule</field>
+            <field name="model_id" ref="facility.model_meeting_room_booking"/>
+            <field name="active">True</field>
+            <field name="perm_read">True</field>
+            <field name="perm_create">True</field>
+            <field name="perm_write">True</field>
+            <field name="perm_unlink">True</field>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('facility.end_user'))]"/>
+        </record>
+
+        <record id="update_bookings" model="ir.cron">
+            <field name="name">Update Bookings</field>
+            <field name="model_id" ref="facility.model_meeting_room_booking"/>
+            <field name="state">code</field>
+            <field name="code">model.update_bookings()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="stage_solved_officer" model="helpdesk_lite.stage">
+            <field name="name">Solved By Officer</field>
+        </record>
+
+        <record id="access_control_scateg" model="helpdesk.subcategory">
+            <field name="name">Access Control</field>
+        </record>
+
+        <record id="suspicious_act_scateg" model="helpdesk.subcategory">
+            <field name="name">Suspicious Act</field>
+        </record>
+
+        <record id="estcourt_building_scateg" model="helpdesk.subcategory">
+            <field name="name">Estcourt Services in the building</field>
+        </record>
+
+        <record id="workstation_issues_scateg" model="helpdesk.subcategory">
+            <field name="name">Workstation cleanness issues</field>
+        </record>
+
+        <record id="rest_rooms_issues_scateg" model="helpdesk.subcategory">
+            <field name="name">Rest Rooms station cleanness issues</field>
+        </record>
+
+        <record id="office_hygiene_scateg" model="helpdesk.subcategory">
+            <field name="name">Office Hygiene</field>
+        </record>
+
+        <record id="office_hygiene_scateg" model="helpdesk.subcategory">
+            <field name="name">Sanitory Bins</field>
+        </record>
+
+        <record id="delivery_goods_scateg" model="helpdesk.subcategory">
+            <field name="name">Delivery of goods</field>
+        </record>
+
+        <record id="shuttle_services_scateg" model="helpdesk.subcategory">
+            <field name="name">Shuttle services</field>
+        </record>
+
+        <record id="electrical_issues_scateg" model="helpdesk.subcategory">
+            <field name="name">Electrical issues</field>
+        </record>
+
+        <record id="plumbing_issues_scateg" model="helpdesk.subcategory">
+            <field name="name">Plumbing issues</field>
+        </record>
+
+        <record id="mechanical_issues_scateg" model="helpdesk.subcategory">
+            <field name="name">Mechanical issues</field>
+        </record>
+
+        <record id="wear_fear_scateg" model="helpdesk.subcategory">
+            <field name="name">Wear and fear</field>
+        </record>
+
+        <record id="replacement_scateg" model="helpdesk.subcategory">
+            <field name="name">Replacement</field>
+        </record>
+
+        <record id="mis_use_scateg" model="helpdesk.subcategory">
+            <field name="name">Misuse</field>
+        </record>
+
+        <record id="toilet_roll_scateg" model="helpdesk.subcategory">
+            <field name="name">Toilet Roll</field>
+        </record>
+
+        <record id="water_dispenser_scateg" model="helpdesk.subcategory">
+            <field name="name">Water Dispenser</field>
+        </record>
+
+        <record id="coffee_and_tea_scateg" model="helpdesk.subcategory">
+            <field name="name">Coffee and Tea</field>
+        </record>
+
+        <record id="milk_sugar_scateg" model="helpdesk.subcategory">
+            <field name="name">Milk and Sugar</field>
+        </record>
+
+        <record id="hand_wash_scateg" model="helpdesk.subcategory">
+            <field name="name">Hand wash</field>
+        </record>
+
+        <record id="hand_sanitizer_scateg" model="helpdesk.subcategory">
+            <field name="name">Hand Sanitizer</field>
+        </record>
+
+        <record id="external_garden_issues_scateg" model="helpdesk.subcategory">
+            <field name="name">External Garden issues</field>
+        </record>
+
+        <record id="bookings_scateg" model="helpdesk.subcategory">
+            <field name="name">Bookings</field>
+        </record>
+
+        <record id="security_categ" model="helpdesk.category">
+            <field name="name">Security</field>
+        </record>
+
+        <record id="house_keeping_categ" model="helpdesk.category">
+            <field name="name">House Keeping</field>
+        </record>
+
+        <record id="transport_services_categ" model="helpdesk.category">
+            <field name="name">Transport Services</field>
+        </record>
+
+        <record id="maintenance_categ" model="helpdesk.category">
+            <field name="name">Maintenance</field>
+        </record>
+
+        <record id="printing_paper_categ" model="helpdesk.category">
+            <field name="name">Printing paper</field>
+        </record>
+
+        <record id="consumables_categ" model="helpdesk.category">
+            <field name="name">Consumables</field>
+        </record>
+
+        <!--<record id="hospitality_categ" model="helpdesk.category">-->
+            <!--<field name="name">Hospitality</field>-->
+        <!--</record>-->
+
+        <record id="land_scaping_categ" model="helpdesk.category">
+            <field name="name">Land Scaping</field>
+        </record>
+
+        <record id="meeting_rooms_categ" model="helpdesk.category">
+            <field name="name">Meeting Rooms</field>
+        </record>
+
+        <!--<record id="courier_bags_categ" model="helpdesk.category">-->
+            <!--<field name="name">Courier bags</field>-->
+        <!--</record>-->
+
+        <!--<record id="courier_boxes_categ" model="helpdesk.category">-->
+            <!--<field name="name">Courier boxes</field>-->
+        <!--</record>-->
+
+        <record id="paperformat_landscape_tickets" model="report.paperformat">
+            <field name="name">Tickets A4 Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">28</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!--Cron job for sending mail-->
+        <record id="mail_cron" model="ir.cron">
+            <field name="name">SLA Timer Escalation Mail</field>
+            <field name="model_id" ref="helpdesk_lite.model_helpdesk_lite_ticket"/>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="active">True</field>
+            <field name="code">model.send_esacalation_mail()</field>
+        </record>
+
+        <record id="ticket_facility_officer_rule" model="ir.rule">
+            <field name="name">Restrict Facility Officer Tickets</field>
+            <field name="model_id" ref="facility.model_helpdesk_lite_ticket"/>
+            <field name="domain_force">[('facility_officer_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4,ref('facility.facility_officer'))]"/>
+        </record>
+
+    </data>
+</odoo>

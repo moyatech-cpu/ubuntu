@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- New Enquiry for Monitoring Report mail template -->
+        <!--<record id="new_monitoring_report_email_template" model="mail.template">-->
+            <!--<field name="name">New Monitoring Report Template</field>-->
+            <!--<field name="auto_delete" eval="False"/>-->
+            <!--<field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>-->
+            <!--<field name="lang">${object.lang}</field>-->
+<!--&lt;!&ndash;            <field name="email_from"><![CDATA["${object.create_uid.name|safe}" <${(object.create_uid.email or user.email)|safe}>]]></field>&ndash;&gt;-->
+            <!--<field name="email_to">${ctx['u'].login}</field>-->
+            <!--<field name="subject"><![CDATA[Regarding Monitoring Report.]]></field>-->
+            <!--<field name="body_html">-->
+                <!--<![CDATA[-->
+<!--<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">-->
+    <!--<p>Hello ${ctx['u'].name},</p>-->
+     <!--<p>Your Reporting Timeline is ${object.from_date} to ${object.to_date}.</p>-->
+    <!--<p>Kindly submit your report</p>-->
+    <!--<p>Regards, </p>-->
+    <!--<p>NYDA</p>-->
+<!--</div>-->
+            <!--]]>-->
+            <!--</field>-->
+        <!--</record>-->
+
+        <!-- Reporting Time mail template -->
+        <record id="reporting_time_email_template" model="mail.template">
+            <field name="name">Reporting Time Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.create_uid.company_id.email|safe}</field>
+            <field name="email_to">${object.employee_id.login}</field>
+            <field name="subject"><![CDATA[Regarding reporting time]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.employee_id.name|safe},</p>
+    <p>These mail is regarding to let you know that reporting time is set for a Monitoring report named ${object.name|safe} and its repoting time is on ${object.from_date|safe}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Updating Reporting Time mail template -->
+        <record id="update_reporting_time_email_template" model="mail.template">
+            <field name="name">Updating Reporting Time Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.create_uid.company_id.email|safe}</field>
+            <field name="email_to">${object.employee_id.login}</field>
+            <field name="subject"><![CDATA[Updating reporting time]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.employee_id.name|safe},</p>
+    <p>These mail is regarding to let you know that reporting time is updated for a Monitoring report named ${object.name|safe} and its repoting time is on ${object.from_date|safe}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!--Cron job for sending mail-->
+        <record id="deadline_cron" model="ir.cron">
+            <field name="name">Send mail for reminding deadline</field>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">12</field>
+            <field name="interval_type">hours</field>
+            <field name="active">True</field>
+            <field name="code">model.send_deadline_mail()</field>
+        </record>
+
+        <!-- Sending Deadline mail template -->
+        <record id="deadline_mail_template" model="mail.template">
+            <field name="name">Deadline Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.create_uid.company_id.email|safe}</field>
+            <field name="email_to">${object.employee_id.login}</field>
+            <field name="subject"><![CDATA[Reminder for deadline date]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.employee_id.name|safe},</p>
+    <p>These mail is regarding to let you know that deadline date for a Monitoring report named ${object.name|safe} is on ${object.to_date|safe}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Sending Monitoring Report Status Change Mail Template -->
+        <record id="monitoring_report_mail_template" model="mail.template">
+            <field name="name">Monitoring Report Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="lang">${object.lang}</field>
+            <field name="subject"><![CDATA[Monitoring Report Status Update]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+%if object.state in ['new', 'review', 'reject']:
+    <p>Hello ${object.employee_id.name|safe},</p>
+%endif
+%if object.state in ['submitted', 'sm_review', 'sm_reject']:
+    <p>Hello ${object.line_manager_id.name|safe},</p>
+%endif
+%if object.state in ['approve', 'ed_review', 'ed_reject','ed_approve']:
+    <p>Hello ${object.senior_manager_id.name|safe},</p>
+%endif
+%if object.state in ['sm_approve']:
+    <p>Hello ${object.executive_director_id.name|safe},</p>
+%endif
+    <p>These mail is regarding to let you know that status for a Monitoring report named ${object.name|safe} is changed to
+    %if object.state in ['new']:
+        New
+    %endif
+    %if object.state in ['submitted']:
+        Submitted
+    %endif
+    %if object.state in ['review']:
+        Review
+    %endif
+    %if object.state in ['approve']:
+        Approve
+    %endif
+    %if object.state in ['reject']:
+        Reject
+    %endif
+    %if object.state in ['sm_review']:
+        Senior Manager Review
+    %endif
+    %if object.state in ['sm_approve']:
+        Senior Manager Approve
+    %endif
+    %if object.state in ['sm_reject']:
+        Senior Manager Reject
+    %endif
+    %if object.state in ['ed_reject']:
+        Executive Director Reject
+    %endif
+    %if object.state in ['ed_approve']:
+        Executive Director Approve
+    %endif
+    %if object.state in ['ed_review']:
+        Executive Director Review
+    %endif
+    .</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <record id="monitoring_report_records" model="ir.rule">
+            <field name="name">Monitoring report NYDA Employees records</field>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="active">True</field>
+            <field name="domain_force">[('employee_id', '=', user.id)]</field>
+            <field name="global">False</field>
+            <field name="groups" eval="[(4, ref('monitoring_and_evaluation.group_nyda_employees'))]"/>
+        </record>
+
+        <record id="monitoring_report_line_manger_records" model="ir.rule">
+            <field name="name">Monitoring report Line Manager records</field>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="active">True</field>
+            <field name="domain_force">[('line_manager_id', '=', user.id)]</field>
+            <field name="global">False</field>
+            <field name="groups" eval="[(4, ref('strategy_and_planning.group_line_manager'))]"/>
+        </record>
+
+        <record id="monitoring_report_senior_manger_records" model="ir.rule">
+            <field name="name">Monitoring report Senior Manager records</field>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="active">True</field>
+            <field name="domain_force">[('senior_manager_id', '=', user.id)]</field>
+            <field name="global">False</field>
+            <field name="groups" eval="[(4, ref('monitoring_and_evaluation.group_senior_manager'))]"/>
+        </record>
+
+        <record id="monitoring_report_executive_director_records" model="ir.rule">
+            <field name="name">Monitoring report Executive Director records</field>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="active">True</field>
+            <field name="domain_force">[('executive_director_id', '=', user.id)]</field>
+            <field name="global">False</field>
+            <field name="groups" eval="[(4, ref('strategy_and_planning.group_executive_director'))]"/>
+        </record>
+
+        <record id="monitoring_report_me_personnal_records" model="ir.rule">
+            <field name="name">Monitoring report M&amp;E Personnal records</field>
+            <field name="model_id" ref="monitoring_and_evaluation.model_monitoring_report"/>
+            <field name="active">True</field>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="global">False</field>
+            <field name="groups" eval="[(4, ref('monitoring_and_evaluation.group_me_personnal'))]"/>
+        </record>
+
+    </data>
+</odoo>
+

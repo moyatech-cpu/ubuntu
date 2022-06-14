@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_frontend" name="website_ribbon_assets_frontend" inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/odoo_maintenance_mode/static/src/css/odoo_maintainance.css"/>
+                <script type="text/javascript" src='/odoo_maintenance_mode/static/src/js/maintainance.js'></script>
+            </xpath>
+        </template>
+        <template id="maintenance_mode_template_id" name="Maintainanace Mode">
+            <main>
+                <div class="sigin_header text-center ">
+                    <a t-attf-href="/web/login">
+                        <b class="login_wk">Login</b>
+                    </a>
+                </div>
+                <div class="wk_maintinance_body">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <span t-if="website.get_image()" t-esc="website.get_image().image" t-options="{'widget': 'image', 'class': 'img_full'}" style="max-width:100%" class="maintainance_img"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="maintenance_header">
+                            <p class="text-center ">
+                                <t t-if="website.get_page_header_message()" t-esc="website.get_page_header_message()"/>
+                            </p>
+                        </div>
+                        <div class="maintenance_body_txt">
+                            <p class="text-center ">
+                                <i>
+                                    <t t-if="website.get_page_descriptitive_message()" t-esc="website.get_page_descriptitive_message()"/>
+                                </i>
+                            </p>
+                        </div>
+                        <div t-if="website.display_email_in_page()">
+                            <div class="wk_email_noti_hdr ">
+                                <t t-if="website.get_notification_header()" t-esc="website.get_notification_header()"/>
+                            </div>
+                            <div class="input-group wk_scbscriber_input col-md-8 col-md-12 text-center">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input name="wk_subscriber_email" class='form-control' id="wk_subscriber_email" type="text" placeholder="Enter your email"/>
+                                <div class="input-group-btn">
+                                    <span class="btn wk_maintenance_subscriber fa fa-envelope">Notify Me</span>
+                                </div>
+                            </div>
+                            <div class="wk_invalid_email_msg col-md-8 col-md-12">
+                                <t t-if="website.display_invalid_email_msg()" t-esc="website.display_invalid_email_msg()"/>
+                            </div>
+                            <div class="wk_valid_email_msg col-md-8 col-md-12">
+                                <t t-if="website.display_valid_email_msg()" t-esc="website.display_valid_email_msg()"/>
+                            </div>
+                            <div class="wk_exists_email_msg col-md-8 col-md-12">
+                                <t t-if="website.display_exists_email_msg()" t-esc="website.display_exists_email_msg()"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wk_maintinance_footer text-center col-md-12 col-sm-12 col-xs-12">
+                    <div class="wk_company_footer1">
+                        <p t-field="res_company.name" />
+                    </div>
+                    <div class="wk_company_footer2">
+                        <span class="fa fa-envelope" t-field="res_company.email"></span>
+                    </div>
+                </div>
+            </main>
+        </template>
+        <template id="layout" inherit_id="website.layout" name="Main layout">
+            <xpath expr="//div[@id='wrapwrap']" position="replace">
+                <t t-set="maintnance_value" t-value="website.odoo_maintainance_mode()"/>
+                <div t-if="not maintnance_value['wk_display_page']" id="wrapwrap" t-att-class="pageName or ''">
+                    <header>
+                        <div class="navbar navbar-default navbar-static-top">
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="/" t-if="website" t-field="website.name">My Website</a>
+                                </div>
+                                <div class="collapse navbar-collapse navbar-top-collapse">
+                                    <ul t-if="not maintnance_value['is_sigin_clicked']" class="nav navbar-nav navbar-right" id="top_menu">
+                                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                            <t t-call="website.submenu"/></t>
+                                        <li class="divider" t-ignore="true" t-if="website.user_id != user_id"/>
+                                        <li class="dropdown" t-ignore="true" t-if="website.user_id != user_id">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <b>
+                                                    <span t-esc="(len(user_id.name)&gt;25) and (user_id.name[:23]+'...') or user_id.name"/>
+                                                    <span class="caret"></span>
+                                                </b>
+                                            </a>
+                                            <ul class="dropdown-menu js_usermenu" role="menu">
+                                                <li id="o_logout">
+                                                    <a t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider" groups="base.group_public"/>
+                                        <li groups="base.group_public">
+                                            <a t-attf-href="/web/login">
+                                                <b>Sign in</b>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div t-if="maintnance_value['is_sigin_clicked']" class="close_header text-center ">
+                                        <a t-attf-href="/">
+                                            <b class="login_wk">Go Back</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <main>
+                        <t t-raw="0"/>
+                    </main>
+                    <footer>
+                        <div id="footer"></div>
+                    </footer>
+                </div>
+                <div t-if="maintnance_value['wk_display_page']" id="wrapwrap" t-att-class="pageName or ''">
+                    <t t-call="odoo_maintenance_mode.maintenance_mode_template_id"/>
+                </div>
+            </xpath>
+        </template>
+        <template id="user_navbar" inherit_id="website.user_navbar">
+            <xpath expr="//t[@t-set='body_classname']" position="replace">
+                <t t-set="maintnance_value" t-value="website.odoo_maintainance_mode()"/>
+                <div class="admin_header text-center" t-if="request.session.context.get('accessible_user') and website.display_admin_message()">
+                    <span class="admin_msg_web fa fa-cogs">
+                        <span class="wk_text" t-esc="website.get_admin_message()"/></span>
+                </div>
+                <t t-if="not maintnance_value['is_sigin_clicked'] and not maintnance_value['wk_display_page']" t-set="body_classname" t-value="'o_connected_user' if env['ir.ui.view'].user_has_groups('base.group_user') else None"/>
+            </xpath>
+            <xpath expr="//nav[@id='oe_main_menu_navbar']" position="replace">
+                <nav groups="base.group_user" t-if="website and menu_data and (not maintnance_value['is_sigin_clicked'] and not maintnance_value['wk_display_page'])" id="oe_main_menu_navbar" class="o_main_navbar">
+                    <ul id="oe_applications">
+                        <li class="dropdown active">
+                            <a class="dropdown full" data-toggle="dropdown" href="#">
+                                <i class="fa fa-th-large"/>WEBSITE
+                                <b class="caret"/>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li t-as="menu" t-foreach="menu_data['children']">
+                                    <t t-set="debug_param" t-value="'?&amp;debug=' if debug else ''"/>
+                                    <a t-att-class="'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'" t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or None" t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or None" t-att-data-menu="menu['id']" t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')">
+                                        <i t-attf-class="fa #{menu.get('icon')} fa-lg fa-fw" t-if="menu.get('icon')"/>
+                                        <span class="oe_menu_text">
+                                            <t t-esc="menu['name']"/>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <button type="button" class="fa fa-bars pull-right visible-xs-block o_mobile_menu_toggle"/>
+                    <div class="o_menu_brand">Website</div>
+                    <ul class="o_menu_sections" groups="website.group_website_designer">
+                        <!-- Content -->
+                        <li class="dropdown content" t-if="editable">
+                            <a id="content-menu-button" class="dropdown-toggle waves" data-toggle="dropdown" href="#">Content</a>
+                            <ul class="dropdown-menu oe_content_menu" role="menu">
+                                <li>
+                                    <a data-action="edit_menu" href="#" title="Edit Top Menu">Edit Menu</a>
+                                </li>
+                                <li t-if="deletable" role="separator" class="divider"></li>
+                                <li t-if="deletable">
+                                    <a href="#" data-action="rename_page">Rename Page</a>
+                                </li>
+                                <li t-if="deletable">
+                                    <a href="#" data-action="delete_page">Delete Page</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Customize -->
+                        <li class="dropdown" id="customize-menu">
+                            <a class="dropdown-toggle waves" data-toggle="dropdown" href="#" id="customize-menu-button">Customize</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li id="html_editor">
+                                    <a data-action="ace" href="#advanced-view-editor">HTML Editor</a>
+                                </li>
+                                <li id="theme_customize">
+                                    <a href="#">Customize Theme</a>
+                                </li>
+                                <li id="install_apps">
+                                    <a href="/web#return_label=Website&amp;action=website.action_module_website">Install Apps</a>
+                                </li>
+                                <li class="divider"/>
+                            </ul>
+                        </li>
+                        <!-- Promote -->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle waves" data-toggle="dropdown" href="#" id="promote-menu-button">Promote</a>
+                            <ul class="dropdown-menu oe_promote_menu" role="menu">
+                                <li>
+                                    <a data-action="promote-current-page" href="#" title="Promote page on the web">Optimize SEO</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="o_menu_systray hidden-xs" groups="website.group_website_publisher">
+                        <!-- Mobile preview -->
+                        <li class="o_mobile_preview">
+                            <a data-action="show-mobile-preview" href="#">
+                                <span title="Mobile preview" class="fa fa-mobile"/>
+                            </a>
+                        </li>
+                        <!-- Page Edition -->
+                        <li>
+                            <a data-action="new_page" href="#" data-toggle="modal" data-target="#o_website_add_page_modal">
+                                <span class="fa fa-plus"/>New
+                            </a>
+                        </li>
+                        <li t-if="not translatable">
+                            <a data-action="edit" href="#">
+                                <span class="fa fa-pencil"/>Edit
+                            </a>
+                        </li>
+                        <li t-if="translatable">
+                            <a data-action="translate" href="#">TRANSLATE</a>
+                        </li>
+                        <li t-if="translatable">
+                            <a data-action="edit_master" href="#">or Edit Master</a>
+                        </li>
+                    </ul>
+                </nav>
+            </xpath>
+        </template>
+        <template id="footer_custom" inherit_id="odoo_maintenance_mode.layout" name="Footer">
+            <xpath expr="//div[@id='footer']" position="replace">
+                <div class="oe_structure" id="footer">
+                    <section>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4 class="mt16">Subtitle</h4>
+                                    <p>
+                                        <a href="/">Homepage</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="mt16">Subtitle 2</h4>
+                                    <p>...</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="mt16">Subtitle 3</h4>
+                                    <p>...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </xpath>
+        </template>
+        <template id="footer_default" inherit_id="odoo_maintenance_mode.footer_custom" customize_show="True" name="Automatic Footer">
+            <xpath expr="//div[@id='footer']" position="replace">
+                <div id="footer" class="container hidden-print">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3">
+                            <h4>Our Products &amp; Services</h4>
+                            <ul class="list-unstyled" id="products">
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-lg-3" id="info">
+                            <h4>Connect with us</h4>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/page/website.contactus">Contact us</a>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled">
+                                <li t-ignore="true">
+                                    <i class="fa fa-phone"></i>
+                                    <span t-field="res_company.phone"></span>
+                                </li>
+                                <li t-ignore="true">
+                                    <i class="fa fa-envelope"></i>
+                                    <span t-field="res_company.email"></span>
+                                </li>
+                            </ul>
+                            <h2>
+                                <a t-att-href="website.social_facebook" t-if="website.social_facebook">
+                                    <i class="fa fa-facebook-square"/>
+                                </a>
+                                <a t-att-href="website.social_twitter" t-if="website.social_twitter">
+                                    <i class="fa fa-twitter"/>
+                                </a>
+                                <a t-att-href="website.social_linkedin" t-if="website.social_linkedin">
+                                    <i class="fa fa-linkedin"/>
+                                </a>
+                                <a t-att-href="website.social_youtube" t-if="website.social_youtube">
+                                    <i class="fa fa-youtube-play"/>
+                                </a>
+                                <a t-att-href="website.social_googleplus" t-if="website.social_googleplus" rel="publisher">
+                                    <i class="fa fa-google-plus-square"/>
+                                </a>
+                                <a t-att-href="website.social_github" t-if="website.social_github">
+                                    <i class="fa fa-github"/>
+                                </a>
+                            </h2>
+                        </div>
+                        <div class="col-md-4 col-lg-5 col-lg-offset-1">
+                            <h4>
+                                <span t-field="res_company.name" />
+                                <small>-
+                                    <a href="/page/website.aboutus">About us</a>
+                                </small>
+                            </h4>
+                            <div>
+                                <p>We are a team of passionate people whose goal is to improve everyone's                            life through disruptive products. We build great products to solve your                            business problems.</p>
+                                <p>Our products are designed for small to medium size companies willing to optimize                            their performance.</p>
+                            </div>
+                            <t t-call="website.language_selector"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="web_login_inherited" inherit_id="web.login" name="Sign up login">
+            <xpath expr="//div[@class='clearfix oe_login_buttons']" position="before">
+                <div t-if="request.session.context.get('login_clicked') and not error" class="text-center alert alert-danger">
+                    <t t-esc="request.env['website'].get_login_page_message()"/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="webclient_bootstrap_inherited" inherit_id="web.webclient_bootstrap">
+            <xpath expr="//nav[@id='oe_main_menu_navbar']" position="before">
+                <div t-if="request.session.context.get('accessible_user') and request.env['website'].display_admin_message()" style="color: #01579B;font-size:18px;aligin:center;height:30px;background-color:#2e3d50;padding-top:3px;" class="fa fa-cogs text-center">
+                    <span style="padding:2px; color:#fc5a69;font-style: italic;">
+                        <t t-esc="request.env['website'].get_admin_message()"/>
+                    </span>
+                </div>
+            </xpath>
+        </template>
+        <template id="layout_logo_show" inherit_id="odoo_maintenance_mode.layout" customize_show="True" name="Show Logo">
+            <xpath expr="//header//a[hasclass('navbar-brand')]" position="replace">
+                <a href="/" class="navbar-brand logo">
+                    <span t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name" />
+                </a>
+            </xpath>
+        </template>
+    </data>
+</odoo>

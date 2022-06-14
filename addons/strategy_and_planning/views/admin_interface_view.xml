@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_admin_interface_division_form" model="ir.ui.view">
+            <field name="name">Division</field>
+            <field name="model">divisions</field>
+            <field name="arch" type="xml">
+                <form string="Division">
+                    <sheet>
+                        <group>
+                            <field name="division_name"/>
+                            <field name="programme_id"/>
+                        </group>
+                        <group>
+                            <field name="responsible_user"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_admin_interface_division_tree" model="ir.ui.view">
+            <field name="name">Division</field>
+            <field name="model">divisions</field>
+            <field name="arch" type="xml">
+                <tree string="Division">
+                    <field name="division_name"/>
+                    <field name="programme_id"/>
+                    <field name="responsible_user"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_admin_interface_division" model="ir.actions.act_window">
+            <field name="name">Divisions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">divisions</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Configuration" id="configuration_menu" parent="menu_planning_root"
+                  sequence="15"/>
+
+        <menuitem id="menu_admin_interface_division" name="Division"
+                  parent="configuration_menu" action="action_admin_interface_division"
+                  sequence="10"/>
+
+        <record id="view_admin_interface_business_units_form" model="ir.ui.view">
+            <field name="name">Business Unit</field>
+            <field name="model">business.units</field>
+            <field name="arch" type="xml">
+                <form string="Business Unit">
+                    <sheet>
+                        <group>
+                            <field name="unit_name"/>
+                            <field name="sub_programme"/>
+                        </group>
+                        <group>
+                            <field name="division_id"/>
+                            <field name="responsible_user"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_admin_interface_business_unit_tree" model="ir.ui.view">
+            <field name="name">Business Unit</field>
+            <field name="model">business.units</field>
+            <field name="arch" type="xml">
+                <tree string="Business Unit">
+                    <field name="unit_name"/>
+                    <field name="sub_programme"/>
+                    <field name="division_id"/>
+                    <field name="responsible_user"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_admin_interface_business_unit" model="ir.actions.act_window">
+            <field name="name">Business Units</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">business.units</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_admin_interface_business_unit" name="Business Unit"
+                  parent="configuration_menu" action="action_admin_interface_business_unit"
+                  sequence="20"/>
+
+        <record id="view_admin_interface_programme_form" model="ir.ui.view">
+            <field name="name">Programme</field>
+            <field name="model">programme</field>
+            <field name="arch" type="xml">
+                <form string="Programme">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_admin_interface_programme_tree" model="ir.ui.view">
+            <field name="name">Programme</field>
+            <field name="model">programme</field>
+            <field name="arch" type="xml">
+                <tree string="Programme">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_admin_interface_programme" model="ir.actions.act_window">
+            <field name="name">Programme</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">programme</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_admin_interface_programme" name="Programme"
+                  parent="configuration_menu" action="action_admin_interface_programme"
+                  sequence="30"/>
+    </data>
+</odoo>

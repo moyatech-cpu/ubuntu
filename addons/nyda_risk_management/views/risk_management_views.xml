@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_risk_management_root"
+              name="Risk Management"
+              sequence="9"
+              web_icon="nyda_risk_management,static/description/icon.png"/>
+
+    <!-- Risk Report Menu 
+    <menuitem id="menu_risk_reporting"
+              name="Reporting"
+              parent="menu_risk_management_root"
+              sequence="17"/>
+	-->
+
+    <!-- Risk Management Views -->
+    <record id="view_risk_management_form" model="ir.ui.view">
+        <field name="name">view.risk.management.form</field>
+        <field name="model">risk.management</field>
+        <field name="arch" type="xml">
+            <form string="Risk">
+                <header>
+                    <button name="action_approval_send" string="Submit for Approval" type="object" states="new" class="btn-primary" groups="nyda_risk_management.risk_user"/>
+                    <button name="action_accept" string="Accept" type="object" states="submit" class="btn-primary" groups="	nyda_risk_management.risk_manager"/>
+                    <button name="action_reset" string="Decline" type="object" states="submit" class="btn-primary" groups="	nyda_risk_management.risk_manager"/>
+                    
+                    <button name="action_reminder_send" string="Send Notice" type="object" class="btn-primary" groups="nyda_risk_management.risk_user"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                     <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                type="object"
+                                icon="fa-th-list"
+                                name="submited_report_smart_button"
+                                attrs="{'invisible': [('risk_reports_count', '=', 0)]}">
+                            <field name="risk_reports_count" widget="statinfo" string="Submited Report"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Please Enter Risk Title..." required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="risk_level" required="1"/>
+                            <field name="monitoring_intervals" required="1"/>
+                            <field name="time_scale" string="Date Effective"/>
+                        </group>
+                        <group>
+                            <field name="risk_owner" required="1"/>
+                            <field name="action_owner" required="1"/>
+                            <!--  <field name="improve_risk"/> -->
+                        </group>
+                    </group>
+<!--                    <group string="Basic Data">-->
+<!--                        <group>-->
+<!--                            <field name="reporting_deadline_start"/>-->
+<!--                            <field name="reporting_deadline_end"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="risk_level" required="1"/>-->
+<!--                            <field name="poe_attachment" required="1"/>-->
+<!--                            <field name="responsible_id"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group string="Planning Data">-->
+<!--                        <group>-->
+<!--                            <field name="plan_id"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="plan_start_date"/>-->
+<!--                            <field name="plan_end_date"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group string="Legislation log">-->
+<!--                        <field name="legislation_log_ids" nolabel="1">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="name"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                    <group string="Supporting Documents">-->
+<!--                        <field name="support_doc_ids" nolabel="1">-->
+<!--                            <form string="Upload Document">-->
+<!--                                <group>-->
+<!--                                    <field name="support_doc"/>-->
+<!--                                </group>-->
+<!--                            </form>-->
+<!--                            <tree>-->
+<!--                                <field name="support_doc"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+                    <notebook>
+                        <page string="Risk Data" name="risk_data">
+                            <group>
+                                <group>
+                                    <field name="strategic_objective_id"/>
+                                    <field name="contributing_factors"/>
+                                </group>
+                                <group>
+                                    <field name="ideal_control"/>
+                                </group>
+                            </group>
+                            <separator string="Risk Description"/>
+                            <field name="risk_description"/>
+                        </page>
+                        <page string="Effect" name="effect">
+                            <group>
+                                <group>
+                                    <field name="effect"/>
+                                    <field name="likelihood"/>
+                                    <field name="existing_controls" string="Existing Control"/>
+                                    <field name="residual_risk"/>
+                                    <!--  
+                                    <field name="improve_risk"/>
+                                    <field name="time_scale"/>
+                                    -->
+                                </group>
+                                <group>
+                                    <field name="effect_impact"/>
+                                    <field name="inherent_risk"/>
+                                    <field name="perceived_control"/>
+                                    <!--  
+                                    <field name="risk_owner"/>
+                                    <field name="action_owner"/>
+                                    <field name="monitoring_intervals"/>
+                                    -->
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Lost Assets log" attrs="{'invisible': [('state', '=', 'new')]}" name="log_assets_log">
+                            <field name="lost_assets_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Deliverable log" attrs="{'invisible': [('state', '=', 'new')]}" name="delivery_log">
+                            <field name="deliverable_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_clear"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_management_tree" model="ir.ui.view">
+        <field name="name">view.risk.management.tree</field>
+        <field name="model">risk.management</field>
+        <field name="arch" type="xml">
+            <tree string="Risks" decoration-danger="risk_level == 'high'" decoration-success="risk_level == 'low'"
+                  decoration-warning="risk_level == 'moderate'">
+                <field name="name"/>
+                <field name="strategic_objective_id"/>
+                <field name="risk_description"/>
+                <field name="contributing_factors"/>
+                <field name="ideal_control"/>
+                <field name="risk_level"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_risk_management" model="ir.actions.act_window">
+        <field name="name">Risks</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">risk.management</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Add Risk Factor for Planning from here.
+            </p>
+        </field>
+    </record>
+
+<!--  
+    <menuitem id="menu_risk_management"
+              name="Risks"
+              parent="menu_risk_management_root"
+              action="action_risk_management"
+              sequence="10"/>
+-->
+<!--    <menuitem id="risk_management_configuration_menu" name="Configuration"-->
+<!--                  parent="nyda_risk_management.menu_risk_management_root" action="action_view_vehicle_category"-->
+<!--                  sequence="10"/>-->
+
+    <!-- risk.reporting.history search view -->
+    <record id="view_risk_reporting_history_search" model="ir.ui.view">
+        <field name="name">view.risk.reporting..history.search</field>
+        <field name="model">risk.reporting.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="risk_id"/>
+                <filter name="state" string="State" context="{'group_by':'state'}"/>
+                <filter name="user_id" string="Submit By" context="{'group_by':'user_id'}"/>
+                <filter name="risk_id" string="Risk" context="{'group_by':'risk_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- risk.reporting.history tree view -->
+    <record id="view_risk_reporting_history_tree" model="ir.ui.view">
+        <field name="name">view.risk.reporting..history.tree</field>
+        <field name="model">risk.reporting.history</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" decoration-danger="state=='reject'" decoration-success="state=='approved'">
+                <field name="risk_id"/>
+                <field name="monitoring_intervals"/>
+                <field name="employee_id"/>
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- risk.reporting.history form view -->
+    <record id="view_risk_reporting_history_form" model="ir.ui.view">
+        <field name="name">view.risk.reporting..history.form</field>
+        <field name="model">risk.reporting.history</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header>
+                    <button name="action_manager_approve" string="Manager Approve" type="object" attrs="{'invisible':[('state','not in',['draft'])]}"/>
+                    <button name="action_ed_approve" string="Executive Director Approve" type="object" attrs="{'invisible':[('state','not in',['manger'])]}"/>
+                    <button name="action_ceo_approve" string="CEO Approve" type="object" attrs="{'invisible':[('state','not in',['ed'])]}"/>
+                    <button name="%(nyda_risk_management.action_wiz_report_reject_comment)d" string="Reject" type="action" attrs="{'invisible':[('state','in',['reject','approved'])]}"/>
+                    <button name="action_set_to_draft" string="Set to Draft" type="object" attrs="{'invisible':[('state','!=','reject')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="risk_id"/>
+                            <field name="employee_id"/>
+                            <field name="submit_date"/>
+                        </group>
+                        <group>
+                            <field name="monitoring_intervals"/>
+                            <field name="monitoring_month" attrs="{'invisible': [('monitoring_intervals','!=','monthly')], 'required': [('monitoring_intervals','=','monthly')]}"/>
+                            <field name="monitoring_quarter" attrs="{'invisible': [('monitoring_intervals','!=','quarterly')], 'required': [('monitoring_intervals','=','quarterly')]}"/>
+                            <field name="monitoring_year" attrs="{'invisible': [('monitoring_intervals','!=','annually')], 'required': [('monitoring_intervals','=','annually')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Documents">
+                            <field name="store_report_name" invisible="1"/>
+                            <field name="report_doc" widget="binary" filename="store_report_name" required="1"/>
+                            <field name="store_p_o_e_name" invisible="1"/>
+                            <field name="p_o_e_doc" widget="binary" filename="store_p_o_e_name" required="1"/>
+                        </group>
+                        <group string="Approver Info.">
+                            <field name="user_id" readonly="1"/>
+                            <field name="manager_user_id" readonly="1"/>
+                            <field name="ed_user_id" readonly="1"/>
+                            <field name="ceo_user_id" readonly="1"/>
+                            <field name="reject_user_id" readonly="1" attrs="{'invisible': [('state','!=','reject')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="note">
+                            <field name="note"/>
+                        </page>
+                        <page string="Rejection Reason" name="rejection_reason" attrs="{'invisible':[('state','!=','reject')]}">
+                            <field name="reject_comment"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- action for risk.reporting.history -->
+    <record id="action_risk_reporting_history" model="ir.actions.act_window">
+        <field name="name">Risk Reporting</field>
+        <field name="res_model">risk.reporting.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+	
+	<!--  
+    <menuitem id="menu_risk_reporting_history"
+              name="Risk Reporting"
+              action="action_risk_reporting_history"
+              parent="menu_risk_reporting"
+              sequence="20"/>
+	-->
+	
+</odoo>

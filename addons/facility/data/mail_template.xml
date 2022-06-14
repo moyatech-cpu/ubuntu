@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!--  Mail Template -->
+        <record id="meeting_room_email_template" model="mail.template">
+            <field name="name">Confirmation Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="model_meeting_room_booking"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.user_id.company_id.email}</field>
+            <field name="email_to">${object.user_id.login}</field>
+            <field name="subject"><![CDATA[Regarding Status of ${object.meeting_room_id.name} room]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.user_id.name},</p>
+    %if object.state in ['booked']:
+        <p>This mail is to inform you that your room "${object.meeting_room_id.name}" booking is confirmed for
+        discussion of ${object.name}.</p>
+        <p>Booking Details:-<br/>
+        Meeting Room: ${object.meeting_room_id.name}<br/>
+        Meeting Start Date: ${object.meeting_date}<br/>
+        Meeting End Date: ${object.meeting_end_time}</p>
+    %endif
+    %if object.state in ['cancelled']:
+        <p>This mail is to inform you that your room "${object.meeting_room_id.name}" booking is cancelled for
+        discussion of ${object.name} by ${object.cancellation_user_id.name}.</p>
+    %endif
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!--  Mail Template -->
+        <record id="meeting_room_rescheduled_email_template" model="mail.template">
+            <field name="name">Reschedule Time Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="model_meeting_room_booking"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.user_id.company_id.email}</field>
+            <field name="email_to">${object.user_id.login}</field>
+            <field name="subject"><![CDATA[Rescheduled timing of ${object.meeting_room_id.name} room]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.user_id.name},</p>
+    <p>This mail is to inform you that timing for your room "${object.meeting_room_id.name}" is changed for
+    discussion of ${object.name}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Compliments and Suggestions mail template -->
+        <record id="compliments_and_suggestions_email_template" model="mail.template">
+            <field name="name">Compliments and Suggestions Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="facility.model_compliments_suggestions"/>
+            <field name="lang">${object.lang}</field>
+            <field name="subject"><![CDATA[${object.type} by ${object.user_id.name}.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>This mail is sent to you to let you know that ${object.type} is given by "${object.user_id.name}".<br/>
+    %if object.type in ['Compliments']:
+        Compliments : ${object.comment}
+    %endif
+    %if object.type in ['Suggestions']:
+        Suggestions : ${object.comment}
+    %endif
+    %if object.type in ['Complain']:
+        Suggestions : ${object.comment}
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Status Change mail template -->
+        <record id="solved_by_officer_email_template" model="mail.template">
+            <field name="name">Status Change Email Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="facility.model_helpdesk_lite_ticket"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.facility_officer_id.login}</field>
+            <field name="email_to">${object.end_user_id.login}</field>
+            <field name="subject"><![CDATA[Status Updated for ${object.name}]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.end_user_id.name},</p>
+    <p>This mail is sent to you to let you know that status for ${object.name} is changed to Solved By Officer.</p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Looged Ticket mail template -->
+        <record id="logged_ticket_email_template" model="mail.template">
+            <field name="name">Looged Ticket Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="facility.model_helpdesk_lite_ticket"/>
+            <field name="lang">${object.lang}</field>
+            <field name="subject"><![CDATA[Ticket Logged]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ,</p>
+    <p>This mail is sent to you to let you know that ticket named "${object.name}" is logged in the system under the
+    category named "${object.helpdesk_category_id.name}".</p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Escelation mail template -->
+        <record id="escelation_email_template" model="mail.template">
+            <field name="name">Escelation Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="facility.model_helpdesk_lite_ticket"/>
+            <field name="lang">${object.lang}</field>
+            <field name="subject"><![CDATA[Escelation in ${object.name}]]></field>
+            <field name="body_html">
+                <![CDATA[
+				<div>
+				    <p>Hello ${object.facility_manager_id.name},</p>
+				    <p>This mail is sent to you to let you know that ticket named "${object.name}" has passed it SLA Time
+				    which is ${object.sla_time}.</p>
+				    <p>Regards,</p>
+				    <p>NYDA</p>
+				</div>
+            ]]>
+            </field>
+        </record>
+        
+        <!--  Mail Template -->
+        <record id="fleet_email_template" model="mail.template">
+            <field name="name">Confirmation Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="model_fleet_booking"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.user_id.company_id.email}</field>
+            <field name="email_to">${object.user_id.login}</field>
+            <field name="subject"><![CDATA[Regarding Status of ${object.vehicle_id.name} room]]></field>
+            <field name="body_html">
+                <![CDATA[
+					<div>
+					    <p>Hello ${object.user_id.name},</p>
+					    %if object.state in ['booked']:
+					        <p>This mail is to inform you that your room "${object.vehicle_id.name}" booking is confirmed for
+					        discussion of ${object.name}.</p>
+					        <p>Booking Details:-<br/>
+					        Meeting Room: ${object.vehicle_id.name}<br/>
+					        Meeting Start Date: ${object.meeting_date}<br/>
+					        Meeting End Date: ${object.meeting_end_time}</p>
+					    %endif
+					    %if object.state in ['cancelled']:
+					        <p>This mail is to inform you that your room "${object.vehicle_id.name}" booking is cancelled for
+					        discussion of ${object.name} by ${object.cancellation_user_id.name}.</p>
+					    %endif
+					    <p>Regards, </p>
+					    <p>NYDA</p>
+					</div>
+            ]]>
+            </field>
+        </record>
+
+        <!--  Mail Template -->
+        <record id="fleet_rescheduled_email_template" model="mail.template">
+            <field name="name">Reschedule Time Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="model_fleet_booking"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.user_id.company_id.email}</field>
+            <field name="email_to">${object.user_id.login}</field>
+            <field name="subject"><![CDATA[Rescheduled timing of ${object.vehicle_id.name} room]]></field>
+            <field name="body_html">
+                <![CDATA[
+				<div>
+				    <p>Hello ${object.user_id.name},</p>
+				    <p>This mail is to inform you that timing for your room "${object.vehicle_id.name}" is changed for
+				    discussion of ${object.name}.</p>
+				    <p>Regards, </p>
+				    <p>NYDA</p>
+				</div>
+            ]]>
+            </field>
+        </record>        
+        
+
+    </data>
+</odoo>

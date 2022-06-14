@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- project.plan.target views -->
+        <record id="view_project_plan_linkage_form" model="ir.ui.view">
+            <field name="name">project.plan.target</field>
+            <field name="model">project.plan.target</field>
+            <field name="arch" type="xml">
+                <form string="Project Plan target">
+                    <sheet>
+                        <group>
+                            <field name="app_target"/>
+                            <field name="app_target_budget"/>
+                        </group>
+                        <group>
+                            <field name="project_plan_linkage"/>
+                            <field name="project_plan_linkage_budget"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- project.plan.target tree -->
+        <record id="view_project_plan_target_tree" model="ir.ui.view">
+            <field name="name">project.plan.target</field>
+            <field name="model">project.plan.target</field>
+            <field name="arch" type="xml">
+                <tree string="Project Plan Target">
+                     <field name="app_target"/>
+                            <field name="app_target_budget"/>
+                            <field name="project_plan_linkage"/>
+                            <field name="project_plan_linkage_budget"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- project.plan.target action -->
+        <record id="action_project_plan_target" model="ir.actions.act_window">
+            <field name="name">Project Plan Target</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.plan.target</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
+        </record>
+
+        <!-- MenuItem for project.plan.target-->
+        <menuitem id="sub_menu_project_plan_target" name="Project Plan Target"
+                  parent="menu_project_plan_linkage" action="action_project_plan_target"
+                  sequence="10"/>
+
+    </data>
+</odoo>

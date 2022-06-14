@@ -1,0 +1,51 @@
+<odoo>
+    <record id="SM_reject_reason_content_publish_form" model="ir.ui.view">
+        <field name="name">reject.content.reason.sm.form</field>
+        <field name="model">sm.reject.content.publish</field>
+        <field name="arch" type="xml">
+            <form string="Reject Content">
+                <group>
+                    <field name="rejection_reason"/>
+                </group>
+                <footer>
+                    <button name="submit_sm_reason" string="Reject" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="ED_reject_reason_content_publish_form" model="ir.ui.view">
+        <field name="name">reject.content.reason.ed.form</field>
+        <field name="model">ed.reject.content.publish</field>
+        <field name="arch" type="xml">
+            <form string="Reject Content">
+                <group>
+                    <field name="rejection_reason"/>
+                </group>
+                <footer>
+                    <button name="submit_ed_reason" string="Reject" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="reject_content_publish_sm_wizard_action" model="ir.actions.act_window">
+        <field name="name">reject.content.publish.action.sm</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sm.reject.content.publish</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="SM_reject_reason_content_publish_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="reject_content_publish_ed_wizard_action" model="ir.actions.act_window">
+        <field name="name">reject.content.publish.action.ed</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ed.reject.content.publish</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="ED_reject_reason_content_publish_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

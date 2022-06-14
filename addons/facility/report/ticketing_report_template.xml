@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_ticketing_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Ticketing Report</h1>
+                    </div>
+                    <t t-value="doc.get_ticket_logging_report()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['tickets']">
+                                <h4>Total Tickets :
+                                    <t t-esc="len(data['tickets'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div><br/>
+                <t t-if="data['tickets']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Topic</th>
+                                        <th>Stage</th>
+                                        <th>Priority</th>
+                                        <th>Customer</th>
+                                        <th>E-mail</th>
+                                        <th>Assigned To</th>
+                                        <th>Support Team</th>
+                                        <th>Created On</th>
+                                        <th>Deadline</th>
+                                        <th>Category</th>
+                                        <th>Facility Officer</th>
+                                        <th>Facility Manager</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['tickets']" t-as="data">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="data.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.stage_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="data.priority"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.partner_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.email_from"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.user_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.team_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.create_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.date_deadline"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.helpdesk_category_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.facility_officer_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data.facility_manager_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no bookings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_ticketing">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="facility.report_ticketing_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

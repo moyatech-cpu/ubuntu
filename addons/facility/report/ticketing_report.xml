@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_report_ticket"
+                string="Ticketing Report"
+                model="ticket.report.wizard"
+                report_type="qweb-pdf"
+                paperformat="facility.paperformat_landscape_tickets"
+                file="facility.report_ticketing"
+                name="facility.report_ticketing"
+                menu="False"
+        />
+
+    </data>
+</odoo>

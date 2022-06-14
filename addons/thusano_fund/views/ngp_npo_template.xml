@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<template id="ngo_npo_thusano_form" name="Thusano Fund Application Form">
+        <t t-call="website.layout">
+        <link rel="stylesheet" href="/thusano_fund/static/src/css/voucher_style.css"/>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">THUSANO FUND NGO/NPO APPLICATION FORM</h1>
+                        <hr/>
+                    </div>
+            	</div>
+                <form id="regForm" method="post" action="/form/submit" enctype="multipart/form-data">
+                      
+                   <div class="tab" style="display:block">
+                    <div class="demo_header">
+                        <h4>
+                            <b>PERSONAL DETAILS</b>
+                        </h4>
+                    </div>
+                     
+                       <div class="row">
+                        <div class="col-md-6">
+                            Name:
+                            <p>
+                                <input placeholder="First name..." name="name"
+                                		t-att-value="partner.display_name" readonly="1"/>
+                            </p>
+                        </div>
+                      
+                         <div class="col-md-6">
+                            Surname:
+                            <p>
+                                <input placeholder="Last name..." name="surname"
+                                t-att-value="partner.surname" readonly="1"/>
+                            </p>
+                        </div>
+                        </div>
+
+						<div class="row">
+                       <div class="col-md-6">
+                            Gender:
+                            <p>
+                                <select name="gender" class="select_style">
+                                    <t t-if="partner.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                    </t>
+                                    <t t-if="partner.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                    </t>
+                                </select>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                                    Job Title
+                                <p>
+                                <input placeholder="Job Title..." name="partner_job_title"
+                                t-att-value="partner.job_title" readonly="1"/>
+                            </p>
+                            </div>
+                        </div>
+                        
+                 		<div class="row">
+                        <div class="col-md-6 ">
+                                    Applicant’s identity number
+                                <input id="id_number" name="id_number" placeholder="ID Number" />
+                            </div>
+                        
+                        <div class="col-md-6">
+                                    Do you have a sponsor? 
+                                <select class="select_style" id="has_sponsor" name="has_sponsor" required="required">
+                                    <option value="True">Yes, I have a sponsor</option>
+                                    <option value="False">No, I do not have a sponsor</option>
+                                    
+                                </select>
+                            </div>
+                            </div>
+                            
+                         <div class="row">
+                         <div class="col-md-6" id="sponsor_div" style="display: none;">
+                            Sponsor Name:
+                            <p>
+                                <input placeholder="Name of sponsor..." name="sponsor_name"/>
+                            </p>
+                            Sponsor Contribution Amount:
+                            <p>
+                                <input placeholder="Sponsor contribution..." name="sponsor_amount"/>
+                            </p>
+                        </div>
+                        </div>
+                    
+                          <div class="row">
+                        <div class="col-md-6">
+                            Cell Phone No:
+                            <p>
+                                <input placeholder="Cell Phone No..."  id="cellphone" name="cellphone"
+                                t-att-value="partner.cell_phone_number" readonly="1" />
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                           Alternative number:
+                            <p>
+                                <input placeholder="Alternative number..." id="alterphone" name="alterphone"
+                                t-att-value="partner.alternative_number" readonly="1"/>
+                            </p>
+                        </div>
+                        
+                        	<div class="col-md-6">
+                                <select class="select_style req" id="user_type" name="user_type" >
+                                    <option hidden="hidden" value="ngo" selected="selected">NGO</option>
+                                </select>
+                            </div>
+                        </div>
+              
+                     <div class="row">
+                            <div class="col-md-6">
+                                    Email
+                                <input  id="email" name="email" placeholder="Email"
+                                t-att-value="partner.email" readonly="1"/>
+                            </div>
+                            
+                         
+                     </div>
+                     <div class="row">
+                         <div class="col-md-6"  style="display: none;">
+                         <br />
+                            NPO/ NGO number:
+                            <p>
+                                <input placeholder="NGO/NPO Regristration Number..." name="npo_ngo_number"
+                                 t-att-value="partner.company_reg_number" readonly="1"/>
+                            </p>
+                        </div>
+                        </div>
+                     
+                     <div class="row">	
+                     	<div class="col-md-6">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="physical_address"
+                                          name="physical_address" placeholder="Physical Address..." rows="5">
+                                          
+                                </textarea>
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                               Postal Address:
+                               <p>
+                                <textarea class="form-control req" cols="40" id="postal_address" name="postal_address"
+                                          placeholder="Postal Address" rows="5">
+                               </textarea>
+								</p>
+                         </div>
+                   </div>
+                       
+                </div>
+                   <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>DETAILS OF APPLICATION</b>
+                        </h4>
+                    </div>
+                   
+                      </div>
+                    
+                    <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>DOCUMENTS UPLOAD</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                       <div class="col-md-6" id="student_docs">
+                            <h4>Motivation or application letter stating the financial need
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="letter_stating_financial_need" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-md-6" id="ngo_docs">
+                            <h4>Invoice stating the amount needed from the NPO 
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="npo_invoice" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                  
+                        <div class="col-md-6" id="ngo_docs">
+                            <h4>NPO/NGO registration documents (certificate)
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="npo_ngo_reg_docs" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-md-6" id="ngo_docs">
+                            <h4>Proposal with budget ( NPO’s or NGO’s) 
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="proposal_w_budget" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                  
+                        <div class="col-md-6" id="ngo_docs">
+                            <h4>Tax exemption for NPO’s or NGO’s
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" >
+                                    <input name="tax_exemption_docs" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    	 <div class="row">
+                        <div class="col-md-12" style="color:red">
+                            <h3>
+                                <b>Declaration -</b>
+                            </h3>
+                        </div>
+                        <div class="col-md-10" style="color:rebeccapurple">
+                            <h4>By submitting,I&#160;<t t-esc="applicant.name"/>&#160;<t t-esc="applicant.surname"/>&#160; hereby declare that the information provided in this form is correct 
+                            		and that I read and understand all Thusano Fund guidelines.
+                            </h4>
+                        </div>
+                 	   </div>
+                    </div>
+                   
+                     <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn">Previous</button>
+                        <button type="button" id="nextBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                    <!--                    <span class="step"></span>-->
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+                </form>
+                 <div id="div_loading"/>
+            </div>
+
+        </t>
+    </template>
+    </odoo>

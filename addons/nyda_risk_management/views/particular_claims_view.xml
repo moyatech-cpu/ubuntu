@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Particular Of the Claims form view -->
+    <record id="particular_of_the_claims_form" model="ir.ui.view">
+        <field name="name">particular.claims.form</field>
+        <field name="model">particular.claims</field>
+        <field name="arch" type="xml">
+            <form string="Particular Of the Claims">
+                <sheet>
+                    <group string="Particular Of the Claims">
+                        <group>
+                            <field name="description_of_property_damaged" required="1"/>
+                            <field name="date_of_purchase"/>
+                            <field name="cost_price"/>
+                            <field name="depreciation"/>
+                        </group>
+                        <group>
+                            <field name="depreciated_value_of_property"/>
+                            <field name="value_of_salvage"/>
+                            <field name="amount_claimed"/>
+                            <field name="loss_damage_assets_id" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Particular Of the Claims tree view -->
+    <record id="view_particular_claims_tree" model="ir.ui.view">
+        <field name="name">Particular Claims Tree View</field>
+        <field name="model">particular.claims</field>
+        <field name="arch" type="xml">
+            <tree string="Particular Claims tree view">
+                <field name="description_of_property_damaged"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Particular Of the Claims action -->
+    <record id="action_particular_claims" model="ir.actions.act_window">
+        <field name="name">Particular Of the Claims</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">particular.claims</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu of Particular Of the Claims -->
+    <menuitem id="menu_particular_claims" name="Particular Of the Claims"
+          parent="nyda_risk_management.menu_loss_damage_assets_main"
+          action="action_particular_claims"/>
+</odoo>

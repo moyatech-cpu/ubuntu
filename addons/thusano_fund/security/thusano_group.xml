@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_thusano_fund">
+            <field name="name">Thusano Fund Application</field>
+            <field name="description">Thusano Fund Application Form</field>
+            <field name="sequence">50</field>
+    </record>
+    
+    
+    <record id="thusano_fund_manager_user" model="res.groups">
+        <field name="name">Thusano Fund  Manager User</field>
+        <field name="category_id" ref="thusano_fund.model_category_thusano_fund"/>
+        <field name="description">Thusano Fund Application Form</field>
+        
+    </record>
+
+</data>

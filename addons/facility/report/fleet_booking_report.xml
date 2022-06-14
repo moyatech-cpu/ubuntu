@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_report_booked_fleet"
+                string="Booked Fleet Report"
+                model="fleet.report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_booked_fleet"
+                name="facility.report_booked_fleet"
+                menu="False"
+        />
+
+        <report
+                id="action_report_approved_fleet"
+                string="Approved Fleet Report"
+                model="fleet.report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_approved_fleet"
+                name="facility.report_approved_fleet"
+                menu="False"
+        />
+
+        <report
+                id="action_report_rejected_fleet"
+                string="Rejected Fleet Report"
+                model="fleet.report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_rejected_fleet"
+                name="facility.report_rejected_fleet"
+                menu="False"
+        />
+        
+        <report
+                id="action_report_cancelled_fleet"
+                string="Cancelled Fleet Report"
+                model="fleet.report.wizard"
+                report_type="qweb-pdf"
+                file="facility.report_cancelled_fleet"
+                name="facility.report_cancelled_fleet"
+                menu="False"
+        />
+
+    </data>
+</odoo>
