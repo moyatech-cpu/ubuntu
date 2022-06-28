@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	<!-- obsolete 
+    <record id="view_account_move_reversal_inherit" model="ir.ui.view">
+            <field name="name">account.move.reversal.form.inherit</field>
+            <field name="model">account.move.reversal</field>
+            <field name="inherit_id" ref="account.view_account_move_reversal"/>
+            <field name="arch" type="xml">
+           		<xpath expr="//button[@name='reverse_moves']" position="attributes">
+                    <attribute name="confirm">
+                    Are you sure you want to proceed with reversing this journal entry transaction?
+                    </attribute>
+            	</xpath>
+            </field>
+    </record>
+    -->	
+    
+    <record id="view_asset_batch_disposal_form_inherit" model="ir.ui.view">
+            <field name="name">view.batch.asset.form.inherit</field>
+            <field name="model">batch.asset.disposal</field>
+            <field name="inherit_id" ref="account_asset_batch.view_asset_batch_disposal_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//button[@name='dispose_batch']" position="attributes">
+	            	<attribute name="attrs">
+	                   {'invisible': [('invoice_status', 'not in', ('dispose','obsolete','storage'))]}
+	            	</attribute>
+            	</xpath>
+            	
+           		<xpath expr="//button[@name='dispose_batch']" position="after">
+                    
+            		  <!-- New -->
+				      <button string="Proceed" name="proceed"  class="oe_highlight" type="object" groups="nyda_asset_management.nyda_asset_mngmnt_asset_user,base.group_system"
+				      attrs="{'invisible' : [('invoice_status', '!=', 'new')]}"
+				      />
+				
+				      <!-- 1st APPROVAL -->
+				      <button name="set_approve_reject" string="Review" type="object" class="oe_highlight" groups="nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"
+				       attrs="{'invisible' : [('invoice_status', '!=', 'review')]}" 
+				       
+				      />
+				      
+				      <!-- 1st REJECT -->
+				      <button name="store_stage" string="Store" type="object" class="oe_highlight" groups="nyda_asset_management.nyda_asset_mngmnt_asset_user,nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"
+				       invisible="1"
+				       
+				      />
+						<!-- 1st REJECT -->
+				      <button name="set_post" string="Post" confirm="Please note the journal entries for the assets will be posted." type="object" class="oe_highlight" groups="__export__.res_groups_374,__export__.res_groups_372,base.group_system"
+				       attrs="{'invisible' : [('invoice_status', '!=', 'journal')]}" 
+				       
+				      />
+				      
+				      <!-- CFO OBSOLETE -->
+				      <button name="obsolete" string="Obsolete" type="object" class="oe_highlight" groups="nyda_asset_management.nyda_asset_mngmnt_asset_user,nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"
+				       invisible="1"
+				       
+				      />                     
+            	
+            	</xpath>
+               	<xpath expr="//notebook" position="inside">
+	            	<page string="Review Comments">
+	            		<group>
+	            			<field name="review_by" readonly="1" />
+	            			<field name="review_date" readonly="1"/>
+	            			<field name="review_state" readonly="1"/>
+	            			<field name="review_comment" readonly="1"/>
+	            		</group>
+                    </page>
+            	</xpath>
+			</field>
+	</record>
+    </data>
+    
+</odoo>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_first_posting_journal_temp">
+        <t t-name="account_payables.report_first_posting_journal_temp">
+        <t t-call="web.html_container">    
+        <style type="text/css">
+        
+            .vertexReader{
+            	padding:5px;
+            }
+            .width{
+            	width:100%
+            }
+            .width td{
+            	width:33%
+            }
+            .batch{
+            	width:100%
+            }
+            .batch td{
+            	width:25%
+            }
+            .length{
+            	width:100%
+            }
+            .length td{
+            	width:9%
+            }
+            .ledger{
+            	padding-top:20px;
+            	padding-bottom:0px;
+            	padding-left:40px;
+            	padding-right:40px;
+            }
+            .ledger td{
+            	width:10%
+            }
+            .totals{
+            	padding-top:40px;
+            	padding-bottom:40px;
+            	padding-left:150px;
+            	padding-right:150px;
+            }
+            .totals td{
+            	width:5%;
+            	padding: 10px;
+            }
+    </style>
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	
+            	
+	<div class="vertexReader">
+		<table class='width'>
+			<tr>
+				<td>
+				System: <t t-esc="o.create_date"/>
+				</td>
+				<td align='center'>
+				National Youth Development Agency
+				</td>
+				
+				<td align='right'>
+				Page: <span class="page"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				User Date: <t t-esc="o.create_date"/>
+				</td>
+				<td align='center'>
+				POSTING JOURNAL
+				</td>
+				
+				<td align='right'>
+				User ID: <t t-esc="o.create_uid.name"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+				</td>
+				<td align='center'>
+				Purchase Order Processing
+				</td>
+				
+				<td>
+				
+				</td>
+			</tr>
+		</table>
+		<br/>
+		
+		<table class='batch'>
+			<tr>
+				<td>
+				Batch ID: <t t-esc="o.batch_id"/>
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				Audit Trail Code: <t t-esc="o.batch_ref"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				Batch Comment: <t t-esc="o.comment"/>
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+				
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<br/>
+		
+		<table class='length'>
+			<tr>
+				<td style="border-bottom: 2px dashed black">
+				Type
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Receipt No.
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Doc. Date
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Post Date
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Creditor ID
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Name
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Creditor Doc. No.
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Subtotal
+				</td>
+				
+				<td style="border-bottom: 2px dashed black">
+				Trade Discount
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Total
+				</td>
+			</tr>
+			</table>
+			
+		<table class='length'>
+			<tr>
+				<td>
+				SHP/IVC
+				</td>
+				<td>
+				<t t-esc="o.receipt_num"/>
+				</td>
+				<td>
+				<t t-esc="o.date"/>
+				</td>
+				<td>
+				<t t-esc="o.posting_date"/>
+				</td>
+				<td>
+				<t t-esc="o.creditor_id"/>
+				</td>
+				<td style="width:20%">
+				<t t-esc="o.source.name"/>
+				</td>
+				<td>
+				<t t-esc="o.doc_number"/>
+				</td>
+				<td>
+				<t t-esc="o.total_amount"/>
+				</td>
+				<td>
+				0.00
+				</td>
+				<td>
+				<t t-esc="o.total_amount"/>
+				</td>
+			</tr>
+			<tr>
+			<td colspan="10"></td>
+			</tr>
+		</table>
+		<br/>
+		<br/>
+		
+		
+        <table class='length'>
+        <tr>
+                <td style="border-bottom: 2px dashed black">
+                Item
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Description
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                U of M
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Site ID
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Source
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Document Number
+                </td>
+                <td style="width:20%;border-bottom: 2px dashed black">
+                Creditor Item
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Quantity
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Unit Cost
+                </td>
+                
+                <td style="border-bottom: 2px dashed black">
+                Extended Cost
+                </td>
+               
+            </tr>
+        <t t-foreach="o.transactions" t-as="v_data">
+            <tr>
+                <td>
+                <t t-esc="v_data['ivoice_item']"/>
+                </td>
+                <td>
+                <t t-esc="v_data['ivoice_item']"/>
+                </td>
+                <td>
+                
+                </td>
+                <td>
+                    
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                 <t t-esc="v_data['origin']"/>
+                </td>
+                <td>
+                <t t-esc="v_data['invoice_number_entry']"/>
+                </td>
+                <td style="width:20%">
+                <t t-esc="v_data['ivoice_item']"/>
+                </td>
+                <td>
+                1
+                </td>
+                <td>
+                <t t-esc="v_data['amount_total']"/>
+                </td>
+                
+                <td>
+                <t t-esc="v_data['amount_total']"/>
+                </td>
+                
+            </tr>
+        </t>
+        <tr>
+        <td colspan="7">
+        
+        </td>
+        <td colspan="2">
+        -------------------
+        Sub Total: <t t-esc="o.total_amount"/>
+        -------------------
+        </td>
+        </tr>
+		</table>
+		
+	</div>
+	
+</div>
+            
+           </t>
+            
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_first_posting_journal_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_payables.report_first_posting_journal_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

@@ -22,7 +22,7 @@ class FleetDashboard(models.Model):
         history_bookings        = self.env['fleet.booking'].sudo().search([('type', '=', 'history')])
         submitted_bookings      = self.env['fleet.booking'].sudo().search([('state', '=', 'booked')])
         approved_bookings       = self.env['fleet.booking'].sudo().search([('state', '=', 'approved')])
-        upcoming_bookings       = self.env['fleet.booking'].sudo().search([('type', '=', 'upcoming')])
+        upcoming_bookings       = self.env['fleet.booking'].search([('type', '=', 'upcoming')])
         rescheduled_bookings    = self.env['fleet.booking'].sudo().search([('rescheduled_vehicle', '=', True)])
         booking_list = []
         

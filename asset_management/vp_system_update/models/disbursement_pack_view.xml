@@ -1,0 +1,42 @@
+<odoo>
+    <record id="view_disbursement_wiz_form_1" model="ir.ui.view">
+        <field name="name">disbursement.pack.wiz.form</field>
+        <field name="model">disbursement.pack.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Disbursement Pack">
+                <group>
+                  <field name="cover_letter_name" invisible="1"/>
+                  <field name="cover_letter" widget="binary" filename="cover_letter_name"/>
+                  <field name="supplier_checklist_name" invisible="1"/>
+                  <field name="supplier_checklist" widget="binary" filename="supplier_checklist_name"/>
+                  <field name="quatation_attech_ids" widget="many2many_tags"/>
+                  <field name="bank_confirmation_ids" widget="many2many_tags"/>
+                  <field name="directors_attech_ids" widget="many2many_tags"/>
+                  <field name="company_registration_attech_ids" widget="many2many_tags"/>
+                  <!-- <field name="quatation_attech_name" invisible="1"/>
+                  <field name="quatation_attech" widget="binary" filename="quatation_attech_name"/>
+                  <field name="bank_confirmation_name" invisible="1"/>
+                  <field name="bank_confirmation" widget="binary" filename="bank_confirmation_name"/> -->
+                  <!-- <field name="director_ide" widget="binary" filename="director_ide_name"/> -->
+                  <!-- <field name="company_registration_doc_name" invisible="1"/>
+                  <field name="company_registration_doc" widget="binary" filename="company_registration_doc_name"/> -->
+                  <!-- <field name="tax_clearance_doc" widget="binary" filename="tax_clearance_doc_name"/>
+                  <field name="tax_clearance_doc_name" invisible="1"/> -->
+                </group>
+                <footer>
+                    <button name="disbursement_pack_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_disbursement_wiz_action" model="ir.actions.act_window">
+        <field name="name">Disbursement Pack</field>
+        <field name="res_model">disbursement.pack.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_disbursement_wiz_form_1"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

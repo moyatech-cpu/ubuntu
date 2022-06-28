@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_report_trans_enq"
+		string="Transaction Enquiry"
+		model="transactions.enquiry"
+		report_type="qweb-pdf"
+		name="account_receivables.report_trans_enq_template"
+		file="account_receivables.report_trans_enq_template"
+		menu="True"
+	/>
+	<report
+		id="action_report_batch_entry"
+		string="Batch Entry"
+		model="batch.entry"
+		report_type="qweb-pdf"
+		name="account_receivables.report_batch_entry_template"
+		file="account_receivables.report_batch_entry_template"
+	/>
+	<report
+		id="action_inv_sales_entry"
+		string="Invoice Sale"
+		model="account.invoice"
+		report_type="qweb-pdf"
+		name="account_receivables.report_invoice_template"
+		file="account_receivables.report_invoice_template"
+	/>
+	<report
+		id="action_general_post_journal_entry"
+		string="Invoice Sale"
+		model="batch.entry"
+		report_type="qweb-pdf"
+		name="account_receivables.report_general_post_journal_template"
+		file="account_receivables.report_general_post_journal_template"
+	/>
+	<report
+		id="action_cash_receipt_journal"
+		string="Cash Receipt"
+		model="account.payment"
+		report_type="qweb-pdf"
+		name="account_receivables.report_cash_receipt_journal_template"
+		file="account_receivables.report_cash_receipt_journal_template"
+	/>
+	
+	
+	<!-- 
+	<report
+		id="action_report_cust_batch_entry"
+		string="Batch Entry"
+		model="customer.batch.entry"
+		report_type="qweb-pdf"
+		name="account_receivables.report_batch_entry_template"
+		file="account_receivables.report_batch_entry_template"
+	/>
+	
+	<report
+		id="action_cust_general_post_journal_entry"
+		string="Invoice Sale"
+		model="customer.batch.entry"
+		report_type="qweb-pdf"
+		name="account_receivables.report_general_post_journal_template"
+		file="account_receivables.report_general_post_journal_template"
+	/>
+	 -->
+</data>
+	
+    
+</odoo>

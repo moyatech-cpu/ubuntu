@@ -1,0 +1,28 @@
+<odoo>
+    <record id="review_batch_wizard_form_review" model="ir.ui.view">
+        <field name="name">review.batch.final.form</field>
+        <field name="model">batch.review.final</field>
+        <field name="arch" type="xml">
+            <form string="Batch Review">
+                <group>
+                    <h4>
+                    Please confirm review
+                    </h4>
+                </group>
+                <footer>
+                    <button name="review_batch" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="review_batch_wizard_final_action" model="ir.actions.act_window">
+        <field name="name">Batch Review Final</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">batch.review.final</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="review_batch_wizard_form_review"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

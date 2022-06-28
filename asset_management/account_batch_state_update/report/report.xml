@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_report_dep_asset"
+		string="Depreciation Reports"
+		model="asset.dep.report"
+		report_type="qweb-pdf"
+		name="account_batch_state_update.report_dep_asset_template"
+		file="account_batch_state_update.report_dep_asset_template"
+		menu="True"
+	/>
+	<report
+		id="action_report_transfer_asset"
+		string="Asset Transfer Report"
+		model="asset.transfer.report"
+		report_type="qweb-pdf"
+		name="account_batch_state_update.report_asset_transfer_template"
+		file="account_batch_state_update.report_asset_transfer_template"
+		menu="True"
+	/>
+	<report
+		id="action_report_disposal_asset"
+		string="Asset Disposal Report"
+		model="asset.disposal.report"
+		report_type="qweb-pdf"
+		name="account_batch_state_update.report_asset_disposal_template"
+		file="account_batch_state_update.report_asset_disposal_template"
+		menu="True"
+	/>
+	<report
+		id="action_report_bcs_vsp"
+		string="Batch Disposals"
+		model="batch.asset.disposal"
+		report_type="qweb-pdf"
+		name="account_batch_state_update.report_bcs_vsp_template"
+		file="account_batch_state_update.report_bcs_vsp_template"
+		menu="True"
+	/>
+</data>
+	
+    
+</odoo>

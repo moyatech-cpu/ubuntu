@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+  
+  
+  	<record model="ir.ui.view" id="branch_asset_register_tree_view">
+      <field name="name">branch.asset.register.tree.view</field>
+      <field name="model">account.asset</field>
+      <field name="arch" type="xml">
+        <tree string="Assets" decoration-info="(state == 'draft')" decoration-muted="(state == 'close')" editable="bottom">
+   			 
+   			<!--  <field name="x_asset_number" string="Asset ID" readonly="1"/>-->
+    		<field name="name" readonly="1"/>
+    		
+    		<!-- 
+    		<field name="category_id" readonly="1"/>
+    		<field name="x_start_date" string="Place in Service Date" readonly="1"/>-->
+    		<!--  <field name="x_depreciation_date" readonly="1"/>-->
+    		<field name="value" readonly="1"/>
+    		<field name="value_residual" widget="monetary" readonly="1"/>
+    		<!--  <field name="x_serial" readonly="1"/>-->
+    		<field name="state" invisible="1"/>
+    		<!--  <field name="x_custodian" options="{'no_create_edit': True}"/>-->
+    		<!--  <field name="x_tagged"/>
+    		<field name="x_condition"/>
+    		<field name="x_additional_comments"/>-->
+
+    <!-- 
+    <field name="currency_id" groups="base.group_multi_currency"/>
+    <field name="company_id" groups="base.group_multi_company"/> 
+    -->
+    <!-- <field name="partner_id" string="Vendor"/> -->
+    
+</tree>
+      </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="branch_asset_register_window_action">
+      		<field name="name">Branch Asset Register</field>
+      		<field name="res_model">account.asset</field>
+      		<field name="view_mode">kanban,form,tree</field>
+	 </record>
+
+  </data>
+</odoo>

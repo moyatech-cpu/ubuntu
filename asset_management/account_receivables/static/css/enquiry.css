@@ -1,0 +1,44 @@
+.page{
+	font-family: courier new;
+	font-size: 10px;
+}
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%
+}
+.width td{
+	width:33%
+}
+.batch{
+	width:100%
+}
+.batch td{
+	width:25%
+}
+.length{
+	width:100%
+}
+.length td{
+	width:9%
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}

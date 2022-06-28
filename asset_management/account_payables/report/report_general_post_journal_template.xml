@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_general_post_journal_temp">
+        <t t-name="account_payables.report_general_post_journal_temp">
+        <t t-call="web.html_container">
+            <style type="text/css">
+        
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%
+}
+.width td{
+	width:33%
+}
+.batch{
+	width:100%
+}
+.batch td{
+	width:25%
+}
+.length{
+	width:100%
+}
+.length td{
+	width:10%
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}
+    </style>
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	
+         
+	<div class="vertexReader">
+		<table class='width'>
+			<tr>
+				<td>
+				System: <t t-esc="o.create_date"/>
+				</td>
+				<td align='center'>
+				National Youth Development Agency
+				</td>
+				
+				<td align='right'>
+				Page: <span class="page"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				User Date: <t t-esc="o.create_date"/>
+				</td>
+				<td align='center'>
+				GENERAL POSTING JOURNAL
+				</td>
+				
+				<td align='right'>
+				User ID: <t t-esc="o.create_uid.name"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+				</td>
+				<td align='center'>
+				General Ledger
+				</td>
+				
+				<td>
+				
+				</td>
+			</tr>
+		</table>
+		<br/>
+		
+		<table class='batch'>
+			<tr>
+				<td colspan="3">
+				Batch ID: <t t-esc="o.audit_trail_code_ref"/>
+				</td>
+				<td colspan="1">
+				Audit Trail Code: <t t-esc="o.audit_trail_code_ref"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+				Batch Comment: <t t-esc="o.comment"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				Approved: No
+				</td>
+				<td>
+				Batch Total Actual: R <t t-esc="o.total_amount"/>
+				</td>
+				<td>
+				Batch Total Control: R0.00
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+			<tr>
+				<td>
+				Approved By: 
+				</td>
+				<td>
+				Trn Total Actual: <t t-esc="len(o.journals)"/>
+				</td>
+				<td>
+				Trn Total Control: 0
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+			<tr>
+				<td>
+				Approval Date: 
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+			
+		</table>
+		<br/>
+		<br/>
+		
+		<table class='length'>
+			<tr>
+				<td style="border-bottom: 2px dashed black">
+				Journal Entry
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Transaction Type
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Transaction Date
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Reversing Date
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Source Document
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Transaction Reference
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Audit Trail Code
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Reversing Audit Trail Code
+				</td>			
+			</tr>
+		</table>
+		<t t-foreach="o.journals" t-as="v_data">
+		<table class='length'>
+			<tr>
+				<td>
+				<t t-esc="v_data['id']"/>
+				</td>
+				<td>
+				Standard
+				</td>
+				<td>
+				<t t-esc="v_data['date']"/>
+				</td>
+				<td>
+				
+				</td>
+				<td>
+				<t t-esc="v_data['name']"/>
+				</td>
+				<td style="width:20%">
+				<t t-esc="v_data['ref']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['jid']"/>
+				</td>
+				<td>
+				
+				</td>
+				
+			</tr>
+			<tr>
+				<td colspan="8">
+				<br/>
+				<table class='length'>
+						<tr>
+							<td colspan='8'>
+							
+							</td>
+						</tr>
+						<tr>
+							<td coslpan="2">
+							Account Number
+							</td>
+							<td coslpan="2">
+							Account Description
+							</td>
+							<td coslpan="2">
+							Debit
+							</td>
+							<td coslpan="2">
+							Credit
+							</td>
+						</tr>
+						<t t-foreach="v_data['line_ids']" t-as="l_data">
+						<tr>
+							<td coslpan="2">
+							<t t-esc="l_data['account_id']['code']"/>
+							</td>
+							<td coslpan="2">
+							<t t-esc="l_data['name']"/>
+							</td>
+							
+							<td coslpan="2" align="left">
+							<t t-esc="l_data['debit']"/>
+							</td>
+							<td coslpan="2" align="left">
+							<t t-esc="l_data['credit']"/>
+							</td>
+						</tr>
+						</t>
+						
+						<tr>
+							<td >
+							Total Distributions: <t t-esc="len(v_data['line_ids'])"/>
+							</td>
+							<td align="center" >
+							Totals:
+							</td>
+							<td style="border-top: 2px dashed black">
+							<t t-esc="v_data['move_total']"/>
+							</td>
+							<td  style="border-top: 2px dashed black">
+							<t t-esc="v_data['move_total']"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+			
+		</table>
+		<br/>
+		<br/>
+		</t>
+		
+		
+		<table class='totals'>
+			
+			<tr>
+				<td>
+				Total Journal Entries: <t t-esc="o.total_amount"/>
+				</td>
+			</tr>
+			
+		</table>
+	</div>
+	
+</div>
+            
+           </t>
+            
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_general_post_journal_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_payables.report_general_post_journal_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

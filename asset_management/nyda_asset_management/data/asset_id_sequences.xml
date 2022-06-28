@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+    
+        <record id="asset_number_sequence" model="ir.sequence">
+            <field name="name">Asset Number Sequence</field>
+            <field name="code">asset.number.seq</field>
+            <field name="prefix">NYDA-A-</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+            
+        <record id="asset_id_ce_sequence" model="ir.sequence">
+            <field name="name">Computer Equipment Sequence</field>
+            <field name="code">asset.id.ce</field>
+            <field name="prefix">CE</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="asset_id_f_sequence" model="ir.sequence">
+            <field name="name">Furniture Sequence</field>
+            <field name="code">asset.id.f</field>
+            <field name="prefix">F</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+        <record id="asset_id_mv_sequence" model="ir.sequence">
+            <field name="name">Motor Vehicle Sequence</field>
+            <field name="code">asset.id.mv</field>
+            <field name="prefix">MV</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+        <record id="asset_id_oe_sequence" model="ir.sequence">
+            <field name="name">Office Furniture Sequence</field>
+            <field name="code">asset.id.oe</field>
+            <field name="prefix">OE</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+        <record id="asset_id_lh_sequence" model="ir.sequence">
+            <field name="name">Leasehold Sequence</field>
+            <field name="code">asset.id.lh</field>
+            <field name="prefix">LH</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>                        
+
+    </data>
+</odoo>

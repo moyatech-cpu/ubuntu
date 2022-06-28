@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+        <record id="purchase_invoice_batch_code" model="ir.sequence">
+            <field name="name">PurchaseBatch</field>
+            <field name="code">pur.batch.invoice</field>
+            <field name="prefix">PYMNT</field>
+            <field name="padding">7</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="voucher_number" model="ir.sequence">
+            <field name="name">VoucherNumber</field>
+            <field name="code">voucher.number</field>
+            <field name="prefix">PMINV</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="audit_trail" model="ir.sequence">
+            <field name="name">AuditTrail</field>
+            <field name="code">audit.trail.code</field>
+            <field name="prefix">RECVG</field>
+            <field name="padding">14</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="reciept_number" model="ir.sequence">
+            <field name="name">ReceiptNumber</field>
+            <field name="code">receipt.number</field>
+            <field name="prefix">RCT</field>
+            <field name="padding">14</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="reciept_batch_number" model="ir.sequence">
+            <field name="name">ReceiptNumber</field>
+            <field name="code">receipt.batch.number</field>
+            <field name="prefix">RCT</field>
+            <field name="padding">14</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="debit_invoice_batch_code" model="ir.sequence">
+            <field name="name">DebitsBatch</field>
+            <field name="code">debit.invoice</field>
+            <field name="prefix">DBT</field>
+            <field name="padding">7</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sequence_batch_payables_enquiry" model="ir.sequence">
+            <field name="name">BatchID</field>
+            <field name="code">pay.batch.entry</field>
+            <field name="prefix">PURB</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+        
+        
+        <record id="voucher_number_payables" model="ir.sequence">
+            <field name="name">VoucherNumberPayables</field>
+            <field name="code">voucher.number.payables</field>
+            <field name="prefix">PMINV</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="audit_trail_payables" model="ir.sequence">
+            <field name="name">AuditTrailPayables</field>
+            <field name="code">audit.trail.code.payables</field>
+            <field name="prefix">RECVG</field>
+            <field name="padding">14</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="reciept_number_payables" model="ir.sequence">
+            <field name="name">ReceiptNumberPayables</field>
+            <field name="code">receipt.number.payables</field>
+            <field name="prefix">RCT</field>
+            <field name="padding">14</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+        <record id="authorization_batch" model="ir.sequence">
+            <field name="name">AuthorizationBatch</field>
+            <field name="code">creditor.authorize</field>
+            <field name="prefix">EFTSP</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="recon_creditor" model="ir.sequence">
+            <field name="name">ReconCreditor</field>
+            <field name="code">creditor.recon</field>
+            <field name="prefix">EFTPAYSP</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="eft_batch" model="ir.sequence">
+            <field name="name">EFTCode</field>
+            <field name="code">creditor.eft</field>
+            <field name="prefix">EFTSP</field>
+            <field name="padding">14</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="audit_line_journal" model="ir.sequence">
+            <field name="name">JournalTrailCode</field>
+            <field name="code">audit.trail.code.journal</field>
+            <field name="prefix">GLTRN</field>
+            <field name="padding">8</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="grant_disbursement_ref" model="ir.sequence">
+            <field name="name">GrantDisbursement</field>
+            <field name="code">bulk.grant</field>
+            <field name="prefix">GDB</field>
+            <field name="padding">8</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+	</data>
+</odoo>

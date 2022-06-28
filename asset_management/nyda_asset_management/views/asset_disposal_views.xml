@@ -1,0 +1,158 @@
+<odoo>
+  <data>
+  		<record id="asset_disposal_kanban_view" model="ir.ui.view">
+        <field name="name">asset.disposal.kanban.view</field>
+        <field name="model">asset.disposal</field>
+        <field name="arch" type="xml"> 
+		<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';red:state=='1st_review';yellow:state=='2nd_review';green:state=='completed';
+			green:state=='end';" disable_drag_drop_record="true" import="false" >
+			 
+                    <field name="create_date"/>
+                    <field name="state"/>
+                    <field name="color"/>
+                    <field name="asset_disposal_date"/>
+                    <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.deletable">
+                                            <li><a type="delete">Delete</a></li>
+                                        </t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                                </div>
+                                 <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title">
+                                    	<field name="serial_number"/><br/>
+                                    </h4>
+                                    <div>
+                                        <t t-if="record.asset_disposal_employee.raw_value"> <b class="o_kanban_record_subtitle">By: <field name="asset_disposal_employee"/> </b> <br/> </t>
+                                        <i class="fa fa-clock-o"/>
+                                        <b>End Date</b> <t t-esc="moment(record.asset_disposal_date.raw_value).format('lll')"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </field>
+      </record>
+      <record model="ir.ui.view" id="asset_disposal_form_view">
+      
+      <field name="name">asset.disposal.form.view</field>
+      <field name="model">asset.disposal</field>
+      
+      <field name="arch" type="xml">
+      <form string="Asset Disposal Form">
+      	<header>
+      		 
+      		<button string="Proceed"  style="margin-right:10px;" type="object" name="asset_disposal_proceed_button" class="oe_highlight"
+      		 attrs="{'invisible' : [('state','!=','new')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_user,base.group_system"/>
+      		 <!-- Review -->
+      		 <button string="Dispose"  style="margin-right:10px;" type="object" name="asset_disposal_dispose_button" class="oe_highlight"
+      		 	attrs="{'invisible' : [('state','!=','cfo_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_cfo,base.group_system"/>
+      		 	
+      		 <button string="Dispose"  style="margin-right:10px;" type="object" name="asset_disposal_2nd_dispose_button" class="oe_highlight"
+      		 	attrs="{'invisible' : [('state','!=','review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"/>  
+      		 <!-- Review -->
+			<button string="Store"  style="margin-right:10px;" type="object" name="asset_disposal_store_button" class="oe_highlight"
+			 attrs="{'invisible' : [('state','!=','review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"/>
+			 <!-- CFO Review -->
+			<button string="Obsolete"  style="margin-right:10px;" type="object" name="asset_disposal_obsolete_button" class="oe_highlight"
+			 attrs="{'invisible' : [('state','!=','cfo_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_cfo,base.group_system"/>
+			
+			
+      	     <field name="state" widget="statusbar"  statusbar_visible="new,review,cfo_review,dispose,obsolete,storage" />
+      	</header>
+      	<sheet>
+      		<div class="oe_button_box" name="button_box">
+                   
+                   
+           </div>		  
+		<div id="o_memo_container">
+        	<div id="o_memo_main">
+        		<group>
+        			<label for="asset_disposal_title" string="Title"/><br />
+        			<div class="oe_title">
+       					 <h1 class="o_row">
+           					 <field name="asset_disposal_title" placeholder="Disposal Title ..."/>
+        				</h1>
+   					</div>
+        				
+        				
+        		</group>
+                   
+                <group>
+                		
+                        <group string="Employee Details">
+                	
+                			<field name="asset_disposal_date"/>
+                      		<field name="asset_disposal_employee"/>
+                            <field name="asset_disposal_employee_department"/>
+    
+                        </group>
+                        <group string="Asset Details">
+                	
+                			<field name="asset_register"/>
+                      		<field name="asset_model"/>
+                            <field name="asset_number"/>
+    						 <field name="asset_serial_number"/>
+                        </group>
+ 				</group>
+ 				
+         	</div>
+       </div>
+       <notebook colspan="8">
+       		
+       		<page name="disposal_comment" string="Comments">
+                   <field name="asset_disposal_comments"/>
+           </page>
+           
+           <page name="mngr_disposal_comment" string="Manager Comments">
+                   <field name="asset_disposal_manager_comments"/>
+           </page>
+           
+           <page name="disposal_cfo_comment" string="CFO Comments">
+                   <field name="asset_disposal_cfo_comments"/>
+           </page>
+                   
+        </notebook>
+        </sheet>
+        <div class="oe_chatter" >
+    		<field name="message_follower_ids" widget="mail_followers"/>
+    		<field name="message_ids" widget="mail_thread"/>
+		</div>
+    	</form>
+      </field>
+      </record>
+      
+      <record model="ir.actions.act_window" id="asset_disposal_window_action">
+      		<field name="name">Asset Disposal</field>
+      		<field name="res_model">asset.disposal</field>
+      		<field name="view_mode">kanban,form</field>
+	  </record>
+	    
+     <menuitem name="Asset Disposal" id="sub_menu_asset_impairment_main"
+         parent="nyda_asset_management.menu_asset_management" sequence="4"/>
+     <!-- <menuitem name="Single Asset Disposal" id="sub_menu_asset_disposal_mini"
+         parent="nyda_asset_management.sub_menu_asset_impairment_main" sequence="0"/>
+    <menuitem name="Asset Disposal" id="sub_menu_asset_impairment" action="asset_disposal_window_action"
+         parent="nyda_asset_management.sub_menu_asset_disposal_mini" sequence="0"/> -->
+  </data>
+</odoo>

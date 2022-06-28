@@ -1,0 +1,67 @@
+<odoo>
+    <record id="view_disbursement_wiz_form_1_inherit" model="ir.ui.view">
+        <field name="name">disbursement.pack.wiz.form.inherit</field>
+        <field name="model">disbursement.pack.wiz</field>
+        <field name="inherit_id" ref='nyda_grant_and_voucher.view_disbursement_wiz_form_1'/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='quatation_attech_ids']" position="after">
+                    <field name="quotation_records" required="1" widget="many2many_tags" context="{'default_grant_id': active_id}"/>
+            </xpath>
+        </field>
+        
+    </record>
+    
+    <!-- <record id="view_grant_quotation_views" model="ir.ui.view">
+        <field name="name">grant.quotation.form</field>
+        <field name="model">grant.quotation</field>
+        <field name="arch" type="xml">
+           	<form string="Quotation Details">
+           	<header></header>
+           		<sheet>
+                    <div class="oe_title">
+                    	<label for="batch_id" string="Supplier Name"/>
+                        <h5>
+                            <field name="supplier_name" required="1"/>
+                        </h5>
+                    </div>
+                    <group coslpan="4">
+                        <group>
+                        	<field name="mobile_number"/>
+                           	<field name="email"/>
+                            <field name="description" />
+                     	</group>
+                     	<group>
+                        	<field name="bank_account_ids" required="1"/>
+                            <field name="date_invoice" />
+                            <field name="grant_id" invisible="1"/>
+                            <field name="total_amount" required="1" sum="Total"/>
+                     	</group>
+                    </group>
+                </sheet>
+           	<footer>
+           	<button name="write" type="object" string="Save"/><button name="cancel" string="Cancel" special="cancel" class="oe_link"/></footer>
+           	</form>
+        </field>
+        
+    </record> -->
+     <record id="action_grant_quotation" model="ir.actions.act_window">
+        <field name="name">grant.quotation.action</field>
+        <field name="res_model">grant.quotation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+    <record id="view_grant_internal_report_inherit" model="ir.ui.view">
+            <field name="name">Grant.Quotations.Update</field>
+            <field name="model">grant.application</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_grant_application_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='contract']" position="after">
+                    <field name="quotation_records" />
+                    <field name="quotation_sum" />
+            	</xpath>
+            
+           	</field>
+	</record>
+
+</odoo>

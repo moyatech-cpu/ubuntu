@@ -1,0 +1,152 @@
+<odoo>
+    <record id="asset_verification_branch_mngr_query_form" model="ir.ui.view">
+        <field name="name">asset.verification.branch.manager.query.form</field>
+        <field name="model">asset.verification.query.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BRANCH MANAGER QUERY COMMENT">
+                <group>
+                    <field name="branch_manager_query_comment"/>
+                </group>
+                <footer>
+                    <button name="branch_manager_query_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="asset_verification_accountant_query_form" model="ir.ui.view">
+        <field name="name">asset.verification.accountant.query.form</field>
+        <field name="model">asset.verification.query.wizard</field>
+        <field name="arch" type="xml">
+            <form string="ACCOUNTANT QUERY COMMENT">
+                <group>
+                    <field name="accountant_query_comment"/>
+                </group>
+                <footer>
+                    <button name="accountant_query_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="asset_verification_asset_mngr_query_form" model="ir.ui.view">
+        <field name="name">asset.verification.asset.mngr.query.form</field>
+        <field name="model">asset.verification.query.wizard</field>
+        <field name="arch" type="xml">
+            <form string="ASSET MANAGER QUERY COMMENT">
+                <group>
+                    <field name="asset_manager_query_comment"/>
+                </group>
+                <footer>
+                    <button name="asset_manager_query_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="asset_verification_snr_mngr_query_form" model="ir.ui.view">
+        <field name="name">asset.verification.snr.mngr.query.form</field>
+        <field name="model">asset.verification.query.wizard</field>
+        <field name="arch" type="xml">
+            <form string="SENIOR MANAGER QUERY COMMENT">
+                <group>
+                    <field name="snr_manager_query_comment"/>
+                </group>
+                <footer>
+                    <button name="snr_manager_query_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="asset_verification_cfo_query_form" model="ir.ui.view">
+        <field name="name">asset.verification.cfo.query.form</field>
+        <field name="model">asset.verification.query.wizard</field>
+        <field name="arch" type="xml">
+            <form string="CFO QUERY COMMENT">
+                <group>
+                    <field name="cfo_query_comment"/>
+                </group>
+                <footer>
+                    <button name="cfo_query_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="asset_impairment_form" model="ir.ui.view">
+        <field name="name">asset.imparment.wizard.form</field>
+        <field name="model">asset.impairment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Impairment Value">
+                <group>
+                    <field name="impairment_amount" required="1"/>
+                    <field name="impairment_reason" required="1"/>
+                </group>
+                <footer>
+                    <button name="action_add_impairment_value" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="asset_verification_branch_mngr_query_wizard_action" model="ir.actions.act_window">
+        <field name="name">query.comment.branch.mngr.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.verification.query.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_verification_branch_mngr_query_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="asset_imparment_wizard_action" model="ir.actions.act_window">
+        <field name="name">asset.imparment.wizard.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.impairment.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_impairment_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="asset_verification_accountant_query_wizard_action" model="ir.actions.act_window">
+        <field name="name">query.comment.accountant.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.verification.query.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_verification_accountant_query_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="asset_verification_asset_mngr_query_wizard_action" model="ir.actions.act_window">
+        <field name="name">query.comment.asset.mngr.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.verification.query.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_verification_asset_mngr_query_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="asset_verification_snr_mngr_query_wizard_action" model="ir.actions.act_window">
+        <field name="name">query.comment.snr.mngr.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.verification.query.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_verification_snr_mngr_query_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="asset_verification_cfo_query_wizard_action" model="ir.actions.act_window">
+        <field name="name">query.comment.cfo.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.verification.query.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_verification_cfo_query_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

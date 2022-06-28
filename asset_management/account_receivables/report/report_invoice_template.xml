@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_invoice_temp">
+        <t t-call="web.external_layout">
+        
+            <t t-name="account_receivables.report_invoice_temp">
+             
+            
+            <t t-foreach="docs" t-as="o">
+            	<div class="page" style="font-family: 'courier new'">
+            	<style type="text/css">
+        
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%
+}
+.width td{
+	width:33%
+}
+.batch{
+	width:100%
+}
+.batch td{
+	width:25%
+}
+.length{
+	width:100%
+}
+.length td{
+	width:9%
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}
+    </style>
+            	<t t-value="o.get_invoice_journal()" t-set="data_vals"/>
+	<div class="vertexReader">
+		<table class='width'>
+			<tr>
+				<td>
+				System: <t t-esc="data_vals.get('system_time')"/>
+				</td>
+				<td align='center'>
+				National Youth Development Agency
+				</td>
+				
+				<td align='right'>
+				Page: <span class="page"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				User Date: <t t-esc="data_vals.get('create_date')"/>
+				</td>
+				<td align='center'>
+				TRANSACTION EDIT LIST
+				</td>
+				
+				<td align='right'>
+				User ID: <t t-esc="data_vals.get('create_user')"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+				</td>
+				<td align='center'>
+				
+				</td>
+				
+				<td>
+				
+				</td>
+			</tr>
+		</table>
+		<br/>
+		
+		<table class='batch'>
+			<tr>
+				<td>
+				Batch ID: <t t-esc="data_vals.get('batch_id')"/>
+				</td>
+				<td>
+				Posting Date: <t t-esc="data_vals.get('posting_date')"/>
+				</td>
+				<td>
+				</td>
+				<td>
+				Audit Trail Code: N/A
+				</td>
+			</tr>
+			
+		</table>
+		<br/>
+		<br/>
+		
+		<table class='length'>
+			<tr>
+				<td style="border-bottom: 2px dashed black">
+				Document Number
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Doc Date
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Post Date
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Debtor ID
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Name
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Salesperson
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Sales Amount
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Trade Discount
+				</td>
+				
+				<td style="border-bottom: 2px dashed black">
+				Document Total
+				</td>
+				<td style="border-bottom: 2px dashed black">
+				Discount Avail
+				</td>
+			</tr>
+			</table>
+		<t t-foreach="data_vals['invoice_ids']" t-as="v_data">
+		<table class='length'>
+			<tr>
+				<td>
+				<t t-esc="v_data['number']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['date_invoice']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['due_date']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['parnter_id']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['name']"/>
+				</td>
+				<td style="width:20%">
+				<t t-esc="v_data['sales_person']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['amount_total_signed']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['discount']"/>
+				</td>
+				
+				<td>
+				<t t-esc="v_data['amount_total_signed']"/>
+				</td>
+				<td>
+				<t t-esc="v_data['discount']"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="10">
+				<br/>
+				<table class='ledger'>
+			<tr>
+				<td colspan='5'>
+				General Ledger Distributions
+				</td>
+			</tr>
+			<tr>
+				<td>
+				Account Number
+				</td>
+				<td>
+				Account Description
+				</td>
+				<td>
+				Account Type
+				</td>
+				<td>
+				Debit Amount
+				</td>
+				<td>
+				Credit Amount
+				</td>
+			</tr>
+			<t t-foreach="v_data['ledger_data']" t-as="l_data">
+			<tr>
+				<td>
+				<t t-esc="l_data['code']"/>
+				</td>
+				<td>
+				<t t-esc="l_data['account_id']"/>
+				</td>
+				<td>
+				<t t-esc="l_data['type']"/>
+				</td>
+				<td>
+				<t t-esc="l_data['debit']"/>
+				</td>
+				<td>
+				<t t-esc="l_data['credit']"/>
+				</td>
+			</tr>
+			</t>
+		</table>
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<br/>
+		</t>
+		
+		
+		<table class='totals'>
+			
+			<tr>
+				<td>
+				Totals:
+				</td>
+				<td style="border-top: 2px dashed black;border-bottom: 2px dashed black;">
+				R <t t-esc="data_vals.get('total_invoices_amount')"/>
+				</td>
+				<td style="border-top: 2px dashed black;border-bottom: 2px dashed black;">
+				R <t t-esc="data_vals.get('total_write_off')"/>
+				</td>
+				<td style="border-top: 2px dashed black;border-bottom: 2px dashed black;">
+				R <t t-esc="data_vals.get('total_discounts')"/>
+				</td>
+				<td style="border-top: 2px dashed black;border-bottom: 2px dashed black;">
+				R <t t-esc="data_vals.get('total_unapplied_amount')"/>
+				</td>
+			</tr>
+			
+		</table>
+	</div>
+	
+</div>
+            
+           </t>
+            
+        </t>
+        </t>
+        </template>
+
+        <template id="report_invoice_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_receivables.report_invoice_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

@@ -1,0 +1,76 @@
+<odoo>
+    <record id="transactons_customer_wizard" model="ir.ui.view">
+        <field name="name">transactions.customer.wiz</field>
+        <field name="model">customer.summary</field>
+        <field name="arch" type="xml">
+            <form string="Customer Period Summary">
+                <header>
+                    
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                        	<field name="customerID"/>
+                        	<field name="date_filter"/>
+                        </group>
+                        <group>
+                        	<field name="from_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+                        	<field name="to_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+	                        
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Summary">
+               <div style="padding:10px;border-bottom: solid 1px grey">
+               		<div class="oe_title">
+               		
+                        <h1>Total Invoices
+                            <field name="total_invoices" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group colspan='4'>
+                    	<group>
+                    		<field name="total_sales" readonly="1"/>
+                    	</group>
+                    	<group>
+                    		<field name="total_sales_amount" readonly="1"/>
+                    	</group>
+                    </group>
+                    <group colspan='4'>
+                    	<group>
+                    		<field name="total_credit_notes" readonly="1"/>
+                    	</group>
+                    	<group>
+                    		<field name="total_credit_amount" readonly="1"/>
+                    	</group>
+                    	
+                    </group>
+                    <group colspan='4'>
+                    	<field name="total_payment_received" readonly="1"/>
+                    </group>
+                    </div>
+                    
+                            
+                            <div class="oe_clear"/>
+                        </page>
+                        
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="print_enquiry" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                </form>
+                    
+        </field>
+    </record>
+
+    <record id="transactons_customer_action" model="ir.actions.act_window">
+        <field name="name">Customer Period Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">customer.summary</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="transactons_customer_wizard"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

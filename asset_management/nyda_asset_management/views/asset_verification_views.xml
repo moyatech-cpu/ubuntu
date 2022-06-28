@@ -1,0 +1,184 @@
+<odoo>
+  <data>
+  		<record id="nyda_asset_verification_kanban" model="ir.ui.view">
+        <field name="name">nyda.asset.verification.kanban.view</field>
+        <field name="model">asset.verification</field>
+        <field name="arch" type="xml"> 
+		<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='Draft';red:state=='Verification';yellow:state=='Branch Review';green:state=='1ST_Review';green:state=='2nd_review';green:state=='3rd_review';green:state=='completed';" disable_drag_drop_record="true" import="false" >
+			 
+                    <field name="create_date"/>
+                    <field name="state"/>
+                    <field name="color"/>
+                    <field name="asset_verification_end_date"/>
+                    
+                    <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                                </div>
+                                <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title">
+                                    	<field name="serial_number"/><br/>
+                                    </h4>
+                                    <div>
+                                        <t t-if="record.asset_verification_officer.raw_value"> <b class="o_kanban_record_subtitle">To <field name="asset_verification_officer"/> </b> <br/> </t>
+                                        <i class="fa fa-clock-o"/>
+                                        <b>End Date</b> <t t-esc="moment(record.asset_verification_end_date.raw_value).format('lll')"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                   				 	<div class="oe_kanban_bottom_left">
+                        			 	<field name="state" widget="state_selection"/>
+                    				</div>
+                				</div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </field>
+      </record>
+      
+      <record model="ir.ui.view" id="nyda_asset_verification_tree_view">
+      <field name="name">nyda.asset.verification.tree.view</field>
+      <field name="model">asset.verification</field>
+      <field name="arch" type="xml">
+        <tree >
+        	<field name="asset_verification_title"/>
+          	<field name="asset_verification_officer"/>
+          
+        </tree>
+      </field>
+    </record>
+      
+      <record model="ir.ui.view" id="nyda_asset_verification_form_view">
+      
+      <field name="name">nyda.asset_verification.form.view</field>
+      <field name="model">asset.verification</field>
+      
+      <field name="arch" type="xml">
+      <form string="Asset Verification Form">
+      	<header>
+      		 
+      		<button string="Proceed"  type="object" name="asset_verification_proceed_button" class="oe_highlight"
+      		  	 attrs="{'invisible' : [('state','!=','new')]}" />
+      		 
+      		 <button string="Proceed" type="object" name="asset_verification_proceed_from_verification_button" class="oe_highlight"
+      		  	 attrs="{'invisible' : [('state','!=','verification')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_officer,base.group_system"/>  
+      		 
+			<button string="Branch Asset Register" type="object" name="branch_asset_register_button" class="oe_highlight"
+			 	attrs="{'invisible' : [('state','!=','new')]}" groups="nyda_asset_management.nyda_asset_mngmnt_branch_manager,base.group_system"/>
+			  
+			<button string="Query"  type="object" name="manager_query_button" class="oe_highlight" 
+				attrs="{'invisible' : [('state','!=','branch_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_branch_manager,base.group_system"/>
+			
+			<button string="Regional Sign Off"  type="object" name="asset_verification_regional_manager_sign_off_button" class="oe_highlight" 
+				attrs="{'invisible' : [('state','!=','regional_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_regional_manager,base.group_system"/>
+			   
+			<button string="Sign-Off" type="object" name="asset_branch_mngr_sign_off_button" class="oe_highlight"
+				attrs="{'invisible' : [('state','!=','branch_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_branch_manager,base.group_system"/>
+			   
+			<button string="Assing to me" type="object" name="asset_verfification_assign_to_me_button" class="oe_highlight" 
+				attrs="{'invisible' : [('user_id', '!=', False)]}"/>
+			
+		    <!-- 1st Review -->
+            <button name="accountant_query_button" string="Query" type="object" class="oe_highlight" 
+            	 attrs="{'invisible' : [('state','!=','1st_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_snr_accountant,base.group_system"/>
+            <!-- 1st Review -->
+            <button name="asset_accountant_sign_off_button" string="Sign-Off" type="object" class="oe_highlight" 
+            	attrs="{'invisible' : [('state','!=','1st_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_snr_accountant,base.group_system"/>
+                          
+            <!-- 2nd Review -->
+            <button name="asset_mngr_query_button" string="Query" type="object" class="oe_highlight" 
+            	attrs="{'invisible' : [('state','!=','2nd_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"/>
+            <!-- 2nd Review -->
+            <button name="asset_asset_mngr_sign_off_button" string="Sign-Off" type="object" class="oe_highlight" 
+             	attrs="{'invisible' : [('state','!=','2nd_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_manager,base.group_system"/>
+                          
+            <!-- 3rd Review -->
+            <button name="snr_mngr_query_button" string="Query" type="object" class="oe_highlight" 
+            	attrs="{'invisible' : [('state','!=','3rd_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_snr_manager,base.group_system"/>
+            <!-- 3rd Review -->
+            <button name="asset_snr_mngr_sign_off_button" string="Sign-Off" type="object" class="oe_highlight" 
+             	attrs="{'invisible' : [('state','!=','3rd_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_snr_manager,base.group_system"/>                    
+          
+      	     <field name="state" widget="statusbar"  statusbar_visible="verification,branch_review,1st_review,2nd_review,3rd_review,completed" />
+      	</header>
+      	<sheet>
+      			  
+		<div id="o_memo_container">
+        	<div id="o_memo_main">
+        		<group string="Verification Details">
+        			<div class="oe_title">
+       					 <h1 class="o_row">
+           					 <field name="asset_verification_title" placeholder="e.g MacBook Pro Desktop"/>
+        				</h1>
+   					</div>
+        				
+        		</group>
+                   
+                <group>
+                	<group>
+                			<field name="asset_branch_id"/>
+                			<field name="user_id"  invisible="1"/>
+                      		<field name="asset_verification_officer"/>
+                            <field name="asset_verification_start_date"  required="1"/>
+                            <field name="asset_verification_end_date"  required="1"/>
+    
+                        </group>
+ 				</group>
+ 				
+         	</div>
+       </div>
+       <notebook>
+        <page name="verification_comment" string="Verification Comments">
+                   <field name="asset_verification_comments"/>
+           </page>
+           
+           <page name="branch_mngr_verification_comment" string="Branch Manager Comments">
+                   <field name="asset_verification_branch_manager_comments" attrs="{'required' :[('state','=','branch_review')], 'invisible' : [('state','!=','branch_review')]}" />
+           </page>
+           <page name="snr_accountant_verification_comment" string="Snr. Accountant Comments">
+                   <field name="asset_verification_snr_accountant_comments" attrs="{'required' :[('state','=','1st_review')],'invisible' : [('state','!=','1st_review')]}"/>
+           </page>
+           
+           <page name="asset_manager_verification_comment" string="Asset Manager Comments">
+                   <field name="asset_verification_asset_manager_comments"  attrs="{'required' :[('state','=','2nd_review')], 'invisible' : [('state','!=','2nd_review')]}"/>
+           </page>
+           
+           <page name="snr_manager_verification_comment" string="Snr. Manager Comments">
+                   <field name="asset_verification_snr_manager_comments"  attrs="{'required' :[('state','=','3rd_review')], 'invisible' : [('state','!=','3rd_review')]}"/>
+           </page>
+            <page name="regional_manager_verification_comment" string="Regional Manager Comments">
+                   <field name="asset_verification_regional_comments"  attrs="{'required' :[('state','=','regional_review')], 'invisible' : [('state','!=','regional_review')]}"/>
+        </page>
+        
+                      
+        </notebook>
+        </sheet>
+        <div class="oe_chatter" >
+    		<field name="message_follower_ids" widget="mail_followers"/>
+    		<field name="message_ids" widget="mail_thread"/>
+		</div>
+    	</form>
+      </field>
+      </record>
+      
+      <record model="ir.actions.act_window" id="asset_verification_window_action">
+      		<field name="name">Asset Verification</field>
+      		<field name="res_model">asset.verification</field>
+      		<field name="view_mode">kanban,tree,form</field>
+	  </record>
+	      
+    <menuitem name="Asset Management" id="menu_asset_management" sequence="0" web_icon="nyda_asset_management,static/description/icon.png"/>
+    <menuitem name="Asset Verification" id="sub_menu_asset_verification" action="asset_verification_window_action"
+         parent="menu_asset_management" sequence="1"/>   
+  </data>
+</odoo>

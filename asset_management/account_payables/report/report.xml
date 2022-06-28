@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_invoice_pdf"
+		string="Invoice Output"
+		model="account.invoice"
+		report_type="qweb-pdf"
+		name="account_payables.report_invoice_purchase_template"
+		file="account_payables.report_invoice_purchase_template"
+		menu="True"
+	/>
+	<report
+        id="action_print_posting_journal"
+        string="Purchase Order Processing"
+        model="payable.batch"
+        report_type="qweb-pdf"
+        name="account_payables.report_first_posting_journal_template"
+        file="account_payables.report_first_posting_journal_template"
+        menu="True"
+    />
+    <report
+        id="action_print_reconciliation_report"
+        string="Reconciliation Statement"
+        model="creditor.recon"
+        report_type="qweb-pdf"
+        name="account_payables.report_reconciliation_template"
+        file="account_payables.report_reconciliation_template"
+        menu="True"
+    />
+    
+    <report
+        id="action_print_posting_journal_report"
+        string="Authorization"
+        model="creditor.authorize"
+        report_type="qweb-pdf"
+        name="account_payables.report_authorization_template"
+        file="account_payables.report_authorization_template"
+        menu="True"
+    />
+    <report
+        id="action_print_eft_journal_report"
+        string="EFT"
+        model="creditor.eft"
+        report_type="qweb-pdf"
+        name="account_payables.report_print_eftpayables_template"
+        file="account_payables.report_print_eftpayables_template"
+        menu="True"
+    />
+    <report
+        id="action_print_reconciliation_voucher_report"
+        string="Reconciliation Statement"
+        model="creditor.recon.voucher"
+        report_type="qweb-pdf"
+        name="account_payables.report_reconciliation_voucher_template"
+        file="account_payables.report_reconciliation_voucher_template"
+        menu="True"
+    />
+    <report
+		id="action_general_posting_journal"
+		string="General Posting Journal"
+		model="payable.batch"
+		report_type="qweb-pdf"
+		name="account_payables.report_general_post_journal_template"
+		file="account_payables.report_general_post_journal_template"
+	/>
+	<report
+        id="action_print_posting_journal_voucher_report"
+        string="Authorization"
+        model="creditor.authorize.voucher"
+        report_type="qweb-pdf"
+        name="account_payables.report_authorization_voucher_template"
+        file="account_payables.report_authorization_voucher_template"
+        menu="True"
+    />
+    <report
+        id="action_print_eft_voucher_journal_report"
+        string="EFT"
+        model="creditor.eft.voucher"
+        report_type="qweb-pdf"
+        name="account_payables.report_print_eftpayables_v_template"
+        file="account_payables.report_print_eftpayables_v_template"
+        menu="True"
+    />
+    
+</data>
+	
+    
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo>
+    <record id="vp_query_form" model="ir.ui.view">
+        <field name="name">vp.query.voucher.form</field>
+        <field name="model">query.vp</field>
+        <field name="arch" type="xml">
+            <form string="V19 Query">
+                <group>
+                    <field name="query"/>
+                </group>
+                 <footer>
+                     <button name="voucher_vp_documents_seq" string="SUBMIT" type="object" class="btn-primary"/>
+                     <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+
+            </form>
+        </field>
+    </record>
+   <record id="action_vp_query" model="ir.actions.act_window">
+            <field name="name">VP19 Query</field>
+            <field name="res_model">query.vp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="vp_query_form"/>
+           <field name="target">new</field>
+   </record>
+    
+
+</odoo>

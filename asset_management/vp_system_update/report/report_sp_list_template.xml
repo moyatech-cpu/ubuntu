@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_sp_list_temp">
+        <t t-name="vp_system_update.report_sp_list_temp">
+        <t t-call="web.html_container">
+        <style type="text/css">
+        
+.vertexReader{
+	padding:5px;
+}
+.vertexReader td{
+	width:25%
+}
+
+
+    </style>
+                 
+            
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	
+            	<t t-value="o.get_sp_report()" t-set="data_vals"/>
+				<div class="vertexReader">
+					<h2>Service Provider List</h2>
+					<br/>
+					<table class='width'>
+						<tr>
+							<td>
+								<b>Name</b>
+							</td>
+							<td>
+								<b>Phone</b>
+							</td>
+							<td>
+								<b>Email</b>
+							</td>
+							<td>
+								<b>Nearest Branch</b>
+							</td>
+							<td>
+								<b>Progress</b>
+							</td>
+						</tr>
+						<t t-foreach="data_vals['service_providers']" t-as="v_data">
+						<tr>
+							<td>
+							<t t-esc="v_data['display_name']"/>
+							</td>
+							<td>
+							<t t-esc="v_data['phone']"/>
+							</td>
+							<td>
+							<t t-esc="v_data['email']"/>
+							</td>
+							<td>
+							<t t-esc="v_data['user_id']['branch_id']['name']"/>
+							</td>
+							<td>
+							<t t-esc="v_data['payment_status']"/>
+							</td>
+						</tr>
+						</t>
+					</table>
+					<br/>
+				</div>
+            </div>
+           </t>
+            
+        </t>
+        
+        </t>
+        </t>
+        </template>
+
+        <template id="report_sp_list_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="vp_system_update.report_sp_list_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

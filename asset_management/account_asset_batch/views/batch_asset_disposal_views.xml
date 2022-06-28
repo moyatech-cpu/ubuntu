@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	<!-- obsolete -->	
+    <record id="view_asset_batch_disposal_form" model="ir.ui.view">
+        <field name="name">view.batch.asset.form</field>
+        <field name="model">batch.asset.disposal</field>
+        <field name="arch" type="xml">
+           <form string="Fixed Asset Disposal Batch">
+                <header>
+                    <field name="invoice_status" widget="statusbar" statusbar_visible="new,review,dispose,reject" readonly="1" />
+                    <button string="Generate Removal entries" name="dispose_batch"  class="oe_highlight" type="object" attrs="{'invisible': [('invoice_status', 'in', ('dispose'))]}"/>
+                    </header>
+                <sheet>
+                    
+                    <div class="oe_title">
+                    	<label for="asset_batch_id" string="Batch#"/>
+                        <h3>
+                            <field name="asset_batch_id" readonly="1"/>
+                        </h3>
+                    </div>
+                    <group string="Batch Details">
+                        <group>
+                        	<field name="batch_date" required="1"/>
+                        	<field name="disposed_date" required="1"/>
+                        	<field name="description" />
+                        </group>
+                        <group string="List Filters">
+                        <field name="populate_by_name"/>
+                        	<field name="populate_by_profile"/>
+                        	<!-- <field name="populate_by_code"/> -->
+                       	</group>
+                    
+                    </group>
+                    
+                   <notebook>
+                        <page string="Assets">
+                             <field name="transactions" attrs="{'readonly': [('invoice_status', '=', 'dispose')]}" >
+                                <tree string="Assets" editable="bottom" decoration-info="type == 'view'">
+        <field name="name" readonly="1"/>
+        <field name="type" readonly="1" invisible="1"/>
+        <field name="asset_id" readonly="1"/>
+        <field name="value_residual" readonly="1" />
+        <field name="date_start" readonly="1"/>
+        <field name="profile_id" readonly="1"/>
+        <field name="r_date_remove"/>
+          
+          <field name="sale_value" />
+          <field name="account_sale_id" attrs="{'readonly': [('sale_value', '=', 0.0)], 'required': [('sale_value', '>', 0.0)]}"/>
+          <field name="posting_regime" readonly="1" />
+          <!-- <field name="account_residual_value_id" attrs="{'readonly': [('posting_regime', '!=', 'residual_value')], 'required': [('posting_regime', '=', 'residual_value')]}"/>
+          <field name="force_date"/> -->
+          <field name="account_plus_value_id" string="Debit Account" required="1" attrs="{'readonly': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"/>
+          <field name="account_min_value_id" string="Credit Account" required="1"  attrs="{'readonly': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"/>
+          
+          <field name="note"/>
+      </tree>
+    
+                            </field>
+                            <div class="oe_clear"/>
+                        </page>
+                        <page string="Journals" attrs="{'invisible': [('invoice_status', '=', 'draft')]}">
+                       		<br/>
+                       		<div class="oe_title">
+	                          	<h5 style="color:red;">
+	                            	<b>Journal Entries</b>
+	                        	</h5>
+                    		</div>
+                            <field name="journal_ids" widget="one2many_list">
+                                <tree decoration-info="state == 'draft'" string="Journal Entries">
+                    				<field name="date"/>
+				                    <field name="name"/>
+				                    <field name="partner_id"/>
+				                    <field name="ref"/>
+				                    <field name="journal_id"/>
+				                    <field name="amount" sum="Total Amount"/>
+				                    <field name="state"/>
+				                    <field name="currency_id" invisible="1"/>
+				                </tree>
+                            </field>
+                            <div class="oe_clear"/>
+                        <br/>
+                        <div class="oe_title">
+                          	<h5 style="color:red;">
+                            	<b>Consolidated Journal Items</b>
+                        	</h5>
+                    	</div>
+                        <field name="journal_line_ids" widget="one2many_list">
+                                <tree editable="bottom" string="Journal Items">
+                                    <field name="account_id" />
+                                    <field name="partner_id"/>
+                                    <field name="name"/>
+                                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                    <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                    <field name="amount_currency" groups="base.group_multi_currency"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="date_maturity" required="0" invisible="context.get('view_no_maturity', False)"/>
+                                </tree>
+                            </field>
+                            <div class="oe_clear"/>
+                            
+                        </page>
+                        
+                    </notebook>
+                
+                </sheet>
+                <br/>
+               
+                <footer>
+                
+                </footer>
+                </form>
+                    
+               </field>
+    </record>
+    <!-- obsolete -->	
+    <record id="view_asset_batch_tree_view" model="ir.ui.view">
+        <field name="name">Asset Batch Disposal</field>
+        <field name="model">batch.asset.disposal</field>
+        <field name="arch" type="xml">
+            <tree string="Fixed Asset Batch Disposal" delete="true" create="true" import="false">
+                <field name="asset_batch_id"/>
+                <field name="batch_date"/>
+                <field name="disposed_date"/>
+                <field name="description"/>
+                <field name="invoice_status"/>
+            </tree>
+        </field>
+    </record>
+	
+	
+    <record id="view_asset_batch_action" model="ir.actions.act_window">
+        <field name="name">Asset Batch Disposal</field>
+        <field name="res_model">batch.asset.disposal</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+	
+	
+	<menuitem name="Batch Asset Disposal" id="sub_menu_asset_batch_mini"
+         parent="nyda_asset_management.sub_menu_asset_impairment_main" sequence="1"/>
+   
+   <menuitem name="Fixed Asset Batch Disposal" id="menu_asset_batch_disposal"
+              parent="account_asset_batch.sub_menu_asset_batch_mini"
+              action="account_asset_batch.view_asset_batch_action" sequence="0"/>
+   
+    
+    </data>
+</odoo>

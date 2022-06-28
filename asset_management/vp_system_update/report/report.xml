@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_print_service_providers"
+		string="Service Provider List"
+		model="bcs.vsp"
+		report_type="qweb-pdf"
+		name="vp_system_update.report_sp_list_template"
+		file="vp_system_update.report_sp_list_template"
+	/>
+	<report
+		id="action_print_process_flow"
+		string="VP19 package file"
+		model="bcs.vsp"
+		report_type="qweb-pdf"
+		name="vp_system_update.report_process_flow_template"
+		file="vp_system_update.report_process_flow_template"
+	/>
+	<report
+        id="action_report_bulk_grant"
+        string="BCS VSP19 Form"
+        model="bulk.grant.disbursment"
+        report_type="qweb-pdf"
+        name="vp_system_update.report_bulk_grant_template"
+        file="vp_system_update.report_bulk_grant_template"
+        menu="True"
+    />
+    <report
+        id="action_report_voucher_internal_audit"
+        string="Internal Audit Report"
+        model="voucher.application"
+        report_type="qweb-pdf"
+        name="vp_system_update.report_internal_audit_template"
+        file="vp_system_update.report_internal_audit_template"
+        menu="True"
+    />
+</data>
+	
+    
+</odoo>

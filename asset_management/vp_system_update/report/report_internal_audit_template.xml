@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_internal_audit_temp">
+            <t t-name="vp_system_update.report_internal_audit_template">
+            <t t-call="web.html_container">
+            <style>
+                table, th, td {
+                padding: 5px;
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                        	<div class="oe_structure"/>
+								<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+	                        		<h4>
+		                                Voucher Application Detail Report 
+		                            </h4>
+                        		</div>
+                        		<hr/>
+                        		<table>
+                        			<thead>
+                        				<th>
+                        					<td colspan='4'><h3>Personal Details</h3></td>
+                        				</th>
+                        			</thead>
+                        			<tbody>
+                        				<tr>
+                        					<td>
+                        						<b>Name</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.name" />
+                        					</td>
+                        					<td>
+                        						<b>Surname</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.surname" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Identity Number</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.sa_identity_number" />
+                        					</td>
+                        					<td>
+                        						<b>Gender</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.gender" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Population Group</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.population_group" />
+                        					</td>
+                        					<td>
+                        						<b>Telephone Number</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.telephone" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Cell phone Number</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.mobile" />
+                        					</td>
+                        					<td>
+                        						<b>Disability Status</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.disability" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Email</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.email" />
+                        					</td>
+                        					<td>
+                        						<b>Postal Address</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.postal_address" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Physical Address</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.physical_address" />
+                        					</td>
+                        					<td>
+                        						<b>Postal Code</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.postal_code" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Geographical Type</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.geographical_type" />
+                        					</td>
+                        					<td>
+                        						<b>Province</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.province_id.name" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Formal Qualifications</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.formal_qualification" />
+                        					</td>
+                        					<td>
+                        						<b>Training Courses Attended</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.trainings_attended" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Next Of Kin</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.next_of_kin" />
+                        					</td>
+                        					<td>
+                        						<b>Cell Number</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.relative_mobile" />
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Relationship</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.relationship" />
+                        					</td>
+                        					<td>
+                        						<b>Physical Address</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.relative_physical_address" />
+                        					</td>
+                        				</tr>
+                        				
+                        				<tr>
+                        					<td colspan="2">
+                        						<b>Branch</b>
+                        					</td>
+                        					<td colspan="2">
+                        						<t t-esc="o.branch_id.name"/>
+                        					</td>
+                        					
+                        				</tr>
+                        				<tr>
+                        				  
+                        				   <td colspan="4"><h5>Voucher Issuance</h5></td>
+                        				  
+                        				  
+                        				</tr>
+                        				<tr>
+                        				  <td colspan="4">
+                        				    Recommended service(s)
+                        				  </td>
+                        				  
+                        				</tr>
+                        				<tr t-foreach='o.x_recommended_service' t-as='line'>
+                                      <td><span t-esc="line.name"/></td>
+                                      <td><span t-esc="line.code"/></td>
+                                      <td><span t-esc="line.voucher_value"/></td>
+                                      <td><span t-esc="line.min_dur"/></td>
+                                      <td><span t-esc="line.service_item_seq"/></td>
+                                </tr>
+                        				<tr>
+                        					<td>
+                        						<b>Service Provider</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_service_provider.name"/>
+                        					</td>
+                        					<td>
+                        						<b>Company Email</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_sp_company_email"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Street Address</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_sp_street_address"/>
+                        					</td>
+                        					<td>
+                        						<b>Company Website</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_sp_company_website"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>City</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_sp_city"/>
+                        					</td>
+                        					<td>
+                        						<b>Voucher Value</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_voucher_value"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Zip</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_sp_zip"/>
+                        					</td>
+                        					<td>
+                        						<b>Voucher Start Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_voucher_start_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						
+                        					</td>
+                        					<td>
+                        						
+                        					</td>
+                        					<td>
+                        						<b>Voucher End Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_voucher_end_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Reissue Start Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_voucher_reissue_start_date"/>
+                        					</td>
+                        					<td>
+                        						<b>Reissue End Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_voucher_reissue_end_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="4">
+                        						
+                        					</td>
+                        					
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						<b>Voucher Number</b>
+                        					</td>
+                        					<td colspan="2">
+                        						<t t-esc="o.x_voucher_number"/>
+                        					</td>
+                        					
+                        				</tr>
+                        				<tr>
+                        					<td colspan="4">
+                        						
+                        					</td>
+                        					
+                        				</tr>
+                        				<tr>
+                        				  
+                        				   <td colspan="4"><h5>Internal Report</h5></td>
+                        				  
+                        				</tr>
+                        				<tr>
+                        				  <td colspan="2"><h5>Beneficiary Product Review</h5></td>
+                        				  <td colspan="2"><h5>Branch Review</h5></td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Status</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.client_approve_reject_state"/>
+                        					</td>
+                        					<td>
+                        						<b>BDA Status</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_bda_state"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Comments</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.client_approve_reject_description"/>
+                        					</td>
+                        					<td>
+                        						<b>Comments</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_bda_comments"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Review Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.client_approve_query_reject_date"/>
+                        					</td>
+                        					<td>
+                        						<b>Review Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.bda_approve_query_reject_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Reviewed By</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.client_approve_reject_by.name"/>
+                        					</td>
+                        					<td>
+                        						<b>Reviewed By</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.bda_approve_reject_by.name"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>BDO Status</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_bdo_state"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Comment</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_bdo_comments"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Review Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.bdo_approve_query_reject_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Reviewed By</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.bdo_approve_reject_by.name"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>PC Status</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_pc_state"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Comment</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_pc_comments"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Review Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.pc_approve_query_reject_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Reviewed By</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.pc_approve_reject_by.name"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Branch Manager Status</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_branch_manager_state"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        					
+                        					<td>
+                        						<b>Comment</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_branch_manager_comments"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        				  <td colspan="2"><h5>NYDA Head Office Review</h5></td>
+                        				  <td colspan="2"><h5>Proof Of Payment</h5></td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>HO Admin State</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_ho_admin_state"/>
+                        					</td>
+                        					<td>
+                        						<b>Proof of Payment Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.proof_of_payment_date"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>HO Admin Comment</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_ho_admin_comments"/>
+                        					</td>
+                        					<td>
+                        						<b>Proof Submitted By</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.proof_submitted_by"/>
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>QA Officer State</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_qa_officer_state"/>
+                        					</td>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Comments</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_qa_officer_comments"/>
+                        					</td>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Review Date</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.qa_approve_query_reject_date"/>
+                        					</td>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Review By</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.qa_approve_reject_by.name"/>
+                        					</td>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>ED Manager State</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_ed_manager_state"/>
+                        					</td>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        				</tr>
+                        				<tr>
+                        					<td>
+                        						<b>Comments</b>
+                        					</td>
+                        					<td>
+                        						<t t-esc="o.x_ed_manager_comments"/>
+                        					</td>
+                        					<td colspan="2">
+                        						
+                        					</td>
+                        				</tr>
+                        			</tbody>
+                        		</table>
+                    	
+                    	</div>
+                    
+                    </t>
+                </t>
+            </t>
+
+        </t>
+        </template>
+
+        <template id="report_internal_audit_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="vp_system_update.report_internal_audit_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

@@ -1,0 +1,48 @@
+<odoo>
+	
+    <record id="form_asset_disposal_report" model="ir.ui.view">
+        <field name="name">asset.disposal.report.form</field>
+        <field name="model">asset.disposal.report</field>
+        <field name="arch" type="xml">
+            <form string="Asset Disposal Report Wizard">
+                <group string="Period">
+                	<field name="by_period"/>
+                    <field name="sdate"  attrs="{'invisible' : [('by_period', '=',False)]}"/>
+                    <field name="edate"  attrs="{'invisible' : [('by_period', '=',False)]}"/>
+                </group>
+                <group string="Asset Status">
+                    <field name="by_status"/>
+                    <field name="status" attrs="{'invisible' : [('by_status', '=',False)]}"/>
+                </group>
+                <group string="Asset Branch">
+                    <field name="by_branch"/>
+                    <field name="branch" attrs="{'invisible' : [('by_branch', '=',False)]}"/>
+                </group>
+                <footer>
+                    <button name="print_disposal_report" string="Get report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_asset_disposal_report" model="ir.actions.act_window">
+        <field name="name">Asset Disposal Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.disposal.report</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="form_asset_disposal_report"/>
+        <field name="target">new</field>
+    </record>
+    
+    	<menuitem name="Asset Disposal" id="menu_asset_disposal_report_main_mini"
+              parent="account_batch_state_update.menu_asset_depreciation_report_main"
+              sequence="2"/>
+   	
+    
+    <menuitem name="Asset Disposal Report" id="menu_asset_disposal_report"
+              parent="account_batch_state_update.menu_asset_disposal_report_main_mini"
+              action="account_batch_state_update.action_asset_disposal_report" sequence="0"/>
+   	
+    
+</odoo>

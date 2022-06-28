@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_process_flow_temp">
+        <t t-name="vp_system_update.report_process_flow_temp">
+        <t t-call="web.html_container">
+        <style>
+                table, th, td {
+                padding: 5px;
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                        <div class="oe_structure"/>
+							<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                        <div class="col-md-8 oe_title">
+                        <t t-value="o.grant_bcs_vsp_data()" t-set="data_vals"/>
+                        	
+                            <h4>
+                                <t t-esc="data_vals.get('bcs_number')"/>
+                            </h4>
+                        </div>
+                        <div class="col-md-4 oe_title">
+                            <!-- <label for="flag" string="urgency"/>
+                            <h5>
+                                <field name="flag" widget="radio" options="{'horizontal': true}" style="color: red;" />
+                            </h5>-->
+                        </div> 
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;border-style: solid;border-width: 0px;">
+                    <table style="padding-left: 0px;padding-right: 0px;border-style: solid;border-width: 1px;width:100%">
+                        	<tbody>
+                        	<t t-value="o.grant_bcs_vsp_data()" t-set="data_vals"/>
+                        		<tr>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<h5>
+                                			TO
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                			<t t-esc="data_vals.get('edm')"/>
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<h5>
+                                			FROM
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                			<t t-esc="data_vals.get('bcs')"/>
+                            			</h5>
+                        			</td>
+                        		</tr>
+                        		<tr>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<h5>
+                                			DATE
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                			<t t-esc="data_vals.get('date')"/>
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<h5>
+                                			NO. OF VOUCHERS
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                				<t t-esc="data_vals.get('no_vouchers')"/>
+                            			</h5>
+                        			</td>
+                        		</tr>
+                        		<tr>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<h5>
+                                			SUBJECT
+                            			</h5>
+                        			</td>
+                        			<td colspan="3"  style="padding-left: 5px;padding-right: 0px;padding-top:10px;padding-bottom:10px;border-style: solid;border-width: 1px;width:90%">
+                        				<h5>
+                                			REQUEST FOR PAYMENT:   BCS VOUCHER SERVICE PROVIDER PAYMENTS:  BRANCH – SERVICE PROVIDER
+                            			</h5>
+                        			</td>
+                        			
+                        		</tr>
+                        		<tr>
+                        			<td colspan="2" style="padding-left: 5px;padding-right: 0px;">
+                        				<div class="col-md-12">
+                        					<div class="col-md-6">
+                        						<div class="col-md-3">
+                        							For comment
+                        						</div>
+                        						<div class="col-md-3">
+                        							For Approve
+                        						</div>
+                        					</div>
+                        					
+                        				</div>
+                        			</td>
+                        			
+                        			<td colspan="2"  style="padding-left: 5px;padding-right: 0px;width:60%">
+                        				<h5 style="color: red;">
+                                			<t t-esc="data_vals.get('priority')"/>
+                            			</h5>
+                        			</td>
+                        		</tr>
+                        	</tbody>
+                            
+                        </table>
+                    </div>
+                   
+                    <br/>	
+                          <!-- <label string="SUBJECT: REQUEST FOR PAYMENT:   BCS VOUCHER SERVICE PROVIDER PAYMENTS:  BRANCH – SERVICE PROVIDER"/> -->
+                    
+                    <div class="row">
+                            <div class="col-md-12">
+                            <t t-value="o.grant_bcs_vsp_data()" t-set="data_vals"/>
+                            	<div class="col-md-4">
+                            		<p> Service Provider</p>
+                            	</div>
+                            	<div class="col-md-4">
+                            		<p> <t t-esc="data_vals.get('sp')"/></p>
+                            	</div>
+                            </div>
+                    </div>
+                    <br/>
+                    <t t-value="o.grant_bcs_vsp_data()" t-set="data"/>
+                    <t t-if="data['vouchers']">
+                    <div class="row">
+                    			  
+                            	<table style="padding-left: 0px;padding-right: 0px;border-style: solid;border-width: 1px;width:100%">
+	                        		
+	                        		<tr>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					No.
+                            				</th>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					Service Provider
+                            				</th>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					Voucher
+                            				</th>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					Invoice
+                            				</th>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					Service
+                            				</th>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					Branch
+                            				</th>
+                            				<th style="border: 1px solid black;padding: 5px;">
+                            					Amount
+                            				</th>
+                            		</tr>	
+                            		<t t-foreach="data['vouchers']" t-as="v_data">
+                            		<tr>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<t t-esc="v_data['main_no']"/>
+                            				</td>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<t t-esc="v_data['sp']"/>
+                            				</td>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<t t-esc="v_data['vch_no']"/>
+                            				</td>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<t t-esc="v_data['inv_no']"/>
+                            				</td>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<p><t t-esc="v_data['services']"/></p>
+                            						
+                            				</td>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<t t-esc="v_data['branch']"/>
+                            				</td>
+                            				<td style="border: 1px solid black;padding: 5px;">
+                            					<t t-esc="v_data['amount']"/>
+                            				</td>
+                            			</tr>
+                            		</t>
+                            		
+                            	</table>
+                            	
+                            </div>
+                            </t>
+                            <br/>
+                           	<div  class="row">
+                           	<table style="padding-left: 0px;padding-right: 0px;border-collapse: collapse;width:100%">
+                           			<tbody >
+                           			<t t-value="o.grant_bcs_vsp_data()" t-set="data_vals"/>
+                        				<tr style="border-bottom: 1px solid #337AB7;">
+                        					<td style="padding-left: 5px;padding-right: 0px;width:90%">
+                        						<h5>
+                                					TOTAL
+                            					</h5>
+                        					</td>
+                        					<td style="padding-left: 10px;padding-right: 0px;border-style: solid;border-width: 2px;width:10%">
+                        					<h5>
+                                				<t t-esc="data_vals.get('total')"/>
+                            				</h5>
+                        					</td>
+                        				</tr>
+                        			</tbody>
+                           		</table>
+                           	
+                            </div>
+                            <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                            	
+                            	
+                            </div>
+                            <div class="row">
+                            <t t-value="o.grant_bcs_vsp_data()" t-set="data_vals"/>
+                  			 <div class="col-md-12">
+                            <div class="col-md-6">
+                            	<div class="col-md-2">
+                            		<p> Compiled By</p>
+                            	</div>
+                            	<div class="col-md-4">
+                            		<p> <t t-esc="data_vals.get('compiler')"/></p>
+                            	</div>
+                            </div>
+                            <div class="col-md-6">
+                            	<div class="col-md-2">
+                            		<p> Verified By</p>
+                            	</div>
+                            	<div class="col-md-4">
+                            		<p> <t t-esc="data_vals.get('verifier')"/></p>
+                            	</div>
+                            </div>
+                            <div class="col-md-6">
+                            	<div class="col-md-2">
+                            		<p> Approved By</p>
+                            	</div>
+                            	<div class="col-md-4">
+                            		<p> <t t-esc="data_vals.get('approver')"/></p>
+                            	</div>
+                            </div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                        <!-- Second Page Attachment statement-->
+                        <br/>
+                        <div style="page-break-after: always;"/>
+                        
+						
+                          
+                    </t>
+                </t>
+            </t>
+
+        </t>
+                </template>
+
+        <template id="report_process_flow_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="vp_system_update.report_process_flow_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

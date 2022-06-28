@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="views_payable_eft_voucher" model="ir.ui.view">
+        <field name="name">creditor.eft.wizard.voucher</field>
+        <field name="model">creditor.eft.voucher</field>
+        <field name="arch" type="xml">
+            <form string="Create Credit Clearing Batch">
+                <header>
+                    <button name="create_eft" string="Generate EFT" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group colspan="4" string="Details">
+                        <group>
+                            <field name="batch_id"/>
+                            <field name="chequebook" string="Chequebook ID" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="separate" invisible="1" string="Separate Remittance"/>
+                        </group>
+                    </group>
+                    <group colspan="4">
+                        <group>
+                            <field name="cheque_date" />
+                        </group>
+                        <group>
+                            <field name="creation_date" />
+                            
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="EFT">
+                            <group colspan="4">
+                                <group>
+                                    <field name="incremental_num" />
+                                    <field name="file_type" />
+                                </group>
+                                <group>
+                                    <field name="eft_file_name" invisible="1"/>
+                                    <field name="eft_file" widget="binary" filename="eft_file_name" readonly="1"/>
+                                </group>
+                            </group>
+                            <div class="oe_clear"/>
+                        </page>
+                        
+                    </notebook>
+                </sheet>
+                <footer>
+
+                </footer>
+                </form>
+                    
+        </field>
+    </record>
+    <record id="tree_credit_eft_voucher" model="ir.ui.view">
+        <field name="name">CreditClearingVoucher</field>
+        <field name="model">creditor.eft.voucher</field>
+        <field name="arch" type="xml">
+            <tree string="Credit Clearing EFTs" delete="true" create="true" import="false">
+                <field name="batch_id"/>
+                <field name="chequebook"/>
+                <field name="cheque_date" />
+                <field name="incremental_num"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_creditor_eft_voucher" model="ir.actions.act_window">
+        <field name="name">Create Credit Clearing Batch Voucher</field>
+        <field name="res_model">creditor.eft.voucher</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+    <menuitem name="Create EFT" id="menu_creditors_eft_voucher_group" groups="base.group_system,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508"
+              parent="account_payables.menu_creditor_vouchers_group" action="account_payables.action_creditor_eft_voucher" 
+              sequence="1"/>
+   
+    
+    </data>
+</odoo>

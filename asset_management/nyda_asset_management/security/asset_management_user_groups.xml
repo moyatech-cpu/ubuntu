@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_nyda_asset_management">
+            <field name="name">Asset Management</field>
+            <field name="description">NYDA Organizational Assets Management</field>
+            <field name="sequence">51</field>
+    </record>
+    
+    
+    <record id="nyda_asset_mngmnt_branch_manager" model="res.groups">
+        <field name="name">Branch Manager</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset branch manager</field>        
+    </record>
+    
+    <record id="nyda_asset_mngmnt_snr_accountant" model="res.groups">
+        <field name="name">Snr Accountant</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management Senior Accountant</field>
+    </record>
+    
+     <record id="nyda_asset_mngmnt_asset_manager" model="res.groups">
+        <field name="name">Asset Manager</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management Asset Manager</field>
+    </record>
+    
+    <record id="nyda_asset_mngmnt_snr_manager" model="res.groups">
+        <field name="name">Senior Manager</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management Senior Manager</field>
+    </record>
+    
+    <record id="nyda_asset_mngmnt_asset_officer" model="res.groups">
+        <field name="name">Asset Officer</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management Asset Officer</field>
+    </record>
+    
+	<record id="nyda_asset_mngmnt_asset_user" model="res.groups">
+        <field name="name">Asset User</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management Asset User</field>
+        
+    </record>
+    
+    <record id="nyda_asset_mngmnt_transfer_authority" model="res.groups">
+        <field name="name">Transfer Authority</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management Transfer Authority</field>        
+    </record>
+    
+    <record id="nyda_asset_mngmnt_regional_manager" model="res.groups">
+        <field name="name">Regional Manager</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Manager Regional Manager</field>
+    </record>
+    
+    <record id="nyda_asset_mngmnt_cfo" model="res.groups">
+        <field name="name">CFO</field>
+        <field name="category_id" ref="model_category_nyda_asset_management"/>
+        <field name="description">Asset Management CFO</field>        
+    </record>
+    
+</data>

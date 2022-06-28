@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_authorization_temp">
+        <t t-name="account_payables.report_authorization_temp">
+        <t t-call="web.html_container">    
+        <style type="text/css">
+        
+            .vertexReader{
+            	padding:5px;
+            }
+            .width{
+            	width:100%
+            }
+            .width td{
+            	width:33%
+            }
+            .batch{
+            	width:100%
+            }
+            .batch td{
+            	width:25%
+            }
+            .length{
+            	width:100%
+            }
+            .length td{
+            	width:9%
+            }
+            .ledger{
+            	padding-top:20px;
+            	padding-bottom:0px;
+            	padding-left:40px;
+            	padding-right:40px;
+            }
+            .ledger td{
+            	width:10%
+            }
+            .totals{
+            	padding-top:40px;
+            	padding-bottom:40px;
+            	padding-left:150px;
+            	padding-right:150px;
+            }
+            .totals td{
+            	width:5%;
+            	padding: 10px;
+            }
+    </style>
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	
+            	
+	<div class="vertexReader">
+		<table class='width'>
+			<tr>
+				<td>
+				Date Time: <t t-esc="o.create_date"/>
+				</td>
+				<td align='center'>
+				National Youth Development Agency
+				</td>
+				
+				<td align='right'>
+				
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+				</td>
+				<td align='center' style="border-bottom: 2px dashed black">
+				 Posting Journal
+				</td>
+				
+				<td align='right'>
+				
+				</td>
+			</tr>
+			<tr>
+			    <td>
+			    Batch Number : <t t-esc="o.batch_number"/>
+			    
+                </td>
+                <td align='center'>
+                
+                </td>
+                
+                <td align='right'>
+                
+                </td>
+			</tr>
+			
+            
+		</table>
+		<br/>
+		<table class='length'>
+        <tr>
+                <td style="border-bottom: 2px dashed black">
+                Creditor
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Statement Date
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Payment Date
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Cheque Amount
+                </td>
+                <td style="border-bottom: 2px dashed black">
+                Payment Number
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"/>
+            </tr>
+        <t t-foreach="o.statement" t-as="v_data">
+            <tr>
+                <td>
+                <t t-esc="v_data['partner_id']['name']"/>
+                </td>
+                <td>
+                <t t-esc="v_data['statement_date']"/>
+                </td>
+                <td>
+                <t t-esc="v_data['payment_date']"/>
+                </td>
+                <td>
+                <t t-esc="v_data['balance']"/>
+                </td>
+                <td>
+                <t t-esc="v_data['batch_number']"/>
+                </td>
+                
+            </tr>
+        </t>
+        <tr>
+                <td colspan="5" align="center">
+                   
+                </td>
+                
+         </tr>
+         <tr>
+                <td colspan="5" align="center">
+                   
+                </td>
+                
+         </tr>
+         <tr>
+                <td colspan="1">
+                    
+                </td>
+                <td colspan="1" >
+                    
+                </td>
+                <td colspan="1" >
+                    Batch Total: 
+                </td>
+                <td colspan="1" >
+                    R <t t-esc="o.total_authorized"/>
+                </td>
+                <td colspan="1">
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" >
+                   Number of Statements Posted:
+                </td>
+                <td colspan="2" >
+                     <t t-esc="len(o.statement)"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" >
+                   Posted By:
+                </td>
+                <td colspan="2" >
+                     <t t-esc="o.create_uid.name"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" >
+                   EFT Batch Number:
+                </td>
+                <td colspan="2">
+                     
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" >
+                   EFT Batch Uploaded User:
+                </td>
+                <td colspan="2" >
+                     
+                </td>
+            </tr>
+        </table>
+        </div>
+        </div>
+    </t>
+            
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_authorization_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_payables.report_authorization_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

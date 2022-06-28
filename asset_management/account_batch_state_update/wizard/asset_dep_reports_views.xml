@@ -1,0 +1,49 @@
+<odoo>
+	<template id="assets_backend" inherit_id="web.assets_backend"> 
+     		<xpath expr="." position="inside">
+         		<link rel="stylesheet" href="/account_batch_state_update/static/css/sheet.css"/> 
+     		</xpath>        
+	</template>
+    <record id="form_asset_depreciation_report" model="ir.ui.view">
+        <field name="name">asset.dep.report</field>
+        <field name="model">asset.dep.report</field>
+        <field name="arch" type="xml">
+            <form string="Asset Depreciation Report Wizard">
+                <group string="Period">
+                    <field name="sdate" required="1"/>
+                    <field name="edate" required="1"/>
+                </group>
+                <group string="Asset Category">
+                    <field name="a_cat_choice"/>
+                    <field name="category_id" attrs="{'invisible' : [('a_cat_choice', '=',False)]}"/>
+                </group>
+                <footer>
+                    <button name="print_dep_report" string="Get report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_asset_depreciation_report" model="ir.actions.act_window">
+        <field name="name">Asset Depreciation Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.dep.report</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="form_asset_depreciation_report"/>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem name="Reports" id="menu_asset_depreciation_report_main"
+              parent="nyda_asset_management.menu_asset_management"
+              sequence="5"/>
+   	<menuitem name="Depreciation Reports" id="menu_asset_depreciation_report_main_mini"
+              parent="account_batch_state_update.menu_asset_depreciation_report_main"
+              sequence="0"/>
+    
+    <menuitem name="Depreciation Report" id="menu_asset_depreciation_report"
+              parent="account_batch_state_update.menu_asset_depreciation_report_main_mini"
+              action="account_batch_state_update.action_asset_depreciation_report" sequence="10"/>
+   	
+    
+</odoo>

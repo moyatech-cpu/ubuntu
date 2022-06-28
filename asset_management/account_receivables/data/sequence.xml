@@ -1,0 +1,60 @@
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_creditor_id" model="ir.sequence">
+            <field name="name">CreditorID</field>
+            <field name="code">creditor.id</field>
+            <field name="prefix">CR</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sequence_customer_id" model="ir.sequence">
+            <field name="name">CustomerID</field>
+            <field name="code">customer.id</field>
+            <field name="prefix">CUST</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sequence_account_invoice_receivable" model="ir.sequence">
+            <field name="name">CreditNo</field>
+            <field name="code">account.invoice.receivable</field>
+            <field name="prefix">CNR</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sales_invoice_batch_code" model="ir.sequence">
+            <field name="name">salesBatch</field>
+            <field name="code">batch.invoice</field>
+            <field name="prefix">SLS</field>
+            <field name="padding">7</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="credit_invoice_batch_code" model="ir.sequence">
+            <field name="name">creditBatch</field>
+            <field name="code">credit.invoice</field>
+            <field name="prefix">CRD</field>
+            <field name="padding">7</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+		<record id="sequence_batch_enquiry" model="ir.sequence">
+            <field name="name">BatchID</field>
+            <field name="code">batch.entry</field>
+            <field name="prefix">RMSLS</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sequence_credit_batch_enquiry" model="ir.sequence">
+            <field name="name">CreditBatch</field>
+            <field name="code">credit.entry</field>
+            <field name="prefix">CRB</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

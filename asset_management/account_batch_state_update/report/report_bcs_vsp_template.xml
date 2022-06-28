@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_bcs_vsp_temp">
+            <t t-name="account_batch_state_update.report_bcs_vsp_temp">
+            <t t-call="web.html_container">
+            <style>
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%
+}
+
+.width td{
+	width:33%;
+	padding:3px;
+}
+.batch{
+	width:100%
+}
+.batch td{
+	width:25%
+}
+.length{
+	border: 1px solid black;
+	width:100%;
+}
+.length td{
+	width:10%;
+	border: 1px solid black;
+	padding:3px;
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}
+            </style>
+                <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	<t t-value="o.grant_bcs_vsp_data()" t-set="data_vals"/>
+					<div class="vertexReader">
+						<table class='width'>
+							<tr>
+								<td align='left'>
+									<b>Batch ID: </b> <t t-esc="data_vals.get('batch_number')"/>
+								</td>
+								<td align='center'>
+									<b>Description: </b> <t t-esc="data_vals.get('description')"/>
+								</td>
+								<td align='center'>
+									<b>Dispose date: </b> <t t-esc="data_vals.get('disposed_date')"/>
+								</td>
+								<td align='right'>
+									<b>Date: </b> <t t-esc="data_vals.get('date')"/>
+								</td>
+							</tr>
+						</table>
+						<b>Assets</b>
+							<table class='length'>
+								<tr>
+									<td>
+										<b>Name</b>
+									</td>
+									<td>
+										<b>Asset ID</b>
+									</td>
+									<td>
+										<b>Start Date</b>
+									</td>
+									<td>
+										<b>Remove Date</b>
+									</td>
+									<td>
+										<b>Category</b>
+									</td>
+									<td>
+										<b>Carrying</b>
+									</td>
+									<td>
+										<b>Sale Value</b>
+									</td>
+									<td colspan='2'>
+										<b>Note</b>
+									</td>
+									
+								</tr>
+						<t t-foreach="data_vals['asset_data']" t-as="asset_data">
+							<tr>
+								<td>
+									<t t-esc="asset_data['asset_name']"/>
+								</td>
+								<td>
+									<t t-esc="asset_data['asset_id']"/>
+								</td>
+								<td>
+									<t t-esc="asset_data['date_start']"/>
+								</td>
+								<td>
+									<t t-esc="asset_data['r_date_remove']"/>
+								</td>
+								<td>
+									<t t-esc="asset_data['profile_id']"/>
+								</td>
+								<td>
+									<t t-esc="asset_data['value_residual']"/>
+								</td>
+								<td>
+									<t t-esc="asset_data['sale_value']"/>
+								</td>
+								<td colspan='2'>
+									<t t-esc="asset_data['note']"/>
+								</td>
+								
+							</tr>
+						</t>
+						</table>
+					
+							
+								
+
+		</div>			
+</div>
+            
+           </t>
+            
+        </t>
+		</t>
+        </t>
+        </template>
+
+        <template id="report_bcs_vsp_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_batch_state_update.report_bcs_vsp_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

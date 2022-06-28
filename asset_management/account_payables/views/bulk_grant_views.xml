@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	
+ <record id="nyda_grant_disbursement_kanban" model="ir.ui.view">
+        <field name="name">nyda.bulk.grant.disbursment.kanban.view</field>
+        <field name="model">bulk.grant.disbursment</field>
+        <field name="arch" type="xml"> 
+		<kanban class="o_event_kanban_view" default_group_by="status" colors="green:flag=='0';orange:flag=='2';yellow:flag=='1';red:flag=='3';" disable_drag_drop_record="true" import="false" >
+                    <field name="ref_number"/>
+                    <field name="date"/>
+                    <field name="compiled_by"/>
+                    <field name="total_grants"/>
+                    <field name="flag"/>
+                    <field name="fold" readonly="1"/>
+                    <field name="status" readonly="1"/>
+                    <field name="color"/>
+                    <progressbar field="status" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.deletable">
+                                            <li><a type="delete">Delete</a></li>
+                                        </t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                                </div>
+                                <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title"><field name="ref_number"/></h4>
+                                    <div>
+                                        <t t-if="record.compiled_by.raw_value"> <b class="o_kanban_record_subtitle"> <field name="compiled_by"/> </b> <br/> </t>
+                                        <t t-if="record.flag.raw_value"> <b style="color:red" class="o_kanban_record_subtitle"> <field name="flag"/> </b> <br/> </t>
+                                        
+                                        <i class="fa fa-ticket"/>
+                                        <b>Grant Applications</b> <field name="num_of_applications"/><br/>
+                                        <i class="fa fa-money"/>
+                                        <b>R</b> <field name="total_grants"/><br/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </field>
+      </record>
+	
+    <record id="view_grant_disbursement_form" model="ir.ui.view">
+        <field name="name">view.bulk.grant.disbursment.form</field>
+        <field name="model">bulk.grant.disbursment</field>
+        <field name="arch" type="xml">
+            <form string="Grant Disbursment" delete="true" duplicate="true" create="true" edit="true">
+                <header>
+                    <button string="Send to Finance" class="oe_highlight" type="object" name="send_to_finance" confirm="Confirm Grant Disbursment form is accurate and ready for payment?"
+                            attrs="{'invisible': [('status', '!=', 'new')]}"
+                            groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp"/>
+					
+                    <button string="Completed" class="oe_highlight" type="object" name="payment_completed"
+                            attrs="{'invisible': [('status', '!=', 'sent2fin')]}"
+                            groups="nyda_grant_and_voucher.group_grant_voucher_bcs_vp"/>
+					<field name="status" widget="statusbar" clickable="False"
+                           statusbar_visible="new,sent2fin,completed"/>
+					
+                </header>
+                <sheet>
+                    
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                        <div class="col-md-8 oe_title">
+                            <h4>
+                                <field name="ref_number" readonly="1"/>
+                            </h4>
+                        </div>
+                        <div class="col-md-4 oe_title">
+                            
+                        </div> 
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;border-style: solid;border-width: 0px;">
+                    <table style="padding-left: 0px;padding-right: 0px;border-style: solid;border-width: 1px;width:100%">
+                        	<tbody>
+                        		
+                        		<tr>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<label for="date" string="DATE"/>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                			<field name="date" readonly="1" />
+                            			</h5>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        				<label for="num_of_applications" string="NO. OF GRANTS"/>
+                        			</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                			<field name="num_of_applications" style="width:100%"/>
+                            			</h5>
+                        			</td>
+                        		</tr>
+                        		
+                        		<tr>
+                        			<td colspan="2" style="padding-left: 5px;padding-right: 0px;">
+                        				<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:10%">
+                        					<label for="branch" string="Branch"/>
+                        				</td>
+                        			<td style="padding-left: 5px;padding-right: 0px;border-style: solid;border-width: 1px;width:40%">
+                        				<h5>
+                                			<field name="branch" style="width:100%"/>
+                            			</h5>
+                        			</td>
+                        			</td>
+                        			
+                        			<td colspan="2"  style="padding-left: 5px;padding-right: 0px;width:60%">
+                        				<h5>
+                                			<field name="flag" widget="radio" options="{'horizontal': true}" style="color: red;" />
+                            			</h5>
+                        			</td>
+                        		</tr>
+                        	</tbody>
+                            
+                        </table>
+                    </div>
+                   
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                  		<br/>
+                  	</div>	
+                    <group colspan="4">
+                            <group colspan="4">
+                            	<group>
+			                  		<field name="date_filter" attrs="{'readonly': [('status', '!=', 'new')]}" />
+			                  	</group>
+			                  	<group>
+			                  		<field name="from_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+			              			<field name="to_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+                            	</group>
+                            </group>
+                            <br/>
+                            <group colspan="4">
+                            	<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;border-style: solid;border-width: 0px;">
+                            	<notebook>
+                            		<page string="Grant Application">
+                            			<field name="grant_application_ids">
+	                            			<tree editable="bottom">
+	                            				<field name="serial_number" string="Serial #"/>
+	                            				<field name="quotation_records" widget="many2many_tags" string="Quotations Number"/>
+	                            				<field name="branch_id" string="Branch"/>
+	                            				<field name="quotation_sum" string="Amount"/>
+	                            			</tree>
+                           				</field>
+                            		</page>
+                            		<page string="Attachments">
+                            			<group colspan="4">
+                            				<field name="gp_attachments" widget="many2many_binary"/>
+                            			</group>
+                            			
+                            		</page>
+                            	</notebook>
+                            	
+                           		</div>
+                           	</group>
+                           	<group colspan="4">
+                           	<table style="padding-left: 0px;padding-right: 0px;border-collapse: collapse;width:100%">
+                           			<tbody >
+                        				<tr style="border-bottom: 1px solid #337AB7;">
+                        					<td style="padding-left: 5px;padding-right: 0px;width:90%">
+                        						<label for="total_vouchers" string="TOTAL"/>
+                        					</td>
+                        					<td style="padding-left: 10px;padding-right: 0px;border-style: solid;border-width: 2px;width:10%">
+                        					<h5>
+                                				R <field name="total_grants" />
+                            				</h5>
+                        					</td>
+                        				</tr>
+                        			</tbody>
+                           		</table>
+                           	
+                            </group>
+                            <group colspan="4">
+                            <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                            	
+                            	
+                            </div>
+                            </group>
+                        </group>
+                        <group colspan="4">
+                        	<group>
+                        		<field name="compiled_by" readonly="1"/>
+                        		<field name="date" readonly="1"/>
+                        	</group>
+                        	<group>
+                        		<field name="verified_by" readonly="1"/>
+                        		<field name="verified_by_date" readonly="1"/>
+                        	</group>
+                        </group>
+                        <group colspan="4">
+                        	<group>
+                        		<field name="completed_by" readonly="1"/>
+                        		<field name="completed_date" readonly="1"/>
+                        	</group>
+                        	
+                      		
+                        </group>
+                            
+                          
+                        
+                  
+                   
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_grant_disbursement_tree" model="ir.ui.view">
+        <field name="name">Grant Disbursment Pack</field>
+        <field name="model">bulk.grant.disbursment</field>
+        <field name="arch" type="xml">
+            <tree string="Grant Disbursment Pack" delete="true" create="true" import="false">
+                <field name="ref_number"/>
+                <field name="flag" string="Urgency"/>
+                <field name="date"/>
+                <field name="branch"/>
+                <field name="status"/>
+                <field name="total_grants"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_grant_disbursement_main" model="ir.actions.act_window">
+        <field name="name">Grant Disbursement</field>
+        <field name="res_model">bulk.grant.disbursment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item for BCS VSP19 -->
+    <menuitem name="Grant Disbursement" id="menu_main_grant_disbursement"
+              parent="nyda_grant_and_voucher.main_menu_client_preassessment" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508" sequence="11"/>
+    <menuitem name="Batch Grant Disbursement" id="sub_main_grant_disbursement" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508" action="action_grant_disbursement_main"
+              parent="account_payables.menu_main_grant_disbursement" sequence="1"/>
+</odoo>

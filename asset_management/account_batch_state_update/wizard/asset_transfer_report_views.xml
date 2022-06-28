@@ -1,0 +1,48 @@
+<odoo>
+	
+    <record id="form_asset_transfer_report" model="ir.ui.view">
+        <field name="name">asset.transfer.report.form</field>
+        <field name="model">asset.transfer.report</field>
+        <field name="arch" type="xml">
+            <form string="Asset Transfer Report Wizard">
+                <group string="Period">
+                	<field name="by_period"/>
+                    <field name="sdate"  attrs="{'invisible' : [('by_period', '=',False)]}"/>
+                    <field name="edate"  attrs="{'invisible' : [('by_period', '=',False)]}"/>
+                </group>
+                <group string="Asset Status">
+                    <field name="by_status"/>
+                    <field name="status" attrs="{'invisible' : [('by_status', '=',False)]}"/>
+                </group>
+                <group string="Asset Branch">
+                    <field name="by_branch"/>
+                    <field name="branch" attrs="{'invisible' : [('by_branch', '=',False)]}"/>
+                </group>
+                <footer>
+                    <button name="print_transfer_report" string="Get report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_asset_transfer_report" model="ir.actions.act_window">
+        <field name="name">Asset Transfer Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.transfer.report</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="form_asset_transfer_report"/>
+        <field name="target">new</field>
+    </record>
+    
+    	<menuitem name="Asset Transfer" id="menu_asset_transfer_report_main_mini"
+              parent="account_batch_state_update.menu_asset_depreciation_report_main"
+              sequence="1"/>
+   	
+    
+    <menuitem name="Asset Transfer Report" id="menu_asset_transfer_report"
+              parent="account_batch_state_update.menu_asset_transfer_report_main_mini"
+              action="account_batch_state_update.action_asset_transfer_report" sequence="0"/>
+   	
+    
+</odoo>

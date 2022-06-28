@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_print_eftpayables_v_temp">
+        <t t-name="account_payables.report_print_eftpayables_v_temp">
+        <t t-call="web.html_container">  
+        <style type="text/css">
+        
+            .vertexReader{
+            	padding:5px;
+            }
+            .width{
+            	width:100%
+            }
+            .width td{
+            	width:33%
+            }
+            .batch{
+            	width:100%
+            }
+            .batch td{
+            	width:25%
+            }
+            .length{
+            	width:100%
+            }
+            .length td{
+            	width:9%
+            }
+            .ledger{
+            	padding-top:20px;
+            	padding-bottom:0px;
+            	padding-left:40px;
+            	padding-right:40px;
+            }
+            .ledger td{
+            	width:10%
+            }
+            .totals{
+            	padding-top:40px;
+            	padding-bottom:40px;
+            	padding-left:150px;
+            	padding-right:150px;
+            }
+            .totals td{
+            	width:5%;
+            	padding: 10px;
+            }
+    </style>  
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	<div class="vertexReader">
+					<table class='width' style="border: 1px solid black;">
+						<tr style="border: 1px solid black;">
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Creditor ID
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Creditor Name
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Cheque Name
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Payment Number
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Cheque Date
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Chequee Number
+							</td>
+						</tr>
+						<tr style="border: 1px solid black;">
+							<td style="border: 1px solid black;">
+								Bora
+							</td>
+							<td style="border: 1px solid black;">
+								
+							</td>
+							<td style="border: 1px solid black;">
+								
+							</td>
+							<td style="border: 1px solid black;">
+								<t t-esc="o.cheque_number"/>
+							</td>
+							<td style="border: 1px solid black;">
+								<t t-esc="o.cheque_date"/>
+							</td>
+							<td style="border: 1px solid black;">
+								<t t-esc="o.cheque_number"/>
+							</td>
+						</tr>
+					</table>
+					<table class='length' style="border: 1px solid black;">
+						<tr style="border: 1px solid black;">
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Our Voucher Number
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Your Voucher Number
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Date
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Amount
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Amount Paid
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Discount
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Writeoff
+							</td>
+							<td style="border: 1px solid black;font-style:bold;background-color:grey">
+								Net
+							</td>
+			
+						</tr>
+						<tr style="border: 1px solid black;">
+							<td style="border: 1px solid black;">
+								<t t-esc="o.voucher_number"/>
+							</td>
+							<td style="border: 1px solid black;">
+								<t t-esc="o.doc_number"/>
+							</td>
+							<td style="border: 1px solid black;">
+								<t t-esc="o.date"/>
+							</td>
+							<td style="border: 1px solid black;">
+								R <t t-esc="o.amount"/>
+							</td>
+							<td style="border: 1px solid black;">
+								R <t t-esc="o.amount"/>
+							</td>
+							<td style="border: 1px solid black;">
+								R 0.00
+							</td>
+							<td style="border: 1px solid black;">
+								R 0.00
+							</td>
+							<td style="border: 1px solid black;">
+								R <t t-esc="o.amount"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+				</div>
+			    </t>   
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_print_eftpayables_v_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_payables.report_print_eftpayables_v_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

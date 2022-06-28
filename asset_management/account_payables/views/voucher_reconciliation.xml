@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    
+    
+    <record id="wizard_creditor_voucher_reconciliation" model="ir.ui.view">
+        <field name="name">creditor.reconciliation.wizard.voucher</field>
+        <field name="model">creditor.recon.voucher</field>
+        <field name="arch" type="xml">
+            <form string="Creditor's Reconciliation">
+                <header>
+                    <button name="reconcile" string="Reconcile Statement" attrs="{'invisible':[('state','!=','new')]}" type="object" class="btn-primary"/>
+                    <button name="authorize_statement" string="Authorize" attrs="{'invisible':[('state','!=','reconciled')]}" type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar" clickable="1"/>
+                </header>
+                <sheet>
+                    <group colspan="4" string="Capture Statement">
+                        <group>
+                        	<field name="statement_date" />
+                        </group>
+                        <group>
+                        	<field name="payment_date"/>
+	                        <field name="balance"/>
+	                        <field name="description"/>
+	                        <div style="color:red" >
+	                           <field name="reconcile_check" string="Ready to Reconcile"/>
+	                           Ready to Reconcile
+	                        </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Capture Statement">
+                            <field name="transactions" readonly="0">
+                                <tree>
+                    				<field name="doc_number"/>
+                    				<field name="amount" sum="Total"/>
+                    				<field name="date"/>
+                    				
+                				</tree>
+                                
+                            </field>
+                            
+                            <group colspan="4">
+                            	<group>
+                            		<field name="captured_balance" readonly="1"/>
+                    				
+                            	</group>
+                            	<group>
+                            		<field name="difference"/>
+                            	</group>
+                            </group>
+                            <div class="oe_clear"/>
+                        </page>
+                        
+                    </notebook>
+                </sheet>
+                <footer>
+
+                </footer>
+                </form>
+                    
+        </field>
+    </record>
+    <record id="tree_voucher_reconcile_statement" model="ir.ui.view">
+        <field name="name">Voucher Recon</field>
+        <field name="model">creditor.recon.voucher</field>
+        <field name="arch" type="xml">
+            <tree string="Captured Statements" delete="true" create="true" import="false">
+                <field name="statement_date"/>
+                <field name="payment_date"/>
+                <field name="transactions" widget="many2many_tags"/>
+                <field name="state"/>
+                <field name="balance" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+    
+     <record id="action_creditor_vouchers_recon_1" model="ir.actions.act_window">
+        <field name="name">Voucher Recon</field>
+        <field name="res_model">creditor.recon.voucher</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+   <menuitem name="Grant Voucher" id="menu_pddd_main_group"
+              parent="account.menu_finance" groups="base.group_system,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508"
+              sequence="0"/>
+   <menuitem name="Reconciliation" id="menu_creditor_vouchers_group" groups="base.group_system,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508"
+              parent="account_payables.menu_pddd_main_group" 
+              sequence="0"/>
+   <menuitem name="Voucher Recon" id="menu_creditor_vouchers_recon_group" groups="base.group_system,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508"
+              parent="account_payables.menu_creditor_vouchers_group" action="account_payables.action_creditor_vouchers_recon_1" 
+              sequence="0"/>
+    
+    </data>
+</odoo>

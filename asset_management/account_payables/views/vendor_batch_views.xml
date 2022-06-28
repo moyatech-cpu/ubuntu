@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	
+	<record id="view_vendor_batch_entry_tree_view" model="ir.ui.view">
+        <field name="name">Purchase Batch Entry</field>
+        <field name="model">batch.entry</field>
+        <field name="arch" type="xml">
+            <tree string="Vendor Batch Entry" delete="true" create="true" import="false">
+                <field name="batch_id"/>
+                <field name="source"/>
+                <field name="comment"/>
+                <field name="posting_date"/>
+                <field name="invoice_status"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_new_batch_entry_form_view" model="ir.ui.view">
+        <field name="name">purchase.entry.form</field>
+        <field name="model">payable.batch</field>
+        <field name="arch" type="xml">
+           <form string="Purchase Batch Entry">
+                <header>
+                    <button name="populate_po_invoice" type="object" string="Populate PO" attrs="{'invisible':[('state','=','posted')]}"/>
+                    <button name="post_journal" type="object" string="POST" attrs="{'invisible':[('state','=','posted')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    
+                    <div class="oe_title">
+                        <label for="batch_id" string="Batch #"/>
+                        <h3>
+                            <field name="batch_id" readonly="0" required="1"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="source" string="Creditor"/>
+                            <field name="creditor_id" string="Creditor ID" readonly="1"/>
+                            <field name="doc_number"/>
+                            <field name="receipt_num" readonly="1" invisible="0"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="posting_date" readonly='0'/>
+                            <field name="comment"/>
+                            <field name="gl_report_fn" invisible="1"/>
+                            <field name="gl_report" readonly="1" filename="gl_report_fn" widget="binary"/>
+                        </group>
+                    
+                    </group>
+                    <group>
+                        <group>
+                            <field name="payment_term_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="total_amount" readonly='1'/>
+                        </group>
+                    </group>
+                   
+                   <notebook>
+                        <page string="Transactions">
+                             <field name="transactions" readonly="0" context="{'default_partner_id': source,'default_type': 'in_invoice'}">
+                                 <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" default_order='invoice_number_entry asc' editable="bottom" create="false" string="Invoice">
+                                    <field name="invoice_number_entry" string="Doc Number" readonly="0"/>
+                                    <field name="creditor_id" readonly="1"  string="Creditor ID"/>
+                                    <field name="partner_id"  string="Creditor" force_save="1"/>
+                                    <field name="account_id" force_save="1" readonly="1"/>
+                                    <field name="date_invoice"/>
+                                    <field name="line_description"/>
+                                    <field name="number" invisible="1"/>
+                                    <field name="commercial_partner_id" invisible="1"/>
+                                    <field name="reference" invisible="1"/>
+                                    <field name="name" invisible="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                    <field name="user_id" invisible="1" />
+                                    <field name="date_due" invisible="1"/>
+                                    <field name="origin" invisible="1"/>
+                                    <field name="discount" invisible="1"/>
+                                    <field name="sales_amount" string="Total PO Amount" readonly="1"/>
+                                    <field name="percentage"/>
+                                    <field name="amount_total_signed" string="Invoice Amount" readonly="0" sum="Total"/>
+                                    <field name="residual_signed" string="Amount Due" invisible="1" sum="Amount Due"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="type"  force_save="1"  invisible="context.get('type',True)"/>
+                                </tree>
+                                                
+                            </field>
+                            </page>
+                            <page string="Journal Entries" attrs="{'invisible':[('state','!=','posted')]}">
+                             <field name="journals" readonly="0" >
+                                 <tree decoration-info="state == 'draft'" string="Journal Entries">
+				                    <field name="date"/>
+				                    <field name="name"/>
+				                    <field name="partner_id"/>
+				                    <field name="ref"/>
+				                    <field name="journal_id"/>
+				                    <field name="amount" sum="Total Amount"/>
+				                    <field name="state"/>
+				                    <field name="currency_id" invisible="1"/>
+				                </tree>
+                                                
+                            </field>
+                            <div class="oe_clear"/>
+                        </page>
+                        
+                    </notebook>
+                
+                </sheet>
+                <br/>
+               
+                <footer>
+                
+                </footer>
+                </form>
+                    
+               </field>
+    </record>
+    
+	<record id="view_new_batch_tree_view" model="ir.ui.view">
+        <field name="name">Purchase Entry</field>
+        <field name="model">payable.batch</field>
+        <field name="arch" type="xml">
+            <tree string="Vendor Batch Entry" delete="true" create="true" import="false">
+                <field name="batch_id"/>
+                <field name="source"/>
+                <field name="comment"/>
+                <field name="posting_date"/>
+                <field name="total_amount" sum="Total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+	
+    <!--<record id="view_vendor_batch_entry_form_view" model="ir.ui.view">
+        <field name="name">purchase.batch.entry.form</field>
+        <field name="model">batch.entry</field>
+        <field name="arch" type="xml">
+           <form string="Purchase Batch Entry">
+                <header>
+                    <field name="invoice_status" widget="statusbar" readonly="1" statusbar_visible="draft,review,posted"/>
+                    <button name="set_review" string="Validate" class="oe_highlight" type="object" groups="base.group_system" attrs="{'invisible': [('invoice_status', 'in', ('review','posted','paid','cancel','approve','reject'))]}"/>
+                    <button name="set_approve_reject" string="Review" class="oe_highlight" type="object" groups="base.group_system" attrs="{'invisible': [('invoice_status', 'in', ('draft','posted','paid','cancel','approve','reject'))]}"/>
+                    <button name="set_post" string="Post" class="oe_highlight" type="object" groups="base.group_system" attrs="{'invisible': [('invoice_status', 'in', ('draft','posted','paid','cancel','review','reject'))]}"/>
+                    <button name="set_paid" string="Paid" class="oe_highlight" type="object" groups="base.group_system" attrs="{'invisible': [('invoice_status', 'in', ('draft','review','paid','cancel','review','reject','approve'))]}"/>
+                    <button name="set_cancel" string="Cancel" class="oe_highlight" type="object" groups="base.group_system" attrs="{'invisible': [('invoice_status', 'in', ('posted','paid','reject'))]}"/>
+                    <button name="general_post" type="object" string="General Posting Journal" attrs="{'invisible':[('invoice_status', 'not in', ('paid','posted'))]}" class="oe_highlight o_invoice_send" groups="base.group_user"/>
+                    <button name="sales_journal" type="object" string="Print Journal" attrs="{'invisible':[('invoice_status', 'in', ('paid','posted'))]}" class="oe_highlight o_invoice_send" groups="base.group_user"/>
+                    <button name="review_final" type="object" string="Review" attrs="{'invisible':[('invoice_status', 'in', ('draft','review','cancel','review','reject','approve','posted'))]}" class="oe_highlight o_invoice_send" groups="base.group_user"/>
+                    
+                </header>
+                <sheet>
+                    
+                    <div class="oe_title">
+                    	<label for="batch_id" string="Batch #"/>
+                        <h3>
+                            <field name="batch_id" readonly="0" required="1"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                        	<field name="batch_type" invisible="1"/>
+                        	<field name="source" string="Creditor"/>
+                        	<field name="creditor_id" string="Creditor ID" readonly="1"/>
+                        	<field name="doc_number"/>
+                        	<field name="account_id"/>
+                        	<field name="receipt_num" readonly="1" invisible="0"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        	<field name="posting_date" readonly='0'/>
+                        	<field name="date_due" invisible="0"/>
+                        	<field name="comment"/>
+                        	<field name="apply_controls"/>
+                        	<field name="last_posting_date" readonly="1" attrs="{'invisible': [('last_posting_date', '=', False)]}"/>
+                        </group>
+                    
+                    </group>
+                    <group style="font-family:'Lucida Console', Courier, monospace;" attrs="{'invisible':[('apply_controls','!=',False)]}">
+                        <group>
+                            <field name="payment_term_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="total_amount" readonly='1'/>
+                        </group>
+                    </group>
+                    <group style="font-family:'Lucida Console', Courier, monospace;" attrs="{'invisible':[('apply_controls','=',False)]}">
+                        <group>
+                        	<field name="transactions_control" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        	<field name="batch_control" attrs="{'readonly': [('id', '!=', False)]}" />
+                        </group>
+                        <group>
+                        	<field name="transactions_actual" readonly='1'/>
+                        	<field name="batch_actual" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                   <notebook>
+                        <page string="Transactions">
+                             <field name="transactions" readonly="0" context="{'default_partner_id': source,'default_type': 'in_invoice','default_invoice_idetifier':False}">
+                                 <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" default_order='invoice_number_entry asc' editable="bottom" string="Invoice">
+                    <field name="invoice_number_entry" string="Doc Number" readonly="0"/>
+                    <field name="partner_id"  string="Vendor" force_save="1"/>
+                    <field name="account_id" force_save="1"/>
+                    <field name="date_invoice"/>
+                    <field name="line_description"/>
+                    <field name="number" invisible="1"/>
+                    <field name="commercial_partner_id" invisible="1"/>
+                    <field name="reference" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="user_id" invisible="1" />
+                    <field name="date_due" invisible="1"/>
+                    <field name="origin" invisible="1"/>
+                    <field name="discount" invisible="1"/>
+                    <field name="sales_amount" string="Purchase Amount"/>
+                    <field name="percentage"/>
+                    <field name="amount_total_signed" string="Total" sum="Total"/>
+                    <field name="residual_signed" string="Amount Due" sum="Amount Due"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_currency_id" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="type"  force_save="1"  invisible="context.get('type',True)"/>
+                </tree>
+                                
+                            </field>
+                            <div class="oe_clear"/>
+                        </page>
+                        <page string="Journal">
+                        <field name="journal_line_ids" widget="one2many_list">
+                                <tree editable="bottom" string="Journal Items">
+                                    <field name="account_id" />
+                                    <field name="partner_id"/>
+                                    <field name="name"/>
+                                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                    <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                                    <field name="amount_currency" groups="base.group_multi_currency"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="date_maturity" required="0" invisible="context.get('view_no_maturity', False)"/>
+                                </tree>
+                            </field>
+                            <div class="oe_clear"/>
+                        </page>
+                        <page string="Journal Entries" invisible="1">
+                             <field name="journal_ids" widget="one2many_list">
+                                <tree decoration-info="state == 'draft'" string="Journal Entries">
+                    				<field name="date"/>
+                    		<field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="ref"/>
+                    <field name="journal_id"/>
+                    <field name="amount" sum="Total Amount"/>
+                    <field name="state"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+                            </field>
+                            <div class="oe_clear"/>
+                        </page>
+                    </notebook>
+                <group>
+                        <group>
+                    		<field name="create_uid" readonly="1"/>
+                    		<field name="approvalUser" readonly="1"/>
+                    		<field name="approval_date" readonly="1"/>
+                    	</group>
+                    	<group>
+                    	  
+                    		<field name="last_update_user" readonly="1"/>
+                    		
+                    	</group>
+                </group> 
+                </sheet>
+                <br/>
+               
+                <footer>
+                
+                </footer>
+                </form>
+                    
+               </field>
+    </record>
+    <record id="view_vendor_batch_entry_action" model="ir.actions.act_window">
+        <field name="name">Purchase Batch Transaction Entry</field>
+        <field name="res_model">batch.entry</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('batch_type','=','pay')]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_vendor_batch_entry_tree_view')}),
+    (0, 0, {'view_mode': 'form', 'view_id': ref('view_new_batch_entry_form_view')})]"/>
+        
+        <field name="context">{
+      			"default_batch_type" : "pay",
+   		}
+   		</field>
+    </record>-->
+    <record id="view_new_batch_entry_action" model="ir.actions.act_window">
+        <field name="name">Purchase Batch Entry</field>
+        <field name="res_model">payable.batch</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('batch_type','=','normal')]</field>
+        <field name="context">{'default_batch_type':'normal'}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_new_batch_tree_view')}),
+    (0, 0, {'view_mode': 'form', 'view_id': ref('view_new_batch_entry_form_view')})]"/>
+        
+    </record>
+   <menuitem name="Purchase Batch Entry" id="menu_purchase_new_batch_entry"
+              parent="account_payables.menu_payable_entry_group" groups="base.group_system,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508" 
+              action="account_payables.view_new_batch_entry_action" sequence="1"/>
+   
+    
+    </data>
+</odoo>

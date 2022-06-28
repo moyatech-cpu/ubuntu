@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="views_payable_authorization" model="ir.ui.view">
+        <field name="name">creditor.authorize.wizard</field>
+        <field name="model">creditor.authorize</field>
+        <field name="arch" type="xml">
+            <form string="Authorization">
+                <header>
+                    <button name="authorize" string="Authorize Statement" attrs="{'invisible':[('state','!=','new')]}" type="object" class="btn-primary"/>
+                    <button name="create_eft" string="Create EFT" attrs="{'invisible':[('state','!=','auth')]}" type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar" clickable="1"/>
+                </header>
+                <sheet>
+                    <group colspan="4" string="Authorization">
+                        <group>
+                            <field name="process" readonly="1"/>
+                            <field name="chequebook" string="Chequebook ID" require="1" readonly="0"/>
+                            
+                        </group>
+                        <group>
+                            <field name="show_statements" invisible="1"/>
+                            <field name="total_authorized" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Statement">
+                            <field name="statement" options="{'no_create': True}" attrs="{'readonly':[('state','!=','new')]}" domain="[('state','=','reconciled')]">
+                                <tree editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="statement_date"/>
+                                    <field name="balance" sum="Total"/>
+                                    <field name="num_of_payments"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                            
+                            <div class="oe_clear"/>
+                        </page>
+                        
+                    </notebook>
+                </sheet>
+                <footer>
+
+                </footer>
+                </form>
+                    
+        </field>
+    </record>
+    <record id="tree_authorize_statement" model="ir.ui.view">
+        <field name="name">Authorizations</field>
+        <field name="model">creditor.authorize</field>
+        <field name="arch" type="xml">
+            <tree string="Captured Statements" delete="true" create="true" import="false">
+                <field name="chequebook"/>
+                <field name="process"/>
+                <field name="statement" string="Auth. Transactions" widget="many2many_tags"/>
+                <field name="state"/>
+                <field name="total_authorized"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_creditor_authorization" model="ir.actions.act_window">
+        <field name="name">Creditor's Authorizations</field>
+        <field name="res_model">creditor.authorize</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+    <menuitem name="Authorization" id="menu_creditors_auth_group"
+              parent="account_payables.menu_creditors_group" action="account_payables.action_creditor_authorization" groups="base.group_system,nyda_res_user.group_finance_manager,nyda_grant_and_voucher.group_grant_voucher_fa,__export__.res_groups_508" 
+              sequence="1"/>
+   
+    
+    </data>
+</odoo>

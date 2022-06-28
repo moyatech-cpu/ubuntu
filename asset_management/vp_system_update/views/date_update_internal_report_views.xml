@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	
+    <record id="view_voucher_application_form_inherit" model="ir.ui.view">
+        <field name="name">view.voucher.application.form.inherit</field>
+        <field name="model">voucher.application</field>
+        <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_application_form"/><!-- <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_application_form_restricted"/> -->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='assessment_report']" position="after">
+       			<field name="assessment_upload_date" />
+       			<field name="assessment_uploaded_by" />
+            </xpath>
+            <xpath expr="//field[@name='x_attendance_register']" position="after">
+                <field name="attendance_created_date" />
+                <field name="attendance_by" />
+            </xpath>
+            <xpath expr="//field[@name='recommendationnote']" position="after">
+                <field name="recommendation_date" />
+                <field name="recommendation_by" />
+            </xpath>
+            <xpath expr="//field[@name='x_pc_bc_comments']" position="after">
+                <field name="approved_date" />
+                <field name="approved_by" />
+                <field name="decline_date" attrs="{'invisible':[('approved_date','!=',False)]}"/>
+                <field name="decline_by" attrs="{'invisible':[('approved_date','!=',False)]}" />
+            </xpath>
+            <xpath expr="//field[@name='work_plan_report']" position="after">
+                <field name="product_submitted_date" />
+                <field name="product_submitted_by" />
+                
+            </xpath>
+            <xpath expr="//field[@name='client_approve_reject_description']" position="after">
+                <field name="client_approve_query_reject_date" />
+                <field name="client_approve_reject_by" />
+                
+            </xpath>
+            <xpath expr="//field[@name='x_bda_comments']" position="after">
+                <field name="bda_approve_query_reject_date" />
+                <field name="bda_approve_reject_by" />
+                
+            </xpath>
+            <xpath expr="//field[@name='x_bdo_comments']" position="after">
+                <field name="bdo_approve_query_reject_date" />
+                <field name="bdo_approve_reject_by" />
+                
+            </xpath>
+            <xpath expr="//field[@name='x_pc_comments']" position="after">
+                <field name="pc_approve_query_reject_date" />
+                <field name="pc_approve_reject_by" />
+                
+            </xpath>
+            <xpath expr="//field[@name='x_qa_officer_comments']" position="after">
+                <field name="qa_approve_query_reject_date" />
+                <field name="qa_approve_reject_by" />
+                
+            </xpath>
+            <xpath expr="//field[@name='proof_of_payment_date']" position="after">
+                <field name="proof_submitted_by" />
+                
+            </xpath>
+        </field>    
+      </record>
+   
+</odoo>

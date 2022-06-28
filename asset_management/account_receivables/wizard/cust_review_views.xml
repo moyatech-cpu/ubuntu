@@ -1,0 +1,31 @@
+<odoo>
+    <record id="review_cust_batch_wizard_form" model="ir.ui.view">
+        <field name="name">review.cust.batch.form</field>
+        <field name="model">customer.batch.review</field>
+        <field name="arch" type="xml">
+            <form string="Batch Review">
+                <group>
+                    <h4>
+                    Ensure that the batch is completed and review, by selecting the approve option below means concent of the invoice batches ready to be posted.
+                    </h4>
+                </group>
+                <group>
+                    <field name="choice" widget="radio"/>
+                </group>
+                <footer>
+                    <button name="review_batch" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="review_cust_batch_wizard_action" model="ir.actions.act_window">
+        <field name="name">Customer Batch Review</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">customer.batch.review</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="review_cust_batch_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

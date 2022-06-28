@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  
+  		<record id="asset_transfer_kanban_view" model="ir.ui.view">
+        <field name="name">asset.transfer.kanban.view</field>
+        <field name="model">asset.transfer</field>
+        <field name="arch" type="xml"> 
+		<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';red:state=='1st_review';yellow:state=='2nd_review';state=='completed';
+			green:state=='end';" disable_drag_drop_record="true" import="false" >
+			 
+                    <field name="create_date"/>
+                    <field name="state"/>
+                    <field name="color"/>
+                    <field name="asset_recipient"/>
+                    <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.deletable">
+                                            <li><a type="delete">Delete</a></li>
+                                        </t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                                </div>
+                               		 <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title">
+                                    	<field name="serial_number"/><br/>
+                                    </h4>
+                                    <div>
+                                        <t t-if="record.asset_dispatcher.raw_value"> <b class="o_kanban_record_subtitle">By: <field name="asset_dispatcher"/> </b> <br/> </t>
+                                        
+                                        <t t-if="record.asset_recipient.raw_value"> <b class="o_kanban_record_subtitle">To: <field name="asset_recipient"/> </b> <br/> </t>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </field>
+      </record>
+      <record model="ir.ui.view" id="nyda_asset_tranfer_form_view">
+      
+      <field name="name">nyda.asset.transfer.form.view</field>
+      <field name="model">asset.transfer</field>
+      
+      <field name="arch" type="xml">
+      <form string="Asset Transfer Form">
+      	<header>
+      		 
+      		<button string="Proceed"  style="margin-right:10px;" type="object" name="asset_transfer_proceed_button" class="oe_highlight"
+      		 attrs="{'invisible' : [('state','!=','new')]}" groups="nyda_asset_management.nyda_asset_mngmnt_asset_user,base.group_system"/>
+      		 <!-- 1st Review -->
+      		 <button string="Approve"  style="margin-right:10px;" type="object" name="asset_transfer_1st_review_approve_button" class="oe_highlight" 
+      		 attrs="{'invisible' : [('state','!=','1st_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_snr_manager,base.group_system"/>  
+      		 <!-- 1st Review -->
+			<button string="Reject"  style="margin-right:10px;" type="object" name="asset_transfer_1st_review_reject_button" class="oe_highlight" 
+			 attrs="{'invisible' : [('state','!=','1st_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_snr_manager,base.group_system"/>
+			 <!-- 2nd Review -->
+			<button string="Approve"  style="margin-right:10px;" type="object" name="asset_transfer_2nd_review_approve_button" class="oe_highlight" 
+			 attrs="{'invisible' : [('state','!=','2nd_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_transfer_authority,base.group_system"/>
+			 <!-- 2nd Review -->  
+			<button string="Reject" style="margin-right:10px;" type="object" name="asset_transfer_2nd_review_reject_button" class="oe_highlight"
+			 attrs="{'invisible' : [('state','!=','2nd_review')]}" groups="nyda_asset_management.nyda_asset_mngmnt_transfer_authority,base.group_system"/>
+			   
+			
+      	     <field name="state" widget="statusbar"  statusbar_visible="new,1st_review,2nd_review,completed,end" />
+      	</header>
+      	<sheet>
+      		<div class="oe_button_box" name="button_box">
+                   
+                    <!--      <button name="toggle_active" type="object" groups="base.group_user" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>-->
+           </div>		  
+		<div id="o_memo_container">
+        	<div id="o_memo_main">
+        		<group>
+        			<div class="oe_title">
+        			<label for="asset_transfer_title" string="Title"/><br />
+       					 <h1 class="o_row">
+           					 <field name="asset_transfer_title" required="1" placeholder="Transfer Title"/>
+        				</h1>
+   					</div>
+        				
+        		</group>
+                   
+                <group >
+                	<group name="transfer_details" string="Transfer Details">
+                			<field name="asset_dispatcher" options="{'no_create_edit': True, 'no_open': True}"/>
+                            <field name="asset_dispatcher_branch" readonly="1"/>
+                      		<field name="asset_dispatcher_department" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                      		<field name="asset_recipient" options="{'no_create_edit': True, 'no_open': True}" />
+                            <field name="asset_recipient_branch" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                            <field name="asset_transfer_location"/>
+    
+                        </group>
+                        
+                        <group name="asset_details" string="Asset Details">
+                      		<field name="asset_register"/>
+                      		<field name="asset_model" readonly="1" />
+                      		<field name="asset_number" readonly="1"/>
+                            <field name="asset_serial_number" readonly="1"/>
+    
+                        </group>
+ 				</group>
+ 				
+         	</div>
+       </div>
+       <notebook colspan="8">
+       		<page name="tranfer_comment" string="Comments">
+                   <field name="asset_transfer_comments" required="1"/>
+           </page>
+           
+           <page name="mngr_transfer_comment" string="Manager Comments">
+                   <field name="asset_transfer_manager_comments"/>
+           </page>
+           
+           <page name="delegated_authority_comment" string="Authority Comments">
+                   <field name="asset_transfer_authority_comments"/>
+           </page>
+           <page name="internal_audit" string="Internal Audit">
+                 <group>
+                 	<group string="Created by">
+                 		<field name="create_uid" readonly="1" />
+                 		<field name="create_date" readonly="1"  />
+                 	</group>
+                 	<group string="First Review">
+                 		<field name="first_review_user" readonly="1"  />
+                 		<field name="first_reviewed_date" readonly="1"  />
+                 	</group>
+                 </group>
+                 <group>
+                 	<group string="Second Review">
+                 		<field name="second_review_user" readonly="1"  />
+                 		<field name="second_reviewed_date" readonly="1"  />
+                 	</group>
+                 </group>
+           </page>  
+        </notebook>
+        </sheet>
+        <div class="oe_chatter" >
+    		<field name="message_follower_ids" widget="mail_followers"/>
+    		<field name="message_ids" widget="mail_thread"/>
+		</div>
+    	</form>
+      </field>
+      </record>
+      
+      <record model="ir.actions.act_window" id="asset_transfer_window_action">
+      		<field name="name">Asset Transfer</field>
+      		<field name="res_model">asset.transfer</field>
+      		<field name="view_mode">kanban,form</field>
+	  </record>
+    
+    <menuitem name="Asset Transfer" id="sub_menu_asset_transfer" action="asset_transfer_window_action"
+         parent="menu_asset_management" sequence="2"/>
+
+</odoo>

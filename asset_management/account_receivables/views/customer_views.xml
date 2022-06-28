@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record id="view_customers_form_view" model="ir.ui.view">
+        <field name="name">view.customer.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+           <form>
+                <header>
+                    
+                </header>
+                <sheet>
+                    
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                        	<field name="customer_id"/>
+                        	<field name="name"/>
+                        	<field name="surname"/>
+                        	<field name="statement_name"/>
+                        </group>
+                        <group>
+                        	<field name="phone1"/>
+                        	<field name="property_account_receivable_id"/>
+                        	<field name="customer_accounts"/>
+                        	<field name="is_finance"/>
+                        	<field name="role" attrs="{'invisible': [('is_finance','=',False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Address">
+                        <group>
+                        	<field name="address_id" />
+                    	</group>
+                            <div class="oe_clear"/>
+                        </page>
+                        <page string="Contact">
+                            <group>
+                        <group>
+                        	
+                        	<field name="phone1"/>
+                        	<field name="phone2"/>
+                        	<field name="phone3"/>
+                        </group>
+                        <group>
+                        	<field name="fax" />
+                        	<field name="comment1"/>
+                        	<field name="comment2"/>
+                        	
+                        </group>
+                    </group>
+                            <div class="oe_clear"/>
+                        </page>
+                        <page string="Accounting Details">
+                            <group>
+                        <group>
+                        	<field name="trade_discount" />
+                        	<field name="payment_term"/>
+                        	<field name="discount_grace_period"/>
+                        	<field name="due_date_grace_period"/>
+                        	<field name="price_level"/>
+                        	<field name="priority" widget="priority"/>
+                        </group>
+                        <group>
+                        	<field name="ship_to_address" />
+                        	<field name="bill_to"/>
+                        	<field name="statement_to"/>
+                        	<field name="sales_person_id"/>
+                        	<field name="type"/>
+                        	<field name="region"/>
+                        </group>
+                    </group>
+                            <div class="oe_clear"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                </form>
+                    
+               </field>
+    </record>
+    
+    
+    <record id="view_customer_tree_view" model="ir.ui.view">
+        <field name="name">Customers</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Customers" delete="true" create="true" import="false">
+                <field name="customer_id"/>
+                <field name="name"/>
+                <field name="address_id" widget="many2many_tags"/>
+                <field name="customer_accounts"/>
+                <field name="customer"/>
+				<field name="property_account_receivable_id"/>
+            </tree>
+        </field>
+    </record>
+    
+
+    <record id="view_customer_action" model="ir.actions.act_window">
+        <field name="name">Customer Database</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_finance','=',True),('role','=','debtor'),('customer','=',True)]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_customer_tree_view')}),
+    (0, 0, {'view_mode': 'form', 'view_id': ref('view_customers_form_view')})]"/>  
+    </record>
+   
+
+   
+   <menuitem name="Customer Managenent" id="menu_customer_managmenent"
+              parent="account.menu_finance_receivables" groups="base.group_system" 
+              sequence="1"/> 
+   <menuitem name="Customers Database" id="menu_customers_database"
+              parent="account_receivables.menu_customer_managmenent" groups="base.group_system" 
+              action="account_receivables.view_customer_action" sequence="0"/>
+    
+    </data>
+</odoo>

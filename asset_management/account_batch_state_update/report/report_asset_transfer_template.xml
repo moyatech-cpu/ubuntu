@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<template id="report_transfer_asset_temp">
+        <t t-name="account_batch_state_update.report_dep_asset_temp">
+        <t t-call="web.html_container">  
+        <style type="text/css">
+        
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%
+}
+
+.width td{
+	width:33%;
+	padding:3px;
+}
+.batch{
+	width:100%
+}
+.batch td{
+	width:25%
+}
+.length{
+	border: 1px solid black;
+	width:100%;
+}
+.length td{
+	width:10%;
+	border: 1px solid black;
+	padding:3px;
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}
+    </style>  
+        	<t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	<t t-value="o.account_asset_transfer_report()" t-set="data_vals"/>
+					<div class="vertexReader">
+						<table class='width'>
+							<tr>
+								<td>
+								<t t-if="o.by_period == True"> 
+									<b>Period:</b> <t t-esc="data_vals.get('sdate')"/> - <t t-esc="data_vals.get('edate')"/>
+								</t>
+								<t t-if="o.by_period == False"> 
+									<b>Period:</b> All
+								</t>
+								</td>
+								<td align='center'>
+									<t t-if="o.by_status == True"> 
+										<b>Status: </b> <t t-esc="data_vals.get('status')"/>
+									</t>
+									<t t-if="o.by_status == False"> 
+										<b>Status: </b> All
+									</t>
+								</td>
+								<td align='right'>
+									<t t-if="o.by_branch == True">
+										<b>Branch: </b> <t t-esc="data_vals.get('branch')"/>
+									</t>
+									<t t-if="o.by_branch == False">
+										<b>Branch: </b> All
+									</t>
+								</td>
+							</tr>
+						</table>
+						<t t-foreach="data_vals['branch_data']" t-as="cat_data">
+							<br/>
+							<table class='length' style="background-color:#c9c9c9">
+								<tr>
+									<td>
+									 	<b>Branch: </b>  <t t-esc="cat_data['branch']"/>
+									</td>
+									<td>
+										<b>Total Assets transfered: </b> <t t-esc="cat_data['total_assets']"/>
+									</td>
+								</tr>
+							</table>
+							<b>Assets</b>
+							<table class='length'>
+								<tr>
+									<td>
+										<b>Asset</b>
+									</td>
+									<td>
+										<b>Model</b>
+									</td>
+									<td>
+										<b>Branch</b>
+									</td>
+									<td>
+										<b>Asset #</b>
+									</td>
+									<td>
+										<b>Serial #</b>
+									</td>
+									<td>
+										<b>Dispatcher</b>
+									</td>
+									<td>
+										<b>Recipient</b>
+									</td>
+									<td>
+										<b>Receipient Branch</b>
+									</td>
+									<td>
+										<b>Status</b>
+									</td>
+								</tr>
+							
+							<t t-foreach="cat_data['assets']" t-as="asset_data">
+								<tr>
+									<td colspan='11' align='center'>
+										<b>Asset Item <t t-esc="asset_data['number']"/></b>				
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t t-esc="asset_data['asset']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['model']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['branch']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['asset_number']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['asset_serial_number']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['asset_dispatcher']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['asset_recipient']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['asset_recipient_branch']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['status']"/>
+									</td>
+								</tr>
+						</t>
+						<tr>
+								<td colspan='9' align='center'>
+									<b>################################################</b>
+								</td>
+							</tr>	
+						</table>
+						
+					</t>			
+								
+
+		</div>			
+</div>
+            
+           </t>
+            
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_asset_transfer_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_batch_state_update.report_transfer_asset_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

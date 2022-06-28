@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	
+    <record id="view_bcs_vsp_form_inherit" model="ir.ui.view">
+        <field name="name">view.bcs.vsp.form.inherit</field>
+        <field name="model">bcs.vsp</field>
+        <field name="inherit_id" ref="bcs_vsp.view_bcs_vsp_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='service_provider']" position="replace">
+       			<group string="Service Providers" colspan="4">
+                  	<group>
+                  		<field name="date_filter" attrs="{'readonly': [('status', '!=', 'new')]}" />
+                  	</group>
+                  	<group>
+                  		<field name="from_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+              			<field name="to_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+              			<button name="get_service_provider_report" string="Print List" type="object" class="oe_stat_button" icon="fa-print" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist" attrs="{'invisible':[('status', '!=', 'new')]}"/>
+                 		<button name="get_process_flow_report" string="Print Process flow" type="object" class="oe_stat_button" icon="fa-print" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist" attrs="{'invisible':[('status', '!=', 'new')]}"/>
+                 		
+                 		</group>
+                 </group>
+	               <field name="service_providers" attrs="{'readonly': [('status', '!=', 'new')]}" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist,nyda_grant_and_voucher.group_grant_voucher_edm">
+		               	<tree>
+			              	<field name="display_name" string="Name"/>
+			              	<field name="function" invisible="1"/>
+			              	<field name="phone"/>
+			              	<field name="email"/>
+			              	<field name="active" invisible="1"/>
+			             	<field name="payment_status" invisible="0"/>
+			 				<button name="payment_completed" string="Done" type="object"  attrs="{'invisible':[('payment_status','=','paid')]}" class="oe_highlight" icon="fa-check-square-o" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist,nyda_grant_and_voucher.group_grant_voucher_fa"/>
+			          	</tree>
+	       			</field>	
+            </xpath>
+            <xpath expr="//field[@name='status']" position="replace">
+               	<field name="status" widget="statusbar" clickable="False" statusbar_visible="new,sent2fin,approved" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist,nyda_grant_and_voucher.group_grant_voucher_edm"/>
+               	<field name="fin_status" widget="statusbar" clickable="False" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa"/>
+            </xpath>
+            <xpath expr="//field[@name='voucher_application_ids']" position="replace">
+                 <field name="voucher_application_ids">
+        			<tree editable="bottom">
+        				<field name="x_service_provider" string="Service Provider"/>
+        				<field name="x_voucher_number" string="Voucher Number"/>
+        				<field name="invoice_number" string="Invoice Number"/>
+        				<field name="x_recommended_service" string="Service" widget="many2many_tags"/>
+        				<field name="branch_id" string="Branch"/>
+        				<field name="x_voucher_value" string="Voucher Amount"/>
+        				<field name="status" string="Payment Status"/>
+        				<field name="query_comment" string="Query"/>
+        				<button name="4048" string="Complete Payment" type="action"  attrs="{'invisible':[('status','=','payment_completed')]}" class="oe_highlight" icon="fa-check-square-o"/>
+        			</tree>
+      			</field>	
+            </xpath>
+            <xpath expr="//field[@name='voucher_application_ids']" position="replace">
+                 <field name="voucher_application_ids">
+        			<tree editable="bottom">
+        				<field name="x_service_provider" string="Service Provider"/>
+        				<field name="x_voucher_number" string="Voucher Number"/>
+        				<field name="invoice_number" string="Invoice Number"/>
+        				<field name="x_recommended_service" string="Service" widget="many2many_tags"/>
+        				<field name="branch_id" string="Branch"/>
+        				<field name="x_voucher_value" string="Voucher Amount"/>
+        				<field name='vp_process_document' filename='vp_process_fn' widget="binary" invisible="1" />
+        				<field name="invoice_doc" string="Invoice Doc" invisible="1"/>
+        				<field name="timesheet_doc" widget="binary" filename="timesheet_doc_name" invisible="1"/>
+        				<field name="identity_document_1" widget="binary" filename="identity_document_1_name" invisible="1"/>
+        				
+        				<field name="status" string="Payment Status"/>
+        				<button name="4048" string="Complete Payment" type="action"  attrs="{'invisible':[('status','=','payment_completed')]}" class="oe_highlight" icon="fa-check-square-o"/>
+        			</tree>
+      			</field>	
+            </xpath>
+            
+            <!-- Accounting Views -->
+             <xpath expr="//notebook" position="inside">
+              <page string="Process Flow" groups="base.group_system,bcs_vsp.group_grant_voucher_bcs_vp,vp_system_update.group_grant_voucher_vp_19_specialist,nyda_grant_and_voucher.group_grant_voucher_edm">
+              		<group string='VP19'>
+              			<field name="vp_document" filename="vp_document_fn" widget="binary"/>
+              			<field name="vp_document_fn" invisible="1"/>
+	                	<field name="sp_statements" filename="sp_statements_fn" widget="binary"/>
+	                	<field name="sp_statements_fn" invisible="1"/>
+              		</group>
+              		<hr/>
+	                <group string='Process Flows/Voucher'>
+              			
+              		</group>
+              		<hr/>
+              		
+              </page>	
+                 <page string="Invoices" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa">
+                 <field name="voucher_invoices" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa">
+        			<tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" string="Invoice">
+	                    <field name="partner_id" groups="base.group_user" string="Vendor"/>
+	                    <field name="date_invoice" string="Bill Date"/>
+	                    <field name="number"/>
+	                    <field name="reference"/>
+	                    <field name="commercial_partner_id" invisible="1"/>
+	                    <field name="name" invisible="1"/>
+	                    <field name="journal_id" invisible="1"/>
+	                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+	                    <field name="date_due"/>
+	                    <field name="origin"/>
+	                    <field name="amount_total_signed" string="Total" sum="Total"/>
+	                    <field name="residual_signed" string="To Pay" sum="To pay"/>
+	                    <field name="currency_id" invisible="1"/>
+	                    <field name="company_currency_id" invisible="1"/>
+	                    <field name="state"/>
+	                    <field name="type" invisible="context.get('type',True)"/>
+                	</tree>
+      			</field>
+      			</page>	
+            </xpath>
+           <xpath expr="//button[@name='payment_completed']" position="after">
+           		<button string="Create Invoice(s)" class="oe_highlight" type="object" name="generate_invoices" attrs="{'invisible': [('fin_status', '!=', 'new')]}" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa"/>
+                <button string="Query" class="oe_highlight" type="object" name="reject_record" attrs="{'invisible': [('status', '!=', 'new'),('status', '!=', 'sent2fin'),('status', '!=', 'verified')]}" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_edm"/>    
+           		<button string="Query" class="oe_highlight" type="object" name="query_finance" attrs="{'invisible': [('fin_status', 'not in', ('new','open','paid'))]}" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa"/>
+          		<button string="Send To Finance" class="oe_highlight" type="object" name="send_back_to_finance" attrs="{'invisible': [('status', '!=', 'query')]}" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_edm,bcs_vsp.group_grant_voucher_bcs_vp"/>
+           		<button string="Post Invoice (s)" class="oe_highlight" type="object" name="post_invoices" attrs="{'invisible': [('fin_status', '!=', 'open')]}" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa"/>
+                
+           </xpath>
+        </field>
+        
+                
+      </record>
+   <record id="nyda_bcs_vsp_kanban_finance" model="ir.ui.view">
+        <field name="name">nyda.bcs.vsp.kanban.finance.view</field>
+        <field name="model">bcs.vsp</field>
+        <field name="arch" type="xml"> 
+		<kanban class="o_event_kanban_view" default_group_by="fin_status" colors="green:flag=='0';orange:flag=='2';yellow:flag=='1';red:flag=='3';" disable_drag_drop_record="true" import="false" >
+                    <field name="bcs_number"/>
+                    <field name="create_date"/>
+                    <field name="compiled_by"/>
+                    <field name="total_vouchers"/>
+                    <field name="service_provider"/>
+                    <field name="flag"/>
+                    <field name="fin_fold" readonly="1"/>
+                    <field name="fin_status" readonly="1"/>
+                    <field name="color"/>
+                    <progressbar field="fin_status" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.deletable">
+                                            <li><a type="delete">Delete</a></li>
+                                        </t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="o_event_left">
+                                    <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                    <div>
+                                        <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                        <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                                </div>
+                                <div class="o_event_right">
+                                    <h4 class="o_kanban_record_title"><field name="bcs_number"/></h4>
+                                    <div>
+                                        <t t-if="record.compiled_by.raw_value"> <b class="o_kanban_record_subtitle"> <field name="service_provider"/> </b> <br/> </t>
+                                        <t t-if="record.flag.raw_value"> <b style="color:red" class="o_kanban_record_subtitle"> <field name="flag"/> </b> <br/> </t>
+                                        
+                                        <i class="fa fa-ticket"/>
+                                        <b>Voucher Applications</b> <field name="num_of_applications"/><br/>
+                                        <i class="fa fa-money"/>
+                                        <b>R</b> <field name="total_vouchers"/><br/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                </field>
+    </record>
+
+	<record id="vp_invoices_action" model="ir.actions.act_window">
+			        <field name="name">VP19 Invoices</field>
+			        <field name="res_model">bcs.vsp</field>
+			        <field name="view_type">form</field>
+			        <field name="view_mode">kanban,tree,form</field>
+			        <field name="view_ids" eval="[(5, 0, 0),
+			    (0, 0, {'view_mode': 'kanban', 'view_id': ref('nyda_bcs_vsp_kanban_finance')})]"/>
+			        
+			        <field name="context">{
+			      			"default_batch_type" : "customer",
+			   		}
+			   		</field>
+    </record>
+    <menuitem name="Voucher Payments" id="menu_voucher_payments"
+		              parent="account.menu_finance_payables" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa" 
+		              sequence="2"/>
+	<menuitem name="Voucher VP19 Invoices" id="menu_voucher_payments_vp"
+		              parent="vp_system_update.menu_voucher_payments" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_fa" 
+		              action="vp_system_update.vp_invoices_action"
+		              sequence="0"/>
+</odoo>

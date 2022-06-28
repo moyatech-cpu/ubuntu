@@ -1,0 +1,175 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_spread_contract
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_spread_contract_line_link_wizard
+msgid "Account Spread Contract Line Link Wizard"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_spread_template
+msgid "Account Spread Template"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_analytic_account
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_contract_id
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.ui.view,arch_db:account_spread_contract.view_account_spread_contract_line_link_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.ui.view,arch_db:account_spread_contract.view_account_spread_contract_line_link_wizard
+msgid "Confirm"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_account.py:75
+#, python-format
+msgid "Contract %s (%s) %s"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_contract_line_id
+msgid "Contract Line"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_template_contract_line_ids
+msgid "Contract Lines"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_contract_type
+msgid "Contract Type"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_id
+msgid "ID"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_invoice_line.py:57
+#, python-format
+msgid "Link Contract Line with Spread Template"
+msgstr ""
+
+#. module: account_spread_contract
+#: selection:account.analytic.invoice.line,spread_check:0
+msgid "Linked"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_account.py:97
+#, python-format
+msgid "Not implemented."
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_analytic_invoice_line_spread_check
+msgid "Spread Check"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_analytic_invoice_line_spread_template_id
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_spread_template_id
+msgid "Spread Template"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_invoice_line.py:40
+#: code:addons/account_spread_contract/wizards/account_spread_contract_line_link_wizard.py:40
+#, python-format
+msgid "Spread Template Details"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_spread_template.py:30
+#, python-format
+msgid "The contract type (Purchases) is not compatible with selected Template Spread Type"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_spread_template.py:25
+#, python-format
+msgid "The contract type (Sales) is not compatible with selected Template Spread Type"
+msgstr ""
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_account.py:64
+#, python-format
+msgid "Unable to get the Invoice Line Account."
+msgstr ""
+
+#. module: account_spread_contract
+#: selection:account.analytic.invoice.line,spread_check:0
+msgid "Unavailable"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.ui.view,arch_db:account_spread_contract.view_account_spread_template
+msgid "Unlink Contract Line"
+msgstr ""
+
+#. module: account_spread_contract
+#: selection:account.analytic.invoice.line,spread_check:0
+msgid "Unlinked"
+msgstr ""
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_analytic_invoice_line
+msgid "account.analytic.invoice.line"
+msgstr ""
+

@@ -1,0 +1,51 @@
+
+.o_form_view .o_field_widget .o_list_view > tfoot > tr > td {
+    padding: 3px;
+    color: #FFFFFF;
+}
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%;
+	border: 1px solid black;
+}
+.width td{
+	width:33%;
+	border: 1px solid black;
+}
+.batch{
+	width:100%;
+	border: 1px solid black;
+}
+.batch td{
+	width:25%;
+	border: 1px solid black;
+}
+.length{
+	border: 1px solid black;
+	width:100%;
+}
+.length td{
+	width:10%;
+	border: 1px solid black;
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}

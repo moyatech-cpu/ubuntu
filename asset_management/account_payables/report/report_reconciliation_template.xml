@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <template id="report_reconciliation_temp">
+        <t t-name="account_payables.report_reconciliation_temp">
+        <t t-call="web.html_container">    
+        <style type="text/css">
+        
+            .vertexReader{
+            	padding:5px;
+            }
+            .width{
+            	width:100%
+            }
+            .width td{
+            	width:33%
+            }
+            .batch{
+            	width:100%
+            }
+            .batch td{
+            	width:25%
+            }
+            .length{
+            	width:100%
+            }
+            .length td{
+            	width:9%
+            }
+            .ledger{
+            	padding-top:20px;
+            	padding-bottom:0px;
+            	padding-left:40px;
+            	padding-right:40px;
+            }
+            .ledger td{
+            	width:10%
+            }
+            .totals{
+            	padding-top:40px;
+            	padding-bottom:40px;
+            	padding-left:150px;
+            	padding-right:150px;
+            }
+            .totals td{
+            	width:5%;
+            	padding: 10px;
+            }
+    </style>
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	
+            	
+	<div class="vertexReader">
+		<table class='width'>
+			<tr>
+				<td>
+				
+				</td>
+				<td align='center'>
+				National Youth Development Agency
+				</td>
+				
+				<td align='right'>
+				Date Time: <t t-esc="o.create_date"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+				</td>
+				<td align='center'>
+				
+				</td>
+				
+				<td align='right'>
+				Page: <span class="page"/>
+				</td>
+			</tr>
+			<tr>
+			    <td>
+			    <t t-esc="o.partner_id.creditor_id"/>
+			    
+                </td>
+                <td align='center'>
+                
+                </td>
+                
+                <td align='right'>
+                
+                </td>
+			</tr>
+			<tr>
+                <td>
+                
+                <t t-esc="o.partner_id.name"/>
+                </td>
+                <td align='center'>
+                
+                </td>
+                
+                <td align='right'>
+                
+                </td>
+            </tr>
+            <tr>
+                <td>
+                
+                <t t-esc="o.partner_id.x_physical_address"/>
+                </td>
+                <td align='center'>
+                
+                </td>
+                
+                <td align='right'>
+                
+                </td>
+            </tr>
+            <tr>
+                <td>
+                
+                <t t-esc="o.partner_id.zip"/>
+                </td>
+                <td align='center'>
+                
+                </td>
+                
+                <td align='right'>
+                
+                </td>
+            </tr>
+            
+		</table>
+		<br/>
+		<p>Reconciliation as at: <t t-esc="o.create_date"/></p>
+		<br/>
+		<br/>
+		<table class='length'>
+			<tr>
+				<td>
+				
+				</td>
+				<td >
+				
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Orig Amount
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Payable Amount
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+            <tr>
+                <td colspan="2">
+               Statement Balance
+                </td>
+                <td colspan="3" >
+                
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1" style="border-bottom: 2px dashed black">
+                R 0.00
+                </td>
+                <td colspan="1" style="border-bottom: 2px dashed black" >
+                R <t t-esc="o.balance"/>
+                </td>
+                <td colspan="1" >
+                
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+               
+                </td>
+                
+            </tr>
+            <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1">
+                R 0.00
+                </td>
+                <td colspan="1" >
+                R <t t-esc="o.balance"/>
+                </td>
+                <td colspan="1" >
+                
+                </td>
+            </tr>
+			<tr><td colspan="5" >Plus Invoices not on Statememnt:</td></tr>
+			<tr>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Document Number
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Date
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Orig Amount
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Payable Amount
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Comments
+				</td>
+			</tr>
+				<t t-foreach="o.unreconciled" t-as="v_data">
+		            <tr>
+		                <td >
+		                <t t-esc="v_data['doc_number']"/>
+		                </td>
+		                <td >
+		                <t t-esc="v_data['date']"/>
+		                </td>
+		                <td >
+		                R <t t-esc="v_data['amount']"/>
+		                </td>
+		                <td >
+		                R <t t-esc="v_data['amount']"/>
+		                </td>
+		                <td >
+		                
+		                </td>
+		            </tr>
+		        </t>
+            <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1" style="border-top: 2px dashed black" >
+                R  <t t-esc="o.other_statements"/>
+                </td>
+                <td colspan="1" style="border-top: 2px dashed black">
+                R <t t-esc="o.other_statements"/>
+                </td>
+                <td colspan="1" >
+               
+                </td>
+            </tr>
+        <tr><td colspan="5" >Less Partially Paid Doc:</td></tr>
+        <tr><td colspan="5" ></td></tr>
+        <tr><td colspan="5" ></td></tr>
+        <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1" style="border-top: 2px dashed black">
+                R 0.00
+                </td>
+                <td colspan="1" style="border-top: 2px dashed black">
+                R 0.00
+                </td>
+                <td colspan="1" >
+               
+                </td>
+        </tr>
+        <tr><td colspan="5" >Checkque Amount: </td></tr>
+        <tr>
+                <td colspan="5" >
+               
+                </td>
+        </tr>
+        <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1" style="border-bottom: 2px dashed black">
+                R 0.00
+                </td>
+                <td colspan="1" style="border-bottom: 2px dashed black">
+                R <t t-esc="o.balance"/>
+                </td>
+                <td colspan="1" >
+               
+                </td>
+        </tr>
+        <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1" style="border-bottom: 2px dashed black">
+                R 0.00
+                </td>
+                <td colspan="1" style="border-bottom: 2px dashed black">
+                R <t t-esc="o.balance"/>
+                </td>
+                <td colspan="1" >
+               
+                </td>
+        </tr>
+        <tr><td colspan="5" >Documents Reconciled:</td></tr>
+        <tr><td colspan="5" ></td></tr>
+        <tr>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Document Number
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Date
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Orig Amount
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Payable Amount
+				</td>
+				<td style="width:20%;border-bottom: 2px dashed black">
+				Comments
+				</td>
+			</tr>
+        <t t-foreach="o.transactions" t-as="v_data">
+            <tr>
+                <td >
+                <t t-esc="v_data['doc_number']"/>
+                </td>
+                <td >
+                <t t-esc="v_data['date']"/>
+                </td>
+                <td >
+                R <t t-esc="v_data['amount']"/>
+                </td>
+                <td >
+                R <t t-esc="v_data['amount']"/>
+                </td>
+                <td >
+                
+                </td>
+            </tr>
+        </t>
+         <tr>
+                <td colspan="2" >
+               
+                </td>
+                <td colspan="1" style="border-top: 2px dashed black">
+                R <t t-esc="o.balance"/>
+                </td>
+                <td colspan="1" style="border-top: 2px dashed black">
+                R <t t-esc="o.balance"/>
+                </td>
+                <td colspan="1" >
+               
+                </td>
+        </tr>
+        </table>
+        
+        <table>
+	        <tr>
+		        <td>
+		        Preparer: 
+		        </td>
+		        <td>
+		        <t t-esc="o.create_uid.name"/>
+		        </td>
+	        </tr>
+	        <tr>
+		        <td>
+		        Authorizer: 
+		        </td>
+		        <td>
+		        
+		        </td>
+	        </tr>
+        </table>
+        </div>
+        </div>
+    </t>
+            
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_reconciliation_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_payables.report_reconciliation_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

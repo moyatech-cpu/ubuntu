@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<template id="report_dep_asset_temp">
+        <t t-name="account_batch_state_update.report_dep_asset_temp">
+        <t t-call="web.html_container">  
+        <style type="text/css">
+        
+.vertexReader{
+	padding:5px;
+}
+.width{
+	width:100%
+}
+
+.width td{
+	width:33%;
+	padding:3px;
+}
+.batch{
+	width:100%
+}
+.batch td{
+	width:25%
+}
+.length{
+	border: 1px solid black;
+	width:100%;
+}
+.length td{
+	width:10%;
+	border: 1px solid black;
+	padding:3px;
+}
+.ledger{
+	padding-top:20px;
+	padding-bottom:0px;
+	padding-left:40px;
+	padding-right:40px;
+}
+.ledger td{
+	width:10%
+}
+.totals{
+	padding-top:40px;
+	padding-bottom:40px;
+	padding-left:150px;
+	padding-right:150px;
+}
+.totals td{
+	width:5%;
+	padding: 10px;
+}
+    </style>  
+        	<t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+            	<div class="page" style="font-family: 'courier new'">
+            	<t t-value="o.account_asset_report()" t-set="data_vals"/>
+					<div class="vertexReader">
+						<table class='width'>
+							<tr>
+								<td>
+								<b>System:</b> <t t-esc="data_vals.get('system_time')"/>
+								</td>
+								<td align='center'>
+								<b>Start Date:</b> <t t-esc="data_vals.get('sdate')"/>
+								</td>
+								
+								<td align='right'>
+								<b>End Date:</b> <t t-esc="data_vals.get('edate')"/>
+								</td>
+							</tr>
+						</table>
+						
+						
+						<t t-foreach="data_vals['assets_bulk']" t-as="cat_data">
+							<br/>
+							<b>Asset Category</b>
+							<table class='length' style="background-color:grey">
+								<tr>
+									<td>
+									 	<b>Name:</b> <t t-esc="cat_data['name']"/>
+									</td>
+									<td>
+										<b>Code:</b> <t t-esc="cat_data['code']"/>
+									</td>
+									<td>
+										<b>Salvage %:</b> <t t-esc="cat_data['salvage_percentage']"/>
+									</td>
+									<td>
+										<b>Asset Account:</b> <t t-esc="cat_data['account_asset_id']"/>
+									</td>
+									<td>
+										<b>Depreciation:</b> <t t-esc="cat_data['depreciation_id']"/>
+									</td>
+								</tr>
+							</table>
+							<br/>	
+							<b>Depreciation Details</b>
+							<table class='length' style="background-color:grey">
+								<tr>
+									<td>
+										<b>Method Time:</b> <t t-esc="cat_data['method_time']"/>
+									</td>
+									<td>
+										<b>Number:</b> <t t-esc="cat_data['method_number']"/>
+									</td>
+									<td>
+										<b>Period:</b> <t t-esc="cat_data['method_period']"/>
+									</td>
+									<td>
+										<b>Method:</b> <t t-esc="cat_data['method']"/>
+									</td>
+									<td>
+										
+									</td>
+								</tr>
+							</table>
+							<br/>
+							<b>Assets</b>
+							<table class='length'>
+								<tr>
+									<td>
+										<b>Asset #</b>
+									</td>
+									<td>
+										<b>Name</b>
+									</td>
+									<td>
+										<b>Location</b>
+									</td>
+									<td>
+										<b>Serial</b>
+									</td>
+									<td>
+										<b>Custodian</b>
+									</td>
+									<td>
+										<b>Purchase</b>
+									</td>
+									<td>
+										<b>Residual</b>
+									</td>
+									<td>
+										<b>Dep base</b>
+									</td>
+									<td>
+										<b>Carrying</b>
+									</td>
+									<td>
+										<b>Dep value</b>
+									</td>
+									<td>
+										<b>Start date</b>
+									</td>
+								</tr>
+							
+							<t t-foreach="cat_data['assets_in_category']" t-as="asset_data">
+								<tr>
+									<td colspan='11' align='center'>
+										<b>Asset Item <t t-esc="asset_data['number']"/></b>				
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t t-esc="asset_data['asset_number']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['name']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['asset_location']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['serial']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['custodian']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['purchase_value']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['residual_value']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['depreciation_base']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['carrying_amount']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['depreciated_value']"/>
+									</td>
+									<td>
+										<t t-esc="asset_data['date_start']"/>
+									</td>
+								</tr>
+							<tr>
+								<td colspan='11' align='center'>
+									<b>Depreciation lines</b>
+								</td>
+							</tr>	
+							
+							<tr>
+								<td colspan='2'>
+									<b>Type</b>
+								</td>
+								<td colspan='2'>
+									<b>Date</b>
+								</td>
+								<td colspan='2'>
+									<b>Total Depreciated</b>
+								</td>
+								<td colspan='2'>
+									<b>Depreciation Amount</b>
+								</td>
+								<td colspan='2'>
+									<b>Carrying Amount</b>
+								</td>
+								<td>
+									<b>Posted</b>
+								</td>
+							</tr>
+							
+							<t t-foreach="asset_data['depreciations']" t-as="depreciation">
+							
+								<tr>
+									<td colspan='2'>
+										<t t-esc="depreciation['type']"/>
+									</td>
+									<td colspan='2'>
+										<t t-esc="depreciation['date']"/>
+									</td>
+									<td colspan='2'>
+										<t t-esc="depreciation['depreciated_value']"/>
+									</td>
+									<td colspan='2'>
+										<t t-esc="depreciation['amount']"/>
+									</td>
+									<td colspan='2'>
+										<t t-esc="depreciation['remaining_value']"/>
+									</td>
+									<td>
+										<t t-esc="depreciation['move']"/>
+									</td>
+								</tr>						
+							</t>
+						</t>
+						</table>
+					
+					</t>			
+								
+
+		</div>			
+</div>
+            
+           </t>
+            
+        </t>
+        </t>
+        </t>
+        </template>
+
+        <template id="report_dep_asset_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_batch_state_update.report_dep_asset_temp"/>
+                </t>
+            </t>
+        </template>
+        
+</odoo>

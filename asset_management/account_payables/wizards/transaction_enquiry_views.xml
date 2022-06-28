@@ -1,0 +1,75 @@
+<odoo>
+    <record id="transactons_enquiry_wizard" model="ir.ui.view">
+        <field name="name">transactions.enquiry.wiz</field>
+        <field name="model">transactions.enquiry</field>
+        <field name="arch" type="xml">
+            <form string="Receiving transaction Enquiry">
+                <header>
+                    
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                        	<field name="customerID"/>
+                        	<field name="date_filter"/>
+                        	<field name="status_filter"/>
+                        	
+                        </group>
+                        <group>
+                        	<field name="type" widget="radio"/>
+                        	<field name="from_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+                        	<field name="to_date" attrs="{'invisible': [('date_filter','=',False)]}"/>
+                        	<field name="invoice_status" attrs="{'invisible': [('status_filter','=',False)]}"/>
+	                        
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Transactions">
+                            <field name="transactions" readonly="0">
+                                 <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" editable="bottom" string="Invoice">
+                    <field name="partner_id" groups="base.group_user" string="Customer"/>
+                    <field name="date_invoice"/>
+                    <field name="number"/>
+                    <field name="commercial_partner_id" invisible="1"/>
+                    <field name="reference" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="user_id"/>
+                    <field name="date_due"/>
+                    <field name="origin"/>
+                    <field name="sales_amount"/>
+                    <field name="percentage"/>
+                    <field name="amount_total_signed" string="Total" sum="Total"/>
+                    <field name="residual_signed" string="Amount Due" sum="Amount Due"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_currency_id" invisible="1"/>
+                    <field name="state"/>
+                    <field name="type" invisible="context.get('type',True)"/>
+                </tree>
+                                
+                            </field>
+                            
+                            <div class="oe_clear"/>
+                        </page>
+                        
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="print_enquiry" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                </form>
+                    
+        </field>
+    </record>
+
+    <record id="payable_transactons_enquiry_action" model="ir.actions.act_window">
+        <field name="name">Transactions by Customer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">transactions.enquiry</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="transactons_enquiry_wizard"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

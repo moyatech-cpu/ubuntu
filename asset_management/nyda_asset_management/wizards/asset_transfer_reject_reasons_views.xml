@@ -1,0 +1,52 @@
+<odoo>
+    <record id="asset_transfer_line_mngr_reason_form" model="ir.ui.view">
+        <field name="name">asset.transfer.line.manager.reason.form</field>
+        <field name="model">asset.transfer.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Line Manager Reject Reason">
+                <group>
+                    <field name="asset_transfer_reject_reason_line_manager"/>
+                </group>
+                <footer>
+                    <button name="line_manager_reject_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="asset_transfer_delegated_authority_reason_form" model="ir.ui.view">
+        <field name="name">asset.transfer.delegated.authority.reason.form</field>
+        <field name="model">asset.transfer.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Delegated Authority Reject Reason">
+                <group>
+                    <field name="asset_transfer_delegated_authority_reject_comment"/>
+                </group>
+                <footer>
+                    <button name="delegated_authority_reject_comment_proceed_button" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="asset_transfer_line_mngr_reason_wizard_action" model="ir.actions.act_window">
+        <field name="name">asset.tranfer.line.manager.reject.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.transfer.reject.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_transfer_line_mngr_reason_form"/>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="asset_transfer_delegated_authority_reason_wizard_action" model="ir.actions.act_window">
+        <field name="name">asset.tranfer.delegated.authority.reject.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.transfer.reject.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="asset_transfer_delegated_authority_reason_form"/>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>
