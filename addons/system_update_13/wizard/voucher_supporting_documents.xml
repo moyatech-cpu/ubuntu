@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo>
+    <record id="reissue_voucher_form" model="ir.ui.view">
+        <field name="name">reissue.voucher.form</field>
+        <field name="model">reissue.voucher</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Re-issuance">
+                <group>
+                    <field name="reissued_voucher_supporting_doc_file_name" invisible="1"/>
+                    <field name="reissued_voucher_supporting_doc" widget="binary" filename="reissued_voucher_supporting_doc_file_name" required="1" string="V8"/>
+                	<field name="start_date" required="1"/>
+                </group>
+                 <footer>
+                     <button name="voucher_resupporting_documents_seq" string="SUBMIT" type="object" class="btn-primary"/>
+                     <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+
+            </form>
+        </field>
+    </record>
+   <record id="action_reissuance_document" model="ir.actions.act_window">
+            <field name="name">Voucher Re-issuance</field>
+            <field name="res_model">reissue.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="reissue_voucher_form"/>
+           <field name="target">new</field>
+   </record>
+    
+   <record id="voucher_application_issuance_inherit" model="ir.ui.view">
+            <field name="name">Voucher Application</field>
+            <field name="model">voucher.application</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_application_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//button[@name='set_recommend']" position="before">
+                 <button name="reissue_voucher" string="Re-Issue Voucher" class="oe_highlight" type="object" groups="base.group_system,client_management.group_partner_service_provider, nyda_grant_and_voucher.group_grant_voucher_bda, nyda_grant_and_voucher.group_grant_voucher_bdo, nyda_grant_and_voucher.group_grant_voucher_pc_bc, nyda_grant_and_voucher.group_grant_voucher_bcs, nyda_grant_and_voucher.group_grant_voucher_qao, nyda_grant_and_voucher.group_grant_voucher_edm, nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac"/>
+            </xpath>
+ 			<xpath expr="//page[@name='Voucher_Internal_Report']" position="inside">
+                  <group string="Voucher Issuance">
+                        <field name="voucher_issuance_supporting_document_file_name" invisible="1" />
+                        <field name="voucher_issuance_supporting_document" widget="binary" readonly="1" filename="voucher_issuance_supporting_document_file_name" />
+                        <field name="reissued_voucher_supporting_doc_file_name" invisible="1"  />
+                        <field name="reissued_voucher_supporting_doc" widget="binary" readonly="1" filename="reissued_voucher_supporting_doc"/>
+                        
+                  </group>
+            </xpath>           
+            
+            </field>
+    </record>
+
+</odoo>

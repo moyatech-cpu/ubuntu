@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_bursary_external_report"
+                string="Report"
+                model="bursary.external.report"
+                report_type="qweb-pdf"
+                file="learning_development.report_bursary_external"
+                name="learning_development.report_bursary_external"
+                menu="False"
+        />
+
+    </data>
+</odoo>

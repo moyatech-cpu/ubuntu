@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Job Databases-->
+        <record model="ir.ui.view" id="jobs_database_tree_view">
+            <field name="name">jobs.database.tree.view</field>
+            <field name="model">jobs.database</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date" string="Date"/>
+                    <field name="name"/>
+                    <field name="matric_Result_ids"/>
+                    <field name="teritory_higher_education_ids"/>
+                    <field name="branch_id"/>
+                    <field name="completed_job_preparedeness"/>
+                    <field name="province_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View of Jobs Databases-->
+        <record model="ir.ui.view" id="jobs_database_form_view">
+            <field name="name">jobs.database.form.view</field>
+            <field name="model">jobs.database</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button"
+                                    icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar"
+                               options="{'preview_image':'image'}"/>
+                        <!--<div class="oe_title">-->
+                            <!--<label for="name" string="Name"/>-->
+                            <!--<h3>-->
+                                <!--<field name="name" required="1"/>-->
+                            <!--</h3>-->
+                        <!--</div>-->
+                        <group>
+                            <group string="Personal Details" name="personal_details">
+                                <field name="title" required="1"/>
+                                <field name="name" required="1"/>
+                                <field name="surname" required="1"/>
+                                <field name="id_no" required="1"/>
+                                <field name="gender" required="1"/>
+                                <field name="disability" required="1"/>
+                                <field name="home_language" required="1"/>
+                                <field name="employment_status" required="1"/>
+                                <field name="location"/>
+                                <field name="cell_phone"/>
+                                <field name="alt_number"/>
+                                <field name="email" required="1"/>
+                                <field name="population_group"/>
+                                <field name="highest_education"/>
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="youth_enquiry_id" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group string="Additional Information" name="additional_information">
+                                <field name="drivers_license"/>
+                                <field name="license_code"/>
+                                <field name="marital_status"/>
+                                <field name="occupation"/>
+                                <field name="scholar_level"/>
+                                <field name="completed_job_preparedeness"/>
+                                <field name="branch_id"/>
+                                <field name="municipality_id"/>
+                                 <!--domain="[('district_id', '=', 'province_id')]"-->
+                                <field name="district"/>
+                                 <!--domain="[('state_id', '=', 'province_id')]"-->
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="town" placeholder="Town" class="o_address_street"/>
+                                    <field name="province_id" class="o_address_street" placeholder="Province"
+                                           options='{"no_open": True, "no_create": True}'
+                                           domain="[('country_id.name', '=', 'South Africa')]"/>
+                                    <field name="postal_code" placeholder="Postal Code" class="o_address_street"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group name="education_training" string="Education and Training">
+                            <group>
+                                <field name="is_matric_certificate"/>
+                                <field name="is_teritory_higher_education"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page name="matric_results" string="Matric Results (or High Level Achieved)"
+                                      attrs="{'invisible': [('is_matric_certificate', '!=', 'yes')]}">
+                                    <field name="matric_Result_ids">
+                                        <tree editable="top">
+                                            <field name="subject" required="1"/>
+                                            <field name="level_grade" required="1"/>
+                                            <field name="symbol" required="1"/>
+                                            <field name="certificate" widget="download" filename="certificate_name"/>
+                                            <field name="certificate_name" invisible="1"/>
+                                            <field name="jobs_database_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page name="teritory_higher_education" string="Teritory or Higher Education"
+                                      attrs="{'invisible': [('is_teritory_higher_education', '!=', 'yes')]}">
+                                    <field name="teritory_higher_education_ids">
+                                        <tree editable="top">
+                                            <field name="name" required="1"/>
+                                            <field name="major_subjects" required="1"/>
+                                            <field name="teritory_year_completed" required="1"/>
+                                            <field name="qualification_obtained" required="1"/>
+                                            <field name="attachment" required="1" filename="attachment_name"
+                                                   widget="download"/>
+                                            <field name="attachment_name" invisible="1"/>
+                                            <field name="jobs_database_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page name="computer_skills" string="Computer Skills">
+                                    <field name="computer_skills_ids">
+                                        <tree editable="top">
+                                            <field name="qualification" required="1"/>
+                                            <field name="ms_word" required="1"/>
+                                            <field name="excel" required="1"/>
+                                            <field name="database_system" required="1"/>
+                                            <field name="graphic_design"/>
+                                            <field name="int_mo"/>
+                                            <field name="accounts"/>
+                                            <field name="quali_att" filename="quali_att_name" widget="download"/>
+                                            <field name="quali_att_name" invisible="1"/>
+                                            <field name="jobs_database_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                        <group name="work_experience" string="Work Experience">
+                            <notebook>
+                                <page name="organisations" string="Organisations">
+                                    <field name="organisations_ids">
+                                        <tree editable="top">
+                                            <field name="name_of_organisation" required="1"/>
+                                            <field name="start_date" required="1"/>
+                                            <field name="end_date" required="1"/>
+                                            <field name="position_held_id" required="1"
+                                                   options='{"no_open": True, "no_create": True}'/>
+                                            <field name="reason_for_leaving"/>
+                                            <field name="jobs_database_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                        <group name="references" string="References">
+                            <notebook>
+                                <page name="referess_page" string="References">
+                                    <field name="referees_ids">
+                                        <tree editable="top">
+                                            <field name="organisation" required="1"/>
+                                            <field name="job_title_id" required="1"
+                                                   options='{"no_open": True, "no_create": True}'/>
+                                            <field name="telephone" required="1"/>
+                                            <field name="mobile" required="1"/>
+                                            <field name="jobs_database_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                        <group name="pledge" string="Terms of Agreement(Pledge)">
+                            <h3>The information I have provided is true and correct<br/><br/>
+                            I understand that registration is not guarantee of placement<br/><br/>
+                            I hereby give permission to NYDA to use this information i have provided in search for<br/>
+                            employment and/ or training opportunities<br/><br/>
+                            Signature</h3>
+                        </group>
+                        <group>
+                            <field name="benificiary_signature" widget="signature" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Kanban view for Jobs Database-->
+        <record id="kanban_view_jobs_database" model="ir.ui.view">
+            <field name="name">jobs.database.kanban</field>
+            <field name="model">jobs.database</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban class="o_hr_employee_kanban">
+                    <field name="id"/>
+                    <field name="image"/>
+                    <field name="name"/>
+                    <field name="surname"/>
+                    <field name="id_no"/>
+                    <field name="gender"/>
+                    <field name="cell_phone"/>
+                    <field name="email"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('jobs.database', 'image', record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                            </strong>
+                                            <span t-if="record.id_no.raw_value" class="o_kanban_record_subtitle">
+                                                <field name="id_no"/>
+                                            </span>
+                                            <span t-if="record.gender.raw_value" class="o_kanban_record_subtitle">
+                                                <field name="gender"/>
+                                            </span>
+                                            <span t-if="record.cell_phone.raw_value" class="o_kanban_record_subtitle">
+                                                <field name="cell_phone"/>
+                                            </span>
+                                            <span t-if="record.email.raw_value" class="o_kanban_record_subtitle">
+                                                <field name="email"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="jobs_database_action_window">
+            <field name="name">Jobs Database</field>
+            <field name="res_model">jobs.database</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Jobs/Opportunities" id="job_opportunities_main_menu" groups="base.group_system"
+                  web_icon="job_opportunities,static/description/icon.png"/>
+        <menuitem name="Job Database Registration" id="job_db_reg"
+                  groups="job_opportunities.job_officer,base.group_system,job_opportunities.opportunity_provider"
+                  parent="job_opportunities.job_opportunities_main_menu" sequence="2"
+                  action="jobs_database_action_window"/>
+
+    </data>
+</odoo>

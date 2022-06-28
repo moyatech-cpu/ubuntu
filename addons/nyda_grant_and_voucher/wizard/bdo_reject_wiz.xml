@@ -1,0 +1,28 @@
+<odoo>
+
+    <record id="bdo_reject_wiz_form" model="ir.ui.view">
+        <field name="name">BDO.Rejection.Reason.form</field>
+        <field name="model">bdo.reject.wiz</field>
+        <field name="arch" type="xml">
+            <form string="BDO Rejection Reason">
+                <group>
+                      <field name="bdo_reason_text" required="1"/>
+                </group>
+                <footer>
+                    <button name="submit_reason" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bdo_reject_wiz" model="ir.actions.act_window">
+        <field name="name">BDO Rejection Reason</field>
+        <field name="res_model">bdo.reject.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bdo_reject_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

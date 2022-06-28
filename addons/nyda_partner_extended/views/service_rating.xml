@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Inheriting Partner form view to include details.-->
+    <record id="view_nyda_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view.nyda.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <group>
+                    <group>
+                        <field name="service_rating" widget="priority" readonly="1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record> 
+</odoo>

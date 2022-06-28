@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="preassessment_template" name="Preassessment Form">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/nyda_grant_and_voucher/static/src/css/voucher_style.css"/>
+            <form id="regForm" method="post" action="/pre-assessment-submit" enctype="multipart/form-data">
+                <input type="hidden" name="form_data"/>
+                <input type="hidden" name="enquiry_id" t-att-value="enquiry_id.id"/>
+                <h1>Pre-assessment Application Form:</h1>
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section A: CLIENT DETAILS</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Name:
+                            <p>
+                                <input placeholder="First name..." name="name"
+                                       t-att-value="enquiry_id.name"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Surname:
+                            <p>
+                                <input placeholder="Last name..." name="surname"
+                                       t-att-value="enquiry_id.surname" readonly="1"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Identity Number:
+                            <p>
+                                <input placeholder="Identity Number..." oninput="this.className = ''"
+                                       name="sa_identity_number"
+                                       t-att-value="enquiry_id.id_number" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Gender:
+                            <p>
+                                <select name="gender" class="select_style">
+                                    <t t-if="enquiry_id.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                    </t>
+                                    <t t-if="enquiry_id.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                    </t>
+                                </select>
+                                <input type="hidden" name="gender" t-att-value="enquiry_id.gender"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            Cell Phone No:
+                            <p>
+                                <input placeholder="Cell Phone No..." name="mobile"
+                                       t-att-value="enquiry_id.cell_phone_number" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Telephone No:
+                            <p>
+                                <input class='numericOnly' placeholder="Telephone No..." name="telephone" maxlength="10"
+                                       t-att-value="enquiry_id.alternative_number"/>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Email:
+                            <p>
+                                <input placeholder="Email..." name="email"
+                                       t-att-value="enquiry_id.email"
+                                       readonly="1"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="physical_address"
+                                          name="physical_address"
+                                          placeholder="Physical Address..."
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Postal Code:
+                            <p>
+                                <input class="req" placeholder="Postal Code..." name="physical_postal_code"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Geographical Type:
+                            <p>
+                                <select name="geographical_type" class="select_style">
+                                    <option value="">-Select Geographical Type-</option>
+                                    <option value="urban">Urban</option>
+                                    <option value="peri-urban">Peri Urban</option>
+                                    <option value="rural-area-villages">Rural area - Villages</option>
+                                    <option value="rural-area-farms">Rural area - Farms</option>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Marital status:
+                            <p>
+                                <select name="relationship" class="select_style">
+                                    <option value="">-Select Marital Status-</option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="divorced">Divorced</option>
+                                    <option value="widowed">Widowed</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="child">No. of Children:</label>
+                            <input id='child_number' class="form-control" placeholder="number..." name="child_number"/>
+                            <label for="supporting col-md-4">No. of other family members you are currently supporting:
+                            </label>
+                            <input id='child_supporting' class="form-control col-md-2" placeholder="Supporting Child"
+                                   name="child_supporting"/>
+                        </div>
+                        <span id="errmsg"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Are you related to any NYDA staff or Board member?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup hide-my-div">
+                                        <input id="radio1" class="radio-button" name="board_member" type="radio"
+                                               value="yes"/>
+                                        <label for="radio1">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio2" class="radio-button" name="board_member" type="radio"
+                                               value="no"/>
+                                        <label for="radio2">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row hidden board_member_hide">
+                        <div class="col-md-12">
+                            If yes, indicate who:
+                            <textarea class="form-control" cols="40"
+                                      name="if_yes"
+                                      rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Educational Information (Highest level of Education achieved)</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Highest standard passed: (e.g. grade R – Matric)
+                            <p>
+                                <input placeholder="Grade" name="grade"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Tertiary education (e.g. certificate/diploma/Degree etc.)
+                            <p>
+                                <input placeholder="Tertiary Education" name="tertiary"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Please specify the field of study
+                            <p>
+                                <input placeholder="specify the field of study" name="fields"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Any other technical training acquired
+                            <p>
+                                <input placeholder="training Acquired" name="training_acquired"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="demo_header">
+                        <h4>
+                            <b>Employment History</b>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Are you currently employed?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio3" class="radio-button1" name="currently_employed" type="radio"
+                                               value="yes"/>
+                                        <label for="radio3">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio4" class="radio-button1" name="currently_employed" type="radio"
+                                               value="no"/>
+                                        <label for="radio4">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 hidden board_member_hide1">
+                            If yes, Name of Employer and how long?
+                            <br/>
+                            <p>
+                                <textarea class="form-control" cols="40" id="for_how_long"
+                                          name="for_how_long"
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-12 hidden board_member_hide1_12">
+                            If no, indicate if you have any previous work or technical experience?
+                            <p>
+                                <textarea class="form-control" cols="40" id="technical_experience"
+                                          name="technical_experience"
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="demo_header">
+                        <h4>
+                            <b>General Information</b>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Have you benefited from any NYDA support services before?</h4>
+
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio5" class='radio-button2' name="nyda_support_services"
+                                               type="radio" value="yes"/>
+                                        <label for="radio5">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio6" class='radio-button2' name="nyda_support_services"
+                                               type="radio" value="no"/>
+                                        <label for="radio6">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row hidden board_member_hide2">
+                        <div class="col-md-6">
+                            Branch Name:
+                            <p>
+                                <select name="branch_name" class="select form-control">
+                                    <t t-foreach="branch_ids" t-as="b_id">
+                                        <option t-att-value="b_id.id">
+                                            <t t-esc="b_id.name">
+                                            </t>
+                                        </option>
+                                    </t>
+                                </select>
+<!--                                <input placeholder="Branch Name" id='branch_name' name="branch_name"-->
+<!--                                       t-att-value="enquiry_id.nearest_branch.name"/>-->
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                Service:
+                                <!--                        <p>-->
+                                <textarea class="form-control" cols="40" id="please_specify"
+                                          name="please_specify"
+                                          rows="5"></textarea>
+                                <!--                        </p>-->
+                            </div>
+                            <div class="col-md-6">
+                                When:
+                                <p>
+                                    <input type="date" id="date_time" name="date_time"/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <h4>Are you willing to participate in the NYDA Business Development Support if assessed to-->
+<!--                                be requiring them?-->
+<!--                            </h4>-->
+<!--                            <p>-->
+<!--                                <div class="readio_style">-->
+<!--                                    <div class="inputGroup">-->
+<!--                                        <input id="radio7" class="radio-button3" name="participate" type="radio"-->
+<!--                                               value="yes"/>-->
+<!--                                        <label for="radio7">Yes</label>-->
+<!--                                    </div>-->
+<!--                                    <div class="inputGroup">-->
+<!--                                        <input id="radio8" class="radio-button3" name="participate" type="radio"-->
+<!--                                               value="no"/>-->
+<!--                                        <label for="radio8">No</label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <!---->
+<!--                    <div class="row hidden board_member_hide3">-->
+<!--                        <div class="col-md-12">-->
+<!--                            If no, indicate why:-->
+<!--                            <p>-->
+<!--                                <textarea class="form-control" cols="40" id="indicate_why"-->
+<!--                                          name="indicate_why"-->
+<!--                                          placeholder="indicate why??"-->
+<!--                                          rows="5"></textarea>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+                <div class="tab">
+                    <!---->
+                    <div class="demo_header">
+                        <h4>
+                            <b>Entrepreneurial Analysis</b>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>1. Do you have a business Idea?</h4>
+<!--                            <h5>&#45;&#45; No (if no, refer to EDP training, starting with awareness)</h5>-->
+<!--                            <h5>&#45;&#45; Yes (if yes, follow the questions on the Start Up)</h5>-->
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio9" class="radio-button7" name="business_idea" type="radio"
+                                               value="yes"/>
+                                        <label for="radio9">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio10" class="radio-button7" name="business_idea" type="radio"
+                                               value="no"/>
+                                        <label for="radio10">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row hidden board_member_hide7">
+                        <div class="demo_header">
+                            <h4>
+                                <b>Start Up</b>
+                                (client who has a viable business idea to start the business)
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                1. Why do you want to start a business?
+                                <p>
+                                    <textarea class="form-control" cols="40" id="start_a_business"
+                                              name="start_a_business"
+                                              rows="5"></textarea>
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                2. Indicate the sector in which the business will be operating:
+                                <p>
+                                    <textarea class="form-control" cols="40" id="operating_business"
+                                              name="operating_business"
+                                              rows="5"></textarea>
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                3. Give a brief description of the idea in terms of :
+                                <br/>
+                                a. The type of business
+                                <textarea class="form-control" cols="40" id="type_business"
+                                          name="type_business"
+                                          rows="5"></textarea>
+                                b. The need the business seeks to satisfy is
+                                <textarea class="form-control" cols="40" id="seeks_business"
+                                          name="seeks_business"
+                                          rows="5"></textarea>
+                                c. The potential customers are
+                                <textarea class="form-control" cols="40" id="potential_customers"
+                                          name="potential_customers"
+                                          rows="5"></textarea>
+                                d. The business operate from
+                                <textarea class="form-control" cols="40" id="operate_customers"
+                                          name="operate_customers"
+                                          rows="5"></textarea>
+                                e. The product/service which the business develop are
+                                <textarea class="form-control" cols="40" id="develop_customers"
+                                          name="develop_customers"
+                                          rows="5"></textarea>
+                                f. The service be rendered are
+                                <textarea class="form-control" cols="40" id="service_be_rendered"
+                                          name="service_be_rendered"
+                                          rows="5"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                4. What amount of funding would you require for your business? R
+                                <p>
+                                    <input class='only_number' id='only_number' type="text" name="require_business"/>
+                                </p>
+                                <span id="errmsg"></span>
+                            </div>
+                            <div class="col-md-12">
+                                5. Assess yourself against the following business feasibility requirements:
+                                <br/>
+                                a. What management skills/experience do you have to start the business?
+                                <textarea class="form-control" cols="40" id="start_the_business"
+                                          name="start_the_business"
+                                          rows="5"></textarea>
+                                b. What technical skills do you have to start the business?
+                                <textarea class="form-control" cols="40" id="do_the_business"
+                                          name="do_the_business"
+                                          rows="5"></textarea>
+                                <h4>c. Have you identified potential customers?</h4>
+                                <p>
+                                    <div class="readio_style">
+                                        <div class="inputGroup">
+                                            <input id="radio20" class='radio-button4' name="identified_potential"
+                                                   type="radio" value="yes"/>
+                                            <label for="radio20">Yes</label>
+                                        </div>
+                                        <div class="inputGroup">
+                                            <input id="radio15" class='radio-button4' name="identified_potential"
+                                                   type="radio" value="no"/>
+                                            <label for="radio15">No</label>
+                                        </div>
+                                    </div>
+                                </p>
+                                <div class="hidden board_member_hide4">
+                                    -- If yes, who are they
+                                    <textarea class="form-control" cols="40" id="they"
+                                              name="they"
+                                              rows="5"></textarea>
+                                </div>
+                                <h4>d. Do you have any funds to invest in the business?</h4>
+                                <p>
+                                    <div class="readio_style">
+                                        <div class="inputGroup">
+                                            <input id="radio16" class='radio-button5' name="invest_business"
+                                                   type="radio"
+                                                   value="yes"/>
+                                            <label for="radio16">Yes</label>
+                                        </div>
+                                        <div class="inputGroup">
+                                            <input id="radio17" class='radio-button5' name="invest_business"
+                                                   type="radio"
+                                                   value="no"/>
+                                            <label for="radio17">No</label>
+                                        </div>
+                                    </div>
+                                </p>
+                                <div class="hidden board_member_hide5">
+                                    -- If yes, how much?
+                                    <input class="form-control numericOnly" cols="40" id="much"
+                                              name="much"
+                                              rows="5"></input>
+                                </div>
+                                <h4>e. Do you have any equipment to start the business?</h4>
+                                <p>
+                                    <div class="readio_style">
+                                        <div class="inputGroup">
+                                            <input id="radio18" class='radio-button6' name="equipment_business"
+                                                   type="radio"
+                                                   value="yes"/>
+                                            <label for="radio18">Yes</label>
+                                        </div>
+                                        <div class="inputGroup">
+                                            <input id="radio19" class='radio-button6' name="equipment_business"
+                                                   type="radio"
+                                                   value="no"/>
+                                            <label for="radio19">No</label>
+                                        </div>
+                                    </div>
+                                </p>
+                                <div class="hidden board_member_hide6">
+                                    -- If yes, list them:
+                                    <textarea class="form-control" cols="40" id="them"
+                                              name="them"
+                                              rows="5"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>2. Do you have a registered business or not?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio23" class="radio-button9" name="registered_business"
+                                               type="radio"
+                                               value="yes"/>
+                                        <label for="radio23">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio24" class="radio-button9" name="registered_business"
+                                               type="radio"
+                                               value="no"/>
+                                        <label for="radio24">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row hidden reg_num_div">
+                        <div class="col-md-12">
+                            Enter Company Registration Number
+                            <p>
+                                <textarea class="form-control" cols="40" id="reg_number"
+                                          name="reg_number"
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>3. Is your business currently operational?</h4>
+<!--                            <h5>&#45;&#45; No (if no, follow the questions on the Start Up)</h5>-->
+<!--                            <h5>&#45;&#45; Yes (if yes, follow the questions on the Existing Business)</h5>-->
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio11" class="radio-button8" name="business_own" type="radio"
+                                               value="yes"/>
+                                        <label for="radio11">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio12" class="radio-button8" name="business_own" type="radio"
+                                               value="no"/>
+                                        <label for="radio12">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row hidden board_member_hide8">
+                        <div class="row">
+                            <div class="demo_header">
+                                <h4>
+                                    <b>Existing Business</b>
+                                    (operational business)
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                1. Why did you start the business?
+                                <textarea class="form-control" cols="40" id="start_the_business"
+                                          name="start_the_business"
+                                          rows="5"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                2. Indicate the sector in which the business is operating?
+                                <br/>
+                                a. The type of business:
+                                <textarea class="form-control" cols="40" id="business_types"
+                                          name="business_types"
+                                          rows="5"></textarea>
+                                b. The need the business seeks to satisfy is to
+                                <textarea class="form-control" cols="40" id="business_satisfy"
+                                          name="business_satisfy"
+                                          rows="5"></textarea>
+                                c. Who are the customers/ potential customers?
+                                <textarea class="form-control" cols="40" id="potential_customers"
+                                          name="potential_customers"
+                                          rows="5"></textarea>
+                                d. Where is the business operating from?
+                                <textarea class="form-control" cols="40" id="from_customers"
+                                          name="from_customers"
+                                          rows="5"></textarea>
+                                e. What is the product/ service of the business?
+                                <textarea class="form-control" cols="40" id="service_business"
+                                          name="service_business"
+                                          rows="5"></textarea>
+                                f. How is the product/ service delivered/ rendered?
+                                <textarea class="form-control" cols="40" id="rendered_business"
+                                          name="rendered_business"
+                                          rows="5"></textarea>
+                                g. How long has the business been in operation?
+                                <textarea class="form-control" cols="40" id="operation"
+                                          name="operation"
+                                          rows="5"></textarea>
+                                h. How many people are employed by the business?
+                                <textarea class="form-control" cols="40" id="employed_business"
+                                          name="employed_business"
+                                          rows="5"></textarea>
+                                i. What is the estimated annual turnover of the business?
+                                <input id='turnover_business' class="form-control" placeholder="Annual Turnover"
+                                       name="turnover_business"/>
+                                <span id="errmsg"></span>
+
+                                <!--                            <textarea class="form-control req" cols="40" id="turnover_business"-->
+                                <!--                                      name="turnover_business"-->
+                                <!--                                      rows="5"></textarea>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>3. Do you have business plan?</h4>
+                                <p>
+                                    <div class="readio_style">
+                                        <div class="inputGroup">
+                                            <input id="radio13" name="business_plan" type="radio" value="yes"/>
+                                            <label for="radio13">Yes</label>
+                                        </div>
+                                        <div class="inputGroup">
+                                            <input id="radio14" name="business_plan" type="radio" value="no"/>
+                                            <label for="radio14">No</label>
+                                        </div>
+                                    </div>
+                                </p>
+                                <div class="business_plan_doc hidden">
+                                    <input name="business_plan_document" type="file"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab">
+
+                    <div class="demo_header">
+                        <h4>
+                            <b>Capacity Building</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            1. What skills/ knowledge do you have about the business you want to start?
+                            <textarea class="form-control" cols="40" id="knowledge_business"
+                                      name="knowledge_business"
+                                      rows="5"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            2. Have you ever received Business Management Training? (Yes/No)
+                            <div class="readio_style">
+                                <div class="inputGroup">
+                                    <input id="radio21" name="Entrepreneurship_training" type="radio" value="yes"/>
+                                    <label for="radio21">Yes</label>
+                                </div>
+                                <div class="inputGroup">
+                                    <input id="radio22" name="Entrepreneurship_training" type="radio" value="no"/>
+                                    <label for="radio22">No</label>
+                                </div>
+                            </div>
+                            <div class="supporting_docs_info hidden">
+                                <input type="hidden" name="supporting_docs"/>
+                                If yes, indicate the training you received and name of the institution. (E.g. financial
+                                management, project management, etc. and provide proof of the training received.)
+                                <textarea class="form-control" cols="40" id="knowledge_business"
+                                          name="training_you_received"
+                                          placeholder="Knowledge do you have about the business " rows="5"></textarea>
+                                <table id="assessment_supporting_docs" class="table order-list">
+                                    <thead>
+                                        <tr>
+                                            <td>Supporting Document</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-sm-10">
+                                                <input type="file" name="supportingdoc" class="form-control"
+                                                       required="required"/>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <a class="deleteRow"></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-primary" id="adddocrow"
+                                                       value="Add Row"/>
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="row col-md-12 hidden received_entrepreneurship">
+                                <p>
+                                    <h4>
+                                        <b>MESSAGE:</b>
+                                        Please note you will have to undergo NYDA Business Management Training
+                                    </h4>
+                                </p>
+                            </div>
+                        </div>
+<!--                        <div class="col-md-12">-->
+<!--                            3. Are you willing to attend the Entrepreneurship Development-->
+<!--                            <input placeholder="" name="attend_entrepreneurship Training if required?"/>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+
+                <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn">Previous</button>
+                        <button type="button" id="nextBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+
+            </form>
+        </t>
+    </template>
+
+    <template id="pre_assessment_submitted" name="Thanks">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404" style="opacity: 0.5 !important;">
+                        <h1 style="padding-top:100px">Thank you!</h1>
+                    </div>
+                    <h2 style="padding-top:185px">You have successfully submitted the Grant pre-assessment application
+                    </h2>
+                    <!--                    <h3 style="color:white">Your Grant Application Number : <t t-esc="grant_application_id.serial_number"/></h3>-->
+                    <a href="#" class="contact-btn">Contact us</a>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

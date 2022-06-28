@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_branch_inherit" model="ir.ui.view">
+        <field name="name">res.branch.inherit</field>
+        <field name="model">res.branch</field>
+        <field name="inherit_id" ref="client_management.view_res_branch_form" />
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='name']" position="after">
+            		<field name="region_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_region_form" model="ir.ui.view">
+        <field name="name">res.region.view</field>
+        <field name="model">res.region</field>
+        <field name="arch" type="xml">
+            <form string="Region">
+            
+            	<group>
+            		<field name="name"/>
+            		<field name="region_manager"/>
+            		<field name="user" invisible="True"/>
+            		<field name="branches"/>
+            	</group>
+           
+            </form>
+        </field>
+    </record>
+	<record id="view_region_tree" model="ir.ui.view">
+        <field name="name">view.region.tree</field>
+        <field name="model">res.region</field>
+        <field name="arch" type="xml">
+            <tree string="Regions">
+                <field name="create_date"/>
+                <field name="name"/>
+                <field name="region_manager"/>
+            </tree>
+        </field>
+    </record>
+    
+
+    <record id="action_region_main" model="ir.actions.act_window">
+        <field name="name">Regions</field>
+        <field name="res_model">res.region</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item for Grant Application -->
+    <menuitem name="Regions" id="menu_main_regions" action="action_region_main"
+              parent="client_management.menu_mentorship_config" sequence="0"/>
+    
+</odoo>

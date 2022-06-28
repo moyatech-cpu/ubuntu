@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo>
+    <record id="view_attendance_register_form" model="ir.ui.view">
+        <field name="name">attendance.register.form</field>
+        <field name="model">attendance.register</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Register Upload">
+                <group>
+                    <field name="attendance_register_name" invisible="1"/>
+                    <field name="attendance_register_file" widget="binary" required="1" filename="attendance_register_name"/>
+                </group>
+                 <footer>
+                     <button name="attendance_reg_req" string="SUBMIT" type="object" class="btn-primary"/>
+                     <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+
+            </form>
+        </field>
+    </record>
+    <record id="action_upload_attendance" model="ir.actions.act_window">
+            <field name="name">Attendance Register</field>
+            <field name="res_model">attendance.register</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_attendance_register_form"/>
+           <field name="target">new</field>
+        </record>
+
+</odoo>

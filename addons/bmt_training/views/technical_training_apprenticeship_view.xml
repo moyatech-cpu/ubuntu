@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Technical Training Apprenticeship Search View-->
+        <record model="ir.ui.view" id="technical_training_apprenticeship_search_view">
+            <field name="name">technical.training.apprenticeship.search.view</field>
+            <field name="model">technical.training.apprenticeship</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="branch_id"/>
+                    <field name="trainer_id"/>
+                    <field name="company_id"/>
+                    <filter name="branch" string="Branch" context="{'group_by': 'branch_id'}"/>
+                    <filter name="Trainer" string="Trainer" context="{'group_by': 'trainer_id'}"/>
+                    <filter name="company" string="Company" context="{'group_by': 'company_id'}"/>
+                </search>
+            </field>
+        </record>
+
+        <!--Technical Training Apprenticeship Tree View-->
+        <record model="ir.ui.view" id="technical_training_apprenticeship_tree_view">
+            <field name="name">technical.training.apprenticeship.tree.view</field>
+            <field name="model">technical.training.apprenticeship</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="branch_id"/>
+                    <field name="state"/>
+                    <field name="trainer_id"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Technical Training Apprenticeship Form View-->
+        <record model="ir.ui.view" id="technical_training_apprenticeship_form_view">
+            <field name="name">technical.training.apprenticeship.form.view</field>
+            <field name="model">technical.training.apprenticeship</field>
+            <field name="arch" type="xml">
+                <form delete="false" duplicate="false">
+                    <header>
+                        <button name="start_training" string="Benificiary Recruitment" type="object"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="assign_company" string="Assign Company" type="object"
+                                attrs="{'invisible': [('state','!=','start_training')]}"/>
+                        <button name="submit_to_ho" string="Submit Mentorship Report" type="object"
+                                states="placed_at_company"/>
+                        <button name="approve_ho" string="Approved By Head Office" type="object"
+                                states="mentorship_log_book"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button name="%(bmt_training.action_wiz_report_reject_comment)d"
+                                string="Rejected By Head Office" states="mentorship_log_book"
+                                type="action" context="{'reject_head_office':True}"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button string="Service Provider Submit Report" name="service_provider_submit_report"
+                                states="service_provider_submit"
+                                type="object"
+                                groups="base.group_system,client_management.group_partner_service_provider"/>
+                        <button string="NYDA Specialist Review" name="nyda_specialist_review"
+                                states="service_provider_submitted_report"
+                                type="object" groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button string="NYDA Specialist Approve" name="nyda_specialist_approve"
+                                states="nyda_specialist_reviews"
+                                type="object" groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button name="%(bmt_training.action_wiz_report_reject_comment)d"
+                                string="NYDA Specialist Reject" states="nyda_specialist_reviews"
+                                type="action" context="{'nyda_reject':True}"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button string="Submit Report" name="submit_sv_report"
+                                states="upload_site_visit,rej_site_visit" type="object"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button string="Approve Site Visit Report" name="approve_sv_report"
+                                states="submitted_report" type="object"
+                                groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <button string="Reject Site Visit Report" name="rej_sv_report"
+                                states="submitted_report" type="object"
+                                groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <button name="button_trade_test_pass" string="Trade Test Pass" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible': ['|',('current_year','!=','third_year'),('state','!=','approve_site_visit')]}"/>
+                        <button name="button_trade_test_fail" string="Trade Test Fail" type="object"
+                                attrs="{'invisible': ['|',('current_year','!=','third_year'),('state','!=','approve_site_visit')]}"/>
+                        <!--<button name="me_evaluate" string="Do the Evaluation" states="pass" type="object"/>-->
+                        <!--<button name="complete_me_eval" string="Complete Evaluation" states="me_evaluation"-->
+                                <!--type="object"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,start_training,placed_at_company"
+                               type="object"/>
+                    </header>
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button class="oe_stat_button"-->
+<!--                                    type="object"-->
+<!--                                    icon="fa-th-list"-->
+<!--                                    context="{'goto_first_year':True}"-->
+<!--                                    string="First Year"-->
+<!--                                    name="action_goto_year"-->
+<!--                                    attrs="{'invisible':['|',('current_year','=','first_year'),('fy_id','=',False)]}">-->
+<!--                            </button>-->
+<!--                            <button class="oe_stat_button"-->
+<!--                                    type="object"-->
+<!--                                    icon="fa-th-list"-->
+<!--                                    context="{'goto_second_year':True}"-->
+<!--                                    string="Second Year"-->
+<!--                                    name="action_goto_year"-->
+<!--                                    attrs="{'invisible': ['|',('current_year','=','second_year'),('sy_id','=',False)]}">-->
+<!--                            </button>-->
+<!--                            <button class="oe_stat_button"-->
+<!--                                    type="object"-->
+<!--                                    context="{'goto_third_year':True}"-->
+<!--                                    icon="fa-th-list"-->
+<!--                                    string="Third Year"-->
+<!--                                    name="action_goto_year"-->
+<!--                                    attrs="{'invisible': ['|',('current_year','=','third_year'),('ty_id','=',False)]}">-->
+<!--                            </button>-->
+<!--                        </div>-->
+                        <group string="Training Details" name="training_details">
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name="branch_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                                <field name="programme_type" required="1"/>
+                                <field name="start_date" readonly="1" attrs="{'invisible':[('state','=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="trainer_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                                <field name="company_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('state','=','start_training')]}"/>
+                                <field name="course_duration"/>
+                                <field name="current_year" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Documents" name="documents">
+                                <group>
+                                    <group>
+                                        <!--<field name="mentorship_report_log_book" filename="log_book_file_name" attrs="{'required': [('state','=','placed_at_company')]}"/>-->
+                                        <!--<field name="log_book_file_name" invisible="1"/>-->
+                                        <field name="trade_test_name" invisible="1"/>
+                                        <field name="trade_test" filename="trade_test_name" attrs="{'invisible': ['|',('current_year','!=','third_year'),('state','not in',['submitted_report','pass','me_evaluation','complete_me_evaluation'])], 'required':[('current_year','=','third_year'),('state','=','submitted_report')]}"/>
+                                        <field name="certi_file" filename="certi_file_name" attrs="{'invisible': ['|',('current_year','!=','third_year'),('state','not in',['submitted_report','pass','me_evaluation','complete_me_evaluation'])], 'required':[('state','=','pass')]}"/>
+                                        <field name="certi_file_name" invisible="1"/>
+                                    <!--</group>-->
+                                    <!--<group>-->
+                                        <!--<field name="site_visit_report" filename="site_visit_file_name"/>-->
+                                        <!--<field name="site_visit_file_name" invisible="1"/>-->
+                                        <field name="site_visit_file_ids"/>
+                                        <field name="project_closeout_report" filename="project_closeout_file_name" attrs="{'invisible': ['|',('current_year','!=','third_year'),('state','!=','pass')], 'required':[('state','=','pass')]}"/>
+                                        <field name="project_closeout_file_name" invisible="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Enrolled Benificiaries" name="enrolled_benificiaries">
+                                <field name="enrolled_users_apprenticeship_ids" nolabel="1">
+                                    <tree editable="top">
+                                        <field name="benificiary_id" required="1" string="Name" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="surname" required="1"/>
+                                        <field name="id_number" required="1"/>
+                                        <field name="contact_number" required="1"/>
+                                        <field name="e_mail" required="1"/>
+                                        <field name="gender"/>
+                                        <field name="population_group" required="1"/>
+                                        <field name="technical_training_apprenticeship_id" invisible="1"/>
+                                        <field name="year" required="1"/>
+                                        <field name="passed"/>
+                                        <field name="certificate" filename="certificate_name" widget="download"
+                                               string="Progression Certificate"/>
+                                        <field name="certificate_name" invisible="1"/>
+                                        <field name="trade_certi" filename="trade_certificate_name" widget="download"
+                                               attrs="{'invisible': [('year', '!=', 'third_year')]}"/>
+                                        <field name="trade_certificate_name" invisible="1"/>
+                                        <field name="mentorship_report_log_book" widget="download"
+                                               filename="log_book_file_name"/>
+                                        <field name="log_book_file_name" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Approval Info" name="approval_info">
+                                <group>
+                                    <group>
+                                        <!--<field name="head_office_user_id" readonly="1" help="Approve/Reject By Head Office User"/>-->
+                                        <field name="nyda_user_id" readonly="1" help="Nyda Specialist approved/rejected"/>
+                                    </group>
+                                    <group>
+                                        <field name="manager_id" readonly="1"/>
+                                        <!--<field name="site_visit_user_id" readonly="1" help="Approve/Reject By Site Visitor User"/>-->
+                                        <!--<field name="evaluation_user_id" readonly="1" help="Evaluation By"/>-->
+                                    </group>
+                                </group>
+                                <separator string="Reason for Reject"/>
+                                <field name="reject_reason" readonly="1"/>
+                                <!--attrs="{'invisible': [('state','not in',['ho_reject','site_visit_reject','pc_reject'])]}"-->
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Technical Training Apprenticeship First Year-->
+        <record model="ir.actions.act_window" id="action_technical_training_apprenticeship">
+            <field name="name">ATT First Year</field>
+            <field name="res_model">technical.training.apprenticeship</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('current_year','=','first_year')]</field>
+            <field name="context">{'default_programme_type': 'apprenticeship_programme', 'default_current_year': 'first_year'}</field>
+        </record>
+
+        <!-- Action for Technical Training Apprenticeship Second Year-->
+        <record model="ir.actions.act_window" id="action_technical_training_apprenticeship_sy">
+            <field name="name">ATT Second Year</field>
+            <field name="res_model">technical.training.apprenticeship</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('current_year','=','second_year')]</field>
+            <field name="context">{'default_programme_type': 'apprenticeship_programme', 'default_current_year': 'second_year'}</field>
+        </record>
+
+        <!-- Action for Technical Training Apprenticeship Third Year-->
+        <record model="ir.actions.act_window" id="action_technical_training_apprenticeship_ty">
+            <field name="name">ATT Third Year</field>
+            <field name="res_model">technical.training.apprenticeship</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('current_year','=','third_year')]</field>
+            <field name="context">{'default_programme_type': 'apprenticeship_programme', 'default_current_year': 'third_year'}</field>
+        </record>
+
+        <menuitem id="menu_tech_tarining_appren"
+                  name="Apprenticeship Programme"
+                  parent="bmt_training.technical_training"
+                  sequence="3"/>
+
+        <!-- Menu for Technical Training Apprenticeship FY-->
+        <menuitem name="First Year"
+                  id="technical_training_apprenticeship"
+                  parent="bmt_training.menu_tech_tarining_appren"
+                  action="action_technical_training_apprenticeship"
+                  sequence="1"/>
+
+        <!-- Menu for Technical Training Apprenticeship SY-->
+        <menuitem name="Second Year"
+                  id="technical_training_apprenticeship_sy"
+                  parent="bmt_training.menu_tech_tarining_appren"
+                  action="action_technical_training_apprenticeship_sy"
+                  sequence="2"/>
+
+        <!-- Menu for Technical Training Apprenticeship TY-->
+        <menuitem name="Third Year"
+                  id="technical_training_apprenticeship_ty"
+                  parent="bmt_training.menu_tech_tarining_appren"
+                  action="action_technical_training_apprenticeship_ty"
+                  sequence="3"/>
+
+    </data>
+</odoo>

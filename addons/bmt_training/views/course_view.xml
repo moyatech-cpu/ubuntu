@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Course Tree View-->
+        <record model="ir.ui.view" id="course_tree_view">
+            <field name="name">course.tree.view</field>
+            <field name="model">course</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Course Action-->
+        <record model="ir.actions.act_window" id="action_course">
+            <field name="name">Course</field>
+            <field name="res_model">course</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for training(main menu)-->
+        <menuitem id="main_menu_training" name="Training"
+                  groups="bmt_training.group_trainer,base.group_system"
+                  web_icon="bmt_training,static/description/icon.png"/>
+
+        
+        <menuitem name="BMT" id="trainings" parent="bmt_training.main_menu_training" sequence="4"/>
+        <!--Menu for Course
+        <menuitem name="Course" id="bmt_trainings" parent="bmt_training.trainings" action="action_course"
+                  sequence="5"/>-->
+
+    </data>
+</odoo>

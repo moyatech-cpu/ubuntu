@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_op_admission_register_form_inherit" model="ir.ui.view">
+        <field name="name">view.op.admission.register.form.inherit</field>
+        <field name="model">op.admission.register</field>
+        <field name="inherit_id" ref="openeducat_admission.view_op_admission_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="replace">
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="branch_id"/>
+                        <field name="municipality_id"/>
+                        <field name="trainer_id"/>
+                    </group>
+                    <group>
+                        <field name="course_id" string="Training Type"/>
+                        <field name="end_date"/>
+                        <field name="venue_id"/>
+                        <field name="create_uid" string="Admin Responsible"/>
+                        <field name="product_id" context="{'default_type': 'service'}" invisible="1"/>
+                        <field name="min_count" invisible="1"/>
+                        <field name="max_count" invisible="1"/>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//form/sheet/group[2]" position="replace">
+                <group string="Applications">
+                    <field name="admission_ids" nolabel="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="last_name"/>
+                            <field name="mobile"/>
+                            <field name="application_number"/>
+                            <field name="application_date"/>
+                            <field name="id_no"/>
+                            <field name="state" invisible="1"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--Kanban View for Training schedule-->
+    <record id="training_schedule_kanban_view" model="ir.ui.view">
+        <field name="name">training.schedule.kanban</field>
+        <field name="model">op.admission.register</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_hr_recruitment_kanban"
+                    default_order="create_date desc">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="course_id"/>
+                <!--<field name="x_batch_id"/>-->
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+                <field name="min_count"/>
+                <field name="max_count"/>
+                <field name="create_uid"/>
+                <field name="no_of_application"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#0a7599">
+                            <div t-attf-class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <t t-esc="record.name.value"/>
+                                    </div>
+                                    <div class="o_secondary o_job_alias">
+                                        <small>
+                                            <i class="fa fa-envelope-o"/>
+                                            <field name="course_id"/>
+                                        </small>
+                                    </div>
+                                    <div class="o_secondary">
+                                        <i class="fa fa-calendar" aria-hidden="true"/>
+                                        Start:
+                                        <t t-esc="record.start_date.value"/>
+                                    </div>
+                                    <div class="o_secondary">
+                                        <i class="fa fa-calendar" aria-hidden="true"/>
+                                        End :
+                                        <t t-esc="record.end_date.value"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content">
+                                <div class="row">
+                                    <div class="col-xs-6 o_kanban_primary_left" groups="base.group_system">
+                                        <a class="btn btn-primary" type="open">
+                                            View/Edit
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 o_kanban_primary_right" style="padding-left: 62px;">
+                                        <button class="btn btn-primary" type="object" name="apply_for_training"
+                                                t-attf-data-context="{'default_register_id': [active_id]}">
+                                            Apply
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 o_kanban_primary_bottom bottom_block">
+                                        <field name="no_of_application" widget="progressbar" title="Number Applications"
+                                               options="{'current_value': 'no_of_application', 'max_value': 'max_count', 'editable': true, 'edit_max_value': true}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="training_schedule_action">
+        <field name="name">Training Schedule</field>
+        <field name="res_model">op.admission.register</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_training_schedule_kanban_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="bmt_training.training_schedule_kanban_view"/>
+        <field name="act_window_id" ref="bmt_training.training_schedule_action"/>
+    </record>
+
+    <menuitem name="Training Schedule" id="training_schedule_menu" parent="bmt_training.main_menu_training"
+          sequence="3" action="bmt_training.training_schedule_action"/>
+
+</odoo>

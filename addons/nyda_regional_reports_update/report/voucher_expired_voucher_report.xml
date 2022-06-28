@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+			<report
+                id="action_regional_voucher_application_expired_report"
+                string="Regional Voucher Expired Report"
+                model="voucher.expired.report"
+                report_type="qweb-pdf"
+                file="nyda_regional_reports_update.report_regional_voucher_expired"
+                name="nyda_regional_reports_update.report_regional_voucher_expired"
+                menu="False" />
+    </data>
+</odoo>

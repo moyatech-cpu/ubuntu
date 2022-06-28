@@ -1,0 +1,32 @@
+<odoo>
+  <record id="cancel_business_mgmt_training" model="ir.ui.view">
+  <field name="name">cancel.business.mgmt.training</field>
+  <field name="model">business.mgmt.training</field>
+  <field name="inherit_id" ref="bmt_training.business_mgmt_training_form_view"/>
+  <field name="arch" type="xml">
+    <xpath expr="//button[@name='get_attendance_register']" position="after">
+
+	<button string="Cancel Training" name="btn_cancel_b_mgmt_training" attrs="{'invisible': [('status', '=', 'cancelled')]}" type="object" class="oe_highlight"/>
+
+	</xpath>
+	<xpath expr="//button[@name='btn_cancel_b_mgmt_training']" position="after">
+
+	<button string="Reinstate Training" name="btn_reinstate_b_mgmt_training" attrs="{'invisible': [('status', '!=', 'cancelled')]}" type="object" class="oe_highlight"/>
+ 
+</xpath>
+<xpath expr="//field[@name='state']" position="after">
+
+	<field name="status" widget="statusbar" statusbar_visible="new,cancelled" attrs="{'invisible': [('status', '!=', 'cancelled')]}"/>
+
+</xpath>
+	<xpath expr="//group[@name='bmt_participants']" position="after">
+	<group name="record_status_history" string="Record Status History">
+		<group>
+			<field name="cancel_b_mgmt_reason" readonly="1"/>
+			<field name="reinstate_b_mgmt_reason" readonly="1"/>
+		</group>	 
+	</group>
+</xpath>
+  </field>
+</record>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_front_products" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <link href="/nyda_grant_and_voucher/static/src/css/style.css" rel="stylesheet"/>
+            <link href="/nyda_grant_and_voucher/static/src/css/spinner.css" rel="stylesheet"/>
+            <link href="/nyda_grant_and_voucher/static/src/css/grant_style.css" rel="stylesheet"/>
+            <script type="text/javascript" src="/nyda_grant_and_voucher/static/src/js/grant-voucher.js"></script>
+            <script type="text/javascript" src="/nyda_grant_and_voucher/static/src/js/pre-assessment.js"></script>
+        </xpath>
+    </template>
+</odoo>

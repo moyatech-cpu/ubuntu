@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<record id="budget_manager_record_rule" model="ir.rule">
+        <field name="name">Budget Manager Records</field>
+        <field ref="model_crossovered_budget" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_budget_manager'))]"/>
+    </record>
+
+	<record id="budget_senior_manager_record_rule" model="ir.rule">
+        <field name="name">Budget Snr. Manager Records</field>
+        <field ref="model_crossovered_budget" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_budget_senior_manager'))]"/>
+    </record>
+    
+	<record id="budget_executive director_record_rule" model="ir.rule">
+        <field name="name">Budget Executive Director Records</field>
+        <field ref="model_crossovered_budget" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_budget_executive_director'))]"/>
+    </record>
+    
+</odoo>

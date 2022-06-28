@@ -1,0 +1,53 @@
+<odoo>
+    <record id="view_ict_wiz_form" model="ir.ui.view">
+        <field name="name">ict.wiz.form</field>
+        <field name="model">ict.wiz</field>
+        <field name="arch" type="xml">
+            <form string="ITC Report">
+                <group>
+                    <field name="ict_report_name" invisible="1"/>
+                    <field name="ict_report" widget="binary" required="1" filename="ict_report_name"/>
+                </group>
+                <footer>
+                    <button name="ict_report_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_ict_report" model="ir.actions.act_window">
+        <field name="name">ITC Report</field>
+        <field name="res_model">ict.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_ict_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_aftercare_wiz_form" model="ir.ui.view">
+        <field name="name">aftercare.wiz.form</field>
+        <field name="model">aftercare.wiz</field>
+        <field name="arch" type="xml">
+            <form string="ITC Report">
+                <group>
+                    <field name="aftercare_report_name" invisible="1"/>
+                    <field name="aftercare_report" widget="binary" required="1" filename="aftercare_report_name"/>
+                </group>
+                <footer>
+                    <button name="aftercare_report_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_aftercare_report" model="ir.actions.act_window">
+        <field name="name">Aftercare Report</field>
+        <field name="res_model">aftercare.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_aftercare_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

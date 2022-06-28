@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Voucher Status Report Form View-->
+    <record model="ir.ui.view" id="voucher_status_report_bdo_form_view">
+        <field name="name">voucher.status.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="type" invisible="0"/>
+                    <!-- <field name="x_bda" invisible="0"/> -->
+                    <field name="report_type" invisible="0" attrs="{'invisible': [('type', 'in', ['all', 'received_applications', 'approved_applications', 'declined_applications'])]}"/>
+                </group>
+                <footer>
+                    <button string="Download Received Applications Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'received_applications')]}"/>
+                    <button string="Download Approved Applications Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'approved_applications')]}"/>
+                    <button string="Download Declined Applications Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'declined_applications')]}"/>
+                    
+                    <button string="Download Applications Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'all')]}"/>
+                    <button string="Download BDO Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_bdo')]}"/>
+                    
+                    <button string="Download Status Per Branch Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_branch')]}"/>
+                    <button string="Download Status Per Branch Report(Consolidated)" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_branch_cons')]}"/>
+                    <button string="Download Status Per Disabled Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_disable')]}"/>
+                    <button string="Download Status Per Gender Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_gender')]}"/>
+                    <button string="Download Status Per Race Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_race')]}"/>
+                    <button string="Download Status Per Rural/Urban Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_rural_urban')]}"/>
+                    <button string="Download Status Per Service Provider Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_sp')]}"/>
+                    <button string="Download Status Per Service Report" name="get_status_report" type="object" class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_service')]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="assessment_conducted_report_bdo_view">
+        <field name="name">assessment.conducted.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Assessments Conducted Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Report" name="get_assessment_conducted_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="assessment_appointment_report_bdo_view">
+        <field name="name">assessment.appointment.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Report" name="get_assessment_appointment_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_issuance_report_bdo">
+        <field name="name">voucher.issuance.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Issuance Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Issuance Report" name="get_status_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_issuance_multiple_report_bdo">
+        <field name="name">voucher.issuance.multiple.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Issuance Multiple Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Multi-Issuance Report" name="get_voucher_issuance_multiple_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_beneficiaries_report_bdo">
+        <field name="name">voucher.beneficiaries.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Beneficiaries Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Beneficiaries Report" name="get_beneficiaries_vouchers_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_expired_report_bdo">
+        <field name="name">voucher.expired.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Expired Vouchers Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Expired Report" name="get_expired_vouchers_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_reissued_report_dbo">
+        <field name="name">voucher.reissued.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Reissued Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Reissued Report" name="get_reissued_vouchers_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_jobs_report_bdo">
+        <field name="name">voucher.jobs.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Jobs Created Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Jobs Report" name="get_jobs_created_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!--Assessments Conducted Report-->
+    <record model="ir.ui.view" id="view_voucher_service_provider_report_bdo">
+        <field name="name">voucher.service.provider.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Service Provider Report">
+                <group>
+                    <group>
+                        <field name="x_service" required="1" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="x_province_id" required="1" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Service Provider Report" name="get_service_providers_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_voucher_service_provider_query_report_bdo">
+        <field name="name">voucher.service.provider.query.report.bdo.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Service Provider Query Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    <field name="x_service_provider" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Download Query Report" name="get_service_provider_query_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_voucher_redemption_report">
+        <field name="name">voucher.redemption.report.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Redemption Report">
+                <group>
+                    <group>
+                        <field name="start_date" required="1" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                      <field name="type" invisible="1"/>
+                      <field name="report_type" invisible="1"/>
+                      <field name="x_voucher_status" required="1"/>           
+                    </group>
+                    <group>
+                      <field name="x_voucher_beneficiary"/>       
+                      <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                      <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    </group>
+                </group>
+                <group>
+                  <group>
+                    <field name="x_service" options="{'no_open': True, 'no_create': True}" widget="many2many_tags"/>                
+                  </group>                  
+                  <group>
+                    <field name="x_service_provider" options="{'no_open': True, 'no_create': True}"/>                
+                  </group>
+                </group>
+                
+                <footer>
+                    <button string="Download Redemption Report" name="get_redemptions_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     
+    <record model="ir.ui.view" id="view_voucher_service_provider_ratings_report">
+        <field name="name">voucher.service.provider.ratings.report.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Service Provider Ratings Report">
+                 <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                      <field name="x_service_provider" />
+                      <field name="type" invisible="1"/>
+                    </group>
+                    <group>
+                     <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                     <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                     <field name="report_type" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Download Ratings Report" name="get_service_providers_rating_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     
+    <record model="ir.ui.view" id="view_voucher_payment_report">
+        <field name="name">voucher.payment.report.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Payments Report">
+                 <group>
+                    <group>
+                        <field name="start_date" required="1" />
+                    </group>
+                    <group>
+                        <field name="end_date" required="1" />
+                    </group>
+                </group>
+                <group>
+                    <group>
+                     <field name="x_service_provider" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                    <group>
+                     <field name="type" invisible="1"/>
+                     <field name="report_type" invisible="1"/>
+                     <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                     <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    </group>                      
+                </group>
+                <footer>
+                    <button string="Download Payment Report" name="get_voucher_payments_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_voucher_payment_tracking_report">
+        <field name="name">voucher.payment.tracking.report.form.view</field>
+        <field name="model">voucher.status.report.bdo</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Payment Tracking Report">
+                <group>    
+                    <group>
+                        <field name="start_date" required="1" />
+                    </group>
+                    <group>
+                        <field name="end_date" required="1" />
+                    </group>
+                </group>
+                <group>
+                    <group>
+                     <field name="x_service_provider" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                    <group>
+                     <field name="type" invisible="1"/>
+                     <field name="report_type" invisible="1"/>
+                     <field name="all_branch" attrs="{'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                     <field name="branch_id" options="{'no_open': True, 'no_create': True}" attrs="{'required': [('all_branch', '=', False)], 'invisible': [('type', 'in', ['status_branch', 'status_branch_cons'])]}"/>
+                    </group>                      
+                </group>
+                <footer>
+                    <button string="Download Tracking Report" name="get_voucher_payment_tracking_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+               
+    <!-- Action for Voucher Status Report BDO-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_bdo">
+        <field name="name">Status Per BDO Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_bdo'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Client-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_client">
+        <field name="name">Status Per Client Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_client'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Disabled-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_disabled">
+        <field name="name">Status Per Disabled Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_disable'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Gender-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_gender">
+        <field name="name">Status Per Gender Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_gender'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Branch-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_branch">
+        <field name="name">Status Per Branch Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_branch'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Race-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_race">
+        <field name="name">Status Per Race Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_race'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Rural/Urban-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_rural_urban">
+        <field name="name">Status Per Rural/Urban Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_rural_urban'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Service Provider-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_sp">
+        <field name="name">Status Per Service Provider Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_sp'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Branch Report(Consolidated)-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_branch_cons">
+        <field name="name">Status Per Branch Report(Consolidated)</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_branch_cons'}</field>
+    </record>
+
+    <!-- Action for Voucher Status Report Service Report-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_service">
+        <field name="name">Status Per Service Report</field>
+        <field name="res_model">voucher.status.report.bdo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_service'}</field>
+    </record>
+
+    <!--Menu for Voucher Status Report-->
+    
+    <record id="action_voucher_assessment_conducted_report" model="ir.actions.act_window">
+            <field name="name">Assessments Conducted Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="assessment_conducted_report_bdo_view"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_assessment_conducted_report" model="ir.actions.act_window">
+            <field name="name">Assessments Conducted Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="assessment_conducted_report_bdo_view"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_assessment_conducted_report" model="ir.actions.act_window">
+            <field name="name">Assessments Conducted Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="assessment_conducted_report_bdo_view"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_assessment_appointment_report" model="ir.actions.act_window">
+            <field name="name">Assessments Appointment Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="assessment_appointment_report_bdo_view"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_issuance_report_bdo" model="ir.actions.act_window">
+            <field name="name">Voucher Issuance Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_issuance_report_bdo"/>
+           <field name="target">new</field>
+           <field name="context">{'default_type': 'status_client'}</field>
+    </record>
+    <record id="action_voucher_issuance_multiple_report_bdo" model="ir.actions.act_window">
+            <field name="name">Voucher Issuance Multiple Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_issuance_multiple_report_bdo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_beneficiaries_report_bdo" model="ir.actions.act_window">
+            <field name="name">Voucher Beneficiaries Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_beneficiaries_report_bdo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_expired_report_bdo" model="ir.actions.act_window">
+            <field name="name">Expired Vouchers Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_expired_report_bdo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_reissued_report_dbo" model="ir.actions.act_window">
+            <field name="name">Voucher Reissued Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_reissued_report_dbo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_payment_tracking_report" model="ir.actions.act_window">
+            <field name="name">Voucher Payment Tracking Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_payment_tracking_report"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_payment_report" model="ir.actions.act_window">
+            <field name="name">Voucher Payments Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_payment_report"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_service_provider_ratings_report" model="ir.actions.act_window">
+            <field name="name">Voucher Service Provider Ratings Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_service_provider_ratings_report"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_jobs_report_bdo" model="ir.actions.act_window">
+            <field name="name">Voucher Jobs Created Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_jobs_report_bdo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_service_provider_report_bdo" model="ir.actions.act_window">
+            <field name="name">Voucher Service Provider Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_service_provider_report_bdo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_redemption_report" model="ir.actions.act_window">
+            <field name="name">Voucher Redemption Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_redemption_report"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_service_provider_query_report_bdo" model="ir.actions.act_window">
+            <field name="name">Voucher Service Provider Query Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_voucher_service_provider_query_report_bdo"/>
+           <field name="target">new</field>
+    </record>
+    <record id="action_voucher_status_report_bdo_form_view" model="ir.actions.act_window">
+            <field name="name">Voucher Service Provider Query Report</field>
+            <field name="res_model">voucher.status.report.bdo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="voucher_status_report_bdo_form_view"/>
+           <field name="target">new</field>
+    </record>
+    
+    <menuitem name="Reports" parent="nyda_grant_and_voucher.main_menu_voucher"
+              id="reporting_status" sequence="55"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"/>
+    <menuitem name="Applications Report" parent="nyda_grant_and_voucher.reporting_status"
+              action="nyda_grant_and_voucher.action_voucher_status_report_bdo_form_view"
+              id="menu_applications_report" sequence="0"/>
+    <menuitem name="Assessment" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_assessment" sequence="1"/>
+    <menuitem name="Voucher Issuance" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_voucher_issuance" sequence="4"/>
+    <menuitem name="Expired Vouchers" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_expired_voucher" sequence="9"/>          
+    <menuitem name="Reissued Vouchers" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_reissued_vouchers" sequence="11"/>      
+    <menuitem name="Jobs Created and Sustained" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_jobs_created" sequence="13"/>
+    <menuitem name="Service Providers" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_service_providers" sequence="14"/>          
+    <menuitem name="Redemptions" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_redemptions" sequence="17"/>  
+    <menuitem name="General" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_general" sequence="19"/> 
+              
+    <menuitem name="Query Report" parent="nyda_grant_and_voucher.menu_service_providers"
+              id="menu_voucher_service_provider_query_report_bdo" sequence="16"
+              action="nyda_grant_and_voucher.action_voucher_service_provider_query_report_bdo"/>
+    
+    
+    <menuitem name="Consolidated Report" parent="nyda_grant_and_voucher.menu_redemptions"
+              id="menu_voucher_redemption_report" sequence="18"
+              action="nyda_grant_and_voucher.action_voucher_redemption_report"/>
+    
+    
+    
+    <menuitem name="Approved" parent="nyda_grant_and_voucher.menu_service_providers"
+              id="menu_voucher_service_provider_report_bdo" sequence="15"
+              action="nyda_grant_and_voucher.action_voucher_service_provider_report_bdo"/>
+    
+    
+    <menuitem name="Consolidated Report" parent="nyda_grant_and_voucher.menu_jobs_created"
+              id="menu_voucher_jobs_report_bdo" sequence="13"
+              action="nyda_grant_and_voucher.action_voucher_jobs_report_bdo"/>
+    
+    
+    <menuitem name="Client Service Ratings" parent="nyda_grant_and_voucher.menu_general"
+              id="menu_voucher_service_provider_ratings_report" sequence="20"
+              action="nyda_grant_and_voucher.action_voucher_service_provider_ratings_report"/>
+    
+    
+    <menuitem name="Payments Report" parent="nyda_grant_and_voucher.menu_general"
+              id="menu_voucher_payment_report" sequence="21"
+              action="nyda_grant_and_voucher.action_voucher_payment_report"/>
+    
+    
+    
+    <menuitem name="Payment Tracking Report" parent="nyda_grant_and_voucher.menu_general"
+              id="menu_voucher_payment_tracking_report" sequence="22"
+              action="nyda_grant_and_voucher.action_voucher_payment_tracking_report"/>
+    
+              
+   
+    
+    <menuitem name="No. Vouchers" parent="nyda_grant_and_voucher.menu_reissued_vouchers"
+              id="menu_voucher_reissued_report_dbo" sequence="12"
+              action="nyda_grant_and_voucher.action_voucher_reissued_report_dbo"/>
+    
+    
+    <menuitem name="No. Expired Vouchers" parent="nyda_grant_and_voucher.menu_expired_voucher"
+              id="menu_voucher_expired_report_bdo" sequence="10"
+              action="nyda_grant_and_voucher.action_voucher_expired_report_bdo"/>
+    
+    
+    <menuitem name="Beneficiary Supported" parent="nyda_grant_and_voucher.menu_voucher_issuance"
+              id="menu_voucher_beneficiaries_report_bdo" sequence="8"
+              action="nyda_grant_and_voucher.action_voucher_beneficiaries_report_bdo"/>
+    
+    
+    <menuitem name="Multiple Vouchers" parent="nyda_grant_and_voucher.menu_voucher_issuance"
+              id="menu_voucher_issuance_multiple_report_bdo" sequence="7"
+              action="nyda_grant_and_voucher.action_voucher_issuance_multiple_report_bdo"/>
+    
+    <menuitem name="Vouchers Value" parent="nyda_grant_and_voucher.menu_voucher_issuance"
+              id="menu_voucher_issuance_report_bdo" sequence="6"
+              action="nyda_grant_and_voucher.action_voucher_issuance_report_bdo"/>
+    <menuitem name="No. of Voucher Issued" parent="nyda_grant_and_voucher.menu_voucher_issuance"
+              id="menu_voucher_issuance_report_bdo" sequence="5"
+              action="nyda_grant_and_voucher.action_voucher_issuance_report_bdo"/>
+    
+    <menuitem name="Assessments Schedule" parent="nyda_grant_and_voucher.menu_assessment"
+              id="menu_assessment_appointment_report" sequence="3"
+              action="nyda_grant_and_voucher.action_assessment_appointment_report"/>
+    
+    <menuitem name="Assessments Conducted" parent="nyda_grant_and_voucher.menu_assessment"
+              id="menu_assessment_conducted_report" sequence="2"
+              action="nyda_grant_and_voucher.action_voucher_assessment_conducted_report"/>
+     
+    <!--<menuitem name="Status Per BDO" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_bdo" sequence="1"
+              action="nyda_grant_and_voucher.action_voucher_status_report_bdo"/>
+    <menuitem name="Status Per Branch" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_branch" sequence="2"
+              action="nyda_grant_and_voucher.action_voucher_status_report_branch"/>
+    <menuitem name="Status Per Branch(Consolidated)" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_branch_cons" sequence="3"
+              action="nyda_grant_and_voucher.action_voucher_status_report_branch_cons"/>
+    
+    <menuitem name="Status Per Client" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_client" sequence="4"
+              action="nyda_grant_and_voucher.action_voucher_status_report_client"/>
+              
+    <menuitem name="Status Per Disabled" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_disabled" sequence="5"
+              action="nyda_grant_and_voucher.action_voucher_status_report_disabled"/>
+    <menuitem name="Status Per Gender" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_gender" sequence="6"
+              action="nyda_grant_and_voucher.action_voucher_status_report_gender"/>
+    <menuitem name="Status Per Race" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_race" sequence="7"
+              action="nyda_grant_and_voucher.action_voucher_status_report_race"/>
+    <menuitem name="Status Per Rural/Urban" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_rural_urban" sequence="8"
+              action="nyda_grant_and_voucher.action_voucher_status_report_rural_urban"/>
+    <menuitem name="Status Per Service Provider" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_service_provider" sequence="9"
+              action="nyda_grant_and_voucher.action_voucher_status_report_sp"/>
+    <menuitem name="Status Per Service" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_status_per_service" sequence="10"
+              action="nyda_grant_and_voucher.action_voucher_status_report_service"/>-->
+    </data>
+</odoo>

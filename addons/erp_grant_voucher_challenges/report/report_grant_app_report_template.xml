@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_grant_app_report_temp">
+		<t t-name="erp_grant_voucher_challenges.report_grant_app_report_temp">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_detail_applications()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Grant Applications Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="doc.start_date"/></h4>
+                    <h4>End Date : <t t-esc="doc.end_date"/></h4>
+                    
+                    <t t-if="doc.branch">
+                      <h4>Branch : <t t-esc="doc.branch.name"/></h4>
+                    </t>
+                    <t t-if="doc.status">
+                      <h4>Status Filter : <t t-esc="doc.status"/></h4>
+                    </t>
+					<t t-if="not doc.status">
+                      <h4>Status Filter : All</h4>
+                    </t>
+                    <br/>
+                </div>
+                <br/>
+                <!--Table for Status Per Client-->
+                <t t-if="data">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Client</th>
+                                    <th class="t-center">GR Number</th>
+                                    <th class="t-center">Bussiness Name</th>
+                                    <th class="t-center">Grant Business Type</th>
+                                    <th class="t-center">Sectors</th>
+                                    <th class="t-center">Required Amount (R)</th>
+                                    <th class="t-center">Gender</th>
+                                    <th class="t-center">Geographic Location</th>
+                                    <th class="t-center">Disabled</th>
+                                    <th class="t-center">Status</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_grant" t-value="0"/>
+                                <t t-foreach="doc.get_detail_applications()" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>      
+                                        <t t-set="total_grant" t-value="total_grant + rec_data['grant_amount_required']"/>                          
+                                        <td>
+                                            <t t-esc="rec_data['name']"/> <t t-esc="rec_data['surname']"/>
+											<br/>
+											<t t-esc="rec_data['sa_identity_number']"/>
+											<br/>
+											<t t-esc="rec_data['mobile']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['gr_number']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['grant_business_name']"/>
+                                        </td>
+										<td>
+                                            <t t-esc="rec_data['grant_business_type']"/>
+                                        </td>
+                                        <td>
+                                            <t t-foreach="rec_data['grant_business_sector_ids']" t-as="service_data">
+                                              <t t-esc="service_data['name']"/> <br />
+                                            </t>
+                                        </td>                                        
+                                        <td>
+                                            <t t-esc="rec_data['grant_amount_required']"/>
+                                        </td>                                        
+                                        <td>
+                                            <t t-esc="rec_data['gender']"/>
+                                        </td>                                        
+                                        <td>
+                                            <t t-esc="rec_data['geographical_type']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['disability']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['status']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <div>
+                            <h4><b>Total Grant: R <t t-esc="total_grant" /></b></h4>
+                        </div>                        
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </t>
+
+    
+    </template>
+
+    <template id="report_grant_app_report_template">
+        <t t-name="erp_grant_voucher_challenges.report_grant_app_report_temp">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="erp_grant_voucher_challenges.report_grant_app_report_temp"/>
+        </t>
+    </t>
+</t>
+    </template>
+
+</odoo>

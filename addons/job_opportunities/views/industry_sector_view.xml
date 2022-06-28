@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Industry Sector-->
+        <record model="ir.ui.view" id="industry_sector_tree_view">
+            <field name="name">industry.sector.tree.view</field>
+            <field name="model">industry.sector</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Industry Sector-->
+        <record model="ir.actions.act_window" id="industry_sector_action_window">
+            <field name="name">Industry Sector</field>
+            <field name="res_model">industry.sector</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem name="Industry Sector" id="industry_sector" parent="job_opportunities.config_menu" sequence="2"
+                  action="industry_sector_action_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+
+    <record id="bcs_rejection_reason_wizard_form" model="ir.ui.view">
+        <field name="name">BCS.Rejection.Report.form</field>
+        <field name="model">bcs.rejection.reason.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BCS Rejection RePort">
+                <group>
+                    <field name="bcs_rejection_report" required="1"/>
+                </group>
+                <footer>
+                    <button name="bcs_rejection_submit_reason" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="bcs_rejection_reason_wizard" model="ir.actions.act_window">
+        <field name="name">Bcs Rejection Reason</field>
+        <field name="res_model">bcs.rejection.reason.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bcs_rejection_reason_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

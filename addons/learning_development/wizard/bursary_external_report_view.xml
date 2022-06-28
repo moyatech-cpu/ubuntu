@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Bursary External Report Form View-->
+    <record model="ir.ui.view" id="bursary_external_report_form_view">
+        <field name="name">bursary.external.report.form.view</field>
+        <field name="model">bursary.external.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="status" required="1"/>
+                </group>
+                <footer>
+                    <button string="Download Report" name="get_training_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Bursary Report-->
+    <record model="ir.actions.act_window" id="action_bursary_report">
+        <field name="name">Bursary Report Wizard</field>
+        <field name="res_model">bursary.external.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'bursaries'}</field>
+    </record>
+
+    <!-- Action for Bursary External Report-->
+    <record model="ir.actions.act_window" id="action_external_course_report">
+        <field name="name">External Course Report Wizard</field>
+        <field name="res_model">bursary.external.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'ext_training'}</field>
+    </record>
+
+    <!--Menu for Bursary External Report-->
+    <menuitem name="Reporting" parent="learning_development.learning_development_main_menu"
+              id="menu_busary_external_reporting" sequence="3"/>
+    <menuitem name="Bursary Report" parent="learning_development.menu_busary_external_reporting"
+              id="menu_bursary_reports" sequence="1"
+              action="learning_development.action_bursary_report"/>
+    <menuitem name="External Course Report" parent="learning_development.menu_busary_external_reporting"
+              id="menu_external_reports" sequence="2"
+              action="learning_development.action_external_course_report"/>
+
+    </data>
+</odoo>

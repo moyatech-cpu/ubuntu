@@ -1,0 +1,26 @@
+<odoo>
+
+    <record id="bdo_accept_confirm_wiz_form" model="ir.ui.view">
+        <field name="name">BDO.Cnfirm.Accept.form</field>
+        <field name="model">bdo.accept.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BDO Accept Confirm Reason">
+                <field name="bdo_confirm_text" readonly="1"/>
+                <footer>
+                    <button name="submit_confirm" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bdo_accept_confirm_wiz" model="ir.actions.act_window">
+        <field name="name">BDO Accept Confirm Wizard</field>
+        <field name="res_model">bdo.accept.confirm.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bdo_accept_confirm_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

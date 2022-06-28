@@ -1,0 +1,34 @@
+<odoo>
+
+    <record id="bgarg_approve_wizard_form" model="ir.ui.view">
+        <field name="name">bgarc.approve.wizard.form</field>
+        <field name="model">bgarg.approve.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Uploaded Approve Letter">
+                <group>
+                    <field name="brarg_declaration_of_interest_name" invisible="1"/>
+                    <field name="bgarg_declaration_of_interest" widget="binary" required="1"
+                           filename="brarg_declaration_of_interest_name"/>
+                    <field name="bgarg_minutes_name" invisible="1"/>
+                    <field name="bgarg_minutes" widget="binary" required="1"
+                           filename="bgarg_minutes_name"/>
+                    <field name="bgarg_approval_letter_send_date"/>
+                </group>
+                <footer>
+                    <button name="bgarg_approve_submit" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="bgarg_approve_wizard" model="ir.actions.act_window">
+        <field name="name">BGARC Approve</field>
+        <field name="res_model">bgarg.approve.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bgarg_approve_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

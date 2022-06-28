@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_youth_enquiry_form_inherit" model="ir.ui.view">
+        <field name="name">youth.enquiry.form.inherit</field>
+        <field name="model">youth.enquiry</field>
+        <field name="inherit_id" ref="client_management.view_youth_enquiry_form"/>
+        <field name="arch" type="xml">
+            <group name="location_information" position="after">
+                <group string="BMT Certificate" name="bmt_certificate">
+                    <field name="bmt_certi_ids" readonly="1" nolabel="1">
+                        <tree>
+                            <field name="youth_id" invisible="1"/>
+                            <field name="bmt_id"/>
+                            <field name="bmt_training_certificate" filename="bmt_training_certificate_name" widget="download"/>
+                            <field name="bmt_training_certificate_name" invisible="1"/>
+                            <field name="bmt_certi_upload_date"/>
+                            <field name="training_type"/>
+                        </tree>
+                    </field>
+                    <!--<group>-->
+                        <!--<field name="bmt_training_certificate" filename="bmt_training_certificate_name"/>-->
+                        <!--<field name="bmt_training_certificate_name" invisible="1"/>-->
+                        <!--<field name="certi_acceptance"/>-->
+                    <!--</group>-->
+                    <!--<group>-->
+                        <!--<field name="bmt_certi_upload_date"/>-->
+                        <!--<field name="training_type" readonly="1"/>-->
+                    <!--</group>-->
+                </group>
+                <group string="Co-operative Governance BMT Certificate" name="bmt_certificate">
+                    <group>
+                        <field name="coop_bmt_training_certificate" filename="coop_bmt_training_certificate_name"/>
+                        <field name="coop_bmt_training_certificate_name" invisible="1"/>
+                        <field name="coop_certi_acceptance"/>
+                    </group>
+                    <group>
+                        <field name="coop_bmt_certi_upload_date"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

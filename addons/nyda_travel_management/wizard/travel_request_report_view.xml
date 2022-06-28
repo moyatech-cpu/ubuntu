@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Travel Management Report Form View-->
+    <record model="ir.ui.view" id="bursary_external_report_form_view">
+        <field name="name">travel.request.report.form.view</field>
+        <field name="model">travel.request.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="status"/>
+                    </group>
+                    <group>
+                        <field name="branch"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="programme"/>
+                    </group>
+                    <group>
+                        <field name="emergency"/>
+                    </group>
+                </group>  
+                <group>
+                    <group>
+                        <field name="region"/>
+                    </group>
+                    <group>
+                        <field name="mode"/>
+                    </group>
+                </group>                                              
+                <group>
+                    <field name="accom_type"/>
+                </group>
+                <footer>
+                    <button string="Download Report" name="get_travel_request_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Travel Management Report-->
+    <record model="ir.actions.act_window" id="action_travel_request_report">
+        <field name="name">Travel Management Report Wizard</field>
+        <field name="res_model">travel.request.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'bursaries'}</field>
+    </record>
+
+	<record id="paperformat_report_travel_request" model="report.paperformat">
+		<field name="name">Trained Beneficiaries Report Landscape</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">10</field>
+		<field name="margin_bottom">15</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">3</field>
+		<field name="dpi">90</field>
+	</record>
+	            
+    <!--Menu for Bursary External Report -->
+    <menuitem name="Reports" parent="menu_scm_travel_management"
+              id="menu_travel_management_reports" sequence="3" />
+              
+    <menuitem name="Travel Request Report" parent="nyda_travel_management.menu_travel_management_reports"
+              id="menu_travel_request_report" sequence="1"
+              action="nyda_travel_management.action_travel_request_report" />
+
+    </data>
+</odoo>

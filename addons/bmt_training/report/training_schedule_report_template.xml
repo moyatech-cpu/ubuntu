@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_training_schedule_document">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Training Schedule Report</h1>
+                    </div>
+                    <t t-value="doc.get_training_schedule_data()" t-set="data"/>
+                    <br/>
+                    <t t-if="data['branch']">
+                        <div class="col-xs-4">
+                            <h4>
+                                <b>BRANCH NAME :
+                                    <u>
+                                        <t t-esc="data['branch']"/>
+                                    </u>
+                                </b>
+                            </h4>
+                        </div>
+                    </t>
+                    <t t-if="data['start_date']">
+                        <div class="col-xs-4 text-center">
+                            <h4>
+                                <b>START DATE :
+                                    <u>
+                                        <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(data['start_date'],'%Y-%m-%d'),'%e %B %Y')"/>
+                                    </u>
+                                </b>
+                            </h4>
+                        </div>
+                    </t>
+                    <t t-if="data['end_date']">
+                        <div class="col-xs-4 text-right">
+                            <h4>
+                                <b>END DATE :
+                                    <u>
+                                        <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(data['end_date'],'%Y-%m-%d'),'%e %B %Y')"/>
+                                    </u>
+                                </b>
+                            </h4>
+                        </div>
+                    </t>
+                </div>
+                <br/>
+                <!--Table for Business Management Training-->
+                <t t-if="data['bmt']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">Business Management Training<br/>(incl. SYB-Co-ops)
+                                    </th>
+                                    <th rowspan="2" class="t-center">Course Name</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Pitch Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['bmt']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.title"/>
+                                        </td>
+                                        <t t-if="rec_data.training_type">
+                                            <td>
+                                                <span t-field="rec_data.training_type"/>
+                                            </td>
+                                        </t>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d %H:%M:%S'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d %H:%M:%S'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <t t-if="rec_data.bmt_pitching_id.pitching_date">
+                                            <td>
+                                                <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.bmt_pitching_id.pitching_date,'%Y-%m-%d %H:%M:%S'),'%d/%m/%Y')"/>
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td>-</td>
+                                        </t>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.facilitator_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_no_attended"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_no_attended"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="7" class="t-right">Total Estimated no. of young people - <b>BMT</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>Business Management Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <!--Table for Co-operative Governance Training-->
+                <t t-if="data['coop_gov']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">Co-operative Governance Training</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['coop_gov']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.trainer_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_youth"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_youth"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5" class="t-right">Total Estimated no. of young people - <b>Co-op</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>Co-operative Governance Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <!--Table for Sales Pitch Training-->
+                <t t-if="data['sale_pitch']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">Sales Pitch Training</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['sale_pitch']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.trainer_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_youth"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_youth"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5" class="t-right">Total Estimated no. of young people - <b>Sale Pitch</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>Sales Pitch Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <!--Table for BBBEE Training-->
+                <t t-if="data['bbbee']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">BBBEE Training</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['bbbee']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.trainer_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_youth"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_youth"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5" class="t-right">Total Estimated no. of young people - <b>BBBEE</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>BBBEE Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <!--Table for Job Preparedness Training-->
+                <t t-if="data['job_preparedness']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">Job Preparedness Training</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['job_preparedness']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.trainer_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_youth"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_youth"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5" class="t-right">Total Estimated no. of young people - <b>Job preparedness</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>Job Preparedness Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <!--Table for Life Skills Training-->
+                <t t-if="data['life_skills']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">Life Skills Training</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['life_skills']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.trainer_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_youth"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_youth"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5" class="t-right">Total Estimated no. of young people - <b>Life Skills</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>Life Skills Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <!--Table for Digital Skills Training-->
+                <t t-if="data['digital_skills']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">No.</th>
+                                    <th rowspan="2" class="t-center">Digital Skills Training</th>
+                                    <th colspan="2" class="t-center">Training Date</th>
+                                    <th rowspan="2" class="t-center">Venue</th>
+                                    <th rowspan="2" class="t-center">Trainer</th>
+                                    <th rowspan="2" class="t-center">Estimated no.-YP</th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Start</th>
+                                    <th class="t-center">End</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="total_yp" t-value="0"/>
+                                <t t-foreach="data['digital_skills']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.start_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(rec_data.end_date,'%Y-%m-%d'),'%d/%m/%Y')"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.venue"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data.trainer_id.name"/>
+                                        </td>
+                                        <td class="r-color">
+                                            <t t-esc="rec_data.total_youth"/>
+                                        </td>
+                                        <t t-set="total_yp" t-value="total_yp + rec_data.total_youth"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5" class="t-right">Total Estimated no. of young people - <b>Digital Skills</b></th>
+                                    <td class="r-color">
+                                        <t t-esc="total_yp"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>Digital Skills Trainings on these dates are not done.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_training_schedule">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="bmt_training.report_training_schedule_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

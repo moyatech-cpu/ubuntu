@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_status_rural_urban_template">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_rural_urban_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Status Per Rural/Urban Report</h1>
+                    </div>
+                    <h4>Start Date :
+                        <t t-esc="data['start_date']"/>
+                    </h4>
+                    <h4>End Date :
+                        <t t-esc="data['end_date']"/>
+                    </h4>
+                    <h4>Branch :
+                        <t t-esc="data['branch']"/>
+                    </h4>
+                    <h4>User Type :
+                        <t t-esc="data['type']"/>
+                    </h4>
+                    <br/>
+                </div>
+                <br/>
+                <!--Table for Status Per Rural/Urban-->
+                <t t-if="data['vouchers']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Rural/Urban</th>
+                                    <th class="t-center">Recommended</th>
+                                    <th class="t-center">Approved</th>
+                                    <th class="t-center">Declined</th>
+                                    <th class="t-center">Cancelled</th>
+                                    <th class="t-center">Rural/Urban Total</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="vrec" t-value="0"/>
+                                <t t-set="vapp" t-value="0"/>
+                                <t t-set="vdec" t-value="0"/>
+                                <t t-set="vcan" t-value="0"/>
+                                <t t-set="vtotal" t-value="0"/>
+                                <t t-foreach="data['vouchers']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data['name']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="rec_data['rec']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="rec_data['app']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="rec_data['dec']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="rec_data['can']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <b>
+                                                <t t-esc="rec_data['total']"/>
+                                            </b>
+                                        </td>
+                                        <t t-set="vrec" t-value="vrec + rec_data['rec']"/>
+                                        <t t-set="vapp" t-value="vapp + rec_data['app']"/>
+                                        <t t-set="vdec" t-value="vdec + rec_data['dec']"/>
+                                        <t t-set="vcan" t-value="vcan + rec_data['can']"/>
+                                        <t t-set="vtotal" t-value="vtotal + rec_data['total']"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th colspan="2" class="t-right">Status Total</th>
+                                    <td class="r-color">
+                                        <b>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="vrec"/>
+                                        </b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="vapp"/>
+                                        </b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="vdec"/>
+                                        </b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="vcan"/>
+                                        </b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b>
+                                            <t t-if="data['value_type']=='amt'">R</t>
+                                            <t t-esc="vtotal"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4>
+                                <b>Report Total:
+                                    <t t-if="data['value_type']=='amt'">R</t>
+                                    <t t-esc="vtotal"/>
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_status_rural_urban">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_grant_and_voucher.report_status_rural_urban_template"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

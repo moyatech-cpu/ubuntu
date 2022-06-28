@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_csd_intergration_csd_intergration,csd_intergration.csd_intergration,model_csd_intergration_csd_intergration,,1,0,0,0

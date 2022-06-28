@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- PDD TYPE TRAINING -->
+        <record id="pddd_type_training_1" model="pddd.type.training">
+            <field name="name">BMT Training</field>
+        </record>
+        <record id="pddd_type_training_2" model="pddd.type.training">
+            <field name="name">Sales Pitch Training</field>
+        </record>
+        <record id="pddd_type_training_3" model="pddd.type.training">
+            <field name="name">BBBEE Training</field>
+        </record>
+        <record id="pddd_type_training_4" model="pddd.type.training">
+            <field name="name">Job preparedness Training</field>
+        </record>
+        <record id="pddd_type_training_5" model="pddd.type.training">
+            <field name="name">Sales Pitch/BBBEE Training</field>
+        </record>
+        <record id="pddd_type_training_6" model="pddd.type.training">
+            <field name="name">Life Skills Training</field>
+        </record>
+        <record id="pddd_type_training_7" model="pddd.type.training">
+            <field name="name">Digital Skills Training</field>
+        </record>
+
+    </data>
+</odoo>

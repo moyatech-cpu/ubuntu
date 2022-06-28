@@ -1,0 +1,38 @@
+.table_border {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 23px;
+
+}
+
+.table_border_tr {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 5px;
+
+}
+
+.table_border_td_ {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+
+}
+
+.table_border_td {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 2px;
+
+}

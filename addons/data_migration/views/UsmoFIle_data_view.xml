@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_file_tree_view">
+            <field name="name">usmo.file.tree.view</field>
+            <field name="model">usmo.file</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ContentType"/>
+                    <field name="CreatedDT"/>
+                    <field name="FileType"/>
+                    <field name="OriFileName"/>
+                    <field name="RowGUID"/>
+                    <field name="Superseded"/>
+                    <field name="SupersededBy"/>
+                    <field name="SupersededDT"/>
+                    <field name="SupersededNotes"/>
+                    <field name="Voucher"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_file_form_view">
+            <field name="name">usmo.file.form.view</field>
+            <field name="model">usmo.file</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ContentType"/>
+                                <field name="CreatedDT"/>
+                                <field name="FileType"/>
+                                <field name="OriFileName"/>
+                                <field name="RowGUID"/>
+                            </group>
+                            <group>
+                                <field name="Superseded"/>
+                                <field name="SupersededBy"/>
+                                <field name="SupersededDT"/>
+                                <field name="SupersededNotes"/>
+                                <field name="Voucher"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_file">
+            <field name="name">Usmo File</field>
+            <field name="res_model">usmo.file</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_file" name="Usmo File"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_file" sequence="60"/>
+    </data>
+</odoo>

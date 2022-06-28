@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="nyda_scm_tender_1" model="nyda.scm.tender">
+            <field name="tender_title">Automation System</field>
+            <field name="state">functionality</field>
+            <field name="name">Automation System</field>
+            <field name="description">The agency needs a system to automate manual functions</field>
+            <field name="employee">5729</field>
+            <field name="request_date" eval="(DateTime.today() - relativedelta(months=3)).strftime('%Y-%m-01 04:30')" />
+            <field name="delivery_address">54 Maxwell Drive, Woodmead, 2191</field>
+            <field name="evaluation_minimum_score">70</field>
+            <field name="bac_comments">Comments from the BAC</field>
+            <field name="ceo_comments">Comments from the Chief</field>
+            <field name="preference_point_system">80</field>
+            <field name="validity_period">90</field>
+            <field name="request_date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-01 04:30')" />
+            <field name="executive_review">We need to move pronto, we dont have much time.</field>
+            <field name="scm_review">This is the feedback from the SCM</field>
+            <field name="bsc_review">This is the feedback from the BSC</field>
+            <field name="bac_review">This is the feedback from the BAC</field>
+            <field name="closing_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-01 04:30')" />
+            <field name="no_bids_received">4</field>
+        </record>
+        
+        <record id="nyda_scm_tender_sheet_1" model="scm.tender.preevaluation.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="required_item">Team Curriculum Vitaes</field>
+        </record>
+
+        <record id="nyda_scm_tender_sheet_2" model="scm.tender.preevaluation.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="required_item">CSD Report</field>
+        </record>
+        
+        <record id="nyda_scm_tender_sheet_3" model="scm.tender.preevaluation.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="required_item">Accreditation</field>
+        </record>
+        
+        <record id="nyda_scm_tender_sheet_4" model="scm.tender.preevaluation.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="required_item">Tax Clearance Certificate</field>
+        </record>                
+        
+        <record id="nyda_scm_tender_scoring_sheet_1" model="scm.tender.scoring.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="scoring_item">Implementation Methodology</field>
+            <field name="details">The quality of the proposed method of implementation</field>
+            <field name="scoring_matrix">
+            	5 = Excellent
+            	4 = Very Good
+            	3 = Good
+            	2 = Average
+            	1 = Bad
+            </field>
+            <field name="weight">25</field>
+        </record>          
+
+        <record id="nyda_scm_tender_scoring_sheet_2" model="scm.tender.scoring.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="scoring_item">Project Plan</field>
+            <field name="details">The quality of the proposed project plan</field>
+            <field name="scoring_matrix">
+            	5 = Excellent
+            	4 = Very Good
+            	3 = Good
+            	2 = Average
+            	1 = Bad
+            </field>
+            <field name="weight">25</field>
+        </record> 
+        
+        <record id="nyda_scm_tender_scoring_sheet_3" model="scm.tender.scoring.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="scoring_item">Company Experience</field>
+            <field name="details">The number of previous implemntations completed</field>
+            <field name="scoring_matrix">
+            	5 = Excellent
+            	4 = Very Good
+            	3 = Good
+            	2 = Average
+            	1 = Bad
+            </field>
+            <field name="weight">25</field>
+        </record>     
+        
+        <record id="nyda_scm_tender_scoring_sheet_4" model="scm.tender.scoring.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="scoring_item">System Architecture</field>
+            <field name="details">The quality of the system architecture .</field>
+            <field name="scoring_matrix">
+            	5 = Excellent
+            	4 = Very Good
+            	3 = Good
+            	2 = Average
+            	1 = Bad
+            </field>
+            <field name="weight">25</field>
+        </record> 
+        
+        <!--
+        <record id="nyda_scm_tender_scoring_sheet_5" model="scm.tender.scoring.sheet">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="scoring_item">Team Experience</field>
+            <field name="details">The quality of team members</field>
+            <field name="scoring_matrix">
+            	5 = Excellent
+            	4 = Very Good
+            	3 = Good
+            	2 = Average
+            	1 = Bad
+            </field>
+            <field name="weight">25</field>
+        </record>
+        -->   
+
+        <record id="nyda_scm_tender_submission_register_1" model="scm.tender.submission.register">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="bidder_name">Company A</field>
+            <field name="csd_number">MAAA0401326</field>
+            <field name="telephone">0115134013</field>
+            <field name="email_address">info@companya.com</field>
+        </record>
+
+        <record id="nyda_scm_tender_submission_register_2" model="scm.tender.submission.register">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="bidder_name">Company B</field>
+            <field name="csd_number">MAAA0401327</field>
+            <field name="telephone">0115134013</field>
+            <field name="email_address">info@companyb.com</field>
+        </record>
+        
+        <record id="nyda_scm_tender_submission_register_3" model="scm.tender.submission.register">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="bidder_name">Company C</field>
+            <field name="csd_number">MAAA0401328</field>
+            <field name="telephone">0115134013</field>
+            <field name="email_address">info@companyc.com</field>
+        </record>                                 
+
+        <record id="nyda_scm_tender_submission_register_4" model="scm.tender.submission.register">
+            <field name="tender_id" ref="nyda_scm_tender.nyda_scm_tender_1" />
+            <field name="bidder_name">Company D</field>
+            <field name="csd_number">MAAA0401329</field>
+            <field name="telephone">0115134013</field>
+            <field name="email_address">info@companyd.com</field>
+        </record>  
+                  
+    </data>
+</odoo>

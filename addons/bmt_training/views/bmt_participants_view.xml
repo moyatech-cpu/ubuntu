@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Res Partner Form View Inherit-->
+        <record model="ir.ui.view" id="res_partner_form_view_inherit">
+            <field name="name">res.partner.form.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="email" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+                <field name="lang" position="after">
+                    <field name="is_facilitator"/>
+                </field>
+            </field>
+        </record>
+
+        <!--BMT Participants Tree View-->
+        <record model="ir.ui.view" id="bmt_participants_tree_view">
+            <field name="name">bmt.participants.tree.view</field>
+            <field name="model">bmt.participants</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="participant_id"/>
+                    <field name="dob"/>
+                    <field name="gender"/>
+                    <field name="area"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--BMT Participants Form View-->
+        <record model="ir.ui.view" id="bmt_participants_form_view">
+            <field name="name">bmt.participants.form.view</field>
+            <field name="model">bmt.participants</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="participant_id" required="1"/>
+                                <field name="related_participant_id" invisible="1"/>
+                                <field name="dob"/>
+                                <field name="gender" required="1"/>
+                                <field name="area" required="1"/>
+                                <field name="state"/>
+                                <field name="coop_gov_id" readonly="1"/>
+                                <field name="is_certi"/>
+                            </group>
+                            <group>
+                                <field name="is_disabled"/>
+                                <field name="race" required="1"/>
+                                <field name="mobile"/>
+                                <field name="business_mgmt_training_id" required="1"/>
+                                <field name="bmt_training_app_id"/>
+                                <field name="training_type"/>
+                            </group>
+                            <group name="sign" string="Signature">
+                                <field name="signature_day_one" widget="signature" readonly="1"/>
+                                <field name="signature_day_one_date" readonly="1"/>
+                                <field name="day_one"/>
+                                 <!--readonly="1"-->
+                                <field name="signature_day_second" widget="signature" readonly="1"/>
+                                <field name="signature_day_second_date" readonly="1"/>
+                                <field name="day_two"/>
+                                 <!--readonly="1"-->
+                                <field name="signature_day_three" widget="signature" readonly="1"/>
+                                <field name="signature_day_three_date" readonly="1"/>
+                                <field name="day_three"/>
+                                <field name="signature_day_four" widget="signature" readonly="1"
+                                       attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                <field name="signature_day_four_date" readonly="1"
+                                       attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                <field name="day_four"
+                                       attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                <field name="signature_day_five" widget="signature" readonly="1"
+                                       attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                <field name="signature_day_five_date" readonly="1"
+                                       attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                <field name="day_five"
+                                       attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--BMT Participants Action-->
+        <record model="ir.actions.act_window" id="action_bmt_participants">
+            <field name="name">BMT Participants</field>
+            <field name="res_model">bmt.participants</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for BMT Participants-->
+        <menuitem name="BMT Participants" id="bmt_participants" parent="bmt_training.trainings" action="action_bmt_participants"
+                  sequence="3"/>
+
+    </data>
+</odoo>

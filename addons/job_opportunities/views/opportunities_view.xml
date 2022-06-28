@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Opportunities-->
+        <record model="ir.ui.view" id="opportunities_tree_view">
+            <field name="name">opportunities.tree.view</field>
+            <field name="model">opportunities</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="job_location_id"/>
+                    <field name="official_responsible_id"/>
+                    <field name="ind_sector_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View of Opportunities-->
+        <record model="ir.ui.view" id="opportunities_form_view">
+            <field name="name">opportunities.form.view</field>
+            <field name="model">opportunities</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button"
+                                    icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" string="Jobs/Opportunity Title"/>
+                            <h3>
+                                <field name="name" required="1"/>
+                            </h3>
+                        </div>
+                        <group>
+                            <field name="job_location_id" required="1"/>
+                            <field name="official_responsible_id" options='{"no_open": True, "no_create": True}' required="1"/>
+                            <field name="position_available" required="1"/>
+                            <field name="position_left" readonly="1"/>
+                            <field name="branch_id" required="1"/>
+                        </group>
+                        <!--<div class="oe_title">-->
+                        <label for="description" string="Description" class="oe_edit_only"/>
+                        <field name="description" nolabel="1" required="1"/>
+                        <!--</div>-->
+                        <group name="details_of_position" string="Details Of Position">
+                            <field name="app_closing_date"/>
+                            <field name="job_level"/>
+                            <field name="required_qualification"/>
+                            <field name="required_experience"/>
+                            <field name="description_role"/>
+                            <field name="points"/>
+                            <field name="aff_act_req"/>
+                            <field name="prop_can_start_date"/>
+                            <field name="emp_type"/>
+                            <field name="stipend_per_month"/>
+                            <field name="salary_per_month"/>
+                            <field name="province_id" options='{"no_open": True, "no_create": True}'
+                                   domain="[('country_id.name', '=', 'South Africa')]"/>
+                            <field name="ind_sector_id" options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                        <group name="placed_applicant" string="Placed Applicant's">
+                            <field name="opp_applicant_ids" nolabel="1" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Kanban view for Opportunities-->
+        <record id="kanban_view_opportunities" model="ir.ui.view">
+            <field name="name">opportunities.kanban</field>
+            <field name="model">opportunities</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban class="o_hr_employee_kanban">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="position_left"/>
+                    <field name="position_available"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <!--<div class="oe_kanban_global_click">-->
+                            <div class="row" style="padding: 8px 0px 0px 0px !important;">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <t t-esc="record.name.raw_value"/>
+                                    </strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" style="margin-top:15px;"
+                                            name="apps_opportunity"
+                                            type="object">APPLICATION(S)
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a type="open">
+                                        View/Edit
+                                    </a>
+                                    <br/>
+                                    <a type="object" name="doc_opportunity">
+                                        Documents
+                                    </a>
+                                    <br/>
+                                    <a type="object" name="rec_opportunity">
+                                        Recruitment Done
+                                    </a>
+                                </div>
+                                <div class="col-xs-12 o_kanban_primary_bottom bottom_block row pg-bar">
+                                    <div class="col-xs-12 o_kanban_primary_bottom bottom_block">
+                                        <field name="position_left" widget="progressbar"
+                                               title="Numbers Placed"
+                                               options="{'current_value': 'position_left', 'max_value': 'position_available'}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--Action for opportunities-->
+        <record model="ir.actions.act_window" id="opp_action_window">
+            <field name="name">Jobs/Opportunities</field>
+            <field name="res_model">opportunities</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Opportunities" id="opportunities_menu"
+                  groups="job_opportunities.opportunity_provider,base.group_system"
+                  parent="job_opportunities.job_opportunities_main_menu" sequence="1"
+                  action="opp_action_window"/>
+
+    </data>
+</odoo>

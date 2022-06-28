@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_refer_hogac_form" model="ir.ui.view">
+        <field name="name">refer.hogac.form</field>
+        <field name="model">refer.hogac</field>
+        <field name="arch" type="xml">
+            <form string="ITC Report">
+                <group>
+                  <group>
+                    <field name="minute_from_bgarg_name" invisible="1"/>
+                    <field name="minute_from_bgarg" widget="binary" required="1" filename="minute_from_bgarg_name"/>
+                  </group>
+                  <group>
+                    <field name="declaration_of_interest_refer_name" invisible="1"/>
+                    <field name="declaration_of_interest_refer" widget="binary" required="1" filename="declaration_of_interest_refer_name"/>
+                  </group>
+                </group>
+                <footer>
+                    <button name="set_refer_hogac" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_refer_hogac" model="ir.actions.act_window">
+        <field name="name">Refer To Hogac</field>
+        <field name="res_model">refer.hogac</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_refer_hogac_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+ 
+   	<record id="view_tax_certificate_view" model="ir.ui.view">
+		<field name="name">Tax Certificate</field>
+        <field name="model">tax.certificate</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+           <form string="Users">
+           	<header>
+           	
+           	</header>
+           	<sheet>
+           		<group>
+				<div class="col-md-6 oe_title">
+                      <label for="UniqueRegistrationReferenceNumber" string="Serial #"/>
+                      <h1>
+                          <field name="supplier_identification" readonly="1"/>
+                      </h1>
+                </div>
+                </group>
+                <group>
+                <field name="user_id" invisible="True"/>
+<field name="IsRegistered"/>
+<field name="IsActive"/>
+<field name="IncomeTaxNumber"/>
+<field name="IsVATVendor"/>
+<field name="IncomeTaxVendor"/>
+<field name="PAYENumber"/>
+<field name="VATNumber"/>
+<field name="IsValidCertificate"/>
+<field name="ValidationResponse"/>
+<field name="LastVerficationDate"/>
+<field name="EditDate"/>
+</group>
+
+           	</sheet>
+          </form> 
+        </field>
+    </record>
+    <record id="view_tax_certificate_tree" model="ir.ui.view">
+        <field name="name">Tax Certificate</field>
+        <field name="model">tax.certificate</field>
+        <field name="arch" type="xml">
+            <tree string="Tax Certificate">
+<field name="IsRegistered"/>
+<field name="IsActive"/>
+<field name="IncomeTaxNumber"/>
+<field name="IsVATVendor"/>
+<field name="IncomeTaxVendor"/>
+<field name="PAYENumber"/>
+<field name="VATNumber"/>
+<field name="IsValidCertificate"/>
+<field name="ValidationResponse"/>
+<field name="LastVerficationDate"/>
+<field name="EditDate"/>
+
+        	</tree>
+        </field>
+    </record>
+    
+    <record id="action_tax_certificate" model="ir.actions.act_window">
+        <field name="name">Tax Certificate</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tax.certificate</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain"></field>
+    </record>
+	
+	<menuitem name="Tax Certificate" id="csd_integration.tax_certificate_menu" action="action_tax_certificate" parent="csd_integration.supplier_details_menu" groups="base.group_system"/>
+
+</odoo>

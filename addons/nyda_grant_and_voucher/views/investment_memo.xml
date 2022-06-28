@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="grant_programme_tree" model="ir.ui.view">
+        <field name="name">grant.programme.tree</field>
+        <field name="model">investment.memo</field>
+        <field name="arch" type="xml">
+            <tree string ="Investment memo">
+                <field name="serial_number" invisible="1"/>
+                <field name="business_name"/>
+                <field name="document_number"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="grant_programme_form" model="ir.ui.view">
+        <field name = "name">grant.programme.form</field>
+        <field name="model">investment.memo</field>
+        <field name="arch" type="xml">
+            <form string="Investment Memo">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="document_number" string="Document #"/>
+                        <h1>
+                            <field name="document_number" readonly="1"/>
+                        </h1>
+                        <!--<hl>
+                            <field name="document_number"/>
+                        </hl>-->
+                    </div>
+                    <group>
+                        <!--<field name="serial_number"/>-->
+                        <field name="business_name"/>
+                        <field name="document_present_date"/>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="city_area"/>
+<!--
+                            <field name="project_name"/>
+-->
+                            <field name="sector" widget="many2many_tags"/>
+                            <field name="product"/>
+                            <field name="amount"/>
+<!--                            <field name="date"/>-->
+                        </group>
+                        <group>
+                            <field name="province"/>
+                            <field name="company_individual"/>
+                            <field name="activity"/>
+                            <field name="grant_officer"/>
+<!--                            <field name="source"/>-->
+                            <field name="branch_manager"/>
+                            <field name="chairperson"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Executive Summary">
+                            <form>
+                                <group>
+                                    <field name="transaction_overview"/>
+                                    <field name="project_description"/>
+                                <!--<tree editable="bottom">
+                                    <field name="stock"/>
+                                    <field name="working_capital"/>
+                                    <field name="equipment"/>
+                                </tree>-->
+                                </group>
+                                <group>
+                                    <h4><strong>Summary Proporsal</strong></h4><br></br>
+                                    <h6><strong>PROPOSED APPLICATION OF FUNDS</strong></h6>
+                                    <group>
+                                        <field id='stock' name="stock"/>
+                                        <field name="working_capital"/>
+                                        <field name="equipment"/>
+                                        <field name="others_one"/>
+                                        <field name="others_two"/>
+                                        <field name="description_other_one"/>
+                                        <field name="description_other_two"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="total_grant"/>
+                                </group>
+
+                            </form>
+                        </page>
+                        <page string="POLICY and PROGRAMME FIT">
+                            <form>
+                                <group>
+                                    <field name="stg_of_busin"/>
+                                    <field name="youth_share_hol"/>
+                                    <field name="oper_invo"/>
+                                    <field name="grant_size"/>
+                                    <field name="profitable"/>
+                                    <field name="nyda_role"/>
+                                    <field name="employement"/>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="Sponsers, Management and Employees">
+                            <form>
+                                <group>
+                                    <field name="sponser"/>
+                                    <field name="management_team"/>
+                                    <field name="employees" widget="many2many_tags"/>
+                                </group>
+                                <group string="PERSONAL BALANCE SHEET">
+                                    <group>
+                                        <field name="residential_property"/>
+                                        <field name="motor_vehicle"/>
+                                        <field name="personal_effects"/>
+                                        <field name="cash"/>
+                                        <field name="business_interest"/>
+                                        <field name="others_asset"/>
+                                        <field name="total_asset"/>
+                                    </group>
+                                    <group>
+                                        <field name="bond"/>
+                                        <field name="hp_balance"/>
+                                        <field name="personal_loan"/>
+                                        <field name="credit_card"/>
+                                        <field name="total_liabilities"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="net_total"/>
+                                </group>
+                                <group class="col-md-4" string="SPONSOR’S INCOME and EXPENDITURE STATEMENT">
+                                    <group class="col-md-2">
+                                        <field name="owner_net_sal"/>
+                                        <field name="spouse_net_sal"/>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <field name="total_sal"/>
+                                    </group>
+                                    <group class="col-md-2">
+                                        <field name="rent"/>
+                                        <field name="water_light"/>
+                                        <field name="groceries"/>
+                                        <field name="clothing"/>
+                                        <field name="medical_expences"/>
+                                        <field name="membership"/>
+                                        <field name="school_fees"/>
+                                        <field name="dstv"/>
+                                        <field name="insurance_policy"/>
+                                        <field name="furniture_accounts"/>
+                                        <field name="travel"/>
+                                        <field name="telephone"/>
+                                        <field name="entertainment"/>
+                                        <field name="total_expen"/>
+                                    </group>
+                                </group>
+                                <group class="col-md-4">
+                                    <field name="disposable_income"/>
+                                </group>
+                                <group class="col-md-4" string="SOURCE and APPLICATION OF FUNDS">
+                                    <group class="col-md-2" string="Source of Funds">
+                                        <field name="member_contr"/>
+                                        <field name="nyda_funding"/>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                                        <field name="total_fund"/>
+                                    </group>
+                                    <group class="col-md-2" string="Application of funds">
+                                        <!--<group class="col-md-4" string="Application of funds">-->
+                                            <!--<group string="Fixed assets">-->
+                                        <h3>Fixed Assets</h3>
+                                        <field name="equipment_fund"/>
+                                        <field name="motor_veh"/>
+                                        <field name="tot_fix_asset"/>
+                                        <!--</group>-->
+                                        <!--<group string="Working Capital">-->
+
+                                        <h3>Working Capital</h3>
+                                        <field name="rental"/>
+                                        <field name="salaries"/>
+                                        <field name="stock_cap"/>
+                                        <field name="tot_work_cap"/>
+                                    </group>
+                                    <group class="col-md-2">
+                                        <field name="tot_app_funds"/>
+                                    </group>
+                                    <!--</group>-->
+                                </group>
+                                <group>
+                                    <field name="source_app_tot"/>
+                                </group>
+                                <!--</group>-->
+                            </form>
+                        </page>
+                        <page string="PROPOSED TERMS">
+                            <form string="GRANT">
+                                <group string="KEY TERMS">
+                                    <field name="grant_amount"/>
+                                    <field name="tenure"/>
+                                    <field name="start_date"/>
+                                    <field name="est_due_date"/>
+                                    <field name="add_condit"/>
+                                    <field name="disbursement"/>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="MARKET REVIEW">
+                            <form>
+                                <group>
+                                    <field name="market_review"/>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="SWOT ANALYSIS">
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="strengths"/>
+                                        <field name="opportunities"/>
+                                    </group>
+                                    <group>
+                                        <field name="weakness"/>
+                                        <field name="threats"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="DUE DILIGENCE FINDINGS">
+                            <form>
+                                <group>
+                                    <field name="credit_check"/>
+                                    <field name="company_check"/>
+                                    <field name="business_premises"/>
+                                    <field name="human_resource"/>
+                                    <field name="compliance"/>
+                                    <field name="int_oth_pro_ser"/>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="RISK ANALYSIS">
+                            <form>
+                                <group>
+                                    <field name="financial_control"/>
+                                    <field name="pilferage"/>
+                                    <field name="stock_obsolescence"/>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="FINANCIAL ANALYSIS">
+                            <form>
+                                <group>
+                                    <field name="revenues"/>
+                                    <field name="sales_cost_gp"/>
+                                    <field name="rent_analy"/>
+                                    <field name="salary_wages"/>
+                                    <field name="recommendation"/>
+                                    <field name="transaction"/>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="STATS SHEET">
+                            <form string="Company Details">
+                                <group string="Company Details">
+                                    <group>
+                                        <field name="company_name"/>
+                                        <field name="trading_as"/>
+                                        <field name="member_names"/>
+                                        <field name="interest"/>
+                                        <field name="key_person"/>
+                                        <field name="company_domcilium"/>
+                                        <field name="year_end"/>
+                                    </group>
+                                    <group>
+                                        <field name="comp_reg_no"/>
+                                        <field name="member_id_no"/>
+                                        <field name="gender"/>
+                                        <field name="member_race"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <form string="Company Contact Information">
+                                <group string="Company Contact Information">
+                                    <group>
+                                        <field name="contact_person"/>
+                                        <field name="tel_work"/>
+                                        <field name="fax_work"/>
+                                        <field name="post_address"/>
+                                        <field name="cell_number"/>
+                                        <field name="email"/>
+                                    </group>
+                                    <group>
+                                        <field name="phy_address"/>
+                                        <field name="tel_home"/>
+                                        <field name="web_site"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <form string="Business Details">
+                                <group string="Business Details">
+                                    <group>
+                                        <field name="industry"/>
+                                        <field name="stat_province"/>
+                                        <h4>Employees:</h4>
+                                        <field name="emp_exist" widget="many2many_tags"/>
+                                        <field name="emp_new" widget="many2many_tags"/>
+                                        <field name="cost_per_job"/>
+                                    </group>
+                                    <group>
+                                        <field name="stat_activity"/>
+                                        <field name="stat_town"/>
+                                        <field name="hdp"/>
+                                        <field name="youth"/>
+                                        <field name="cost_per_job"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <form string="Timeline">
+                                <group string="Timeline">
+                                    <group>
+                                        <field name="t_app_rec_date"/>
+                                        <field name="t_due_diligence_date"/>
+                                        <field name="approval_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="timeline_source"/>
+                                        <field name="grants_cdf_Officer"/>
+                                        <field name="t_stage_of_business"/>
+                                        <field name="pts_project_number"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <form string="Facility Details">
+                                <group string="Facility Details">
+                                    <group string="Grant">
+                                        <field name="loan_amount"/>
+                                        <field name="period"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <form string="Disbursement Method">
+                                <group string="Disbursement Method">
+                                    <group>
+                                        <field name="suppliers"/>
+                                    </group>
+                                    <group>
+                                        <field name="s_account_name"/>
+                                        <field name="s_bank_name"/>
+                                        <field name="s_branch_name"/>
+                                        <field name="s_account_number"/>
+                                        <field name="s_branch_number"/>
+                                        <field name="s_account_type"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="w_working_capital"/>
+                                    </group>
+                                    <group>
+                                        <field name="w_account_name"/>
+                                        <field name="w_bank_name"/>
+                                        <field name="w_branch_name"/>
+                                        <field name="w_account_number"/>
+                                        <field name="w_branch_number"/>
+                                        <field name="w_account_type"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_grant_programme" model="ir.actions.act_window">
+        <field name="name">Grant Programme</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">investment.memo</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Investment memo
+            </p>
+        </field>
+    </record>
+
+
+<!--
+    <menuitem id ="investment_memo_root" name="Investment_Memo" sequence="3"/>
+-->
+    <menuitem name="Programme Investment Memo"
+              parent="nyda_grant_and_voucher.menu_main_grant_application"
+              id="main_programme_investment_memo" sequence="30"/>
+    <menuitem id ="investment_memo" name="Investment Memo"
+              parent="nyda_grant_and_voucher.main_programme_investment_memo"
+              action="action_grant_programme"/>
+
+</odoo>

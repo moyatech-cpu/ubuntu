@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//models/Accreditations.py=utf-8
+encoding//models/AddressDetails.py=utf-8
+encoding//models/AssociationDetail.py=utf-8
+encoding//models/BankingDetails.py=utf-8
+encoding//models/CommodityGroups.py=utf-8
+encoding//models/ContactDetails.py=utf-8
+encoding//models/DirectorDetails.py=utf-8
+encoding//models/IndustryClassifications.py=utf-8
+encoding//models/__init__.py=utf-8
+encoding//models/bbbee_certificate.py=utf-8
+encoding//models/csd_supplier.py=utf-8
+encoding//models/supplier_base.py=utf-8
+encoding//models/tax_certificate.py=utf-8
+encoding/__manifest__.py=utf-8

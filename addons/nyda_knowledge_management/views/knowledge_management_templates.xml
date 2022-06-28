@@ -1,0 +1,141 @@
+<odoo>
+
+    <template id="portal_knowledge_management" name="Portal My Home : Knowledge Management" inherit_id="portal.portal_my_home" priority="22">
+        <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+            <li class="list-group-item">
+                <!--                <span class="badge" t-esc="quotation_count"/>-->
+                <a href="/knowledge/documents">Knowledge Management</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_menu_knowledge" name="Portal layout : Knowledge menu entries" inherit_id="portal.portal_layout" priority="23">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name=='document' ">
+                <a t-if="document" t-attf-href="/knowledge/documents?{{ keep_query() }}">Documents</a>
+                <t t-else="">Documents</t>
+            </li>
+            <li t-if="page_name=='document' and document">
+                <t t-if="document">
+                    <t t-esc="document.name"/>
+                </t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_documents" name="Portal Documents">
+        <t t-call="portal.portal_layout">
+            <h3>Documents</h3>
+            <t t-if="not documents">
+                <p>There are currently no documents for your account.</p>
+            </t>
+            <div t-if="documents" class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-hover o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Documents #</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="documents" t-as="document">
+                            <tr>
+                                <td>
+                                    <a t-attf-href="/knowledge/documents/#{document.id}?#{keep_query()}">
+                                        <t t-esc="document.name"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <t t-esc="document.date"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="portal.pager"/>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_document_page" name="Portal Document Page">
+        <t t-call="portal.portal_layout">
+
+            <div class="container" style="margin-top:16px">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-9 col-sm-9">
+                                <h4>
+                                    <b>
+                                        <u>
+                                            <t t-call='portal.record_pager'/>
+                                            <t t-if="document">Document :</t>
+                                            <span t-esc="document.name"/>
+                                        </u>
+                                    </b>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    <b>Refrence Link :</b>
+                                    <t t-esc="document.refrence_link"/>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <b>Date :</b>
+                                    <t t-esc="document.date"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    <b>Description :</b>
+                                </p>
+                                <p>
+                                    <t t-esc="document.description"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <t t-foreach="document.document_ids" t-as="doc">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-2">
+                                        <t t-if="doc.document_type == 'video'">
+                                            <video controls="controls" width="600">
+                                                <source t-att-type="'video/%s' % doc.attachment_id.name.split('.')[-1]" t-att-src="'data:video/%s;base64,%s' % (doc.attachment_id.name.split('.')[-1],to_text(doc.attachment_id.datas))"/>
+                                            </video>
+                                        </t>
+                                        <t t-if="doc.document_type == 'image'">
+                                            <img t-att-src="'data:image/png;base64,%s' % to_text(doc.attachment_id.datas)" alt="Red dot" width="600"/>
+                                        </t>
+                                        <t t-if="doc.document_type in ('pdf', 'ppt', 'doc')">
+                                            <iframe t-att-src="'data:application/%s;base64,%s' % (doc.attachment_id.name.split('.')[-1], to_text(doc.attachment_id.datas))" width="600"/>
+                                        </t>
+                                        <t t-if="doc.document_type == 'url'">
+                                            <div class="text-center">
+                                                <a class="btn btn-primary" t-att-href="doc.attachment_id.url">
+                                                    <t t-esc="doc.attachment_id.name"/>
+                                                </a>
+                                            </div>
+                                        </t>
+                                        <div class="col-md-8 col-md-offset-2 mt16 mb16">
+                                            <t t-esc="doc.description" t-options='{"widget": "html"}'/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure mb32"/>
+        </t>
+    </template>
+
+</odoo>

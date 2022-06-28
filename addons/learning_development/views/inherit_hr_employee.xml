@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="inherit_hr_view_employee_form" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="department_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="options">{'no_open': True,'no_create': True}</attribute>
+                </field>
+                <field name="job_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="options">{'no_open': True,'no_create': True}</attribute>
+                </field>
+                <field name="parent_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="options">{'no_open': True,'no_create': True}</attribute>
+                </field>
+                <field name="work_phone" position="after">
+                    <field name="branch_id" options="{'no_open': True,'no_create': True}" required="1"/>
+                </field>
+                <field name="country_id" position="after">
+                    <field name="province_id" options="{'no_open': True,'no_create': True}" required="1"/>
+                    <attribute name="options">{'no_open': True,'no_create': True}</attribute>
+                </field>
+                <field name="address_home_id" position="after">
+                    <field name="surname" required="1"/>
+                </field>
+                <field name="resource_calendar_id" position="after">
+                    <field name="emp_number" required="1"/>
+                    <field name="app_identity_number" readonly="1"/>
+                </field>
+                <field name="notes" position="before">
+                    <field name="previous_qualification" nolabel="1"
+                           placeholder="Previous Obtained Qualifications(studies)"/>
+                    <field name="physical_address" nolabel="1"
+                           placeholder="Physical Address"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

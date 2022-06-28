@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    
+     <!--HR Employee Report Form View-->
+    <record model="ir.ui.view" id="regional_voucher_applications_report_form_view">
+        <field name="name">regional.voucher.applicaions.report.form.view</field>
+        <field name="model">voucher.applications.report</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                    <group>
+						  <field name="region_id" required='1' />          		
+            		</group>
+            		<group>
+						  <field name="type" required='1' />          		
+            		</group>	
+                </group>
+                
+                <footer>
+                    <button string="Get Report" name="get_regional_voucher_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action for Employee Report-->
+    <record model="ir.actions.act_window" id="action_regional_voucher_application_report">
+        <field name="name">Regional Voucher Application Report</field>
+        <field name="res_model">voucher.applications.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="regional_voucher_applications_report_form_view"/>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem name="Regional Reports" id="menu_voucher_regional_report" parent="nyda_grant_and_voucher.main_menu_voucher" sequence="56"
+    	groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"/>
+    <menuitem name="Application Reports" id="menu_voucher_regional_applications_report" parent="menu_voucher_regional_report" action="action_regional_voucher_application_report"/>           	                                                                       
+    </data>
+</odoo>

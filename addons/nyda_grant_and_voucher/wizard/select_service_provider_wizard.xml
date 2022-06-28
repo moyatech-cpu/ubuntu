@@ -1,0 +1,37 @@
+<odoo>
+    <record id="select_service_provider_wizard_form" model="ir.ui.view">
+        <field name="name">service.provider.select.wizard.form</field>
+        <field name="model">select.service.provider.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Service Provider">
+                <group>
+                    <field name="x_service_provider" required="1" 
+                     options="{'limit': 10, 'create': false, 'create_edit': false, 'search_more':true, 'field_color':'state', 'colors':{'active':'green'}}"
+                    />
+                    
+                    <field name="x_street_address" readonly="1" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                    <field name="x_city" readonly="1" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                    <field name="x_phone" readonly="1" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                    <field name="x_country_id" readonly="1" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                    <field name="x_company_email" readonly="1" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                    <field name="x_company_website" readonly="1" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                    <field name="x_service_rating" readonly="1" widget="priority" attrs="{'invisible': [('x_service_provider', '=', False)]}"/>
+                </group>
+                <footer>
+                    <button name="confirm_service_provider" string="Select" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="select_service_provider_wizard" model="ir.actions.act_window">
+        <field name="name">SelectServiceProviderWizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">select.service.provider.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="select_service_provider_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

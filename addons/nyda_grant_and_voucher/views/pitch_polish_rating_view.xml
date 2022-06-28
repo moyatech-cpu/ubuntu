@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Pre-Assessment  views -->
+    <record id="view_pitch_polish_rating_form" model="ir.ui.view">
+        <field name="name">pitch.polish.rating.form</field>
+        <field name="model">pitch.polish.rating</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="btn_refer" string="Refer" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                    <button name="btn_recommend" string="Recommend" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,recommended"/>
+                </header>
+                <sheet>
+                    <group string="Pitch and Polish Scorecard Form">
+                        <group>
+                            <field name="branch_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="entrepreneur_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="business_name" options="{'no_open':True,'no_create':True}"/>
+                            <field name="urlemail" invisible="1"/>
+                        </group>
+                        <group>
+                        </group>
+                        <label for="funding_criteria"
+                               string="Is the concept in line with the NYDA funding criteria? (NOT FOR SCORING PURPOSES)"/>
+                        <field name="funding_criteria"/>
+                    </group>
+                    <notebook>
+                        <page string="Business Plan Element">
+                            <label for="evaluation_criteria_business"
+                                   string="Introduction of a business idea – What is the rationale for starting the business?"/>
+                            <field name="evaluation_criteria_business"/>
+
+                            <label for="evaluation_criteria_balanced"
+                                   string="Introduction of a business idea – Have you balanced your business idea with reality?"/>
+                            <field name="evaluation_criteria_balanced"/>
+
+                            <label for="evaluation_criteria_products"
+                                   string="Introduction of a business idea – Is there a need for your anticipated products or services?"/>
+                            <field name="evaluation_criteria_products"/>
+
+                            <label for="evaluation_criteria_needs"
+                                   string="Introduction of a business idea – Who needs it?"/>
+                            <field name="evaluation_criteria_needs"/>
+
+                            <label for="evaluation_criteria_market"
+                                   string="Introduction of a business idea – How will your business fit into the market?"/>
+                            <field name="evaluation_criteria_market"/>
+
+                            <label for="vision_and_mission_idea"
+                                   string="What is your business idea trying to achieve?"/>
+                            <field name="vision_and_mission_idea"/>
+
+                            <label for="vision_and_mission_business"
+                                   string="What steps have you taken to make sure your business succeed?"/>
+                            <field name="vision_and_mission_business"/>
+
+                            <label for="vision_and_mission_role"
+                                   string="Does your business idea clarify its role in the community?"/>
+                            <field name="vision_and_mission_role"/>
+
+                            <label for="market_and_competition_research"
+                                   string="Have you done research on your products and services?"/>
+                            <field name="market_and_competition_research"/>
+
+                            <label for="market_and_competition_services"
+                                   string="Are there similar companies offering similar products and services?."/>
+                            <field name="market_and_competition_services"/>
+
+                            <label for="market_and_competition_market"
+                                   string="What is competition like in the market?"/>
+                            <field name="market_and_competition_market"/>
+
+                            <label for="solution_business_idea"
+                                   string="How feasible is your business idea?"/>
+                            <field name="solution_business_idea"/>
+
+                            <label for="solution_viability"
+                                   string="Have you assessed the viability of the business idea?"/>
+                            <field name="solution_viability"/>
+
+                            <label for="solution_market"
+                                   string="Does your business idea solve a problem or fulfil a need in the market?"/>
+                            <field name="solution_market"/>
+
+                            <label for="differentiation_products_and_services"
+                                   string="How different are your products and services from the existing ones in the market?"/>
+                            <field name="differentiation_products_and_services"/>
+
+                            <label for="differentiation_innovations"
+                                   string="Are there any new innovations which sets your business apart from the existing ones in the market"/>
+                            <field name="differentiation_innovations"/>
+
+                            <label for="business_model_understanding"
+                                   string="Do you have a clear understanding on how you are going to deliver value to your customers?"/>
+                            <field name="business_model_understanding"/>
+
+                            <label for="business_model_implement"
+                                   string="Do you know how you are going to implement your business model?"/>
+                            <field name="business_model_implement"/>
+
+                            <label for="team_management_capacity"
+                                   string="Do you have the capacity to deliver on the anticipated products or services?"/>
+                            <field name="team_management_capacity"/>
+
+                            <label for="team_management_employees"
+                                   string="Does your employees have the skill to deliver on product or services?"/>
+                            <field name="team_management_employees"/>
+
+                            <label for="request_require"
+                                   string="How much would you require from the NYDA?"/>
+                            <field name="request_require"/>
+
+                            <label for="request_amount"
+                                   string="How do you know the amount you need is not over financing or underfinancing"/>
+                            <field name="request_amount"/>
+
+                            <label for="growth_and_expansion_grow"
+                                   string="What is your plan to see your business grow?"/>
+                            <field name="growth_and_expansion_grow"/>
+
+                            <label for="growth_and_expansion_years"
+                                   string="Where do you see your business in 5 years?"/>
+                            <field name="growth_and_expansion_years"/>
+                            <field name="related_total" invisible="1"/>
+                            <div class="oe_title">
+                                <label for="total" string="TOTAL"/>
+                                <h1>
+                                    <field name="total" readonly="1"/>
+                                </h1>
+                            </div>
+                            <!--                            <h1>TOTAL:</h1>-->
+                            <!--                            <field name="total"/>-->
+                        </page>
+                    </notebook>
+                    <label for="recommendation"
+                           string="Recommendation"/>
+                    <field name="recommendation" nolable="1" placeholder="Recommendation"/>
+                    <group>
+                        <group>
+                            <label for="evaluator" string="Evaluator:"/>
+                            <field name="evaluator" nolabel="1"/>
+                        </group>
+                        <group>
+                            <!-- <label for="signature" string="Signature:"/>
+                            <field name="signature"/> -->
+                            <label for="pitch_date" string="Pitch Date:"/>
+                            <field name="pitch_date" nolabel="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pitch_polish_rating_tree" model="ir.ui.view">
+        <field name="name">pitch.polish.rating.tree</field>
+        <field name="model">pitch.polish.rating</field>
+        <field name="arch" type="xml">
+            <tree string="Pitch and Polish Scorecard Details">
+                <field name="branch_id"/>
+                <field name="business_name"/>
+                <field name="entrepreneur_id"/>
+                <field name="funding_criteria"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pitch_polish_rating" model="ir.actions.act_window">
+        <field name="name">Pitch and Polish Scorecard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pitch.polish.rating</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

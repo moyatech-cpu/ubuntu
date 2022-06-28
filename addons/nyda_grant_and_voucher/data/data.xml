@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		
+        <record id="voucher_application_menu" model="website.menu">
+            <field name="name">Apply for a Voucher</field>
+            <field name="sequence">1</field>
+            <field name="url">/voucher-application</field>
+            <field name="parent_id" ref="market_linkage.products_services_menu"/>
+        </record>
+        		
+        <record id="grant_voucher_menu" model="website.menu">
+            <field name="name">Apply for a Grant</field>
+            <field name="sequence">2</field>
+            <field name="url">/grant-voucher</field>
+            <field name="parent_id" ref="market_linkage.products_services_menu"/>
+        </record>
+		
+        <record id="preassessment_application_menu" model="website.menu">
+            <field name="name">1. Pre-assessment</field>
+            <field name="url">/pre-assessment-application</field>
+            <field name="parent_id" ref="nyda_grant_and_voucher.grant_voucher_menu"/>
+        </record>
+
+        <record id="grant_application_menu" model="website.menu">
+            <field name="name">2. Application</field>
+            <field name="url">/grant-application</field>
+            <field name="parent_id" ref="nyda_grant_and_voucher.grant_voucher_menu"/>
+        </record>
+
+        <!-- Cron Job for application -->
+        <record id="approval_letter_sign_check_cron" model="ir.cron">
+            <field name="name">Approval Letter sign check</field>
+            <field name="model_id" ref="nyda_grant_and_voucher.model_grant_application"/>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">True</field>
+            <field name="code">model.check_approval_letter_status()</field>
+        </record>
+
+        <!-- Cron Job for Vouchers isurance -->
+        <record id="voucher_issuance_validity_check_cron" model="ir.cron">
+            <field name="name">Voucher Issuance Check Validity</field>
+            <field name="model_id" ref="nyda_grant_and_voucher.model_voucher_isurance"/>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">True</field>
+            <field name="code">model.cron_check_voucher_issuance()</field>
+        </record>
+
+        <record id="ir_cron_update_validity" model="ir.cron">
+            <field name="name">Voucher Validity: update validity</field>
+            <field name="model_id" ref="nyda_grant_and_voucher.model_voucher_application"/>
+            <field name="state">code</field>
+            <field name="code">model.check_validity()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">1</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+
+</odoo>

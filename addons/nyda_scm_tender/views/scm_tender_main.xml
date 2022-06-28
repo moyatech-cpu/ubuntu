@@ -1,0 +1,887 @@
+<odoo>
+	<data>
+  
+		<record id="nyda_scm_tender_prepare_kanban" model="ir.ui.view">
+       		<field name="name">nyda.scm.rfq.kanban.view</field>
+       		<field name="model">nyda.scm.tender</field>
+       		<field name="arch" type="xml"> 
+			<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';yellow:state=='Pending';red:state=='In Progress';red:state=='Closed';green:state=='Delivered';" disable_drag_drop_record="true" 
+					import="false">
+                   <field name="name"/>
+                   <field name="tender_number"/>
+                   <field name="employee"/>
+                   <field name="request_date"/>
+                   <field name="create_date"/>
+                   <field name="state"/>
+                   <field name="color"/>
+                   <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                   
+                   <templates>
+                       <t t-name="kanban-box">
+                           <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                               <div class="o_dropdown_kanban dropdown">
+
+                                   <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                       <span class="fa fa-ellipsis-v"/>
+                                   </a>
+                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                       <t t-if="widget.deletable">
+                                           <li><a type="delete">Delete</a></li>
+                                       </t>
+                                       <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                   </ul>
+                               </div>
+                               <div class="o_event_left">
+                                   <div class="o_day"><t t-esc="record.request_date.raw_value.getDate()"/></div>
+                                   <div>
+                                       <t t-esc="moment(record.request_date.raw_value).format('MMM')"/>
+                                       <t t-esc="record.request_date.raw_value.getFullYear()"/>
+                                   </div>
+                                   <div><t t-esc="moment(record.request_date.raw_value).format('LT')"/></div>
+                               </div>
+                               <div class="o_event_right">
+                                   <h4 class="o_kanban_record_title"><field name="tender_number"/></h4>
+                                   <div>
+                                       <t t-if="record.employee.raw_value"> <b class="o_kanban_record_subtitle"> <field name="name"/> </b> <br/> </t>
+                                       <i class="fa fa-clock-o"/>
+                                       <b>Request Date</b> <t t-esc="moment(record.request_date.raw_value).format('lll')"/>
+                                   </div>
+                                   
+                               </div>
+                           </div>
+                       </t>
+                   </templates>
+			</kanban>
+            </field>
+		</record>
+	
+		<record id="nyda_scm_tender_evaluate_kanban" model="ir.ui.view">
+       		<field name="name">nyda.scm.tender.kanban.view</field>
+       		<field name="model">nyda.scm.tender</field>
+       		<field name="arch" type="xml"> 
+			<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';yellow:state=='Pending';red:state=='In Progress';red:state=='Closed';green:state=='Delivered';" disable_drag_drop_record="true" 
+					import="false" create="false">
+                   <field name="name"/>
+                   <field name="tender_number"/>
+                   <field name="employee"/>
+                   <field name="request_date"/>
+                   <field name="create_date"/>
+                   <field name="state"/>
+                   <field name="color"/>
+                   <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                   
+                   <templates>
+                       <t t-name="kanban-box">
+                           <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                               <div class="o_dropdown_kanban dropdown">
+
+                                   <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                       <span class="fa fa-ellipsis-v"/>
+                                   </a>
+                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                       <t t-if="widget.deletable">
+                                           <li><a type="delete">Delete</a></li>
+                                       </t>
+                                       <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                   </ul>
+                               </div>
+                               <div class="o_event_left">
+                                   <div class="o_day"><t t-esc="record.request_date.raw_value.getDate()"/></div>
+                                   <div>
+                                       <t t-esc="moment(record.request_date.raw_value).format('MMM')"/>
+                                       <t t-esc="record.request_date.raw_value.getFullYear()"/>
+                                   </div>
+                                   <div><t t-esc="moment(record.request_date.raw_value).format('LT')"/></div>
+                               </div>
+                               <div class="o_event_right">
+                                   <h4 class="o_kanban_record_title"><field name="tender_number"/></h4>
+                                   <div>
+                                       <t t-if="record.employee.raw_value"> <b class="o_kanban_record_subtitle"> <field name="name"/> </b> <br/> </t>
+                                       <i class="fa fa-clock-o"/>
+                                       <b>Request Date</b> <t t-esc="moment(record.request_date.raw_value).format('lll')"/>
+                                   </div>
+                               </div>
+                           </div>
+                       </t>
+                   </templates>
+			</kanban>
+            </field>
+	</record>
+	
+	<record model="ir.ui.view" id="nyda_scm_tender_prepare_tree_view">
+		<field name="name">nyda.scm.tender.tree.view</field>
+		<field name="model">nyda.scm.tender</field>
+		<field name="arch" type="xml">
+		<tree import="false">
+	        <field name="tender_title"/>
+	        <field name="tender_number"/>
+	        <field name="request_date"/>
+	        <field name="employee"/>
+	        <field name="division_id"/>
+	        <field name="state"/>
+		</tree>
+     	</field>
+	</record>
+	
+	<record model="ir.ui.view" id="nyda_scm_tender_evaluate_tree_view">
+		<field name="name">nyda.scm.tender.tree.view</field>
+		<field name="model">nyda.scm.tender</field>
+		<field name="arch" type="xml">
+		<tree import="false" create="false">
+	        <field name="tender_title"/>
+	        <field name="tender_number"/>
+	        <field name="request_date"/>
+	        <field name="employee"/>
+	        <field name="division_id"/>
+	        <field name="state"/>
+		</tree>
+     	</field>
+	</record>
+		
+	<record model="ir.ui.view" id="nyda_scm_tender_prepare_form_view">
+		<field name="name">nyda.scm.tender.prepare.form.view</field>
+		<field name="model">nyda.scm.tender</field>
+		<field name="arch" type="xml">
+		<form string="Tender Form">
+	     	<header>
+ 				<button name="prepare_documents" string="Proceed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'prepare_documents')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_business_user,base.group_system"
+				/>
+				
+				<button name="internal_review_approve" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'internal_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_business_excutive,base.group_system"
+				/>
+				
+				<button name="internal_review_reject" string="Reject" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'internal_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_business_excutive,base.group_system"
+				/> 
+
+				<button name="scm_review_approve" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'scm_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"
+				/>
+				
+				<button name="scm_review_reject" string="Reject" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'scm_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"
+				/> 
+				
+				<button name="bsc_approve" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'bsc')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,nyda_scm_tender.nyda_scm_tender_bsc_member,base.group_system"
+				/>
+				
+				<button name="bsc_reject" string="Reject" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'bsc')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,nyda_scm_tender.nyda_scm_tender_bsc_member,base.group_system"
+				/> 
+				
+				<button name="bac_approve" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'bac')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,nyda_scm_tender.nyda_scm_tender_bac_member,base.group_system"
+				/>
+				
+				<button name="bac_reject" string="Reject" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'bac')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_manager,nyda_scm_tender.nyda_scm_tender_bac_member,base.group_system"/> 
+				
+				<button name="" string="Publish Request" type="action" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'advertising')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+				
+				<button name="advertising" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'advertising')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/> 												                       				
+				
+				<!-- Raise purchase order to print errata -->
+				<button name="3305" string="Errata" type="action" class="oe_highlight"
+					attrs="{'invisible' : [('state', '!=', 'submit_offers')]}"
+					groups="base.group_system,nyda_scm_tender.nyda_scm_tender_manager"/>
+                          
+				<button name="submit_offers" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'submit_offers')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+				
+				<button name="open_record_offers" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+				
+				<field name="state" widget="statusbar" statusbar_visible="prepare_documents,internal_review,scm_review,bsc,bac,advertising,submit_offers,open_record_offers"/>
+				
+	     	</header>
+	     	<sheet>	  
+                <div class="oe_button_box" name="button_box">
+                
+                    <button name="nyda_scm_tender.pre_evaluation_sheet_action_window" type="action" string="Pre-Evaluation Sheet" style="width:197px !important" class="oe_inline oe_stat_button" 
+                    	icon="fa-list-ol" help="Pre-Evaluation Sheet" attrs="{'invisible' : [('state', 'not in', ('bsc', 'bac'))]}"
+                    	context="{'default_tender_id': active_id}" />
+                                            
+                    <button name="nyda_scm_tender.scoring_sheet_action_window" type="action" string="Evaluation Sheet" style="width:197px !important" class="oe_inline oe_stat_button" 
+                    	icon="fa-balance-scale" help="Functional evaluation sheet" attrs="{'invisible' : [('state', 'not in', ('bsc', 'bac'))]}"
+                    	context="{'default_tender_id': active_id}" />
+
+					<button name="nyda_scm_tender.submission_register_action_window" type="action" string="Submission Register" style="width:197px !important" class="oe_inline oe_stat_button" icon="fa-book" help="List of companies that submitted bids" 
+                      attrs="{'invisible' : [('state', 'not in', ('open_record_offers'))]}" 
+                      context="{'default_tender_id': active_id}" />
+                                          
+                </div>	     	
+				<div id="o_memo_container">
+                   <div class="oe_title">
+                   		<label for="name" string="Title"/>
+                   		<br />
+                       	<h1 class="o_row">
+                           <field name="tender_title" placeholder="Bid Title..." required="1" attrs="{'readonly' : [('state', 'not in', ('prepare_documents'))]}"/>
+                       	</h1>
+                   </div>					
+			      	<div id="o_memo_main">
+			      		<group name="title" string="Details">
+			              	<group>				          
+								<field name="tender_number" readonly="1" attrs="{'invisible' : [('tender_title', '=', False)]}"/>
+			                    <field name="employee" readonly="1"/>
+			                    <field name="contact_no" readonly="1"/>
+			                   	<field name="division_id" readonly="1"/>
+			                   	<field name="request_date" required="1" attrs="{'readonly' : [('state', 'not in', ('prepare_documents'))]}"/>
+			                   	<field name="delivery_address" required="1" attrs="{'readonly' : [('state', 'not in', ('prepare_documents'))]}"/>
+			                   	<field name="description" required="1" attrs="{'readonly' : [('state', 'not in', ('prepare_documents'))]}"/>
+			                   	<field name="validity_period" attrs="{'invisible' : [('state', 'in', ('prepare_documents','internal_review'))],'readonly' : [('state', 'not in', ('scm_review'))]}"/>
+								<field name="evaluation_minimum_score" attrs="{'invisible' : [('state', 'in', ('prepare_documents','internal_review'))],'readonly' : [('state', 'not in', ('scm_review'))]}"/>
+								<field name="closing_date_time" attrs="{'invisible' : [('state', 'in', ('prepare_documents','internal_review'))],'readonly' : [('state', 'not in', ('scm_review'))]}"/>
+								<field name="preference_point_system" required="0" attrs="{'invisible' : [('state', 'in', ('prepare_documents','internal_review'))],'readonly' : [('state', 'not in', ('scm_review'))]}"/>
+								
+								<field name="no_bids_received" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}" readonly="1"/>
+								
+								<field name="end_user_representative" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}"/>
+								<field name="end_user_signature" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}" widget="signature"/>
+								
+								<field name="scm_representative" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}"/>
+								<field name="scm_representative_signature" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}" widget="signature"/>
+								
+								<field name="risk_representative" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}"/>
+								<field name="risk_representative_signature" attrs="{'invisible' : [('state', '!=', 'open_record_offers')]}" widget="signature"/>
+							</group>
+						</group>
+			       	</div>
+		     	</div>
+				<notebook colspan="8">	
+			     	<page name="internal_review" string="Internal Review">
+						<group name="internal">
+							<field name="executive_review" nolabel="1" attrs="{'readonly' : [('state', 'not in', ('internal_review'))]}"/>
+						</group>
+					</page>					
+			     	<page name="scm_review" string="SCM Review">
+						<group name="scm">
+							<field name="scm_review" nolabel="1" attrs="{'readonly' : [('state', 'not in', ('scm_review'))]}" />
+						</group>
+					</page>
+			     	<page name="bsc_review" string="BSC Review">
+						<group name="bsc_review">
+							<field name="bsc_review" nolabel="1" attrs="{'readonly' : [('state', 'not in', ('bsc'))]}" />
+						</group>
+					</page>
+			     	<page name="bac_review" string="BAC Review">
+						<group name="bac_review">
+							<field name="bac_review" nolabel="1" attrs="{'readonly' : [('state', 'not in', ('bac'))]}" />
+						</group>
+					</page>								
+					<page name="reject_reason" string="Reject Reason" attrs="{'invisible' : [('state', 'not in', ('rejected'))]}" >
+						<field name="reject_reason" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>	
+                                                    									
+				</notebook>
+			</sheet>
+			<!--  
+				<div class="oe_chatter" >
+		  			<field name="message_follower_ids" widget="mail_followers"/>
+		  			<field name="message_ids" widget="mail_thread"/>
+				</div>
+			-->
+  		</form>
+    	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_tender_evaluate_form_view">
+		<field name="name">nyda.scm.tender.evaluate.form.view</field>
+		<field name="model">nyda.scm.tender</field>
+		<field name="arch" type="xml">
+		<form string="Tender Form">
+	     	<header>
+ 				<button name="evaluate_previous_stage" string="Previous Stage" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'compliance')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+					     	
+ 				<button name="compliance" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'compliance')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+								
+				<button name="functionality" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'functionality')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/> 
+
+				<button name="calculate_points" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'calculate_points')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/>
+				
+				<button name="recommend_bidders" string="Completed" type="action" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'recommend_bidders')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/> 
+				
+				<button name="evaluation_report" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'evaluation_report')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+				
+				<button name="signoff_report" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'signoff_report')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_bsc_member,base.group_system"/> 
+				
+				<button name="bac_recommendation" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'bac_recommendation')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bac_member,base.group_system"/>
+
+				<button name="ceo_approval" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'ceo_approval')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_ceo,base.group_system"/>
+				 					
+				<button name="reject_tender_reason_wizard_action" string="Reject" type="action" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', 'not in', ('ceo_approval','bac_recommendation'))]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_ceo,base.group_system"/> 
+
+				<button name="cancel_tender_reason_wizard_action" string="Cancel Tender" type="action" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'ceo_approval')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_ceo,base.group_system"/>
+				
+				<field name="state" widget="statusbar" statusbar_visible="compliance,functionality,calculate_points,recommend_bidders,evaluation_report,signoff_report,bac_recommendation"/>
+				
+	     	</header>
+	     	<sheet>	  
+                <div class="oe_button_box" name="button_box">
+                    <button name="nyda_scm_tender.pre_evaluation_sheet_action_window" type="action" string="Pre-Evaluation Sheet" style="width:197px !important" class="oe_inline oe_stat_button" 
+                    	icon="fa-list-ol" help="Pre-Evaluation Sheet" context="{'default_tender_id': active_id}" />
+                                            
+                    <button name="nyda_scm_tender.scoring_sheet_action_window" type="action" string="Evaluation Sheet" style="width:197px !important" class="oe_inline oe_stat_button" 
+                    	icon="fa-balance-scale" help="Functional evaluation sheet" context="{'default_tender_id': active_id}" />
+                    	                
+					<button name="3286" type="action" string="Purchase Order" style="width:197px !important" class="oe_inline oe_stat_button" icon="fa-money" help="Purchase Order" 
+							attrs="{'invisible' : [('state', '!=', 'completed')]}" />
+                </div>	     	
+				<div id="o_memo_container">
+                   <div class="oe_title">
+                   		<label for="name" string="Title"/>
+                   		<br />
+                       	<h1 class="o_row">
+                           <field name="tender_title" placeholder="Bid Title..." required="1" readonly="1"/>
+                       	</h1>
+                   </div>					
+			      	<div id="o_memo_main">
+			      		<group name="title" string="Details">
+			              	<group>				          
+								<field name="tender_number" readonly="1" />
+			                    <field name="employee" readonly="1"/>
+			                    <field name="contact_no" readonly="1"/>
+			                   	<field name="division_id" readonly="1"/>
+			                   	<field name="request_date" required="1"/>
+			                   	<field name="delivery_address" readonly="1"/>
+			                   	<field name="description" readonly="1"/>
+			                   	<field name="validity_period" readonly="1"/>
+								<field name="evaluation_minimum_score" readonly="1"/>
+								<field name="closing_date_time" readonly="1"/>
+								<field name="preference_point_system" readonly="1"/>
+								<field name="no_bids_received" readonly="1"/>
+								<field name="end_user_representative" readonly="1"/>
+								<field name="end_user_signature" readonly="1" widget="signature"/>
+								<field name="scm_representative" readonly="1"/>
+								<field name="scm_representative_signature" readonly="1" widget="signature"/>
+								<field name="risk_representative" readonly="1"/>
+								<field name="risk_representative_signature" readonly="1" widget="signature"/>
+							</group>
+						</group>
+			       	</div>
+		     	</div>
+				<notebook colspan="8">
+					<page name="compliance_check" string="Compliance Check" >
+						<field name="tender_submission_register" mode="tree">
+							<tree editable="bottom" import="false" create="false">
+								<field name="tender_id" invisible="1"/>
+						        <field name="bidder_name" readonly="1"/>
+						        <field name="csd_number" readonly="1"/>
+						        <field name="telephone" readonly="1"/>
+						        <field name="email_address" readonly="1"/>
+						        <field name="csd_report" readonly="1"/>
+						        <button name="csd_report_view" string="CSD Report View" type="object" icon="fa-file-text text-success" 
+						        		attrs="{'invisible' : [('csd_report', '=', False)]}"/>
+						        <field name="compliance_eligibility" readonly="1"/>
+								<button name="verify_csd_report" string="CSD Report" type="object"/>
+								<button name="pre_evaluation_assessment" string="Pre-Evaluate Tender" type="object" icon="fa-list-ol text-success" 
+										groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/>
+							</tree>						
+						</field>
+					</page>     
+					  
+					<page name="functional_evaluation" string="Functional Evaluation" attrs="{'invisible' : [('state', 'not in', ('functionality', 'calculate_points', 'recommend_bidders', 'evaluation_report', 'signoff_report', 'bac_recommendation', 'ceo_approval'))]}" groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_specialist_user,base.group_system">
+						<field name="tender_submission_functional" mode="tree">
+							<tree editable="bottom" import="false" create="false">
+								<field name="tender_id" invisible="1"/>
+						        <field name="bidder_name" readonly="1"/>
+						        <field name="csd_number" readonly="1"/>
+						        <field name="telephone" readonly="1"/>
+						        <field name="email_address" readonly="1"/>
+						        <field name="csd_report" invisible="1"/>
+						        <field name="compliance_eligibility" readonly="1"/>
+						        <field name="functionality_score" readonly="1"/>
+						        <field name="functionality_score_pass" readonly="1"/>
+								<button name="functionality_evaluation_assessment" string="Functionality Evaluation" type="object" icon="fa-list-ol text-success" 
+										groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/>
+							</tree>						
+						</field>
+					</page>   
+					
+					<page name="bbbee_price" string="BEE Plus Price" attrs="{'invisible' : [('state', 'not in', ('calculate_points', 'recommend_bidders', 'evaluation_report', 'signoff_report', 'bac_recommendation', 'ceo_approval'))]}" groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_specialist_user,base.group_system">
+						<field name="tender_submission_bbbee" mode="tree">
+							<tree editable="bottom" import="false" create="false">
+								<field name="tender_id" invisible="1"/>
+						        <field name="bidder_name" readonly="1"/>
+						        <field name="csd_number" readonly="1"/>
+						        <field name="telephone" readonly="1"/>
+						        <field name="email_address" readonly="1"/>
+						        <field name="compliance_eligibility" readonly="1"/>
+						        <field name="functionality_score" readonly="1"/>
+						        <field name="functionality_score_pass" readonly="1"/>
+						        <field name="price_total"/>
+						        <field name="price_score" readonly="1"/>
+						        <field name="bee_level"/>
+						        <field name="bee_score" readonly="1"/>
+						        <field name="total_score" readonly="1"/>
+							</tree>						
+						</field>
+					</page>   					
+
+					<page name="recommendation" string="Recommendation" attrs="{'invisible' : [('state', 'not in', ('recommend_bidders', 'evaluation_report', 'signoff_report', 'bac_recommendation', 'ceo_approval'))]}" >
+						<field name="recommendation" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+					
+					<page name="bac" string="BAC Notes" attrs="{'invisible' : [('state', 'not in', ('bac_recommendation','ceo_approval'))]}" >
+						<field name="bac_comments" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+
+					<page name="bac" string="CEO Notes" attrs="{'invisible' : [('state', 'not in', ('ceo_approval'))]}" >
+						<field name="ceo_comments" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+																	
+					<page name="reject_reason" string="Reject Reason" attrs="{'invisible' : [('state', 'not in', ('rejected'))]}" >
+						<field name="reject_reason" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>	
+
+					<page name="cancel_reason" string="Cancel Reason" attrs="{'invisible' : [('state', 'not in', ('cancelled'))]}" >
+						<field name="cancel_reason" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+                                                    									
+				</notebook>
+			</sheet>
+			<!--  
+			<div class="oe_chatter" >
+	  			<field name="message_follower_ids" widget="mail_followers"/>
+	  			<field name="message_ids" widget="mail_thread"/>
+			</div>
+			-->
+  		</form>
+    	</field>
+	</record>
+	
+	<record model="ir.ui.view" id="nyda_scm_tender_award_form_view">
+		<field name="name">nyda.scm.tender.award.form.view</field>
+		<field name="model">nyda.scm.tender</field>
+		<field name="arch" type="xml">
+
+		<form string="Tender Form">
+	     	<header>
+ 				<button name="previous_stage" string="Previous Stage" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'notify_bidders')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+
+ 				<button name="" string="Publish Request" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'notify_bidders')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+				 						     	
+ 				<button name="notify_bidders_completed" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'notify_bidders')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+				
+ 				<button name="formally_accepted_offer" string="Offer Accepted" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'formally_accepted_offer')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"/>
+								
+				<button name="legal_contracting" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'legal_contracting')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/> 
+
+				<button name="capture_contract_award" string="Completed" type="object" class="oe_highlight"
+				 	attrs="{'invisible' : [('state', '!=', 'capture_contract_award')]}" 
+				 	groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/>
+				
+				<field name="state" widget="statusbar" statusbar_visible="notify_bidders,formally_accepted_offer,legal_contracting,capture_contract_award,completed"/>
+				
+	     	</header>
+	     	<sheet>	  
+                <div class="oe_button_box" name="button_box">
+					<button name="3286" type="action" string="Purchase Order" style="width:197px !important" class="oe_inline oe_stat_button" icon="fa-money" help="Purchase Order" 
+					  attrs="{'invisible' : [('state', '!=', 'completed')]}" />
+                </div>	     	
+				<div id="o_memo_container">
+                   <div class="oe_title">
+                   		<label for="name" string="Title"/>
+                   		<br />
+                       	<h1 class="o_row">
+                           <field name="tender_title" placeholder="Bid Title..." required="1" readonly="1"/>
+                       	</h1>
+                   </div>					
+			      	<div id="o_memo_main">
+			      		<group name="title" string="Details">
+			              	<group>				          
+								<field name="tender_number" readonly="1" />
+			                    <field name="employee" readonly="1"/>
+			                    <field name="contact_no" readonly="1"/>
+			                   	<field name="division_id" readonly="1"/>
+			                   	<field name="request_date" required="1"/>
+			                   	<field name="delivery_address" readonly="1"/>
+			                   	<field name="description" readonly="1"/>
+			                   	<field name="validity_period" readonly="1"/>
+								<field name="evaluation_minimum_score" readonly="1"/>
+								<field name="closing_date_time" readonly="1"/>
+								<field name="preference_point_system" readonly="1"/>
+								<field name="no_bids_received" readonly="1"/>
+								<field name="end_user_representative" readonly="1"/>
+								<field name="end_user_signature" readonly="1"/>
+								<field name="scm_representative" readonly="1"/>
+								<field name="scm_representative_signature" readonly="1"/>
+								<field name="risk_representative" readonly="1"/>
+								<field name="risk_representative_signature" readonly="1"/>
+							</group>
+						</group>
+			       	</div>
+		     	</div>
+				<notebook colspan="8">	
+					<page name="compliance_check" string="Compliance Check" >
+						<field name="tender_submission_register" nolabel="1" >
+							<tree editable="bottom" create="false">
+								<field name="bidder_name" readonly="1"/>
+								<field name="csd_number" readonly="1"/>
+								<field name="telephone" readonly="1"/>
+								<field name="email_address" readonly="1"/>
+								<field name="csd_report" readonly="1"/>
+								<field name="compliance_eligibility" readonly="1"/>
+							</tree>
+						</field>
+					</page>     
+
+					<page name="functional_evaluation" string="Functional Evaluation" >
+						<field name="tender_submission_register" nolabel="1" >
+							<tree editable="bottom" create="false">
+								<field name="bidder_name" readonly="1"/>
+								<field name="csd_number" readonly="1"/>
+								<field name="telephone" readonly="1"/>
+								<field name="email_address" readonly="1"/>
+								<field name="compliance_eligibility" readonly="1"/>
+								<field name="functionality_score" readonly="1"/>
+								<field name="functionality_score_pass" readonly="1"/>
+							</tree>
+						</field>
+					</page>   
+					
+					<page name="bbbee_price" string="BEE Plus Price">
+						<field name="tender_submission_register" nolabel="1" >
+							<tree editable="bottom" create="false">
+								<field name="bidder_name" readonly="1"/>
+								<field name="csd_number" readonly="1"/>
+								<field name="telephone" readonly="1"/>
+								<field name="email_address" readonly="1"/>
+								<field name="price_total" readonly="1"/>
+								<field name="bee_level" readonly="1"/>
+								<field name="price_score" readonly="1"/>
+								<field name="bee_score" readonly="1"/>
+								<field name="total_score" readonly="1"/>
+							</tree>
+						</field>
+					</page>   					
+
+					<page name="recommendation" string="Recommendation" >
+						<field name="recommendation" readonly="1" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+					
+					<page name="bac" string="BAC Notes" attrs="{'invisible' : [('state', 'not in', ('ceo_approval'))]}" >
+						<field name="bac_comments" readonly="1" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+
+					<page name="bac" string="CEO Notes" attrs="{'invisible' : [('state', 'not in', ('ceo_approval'))]}" >
+						<field name="ceo_comments" readonly="1" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+																	
+					<page name="reject_reason" string="Reject Reason" attrs="{'invisible' : [('state', 'not in', ('rejected'))]}" >
+						<field name="reject_reason" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>	
+
+					<page name="cancel_reason" string="Cancel Reason" attrs="{'invisible' : [('state', 'not in', ('cancelled'))]}" >
+						<field name="cancel_reason" nolabel="1"/>
+						<div class="oe_clear"/>
+					</page>
+                                                    									
+				</notebook>
+			</sheet>
+			<!-- 
+			<div class="oe_chatter" >
+	  			<field name="message_follower_ids" widget="mail_followers"/>
+	  			<field name="message_ids" widget="mail_thread"/>
+			</div>
+			-->
+  		</form>
+    	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_tender_compliance_tree_view">
+		<field name="name">nyda.scm.tender.compliance.tree</field>
+		<field name="model">scm.tender.submission.register</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom" import="false" create="false">
+				<field name="tender_id" invisible="1"/>
+		        <field name="bidder_name" readonly="1"/>
+		        <field name="csd_number" readonly="1"/>
+		        <field name="telephone" readonly="1"/>
+		        <field name="email_address" readonly="1"/>
+		        <field name="csd_report" readonly="1"/>
+		        <field name="compliance_eligibility" readonly="1"/>
+				<button name="verify_csd_report" string="CSD Report" type="object"/>
+				<button name="scm_tender_pre_evaluation_assessment_wizard_action" string="Pre-Evaluate Tender" type="action" icon="fa-list-ol text-success" />
+			</tree>
+     	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_tender_functional_tree_view">
+		<field name="name">nyda.scm.tender.submission.register.tree</field>
+		<field name="model">scm.tender.submission.register</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom" import="false" create="false">
+				<field name="tender_id" readonly="1"/>
+		        <field name="bidder_name" readonly="1"/>
+		        <field name="csd_number" readonly="1"/>
+		        <field name="telephone" readonly="1"/>
+		        <field name="email_address" readonly="1"/>
+		        <field name="csd_report" readonly="1"/>
+		        <field name="compliance_eligibility" readonly="1"/>
+		        <field name="functionality_score" readonly="1"/>
+		        <field name="functionality_score_pass" readonly="1"/>
+				<button name="scm_tender_scoring_assessment_wizard_action" string="Functionality Evaluation" type="action"
+						icon="fa-list-ol text-success" groups="nyda_scm_tender.nyda_scm_tender_officer_user,nyda_scm_tender.nyda_scm_tender_bec_member,base.group_system"/>
+			</tree>
+     	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_tender_bbbee_tree_view">
+		<field name="name">nyda.scm.tender.submission.register.tree</field>
+		<field name="model">scm.tender.submission.register</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom" import="false" create="false">
+				<field name="tender_id" invisible="1"/>
+		        <field name="bidder_name"/>
+		        <field name="csd_number"/>
+		        <field name="telephone"/>
+		        <field name="email_address"/>
+		        <field name="csd_report"/>
+		        <field name="compliance_eligibility"/>
+		        <field name="functionality_score"/>
+		        <field name="functionality_score_pass"/>
+		        <field name="price_total"/>
+		        <field name="price_score"/>
+		        <field name="bee_level"/>
+		        <field name="bee_score"/>
+		        <field name="total_score"/>
+			</tree>
+     	</field>
+	</record>
+	
+	<record model="ir.ui.view" id="scm_tender_submission_register_tree_view">
+		<field name="name">scm.tender.submission.register.tree.view</field>
+		<field name="model">scm.tender.submission.register</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom" import="false" create="true">
+				<field name="tender_id" invisible="1"/>
+		        <field name="bidder_name"/>
+		        <field name="csd_number"/>
+		        <field name="telephone"/>
+		        <field name="email_address"/>
+			</tree>
+     	</field>
+	</record>
+		
+	<record model="ir.ui.view" id="scm_tender_submission_register_form_view">
+		<field name="name">scm.tender.submission.register.form.view</field>
+		<field name="model">scm.tender.submission.register</field>
+		<field name="arch" type="xml">
+		<form string="Supplier Shortlist Form">
+	     	<sheet>	  	     	
+	             <group>
+	             	<field name="tender_id" invisible="1"/>
+			        <field name="bidder_name"/>
+			        <field name="csd_number"/>
+			        <field name="telephone"/>
+			        <field name="email_address"/>
+			        <field name="compliance_eligibility"/>
+				</group>
+			</sheet>
+  		</form>
+    	</field>
+	</record>	
+
+    <record model="ir.actions.act_window" id="nyda_scm_tender.submission_register_action_window">
+      <field name="name">Tender Submission Register</field>
+      <field name="res_model">scm.tender.submission.register</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_scm_tender.scm_tender_submission_register_tree_view')})
+									, (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_scm_tender.scm_tender_submission_register_form_view')})]"/>      
+    </record>
+
+	<record model="ir.ui.view" id="nyda_scm_tender_pre_evaluation_sheet_tree_view">
+		<field name="name">scm.tender.preevaluation.sheet.tree</field>
+		<field name="model">scm.tender.preevaluation.sheet</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom" import="false">
+				<field name="tender_id" invisible="1"/>
+		        <field name="required_item"/>
+			</tree>
+     	</field>
+	</record>
+
+    <record model="ir.actions.act_window" id="nyda_scm_tender.pre_evaluation_sheet_action_window">
+      <field name="name">Tender Pre Evaluation</field>
+      <field name="res_model">scm.tender.preevaluation.sheet</field>
+      <field name="view_mode">tree</field>
+    </record>
+    
+	<record model="ir.ui.view" id="nyda_scm_tender_scoring_sheet_tree_view">
+		<field name="name">nyda.scm.tender.scoring.sheet.tree</field>
+		<field name="model">scm.tender.scoring.sheet</field>
+		<field name="arch" type="xml">
+			<tree import="false">
+				<field name="tender_id" invisible="1"/>
+		        <field name="scoring_item"/>
+		        <field name="details"/>
+		        <field name="scoring_matrix"/>
+		        <field name="weight"/>
+			</tree>
+     	</field>
+	</record>
+
+	<record model="ir.ui.view" id="scm_tender_scoring_sheet_form_view">
+		<field name="name">scm.tender.scoring.sheet.form.view</field>
+		<field name="model">scm.tender.scoring.sheet</field>
+		<field name="arch" type="xml">
+		<form string="Tender Evaluation Form">
+	     	<sheet>	  	     	
+	      		<group name="title" string="Tender Evaluation">
+					<field name="tender_id" invisible="1"/>
+			        <field name="scoring_item"/>
+			        <field name="details"/>
+			        <field name="scoring_matrix"/>
+			        <field name="weight"/>
+				</group>
+			</sheet>
+  		</form>
+    	</field>
+	</record>	
+	
+    <record model="ir.actions.act_window" id="nyda_scm_tender.scoring_sheet_action_window">
+      <field name="name">Tender Evaluation Sheet</field>
+      <field name="res_model">scm.tender.scoring.sheet</field>
+      <field name="view_mode">tree,form</field>
+	</record>     
+        
+    <record model="ir.actions.act_window" id="nyda_scm_tender.prepare_tender_action_window">
+      <field name="name">Prepare Tender Documents</field>
+      <field name="res_model">nyda.scm.tender</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="domain">[('state', 'in', ('prepare_documents','internal_review','scm_review','bsc','bac','advertising','submit_offers','open_record_offers','rejected','cancelled'))]</field>
+      <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_prepare_tree_view')})
+									, (0, 0, {'view_mode': 'kanban', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_prepare_kanban')})
+									, (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_prepare_form_view')})]"/>
+    </record>
+                                                        
+    <record model="ir.actions.act_window" id="nyda_scm_tender.evaluate_tender_action_window">
+      <field name="name">Evaluate Tender Offers</field>
+      <field name="res_model">nyda.scm.tender</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="domain">[('state', 'in', ('compliance','functionality','calculate_points','recommend_bidders','evaluation_report','signoff_report','bac_recommendation','ceo_approval','rejected','cancelled'))]</field>
+      <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_evaluate_tree_view')})
+									, (0, 0, {'view_mode': 'kanban', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_evaluate_kanban')})
+									, (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_evaluate_form_view')})]"/>      
+    </record> 
+
+    <record model="ir.actions.act_window" id="nyda_scm_tender.award_tender_action_window">
+      <field name="name">Award Contract</field>
+      <field name="res_model">nyda.scm.tender</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="domain">[('state', 'in', ('notify_bidders','formally_accepted_offer','legal_contracting','capture_contract_award','completed','rejected','cancelled'))]</field>
+      <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_evaluate_tree_view')})
+									, (0, 0, {'view_mode': 'kanban', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_evaluate_kanban')})
+									, (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_scm_tender.nyda_scm_tender_award_form_view')})]"/>      
+    </record> 
+
+    <menuitem name="Tender" id="nyda_scm_tender.submenu" parent="nyda_scm_rfq.main_menu"  sequence="1" 
+    	action="nyda_scm_tender.prepare_tender_action_window" groups="base.group_system" />
+
+    <menuitem name="Prepare Tender Documents" id="nyda_scm_tender.prepare_tender_menu" parent="nyda_scm_tender.submenu" sequence="1" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+
+    <menuitem name="Evaluate Tender Offers" id="nyda_scm_tender.evaluate_tender_menu" parent="nyda_scm_tender.submenu" sequence="2" 
+    	action="nyda_scm_tender.evaluate_tender_action_window"/>
+
+    <menuitem name="Award Contract" id="nyda_scm_tender.award_tender_menu" parent="nyda_scm_tender.submenu" sequence="3" 
+    	action="nyda_scm_tender.award_tender_action_window"/>
+    
+    <menuitem name="Reports" id="nyda_scm_tender.tender_reports" parent="nyda_scm_tender.submenu" sequence="4" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    
+    <menuitem name="Tender Overview Report" id="nyda_scm_tender.tender_overview_report" parent="nyda_scm_tender.tender_reports" sequence="5" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Bid Specific Committee Report" id="nyda_scm_tender.bsc_report" parent="nyda_scm_tender.tender_reports" sequence="5" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Bid Evaluation Committee Report" id="nyda_scm_tender.bec_report" parent="nyda_scm_tender.tender_reports" sequence="6" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Bid Adjudication Committee Report" id="nyda_scm_tender.bac_report" parent="nyda_scm_tender.tender_reports" sequence="7" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Tender Submissions Report" id="nyda_scm_tender.tender_submission_report" parent="nyda_scm_tender.tender_reports" sequence="8" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Tender Compliance Report" id="nyda_scm_tender.tender_compliance_report" parent="nyda_scm_tender.tender_reports" sequence="9" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Tender Functionality Report" id="nyda_scm_tender.tender_functionality_report" parent="nyda_scm_tender.tender_reports" sequence="10" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Tender Price/BBBEE Report" id="nyda_scm_tender.tender_price_bbbee_report" parent="nyda_scm_tender.tender_reports" sequence="11" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Functionality Evaluation Report" id="nyda_scm_tender.tender_functionality_report" parent="nyda_scm_tender.tender_reports" sequence="12" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Tender Scoring Sheets Report" id="nyda_scm_tender.tender_scoring_sheet_report" parent="nyda_scm_tender.tender_reports" sequence="13" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>
+    	
+    <menuitem name="Tender Briefing Report" id="nyda_scm_tender.tender_briefing_report" parent="nyda_scm_tender.tender_reports" sequence="14" 
+    	action="nyda_scm_tender.prepare_tender_action_window"/>    	    	    	    	    	    	    	    	    	    	    	    	    	    	
+    
+  </data>
+</odoo>

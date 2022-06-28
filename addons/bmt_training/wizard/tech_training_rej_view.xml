@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Technical Training Rejection view -->
+    <record id="tech_training_rejection_view" model="ir.ui.view">
+        <field name="name">tech.training.rejection.view</field>
+        <field name="model">tech.training.rejection</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="comment" required="1"/>
+                </group>
+                <footer>
+                    <button name="button_reject" string="Reject" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Tech Training Rejection -->
+    <record id="action_tech_training_rejection" model="ir.actions.act_window">
+        <field name="name">Reason for Rejection</field>
+        <field name="res_model">tech.training.rejection</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="tech_training_rejection_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Site Visit Technical Training Upload View -->
+    <record id="sv_tech_training_upload_view" model="ir.ui.view">
+        <field name="name">tech.training.upload.view</field>
+        <field name="model">tech.training.upload</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="site_visit_file_ids" required="1"/>
+                </group>
+                <footer>
+                    <button name="upload_files" string="Upload" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Site Visit Technical Training Upload View -->
+    <record id="tech_training_upload_view" model="ir.ui.view">
+        <field name="name">tech.training.upload.view</field>
+        <field name="model">tech.training.upload</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="upload_file" filename="upload_file_name" required="1"/>
+                    <field name="upload_file_name" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="upload_files" string="Upload" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Technical Training Site Visit Upload -->
+    <record id="action_tech_training_sv_upload" model="ir.actions.act_window">
+        <field name="name">Site Visit Report</field>
+        <field name="res_model">tech.training.upload</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="sv_tech_training_upload_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Action for Technical Training Project Closeout Upload -->
+    <record id="action_tech_training_pc_upload" model="ir.actions.act_window">
+        <field name="name">Project Closeout Report</field>
+        <field name="res_model">tech.training.upload</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="tech_training_upload_view"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--    <menuitem id="menu_root_grant_application" name="Grant" sequence="12"/>-->
+
+    <!-- Views for Grant application -->
+
+
+    <record id="view_grant_application_form" model="ir.ui.view">
+        <field name="name">view.grant.application.form</field>
+        <field name="model">grant.application</field>
+        <field name="arch" type="xml">
+            <form string="Grant Application" delete="false" duplicate="false" create="false" edit="false">
+                <header>
+                    <button string="ITC Check" class="oe_highlight" type="action" name="%(action_ict_report)d"
+                            attrs="{'invisible': [('status', '!=', 'new')]}"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bda"/>
+
+                    <button name="%(schedule_grant_appointment_wizard)d" string="Schedule Appointment" type="action"
+                            attrs="{'invisible': [('status', '!=', 'ict_checked')]}"
+                            context="{'default_name': active_id}"
+                            class="oe_highlight"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_hogac,
+                            nyda_grant_and_voucher.group_grant_voucher_bgarg,
+                            nyda_grant_and_voucher.group_grant_voucher_bdo,
+                            nyda_grant_and_voucher.group_grant_voucher_bda"/>
+
+                    <button string="Due Deligence" class="oe_highlight" type="action"
+                            name="%(action_deligence_report)d" attrs="{'invisible': [('status', '!=', 'inspected')]}"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_hogac,
+                            nyda_grant_and_voucher.group_grant_voucher_bgarg,
+                            nyda_grant_and_voucher.group_grant_voucher_bdo"/>
+
+                    <button string="Upload/Send Approve Letter" class="oe_highlight" type="action"
+                            name="%(action_approve_letter)d" attrs="{'invisible': [('status', '!=', 'approved'),('grant_threshold','==','threshold_4')]}"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo"/>
+
+                    <button string="Upload/Investment Memo" class="oe_highlight" type="action"
+                            name="%(action_upload_investiment_memo)d"
+                            attrs="{'invisible': [('status', '!=', 'deligence_done')]}"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo"/>
+
+                    <button name="bgarg_check" string="BGARC Review" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bda,
+                            nyda_grant_and_voucher.group_grant_voucher_bdo"
+                            attrs="{'invisible': [('status', '!=', 'investment_memo_upload')]}"/>
+
+                    <button name="refer_hogac" string="Refer To HOGAC" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bgarg"
+                            attrs="{'invisible': ['|',('status', 'not in', ['approved']),('grant_threshold', 'not in', ['threshold_4'])]}"/>
+
+                    <button name="set_accept" string="Approve" class="oe_highlight" type="object"
+                            groups="base.group_system,
+                            nyda_grant_and_voucher.group_grant_voucher_bdo,
+                            nyda_grant_and_voucher.group_grant_voucher_bda,
+                            nyda_grant_and_voucher.group_grant_voucher_bgarg"
+                            attrs="{'invisible': [('status', '!=', 'bgarg_review')]}"/>
+                    <!--BGARC reject button-->
+                    <button name="%(bgarg_reject_reason)d" string="Reject" class="oe_highlight" type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bgarg"
+                            attrs="{'invisible': [('status', '!=', 'bgarg_review')]}"/>
+
+                    <button name="%(action_rejection_letter)d" string="Send Rejection Letter" class="oe_highlight"
+                            type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo,client_management.group_coordinator"
+                            attrs="{'invisible': [('status', '!=', 'send_letter')]}"/>
+
+                    <button name="%(hogac_action_uploaded_approve_letter)d" string="HOGAC Approve" class="oe_highlight"
+                            type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_hogac"
+                            attrs="{'invisible': [('status', 'not in', ['hogac_review'])]}"/>
+                    <!--reject for HOCAG button -->
+                    <button name="%(hogac_action_uploaded_reject_letter)d" string="Reject" class="oe_highlight"
+                            type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_hogac"
+                            attrs="{'invisible': [('status', 'not in', ['hogac_review'])]}"/>
+
+                    <button name="%(action_refer_correction)d" string="Refer For Correction" class="oe_highlight"
+                            type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_hogac"
+                            attrs="{'invisible': [('status', 'not in', ['hogac_review'])]}"/>
+
+                    <button name="%(action_uploaded_approve_letter)d" string="Contracting"
+                            class="oe_highlight" type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo, client_management.group_coordinator"
+                            attrs="{'invisible': [('status', '!=', 'sent_approval_letter')]}"/>
+
+                    <button name="%(view_disbursement_wiz_action)d" string="Submit Report" context=""
+                            class="oe_highlight" type="action"
+                            groups="base.group_system,client_management.group_branch_manager,
+                            nyda_grant_and_voucher.group_grant_voucher_bda"
+                            attrs="{'invisible': [('status', '!=', 'uploaded_approval_letter')]}"/>
+
+                    <!--BDO approve-->
+
+                    <button name="bdo_accept_report" string="Accept"
+                            class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo"
+                            attrs="{'invisible': [('status', '!=', 'bdo_review')]}"/>
+                    <!--BDO reject-->
+                    <button name="bdo_reject_report" string="Reject"
+                            class="oe_highlight" type="object"
+                            groups="base.group_system"
+                            attrs="{'invisible': [('status', '!=', 'bdo_review')]}"/>
+
+                    <button name="branch_manager_accept_report" string="BM Accept"
+                            class="oe_highlight" type="object"
+                            groups="base.group_system,client_management.group_branch_manager"
+                            attrs="{'invisible': [('status', '!=', 'branch_manager_review')]}"/>
+
+                    <button name="branch_manager_reject_report" string="BM Reject"
+                            class="oe_highlight" type="object"
+                            groups="base.group_system,client_management.group_branch_manager"
+                            attrs="{'invisible': [('status', '!=', 'branch_manager_review')]}"/>
+
+                    <button name="bsc_approved_check" string="BCS Approve" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bcs"
+                            attrs="{'invisible': [('status', '!=', 'disbursement')]}"/>
+
+                    <button name="bcs_reject_check" string="BCS Reject" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bcs"
+                            attrs="{'invisible': [('status', '!=', 'disbursement')]}"/>
+
+                    <button name="qao_approved_check" string="QAO Approve" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_qao"
+                            attrs="{'invisible': [('status', '!=', 'bcs_approved')]}"/>
+
+                    <button name="qao_reject_check" string="QAO Reject" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_qao"
+                            attrs="{'invisible': [('status', '!=', 'bcs_approved')]}"/>
+
+                    <button name="edm_approved_check" string="EDM Approve" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_edm"
+                            attrs="{'invisible': [('status', '!=', 'qao_approved')]}"/>
+
+                    <button name="edm_reject_check" string="EDM Reject" class="oe_highlight" type="object"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_edm"
+                            attrs="{'invisible': [('status', '!=', 'qao_approved')]}"/>
+
+                    <button name="%(action_proof_of_payment)d" string="Send Proof Of Payment" class="oe_highlight"
+                            type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bcs"
+                            attrs="{'invisible': [('status', '!=', 'edm_approved')]}"/>
+
+                    <button name="%(action_rejection_result)d" string="Reject" class="oe_highlight" type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_hogac,
+                            nyda_grant_and_voucher.group_grant_voucher_bgarg,
+                            nyda_grant_and_voucher.group_grant_voucher_bdo"
+                            attrs="{'invisible': [('status', 'not in', ['ict_checked', 'inspected', 'investment_memo_upload','edm_approved','bgarg_review'])]}"/>
+
+                    <button name="%(action_aftercare_report)d" string="Upload Aftercare Report" class="oe_highlight"
+                            type="action"
+                            groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo,
+                            nyda_grant_and_voucher.group_grant_voucher_bda"
+                            attrs="{'invisible': [('status', '!=', 'aftercare')]}"/>
+
+                    <field name="status" widget="statusbar" readonly="1"
+                           statusbar_visible="new,bgarg_review"/>
+
+                </header>
+                <sheet>
+                    <!-- <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-th-list"
+                                name="create_monthly_smart_button" string="Create Memo"
+                                groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo"
+                                context="{'default_serial_number': active_id}">
+                        </button>
+                    </div> -->
+                    <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                        <div class="col-md-6 oe_title">
+                            <label for="serial_number" string="Serial #"/>
+                            <h1>
+                                <field name="serial_number" readonly="1"/>
+                            </h1>
+                        </div>
+                        <div class="col-md-6 oe_title" style="align:right;text-align:right">
+                            <label for="grant_threshold" string="Grant Threshold"/>
+                            <h5>
+                                <field name="grant_threshold" readonly="1"/>
+                            </h5>
+                        </div>
+                    </div>
+                    <group string="Personal Details">
+                        <group>
+                            <field name="name"/>
+                            <field name="sa_identity_number"/>
+                            <!--                            <field name="age"/>-->
+                            <field name="population_group"/>
+                            <field name="mobile"/>
+                            <field name="telephone"/>
+                            <field name="email"/>
+                            <field name="physical_address"/>
+                            <field name="physical_postal_code"/>
+                            <field name="province_id"/>
+                            <field name="trainings_attended"/>
+                            <field name="appointment_date" attrs="{'invisible': [('appointment_date', '=', False)]}"/>
+                            <field name="appointment_location" attrs="{'invisible': [('appointment_date', '=', False)]}"/>
+                            
+                        </group>
+                        <group>
+                            <field name="surname"/>
+                            <field name="gender"/>
+                            <field name="telephone"/>
+                            <field name="disability"/>
+                            <!--                            <field name="disability_description" attrs="{'invisible': [('disability', '=', 'no')]}"/>-->
+                            <field name="fax"/>
+                            <field name="postal_address"/>
+                            <field name="postal_code"/>
+                            <field name="geographical_type"/>
+                            <field name="formal_qualification"/>
+                            <field name="beneficiary_id" required="1"/>
+                            <field name="user_id" readonly="1"/>
+                            <field name="branch_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="next_of_kin"/>
+                            <field name="relationship"/>
+                        </group>
+                        <group>
+                            <field name="relative_mobile"/>
+                            <field name="relative_physical_address"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="reason_text" class="label label-danger oe_inline"
+                                   attrs="{'invisible': [('status', '!=', 'reject')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="entrepreneurial_status" string="ENTREPRENEURIAL STATUS">
+                            <group string="Entrepreneurial Status">
+                                <group>
+                                    <field name="existing_business"/>
+                                </group>
+                                <group>
+                                    <field name="entrepreneurial_training"/>
+                                </group>
+                            </group>
+                            <group string="Job creation information">
+                                <field name="job_creation_info_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="population_group"/>
+                                        <field name="before_funding_male"/>
+                                        <field name="before_funding_female"/>
+                                        <field name="before_funding_disabled_male"/>
+                                        <field name="before_funding_disabled_female"/>
+                                        <field name="before_funding_age_male"/>
+                                        <field name="before_funding_age_female"/>
+                                        <field name="after_funding_male"/>
+                                        <field name="after_funding_female"/>
+                                        <field name="after_funding_disabled_male"/>
+                                        <field name="after_funding_disabled_female"/>
+                                        <field name="after_funding_age_male"/>
+                                        <field name="after_funding_age_female"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="pre_startup" string="PRE START-UP">
+                            <!--                            attrs="{'invisible': [('existing_business', '=', True)]}"-->
+                            <group string="Pre Start-up Details">
+                                <label for="business_start_reason_ids" string="Why do you want to start a business?"/>
+                                <field name="business_start_reason_ids" widget="many2many_tags"/>
+                                <group>
+                                    <field name="business_start_reason_char"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="business_goals"/>
+                            </group>
+                            <group string="Business Experience">
+                                <field name="business_experience"/>
+                            </group>
+                            <group>
+                                <field name="expertise_in_business"/>
+                            </group>
+                        </page>
+                        <page name="existing_business" string="EXISTING BUSINESS">
+                            <group string="Existing Business Details">
+                                <group>
+                                    <field name="grant_business_name"/>
+                                    <field name="grant_business_sector_ids" widget="many2many_checkboxes"/>
+                                    <field name="grant_business_sector_char"/>
+                                </group>
+                                <group>
+                                    <field name="grant_business_type"/>
+                                    <field name="grant_legal_entity_ids" widget="many2many_checkboxes"/>
+                                    <field name="grant_legal_entity_char"/>
+                                    <!--                                    <field name="grant_business_registration"/>-->
+                                    <field name="grant_business_registration_number"/>
+                                </group>
+                                <!--                                <field name="business_start_monetary_id"/>-->
+                            </group>
+                            <!--                            <group>-->
+                            <!--                                <group>-->
+                            <!--                                    <field name="grant_threshold"/>-->
+                            <!--                                </group>-->
+
+                            <!--                            </group>-->
+                            <group string="Utilization of funds">
+                                <group>
+                                    <field name="grant_amount_required"/>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <field name="grant_amount_utilization" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="amount"/>
+                                        </tree>
+                                    </field>
+                                    <field name="total_grant_amount_utilization" invisible="1"/>
+                                    <field name="copy_total_grant_amount_utilization"/>
+                                </group>
+                            </group>
+                            <group string="Business Income">
+                                <group>
+                                    <field name="grant_business_income_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="rupees"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="grant_business_income_other"/>
+                                    </group>
+                                    <group>
+                                        <field name="grant_business_income_other_rupees"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_grant_business_income"/>
+                                    </group>
+                                </group>
+                            </group>
+                            <group string="Personal Income">
+                                <group>
+                                    <field name="grant_personal_income_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="rupees"/>
+                                        </tree>
+                                    </field>
+                                    <group>
+                                        <field name="grant_personal_income_other"/>
+                                    </group>
+                                    <group>
+                                        <field name="grant_personal_income_other_rupees"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_grant_personal_income"/>
+                                    </group>
+                                </group>
+                            </group>
+                            <group string="Business Expenses">
+                                <group>
+                                    <field name="grant_business_expenses_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="rupees"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="grant_business_expenses_other"/>
+                                    </group>
+                                    <group>
+                                        <field name="grant_business_expenses_other_rupees"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_grant_business_expenses"/>
+                                    </group>
+                                </group>
+                            </group>
+                            <group string="Personal Expenses">
+                                <group>
+                                    <field name="grant_personal_expenses_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="rupees"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="grant_personal_expenses_other"/>
+                                    </group>
+                                    <group>
+                                        <field name="grant_personal_expenses_other_rupees"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_grant_personal_expenses"/>
+                                    </group>
+                                </group>
+                            </group>
+                            <group string="Other Additional Expenses">
+                                <group>
+                                    <field name="other_expenses_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="rupees"/>
+                                        </tree>
+                                    </field>
+                                    <field name="total_grant_other_expenses"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="supporting_document" string="SUPPORTING DOCUMENTS">
+                            <!--                            <group string="Identity Document">-->
+                            <!--                                <group>-->
+                            <!--&lt;!&ndash;                                    <field name="identity_document_1_name" invisible="1"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <field name="identity_document_1" filename="identity_document_1_name"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <field name="identity_document_2_name" invisible="1"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <field name="identity_document_2" filename="identity_document_2_name"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <field name="identity_document_3_name" invisible="1"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <field name="identity_document_3" filename="identity_document_3_name"/>&ndash;&gt;-->
+                            <!--                                </group>-->
+                            <!--                            </group>-->
+                            <group string="Supporting Documents">
+                                <group>
+                                    <field name="certified_identity_document_applicant_name" invisible="1"/>
+                                    <field name="certified_identity_document_applicant"
+                                           filename="certified_identity_document_applicant_name"/>
+                                           
+                                    <field name="nyda_business_plan_template_document_name" invisible="1"/>
+                                    <field name="nyda_business_plan_template_document"
+                                           filename="nyda_business_plan_template_document_name"/>
+                                    <field name="usage_of_working_capital_name" invisible="1"/>
+                                    <field name="usage_of_working_capital" filename="usage_of_working_capital_name"/>
+                                    <field name="business_bank_account_name" invisible="1"/>
+                                    <field name="business_bank_account" filename="business_bank_account_name"/>
+                                </group>
+                                <group>
+                                    <field name="proof_of_business_registration_name" invisible="1"/>
+                                    <field name="proof_of_business_registration"
+                                           filename="proof_of_business_registration_name"/>
+                                    <field name="requires_skills_operate_business_name" invisible="1"/>
+                                    <field name="requires_skills_operate_business"
+                                           filename="requires_skills_operate_business_name"/>
+                                    <field name="additional_permanent_job_creation_name" invisible="1"/>
+                                    <field name="additional_permanent_job_creation"
+                                           filename="additional_permanent_job_creation_name"/>
+                                    <field name="formal_business_plan_name" invisible="1"/>
+                                    <field name="formal_business_plan" filename="formal_business_plan_name"/>
+                                </group>
+                                <group>
+                                    <field name="provide_management_accounts_name" invisible="1"/>
+                                    <field name="provide_management_accounts"
+                                           filename="provide_management_accounts_name"/>
+                                    <field name="market_letters_off_take_contracts_name" invisible="1"/>
+                                    <field name="market_letters_off_take_contracts"
+                                           filename="market_letters_off_take_contracts_name"/>
+                                    <field name="business_operational_years_document_name" invisible="1"/>
+                                    <field name="business_operational_years_document"
+                                           filename="business_operational_years_document_name"/>
+                                    <!--                                    <field name="valid_tax_clearance_certificate_name" invisible="1"/>-->
+                                    <!--                                    <field name="valid_tax_clearance_certificate"-->
+                                    <!--                                           filename="valid_tax_clearance_certificate_name"/>-->
+                                </group>
+                                <group>
+                                    <field name="breakdown_of_funds_name" invisible="1"/>
+                                    <field name="breakdown_of_funds" filename="breakdown_of_funds_name"/>
+                                    <field name="financial_statement_signed_accountant_name" invisible="1"/>
+                                    <field name="financial_statement_signed_accountant"
+                                           filename="financial_statement_signed_accountant_name"/>
+                                    <field name="one_year_management_account_name" invisible="1"/>
+                                    <field name="one_year_management_account"
+                                           filename="one_year_management_account_name"/>
+                                    <field name="other_doc_name" invisible="1"/>
+                                    <field name="other_doc" filename="other_doc_name"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="Internal_report" string="INTERNAL REPORTS"
+                              attrs="{'invisible': [('status', 'in', 'new')]}">
+                            <group>
+                                <group string="ITC Report" attrs="{'invisible': [('status', 'in', 'new')]}">
+                                    <field name="ict_report_name" invisible="1"/>
+                                    <field name="ict_report" widget="binary" filename="ict_report_name"/>
+                                </group>
+
+                                <group string="Due Deligence"
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked'])]}">
+
+                                    <field name="financial_assessment_name" invisible="1"/>
+                                    <field name="financial_assessment" widget="binary"
+                                           filename="financial_assessment_name"/>
+                                    <field name="business_plan_name" invisible="1"/>
+                                    <field name="business_plan" widget="binary"
+                                           filename="business_plan_name"/>
+                                    <field name="inspection_report_name" invisible="1"/>
+                                    <field name="inspection_report" widget="binary"
+                                           filename="inspection_report_name"/>
+                                    <!-- <field name="itc_report_name" invisible="1"/>
+                                    <field name="itc_report" widget="binary" filename="itc_report_name"/> -->
+                                    <!--                                    <field name="due_deligence_checklist_name" invisible="1"/>-->
+                                    <!--                                    <field name="due_deligence_checklist" widget="binary"-->
+                                    <!--                                           filename="due_deligence_checklist_name"/>-->
+
+                                </group>
+                                <group string="Approval Pack"
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked','inspected','deligence_done','bgarg_review'])]}">
+                                    <field name="approval_letter" widget="binary"
+                                           filename="approval_letter_name"/>
+                                    <field name="approval_letter_name" invisible="1"/>
+                                    <field name="uploaded_approval_letter1_name" invisible="1"/>
+                                    <field name="uploaded_approval_letter1" widget="binary"
+                                           filename="uploaded_approval_letter1_name" string="Signed Approval Letter"/>
+                                    <!--                                    <field name="declaration_of_interest_name" invisible="1"/>-->
+                                    <!--                                    <field name="declaration_of_interest" widget="binary"-->
+                                    <!--                                           filename="declaration_of_interest_name"/>-->
+                                    <!--                                    <field name="minutes_name" invisible="1"/>-->
+                                    <!--                                    <field name="minutes" widget="binary"-->
+                                    <!--                                           filename="minutes_name"/>-->
+                                    <field name="approval_letter_send_date"/>
+                                </group>
+
+                                <group string="BGARC Approval"
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked','inspected','deligence_done'])]}">
+                                    <field name="brarg_declaration_of_interest_name" invisible="1"/>
+                                    <field name="bgarg_declaration_of_interest" widget="binary"
+                                           filename="brarg_declaration_of_interest_name"/>
+                                    <field name="bgarg_minutes_name" invisible="1"/>
+                                    <field name="bgarg_minutes" widget="binary" filename="bgarg_minutes_name"/>
+                                    <field name="bgarg_approval_letter_send_date"/>
+
+                                    <field name="bgarc_declaration_of_interest_name_reject" invisible="1"/>
+                                    <field name="bgarc_declaration_of_interest_reject" widget="binary"
+                                           filename="bgarc_declaration_of_interest_name_reject"
+                                           attrs="{'invisible': [('status','!=', 'reject')]}"/>
+                                    <field name="bgarc_minutes_name_reject" invisible="1"/>
+                                    <field name="bgarc_minutes_reject" widget="binary"
+                                           filename="bgarc_minutes_name_reject"
+                                           attrs="{'invisible': [('status','!=', 'reject')]}"/>
+
+                                    <field name="bgarg_rejection_report"
+                                           attrs="{'invisible': [('status','!=', 'reject')]}"/>
+                                    <field name="bgrag_rejection_report_date"
+                                           attrs="{'invisible': [('status', '!=', 'reject')]}"/>
+                                </group>
+
+                                <group string="HOGAC Approval"
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked','inspected','deligence_done','bgarg_review'])]}">
+                                    <!--                                    attrs="{'invisible': [('status','=', 'reject')]}"/>&ndash;&gt;-->
+                                    <field name="hogac_minutes_name" invisible="1"/>
+                                    <field name="hogac_minutes" widget="binary" filename="hogac_minutes_name"/>
+                                    <field name="hogac_approval_letter_send_date"/>
+                                    <!--                                    attrs="{'invisible': [('status', '!=', 'reject')]}"/>&ndash;&gt;-->
+
+                                </group>
+
+                                <group string="Investment Memo"
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked','inspected','deligence_done'])]}">
+                                    <field name="upload_investiment_memo_name" invisible="1"/>
+                                    <field name="upload_investiment_memo" widget="binary"
+                                           filename="upload_investiment_memo_name"/>
+                                </group>
+                                <group string="Disbursement Pack"
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked','inspected','deligence_done','bgarg_review','hogac_review','approved','sent_approval_letter'])]}">
+                                    <field name="cover_letter_name" invisible="1"/>
+                                    <field name="cover_letter" widget="binary" filename="cover_letter_name"
+                                           string="Cover Page"/>
+                                    <field name="supplier_checklist_name" invisible="1"/>
+                                    <field name="supplier_checklist" widget="binary"
+                                           filename="supplier_checklist_name"/>
+                                    <field name="quatation_attech_ids" widget="many2many_binary"/>
+                                    <!-- <field name="bank_confirmation_ids" widget="many2many_binary"/>
+                                    <field name="directors_attech_ids" widget="many2many_binary"/>
+                                    <field name="company_registration_attech_ids" widget="many2many_binary"/> -->
+                                    <field name="contract_name" invisible="1"/>
+                                    <field name="contract" widget="binary" filename="contract_name"/>
+                                    <!-- <field name="quatation_attech_name" invisible="1"/>
+                                    <field name="quatation_attech" widget="binary" filename="quatation_attech_name"/>
+                                    <field name="bank_confirmation_name" invisible="1"/>
+                                    <field name="bank_confirmation" widget="binary" filename="bank_confirmation_name"/>
+                                    <field name="director_ide_name" invisible="1"/>
+                                    <field name="director_ide" widget="binary" filename="director_ide_name"/> -->
+                                    <!-- <field name="company_registration_doc_name" invisible="1"/>
+                                    <field name="company_registration_doc" widget="binary" filename="company_registration_doc_name"/> -->
+                                    <!-- <field name="proof_of_payment_name" invisible="1"/> -->
+                                    <!-- <field name="proof_of_payment" widget="binary" filename="proof_of_payment_name"/> -->
+                                </group>
+                                <group string='Proof Of Payment'
+                                       attrs="{'invisible': [('status', 'in', ['new','itc_checked','inspected','deligence_done','bgarg_review','hogac_review','approved','sent_approval_letter'])]}">
+                                    <field name="payment_date"/>
+                                    <field name="proof_of_payment_name" invisible="1"/>
+                                    <field name="proof_of_payment" widget="binary" filename="proof_of_payment_name"/>
+                                </group>
+                                <group string="NYDA Review Checklist"
+                                       attrs="{'invisible': [('status', 'not in', ['disbursement','bcs_approved','qao_approved','edm_approved'])]}">
+                                    <field name="nyda_bdo_bool" readonly="1"/>
+                                    <field name="nyda_branch_manager_bool" readonly="1"/>
+                                    <field name="nyda_bcs_bool" readonly="1"/>
+                                    <field name="nyda_qao_bool" readonly="1"/>
+                                    <field name="nyda_edm_bool" readonly="1"/>
+                                    <field name="nyda_bdo_r_bool" readonly="1" invisible="1"/>
+                                    <field name="nyda_branch_manager_r_bool" readonly="1" invisible="1"/>
+                                    <field name="nyda_bcs_r_bool" readonly="1" invisible="1"/>
+                                    <field name="nyda_qao_r_bool" readonly="1" invisible="1"/>
+                                    <field name="nyda_edm_r_bool" readonly="1" invisible="1"/>
+                                </group>
+                                <!--                                bdo_rejection_report_date = fields.Date(string='BDO rejection Date')-->
+                                <!--                                bm_rejection_report_date = fields.Date(string='BM rejection Date')-->
+                                <!--                                bcs_rejection_report_date = fields.Date(string='BCS rejection Date')-->
+                                <!--                                qao_rejection_report_date = fields.Date(string='QAO rejection Date') -->
+                                <!--                                edm_rejection_report_date = fields.Date(string='EDM rejection Date')-->
+
+                                <group string="NYDA Rejection Report"
+                                       attrs="{'invisible': [('status', 'in', ['new','ict_checked','inspected','deligence_done'])]}">
+                                    <field name="bdo_rejection_report"
+                                           attrs="{'invisible': ['|',('nyda_bdo_r_bool', '=', False),('nyda_bdo_bool', '=', True)]}"/>
+                                    <field name="bm_rejection_report"
+                                           attrs="{'invisible': ['|',('nyda_branch_manager_bool', '=', True),('nyda_branch_manager_r_bool', '=', False)]}"/>
+                                    <field name="bcs_rejection_report"
+                                           attrs="{'invisible': ['|',('nyda_bcs_r_bool', '=', False),('nyda_bcs_bool', '=', True)]}"/>
+                                    <field name="qao_rejection_report"
+                                           attrs="{'invisible': ['|',('nyda_qao_r_bool', '=', False),('nyda_qao_bool', '=', True)]}"/>
+                                    <field name="edm_rejection_report"
+                                           attrs="{'invisible': ['|',('nyda_edm_r_bool', '=', False),('nyda_edm_bool', '=', True)]}"/>
+                                </group>
+                                <group string="BGARC Rejection"
+                                       attrs="{'invisible': [('status', 'not in', ['send_letter', 'reject'])]}">
+                                    <field name="rejection_letter_name" invisible="1"/>
+                                    <field name="rejection_letter" widget="binary"
+                                           filename="rejection_letter_name"/>
+                                    <field name="rejection_letter_send_date"/>
+                                </group>
+                                <group string="HOGAC Reason for Rejection"
+                                       attrs="{'invisible': [('status', 'not in', ['send_letter', 'reject'])]}">
+                                    <field name="refer_correction"/>
+                                    <field name="correction_date"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_grant_application_tree" model="ir.ui.view">
+        <field name="name">Grant Applications</field>
+        <field name="model">grant.application</field>
+        <field name="arch" type="xml">
+            <tree string="Grant Applications" delete="false" create="false" import="true">
+                <field name="serial_number"/>
+                <field name="application_date"/>
+                <field name="name"/>
+                <field name="surname"/>
+                <field name="population_group"/>
+                <field name="telephone"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_grant_application_main" model="ir.actions.act_window">
+        <field name="name">Grant Application</field>
+        <field name="res_model">grant.application</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item for Grant Application -->
+    <menuitem name="Grant Application" id="menu_main_grant_application"
+              parent="nyda_grant_and_voucher.main_menu_client_preassessment" sequence="10"/>
+    <menuitem name="Grant Application" id="sub_main_grant_application" action="action_grant_application_main"
+              parent="nyda_grant_and_voucher.menu_main_grant_application" sequence="1"/>
+</odoo>

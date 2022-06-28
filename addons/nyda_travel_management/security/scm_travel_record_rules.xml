@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<record id="scm_travel_request_user_record_rule" model="ir.rule">
+        <field name="name">Travel User Own Records</field>
+        <field ref="model_scm_travel_management" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_travel_management.nyda_scm_travel_business_user'))]"/>
+    </record>
+
+    
+</odoo>

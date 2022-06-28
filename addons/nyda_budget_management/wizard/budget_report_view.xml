@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    
+    <!--Finance EMP201 Payroll Report Form View-->
+    <record model="ir.ui.view" id="finance_budget_mid_org_report_form_view">
+        <field name="name">finance.budget.management.mid.org.report.form.view</field>
+        <field name="model">finance.budget.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>            
+                <footer>
+                    <button string="Download Medium Term" name="get_budget_mid_org_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action for Mid Term Organisational Report-->
+    <record model="ir.actions.act_window" id="action_budget_mid_org_report">
+        <field name="name">Medium Term Report</field>
+        <field name="res_model">finance.budget.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="finance_budget_mid_org_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+        
+        
+    <record model="ir.ui.view" id="finance_budget_mid_division_report_form_view">
+        <field name="name">finance.budget.management.mid.division.report.form.view</field>
+        <field name="model">finance.budget.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="division"/>
+                    </group>
+                </group>                
+                <footer>
+                    <button string="Download Division Report" name="get_budget_mid_division_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action for Mid Term Division Report-->
+    <record model="ir.actions.act_window" id="action_budget_mid_division_report">
+        <field name="name">Division Report</field>
+        <field name="res_model">finance.budget.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="finance_budget_mid_division_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+        
+    <record model="ir.ui.view" id="finance_budget_mid_period_report_form_view">
+        <field name="name">finance.budget.management.mid.period.report.form.view</field>
+        <field name="model">finance.budget.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="period"/>
+                    </group>
+                </group>                
+                <footer>
+                    <button string="Download Period Report" name="get_budget_mid_period_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>    
+
+    <!-- Action for Mid Term Period Report-->
+    <record model="ir.actions.act_window" id="action_budget_mid_period_report">
+        <field name="name">Period Report</field>
+        <field name="res_model">finance.budget.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="finance_budget_mid_period_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+        
+    <record model="ir.ui.view" id="finance_budget_annual_org_report_form_view">
+        <field name="name">finance.budget.annual.org.report.form.view</field>
+        <field name="model">finance.budget.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>            
+                <footer>
+                    <button string="Download Organisational Report" name="get_budget_management_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Annual Budget Organisational Report-->
+    <record model="ir.actions.act_window" id="action_budget_annual_org_report">
+        <field name="name">Annual Budget Report</field>
+        <field name="res_model">finance.budget.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="finance_budget_annual_org_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+                
+    <record model="ir.ui.view" id="finance_budget_annual_division_report_form_view">
+        <field name="name">finance.budget.annual.division.report.form.view</field>
+        <field name="model">finance.budget.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="division"/>
+                    </group>
+                </group>             
+                <footer>
+                    <button string="Download Division Report" name="get_budget_management_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>  
+
+    <!-- Action for Annual Budget Division Report-->
+    <record model="ir.actions.act_window" id="action_budget_annual_division_report">
+        <field name="name">Annual Division Report</field>
+        <field name="res_model">finance.budget.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="finance_budget_annual_division_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+        
+    <record model="ir.ui.view" id="finance_budget_annual_exp_report_form_view">
+        <field name="name">finance.budget.annual.exp.report.form.view</field>
+        <field name="model">finance.budget.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="division"/>
+                    </group>
+                </group>             
+                <footer>
+                    <button string="Download Expenditure Report" name="get_budget_annual_exp_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>       
+
+    <!-- Action for Mid Term Period Report-->
+    <record model="ir.actions.act_window" id="action_budget_annual_expenditure_report">
+        <field name="name">Annual Expenditure Report</field>
+        <field name="res_model">finance.budget.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="finance_budget_annual_exp_report_form_view"/>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>    
+            
+	<record id="paperformat_report_budget_management" model="report.paperformat">
+		<field name="name">Budget Management Report Landscape</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">10</field>
+		<field name="margin_bottom">15</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">3</field>
+		<field name="dpi">90</field>
+	</record>
+	            
+    <!--Menu for Bursary External Report account_budget.menu_act_crossovered_budget_view-->
+    <menuitem name="Reports" parent="nyda_budget_management.menu_budget_management"
+              id="menu_budget_reports" sequence="10"/>
+	
+	<!-- Medium Term Reports -->
+    <menuitem name="Medium Term" parent="nyda_budget_management.menu_budget_reports"
+              id="menu_budget_medium_term_section" sequence="1"/>
+
+    <menuitem name="Organisational Report" parent="nyda_budget_management.menu_budget_medium_term_section"
+              id="menu_budget_mid_org_report" sequence="1"
+              action="nyda_budget_management.action_budget_mid_org_report" /> 
+              
+    <menuitem name="Divisions Report" parent="nyda_budget_management.menu_budget_medium_term_section"
+              id="menu_budget_mid_division_report" sequence="1"
+              action="nyda_budget_management.action_budget_mid_division_report" /> 
+              
+    <menuitem name="Period Report" parent="nyda_budget_management.menu_budget_medium_term_section"
+              id="menu_budget_mid_period_report" sequence="1"
+              action="nyda_budget_management.action_budget_mid_period_report" /> 
+
+	<!-- Annual Budget Reports -->
+    <menuitem name="Annual Budgets" parent="nyda_budget_management.menu_budget_reports"
+              id="menu_budget_annual_term_section" sequence="1"/>
+              	                                                        
+    <menuitem name="Organisational Report" parent="nyda_budget_management.menu_budget_annual_term_section"
+              id="menu_budget_annual_org_report" sequence="1"
+              action="nyda_budget_management.action_budget_annual_org_report" />        
+              
+    <menuitem name="Divisions Report" parent="nyda_budget_management.menu_budget_annual_term_section"
+              id="menu_budget_annual_division_report" sequence="1"
+              action="nyda_budget_management.action_budget_annual_division_report" /> 
+              
+    <menuitem name="Expenditure Report" parent="nyda_budget_management.menu_budget_annual_term_section"
+              id="menu_budget_annual_expendtiure_report" sequence="1"
+              action="nyda_budget_management.action_budget_annual_expenditure_report" />                                                 
+                         	                                                                       
+    </data>
+</odoo>

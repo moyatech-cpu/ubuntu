@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_print_voucher_suppliers_report"
+		string="Voucher Supplier Report"
+		model="wiz.voucher.supplier"
+		report_type="qweb-pdf"
+		name="system_update_14.report_voucher_supplier_template"
+		file="system_update_14.report_voucher_supplier_template"
+	/>
+</data>
+</odoo>

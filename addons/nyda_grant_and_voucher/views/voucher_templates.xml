@@ -1,0 +1,2241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="voucher_template" name="Register Form">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/nyda_grant_and_voucher/static/src/css/voucher_style.css"/>
+            <!--            <form id="regForm" action="/action_page.php">-->
+            <form id="regForm" method="post" action="/voucher-application-submit"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="form_data"/>
+                <!--@@@@@@@@@@@@@@@@@TESTING FIELD@@@@@@@@@@@@@@@@@@@@@@@-->
+                <input type="hidden" name="beneficiary_id" t-att-value="enquiry.id"/>
+                <input type="hidden" name="user_id" t-att-value="enquiry.user_id"/>
+                <input type="hidden" name="branch_id" t-att-value="enquiry.nearest_branch"/>
+                <h1>Voucher Application Form:</h1>
+
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section A: CLIENT DETAILS</b>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Name:
+                            <p>
+                                <input placeholder="First name..." name="name"
+                                       t-att-value="enquiry.name"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Surname:
+                            <p>
+                                <input placeholder="Last name..." name="surname"
+                                       t-att-value="enquiry.surname" readonly="1"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Identity Number:
+                            <p>
+                                <input placeholder="Identity Number..." oninput="this.className = ''"
+                                       name="sa_identity_number"
+                                       t-att-value="enquiry.id_number" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Gender:
+                            <p>
+                                <select name="gender" class="select_style">
+                                    <t t-if="enquiry.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                    </t>
+                                    <t t-if="enquiry.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                    </t>
+                                </select>
+                                <input type="hidden" name="gender" t-att-value="enquiry.gender"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Population Group:
+                            <p>
+                                <select name="population_group" class="select_style">
+                                    <t t-if="enquiry.population_group == 'african'">
+                                        <option value="african" selected="selected">African</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'asian'">
+                                        <option value="asian" selected="selected">Asian</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'coloured'">
+                                        <option value="coloured" selected="selected">Coloured</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'indian'">
+                                        <option value="indian" selected="selected">Indian</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'white'">
+                                        <option value="white" selected="selected">White</option>
+                                    </t>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Disability:
+                            <p>
+                                <select name="disability" class="select_style">
+                                    <option value="yes" selected="selected">Yes</option>
+                                    <option value="no" selected="selected">No</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Cell Phone No:
+                            <p>
+                                <input placeholder="Cell Phone No..." name="mobile"
+                                       t-att-value="enquiry.cell_phone_number" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Telephone No:
+                            <p>
+                                <input placeholder="Telephone No..." name="telephone" class="form-control numericOnly"
+                                       t-att-value="enquiry.alternative_number"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Email:
+                            <p>
+                                <input placeholder="Email..." name="email"
+                                       t-att-value="enquiry.email"
+                                       readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Fax No:
+                            <p>
+                                <input placeholder="Fax No..." name="fax"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="physical_address"
+                                          name="physical_address" placeholder="Physical Address..." rows="5">
+                                    <t t-esc="assessment_id.physical_address"/>
+                                </textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Postal Code:
+                            <p>
+                                <input placeholder="Postal Code..." class="numericOnly" name="physical_postal_code"
+                                       t-att-value="assessment_id.postal_code"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Postal Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="postal_address" name="postal_address"
+                                          placeholder="Postal Address..."
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Postal Code:
+                            <p>
+                                <input placeholder="Postal Code..." class="numericOnly" name="postal_code"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Province:
+                            <p>
+                                <select class="select_style" name="province_id" disabled="disabled">
+                                    <option value="">Please select an option</option>
+                                    <t t-foreach="province_ids" t-as="province">
+                                        <t t-if="province.id == enquiry.province.id">
+                                            <option t-att-value="province.id" selected="selected">
+                                                <t t-esc="province.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                                <input type="hidden" name="province_id" t-att-value="enquiry.province.id"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Geographical Type:
+                            <p>
+                                <select name="geographical_type" class="select_style">
+                                    <option value="">-Select Geographical Type-</option>
+                                    <option value="urban">Urban</option>
+                                    <option value="peri_urban">Peri Urban</option>
+                                    <option value="rural_villages">Rural Area-Villages</option>
+                                    <option value="rural_farms">Rural Area-Farms</option>
+                                    <option value="informa_settlement">Informa Settlement</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            Training Courses Attended:
+                            <p>
+                                <textarea class="form-control" cols="40" id="trainings_attended"
+                                          name="trainings_attended"
+                                          placeholder="Training Courses Attended..."
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Formal Qualifications:
+                            <p>
+                                <input placeholder="Formal Qualifications..." class="req" name="formal_qualification"/>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Next of Kin:
+                            <p>
+                                <input placeholder="Next of Kin..." class="req" name="next_of_kin"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Relationship:
+                            <p>
+                                <input placeholder="Relationship..." class="req" name="relationship"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="relative_physical_address"
+                                          name="relative_physical_address"
+                                          placeholder="Physical Address..."
+                                          rows="5"></textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Cell Number:
+                            <p>
+                                <input placeholder="Cell Number..." class="req numericOnly phone_val" maxlength="10"
+                                       name="relative_mobile"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section B: ENTREPRENEURIAL STATUS</b>
+                        </h4>
+                    </div>
+                    <div class="row que_one_voucher">
+                        <div class="col-md-12">
+                            <h4>1. Do you have an existing business that is currently in operation?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio1" name="existing_business" class="existing_business"
+                                               type="radio" value="True"/>
+                                        <label for="radio1">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio2" name="existing_business" class="existing_business"
+                                               type="radio" value="False"/>
+                                        <label for="radio2">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                            <!--                            <input type="text" name="existing_business_form_checker" id="existing_business_form_checker"/>-->
+                        </div>
+                    </div>
+
+                    <div class="row hidden existing_business_div">
+                        <div class="demo_header">
+                            <h4>
+                                <b>Section E: EXISTING BUSINESS</b>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Business Name:
+                                <p>
+                                    <input placeholder="Business name..." name="existing_business_name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Please explain what you do in your business:
+                                <p>
+                                    <input placeholder="Please explain what you do in your business..."
+                                           name="existing_business_type"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>1. Please indicate the Sector in which your business is operating:</h4>
+                                <div class="row">
+                                    <t t-foreach="startup_business_sector_ids" t-as="startup_business_sector_id">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="startup_business_sector_id.name"/>
+                                                <input type="checkbox" name="existing_business_sector_ids"
+                                                       t-att-value="startup_business_sector_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." name="other"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>2. Please indicate the Legal Entity in which your business is operating:</h4>
+                                <div class="row">
+                                    <t t-foreach="startup_legal_entity_ids" t-as="startup_legal_entity_id">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="startup_legal_entity_id.name"/>
+                                                <input type="checkbox" name="existing_legal_entity_ids"
+                                                       t-att-value="startup_legal_entity_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." name="other"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>3. Why did you start the business?</h4>
+                                <div class="row">
+                                    <t t-foreach="business_start_reason_ids" t-as="business_start_reason">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="business_start_reason.name"/>
+                                                <input type="checkbox" class="existing_business_start_reason_ids"
+                                                       name="existing_business_start_reason_ids"
+                                                       t-att-value="business_start_reason.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." id="existing_business_start_reason_char"
+                                           name="existing_business_start_reason_char"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <h4>4. Please explain the following in brief:</h4>
+                                <p>
+                                    <strong>(a) The type of business</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="existing_idea_description_type_of_business"
+                                              name="existing_idea_description_type_of_business"
+                                              placeholder="Describe The type of business..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(b) The need the business seeks to satisfy</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="existing_idea_description_business_need_satisfy"
+                                              name="existing_idea_description_business_need_satisfy"
+                                              placeholder="Describe The need the business seeks to satisfy..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(c) Who your potential customers are?</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="existing_idea_description_potential_customers"
+                                              name="existing_idea_description_potential_customers"
+                                              placeholder="Describe in brief who are your potential customers..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(d) Where you will operate the business from?</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="existing_idea_description_operate_business"
+                                              name="existing_idea_description_operate_business"
+                                              placeholder="Explain here  From where will you operate the business?..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(e) How you will deliver your product or service?</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="existing_idea_description_operate_product_servivces"
+                                              name="existing_idea_description_operate_product_servivces"
+                                              placeholder="Explain here how you will deliver your product or service?..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>5. How long has the business been in operation and trading?</h4>
+                                <p>
+                                    <select name="business_running_time" class="select_style">
+                                        <option value="lt20">Less than 12 months</option>
+                                        <option value="ottyears">1 – 2 years</option>
+                                        <option value="ttfyears">3 – 4 years</option>
+                                        <option value="ftfyears">4 – 5 years</option>
+                                        <option value="ftsyears">5 – 6 years</option>
+                                        <option value="stsyears">6 – 7 years</option>
+                                        <option value="ettyears">8 – 10 years</option>
+                                        <option value="mttyears">More than 10</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>6. How many people (including yourself) are employed in the business?</h4>
+                                <p>
+                                    <input placeholder="Number of Employed..." type="number" class="numericOnly"
+                                           name="count_employees"/>
+                                </p>
+                            </div>
+                        </div>
+                        <!--                    <div class="row">-->
+                        <!--                        <div class="col-md-12">-->
+                        <!--                            <h4>7. Please indicate how many are:</h4>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <p>Male</p>-->
+                        <!--                            <p>-->
+                        <!--                                <input placeholder="Male..." oninput="this.className = ''" name="name"/>-->
+                        <!--                            </p>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <p>Female</p>-->
+                        <!--                            <p>-->
+                        <!--                                <input placeholder="Female..." oninput="this.className = ''" name="name"/>-->
+                        <!--                            </p>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <p>Disabled</p>-->
+                        <!--                            <p>-->
+                        <!--                                <input placeholder="Disabled..." oninput="this.className = ''" name="name"/>-->
+                        <!--                            </p>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <p>Coloured</p>-->
+                        <!--                            <p>-->
+                        <!--                                <input placeholder="Coloured..." oninput="this.className = ''" name="name"/>-->
+                        <!--                            </p>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <p>Indian</p>-->
+                        <!--                            <p>-->
+                        <!--                                <input placeholder="Indian..." oninput="this.className = ''" name="name"/>-->
+                        <!--                            </p>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <p>White</p>-->
+                        <!--                            <p>-->
+                        <!--                                <input placeholder="White..." oninput="this.className = ''" name="name"/>-->
+                        <!--                            </p>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>7. Has there been a change in the number of people employed in the business over the
+                                    last 12 months?
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Increased
+                                            <input type="radio" name="change_in_emp_count" value="increased"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Decreased
+                                            <input type="radio" name="change_in_emp_count" value="decreased"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">No change
+                                            <input type="radio" name="change_in_emp_count" value="no_change"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Reason:</p>
+                                <p>
+                                    <input placeholder="Reason..." name="change_in_emp_reason"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>8. Please provide an estimate of your annual turnover (total amount of income)</h4>
+                            </div>
+                            <div class="col-md-6 est_turn_over" id="est_turn_over">
+                                <p>
+                                    <select name="estimate_annual_turnover" id="est_turn_over_field"
+                                            class="select_style">
+                                        <option value="lttthousand">Less than R20 000</option>
+                                        <option value="ttfthousand">R20 000 – R49 999</option>
+                                        <option value="ftnthousand">R50 000 – R99 999</option>
+                                        <option value="othhthousand">R100 000 – R149 999</option>
+                                        <option value="htththousand">R150 000 – R199 999</option>
+                                        <option value="ttththousand">R200 000 – R299 999</option>
+                                        <option value="ttfhthousand">R300 000 – R499 000</option>
+                                        <option value="ftnhthousand">R500 000 – R999 999</option>
+                                        <option value="ottmillion">R1 – R2 million</option>
+                                        <option value="tttmillion">R2 – R3 million</option>
+                                        <option value="ttfmillion">R3 – R4 million</option>
+                                        <option value="mtfmillion">More than R5 million</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="exp_turn_over_hidden" id="exp_turn_over_hidden">
+                                <p>
+                                    <input id="exp_turn_over_hidden_field" placeholder="Expected turn over index..."
+                                           type="hidden" name="expected_turn_over_hidden_value"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>9. Has there been a change in the turnover of the business over the last 12 months?
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Increased
+                                            <input type="radio" name="change_in_turnover" value="increased"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Decreased
+                                            <input type="radio" name="change_in_turnover" value="decreased"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">No change
+                                            <input type="radio" name="change_in_turnover" value="no_change"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Reason:</p>
+                                <p>
+                                    <input placeholder="Reason..." name="change_in_turnover_reason"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>10. Do you have a separate bank account for the business?
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="separate_bank_account" value="True"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="separate_bank_account" value="False"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <h4>11. Please indicate how you started the business:</h4>
+                                <p>
+                                    <select name="business_start_method" class="select_style">
+                                        <option value="myself">I started it myself</option>
+                                        <option value="with_partner_friend">I started the business with a partner(s)/
+                                            friend(s)
+                                        </option>
+                                        <option value="bought">I bought the business</option>
+                                        <option value="overtook_from_family">I took it over from someone in the family
+                                        </option>
+                                        <option value="business_start_method_other">Other</option>
+                                    </select>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4>12. Where did you get the money to start your business?</h4>
+
+
+                                <p>
+                                    <select name="business_start_monetary_id" class="select_style">
+                                        <t t-foreach="business_start_monetary_ids" t-as="business_start_monetary">
+                                            <option t-att-value="business_start_monetary.id">
+                                                <t t-esc="business_start_monetary.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>13. Describe the premises your business operates from:</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <select name="business_operate_premises_id" class="select_style">
+                                        <t t-foreach="business_operate_premises_ids" t-as="business_operate_premises">
+                                            <option t-att-value="business_operate_premises.id">
+                                                <t t-esc="business_operate_premises.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Other:</p>
+                                <p>
+                                    <input placeholder="Other..." name="business_operate_premises_char"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>14. Do you own or rent the premises?
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Own
+                                            <input type="radio" name="business_premise" value="own"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Rent
+                                            <input type="radio" name="business_premise" value="rent"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>15. Please describe the area in which the business operates:</h4>
+                                <p>
+                                    <input placeholder="Business Operates..."
+                                           name="business_area_description"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>16. Select your Business's Geographical location and sector in which it operates:
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            16.1 Geographical Location:
+                                        </p>
+                                        <p>
+                                            <select name="business_geographical_location_id" class="select_style">
+                                                <t t-foreach="business_geographical_location_ids"
+                                                   t-as="business_geographical_location">
+                                                    <option t-att-value="business_geographical_location.id">
+                                                        <t t-esc="business_geographical_location.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            16.2 Type of business sector:
+                                        </p>
+                                        <p>
+                                            <select name="business_sector_id" class="select_style">
+                                                <t t-foreach="business_sector_ids" t-as="business_sector">
+                                                    <option t-att-value="business_sector.id">
+                                                        <t t-esc="business_sector.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>17. How would you describe the growth of the industry sector in which you operate?
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">Growing
+                                            <input type="radio" name="growth_business_sector" value="growing"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">Growing moderately
+                                            <input type="radio" name="growth_business_sector" value="growing_moderate"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">Growing strongly
+                                            <input type="radio" name="growth_business_sector" value="growing_strongly"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">In decline
+                                            <input type="radio" name="growth_business_sector" value="in_decline"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>18. Does your business comply with industry registration requirements?</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="business_comply_industry" value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="business_comply_industry" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">Not sure
+                                            <input type="radio" name="business_comply_industry" value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">None Applicable
+                                            <input type="radio" name="business_comply_industry"
+                                                   value="none_applicable"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>19. How many business start-ups have you been involved in?</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">Only this one
+                                            <input type="radio" name="startup_involvement" value="only_current"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">2
+                                            <input type="radio" name="startup_involvement" value="two"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">3
+                                            <input type="radio" name="startup_involvement" value="three"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <label class="checkbox_style">More than 3
+                                            <input type="radio" name="startup_involvement" value="more_than_three"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>20. Did you previously work in the industry sector or type of business you currently
+                                    run?
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="previous_work_on_industry" value="True"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="previous_work_on_industry" value="False"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h4>If yes, for how long?</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">Less than 1 year
+                                            <input type="radio" name="radio3233"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">2 – 3 years
+                                            <input type="radio" name="radio3233"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">3 – 5 years
+                                            <input type="radio" name="radio3233"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">more than 5
+                                            <input type="radio" name="radio3233"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>21. How many years of business management experience do you have?</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">Less than 1 year
+                                            <input type="radio" name="business_management_experiance" value="lt1year"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">2 – 3 years
+                                            <input type="radio" name="business_management_experiance" value="tttyears"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">3 – 5 years
+                                            <input type="radio" name="business_management_experiance" value="ttfyears"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="checkbox_style">more than 5
+                                            <input type="radio" name="business_management_experiance" value="mtfyears"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>22. Please describe your business goals for the future:</h4>
+                                <p>
+                                    <textarea class="form-control" cols="40" name="future_business_goals"
+                                              placeholder="Describe Business Goal..."
+                                              rows="3"></textarea>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>23. Please indicate what type of business support services you need:
+                                </h4>
+
+                                <div class="row bus_dev_ass_class">
+                                    <t t-foreach="business_development_assistance_ids"
+                                       t-as="business_development_assistance_id">
+                                        <div class="col-md-6">
+                                            <label class="checkbox_style">
+                                                <span t-field="business_development_assistance_id.name"/>
+                                                <input type="checkbox" class="bus_dev_ass"
+                                                       name="business_development_assistance_ids"
+                                                       t-att-value="business_development_assistance_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="input_hidden_field">
+                                    <input type="hidden" id="check_box_hidden_field" placeholder="Checkbox string"
+                                           name="check_box_transfer_field"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>24. Describe how this assistance is likely to improve your business:</h4>
+                                <p>
+                                    <textarea class="form-control" cols="40" name="business_assistance_improvements"
+                                              placeholder="Describe Improve Your Business..."
+                                              rows="3"></textarea>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>25. Are you able to invest time, financial and other resources in improving your
+                                    business?
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="able_invest_resource" value="True"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="able_invest_resource" value="False"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Explain:</p>
+                                <p>
+                                    <textarea class="form-control" cols="40" id="other" name="other"
+                                              placeholder="Explain..."
+                                              rows="3"></textarea>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>26. Please indicate the Ownership status in your business :</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <table id="business_ownership_status" class="table order-list ownership_table">
+                                <thead>
+                                    <tr>
+                                        <th>Name and Surname of Business Partner (incl. Owner)</th>
+                                        <th>Position in the Business</th>
+                                        <th>Contact Numbers</th>
+                                        <th>Disability Status</th>
+                                        <th>Gender</th>
+                                        <th>Location</th>
+                                        <th>Race</th>
+                                        <th>Ownership(%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="name"
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="position"
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="mobile"
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <select name="disability" class="select_style">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="gender" class="select_style" style="width:90px">
+                                                <option value="female">Female</option>
+                                                <option value="male">Male</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="geographical_type" class="select_style" style="width:82px">
+                                                <option value="urban">Urban</option>
+                                                <option value="peri_urban">Peri Urban</option>
+                                                <option value="rural_villages">Rural Area-Villages</option>
+                                                <option value="rural_farms">Rural Area-Farms</option>
+                                                <option value="informa_settlement">Informa Settlement</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="population_group" class="select_style" style="width:104px">
+                                                <option value="african">African</option>
+                                                <option value="white">White</option>
+                                                <option value="indian">Indian</option>
+                                                <option value="coloured">Coloured</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="ownership"
+                                                   class="form-control ownership_value_cal"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="13" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addBusinessOwnerStatusRow"
+                                                   value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                </tfoot>
+                            </table>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <p>Total Ownership Percent(%)</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="number" id="total_business_ownership_percent" class="form-control"
+                                           name="total_business_ownership_percent" readonly="1"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <p id="ownership_value_error"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row hidden que_two_voucher">
+                        <div class="col-md-12">
+                            <h4>2. Do you Have a business idea?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio5" name="business_idea" class='business_idea' type="radio"
+                                               value="True"/>
+                                        <label for="radio5">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio6" name="business_idea" class='business_idea' type="radio"
+                                               value="False"/>
+                                        <label for="radio6">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                            <!--                            <input type="text" name="start_up_form_checker" id="start_up_form_checker"/>-->
+                        </div>
+                    </div>
+
+                    <div class="row hidden business_idea_div">
+                        <div class="demo_header">
+                            <h4>
+                                <b>Section D: START-UP (Have a Business Idea)</b>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Business Name:
+                                <p>
+                                    <input placeholder="Business name..."
+                                           name="startup_business_name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Please explain what you do in your business:
+                                <p>
+                                    <input placeholder="Please explain what you do in your business..."
+                                           name="startup_business_type"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>1. Please indicate the Sector in which your business is operating:</h4>
+                                <div class="row">
+                                    <t t-foreach="startup_business_sector_ids" t-as="startup_business_sector_id">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="startup_business_sector_id.name"/>
+                                                <input type="checkbox" name="startup_business_sector_ids"
+                                                       t-att-value="startup_business_sector_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." name="existing_business_sector_char"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>2. Please indicate the Legal Entity in which your business is operating:</h4>
+                                <div class="row">
+                                    <t t-foreach="startup_legal_entity_ids" t-as="startup_legal_entity_id">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="startup_legal_entity_id.name"/>
+                                                <input type="checkbox" name="startup_legal_entity_ids"
+                                                       t-att-value="startup_legal_entity_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." name="existing_legal_entity_char"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>3. Why do you want to start a business?</h4>
+                                <div class="row">
+                                    <t t-foreach="business_start_reason_ids" t-as="business_start_reason">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="business_start_reason.name"/>
+                                                <input type="checkbox" class="startup_business_start_reason_ids"
+                                                       name="startup_business_start_reason_ids"
+                                                       t-att-value="business_start_reason.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." id="startup_business_start_reason_char"
+                                           name="startup_business_start_reason_char"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>4. Please explain the following in brief:</h4>
+                                <p>
+                                    <strong>(a) The type of business</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="startup_idea_description_type_of_business"
+                                              name="startup_idea_description_type_of_business"
+                                              placeholder="Describe The type of business..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(b) The need the business seeks to satisfy</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="startup_idea_description_business_need_satisfy"
+                                              name="startup_idea_description_business_need_satisfy"
+                                              placeholder="Describe The need the business seeks to satisfy..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(c) Who your potential customers are?</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="startup_idea_description_potential_customers"
+                                              name="startup_idea_description_potential_customers"
+                                              placeholder="Describe in brief who are your potential customers..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(d) Where you will operate the business from?</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="startup_idea_description_operate_business"
+                                              name="startup_idea_description_operate_business"
+                                              placeholder="Explain here  From where will you operate the business?..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                                <p>
+                                    <strong>(e) How you will deliver your product or service?</strong>
+                                </p>
+                                <p>
+                                    <textarea class="form-control" cols="40"
+                                              id="startup_idea_description_operate_product_servivces"
+                                              name="startup_idea_description_operate_product_servivces"
+                                              placeholder="Explain here how you will deliver your product or service?..."
+                                              rows="5"></textarea>
+                                </p>
+                                <br></br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>5. Please assess yourself against the following business feasibility requirements:
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">a. Do you have the management skills/ experience to
+                                            start
+                                            the business?
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="management_skills_start_business"
+                                                   value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="management_skills_start_business" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="management_skills_start_business"
+                                                   value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">b. Do you have the technical skills to start the
+                                            business?
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="technical_skills_start_business"
+                                                   value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="technical_skills_start_business" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="technical_skills_start_business"
+                                                   value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">c. Have you identified your potential customers?</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="identified_potential_customers"
+                                                   value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="identified_potential_customers" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="identified_potential_customers" value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">d. Do you know who your competitors are?</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="know_competitors" value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="know_competitors" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="know_competitors" value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">e. Do you have the money to cover your start-up
+                                            costs?
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="money_to_cover_startup"
+                                                   value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="money_to_cover_startup" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="money_to_cover_startup" value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">f. Do you have enough money to cover the operating
+                                            costs?
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="money_to_cover_operating"
+                                                   value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="money_to_cover_operating" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="money_to_cover_operating" value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="p_radio_title">g. Do you have the equipment and machinery required to
+                                            run
+                                            the business?
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">Yes
+                                            <input type="radio" name="required_equipments_and_machine"
+                                                   value="yes"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="checkbox_style">No
+                                            <input type="radio" name="required_equipments_and_machine" value="no"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="checkbox_style">Not Sure
+                                            <input type="radio" name="required_equipments_and_machine"
+                                                   value="not_sure"/>
+                                            <span class="checkmark_radio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>6. Please indicate the Ownership status in your business :</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <table id="ownership_status" class="table order-list ownership_status_table">
+                                <thead>
+                                    <tr>
+                                        <th>Name and Surname of Business Partner (incl. Owner)</th>
+                                        <th>Position in the Business</th>
+                                        <th>Contact Numbers</th>
+                                        <th>Disability Status</th>
+                                        <th>Gender</th>
+                                        <th>Rural</th>
+                                        <th>Race</th>
+                                        <th>Ownership(%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="name"
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="position"
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="mobile"
+                                                   class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <select name="disability" class="select_style">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="gender" class="select_style" style="width:90px">
+                                                <option value="female">Female</option>
+                                                <option value="male">Male</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="geographical_type" class="select_style" style="width:82px">
+                                                <option value="urban">Urban</option>
+                                                <option value="peri_urban">Peri Urban</option>
+                                                <option value="rural_villages">Rural Area-Villages</option>
+                                                <option value="rural_farms">Rural Area-Farms</option>
+                                                <option value="informa_settlement">Informa Settlement</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="population_group" class="select_style" style="width:104px">
+                                                <option value="african">African</option>
+                                                <option value="white">White</option>
+                                                <option value="indian">Indian</option>
+                                                <option value="coloured">Coloured</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="ownership"
+                                                   class="form-control ownership_status_value_cal"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="13" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addOwnerStatusRow"
+                                                   value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                </tfoot>
+                            </table>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <p>Total Ownership Percent(%)</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="number" id="total_status_ownership_percent" class="form-control"
+                                           name="total_status_ownership_percent" readonly="1"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <p id="ownership_status_value_error"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>7. Please indicate what type of business support services you need:
+                                </h4>
+
+                                <div class="row bus_dev_ass_class">
+                                    <t t-foreach="business_development_assistance_ids"
+                                       t-as="business_development_assistance_id">
+                                        <div class="col-md-6">
+                                            <label class="checkbox_style">
+                                                <span t-field="business_development_assistance_id.name"/>
+                                                <input type="checkbox" class="bus_dev_ass"
+                                                       name="business_development_assistance_ids"
+                                                       t-att-value="business_development_assistance_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="input_hidden_field">
+                                    <input type="hidden" id="check_box_hidden_field" placeholder="Checkbox string"
+                                           name="check_box_transfer_field"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--                        <div class="row">-->
+                        <!--                            <div class="col-md-12">-->
+                        <!--                                <h4>8. Describe how this assistance is likely to improve your business:</h4>-->
+                        <!--                                <p>-->
+                        <!--                                    <textarea class="form-control" cols="40" name="business_assistance_improvements_business_idea"-->
+                        <!--                                              placeholder="Describe Improve Your Business..."-->
+                        <!--                                              rows="3"></textarea>-->
+                        <!--                                </p>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
+                        <!--                        <div class="row">-->
+                        <!--                            <div class="col-md-12">-->
+                        <!--                                <h4>9. Are you able to invest time, financial and other resources in improving your-->
+                        <!--                                    business?-->
+                        <!--                                </h4>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-md-12">-->
+                        <!--                                <div class="row">-->
+                        <!--                                    <div class="col-md-2">-->
+                        <!--                                        <label class="checkbox_style">Yes-->
+                        <!--                                            <input type="radio" name="able_invest_resource_business_idea" value="True"/>-->
+                        <!--                                            <span class="checkmark_radio"></span>-->
+                        <!--                                        </label>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="col-md-2">-->
+                        <!--                                        <label class="checkbox_style">No-->
+                        <!--                                            <input type="radio" name="able_invest_resource_business_idea" value="False"/>-->
+                        <!--                                            <span class="checkmark_radio"></span>-->
+                        <!--                                        </label>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-md-12">-->
+                        <!--                                <p>Explain:</p>-->
+                        <!--                                <p>-->
+                        <!--                                    <textarea class="form-control" cols="40" id="other" name="other"-->
+                        <!--                                              placeholder="Explain..."-->
+                        <!--                                              rows="3"></textarea>-->
+                        <!--                                </p>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </div>
+
+                    <div class="row hidden que_three_voucher">
+                        <div class="col-md-12">
+                            <h4>3. No business Idea/Have not started a business?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio7" name="no_business" class='no_business' type="radio"
+                                               value="True"/>
+                                        <label for="radio7">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio8" name="no_business" class='no_business' type="radio"
+                                               value="False"/>
+                                        <label for="radio8">No</label>
+                                    </div>
+                                </div>
+                                <!--                                <input type="text" name="pre_start_up_form_checker" id="pre_start_up_form_checker"/>-->
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row hidden no_business_div">
+                        <div class="demo_header">
+                            <h4>
+                                <b>Section C: PRE-START-UP (no business idea/ have not started a business)</b>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>1. Why do you want to start a business?</h4>
+                                <div class="row">
+                                    <t t-foreach="business_start_reason_ids" t-as="business_start_reason">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="business_start_reason.name"/>
+                                                <input type="checkbox" class="business_start_reason_ids"
+                                                       name="business_start_reason_ids"
+                                                       t-att-value="business_start_reason.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." id="business_start_reason_char"
+                                           name="business_start_reason_char"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>2. Please describe the goals you want to achieve in business</h4>
+                                <p>
+                                    <textarea class="form-control" cols="40" id="business_goals"
+                                              name="business_goals"
+                                              placeholder="Describe the goals..."
+                                              rows="3"></textarea>
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="text-center">
+                                    <b>Business Experience</b>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>3. What type of business experience do you have and what type of business do you
+                                    want to
+                                    start?
+                                </h4>
+                                <p>
+                                    <textarea class="form-control" cols="40" id="business_experience"
+                                              name="business_experience"
+                                              placeholder="Business Experience..."
+                                              rows="3"></textarea>
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>4. What knowledge or expertise do you have that is relevant to the proposed
+                                    business?
+                                </h4>
+                                <p>
+                                    <textarea class="form-control" cols="40" id="expertise_in_business"
+                                              name="expertise_in_business"
+                                              placeholder="Knowledge or Expertise..."
+                                              rows="3"></textarea>
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>5. Please indicate what type of business support services you need:
+                                </h4>
+
+                                <div class="row bus_dev_ass_class">
+                                    <t t-foreach="business_development_assistance_ids"
+                                       t-as="business_development_assistance_id">
+                                        <div class="col-md-6">
+                                            <label class="checkbox_style">
+                                                <span t-field="business_development_assistance_id.name"/>
+                                                <input type="checkbox" class="bus_dev_ass"
+                                                       name="business_development_assistance_ids"
+                                                       t-att-value="business_development_assistance_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="input_hidden_field">
+                                    <input type="hidden" id="check_box_hidden_field" placeholder="Checkbox string"
+                                           name="check_box_transfer_field"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <h4>Have you ever received any Entrepreneurship Development Training</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio3" name="entrepreneurial_training" type="radio" value="True"/>
+                                        <label for="radio3">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio4" name="entrepreneurial_training" type="radio" value="False"/>
+                                        <label for="radio4">No</label>
+                                    </div>
+                                </div>
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <h4>Please indicate what type of business support services you need:
+                                </h4>
+
+                                <div class="row bus_dev_ass_class">
+                                    <t t-foreach="business_development_assistance_ids"
+                                       t-as="business_development_assistance_id">
+                                        <div class="col-md-6">
+                                            <label class="checkbox_style">
+                                                <span t-field="business_development_assistance_id.name"/>
+                                                <input type="checkbox" class="bus_dev_ass"
+                                                       name="business_development_assistance_ids"
+                                                       t-att-value="business_development_assistance_id.id"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="input_hidden_field">
+                                    <input type="hidden" id="check_box_hidden_field" placeholder="Checkbox string"
+                                           name="check_box_transfer_field"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center">
+                                <b>Job Creation Information</b>
+                            </h3>
+                            <h3 class="text-center">
+                                <b>How many current jobs and/or jobs do you intend to create?</b>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table id="job_creation" class="table order-list">
+                            <thead>
+                                <tr>
+                                    <th style="border-left: 3px solid black; border-top: 3px solid black; border-right: 3px solid black; border-bottom: 3px solid black;">
+                                        Geographical Type
+                                    </th>
+                                    <th style="border-top: 3px solid black; border-bottom: 3px solid black; border-right: 1px solid black;"
+                                        colspan="2">Before Funding
+                                    </th>
+                                    <th style="border-top: 3px solid black; border-bottom: 3px solid black; border-right: 1px solid black;"
+                                        colspan="2">Disabled
+                                    </th>
+                                    <th style="border-right: 3px solid black; border-top: 3px solid black; border-bottom: 3px solid black;"
+                                        colspan="2">Average Age
+                                    </th>
+                                    <th style="border-top: 3px solid black; border-bottom: 3px solid black; border-right: 3px black;border-right: 1px solid black;"
+                                        colspan="2">After Funding
+                                    </th>
+                                    <th style="border-top: 3px solid black; border-bottom: 3px solid black; border-right: 3px black; border-right: 1px solid black;"
+                                        colspan="2">Disabled
+                                    </th>
+                                    <th style="border-top: 3px solid black; border-bottom: 3px solid black; border-right: 3px solid black;"
+                                        colspan="2">Average Age
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="border-left: 3px solid black; border-bottom: 3px solid black; border-right: 3px solid black;">
+                                        #
+                                    </th>
+                                    <th style="border-bottom: 3px solid black;">Male</th>
+                                    <th style="border-bottom: 3px solid black; border-right: 1px solid black;">Female
+                                    </th>
+                                    <th style="border-bottom: 3px solid black;">Male</th>
+                                    <th style="border-bottom: 3px solid black; border-right: 1px solid black;">Female
+                                    </th>
+                                    <th style="border-bottom: 3px solid black;">Male</th>
+                                    <th style="border-right: 3px solid black; border-bottom: 3px solid black;">Female
+                                    </th>
+                                    <th style="border-bottom: 3px solid black;">Male</th>
+                                    <th style="border-bottom: 3px solid black; border-right: 1px solid black;">Female
+                                    </th>
+                                    <th style="border-bottom: 3px solid black;">Male</th>
+                                    <th style="border-bottom: 3px solid black; border-right: 1px solid black;">Female
+                                    </th>
+                                    <th style="border-bottom: 3px solid black;">Male</th>
+                                    <th style="border-bottom: 3px solid black; border-right: 3px solid black;">Female
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border-bottom: 3px solid black; border-right: 3px solid black; border-left: 3px solid black;">
+                                        <select name="population_group" class="select_style" id="select_geo">
+                                            <option value="african">African</option>
+                                            <option value="white">White</option>
+                                            <option value="indian">Indian</option>
+                                            <option value="coloured">Coloured</option>
+                                            <!--                                    <option value="total">Total</option>-->
+                                        </select>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black;">
+                                        <input type="number" name="before_funding_male"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black; border-right: 1px solid black;">
+                                        <input type="number" name="before_funding_female"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black;">
+                                        <input type="number" name="before_funding_disabled_male"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black; border-right: 1px solid black;">
+                                        <input type="number" name="before_funding_disabled_female"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black;">
+                                        <input type="number" name="before_funding_age_male"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-right: 3px solid black; border-bottom: 3px solid black;">
+                                        <input type="number" name="before_funding_age_female"
+                                               class="form-control numericOnly"/>
+                                    </td>
+
+                                    <td style="border-bottom: 3px solid black;">
+                                        <input type="number" name="after_funding_male"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black; border-right: 1px solid black;">
+                                        <input type="number" name="after_funding_female"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black;">
+                                        <input type="number" name="after_funding_disabled_male"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black; border-right: 1px solid black;">
+                                        <input type="number" name="after_funding_disabled_female"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black;">
+                                        <input type="number" name="after_funding_age_male"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                    <td style="border-bottom: 3px solid black; border-right: 3px solid black;">
+                                        <input type="number" name="after_funding_age_female"
+                                               class="form-control numericOnly"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="13" style="text-align: left;">
+                                        <input type="button" class="btn btn-primary" id="addJobRow" value="Add Row"/>
+                                    </td>
+                                </tr>
+                                <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section G: Supporting Documents for Application</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Certified Identity document Copy (stamp not older than 3 months)
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" data-text="Certified Identity document 1">
+                                    <input name="identity_document_1" type="file" class="file-upload-field identity"
+                                           required="required"/>
+                                </div>
+                            </div>
+                            <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                            <!--                                <div class="file-upload-wrapper" data-text="Certified Identity document 2">-->
+                            <!--                                    <input name="identity_document_2" type="file" class="file-upload-field"/>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                            <!--                                <div class="file-upload-wrapper" data-text="Certified Identity document 3">-->
+                            <!--                                    <input name="identity_document_3" type="file" class="file-upload-field"/>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                        </div>
+                    </div>
+
+                    <!-- <div class="row"> -->
+
+                    <!-- <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                        <div class="file-upload-wrapper" data-text="Proof of Residence">
+                            <input name="proof_of_residence" type="file" class="file-upload-field identity"/>
+                        </div>
+                    </div>
+                </div> -->
+                    <!--                    </div>--> -->
+
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <h4>3. Copy of Company Registration from CIPC <b style="color:red">*</b></h4>-->
+                    <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                    <!--                                <div class="file-upload-wrapper" data-text="Company Registration from CIPC">-->
+                    <!--                                    <input name="company_registration" type="file" class="file-upload-field identity"/>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!-- </div> -->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Copy of Company Registration from CIPC
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" data-text="Company Registration from CIPC">
+                                    <input name="company_registration" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Company Profile
+                                <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" data-text="Company Profile">
+                                    <input name="company_profile" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                    </div>-->
+
+                        <!--                    <div class="row">-->
+                        <!--                        <div class="col-md-6">-->
+                        <!--                            <h4>5. Detailed list of the current employees <b style="color:red">*</b></h4>-->
+                        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                        <!--                                <div class="file-upload-wrapper" data-text="List of the current employees">-->
+                        <!--                                    <input name="current_employees" type="file" class="file-upload-field identity"/>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Download the employee list template, complete it and upload it back
+                              <b style="color:red"></b> Template <a href="nyda_grant_and_voucher/static/EmployeeFormList.docx">Download</a>
+                              <b style="color:red">*</b>
+                            </h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" data-text="List of the current employees">
+                                    <input name="current_employees" type="file" class="file-upload-field identity"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <h4>5. Personal Bank Statement or Business Bank Statement <b style="color:red">*</b></h4>-->
+                    <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                    <!--                                <div class="file-upload-wrapper" data-text="Bank Statement">-->
+                    <!--                                    <input name="bank_statement" type="file" class="file-upload-field identity"/>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    </div>-->
+
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <h4>7. Business Plan if looking for grant >R50 000</h4>-->
+                    <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                    <!--                                <div class="file-upload-wrapper" data-text="Business Plan">-->
+                    <!--                                    <input name="business_plan_grant" type="file" class="file-upload-field"/>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+
+
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <h4>6. Business Plan if looking for grant >R50 000</h4>-->
+                    <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                    <!--                                <div class="file-upload-wrapper" data-text="Business Plan">-->
+                    <!--                                    <input name="business_plan_grant" type="file" class="file-upload-field"/>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <h4>7. Quotations if looking for a grant</h4>-->
+                    <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                    <!--                                <div class="file-upload-wrapper" data-text="Quotations">-->
+                    <!--                                    <input name="quotations_grant" type="file" class="file-upload-field"/>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <h4>9. Any other document that might be required</h4>-->
+                    <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                    <!--                                <div class="file-upload-wrapper" data-text="Other Document">-->
+                    <!--                                    <input name="other_doc" type="file" class="file-upload-field"/>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Any other document that might assist your application.</h4>
+                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                <div class="file-upload-wrapper" data-text="Other Document">
+                                    <input name="other_doc" type="file" class="file-upload-field"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="color:red">
+                            <h3>
+                                <b>Declaration -</b>
+                            </h3>
+                        </div>
+                        <div class="col-md-12" style="color:rebeccapurple">
+                            <h4>1. I hereby declare that the information provided in this application is, to the best of
+                                my knowledge, true and accurate;
+                            </h4>
+                            <h4>2. I hereby declare that I understand the Business Consultancy Services Voucher/Grant
+                                terms and conditions and undertake to abide by such terms and conditions;
+                            </h4>
+                            <h4>3. I hereby indemnify the National Youth Development Agency and its Service Providers
+                                for any loss or damages whatsoever incurred as a result of an intervention rendered by
+                                the Service Provider in good faith.
+                            </h4>
+                            <h4>4. I hereby declare that the information in this application form is fair and a true
+                                reflection of the intended business/project and that all the documents accompanying this
+                                application are authentic. I further confirm that neither I nor my partner(s) have ever
+                                been declared insolvent. I herewith give the National Youth Development Agency
+                                permission to conduct a credit history check as well as any other enquiries they may
+                                deem necessary to process this application.
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn">Previous</button>
+                        <button type="button" id="nextBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                    <!--                    <span class="step"></span>-->
+                    <!--                    <span class="step"></span>-->
+                    <!--                    <span class="step"></span>-->
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+            </form>
+            <div id="div_loading"/>
+        </t>
+    </template>
+
+    <template id="voucher_form_submitted" name="Thanks">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <!--                    <t t-if="registration_bool">-->
+                    <div class="notfound-404" style="opacity: 0.5 !important;">
+                        <h1 style="padding-top:100px">Thank you!</h1>
+                    </div>
+                    <h2 style="padding-top:185px">You have successfully submitted Voucher Application Form
+                    </h2>
+                    <h3 style="color:white">Your Voucher Application Number is:
+                        <t t-esc="voucher_application_id.serial_number"/>
+                    </h3>
+                    <a href="#" class="contact-btn">Contact us</a>
+                    <!--                    </t>-->
+                    <!--                    <t t-else="">-->
+                    <!--                        <div class="notfound-404" style="opacity: 0.5 !important;">-->
+                    <!--                            <h1>Sorry!</h1>-->
+                    <!--                        </div>-->
+                    <!--                        <h2 style="padding-top:125px">Sorry, you already have been registered on the Market Linkage Database-->
+                    <!--                        </h2>-->
+                    <!--                        <a href="#" class="contact-btn">Contact us</a>-->
+                    <!--                    </t>-->
+
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+
+        <record id="module_job_opp" model="ir.module.category">
+            <field name="name">Jobs/Opportunities</field>
+        </record>
+
+        <record id="opportunity_provider" model="res.groups">
+            <field name="name">Opportunity Provider</field>
+            <field name="category_id" ref="job_opportunities.module_job_opp"/>
+        </record>
+
+        <record id="job_officer" model="res.groups">
+            <field name="name">Job officer</field>
+            <field name="category_id" ref="job_opportunities.module_job_opp"/>
+        </record>
+        
+        <record id="jobs_opportunities_menu" model="website.menu">
+            <field name="name">Jobs Database</field>
+            <field name="parent_id" ref="market_linkage.products_services_menu"/>
+            <field name="sequence">0</field>
+        </record>
+		
+        <record id="jobs_database_reg" model="website.menu">
+            <field name="name">Registration</field>
+            <field name="url">/register_job</field>
+            <field name="parent_id" ref="job_opportunities.jobs_opportunities_menu"/>
+        </record>
+
+        <record id="available_jobs" model="website.menu">
+            <field name="name">Available Jobs</field>
+            <field name="url">/career</field>
+            <field name="parent_id" ref="job_opportunities.jobs_opportunities_menu"/>
+        </record>
+
+        <record id="jobs_paperformat_landscape" model="report.paperformat">
+            <field name="name">Jobs A4 Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">28</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+    </data>
+</odoo>

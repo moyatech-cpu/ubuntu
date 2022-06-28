@@ -1,0 +1,40 @@
+<odoo>
+	<record id="view_linkage_report_form" model="ir.ui.view">
+		<field name="name">linkage.report.form</field>
+		<field name="model">linkage.report</field>
+		<field name="arch" type="xml">
+			<form string="Linkage Report">
+                <group>
+<!--					<field name="file_name" invisible="1"/>-->
+<!--					<field name="linkage_report" widget="binary" required="1" filename="file_name"/>-->
+					  <field name="signed_contrct_file_name" invisible="1"/>
+                        <field name="signed_contrct_report" widget="binary" required="1" filename="signed_contrct_file_name"
+                              />
+                             <field name="beneficiary_ver_file_name" required="1" invisible="1"/>
+                        <field name="beneficiary_ver_report" required="1" widget="binary" filename="beneficiary_ver_file_name"
+                               />
+                             <field name="jobs_ver_name" invisible="1"/>
+                        <field name="jobs_ver_report" required="1" widget="binary" filename="jobs_ver_name"
+                              />
+                             <field name="monthly_file_name" invisible="1"/>
+                        <field name="monthly_report" required="1" widget="binary" filename="monthly_file_name"
+                               />
+				</group>
+			     <footer>
+	                 <button name="linkage_report_req" string="Linkage Report" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+
+			</form>
+		</field>
+	</record>
+    <record id="action_linkage_report" model="ir.actions.act_window">
+            <field name="name">Linkage Report</field>
+            <field name="res_model">linkage.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_linkage_report_form"/>
+           <field name="target">new</field>
+        </record>
+
+</odoo>

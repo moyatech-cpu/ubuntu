@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mentee_application,access_mentee_application,model_mentee_application,,1,1,1,1
+access_mentee_application_mentor,access_mentee_application_mentor,model_mentee_application,client_management.group_partner_service_provider,1,0,0,0
+access_mentor_application,access_mentor_application,model_mentor_application,,1,1,1,1
+access_mentor_application_mentee,access_mentor_application_mentee,model_mentor_application,client_management.group_branch_beneficiary,1,0,0,0
+access_legal_entity,access_legal_entity,model_legal_entity,,1,1,1,1
+access_areas_support,access_areas_support,model_areas_support,,1,1,1,1
+access_mentoring_support,access_mentoring_support,model_mentoring_support,,1,1,1,1
+access_skills_training,access_skills_training,model_skills_training,,1,1,1,1
+access_motivation,access_motivation,model_motivation,,1,1,1,1
+access_mentor_business_types,access_mentor_business_types,model_mentor_business_types,,1,1,1,1
+access_supporting_documents,access_supporting_documents,model_supporting_documents,base.group_user,1,1,1,1
+access_mentorship_agreement,access_mentorship_agreement,model_mentorship_agreement,,1,1,1,1
+access_business_monitoring_plan,access_business_monitoring_plan,model_business_monitoring_plan,,1,1,1,1
+access_mentorship_agreement_mentee,access_mentorship_agreement mentee,model_mentorship_agreement,client_management.group_branch_beneficiary,1,1,0,0
+access_mentorship_agreement_mentor,access_mentorship_agreement mentor,model_mentorship_agreement,client_management.group_partner_service_provider,1,1,0,0

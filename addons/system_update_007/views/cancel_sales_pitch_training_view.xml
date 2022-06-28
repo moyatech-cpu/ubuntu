@@ -1,0 +1,38 @@
+<odoo>
+  <record id="cancel_sales_pitch_training" model="ir.ui.view">
+  <field name="name">cancel.sales.pitch.training</field>
+  <field name="model">sales.pitch.training</field>
+  <field name="inherit_id" ref="bmt_training.view_sales_pitch_training_form"/>
+  <field name="arch" type="xml">
+  
+  	<xpath expr="//field[@name='state']" position="replace">
+
+	<field name="state" widget="statusbar" statusbar_visible="new,start_training,end_training,coordinator_review,bm_review,ho_admin_review,ho_manager_review,completed,cancelled"/>
+
+	</xpath>
+
+    <xpath expr="//button[@name='get_attendance_register']" position="after">
+
+		<button string="Cancel Training" name="btn_cancel_sales_pitch" attrs="{'invisible': [('state', '=', 'cancelled')]}" type="object" class="oe_highlight"/>
+
+	</xpath>
+	
+		<xpath expr="//button[@name='btn_cancel_sales_pitch']" position="after">
+
+	<button string="Reinstate Training" name="btn_reinstate_sales_pitch" attrs="{'invisible': [('state', '!=', 'cancelled')]}" type="object" class="oe_highlight"/>
+ 
+</xpath>
+<xpath expr="//page[@name='reporting']" position="inside">
+	 
+	<group name="Training Status History" string="Record Status History">
+		<group>
+			<field name="cancel_sales_pitch_reason" readonly="1"/>
+			<field name="reinstate_sales_pitch_reason" readonly="1"/>
+		</group>
+	</group>
+
+</xpath>
+	
+  </field>
+</record>
+</odoo>

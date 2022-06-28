@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_rejection_result_form" model="ir.ui.view">
+        <field name="name">reject.reason.form</field>
+        <field name="model">reject.reason</field>
+        <field name="arch" type="xml">
+            <form string="Rejection Reason">
+                <group>
+                    <field name="reason_text"/>
+                </group>
+                <footer>
+                    <button name="set_reject" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_rejection_result" model="ir.actions.act_window">
+        <field name="name">Rejection Result</field>
+        <field name="res_model">reject.reason</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_rejection_result_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

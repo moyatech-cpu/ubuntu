@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_voucher_beneficiaires_template">
+<t t-name="nyda_grant_and_voucher.report_voucher_beneficiaires_template">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_beneficiaries_vouchers_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Voucher Beneficiaries Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    <h4>Branch : <t t-esc="data['branch']"/></h4>
+                    <br/>
+                </div>
+                <br/>
+                <!--Table for Status Per Client-->
+                <t t-if="data['vouchers']">
+                    <div class="row">
+                        <div class="text-center p8">
+                                <t t-set="main_no" t-value="1"/>
+                                <t t-foreach="data['vouchers']" t-as="rec_data">
+                                  
+                                  <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                      <tr style="background: lightblue;">
+                                          <th class="t-center">No.</th>
+                                          <th class="t-center" style="width:25%;">Beneficiary Name</th>
+                                          <th class="t-center">Voucher Number</th>
+                                          <th class="t-center">ID Number</th>
+                                          <th class="t-center">Gender</th>
+                                          <th class="t-center">Geographic Location</th>
+                                          <th class="t-center">Disabled</th>
+                                          <th class="t-center">Race</th>
+                                          <th class="t-center">Contact No</th>
+                                      </tr>                                  
+                                          <tr>
+                                              <td class="t-center">
+                                                  <t t-esc="main_no"/>
+                                              </td>
+                                             <td>
+                                                 <t t-esc="rec_data['name']"/> <t t-esc="rec_data['surname']"/> 
+                                             </td>
+                                              <td>
+                                                  <t t-esc="rec_data['voucher_number']"/>
+                                              </td>
+                                              <td>
+                                                  <t t-esc="rec_data['sa_identity_number']"/>
+                                              </td>
+                                              <td>
+                                                  <t t-esc="rec_data['gender']"/>
+                                              </td>
+                                              <td>
+                                                  <t t-esc="rec_data['geographical_type']"/>
+                                              </td>
+                                              <td>
+                                                  <t t-esc="rec_data['disability']"/>
+                                              </td>
+                                              <td>
+                                                  <t t-esc="rec_data['population_group']"/>
+                                              </td>                                                   
+                                              <td>
+                                                  <t t-esc="rec_data['contact_number']"/>
+                                              </td>                                        
+                                          </tr>
+                                    </table>   
+                                    
+                                    <t t-foreach="rec_data['beneficiaries']" t-as="ben_data">
+                                      
+                                      <t t-set="rec_no" t-value="1"/>
+                                      <table style="width:100%;border: 0px solid white;border-collapse: collapse;">
+                                          <tr style="background: lightblue;">
+                                              <th class="t-center">No.</th>
+                                              <th class="t-center" style="width:25%;">Partner Name</th>
+                                              <th class="t-center">Voucher Number</th>
+                                              <th class="t-center">ID Number</th>                                              
+                                              <th class="t-center">Gender</th>
+                                              <th class="t-center">Geographic Location</th>
+                                              <th class="t-center">Disabled</th>
+                                              <th class="t-center">Race</th>
+                                              <th class="t-center">Contact No</th>
+                                          </tr>                                  
+                                              <tr>
+                                                  <td class="t-center">
+                                                      <t t-esc="main_no"/>.<t t-esc="rec_no"/>
+                                                  </td>
+                                                  <t t-set="rec_no" t-value="rec_no + 1"/>                              
+                                                 <td>
+                                                     <t t-esc="ben_data['name']"/>
+                                                 </td>
+                                                 <td>
+                                                    <t t-esc="ben_data['voucher_number']"/>
+                                                 </td>
+                                                 <td>
+                                                    <t t-esc="ben_data['id_number']"/>
+                                                 </td>                                                 
+                                                  <td>
+                                                      <t t-esc="ben_data['gender']"/>
+                                                  </td>
+                                                  <td>
+                                                      <t t-esc="ben_data['geographical_type']"/>
+                                                  </td>
+                                                  <td>
+                                                      <t t-esc="ben_data['disability']"/>
+                                                  </td>
+                                                  <td>
+                                                      <t t-esc="ben_data['population_group']"/>
+                                                  </td>                                                   
+                                                  <td>
+                                                      <t t-esc="ben_data['contact_number']"/>
+                                                  </td>                                        
+                                              </tr>
+                                        </table>   
+                                        <br />
+                                    </t>
+                                    
+                                    <br />
+                                    <t t-set="main_no" t-value="main_no + 1"/>   
+                                </t>
+                            
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </t>
+    </template>
+
+    <template id="report_voucher_beneficiaires">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_grant_and_voucher.report_voucher_beneficiaires_template"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

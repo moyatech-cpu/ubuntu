@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Job Location-->
+        <record model="ir.ui.view" id="job_location_tree_view">
+            <field name="name">job.location.tree.view</field>
+            <field name="model">job.location</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Job Location-->
+        <record model="ir.actions.act_window" id="job_location_action_window">
+            <field name="name">Job Location</field>
+            <field name="res_model">job.location</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem name="Configuration" id="config_menu" parent="job_opportunities.job_opportunities_main_menu"
+                  sequence="6"/>
+        <menuitem name="Job Location" id="job_location" parent="job_opportunities.config_menu" sequence="1"
+                  action="job_location_action_window"/>
+
+    </data>
+</odoo>

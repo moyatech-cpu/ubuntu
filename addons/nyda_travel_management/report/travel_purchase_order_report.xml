@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+			<report
+                id="action_travel_purchase_order_report"
+                string="Travel Purchase Order Report"
+                model="travel.purchase.order.report.wizard"
+                report_type="qweb-pdf"
+                file="nyda_travel_management.report_travel_purchase_order"
+                name="nyda_travel_management.report_travel_purchase_order"
+                menu="False" />
+    </data>
+</odoo>

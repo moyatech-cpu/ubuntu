@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_voucher_search_form" model="ir.ui.view">
+            <field name="name">all.voucher.search</field>
+            <field name="model">all.voucher.search</field>
+            <field name="arch" type="xml">
+                <form string="Search Voucher Document">
+                    <group>
+                        <group>
+                            <field name="voucher_serial_number"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="search_voucher" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_voucher_search" model="ir.actions.act_window">
+            <field name="name">Search Voucher Document</field>
+            <field name="res_model">all.voucher.search</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_voucher_search_form"/>
+            <field name="target">new</field>
+        </record>
+
+<!--        <menuitem name="Search Voucher Document" id="menu_main_voucher_search" action="action_voucher_search"-->
+<!--              parent="nyda_grant_and_voucher.reporting_status" sequence="50"/>-->
+
+    </data>
+</odoo>

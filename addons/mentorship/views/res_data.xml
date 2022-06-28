@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mentee_application_object0" model="areas.support">
+            <field name="name">Financial Management</field>
+        </record>
+        <record id="mentee_application_object1" model="areas.support">
+            <field name="name">Technology: Needs Assessment</field>
+        </record>
+        <record id="mentee_application_object2" model="areas.support">
+            <field name="name">Business Strategy</field>
+        </record>
+        <record id="mentee_application_object3" model="areas.support">
+            <field name="name">Marketing and Sales</field>
+        </record>
+        <record id="mentee_application_object4" model="areas.support">
+            <field name="name">HR and IR</field>
+        </record>
+        <record id="mentee_application_object5" model="areas.support">
+            <field name="name">Admin and General Management</field>
+        </record>
+        <record id="mentee_application_object6" model="areas.support">
+            <field name="name">Tax and Auditing</field>
+        </record>
+        <record id="mentee_application_object7" model="areas.support">
+            <field name="name">Legal Advice and Commercial Law</field>
+        </record>
+        <record id="mentee_application_compliance" model="areas.support">
+            <field name="name">Compliance/SABS standards</field>
+        </record>
+        <record id="mentee_application_object8" model="areas.support">
+            <field name="name">Other</field>
+        </record>
+
+        <record id="mentoring_support_object0" model="mentoring.support">
+            <field name="name">One-on-One Mentoring</field>
+        </record>
+        <record id="mentoring_support_object1" model="mentoring.support">
+            <field name="name">Specialist Mentoring</field>
+        </record>
+        <record id="mentoring_support_object2" model="mentoring.support">
+            <field name="name">Group Mentoring</field>
+        </record>
+        <record id="mentoring_support_object3" model="mentoring.support">
+            <field name="name">Peer Mentoring</field>
+        </record>
+
+        <record id="legal_entity_object0" model="legal.entity">
+            <field name="name">CC</field>
+        </record>
+        <record id="legal_entity_object1" model="legal.entity">
+            <field name="name">PTY</field>
+        </record>
+        <record id="legal_entity_object2" model="legal.entity">
+            <field name="name">Co-ops</field>
+        </record>
+        <record id="legal_entity_object3" model="legal.entity">
+            <field name="name">Other</field>
+        </record>
+    </data>
+</odoo>

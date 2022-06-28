@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+			<report
+                id="action_voucher_assessments_scheduled_report"
+                string="Regional Voucher Assessments Scheduled Report"
+                model="voucher.assessments.scheduled.report"
+                report_type="qweb-pdf"
+                file="nyda_regional_reports_update.report_voucher_assessments_scheduled"
+                name="nyda_regional_reports_update.report_voucher_assessments_scheduled"
+                menu="False" />
+    </data>
+</odoo>

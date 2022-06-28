@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+        <!--Tree view for Institution-->
+        <record model="ir.ui.view" id="institution_tree_view">
+            <field name="name">institution.tree.view</field>
+            <field name="model">institution</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Institution-->
+        <record model="ir.actions.act_window" id="institution_action">
+            <field name="name">Institution</field>
+            <field name="res_model">institution</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for Institution-->
+        <menuitem name="Configuration" id="config_menu" parent="learning_development.learning_development_main_menu"
+            sequence="4"/>
+        <menuitem name="Institution" id="institution_menu" action="institution_action"
+                  parent="learning_development.config_menu"/>
+
+    </data>
+</odoo>

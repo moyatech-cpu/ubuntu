@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- register.opportunity views -->
+    <record id="view_register_opportunity_form" model="ir.ui.view">
+        <field name="name">register.opportunity.form</field>
+        <field name="model">register.opportunity</field>
+        <field name="arch" type="xml">
+            <form delete="false" duplicate="false">
+    <header>
+        <button string="Matched" type="object" name="matched" attrs="{'invisible':[('state','!=','not_match')]}"
+                class="oe_highlight" groups="mentorship.group_bao"/>
+        <button string="Submit" type="object"
+                attrs="{'invisible':['|',('state','!=','new'),('is_assign_button', '!=', True)]}" name="match_req"
+                class="oe_highlight" groups="mentorship.group_bao,client_management.group_partner_service_provider"/>
+        <button class="oe_highlight" type="action" name="%(action_linkage_report)d" string="Linkage Report"
+                attrs="{'invisible':['|','|','|','|',('state','=','new'),('state','=','not_match'),('state','=','linkage_report'),('state','=','project_closeout'),('state','=','complated')]}"
+                groups="mentorship.group_bao"/>    
+        <button class="oe_highlight" type="action" name="%(action_project_closeout_report)d"
+                attrs="{'invisible':['|','|','|','|',('state','=','new'),('state','=','match'),('state','=','not_match'),('state','=','project_closeout'),('state','=','complated')]}"
+                string="Project Closeout" groups="mentorship.group_bao"/>
+        <button class="oe_highlight" type="object" name="complated_funcation" string="Completed"
+                attrs="{'invisible':['|','|','|','|',('state','=','new'),('state','=','match'),('state','=','not_match'),('state','=','linkage_report'),('state','=','complated')]}"
+                groups="mentorship.group_bao"/>
+        <field name="state" widget="statusbar"/>
+    </header>
+    <sheet>
+        <div class="oe_button_box" name="button_box">
+            <button class="oe_stat_button" type="object" icon="fa-th-list" name="req_service_provider_smart_button"
+                    groups="mentorship.group_bao" attrs="{'invisible': [('match_count', '=', 0)]}">
+                <field name="match_count" widget="statinfo"/>
+            </button>
+        </div>
+        <div class="oe_title">
+            <h1>
+                <field name="title" placeholder="Opportunity Title..." required="1"/>
+            </h1>
+            <h3>
+                Branch:
+                <field name="branch_id" placeholder="Select Branch" readonly="1"/>
+            </h3>
+        </div>
+
+        <group string="Opportunity Details">
+            <field name="oppo_type" required="1"/>
+            <field name="description" required="1"/>
+            <field name="company" required="1"/>
+            <field name="is_assign_button" invisible="1"/>
+        </group>
+        <group>
+            <group>
+                <field name="sector_id" required="1"/>
+                <field name="province_id" required="1"/>
+            </group>
+            <group>
+                <field name="posted_date" required="1"/>
+                <field name="closing_date" required="1"/>
+            </group>
+        </group>
+        <group>
+            <field name="reply_tile" invisible="1"/>
+            <field name="creator_id" readonly="1" groups="mentorship.group_bao"/>
+            <field name="opportunity_application_ids" string="Assigned Beneficiaries">
+                <tree>
+                    <field name="business_name" string="Company Name"/>
+                    <field name="registration_number"/>
+                    <field name="contact_person"/>
+                    <field name="cell_phone_number"/>
+                    <field name="email"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </group>
+        <group>
+
+            <group string="Linkage Report">
+                <field name="signed_contrct_file_name" invisible="1"/>
+                <field name="signed_contrct_report" widget="binary" filename="signed_contrct_file_name" readonly="1"/>
+                <field name="beneficiary_ver_file_name" invisible="1"/>
+                <field name="beneficiary_ver_report" widget="binary" filename="beneficiary_ver_file_name" readonly="1"/>
+                <field name="jobs_ver_name" invisible="1"/>
+                <field name="jobs_ver_report" widget="binary" filename="jobs_ver_name" readonly="1"/>
+                <field name="monthly_file_name" invisible="1"/>
+                <field name="monthly_report" widget="binary" filename="monthly_file_name" readonly="1"/>
+            </group>
+            <group string="Project Closeout Report">
+                <field name="project_closeout_file_name" invisible="1"/>
+                <field name="project_closeout_report" widget="binary" filename="project_closeout_file_name"
+                       readonly="1"/>
+            </group>
+
+        </group>
+    </sheet>
+</form>
+        </field>
+    </record>
+
+    <record id="view_register_opportunity_tree" model="ir.ui.view">
+        <field name="name">register.opportunity.tree</field>
+        <field name="model">register.opportunity</field>
+        <field name="arch" type="xml">
+            <tree string="Opportunity Details">
+                <field name="posted_date"/>
+                <field name="company"/>
+                <field name="title"/>
+                <field name="oppo_type"/>
+                <field name="description"/>
+                <field name="state" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_register_opportunity_kanban_button" model="ir.ui.view">
+        <field name="name">view.register.opportunity.kanban</field>
+        <field name="model">register.opportunity</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="" on_create="quick_create">
+                <field name="title"/>
+                <field name="oppo_type"/>
+                <field name="description"/>
+                <field name="interested_bene_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <strong class="text-primary" style="font-size:16px">
+                                                    <field name="title"/>
+                                                </strong>
+                                            </strong>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <t t-if="record.oppo_type.raw_value == 'service'">
+                                            <p class="label label-success o_kanban_inline_block">
+                                                <field name="oppo_type"/>
+                                            </p>
+                                        </t>
+                                        <t t-if="record.oppo_type.raw_value == 'product'">
+                                            <p class="label label-danger o_kanban_inline_block">
+                                                <field name="oppo_type"/>
+                                            </p>
+                                        </t>
+
+                                    </div>
+                                    <div class="o_kanban_card_content">
+                                        <div class="row">
+                                            <div class="col-xs-6 o_kanban_primary_left">
+                                                <p>
+                                                    <b>
+                                                        <field name="branch_id"/>
+                                                    </b>
+                                                </p>
+                                                <p>
+                                                    <b>
+                                                        <field name="sector_id"/>
+                                                    </b>
+                                                </p>
+                                                <p>
+                                                    <b>
+                                                        <field name="posted_date"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <!--                                            <div class="col-xs-6 o_kanban_primary_right">-->
+                                            <!--                                               <p><b><field name="branch_id"/></b></p>-->
+                                            <!--                                            <p><b><field name="sector_id"/></b></p>-->
+                                            <!--                                            <p><b><field name="posted_date"/></b></p>-->
+                                            <!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_tags_section">
+                                        <field name="interested_bene_id" widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_register_opportunity_filter" model="ir.ui.view">
+        <field name="name">register.opportunity.view.search</field>
+        <field name="model">register.opportunity</field>
+        <field name="arch" type="xml">
+            <search string="Search Applicants">
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_stage_opportunity">
+        <field name="name">Opportunity Management</field>
+        <field name="res_model">register.opportunity</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_register_opportunity_filter"/>
+        <field name="context">{'search_default_id': [active_id], 'default_id': active_id}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_register_opportunity_kanban_button')})]"/>
+    </record>
+
+    <record id="view_opportunity_application_kanban_button" model="ir.ui.view">
+        <field name="name">view.opportunity.application.kanban</field>
+        <field name="model">opportunity.application</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="" on_create="quick_create">
+                <field name="name"/>
+                <field name="id_number"/>
+                <field name="email"/>
+                <field name="opportunity_application_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <strong class="text-primary" style="font-size:16px">
+                                                    <field name="opportunity_application_id"/>
+                                                </strong>
+                                            </strong>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_card_content">
+                                        <div class="row">
+                                            <div class="col-xs-6 o_kanban_primary_left">
+                                                <p>
+                                                    <b>
+                                                        <field name="name"/>
+                                                    </b>
+                                                </p>
+<!--                                                <p>-->
+<!--                                                    <b>-->
+<!--                                                        <field name="id_number"/>-->
+<!--                                                    </b>-->
+<!--                                                </p>-->
+                                                <p>
+                                                    <b>
+                                                        <field name="email"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                          <div class="row">
+                                            <div class="col-xs-6 o_kanban_primary_left">
+                                                <button class="btn btn-primary" name="action_match_beneficiary"
+                                                        type="object">Matched
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-6 o_kanban_primary_right">
+                                                <button class="btn btn-primary" name="action_not_match_beneficiary"
+                                                        type="object">Not Matched
+                                                </button>
+                                            </div>
+                                          </div>
+                                    </div>
+
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_opportunity_application_filter" model="ir.ui.view">
+        <field name="name">opportunity.application.view.search</field>
+        <field name="model">opportunity.application</field>
+        <field name="arch" type="xml">
+            <search string="Search Applicants">
+                <field name="opportunity_application_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_opportunity_application">
+        <field name="name">Opportunity Application</field>
+        <field name="res_model">opportunity.application</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_opportunity_application_filter"/>
+        <field name="domain">[('opportunity_application_id','=',active_id)]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_opportunity_application_kanban_button')})]"/>
+    </record>
+
+    <record id="view_register_opportunity_kanban" model="ir.ui.view">
+        <field name="name">view.register.opportunity.kanban</field>
+        <field name="model">register.opportunity</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+    <field name="title"/>
+    <field name="oppo_type"/>
+    <field name="description"/>
+    <field name="state" readonly="1"/>
+    <templates>
+        <t t-name="kanban-box">
+            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                <div t-attf-class="oe_kanban_global_click">
+                    <div class="oe_kanban_content">
+                        <div class="o_kanban_record_top">
+
+                            <div class="o_kanban_record_headings">
+                                <strong class="o_kanban_record_title">
+                                    <strong class="text-primary" style="font-size:16px">
+                                        <field name="company"/>
+                                    </strong>
+                                </strong>
+                                <br/>
+
+
+                                <br>
+
+                                </br>
+
+                                <b>
+                                    <field name="title"/>
+                                </b>
+                            </div>
+                        </div>
+
+                        <div class="o_kanban_record_body">
+                            <t t-if="record.oppo_type.raw_value == 'service'">
+                                <p class="label label-success o_kanban_inline_block">
+                                    <field name="oppo_type"/>
+                                </p>
+                            </t>
+                            <t t-if="record.oppo_type.raw_value == 'product'">
+                                <p class="label label-danger o_kanban_inline_block">
+                                    <field name="oppo_type"/>
+                                </p>
+                            </t>
+
+                        </div>
+
+                        <div class="o_kanban_card_content">
+                            <div class="row">
+
+                                <!--    <div class="col-xs-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="375" type="action">APPLICATION(s)
+                                        </button>
+                                    </div>
+                                    -->
+
+                                <div class="col-xs-6 o_kanban_primary_right">
+                                    <p>
+                                        <b>
+                                            <field name="branch_id"/>
+                                        </b>
+                                    </p>
+                                    <p>
+                                        <b>
+                                            <field name="sector_id"/>
+                                        </b>
+                                    </p>
+                                    <p>
+                                        <b>
+                                            <field name="posted_date"/>
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="oe_clear"/>
+                </div>
+            </div>
+        </t>
+    </templates>
+</kanban>
+        </field>
+    </record>
+
+    <record id="action_register_opportunity" model="ir.actions.act_window">
+        <field name="name">Opportunity Management</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">register.opportunity</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form,graph,pivot</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_register_opportunity_kanban')})]"/>
+    </record>
+
+    <!-- MenuItem for partner.enquiry -->
+    <menuitem id="menu_market_linkage" name="Market Linkage"
+              groups="mentorship.group_bao,client_management.group_partner_service_provider,base.group_system" sequence="4"
+              web_icon="market_linkage,static/description/icon.png"/>
+
+    <menuitem id="menu_register_opportunity" name="Opportunity" parent="menu_market_linkage"
+              action="action_register_opportunity" sequence="4"/>
+
+
+     <!-- opportunity.application views -->
+    <record id="view_opportunity_application_form" model="ir.ui.view">
+        <field name="name">opportunity.application.form</field>
+        <field name="model">opportunity.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Matched" type="object" name="action_match_beneficiary"
+                            groups="mentorship.group_bao"/>
+                    <button string="Not Matched" type="object" name="action_not_match_beneficiary"
+                            groups="mentorship.group_bao"/>
+                    <field name='state' widget='statusbar'/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="mkl_beneficiary_id"/>
+                            <field name="name" />
+                            <field name="id_number" />
+                            <field name="cell_phone_number" />
+                            <field name="email"/>
+                        </group>
+                        <group>
+
+                            <field name="branch_id" />
+                            <field name="youth_enquiry_id" />
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="business_name" />
+                            <field name="registration_number"/>
+                            <field name="contact_person"/>
+                            <field name="contact_details"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_opportunity_application_tree" model="ir.ui.view">
+        <field name="name">opportunity.application.tree</field>
+        <field name="model">opportunity.application</field>
+        <field name="arch" type="xml">
+            <tree string="Opportunity Details">
+                <field name="name"/>
+                <field name="id_number"/>
+                <field name="email"/>
+                <field name="opportunity_application_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

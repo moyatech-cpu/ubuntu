@@ -1,0 +1,116 @@
+<odoo>
+
+    <!-- Menu Entry for Mentorship application
+    <record id="mentorship_program_main" model="website.menu">
+        <field name="name">Mentorship Programme</field>
+        <field name="url">/mentorship/program</field>
+        <field name="parent_id" ref="website.main_menu"/>
+    </record>
+	
+    <record id="mentorship_about" model="website.menu">
+        <field name="name">About Mentorship</field>
+        <field name="url">/mentorship/about</field>
+        <field name="parent_id" ref="mentorship.mentorship_program_main"/>
+    </record>
+	-->
+	
+    <record id="mentorship_registration_mentee" model="website.menu">
+        <field name="name">Mentee Registration</field>
+        <field name="url">/mentorship/application/mentee</field>
+        <field name="parent_id" ref="market_linkage.products_services_menu"/>
+    </record>
+
+    <record id="mentorship_registration_mentor" model="website.menu">
+        <field name="name">Mentor Registration</field>
+        <field name="url">/mentorship/application/mentor</field>
+        <field name="parent_id" ref="market_linkage.products_services_menu"/>
+    </record>
+
+    <!-- Sequence Data for Mentor Agreement -->
+    <record id="seq_mentorship_agreement" model="ir.sequence">
+        <field name="name">Mentorship Agreement</field>
+        <field name="code">mentorship.agreement</field>
+        <field name="prefix">MNSA</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!--    Data for Sectors-->
+
+<!--    <record id="mentor_sectors_object0" model="mentor.sectors">-->
+<!--        <field name="name">Retail / Wholesale</field>-->
+<!--    </record>-->
+<!--    <record id="mentor_sectors_object1" model="mentor.sectors">-->
+<!--        <field name="name">Service</field>-->
+<!--    </record>-->
+<!--    <record id="mentor_sectors_object2" model="mentor.sectors">-->
+<!--        <field name="name">Manufacturing</field>-->
+<!--    </record>-->
+<!--    <record id="mentor_sectors_object3" model="mentor.sectors">-->
+<!--        <field name="name">Franchising</field>-->
+<!--    </record>-->
+
+    <!--    Data for Business types-->
+
+    <record id="mentor_business_types_object0" model="mentor.business.types">
+        <field name="name">Agriculture</field>
+    </record>
+    <record id="mentor_business_types_object1" model="mentor.business.types">
+        <field name="name">Chemical and Pharmaceutical</field>
+    </record>
+    <record id="mentor_business_types_object2" model="mentor.business.types">
+        <field name="name">Electrical and Electronics</field>
+    </record>
+    <record id="mentor_business_types_object3" model="mentor.business.types">
+        <field name="name">Fashion and Clothing</field>
+    </record>
+    <record id="mentor_business_types_object4" model="mentor.business.types">
+        <field name="name">Food and Beverages</field>
+    </record>
+    <record id="mentor_business_types_object5" model="mentor.business.types">
+        <field name="name">Information Technology</field>
+    </record>
+    <record id="mentor_business_types_object6" model="mentor.business.types">
+        <field name="name">Paper and Printing</field>
+    </record>
+    <record id="mentor_business_types_object7" model="mentor.business.types">
+        <field name="name">Pottery and Glassware</field>
+    </record>
+
+    <record id="mentor_business_types_object8" model="mentor.business.types">
+        <field name="name">Arts and Entertainment</field>
+    </record>
+    <record id="mentor_business_types_object9" model="mentor.business.types">
+        <field name="name">Building and Construction</field>
+    </record>
+    <record id="mentor_business_types_object10" model="mentor.business.types">
+        <field name="name">Business Services</field>
+    </record>
+    <record id="mentor_business_types_object11" model="mentor.business.types">
+        <field name="name">Restaurant and Fast Foods</field>
+    </record>
+    <record id="mentor_business_types_object12" model="mentor.business.types">
+        <field name="name">Textiles and Soft Furnishing</field>
+    </record>
+    <record id="mentor_business_types_object13" model="mentor.business.types">
+        <field name="name">Timber and Wood</field>
+    </record>
+    <record id="mentor_business_types_object14" model="mentor.business.types">
+        <field name="name">Tourism and Hospitality</field>
+    </record>
+    <record id="mentor_business_types_object15" model="mentor.business.types">
+        <field name="name">Vehicle Repairs and Parts</field>
+    </record>
+    <record id="mentor_business_types_object16" model="mentor.business.types">
+        <field name="name">Water</field>
+    </record>
+    <record id="mentor_business_types_object17" model="mentor.business.types">
+        <field name="name">Other1</field>
+    </record>
+    <record id="mentor_business_types_object18" model="mentor.business.types">
+        <field name="name">Other2</field>
+    </record>
+    <record id="mentor_business_types_object19" model="mentor.business.types">
+        <field name="name">Other3</field>
+    </record>
+
+</odoo>

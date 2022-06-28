@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <report
+            id="action_grant_report"
+            string="Grant Report"
+            model="grant.report.wizard"
+            report_type="qweb-pdf"
+            file="nyda_grant_and_voucher.grant_report_template"
+            name="nyda_grant_and_voucher.grant_report"
+            print_report_name="'Grant Report'"
+        />
+        <!--            paperformat="property_management.paperformat_property"-->
+
+        <report
+            id="action_report_status_branch_grant"
+            string="Status Per Branch Report"
+            model="grant.status.report"
+            report_type="qweb-pdf"
+            file="nyda_grant_and_voucher.report_status_branch_grant"
+            name="nyda_grant_and_voucher.report_status_branch_grant"
+            menu="False"
+        />
+
+        <report
+            id="action_report_status_branch_cons_grant"
+            string="Status Per Branch Report(Consolidated)"
+            model="grant.status.report"
+            report_type="qweb-pdf"
+            file="nyda_grant_and_voucher.report_status_branch_cons_grant"
+            name="nyda_grant_and_voucher.report_status_branch_cons_grant"
+            menu="False"
+        />
+
+    </data>
+</odoo>

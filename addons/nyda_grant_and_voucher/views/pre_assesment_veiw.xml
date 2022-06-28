@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Pre-Assessment  views -->
+    <record id="view_client_preassessment_form" model="ir.ui.view">
+        <field name="name">client.preassessment.form</field>
+        <field name="model">client.preassessment</field>
+        <field name="arch" type="xml">
+            <form delete="false" duplicate="false" create="false" edit="false">
+                <header>
+                    <button name="create_pitch_and_polish" string="Pitch and Polish" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                    <!-- <button name="set_recommended" string="Recommend" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', '!=', 'new')]}"/> -->
+                    <field name="state" widget="statusbar" statusbar_visible="new,pitch_polish,BMT_Referred,recommended"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" attrs="{'invisible': [('state', '=', 'new')]}">
+                        <button name="pitch_polish_rec" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                            Pitch &amp; Polish
+                        </button>
+                    </div>
+                    <group string="Client Pre-assessment Form">
+                        <group>
+                            <field name="branch_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="area"/>
+                            <field name="province_id" options="{'no_open':True,'no_create':True}"/>
+                        </group>
+                        <group>
+                            <field name="client_id" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                            <field name="client_ref_no"/>
+                            <field name="user_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="assessor_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="position_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="date"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <!--                    <group>-->
+                    <!--                        <field name="outcome_of_the_assessment"/>-->
+                    <!--                        <field name="comment_on_assessment"/>-->
+                    <!--                        <field name="follow_up_on_assessment_outcomes"/>-->
+                    <!--                    </group>-->
+                    <group string="Personal Profile Of Potential Client(s)">
+                        <group>
+                            <field name="name"/>
+                            <field name="id_number"/>
+                        </group>
+                        <group>
+                            <field name="surname"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="home_telephone"/>
+                            <field name="fax_number"/>
+                            <field name="physical_address"/>
+                            <field name="geographic_location"/>
+                        </group>
+                        <group>
+                            <field name="cell"/>
+                            <field name="email"/>
+                            <field name="postal_code"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="no_of_Children"/>
+                            <field name="marital_status"/>
+                            <field name="board_member"/>
+                        </group>
+                        <group>
+                            <field name="children_supporting"/>
+                            <field name="if_yes" attrs="{'invisible': [('board_member', '=', 'no')]}"/>
+                        </group>
+                    </group>
+                    <h4>
+                        <b>Educational Information (Highest level of Education achieved)</b>
+                    </h4>
+                    <group>
+                        <group>
+                            <field name="highest_standard_passed"/>
+                            <field name="specify_study"/>
+                        </group>
+                        <group>
+                            <field name="tertiary_education"/>
+                            <field name="training_acquired"/>
+                        </group>
+                    </group>
+                    <h4>
+                        <b>Employment History</b>
+                    </h4>
+                    <group>
+                        <group>
+                            <field name="currently_employed"/>
+                        </group>
+                        <group>
+                            <field name="how_long" attrs="{'invisible': [('currently_employed', '=', 'no')]}"/>
+                            <field name="technical_experience"
+                                   attrs="{'invisible': [('currently_employed', '=', 'yes')]}"/>
+                        </group>
+                    </group>
+                    <h4>
+                        <b>General Information</b>
+                    </h4>
+                    <!--                    <group>-->
+                    <!--                        <field name="purpose_visit"/>-->
+                    <!--                    </group>-->
+                    <group>
+                        <group>
+                            <field name="benefited_from_nyda"/>
+                            <field name="branch_name" attrs="{'invisible': [('benefited_from_nyda', '=', 'no')]}"/>
+                            <field name="yes_specify" attrs="{'invisible': [('benefited_from_nyda', '=', 'no')]}"/>
+                            <field name="date_time" attrs="{'invisible': [('benefited_from_nyda', '=', 'no')]}"/>
+                        </group>
+                        <!--                        <group>-->
+                        <!--                            <field name="assessed_to_be_requiring"/>-->
+                        <!--                            <field name="no_indicate"-->
+                        <!--                                   attrs="{'invisible': [('assessed_to_be_requiring', '=', 'yes')]}"/>-->
+                        <!--                        </group>-->
+                    </group>
+                    <notebook>
+                        <page string="Entrepreneurial Analysis">
+                            <h4>
+                                <b>Entrepreneurial Analysis</b>
+                            </h4>
+                            <group>
+                                <group>
+                                    <field name="business_idea"/>
+                                    <field name="business_plan"/>
+                                    <field name="registered_business"/>
+                                    <field name="reg_number" attrs="{'invisible': [('registered_business','=','no')]}"/>
+
+                                </group>
+                                <group>
+                                    <field name="own_business"/>
+                                    <field name="business_plan_document_name" invisible="1"/>
+                                    <field name="business_plan_document" filename="business_plan_document"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Start Up"
+                              attrs="{'invisible': [('business_idea', '=', 'no'),('own_business','=','yes')]}">
+                            <h4>
+                                <b>Start Up(client who has a viable business idea to start the business)</b>
+                            </h4>
+                            <group>
+                                <group>
+                                    <field name="start_a_business"/>
+                                    <field name="type_of_business"/>
+                                    <field name="potential_customers"/>
+                                    <field name="business_develop"/>
+                                    <field name="funding"/>
+                                    <field name="technical_skills"/>
+                                    <field name="if_yes_ipc"/>
+                                    <field name="if_yes_fti"/>
+                                    <field name="if_yes_ae"/>
+                                </group>
+                                <group>
+                                    <field name="business_sector"/>
+                                    <field name="need_the_business"/>
+                                    <field name="business_operate"/>
+                                    <field name="service_rendered"/>
+                                    <field name="management_skills"/>
+                                    <field name="identified_potential_customers"/>
+                                    <field name="funds_to_invest"/>
+                                    <field name="any_equipment"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Existing Business" attrs="{'invisible': [('own_business','=','no')]}">
+                            <h4>
+                                <b>Existing Business (operational business)</b>
+                            </h4>
+                            <group>
+                                <group>
+                                    <field name="start_the_business"/>
+                                    <field name="business"/>
+                                    <field name="seeks_to_satisfy"/>
+                                    <field name="business_operating"/>
+                                    <field name="service_rendered_eb"/>
+                                    <field name="people_are_employed"/>
+                                </group>
+                                <group>
+                                    <field name="Indicate_the_business_sector"/>
+                                    <field name="business_seeks_to_satisfy"/>
+                                    <field name="potential_customers_eb"/>
+                                    <field name="service_business"/>
+                                    <field name="operation_business_eb"/>
+                                    <field name="annual_turnover"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Capacity Building">
+                            <h4>
+                                <b>Capacity Building</b>
+                            </h4>
+                            <label for="business_you_want_to_start"
+                                   string="What skills/ knowledge do you have about the business you want to start?"/>
+                            <field name="business_you_want_to_start"/>
+                            <group>
+                                <field name="entrepreneurship_training"/>
+                            </group>
+                            <label for="training_you_received"
+                                   string="If yes, indicate the training you received and name of the institution.(E.g. financial management, project management, etc. And provide proof of the training received.)"
+                                   attrs="{'invisible': [('entrepreneurship_training','=','no')]}"/>
+                            <field name="training_you_received"
+                                   attrs="{'invisible': [('entrepreneurship_training','=','no')]}"/>
+                            <group attrs="{'invisible': [('entrepreneurship_training','=','no')]}">
+                                <field name="supporting_document_ids">
+                                    <tree string="Supporting Documents for Training" editable="bottom">
+                                        <field name="supporting_doc_name" invisible="1"/>
+                                        <field name="supporting_doc" filename="supporting_doc_name"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <!--                            <label for="development_training"-->
+                            <!--                                   string="Are you willing to attend the Entrepreneurship Development Training if required?"/>-->
+                            <!--                            <field name="training_you_received"/>-->
+
+                        </page>
+                        <page string="Business Plan Element">
+                            <label for="executive_summary"
+                                   string="Executive Summary – Clear, concise, exciting, and effective"/>
+                            <field name="executive_summary"/>
+                            <label for="company_overview"
+                                   string="Company Overview – Presents a vision, genesis of idea, current status, overall strategy, and Objectives for the business"/>
+                            <field name="company_overview"/>
+                            <label for="market_opportunity"
+                                   string="Market Opportunity- Describes “pain”/ unique opportunity in the market, needs identification and competitive analysis"/>
+                            <field name="market_opportunity"/>
+                            <label for="market_opportunitys"
+                                   string="Market Opportunity – Clear market need and a pathway presented to take advantage of that need"/>
+                            <field name="market_opportunitys"/>
+                            <label for="marketing_strategy"
+                                   string="Marketing Strategy – Describes credible launch point, establishment of distribution channels,competitive positioning, and appropriate promotional/branding considerations"/>
+                            <field name="marketing_strategy"/>
+                            <label for="competitive_advantage"
+                                   string="Competitive Advantage – Company strategy provides a unique/special element that will give it a distinctive competitive edge in its market"/>
+                            <field name="competitive_advantage"/>
+                            <label for="products_or_services"
+                                   string="Products or Services – Describes features and benefits, pricing, current state of development, proprietary position, business model"/>
+                            <field name="products_or_services"/>
+                            <label for="management"
+                                   string="Management – Roles of key individuals, structure, ability to understand and execute strategy,personnel gaps, advisors"/>
+                            <field name="management"/>
+                            <label for="management_capability"
+                                   string="Management Capability – Applicant/management team has the understanding to effectively grow the venture while handling the risks"/>
+                            <field name="management_capability"/>
+                            <label for="financials"
+                                   string="Financials – Financial information appropriately supports the business strategy. Clear outline of sources/uses of funds and key underlying assumptions."/>
+                            <field name="financials"/>
+                            <label for="financial_understanding"
+                                   string="Financial Understanding – Applicant/Team has a solid understating of its business model that is reflected through the financial statements"/>
+                            <field name="financial_understanding"/>
+                            <label for="operations"
+                                   string="Operations – Plan for production, delivery, cost, margins, operating complexity, resources required"/>
+                            <field name="operations"/>
+                            <label for="plan_composition"
+                                   string="Plan Composition – Communicative value and quality of the plan"/>
+                            <field name="plan_composition"/>
+                            <field name="related_total" invisible="1"/>
+                            <div class="oe_title">
+                                <label for="total" string="TOTAL"/>
+                                <h1>
+                                    <field name="total" readonly="1"/>
+                                </h1>
+                            </div>
+                            <!--                            <h1>TOTAL:</h1>-->
+                            <!--                            <field name="total"/>-->
+                        </page>
+                    </notebook>
+                    <label for="provide_feedback"
+                           string="Please provide feedback and advise based on the assessment of the business plan"/>
+                    <field name="provide_feedback"/>
+                    <label for="strengths" string="Strengths:"/>
+                    <field name="strengths"/>
+                    <label for="weaknesses" string="Weaknesses:"/>
+                    <field name="weaknesses"/>
+                    <label for="suggestions" string="Other Comments/Suggestions:"/>
+                    <field name="suggestions"/>
+                    <label for="recommendation"
+                           string="Recommendation :(see attached list of Entrepreneurship Development Programme Training Offerings)"/>
+                    <field name="recommendation"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_client_preassessment_tree" model="ir.ui.view">
+        <field name="name">client.preassessment.tree</field>
+        <field name="model">client.preassessment</field>
+        <field name="arch" type="xml">
+            <tree string="Client Preassessment Details" delete="false" duplicate="false" create="false" edit="false">
+                <field name="name"/>
+                <field name="surname"/>
+                <field name="id_number"/>
+                <field name="create_date"/>
+                <field name="cell"/>
+                <field name="email"/>
+                <field name="geographic_location"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_client_preassessment" model="ir.actions.act_window">
+        <field name="name">Client Preassessment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">client.preassessment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--MenuItem for Client Preassessment-->
+    <menuitem id="main_menu_client_preassessment" name="Grant Management"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp,client_management.group_branch_beneficiary"/>
+    <menuitem id="main_menu_voucher" name="Voucher Management"/>
+    <menuitem id="menu_client_preassessment" name="Client Preassessment"
+              parent="nyda_grant_and_voucher.main_menu_client_preassessment"
+              action="action_client_preassessment" sequence="1"/>
+
+</odoo>

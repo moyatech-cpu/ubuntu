@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_grant_voucher_bcs_vp" model="res.groups">
+        <field name="name">VP19 Specialist</field>
+        <field name="sequence">10</field>
+        <field name="category_id" ref="nyda_grant_and_voucher.module_category_grant_voucher"/>
+    </record>
+</odoo>

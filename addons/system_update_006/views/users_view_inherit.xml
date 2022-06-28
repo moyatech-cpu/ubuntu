@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_users_region_inherit" model="ir.ui.view">
+        <field name="name">res.users.region.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="mentorship.view_res_users_form_inherit" />
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='branch_id']" position="after">
+            		<field name="is_regional_user"/>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

@@ -1,0 +1,373 @@
+<odoo>
+    <data>
+
+        <!-- Career template -->
+        <template id="career_form" name="Career">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section class="jumbotron s_big_message oe_img_bg oe_custom_bg"
+                             style="background-image: url('/web/image/website.s_background_image_01');">
+                        <div class="container">
+                            <div class="row">
+                                <div class="mb32 col-md-12">
+                                    <h1 class="o_default_snippet_text text-center">Our Job Offers</h1>
+                                    <p class="o_default_snippet_text text-center">The future belongs to those who
+                                        believe in the
+                                        beauty of their dreams.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <t t-if="jobs">
+                        <section class="s_text_block bg-white">
+                            <div class="container mb16">
+                                <div class="row">
+                                    <t t-foreach="jobs" t-as="data">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <t t-if="data.name">
+                                                    <div class="col-sm-12">
+                                                        <a t-attf-href="/position/#{ slug(data) }" class="td-none">
+                                                            <h2 class="o_default_snippet_text">
+                                                                <t t-esc="data.name"/>
+                                                            </h2>
+                                                        </a>
+                                                    </div>
+                                                </t>
+                                                <t t-if="data.job_location_id">
+                                                    <div class="col-sm-12">
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        <t t-esc="data.job_location_id"/>
+                                                    </div>
+                                                </t>
+                                                <t t-if="data.create_date">
+                                                    <div class="col-sm-12">
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                        <t t-esc="data.create_date"/>
+                                                    </div>
+                                                </t>
+                                                <t t-if="data.position_available > 0">
+                                                    <div class="col-sm-12">
+                                                        <span>Position Available :
+                                                            <t t-esc="data.position_available"/>
+                                                        </span>
+                                                    </div>
+                                                </t>
+                                                <t t-if="data.description">
+                                                    <div class="col-sm-12">
+                                                        <p>Short Description :
+                                                            <t t-esc="data.description"/>
+                                                        </p>
+                                                    </div>
+                                                </t>
+                                                <t t-if="data.name">
+                                                    <div class="col-sm-12">
+                                                        <a t-attf-href="/position/#{ slug(data) }"
+                                                           class="td-none btn btn-primary">Apply
+                                                        </a>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </section>
+                    </t>
+                    <t t-else="">
+                        <section class="s_text_block bg-white">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h1>Currently there are no jobs !!</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </t>
+                </div>
+            </t>
+        </template>
+
+        <!-- Jobs Description Template -->
+        <template id="jobs_description_template" name="Career">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty bg-white">
+                    <section class="s_text_block">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1 class="o_default_snippet_text">
+                                        <t t-esc="data.name"/>
+                                    </h1>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.job_location_id">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                        <t t-esc="data.name"/>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.create_date">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <t t-esc="data.create_date"/>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.position_available > 0">
+                                        <span>Position Available :
+                                            <t t-esc="data.position_available"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.app_closing_date">
+                                        <span>Application Closing Date :
+                                            <t t-esc="data.app_closing_date"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.job_level">
+                                        <span>Job Level :
+                                            <span t-field="data.job_level"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.prop_can_start_date">
+                                        <span>Proposed Candidate Start Date :
+                                            <span t-field="data.prop_can_start_date"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.emp_type">
+                                        <span>Employment Type :
+                                            <span t-field="data.emp_type"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.stipend_per_month">
+                                        <span>Stipend Per Month :
+                                            <span t-field="data.stipend_per_month"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.salary_per_month">
+                                        <span>Salary Per Month :
+                                            <span t-field="data.salary_per_month"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.province_id.name">
+                                        <span>Province :
+                                            <span t-field="data.province_id.name"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <t t-if="data.ind_sector_id">
+                                        <span>Industry Sector :
+                                            <span t-field="data.ind_sector_id.name"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-md-12 mb16 mt16">
+                                    <t t-if="data.required_experience">
+                                        <p class="o_default_snippet_text">
+                                            <b class="o_default_snippet_text">Required Experience :</b>
+                                            <t t-esc="data.required_experience"/>
+                                        </p>
+                                    </t>
+                                    <t t-if="data.required_qualification">
+                                        <p class="o_default_snippet_text">
+                                            <b class="o_default_snippet_text">Required Qualification :</b>
+                                            <t t-esc="data.required_qualification"/>
+                                        </p>
+                                    </t>
+                                    <t t-if="data.points">
+                                        <p class="o_default_snippet_text">
+                                            <b class="o_default_snippet_text">Special Requirements :</b>
+                                            <t t-esc="data.points"/>
+                                        </p>
+                                    </t>
+                                    <t t-if="data.description">
+                                        <p class="o_default_snippet_text">
+                                            <b class="o_default_snippet_text">Short Description :</b>
+                                            <t t-esc="data.description"/>
+                                        </p>
+                                    </t>
+                                    <t t-if="data.description_role">
+                                        <p class="o_default_snippet_text">
+                                            <b class="o_default_snippet_text">Description Role :</b>
+                                            <t t-esc="data.description_role"/>
+                                        </p>
+                                    </t>
+                                </div>
+                                <div class="col-sm-12">
+                                    <h1 class="text-center">Job Application Form</h1>
+                                    <form id="JobApplication" method="post" action="/register_application"
+                                          enctype="multipart/form-data">
+                                        <div id="job_application">
+                                            <div class="row pt_30">
+                                                <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+                                                <input type="hidden" name="uid" id="uid" t-att-value="user"/>
+                                                <input type="hidden" name="yid" id="yid" t-att-value="youth.id"/>
+                                                <input type="hidden" name="jid" id="jid" t-att-value="data.id"/>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="name">
+                                                            Name
+                                                            <span class="asteriskField">
+                                                                *
+                                                            </span>
+                                                        </label>
+                                                        <input class="form-control" t-att-value="ben.name" id="name"
+                                                               name="name"
+                                                               placeholder="Name" type="text" required="required"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="email">
+                                                            Email
+                                                            <span class="asteriskField">
+                                                                *
+                                                            </span>
+                                                        </label>
+                                                        <input class="form-control" id="email" name="email"
+                                                               t-att-value="ben.email"
+                                                               placeholder="Email" type="email" required="required"/>
+                                                        <label id="email-error" class="error hidden" for="email">Please
+                                                            enter valid email.
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="cellphone">
+                                                            Cell phone number
+                                                            <span class="asteriskField">
+                                                                *
+                                                            </span>
+                                                        </label>
+                                                        <input class="form-control" t-att-value="ben.phone"
+                                                               id="cellphone"
+                                                               name="cellphone" placeholder="Cell phone number"
+                                                               type="tel" minlength="10"
+                                                               maxlength="10" required="required"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="ref_by">
+                                                            Reffered By
+                                                            <span class="asteriskField">
+                                                                *
+                                                            </span>
+                                                        </label>
+                                                        <input class="form-control" id="ref_by" name="ref_by"
+                                                               placeholder="Referred By"
+                                                               type="text" required="required"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="degree">
+                                                            Degree
+                                                            <span class="asteriskField">
+                                                                *
+                                                            </span>
+                                                        </label>
+                                                        <select class="select form-control" id="degree"
+                                                                name="degree" required="required">
+                                                            <option value="">Please Select Degree</option>
+                                                            <t t-foreach="degree" t-as="deg">
+                                                                <option t-att-value="deg.id">
+                                                                    <t t-esc="deg.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!--<div class="col-md-4 col-sm-4 col-xs-4">-->
+                                                    <!--<div class="form-group ">-->
+                                                        <!--<label class="control-label requiredField" for="source">-->
+                                                            <!--Source-->
+                                                            <!--<span class="asteriskField">-->
+                                                                <!--*-->
+                                                            <!--</span>-->
+                                                        <!--</label>-->
+                                                        <!--<select class="select form-control" id="source" name="source"-->
+                                                                <!--required="required">-->
+                                                            <!--<option value="">Please Select Source</option>-->
+                                                            <!--<option value="newspaper">-->
+                                                                <!--News Paper-->
+                                                            <!--</option>-->
+                                                            <!--<option value="website">-->
+                                                                <!--Website-->
+                                                            <!--</option>-->
+                                                            <!--<option value="job_portal">-->
+                                                                <!--Job Portal-->
+                                                            <!--</option>-->
+                                                        <!--</select>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="resume">
+                                                            Resume
+                                                            <span class="asteriskField">
+                                                                *
+                                                            </span>
+                                                        </label>
+                                                        <input class="form-control" id="resume" name="resume"
+                                                               type="file" required="required"
+                                                               accept="application/pdf"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="form-group ">
+                                                        <label class="control-label requiredField" for="description">
+                                                            Description
+                                                        </label>
+                                                        <textarea class="form-control" cols="40" id="description"
+                                                                  name="description"
+                                                                  rows="8"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-xs-">
+                                                    <div class="form-group">
+                                                        <div>
+                                                            <button class="btn btn-primary " name="submit"
+                                                                    type="submit">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

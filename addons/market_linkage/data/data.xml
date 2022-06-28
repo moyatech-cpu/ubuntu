@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="products_services_menu" model="website.menu">
+            <field name="name">Products and Services</field>
+            <field name="url">/products-services</field>
+            <field name="parent_id" ref="website.main_menu"/>
+        </record>
+
+		<!--  
+        <record id="market_linkage_menu" model="website.menu">
+            <field name="name">Market Linkage</field>
+            <field name="url">/market-linkage</field>
+            <field name="parent_id" ref="market_linkage.products_services_menu"/>
+        </record>
+		-->
+		
+        <record id="register_mkl_menu" model="website.menu">
+            <field name="name">Market Linkage Registration</field>
+            <field name="url">/register-mkl</field>
+            <field name="parent_id" ref="market_linkage.products_services_menu"/>
+        </record>
+
+<!--        <record id="opportunities_mkl_menu" model="website.menu">-->
+<!--            <field name="name">Opportunities</field>-->
+<!--            <field name="url">/opportunities-mkl</field>-->
+<!--            <field name="parent_id" ref="market_linkage.market_linkage_menu"/>-->
+<!--        </record>-->
+    </data>
+
+</odoo>

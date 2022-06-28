@@ -1,0 +1,31 @@
+<odoo>
+
+    <record id="view_upload_contract_form" model="ir.ui.view">
+        <field name="name">upload.contract.form</field>
+        <field name="model">upload.contract.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Upload Contract Details">
+                <group>
+                    <field name="upload_contract_name" invisible="1"/>
+                    <field name="upload_contract" widget="binary" required="1" filename="upload_contract_name"/>
+                    <field name="signed_letter_name" invisible="1"/>
+                    <field name="signed_letter" widget="binary" required="1" filename="signed_letter"/>
+                </group>
+                <footer>
+                    <button name="upload_contract_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_upload_contract" model="ir.actions.act_window">
+        <field name="name">Upload Contract</field>
+        <field name="res_model">upload.contract.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_upload_contract_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

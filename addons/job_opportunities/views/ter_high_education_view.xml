@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Teritory Higher Education-->
+        <record model="ir.ui.view" id="teritory_higher_education_tree_view">
+            <field name="name">teritory.higher.education.tree.view</field>
+            <field name="model">teritory.higher.education</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                    <field name="major_subjects" required="1"/>
+                    <field name="teritory_year_completed" required="1"/>
+                    <field name="qualification_obtained" required="1"/>
+                    <field name="attachment" required="1" filename="attachment_name"
+                           widget="download"/>
+                    <field name="attachment_name" invisible="1"/>
+                    <field name="jobs_database_id" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Teritory Higher Education-->
+        <record model="ir.actions.act_window" id="teritory_higher_education_action_window">
+            <field name="name">Teritory Higher Education</field>
+            <field name="res_model">teritory.higher.education</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem name="Teritory Higher Education" id="teritory_higher_education_menu"
+                  parent="job_opportunities.config_menu" sequence="2"
+                  action="teritory_higher_education_action_window"/>
+
+    </data>
+</odoo>

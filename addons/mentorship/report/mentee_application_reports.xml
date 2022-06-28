@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    git status
+
+    <record id="mentor_report_paper_formate" model="report.paperformat">
+        <field name="name">Mentor Application</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">6</field>
+        <field name="dpi">80</field>
+    </record>
+
+    <report id="mentor_application_form_report_id"
+            string="Mentor Application"
+            model="mentor.application"
+            report_type="qweb-pdf"
+            name="mentorship.mentor_application_form_report"
+            file="mentorship.mentor_application_form_report_view"
+            paperformat="mentor_report_paper_formate"/>
+
+    <record id="mentee_report_paper_formate" model="report.paperformat">
+        <field name="name">Mentee Application</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">6</field>
+        <field name="dpi">80</field>
+    </record>
+    <report id="mentee_application_form_report_id"
+            string="Mentee Application"
+            model="mentee.application"
+            report_type="qweb-pdf"
+            name="mentorship.mentee_application_form_report"
+            file="mentorship.mentee_application_form_report_views"
+            paperformat="mentee_report_paper_formate"/>
+
+    <record id="mentee_report_paper_formate_test" model="report.paperformat">
+        <field name="name">Mentorship Agreement</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">6</field>
+        <field name="dpi">80</field>
+    </record>
+
+    <report id="mentee_application_form_report_id_test"
+            string="Mentorship Agreement"
+            model="mentorship.agreement"
+            report_type="qweb-pdf"
+            name="mentorship.mentee_application_form_report_test"
+            file="mentorship.mentorship_agreement_views"
+            paperformat="mentee_report_paper_formate_test"/>
+
+    <record id="mentor_decline_report_paper_formate_test" model="report.paperformat">
+        <field name="name">Mentor Decline</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">6</field>
+        <field name="dpi">80</field>
+    </record>
+
+    <report id="mentor_decline_form_report_id_test"
+            string="Mentor Decline"
+            model="mentor.application"
+            report_type="qweb-pdf"
+            name="mentorship.mentor_decline_report_test"
+            file="mentorship.mentor_decline_views"
+            paperformat="mentor_decline_report_paper_formate_test"/>
+
+
+</odoo>

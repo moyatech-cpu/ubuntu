@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_scm_tender">
+        <field name="name">Supply Chain Management - Tender</field>
+        <field name="description">Supply Chain Management - Tender</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="nyda_scm_tender_bsc_member" model="res.groups">
+        <field name="name">SCM BSC Member</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM BSC Member</field>
+    </record>
+
+    <record id="nyda_scm_tender_bec_member" model="res.groups">
+        <field name="name">SCM BEC Member</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM BEC Memeber</field>
+    </record>
+    
+    <record id="nyda_scm_tender_bac_member" model="res.groups">
+        <field name="name">SCM BAC Member</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM BAC Member</field>
+    </record>
+    
+	<record id="nyda_scm_tender_ceo" model="res.groups">
+        <field name="name">CEO</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">CEO</field>
+    </record>
+    
+	<record id="nyda_scm_tender_manager" model="res.groups">
+        <field name="name">SCM Manager</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM Manager</field>
+    </record>
+    
+    <record id="nyda_scm_tender_specialist_user" model="res.groups">
+        <field name="name">SCM Specialist</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM Specialist</field>
+    </record>
+    
+    <record id="nyda_scm_tender_officer_user" model="res.groups">
+        <field name="name">SCM Officer</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM Officer</field>
+    </record>
+    
+    <record id="nyda_scm_tender_business_user" model="res.groups">
+        <field name="name">SCM Employee</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM Employee</field>
+    </record>
+    
+    <record id="nyda_scm_tender_business_excutive" model="res.groups">
+        <field name="name">SCM Division Executive</field>
+        <field name="category_id" ref="model_category_scm_tender"/>
+        <field name="description">SCM Division Executive</field>
+    </record>        
+
+</data>

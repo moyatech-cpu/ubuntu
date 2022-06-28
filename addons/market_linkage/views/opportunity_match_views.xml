@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- mkl.beneficiary views -->
+    <record id="view_opportunity_match_form" model="ir.ui.view">
+        <field name="name">opportunity.match.form</field>
+        <field name="model">opportunity.match</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button class="oe_highlight" type="action" name="%(action_linkage_report)d" string='Linkage Report'
+                            groups="mentorship.group_bao" attrs="{'invisible':[('states','!=','new')]}"/>
+                    <button class="oe_highlight" type="action" name="%(action_project_closeout_report)d"
+                            string='Project Closeout'
+                            groups="mentorship.group_bao" attrs="{'invisible':[('states','!=','linkage_report')]}"/>
+                    <button class="oe_highlight" type="object" name="complated_funcation" string='Completed'
+                            groups="mentorship.group_bao" attrs="{'invisible':[('states','!=','project_closeout')]}"/>
+                    <field name='states' widget='statusbar'/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="title" placeholder="Opportunity Title..." required="1"/>
+                        </h1>
+                        <h3>
+                            <field name="branch_id" placeholder="Select Branch" readonly="1"/>
+                        </h3>
+                    </div>
+                    <group string="Opportunity Details">
+                        <group>
+                            <field name="oppo_provider_id"/>
+                        </group>
+                        <group>
+                            <field name="beneficiary_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="oppo_type"/>
+                        <field name="description"/>
+                        <field name="register_oppo_id" invisible="1"/>
+                        <field name="task_ids">
+                            <tree editable="top">
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="date"/>
+                            </tree>
+                        </field>
+                        <field name="file_name" invisible="1"/>
+                        <field name="attachment" widget="binary" filename="file_name"/>
+                    </group>
+                    <group string="Reports">
+                        <field name="linkage_file_name" invisible="1"/>
+                        <field name="linkage_report" widget="binary" filename="linkage_file_name"/>
+                        <field name="project_closeout_file_name" invisible="1"/>
+                        <field name="project_closeout_report" widget="binary" filename="project_closeout_file_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_opportunity_match_tree" model="ir.ui.view">
+        <field name="name">opportunity.match.tree</field>
+        <field name="model">opportunity.match</field>
+        <field name="arch" type="xml">
+            <tree string="Match Details">
+                <field name="title"/>
+                <field name="oppo_type"/>
+                <field name="description"/>
+                <field name="oppo_provider_id"/>
+                <field name="beneficiary_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_opportunity_match" model="ir.actions.act_window">
+        <field name="name">Match</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">opportunity.match</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+
+    <!-- MenuItem for mkl.beneficiary -->
+
+<!--    <menuitem id="menu_opportunity_match" name="Match" parent="menu_market_linkage" groups="mentorship.group_bao" action="action_opportunity_match"-->
+<!--              sequence="18"/>-->
+
+</odoo>

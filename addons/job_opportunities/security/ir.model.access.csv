@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_jobs_database,access_jobs_database,model_jobs_database,,1,1,1,1
+access_matric_results,access_matric_results,model_matric_results,,1,1,1,1
+access_teritory_higher_education,access_teritory_higher_education,model_teritory_higher_education,,1,1,1,1
+access_computer_skills,access_computer_skills,model_computer_skills,,1,1,1,1
+access_organisations,access_organisations,model_organisations,,1,1,1,1
+access_referees,access_referees,model_referees,,1,1,1,1
+access_opportunity_provider,access_opportunity_provider,model_opportunity_provider,,1,1,1,1
+access_opportunities,access_opportunities,model_opportunities,,1,1,1,1
+access_job_location,access_job_location,model_job_location,,1,1,1,1
+access_industry_sector,access_industry_sector,model_industry_sector,,1,1,1,1
+access_degree,access_degree,model_degree,,1,1,1,1
+access_application,access_application,model_application,,1,1,1,1

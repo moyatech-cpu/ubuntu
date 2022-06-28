@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_learning_development">
+            <field name="name">Learning and Development</field>
+            <field name="sequence">146</field>
+        </record>
+
+        <record id="group_hod" model="res.groups">
+            <field name="name">Head Of Division</field>
+            <field name="category_id" ref="learning_development.module_learning_development"/>
+        </record>
+
+        <record id="group_ld_manager" model="res.groups">
+            <field name="name">L&amp;D Manager</field>
+            <field name="category_id" ref="learning_development.module_learning_development"/>
+        </record>
+
+        <record id="group_learn_dev_admin" model="res.groups">
+            <field name="name">Learning Development Access</field>
+            <field name="category_id" ref="learning_development.module_learning_development"/>
+        </record>
+
+    </data>
+</odoo>

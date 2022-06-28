@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_bmt_certificate"
+                string="BMT Certificate"
+                model="bmt.pitching.participants"
+                report_type="qweb-pdf"
+                file="bmt_training.bmt_certificate"
+                name="bmt_training.bmt_certificate"
+                menu="False"
+                paperformat="bmt_training.certificate_landscape"
+        />
+
+        <report
+                id="action_bmt_participants_without_pitching"
+                string="BMT Certificate without pitching"
+                model="bmt.participants"
+                report_type="qweb-pdf"
+                file="bmt_training.bmt_certificate_without_pitching"
+                name="bmt_training.bmt_certificate_without_pitching"
+                menu="False"
+                paperformat="bmt_training.certificate_landscape"
+        />
+
+    </data>
+
+</odoo>

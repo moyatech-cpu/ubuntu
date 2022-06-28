@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+	<record id="view_budget_reallocation_kanban" model="ir.ui.view">
+     		<field name="name">budget.reallocation.kanban</field>
+     		<field name="model">budget.reallocation</field>
+     		<field name="arch" type="xml"> 
+				<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';yellow:state=='Pending';red:state=='In Progress';red:state=='Closed';green:state=='Delivered';" disable_drag_drop_record="true" import="false" >
+	                 <field name="name"/>
+	                 <field name="employee_id"/>
+	                 <field name="create_date"/>
+	                 <field name="state"/>
+	                 <field name="color"/>
+	                 <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+	                 
+	                 <templates>
+	                     <t t-name="kanban-box">
+	                         <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+	                             <div class="o_dropdown_kanban dropdown">
+	
+	                                 <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+	                                     <span class="fa fa-ellipsis-v"/>
+	                                 </a>
+	                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	                                     <t t-if="widget.deletable">
+	                                         <li><a type="delete">Delete</a></li>
+	                                     </t>
+	                                     <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+	                                 </ul>
+	                             </div>
+	                             <div class="o_event_left">
+	                                 <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+	                                 <div>
+	                                     <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+	                                     <t t-esc="record.create_date.raw_value.getFullYear()"/>
+	                                 </div>
+	                                 <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+	                             </div>
+	                             <div class="o_event_right">
+	                                 <h4 class="o_kanban_record_title"><field name="name"/></h4>
+	                                 <div>
+	                                     <t t-if="record.employee_id.raw_value"> <b class="o_kanban_record_subtitle"> <field name="name"/> </b> <br/> </t>
+	                                     <i class="fa fa-clock-o"/>
+	                                     <b>Create Date</b> <t t-esc="moment(record.create_date.raw_value).format('lll')"/>
+	                                 </div>
+	                             </div>
+	                         </div>
+	                     </t>
+	                 </templates>
+				</kanban>
+          </field>
+	</record>
+	
+    <!-- Committee Views -->
+    <record id="view_budget_reallocation_form" model="ir.ui.view">
+        <field name="name">budget.reallocation.form</field>
+        <field name="model">budget.reallocation</field>
+        <field name="arch" type="xml">
+
+			<form>
+				<header>
+				    <field name="state" invisible="1"/>
+				    <field name="state" widget="statusbar" clickable="False" options="{'fold_field': 'fold'}"/>
+				    
+				    <!--  PM: PROCEED -->
+				    <button name="action_proceed" string="Proceed" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', 'New')]}" 
+				     groups="nyda_budget_management.nyda_budget_manager, base.group_system"
+				    />
+				
+				    <!-- Internal  Review: Approve -->
+				    <button name="approve_internal_review" string="Approve" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', 'Internal Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_executive_director, base.group_system"
+				    />
+				
+				    <!-- Internal  Review: Reject -->
+				    <button name="3469" string="Reject" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', 'Internal Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_executive_director, base.group_system"
+				    />
+				    
+				    <!-- 1st  Review: Approve -->
+				    <button name="3381" string="Approve" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', '1st Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_finance_manager, base.group_system"
+				    />
+				
+				    <!-- 1st  Review: Reject -->
+				    <button name="3383" string="Reject" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', '1st Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_finance_manager, base.group_system"
+				    />
+				
+				    <!-- 2nd  Review: Approve -->
+				    <button name="3387" string="Approve" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', '2nd Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_finance_snr_manager, base.group_system"
+				    />
+				
+				    <!-- 2nd  Review: Reject -->
+				    <button name="3389" string="Reject" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', '2nd Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_finance_snr_manager, base.group_system"
+				    />
+				    
+				    <!-- 2nd  Review: Approve -->
+				    <button name="3391" string="Approve" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', 'Final Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_cfo, base.group_system"
+				    />
+				
+				    <!-- 2nd  Review: Reject -->
+				    <button name="3393" string="Reject" type="object" class="oe_highlight"
+				     attrs="{'invisible' : [('state', '!=', 'Final Review')]}" 
+				     groups="nyda_budget_management.nyda_budget_cfo, base.group_system"
+				    />
+				      
+				</header>
+				<sheet string="Task">
+					<div class="oe_title">
+					    <h1 class="o_row">
+					        <field name="name" placeholder="Title..."/>
+					    </h1>
+					</div>
+					<group>
+					    <group>
+					        <field name="employee_id" />
+					        <field name="department_id" />
+					        <field name="designation" />
+					    </group>
+					</group>
+					<notebook>
+					    <page name="description_page" string="Description">
+					        <field name="description" type="html"/>
+					        <div class="oe_clear"/>
+					    </page>
+					</notebook>
+				</sheet>
+				<!-- 
+				<div class="oe_chatter">
+				    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+				    <field name="activity_ids" widget="mail_activity"/>
+				    <field name="message_ids" widget="mail_thread"/>
+				</div>
+				-->
+			</form>
+            
+        </field>
+    </record>
+    	
+    <record id="view_budget_reallocation_tree" model="ir.ui.view">
+        <field name="name">budget.reallocation.tree</field>
+        <field name="model">budget.reallocation</field>
+        <field name="arch" type="xml">
+			<tree decoration-info="state == 'draft'" decoration-muted="state in ('done','cancel')" string="Budget">
+				<field name="name" colspan="1"/>
+				<field name="employee_id"/>
+				<field name="department_id"/>
+				<field name="description"/>
+				<field name="state"/>
+			</tree>
+        </field>
+    </record>
+    
+    <record id="action_reallocation_budget_management" model="ir.actions.act_window">
+        <field name="name">Budget Reallocation</field>
+        <field name="res_model">budget.reallocation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>          
+    
+    <menuitem id="menu_reallocation_budget_management" name="Budget Reallocation" 
+    		action="action_reallocation_budget_management"
+            parent="menu_management_budget"
+            sequence="1"/>                              
+
+</odoo>

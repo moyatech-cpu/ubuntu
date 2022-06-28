@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="mentor_external_layout_standard">
+		<div class="header hidden">
+		</div>
+		<div class="article o_report_layout_standard">
+			<t t-raw="0" />
+		</div>
+		<div class="footer hidden">
+		</div>
+	</template>
+    <template id="mentor_decline_report_test">
+        <t t-call="mentorship.mentor_external_layout_standard">
+            <div class="row">
+                <div class='col-xs-12' align="center">
+                    <img t-attf-src="data:image;base64,{{env.user.company_id.logo}}" width="80" height="60"/>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class='col-xs-12' style="padding-top:15px">
+                    <p>Date:</p>
+                </div>
+                <div class='col-xs-12' style="padding-top:10px">
+                    <h5>
+                        <b>APPLICATION: VOLUNTEER MENTOR – NYDA BUSINESS MENTORSHIP PROGRAMME</b>
+                    </h5>
+                </div>
+                <div class='col-xs-12' style="padding-top:10px">
+                    <p>Dear</p>
+                </div>
+                <div class='col-xs-12' style="padding-top:10px">
+                    <p>After careful consideration of your application we are unfortunately not able to accept your
+                        application as a mentor due the following reasons:
+                    </p>
+                </div>
+                <div class='col-xs-12' style="padding-top:10px">
+                    <p>We are aware of the considerable amount of time and effort you have given to this process and we
+                        greatly appreciate your effort.
+                    </p>
+                </div>
+                <div class='col-xs-12' style="padding-top:10px">
+                    <p>We thank you for your time and interest in the programme.</p>
+                </div>
+                <div class='col-xs-12' style="padding-top:10px">
+                    <p>Yours sincerely,</p>
+                </div>
+
+            </div>
+        </t>
+    </template>
+</odoo>

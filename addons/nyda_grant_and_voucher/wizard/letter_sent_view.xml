@@ -1,0 +1,30 @@
+<odoo>
+    <record id="lette_sent_wiz" model="ir.ui.view">
+        <field name="name">letter.sent</field>
+        <field name="model">letter.sent</field>
+        <field name="arch" type="xml">
+            <form string="Sent Letter">
+                <group>
+                    <field name="name" options="{'no_create_edit': True, 'no_open': True}"/>
+                    <field name="bdo_name" options="{'no_create_edit': True, 'no_open': True}"/>
+                    <field name="appointment_date"/>
+                </group>
+                <footer>
+                    <button name="create_appointment" string="Create" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="letter_sent_wizard" model="ir.actions.act_window">
+        <field name="name">letter.sent</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">letter.sent</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="lette_sent_wiz"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

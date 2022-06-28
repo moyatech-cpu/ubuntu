@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequence for Grant Application -->
+        <record id="sequence_grant_application" model="ir.sequence">
+            <field name="name">Grant Application Sequence</field>
+            <field name="code">grant.application</field>
+            <field name="prefix">GAP</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Sequence for Voucher Application -->
+        <record id="sequence_voucher_application" model="ir.sequence">
+            <field name="name">Voucher Application Sequence</field>
+            <field name="code">voucher.application</field>
+            <field name="prefix">VAP</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- Sequence for Voucher Isurance -->
+        <record id="sequence_voucher_isurance" model="ir.sequence">
+            <field name="name">Voucher Isurance Sequence</field>
+            <field name="code">voucher.isurance</field>
+            <field name="prefix">VI</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- business.start.reason data -->
+        <record id="retrenched" model="business.start.reason">
+            <field name="name">I was Retrenched</field>
+            <field name="code">retrenched</field>
+        </record>
+        <record id="success_business" model="business.start.reason">
+            <field name="name">I can make a success of my business</field>
+            <field name="code">success_business</field>
+        </record>
+        <record id="no_job" model="business.start.reason">
+            <field name="name">I can’t find another job</field>
+            <field name="code">no_job</field>
+        </record>
+        <record id="no_enough_money" model="business.start.reason">
+            <field name="name">I do not make enough money where I’m working</field>
+            <field name="code">no_enough_money</field>
+        </record>
+        <record id="own_business" model="business.start.reason">
+            <field name="name">I want to have my own business</field>
+            <field name="code">own_business</field>
+        </record>
+        <record id="not_happy" model="business.start.reason">
+            <field name="name">I’m not happy in my current job</field>
+            <field name="code">not_happy</field>
+        </record>
+        <record id="skills_to_business" model="business.start.reason">
+            <field name="name">I have the skills to run a business</field>
+            <field name="code">skills_to_business</field>
+        </record>
+        <record id="other" model="business.start.reason">
+            <field name="name">Other</field>
+            <field name="code">other</field>
+        </record>
+
+        <!-- business.start.monetary data -->
+        <record id="personal_savings" model="business.start.monetary">
+            <field name="name">I used my personal savings</field>
+            <field name="code">personal_savings</field>
+        </record>
+        <record id="government_grant" model="business.start.monetary">
+            <field name="name">I received a government grant</field>
+            <field name="code">government_grant</field>
+        </record>
+        <record id="friends_and_family" model="business.start.monetary">
+            <field name="name">I used money I received from friends and family</field>
+            <field name="code">friends_and_family</field>
+        </record>
+        <record id="donor_grant" model="business.start.monetary">
+            <field name="name">I received a donor grant</field>
+            <field name="code">donor_grant</field>
+        </record>
+        <record id="investor" model="business.start.monetary">
+            <field name="name">I received the money from an investor</field>
+            <field name="code">investor</field>
+        </record>
+        <record id="bank" model="business.start.monetary">
+            <field name="name">I borrowed money from a bank</field>
+            <field name="code">bank</field>
+        </record>
+        <record id="employer" model="business.start.monetary">
+            <field name="name">I borrowed money from an employer</field>
+            <field name="code">employer</field>
+        </record>
+        <record id="money_lender" model="business.start.monetary">
+            <field name="name">I borrowed money from a money lender (mashonisa)</field>
+            <field name="code">money_lender</field>
+        </record>
+        <record id="government_agency" model="business.start.monetary">
+            <field name="name">I borrowed money from a government agency</field>
+            <field name="code">government_agency</field>
+        </record>
+        <record id="business_start_monetary_other" model="business.start.monetary">
+            <field name="name">Other</field>
+            <field name="code">business_start_monetary_other</field>
+        </record>
+
+        <!-- business.sector data -->
+        <record id="tourism" model="business.sector">
+            <field name="name">Tourism</field>
+            <field name="code">tourism</field>
+        </record>
+        <record id="information" model="business.sector">
+            <field name="name">Information, Communication and Technology</field>
+            <field name="code">information</field>
+        </record>
+        <record id="construction" model="business.sector">
+            <field name="name">Construction</field>
+            <field name="code">construction</field>
+        </record>
+        <record id="mining" model="business.sector">
+            <field name="name">Mining and Quarrying</field>
+            <field name="code">mining</field>
+        </record>
+        <record id="community" model="business.sector">
+            <field name="name">Community, Social and Personal Services</field>
+            <field name="code">community</field>
+        </record>
+        <record id="financial" model="business.sector">
+            <field name="name">Financial, Intermediation Insurance, Real Estate and Business Services</field>
+            <field name="code">financial</field>
+        </record>
+        <record id="electricity" model="business.sector">
+            <field name="name">Electricity, Gas and Water Supply</field>
+            <field name="code">electricity</field>
+        </record>
+        <record id="manufacturing" model="business.sector">
+            <field name="name">Manufacturing</field>
+            <field name="code">manufacturing</field>
+        </record>
+        <record id="wholesale" model="business.sector">
+            <field name="name">Wholesale and Retail trade</field>
+            <field name="code">wholesale</field>
+        </record>
+        <record id="agriculture" model="business.sector">
+            <field name="name">Agriculture, hunting, forestry and fishing</field>
+            <field name="code">agriculture</field>
+        </record>
+        <record id="transport" model="business.sector">
+            <field name="name">Transport and Storage</field>
+            <field name="code">transport</field>
+        </record>
+        <record id="households" model="business.sector">
+            <field name="name">Private Households, exterritorial organisations</field>
+            <field name="code">households</field>
+        </record>
+
+        <!-- business.development.assistance data -->
+        <record id="feasibility" model="business.development.assistance">
+            <field name="name">Business Feasibility</field>
+            <field name="code">feasibility</field>
+        </record>
+        <record id="diligence" model="business.development.assistance">
+            <field name="name">Due Diligence</field>
+            <field name="code">diligence</field>
+        </record>
+        <record id="business_plan" model="business.development.assistance">
+            <field name="name">Business Plan</field>
+            <field name="code">business_plan</field>
+        </record>
+        <record id="branding" model="business.development.assistance">
+            <field name="name">Branding and Design</field>
+            <field name="code">branding</field>
+        </record>
+<!--        <record id="printing" model="business.development.assistance">-->
+<!--            <field name="name">Printing of Marketing material</field>-->
+<!--            <field name="code">printing</field>-->
+<!--        </record>-->
+        <record id="hosting" model="business.development.assistance">
+            <field name="name">Website Development</field>
+            <field name="code">hosting</field>
+        </record>
+        <record id="business_operations" model="business.development.assistance">
+            <field name="name">Business Operations Manual</field>
+            <field name="code">business_operations</field>
+        </record>
+        <record id="re_engineering" model="business.development.assistance">
+            <field name="name">Business Re-engineering</field>
+            <field name="code">re_engineering</field>
+        </record>
+        <record id="marketing_strategy" model="business.development.assistance">
+            <field name="name">Marketing Strategy and Plan</field>
+            <field name="code">marketing_strategy</field>
+        </record>
+
+        <record id="bookeeping" model="business.development.assistance">
+            <field name="name">Bookkeeping and Financial Administration</field>
+            <field name="code">bookeeping</field>
+        </record>
+
+<!--        <record id="financial_management" model="business.development.assistance">-->
+<!--            <field name="name">Financial Management</field>-->
+<!--            <field name="code">financial_management</field>-->
+<!--        </record>-->
+<!--        <record id="accounting_systems" model="business.development.assistance">-->
+<!--            <field name="name">Financial and Accounting Systems</field>-->
+<!--            <field name="code">accounting_systems</field>-->
+<!--        </record>-->
+<!--        <record id="payroll_system" model="business.development.assistance">-->
+<!--            <field name="name">Payroll System</field>-->
+<!--            <field name="code">payroll_system</field>-->
+<!--        </record>-->
+
+
+        <!-- business.operate.premises data -->
+        <record id="business_operate_premises_object_1" model="business.operate.premises">
+            <field name="name">Street or street corner</field>
+        </record>
+        <record id="business_operate_premises_object_2" model="business.operate.premises">
+            <field name="name">Stall in a market place</field>
+        </record>
+        <record id="business_operate_premises_object_3" model="business.operate.premises">
+            <field name="name">From a container</field>
+        </record>
+        <record id="business_operate_premises_object_4" model="business.operate.premises">
+            <field name="name">I sell door to door</field>
+        </record>
+        <record id="business_operate_premises_object_5" model="business.operate.premises">
+            <field name="name">House</field>
+        </record>
+        <record id="business_operate_premises_object_6" model="business.operate.premises">
+            <field name="name">Part of a house</field>
+        </record>
+        <record id="business_operate_premises_object_7" model="business.operate.premises">
+            <field name="name">Incubator or business hive</field>
+        </record>
+        <record id="business_operate_premises_object_8" model="business.operate.premises">
+            <field name="name">Back yard</field>
+        </record>
+        <record id="business_operate_premises_object_9" model="business.operate.premises">
+            <field name="name">Standalone shop</field>
+        </record>
+        <record id="business_operate_premises_object_10" model="business.operate.premises">
+            <field name="name">Shop in a complex</field>
+        </record>
+        <record id="business_operate_premises_object_11" model="business.operate.premises">
+            <field name="name">Part of an office block</field>
+        </record>
+        <record id="business_operate_premises_object_11" model="business.operate.premises">
+            <field name="name">Other</field>
+        </record>
+
+        <!-- business.geographical.location data -->
+        <record id="business_geographical_location_object_1" model="business.geographical.location">
+            <field name="name">City Centre / Town Centre</field>
+        </record>
+        <record id="business_geographical_location_object_2" model="business.geographical.location">
+            <field name="name">Suburb</field>
+        </record>
+        <record id="business_geographical_location_object_3" model="business.geographical.location">
+            <field name="name">Township</field>
+        </record>
+        <record id="business_geographical_location_object_4" model="business.geographical.location">
+            <field name="name">Informal Area/Shack settlement</field>
+        </record>
+        <record id="business_geographical_location_object_5" model="business.geographical.location">
+            <field name="name">Hostel</field>
+        </record>
+        <record id="business_geographical_location_object_6" model="business.geographical.location">
+            <field name="name">Rural area</field>
+        </record>
+        <record id="business_geographical_location_object_7" model="business.geographical.location">
+            <field name="name">Village</field>
+        </record>
+        <record id="business_geographical_location_object_8" model="business.geographical.location">
+            <field name="name">Rural farm area</field>
+        </record>
+        <record id="business_geographical_location_object_9" model="business.geographical.location">
+            <field name="name">Small holding</field>
+        </record>
+        <record id="business_geographical_location_object_10" model="business.geographical.location">
+            <field name="name">Informal Settlement</field>
+        </record>
+
+         <record id="mentor_sectors_object4" model="mentor.sectors">
+            <field name="name">Agro Processing</field>
+        </record>
+        <record id="mentor_sectors_object5" model="mentor.sectors">
+            <field name="name">Construction</field>
+        </record>
+        <record id="mentor_sectors_object6" model="mentor.sectors">
+            <field name="name">Information Communication Technology</field>
+        </record>
+        <record id="mentor_sectors_object7" model="mentor.sectors">
+            <field name="name">Tourism</field>
+        </record>
+
+
+    </data>
+</odoo>

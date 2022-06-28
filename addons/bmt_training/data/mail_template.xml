@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data noupdate="0">
+
+    <!-- confirm_trainee BMT training application -->
+    <record id="bmt_training_application_mail_template" model="mail.template">
+      <field name="name">BMT Training Application mail template</field>
+      <field name="auto_delete">False</field>
+      <field name="model_id" ref="bmt_training.model_bmt_training_application"/>
+      <field name="email_from">${ctx['user'].email}</field>
+      <field name="email_to">${object.email_address}</field>
+      <field name="subject">
+        <![CDATA[UPDATE : BMT Training Application.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+  <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+      <p>Good day ${object.participant_name.name},</p>
+      <p>Thank you for applying for the Business Management Training,</p>
+      <p>after assessing your application you qualify for the following</p>
+      <p>Business Management Training.</p>
+      <br/>
+      <p>Training Details</p>
+      <br/>
+      %if object.training_type == 'syb':
+          <p>Course: SYB - 5 Days </p>
+      %endif
+      %if object.training_type == 'gyb':
+          <p>Course: GYB - 5 Days </p>
+      %endif
+      %if object.training_type == 'iyb_one':
+          <p>Course: IYB 1 - 5 Days </p>
+      %endif
+      %if object.training_type == 'iyb_two':
+          <p>Course: IYB 2 - 5 Days </p>
+      %endif
+      %if object.training_type == 'syb_coops':
+          <p>Course: SYB/Co-ops - 3 Days </p>
+      %endif
+      <p>Training Start Date: ${object.course_start_date}</p>
+      <p>Training End Date: ${object.course_end_date}</p>
+      %if object.bmt_id.venue != False:
+          <p>Training Venue: ${object.bmt_id.venue}</p>
+      %endif
+      <br/>
+      <p>You're unique reference number is ${object.part_ref_number}</p>
+      <br/>
+      <p>Regards, </p>
+      <p>NYDA</p>
+  </div>
+              ]]>
+      </field>
+    </record>
+
+    <!-- Benificiary BMT training application -->
+    <record id="benificiary_bmt_training_application_mail_template" model="mail.template">
+      <field name="name">Benifciary BMT Training Application mail template</field>
+      <field name="auto_delete">False</field>
+      <field name="model_id" ref="bmt_training.model_bmt_training_application"/>
+      <field name="subject">
+        <![CDATA[NYDA - BMT Training Application]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+    <div>
+      <p>Good day ${object.participant_name.name},</p>
+      <p>Thank you for your application, we will contact you as soon as the application has been processed.</p>
+      <p>Regards,</p>
+      <p>NYDA</p>
+    </div>
+              ]]>
+      </field>
+    </record>
+
+
+    <!-- Pithcin\g mail template -->
+    <record id="pitching_email_template" model="mail.template">
+      <field name="name">Pitching Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="model_business_mgmt_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="email_from">${object.user_id.company_id.email}</field>
+      <field name="subject">
+        <![CDATA[Regarding Pitching of Business Management Training]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello ${object.facilitator_id.name},</p>
+    <p>These mail is remind you for pitching of Business Management Training named ${object.name}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Participants mail template -->
+    <record id="participants_email_template" model="mail.template">
+      <field name="name">Participants Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="model_pddd_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="email_from">${object.trainer_id.company_id.email}</field>
+      <field name="subject">Regarding Training Application</field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello</p>
+    <p>These mail is sent to you for the reminding the confirmation of Training named ${object.title} with NYDA.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Participants mail template -->
+    <record id="participants_email_template" model="mail.template">
+      <field name="name">Participants Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="model_pddd_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="email_from">${object.trainer_id.company_id.email}</field>
+      <field name="subject">Regarding Training Application</field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello</p>
+    <p>These mail is sent to you for the reminding the confirmation of Training named ${object.title} with NYDA.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Training mail template -->
+    <record id="sale_pitch_training_email_template" model="mail.template">
+      <field name="name">Training Mail Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="bmt_training.model_sales_pitch_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="subject">
+        <![CDATA[Regarding Training.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['end_training']:
+        to End Training.
+    %endif
+    %if object.state in ['coordinator_review']:
+        to Coordinator Review.
+    %endif
+    %if object.state in ['bm_review']:
+        to Branch Manager Review.
+    %endif
+    %if object.state in ['ho_admin_review']:
+        to HO Admin Review.
+    %endif
+    %if object.state in ['ho_manager_review']:
+        to HO Manager Review.
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Training mail template -->
+    <record id="bmt_training_email_template" model="mail.template">
+      <field name="name">Training Mail Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="bmt_training.model_business_mgmt_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="subject">
+        <![CDATA[Regarding Training.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['end_training']:
+        to End Training.
+    %endif
+    %if object.state in ['coordinator_review']:
+        to Coordinator Review.
+    %endif
+    %if object.state in ['bm_review']:
+        to Branch Manager Review.
+    %endif
+    %if object.state in ['ho_admin_review']:
+        to HO Admin Review.
+    %endif
+    %if object.state in ['ho_manager_review']:
+        to HO Manager Review.
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Training Rejection mail template -->
+    <record id="sale_pitch_training_rejection_email_template" model="mail.template">
+      <field name="name">Training Rejection Mail Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="bmt_training.model_sales_pitch_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="subject">
+        <![CDATA[Training Report Rejection.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['end_training']:
+        to End Training.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['coordinator_review']:
+        to Coordinator Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['bm_review']:
+        to Branch Manager Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['ho_admin_review']:
+        to HO Admin Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['ho_manager_review']:
+        to HO Manager Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Training Rejection mail template -->
+    <record id="cooperative_governance_training_rejection_email_template" model="mail.template">
+      <field name="name">Training Rejection Mail Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="bmt_training.model_cooperative_governance_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="subject">
+        <![CDATA[Training Report Rejection.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['end_training']:
+        to End Training.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['coordinator_review']:
+        to Coordinator Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['bm_review']:
+        to Branch Manager Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['ho_admin_review']:
+        to HO Admin Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['ho_manager_review']:
+        to HO Manager Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Training Rejection mail template -->
+    <record id="bmt_training_rejection_email_template" model="mail.template">
+      <field name="name">Training Rejection Mail Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="bmt_training.model_business_mgmt_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="subject">
+        <![CDATA[Training Report Rejection.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['end_training']:
+        to End Training.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['coordinator_review']:
+        to Coordinator Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['bm_review']:
+        to Branch Manager Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['ho_admin_review']:
+        to HO Admin Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    %if object.state in ['ho_manager_review']:
+        to HO Manager Review.<br/>
+
+        Rejection Reason : ${object.coordinator_rejection}
+
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+    
+    <!-- Co-opertive Governance Training mail template -->
+    <record id="coopertive_governance_training_email_template" model="mail.template">
+      <field name="name">Co-opertive Governance Training Mail Template</field>
+      <field name="auto_delete" eval="False"/>
+      <field name="model_id" ref="bmt_training.model_cooperative_governance_training"/>
+      <field name="lang">${object.lang}</field>
+      <field name="subject">
+        <![CDATA[Regarding Training.]]>
+      </field>
+      <field name="body_html">
+        <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['end_training']:
+        to End Training.
+    %endif
+    %if object.state in ['coordinator_review']:
+        to Coordinator Review.
+    %endif
+    %if object.state in ['bm_review']:
+        to Branch Manager Review.
+    %endif
+    %if object.state in ['ho_admin_review']:
+        to HO Admin Review.
+    %endif
+    %if object.state in ['ho_manager_review']:
+        to HO Manager Review.
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+      </field>
+    </record>
+
+    <!-- Technical Training mail template -->
+    <record id="technical_training_email_template" model="mail.template">
+          <field name="name">Technical Training Email Template</field>
+          <field name="auto_delete" eval="False"/>
+          <field name="model_id" ref="bmt_training.model_technical_training"/>
+          <field name="lang">${object.lang}</field>
+          <field name="subject">
+          <![CDATA[Regarding Training.]]>
+          </field>
+          <field name="body_html">
+          <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>These mail is sent to you to let you know that state of Training named "${object.name}" has been changed
+    %if object.state in ['pc_reject']:
+        to Project Closeout Reject.
+        Comment :- ${object.prc_reject}
+    %endif
+    %if object.state in ['site_visit_reject']:
+        to Site Visit Reject.
+        Comment :- ${object.site_visit_reject}
+    %endif
+    %if object.state in ['nyda_reject']:
+        to NYDA Specialist Reject.
+        Comment :- ${object.nyda_reject}
+    %endif
+    </p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+          </field>
+    </record>
+
+
+  </data>
+</odoo>

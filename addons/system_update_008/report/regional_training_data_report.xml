@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_regional_report_training"
+                string="Regional Training Report"
+                model="training.regional.report.wizard"
+                report_type="qweb-pdf"
+                file="system_update_008.regional_report_training"
+                name="system_update_008.regional_report_training"
+                menu="True"
+               
+        />
+
+    </data>
+</odoo>

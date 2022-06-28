@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_job_document">
+        <t t-call="web.external_layout">
+        	<style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                	<t t-value="doc.get_jobs_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1><t t-esc="data['rep_type']"/></h1>
+                    </div>
+                    <br/>
+                    <t t-if="data['report'] == 'branch'">
+                        <div class="col-xs-4">
+                            <h4>
+                                <b>BRANCH NAME :
+                                    <u>
+                                        <t t-esc="data['type']"/>
+                                    </u>
+                                </b>
+                            </h4>
+                        </div>
+                    </t>
+                    <t t-if="data['start_date']">
+                        <div class="col-xs-4 text-center">
+                            <h4>
+                                <b>START DATE :
+                                    <u>
+                                        <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(data['start_date'],'%Y-%m-%d'),'%e %B %Y')"/>
+                                    </u>
+                                </b>
+                            </h4>
+                        </div>
+                    </t>
+                    <t t-if="data['end_date']">
+                        <div class="col-xs-4 text-right">
+                            <h4>
+                                <b>END DATE :
+                                    <u>
+                                        <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(data['end_date'],'%Y-%m-%d'),'%e %B %Y')"/>
+                                    </u>
+                                </b>
+                            </h4>
+                        </div>
+                    </t>
+				</div>
+                <br/>
+                <t t-if="data['report'] == 'branch'">
+                <div class="row">
+                    <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <thead>
+                                <tr style="background: lightblue;">
+                                    <th rowspan="2" class="t-center">Male</th>
+                                    <th rowspan="2" class="t-center">Female</th>
+                                    <th rowspan="2" class="t-center">Asian</th>
+                                    <th rowspan="2" class="t-center">Indian</th>
+                                    <th rowspan="2" class="t-center">African</th>
+                                    <th rowspan="2" class="t-center">White</th>
+                                    <th rowspan="2" class="t-center">Coloured</th>
+                                </tr>
+                               	</thead>
+                    			<tbody>
+                    			<tr>
+                            		<td class="t-center">
+                            			<t t-if="data['male'] >= 0">
+	                  						<t t-esc="data['male']"/>
+                           	 			</t>
+                           	 		</td>
+                            		<td class="t-center">
+                            			<t t-if="data['female'] >= 0">
+	                  						<t t-esc="data['female']"/>
+	                  					</t>
+                           	 		</td>
+                           	 		<td class="t-center">
+                           	 			<t t-if="data['asian'] >= 0">
+                            				<t t-esc="data['asian']"/>
+	                  					</t>
+                           	 		</td>
+                           	 		<td class="t-center">
+                           	 			<t t-if="data['indian'] >= 0">
+                            				<t t-esc="data['indian']"/>
+	                  					</t>
+                           	 		</td>
+                           	 		<td class="t-center">
+                           	 			<t t-if="data['african'] >= 0">
+                            				<t t-esc="data['african']"/>
+	                  					</t>
+                           	 		</td>
+                           	 		<td class="t-center">
+                           	 			<t t-if="data['white'] >= 0">
+                            				<t t-esc="data['white']"/>
+	                  					</t>
+	                  				</td>
+                           	 		<td class="t-center">
+                           	 			<t t-if="data['coloured'] >= 0">
+                            				<t t-esc="data['coloured']"/>
+	                  					</t>
+	                  				</td>
+                           	 	</tr>
+                           	 </tbody>
+                      		</table>
+                     </div>
+                </div>
+                </t>
+                <br/>
+                
+                <t t-if="data['jobs']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Application Name</th>
+                                        <th>Applicant Name</th>
+                                        <th>Race</th>
+                                        <th>Geographic Location</th>
+                                        <th>Age</th>
+                                        <t t-if="data['report'] == 'branch'">
+                                            <th>Branch</th>
+                                        </t>
+                                        <th>Opportunity</th>
+                                        <th>Responsible Person</th>
+                                        <th>E-mail</th>
+                                        <th>Phone</th>
+                                        <th>Source</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['jobs']" t-as="rec_data">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="rec_data.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.applicant_name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="rec_data.contact_id.population_group"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="rec_data.contact_id.geographic_location"/>
+                                            </td>
+                                            <t t-if="rec_data.contact_id.age > 0">
+                                                <td>
+                                                    <t t-esc="rec_data.contact_id.age"/>
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td>
+                                                    -
+                                                </td>
+                                            </t>
+                                            <t t-if="data['report'] == 'branch'">
+                                                <td>
+                                                    <t t-esc="rec_data.opportunity_id.branch_id.name"/>
+                                                </td>
+                                            </t>
+                                            <td>
+                                                <t t-esc="rec_data.opportunity_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.official_responsible_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.email"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.phone"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="rec_data.source"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>No data</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_job">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="job_opportunities.report_job_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

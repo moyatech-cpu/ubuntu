@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Cron to Senf mail after 3 days to pitching -->
+        <record id="pitching_mail_after_three_days" model="ir.cron">
+            <field name="name">Pitching Mail</field>
+            <field name="model_id" ref="model_business_mgmt_training"/>
+            <field name="state">code</field>
+            <field name="code">model.send_pitching_mail()</field>
+            <field name="interval_number">12</field>
+            <field name="interval_type">hours</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record id="sequence_gyb" model="ir.sequence">
+            <field name="name">BMT Training Application(GYB)</field>
+            <field name="code">bmt_gyb</field>
+            <field name="prefix">GYB</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_sb" model="ir.sequence">
+            <field name="name">Sales Pitch/BBBEE(SB)</field>
+            <field name="code">sb_code</field>
+            <field name="prefix">SB</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_sp" model="ir.sequence">
+            <field name="name">Sales Pitch(SP)</field>
+            <field name="code">sp_code</field>
+            <field name="prefix">SP</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_be" model="ir.sequence">
+            <field name="name">BBBEE(BE)</field>
+            <field name="code">be_code</field>
+            <field name="prefix">BBBEE</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_jp" model="ir.sequence">
+            <field name="name">Job Preparedness(JP)</field>
+            <field name="code">jp_code</field>
+            <field name="prefix">JP</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_ls" model="ir.sequence">
+            <field name="name">Life Skills(LS)</field>
+            <field name="code">ls_code</field>
+            <field name="prefix">LS</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_ds" model="ir.sequence">
+            <field name="name">Digital Skills(DS)</field>
+            <field name="code">ds_code</field>
+            <field name="prefix">DS</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_cg" model="ir.sequence">
+            <field name="name">Co-operative Governance(CG)</field>
+            <field name="code">cg_code</field>
+            <field name="prefix">CG</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_bmt" model="ir.sequence">
+            <field name="name">BMT(BMT)</field>
+            <field name="code">bmt_code</field>
+            <field name="prefix">BMT</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_bmt_gyb" model="ir.sequence">
+            <field name="name">GYB(BMT)</field>
+            <field name="code">gyb_code</field>
+            <field name="prefix">GYB</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_bmt_syb" model="ir.sequence">
+            <field name="name">SYB(BMT)</field>
+            <field name="code">syb_code</field>
+            <field name="prefix">SYB</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_bmt_iyb_one" model="ir.sequence">
+            <field name="name">IYB(BMT)</field>
+            <field name="code">iyb_one_code</field>
+            <field name="prefix">IYB1</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_bmt_iyb_two" model="ir.sequence">
+            <field name="name">IYB(BMT)</field>
+            <field name="code">iyb_two_code</field>
+            <field name="prefix">IYB2</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_syb_coops" model="ir.sequence">
+            <field name="name">SYB/Co-ops(BMT)</field>
+            <field name="code">syb_coops_code</field>
+            <field name="prefix">SYB/Co-ops</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_syb" model="ir.sequence">
+            <field name="name">BMT Training Application(SYB)</field>
+            <field name="code">bmt_syb</field>
+            <field name="prefix">SYB</field>
+            <field name="padding">13</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_iyb" model="ir.sequence">
+            <field name="name">BMT Training Application(IYB1)</field>
+            <field name="code">bmt_iyb</field>
+            <field name="prefix">IYB1</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_iyb" model="ir.sequence">
+            <field name="name">BMT Training Application(IYB2)</field>
+            <field name="code">bmt_iyb_two</field>
+            <field name="prefix">IYB2</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_sstt" model="ir.sequence">
+            <field name="name">Short Skills(Technical Training)</field>
+            <field name="code">sstt</field>
+            <field name="prefix">SSTT</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_ltt" model="ir.sequence">
+            <field name="name">Leanership(Technical Training)</field>
+            <field name="code">ltt</field>
+            <field name="prefix">LTT</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_att" model="ir.sequence">
+            <field name="name">Apprenticeship(Technical Training)</field>
+            <field name="code">att</field>
+            <field name="prefix">ATT</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="paperformat_landscape" model="report.paperformat">
+            <field name="name">A4 Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">28</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="certificate_landscape" model="report.paperformat">
+            <field name="name">Certificate Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">2</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="certificate_potrait" model="report.paperformat">
+            <field name="name">Certificate Portrait</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">7</field>
+            <field name="margin_bottom">7</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="training_web_menu" model="website.menu">
+            <field name="name">Training               </field>
+            <field name="parent_id" ref="market_linkage.products_services_menu"/>
+        </record>
+        
+        <record id="bmt_training" model="website.menu">
+            <field name="name">Business Management</field>
+            <field name="url">/web#id=&amp;view_type=form&amp;model=bmt.training.application&amp;action=3986</field>            
+            <field name="parent_id" ref="bmt_training.training_web_menu"/>
+        </record>
+
+        <record id="job_preparedness_training" model="website.menu">
+            <field name="name">Job Preparedness</field>
+            <field name="url">/web#id=&amp;view_type=kanban&amp;model=sales.pitch.training&amp;action=3982</field>
+            <field name="parent_id" ref="bmt_training.training_web_menu"/>
+        </record>
+
+        <record id="sales_pitch_training" model="website.menu">
+            <field name="name">Sales Pitch</field>
+            <field name="url">/web#id=&amp;view_type=kanban&amp;model=sales.pitch.training&amp;action=3980</field>
+            <field name="parent_id" ref="bmt_training.training_web_menu"/>
+        </record>
+        
+        <record id="bbbee_training" model="website.menu">
+            <field name="name">BBBEE</field>
+            <field name="url">/web#id=&amp;view_type=kanban&amp;model=sales.pitch.training&amp;action=3981</field>
+            <field name="parent_id" ref="bmt_training.training_web_menu"/>
+        </record>
+        
+        <record id="life_skills_training" model="website.menu">
+            <field name="name">Life Skills</field>
+            <field name="url">/web#id=&amp;view_type=kanban&amp;model=sales.pitch.training&amp;action=3983</field>
+            <field name="parent_id" ref="bmt_training.training_web_menu"/>
+        </record>     
+
+        <record id="digital_skills_training" model="website.menu">
+            <field name="name">Digital Skills</field>
+            <field name="url">/web#id=&amp;view_type=kanban&amp;model=sales.pitch.training&amp;action=3984</field>
+            <field name="parent_id" ref="bmt_training.training_web_menu"/>
+        </record>
+
+    </data>
+</odoo>

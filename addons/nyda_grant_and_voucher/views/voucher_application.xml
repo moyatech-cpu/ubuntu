@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Views for Voucher application -->
+    <record id="view_voucher_application_form" model="ir.ui.view">
+        <field name="name">view.voucher.application.form</field>
+        <field name="model">voucher.application</field>
+        <!--        <field name="priority">1000</field>-->
+        <field name="arch" type="xml">
+            <form string="Voucher Application" delete="false" duplicate="false" create="false" edit="false">
+                <header>
+                    <button name="%(action_upload_attendance)d" string="Upload Attendance Register" class="oe_highlight" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo" type="action" attrs="{'invisible': [('status', '!=', 'appointment_drafted')]}"/>
+                    <button name="%(action_assessment_report_report)d" string="Upload Assessment Report" class="oe_highlight" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo" type="action" attrs="{'invisible': [('status', '!=', 'appointment_drafted')]}"/>
+                    
+                    <button name="pc_bc_review" string="Review" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': [('status', '!=', 'recommended')]}"/>
+                    
+                    <!--
+                    <button name="set_approve" string="Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': [('status', '!=', 'recommended')]}"/>                    
+                    <button name="set_decline" string="Decline" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': [('status', '!=', 'recommended')]}"/>
+                    <button name="set_refer" string="Query" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': [('status', '!=', 'recommended')]}"/>
+                    <button name="set_nyda_bda_bool" string="NYDA BDA Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bda" attrs="{'invisible': ['|',('status', '!=', 'client_review'),('nyda_bda_bool', '=', True)]}"/>
+                    -->
+                    
+                    <button name="set_recommend" string="Recommendations" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bdo" attrs="{'invisible': [('status', '!=', 'assessment_report')]}"/>
+                    <!-- <button name="695" string="Query" class="oe_highlight" type="action" attrs="{'invisible': [('status', '!=', 'assessment_report')]}"/> -->
+                    
+                    <button name="select_service_provider" string="Select Service Provider" class="oe_highlight" type="object" groups="base.group_system, client_management.group_branch_beneficiary, client_management.group_admin_user" attrs="{'invisible': [('status', '!=', 'approved')]}"/>
+                    <button name="%(action_upload_document)d" string="Upload Supporting Document" class="oe_highlight" type="action" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bda" attrs="{'invisible': [('status', '!=', 'voucher_isurance')]}"/>
+                    <button name="submit_work_plan" string="Work Plan Submit" class="oe_highlight" type="object" groups="base.group_system, client_management.group_partner_service_provider" attrs="{'invisible': [('status', '!=', 'work_plan')]}"/>
+                    
+                    <button name="client_approve_reject" string="Client Review" class="oe_highlight" type="object" groups="base.group_system, client_management.group_branch_beneficiary" attrs="{'invisible': [('status', '!=', 'submitted_product')]}"/>
+                    
+                    <button name="%(action_submit_product)d" string="Submit Final Product" class="oe_highlight" groups="base.group_system, client_management.group_partner_service_provider" type="action" attrs="{'invisible': [('status', '!=', 'work_plan_submitted')]}"/>
+                    <button name="btn_sp_assessment" string="Service Rating" class="oe_highlight" type="object" groups="base.group_system, client_management.group_branch_beneficiary" attrs="{'invisible': ['|',('status', '!=', 'client_review')]}"/>
+                    <button name="rating_proceed" string="Proceed" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bda" attrs="{'invisible': ['|',('status', '!=', 'client_review')]}"/>
+                    
+                    <button name="bda_review" string="BDA Compliance Review" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bda" attrs="{'invisible': [('status', '!=', 'bda_review')]}"/>
+                    <button name="bdo_review" string="BDO Review" class="oe_highlight" type="object" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_bdo" attrs="{'invisible': [('status', '!=', 'bdo_review')]}"/>
+                    <button name="pc_review" string="PC Review" class="oe_highlight" type="object" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': [('status', '!=', 'pc_review')]}"/>
+                    <button name="branch_manager_review" string="Branch Manager Review" class="oe_highlight" type="object" groups="base.group_system, client_management.group_branch_manager" attrs="{'invisible': [('status', '!=', 'branch_manager_review')]}"/>
+                    <button name="ho_admin_review" string="HO Admin Review" class="oe_highlight" type="object" groups="base.group_system,bmt_training.group_ho_admin" attrs="{'invisible': [('status', '!=', 'ho_admin_review')]}"/>
+                    <button name="qa_officer_review" string="QA Review" class="oe_highlight" type="object" groups="base.group_system,nyda_grant_and_voucher.group_grant_voucher_qao" attrs="{'invisible': [('status', '!=', 'qa_officer_review')]}"/>
+                    <button name="ed_manager_review" string="ED Review" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_edm" attrs="{'invisible': [('status', '!=', 'ed_manager_review')]}"/>
+                    
+                    <!--
+                      <button name="set_nyda_bcs_bool" string="NYDA BCS Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bcs" attrs="{'invisible': ['|',('status', '!=', 'nyda_review'),('nyda_bcs_bool', '=', True)]}"/>
+                      <button name="set_nyda_bcs_r_bool" string="NYDA BCS Reject" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bcs" attrs="{'invisible': ['|',('status', '!=', 'nyda_review'),('nyda_bcs_bool', '=', True)]}"/>
+                      <button name="set_nyda_bdo_bool" string="NYDA BDO Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bdo" attrs="{'invisible': ['|',('nyda_bdo_bool', '=', True),('nyda_bda_bool', '=', False)]}"/>
+                      <button name="set_nyda_bdo_r_bool" string="NYDA BDO Reject" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bdo" attrs="{'invisible': ['|',('nyda_bdo_bool', '=', True),('nyda_bda_bool', '=', False)]}"/>
+                      
+                      
+                      <button name="set_nyda_pc_bc_bool" string="NYDA PC/BC Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': ['|',('nyda_pc_bc_bool', '=', True),('nyda_bdo_bool', '=', False)]}"/>
+                      <button name="set_nyda_pc_bc_r_bool" string="NYDA PC/BC Reject" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': ['|',('nyda_pc_bc_bool', '=', True),('nyda_bdo_bool', '=', False)]}"/>
+                      <button name="set_nyda_qao_bool" string="NYDA QAO Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_qao" attrs="{'invisible': ['|',('nyda_qao_bool', '=', True),('nyda_bcs_bool', '=', False)]}"/>
+                      <button name="set_nyda_qao_r_bool" string="NYDA QAO Reject" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_qao" attrs="{'invisible': ['|',('nyda_qao_bool', '=', True),('nyda_bcs_bool', '=', False)]}"/>
+                      <button name="set_nyda_edm_bool" string="NYDA EDM Approve" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_edm" attrs="{'invisible': ['|',('nyda_edm_bool', '=', True),('nyda_qao_bool', '=', False)]}"/>
+  
+                      <button name="set_nyda_edm_r_bool" string="NYDA EDM Reject" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_edm" attrs="{'invisible': ['|',('nyda_edm_bool', '=', True),('nyda_qao_bool', '=', False)]}"/>
+                      <button name="692" string="Submit Post Disbursement" class="oe_highlight" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_edm" type="action" attrs="{'invisible': [('status', '!=', 'send_payment_reciept')]}"/>
+                      <button name="set_mkl_database" string="Link MKL Database" class="oe_highlight" type="object" attrs="{'invisible': [('status', '!=', 'post_disbursement_done')]}" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_edm"/>
+                      <button name="approve_payment" string="EDM Approve Payment" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_edm" attrs="{'invisible': [('status', '!=', 'post_disbursement_done')]}"/>
+                      <button name="process_payment" string="Process Payment" class="oe_highlight" type="object" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_fa" attrs="{'invisible': [('status', '!=', 'pending_payment')]}"/>
+                    -->
+                    
+                    <button name="%(action_proof_of_payment)d" string="Submit Proof Of Payment" class="oe_highlight" type="action" attrs="{'invisible': [('status', '!=', 'pending_payment')]}" groups="base.group_system,bmt_training.group_ho_admin"/>
+                    
+                    <field name="status" clickable="0" readonly="1" widget="statusbar" statusbar_visible="new,assessment_report,recommended,approved,work_plan,client_review,ed_manager_review"/>
+                </header>
+                <sheet>
+                    <group>
+                       <div class="col-md-6 oe_title">
+                           <label for="serial_number" string="Serial #"/>
+                           <h1>
+                               <field name="serial_number" readonly="1"/>
+                           </h1>
+                       </div>
+                       <div class="oe_button_box" style="align:right;text-align:right">
+                           <label for="business_development_assistance_ids" string="Beneficiary Service"/>
+                           <h1>
+                               <field name="business_development_assistance_ids" options="{'no_create_edit': True, 'no_open': True}"/>
+                           </h1>
+                       </div>
+                      <br />
+                       <div class="oe_button_box" name="button_box">
+                         
+                           <button name="schedule_appointment_wizard" string="Schedule Appointment" type="object" class="oe_stat_button" icon="fa-calendar" groups="base.group_system, nyda_grant_and_voucher.group_grant_voucher_bda" attrs="{'invisible': [('status', '!=', 'new')]}" context="{'default_name': active_id}">
+                           </button>
+                           <!--
+                           <button name="btn_voucher_isurance" string="Voucher Isurance" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('status', '=', ['new', 'assessment_report', 'appointment_drafted', 'recommended','approved'])]}">
+                           </button>
+                           -->
+                           <button name="btn_voucher_assessment" string="View Assessment" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('status', '=', 'new')]}">
+                           </button>
+                           <!--
+                           <button name="btn_service_provider" string="Check Service Provider" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('status', '!=', 'approved')]}">
+                           </button>
+                           -->
+                       </div>
+                    </group>  
+                    <group string="Personal Details">
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="sa_identity_number"/>
+                            <!--                            <field name="age"/>-->
+                            <field name="population_group"/>
+                            <field name="mobile"/>
+                            <field name="telephone"/>
+                            <field name="email" required="1"/>
+                            <field name="physical_address"/>
+                            <field name="physical_postal_code"/>
+                            <field name="province_id"/>
+                            <field name="trainings_attended"/>
+                            <field name="is_valid" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="surname"/>
+                            <field name="gender"/>
+                            <field name="telephone"/>
+                            <!--                            <field name="home_language"/>-->
+                            <field name="disability"/>
+                            <!--                            <field name="disability_description" attrs="{'invisible': [('disability', '=', 'no')]}"/>-->
+                            <field name="fax"/>
+                            <field name="postal_address"/>
+                            <field name="postal_code"/>
+                            <field name="geographical_type"/>
+                            <field name="formal_qualification"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="next_of_kin"/>
+                            <field name="relationship"/>
+                            <field name="beneficiary_id" required="1" invisible="1"/>
+                            <field name="user_id" readonly="1" invisible="1"/>
+                            <field name="branch_id" readonly="1" invisible="1"/>                            
+                        </group>
+                        <group>
+                            <field name="relative_mobile"/>
+                            <field name="relative_physical_address"/>
+                            <field name="write_uid" readonly="1" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="entrepreneurial_status" string="ENTREPRENEURIAL STATUS">
+                            <group string="Entrepreneurial Status">
+                                <group>
+                                    <field name="existing_business"/>
+                                    <field name="business_idea"/>
+                                    <field name="no_business"/>
+                                </group>
+                                <group>
+                                    <field name="entrepreneurial_training"/>
+                                </group>
+                            </group>
+                            <group string="Job creation information">
+                                <field name="job_creation_info_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="population_group"/>
+                                        <field name="before_funding_male"/>
+                                        <field name="before_funding_female"/>
+                                        <field name="before_funding_disabled_male"/>
+                                        <field name="before_funding_disabled_female"/>
+                                        <field name="before_funding_age_male"/>
+                                        <field name="before_funding_age_female"/>
+                                        <field name="after_funding_male"/>
+                                        <field name="after_funding_female"/>
+                                        <field name="after_funding_disabled_male"/>
+                                        <field name="after_funding_disabled_female"/>
+                                        <field name="after_funding_age_male"/>
+                                        <field name="after_funding_age_female"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+
+                        <page name="pre_startup" string="PRE START-UP" attrs="{'invisible':['|',('existing_business','=',True),('business_idea','=',True)]}">
+                            <group string="Pre Start-up Details">
+                                <label for="business_start_reason_ids" string="Why do you want to start a business?"/>
+                                <field name="business_start_reason_ids" widget="many2many_tags"/>
+                                <group>
+                                    <field name="business_start_reason_char"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="business_goals"/>
+                            </group>
+                            <group string="Business Experience">
+                                <field name="business_experience"/>
+                            </group>
+                            <group>
+                                <field name="expertise_in_business"/>
+                            </group>
+                            <group>
+                                <field name="business_development_assistance_startup_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="business_assistance_improvements_startup_ids"/>
+                                <field name="able_invest_resource_startup_ids"/>
+                                <field name="able_invest_resource_description_startup_ids"/>
+                            </group>
+                        </page>
+
+                        <page name="startup" string="START-UP" attrs="{'invisible':['|',('existing_business','=',True),('no_business','=',True)]}">
+                            <group string="START-UP Business Details">
+                                <group>
+                                    <field name="startup_business_name"/>
+                                    <field name="business_sector_id" string="Business Sector"/>
+                                    <!-- <field name="x_startup_business_sector_id" widget="many2many_tags"/> -->
+                                    <field name="startup_business_sector_char"/>
+                                </group>
+                                <group>
+                                    <field name="startup_business_type"/>
+                                    <field name="startup_legal_entity_ids" widget="many2many_tags"/>
+                                    <field name="startup_legal_entity_char"/>
+                                </group>
+                                <group>
+                                    <label for="startup_business_start_reason_ids"/>
+                                    <field name="startup_business_start_reason_ids" widget="many2many_tags" nolabel="1"/>
+                                </group>
+                                <group>
+                                    <field name="startup_business_start_reason_char"/>
+                                </group>
+                            </group>
+                            <group string="Please explain following in brief">
+                                <group>
+                                    <label for="startup_idea_description_type_of_business"/>
+                                    <field name="startup_idea_description_type_of_business" nolabel="1"/>
+                                    <label for="startup_idea_description_business_need_satisfy"/>
+                                    <field name="startup_idea_description_business_need_satisfy" nolabel="1"/>
+                                    <label for="startup_idea_description_potential_customers"/>
+                                    <field name="startup_idea_description_potential_customers" nolabel="1"/>
+                                    <label for="startup_idea_description_operate_business"/>
+                                    <field name="startup_idea_description_operate_business" nolabel="1"/>
+                                    <label for="startup_idea_description_operate_product_servivces"/>
+                                    <field name="startup_idea_description_operate_product_servivces" nolabel="1"/>
+                                </group>
+                            </group>
+                            <group string="Business Skills">
+                                <group>
+                                    <!--                            <label for="management_skills_start_business"/>-->
+                                    <field name="management_skills_start_business" widget="radio"/>
+                                    <!--                            <label for="technical_skills_start_business"/>-->
+                                    <field name="technical_skills_start_business" widget="radio"/>
+                                    <!--                            <label for="identified_potential_customers"/>-->
+                                    <field name="identified_potential_customers" widget="radio"/>
+                                    <field name="know_competitors" widget="radio"/>
+                                </group>
+                                <group>
+                                    <!--                            <label for="know_competitors"/>-->
+
+                                    <!--                            <label for="money_to_cover_startup"/>-->
+                                    <field name="money_to_cover_startup" widget="radio"/>
+                                    <!--                            <label for="money_to_cover_operating"/>-->
+                                    <field name="money_to_cover_operating" widget="radio"/>
+                                    <!--                            <label for="required_equipments_and_machine"/>-->
+                                    <field name="required_equipments_and_machine" widget="radio"/>
+                                </group>
+                            </group>
+                            <label for="ownership_status_ids"/>
+                            <field name="ownership_status_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="position"/>
+                                    <field name="mobile"/>
+                                    <field name="disability"/>
+                                    <field name="gender"/>
+                                    <field name="geographical_type"/>
+                                    <field name="population_group"/>
+                                    <field name="ownership"/>
+                                </tree>
+                            </field>
+                            <label for="total_status_ownership_percent"/>
+                            <field name="total_status_ownership_percent" readonly="1"/>
+                            <group>
+                                <field name="business_development_assistance_startup_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="business_assistance_improvements_business_idea"/>
+                                <field name="able_invest_resource_business_idea"/>
+                                <field name="able_invest_resource_description_business_idea"/>
+                            </group>
+                        </page>
+
+                        <page name="existing_business" string="EXISTING BUSINESS" attrs="{'invisible': ['|',('no_business','=', True),('business_idea','=',True)]}">
+                            <group string="Existing Business Details">
+                                <group>
+                                    <field name="existing_business_name"/>
+                                    <field name="business_sector_id" string="Business Sector"/>
+                                    <!-- <field name="existing_business_sector_ids" widget="many2many_tags"/> -->
+                                    <field name="existing_business_sector_char"/>
+                                    <field name="existing_business_start_reason_ids" widget="many2many_tags"/>
+                                    <field name="existing_business_start_reason_char"/>
+                                </group>
+                                <group>
+                                    <field name="existing_business_type"/>
+                                    <field name="existing_legal_entity_ids" widget="many2many_tags"/>
+                                    <field name="existing_legal_entity_char"/>
+                                </group>
+                            </group>
+                            <!--                            <label for="existing_idea_description"/>-->
+                            <!--                            <field name="existing_idea_description" nolabel="1"/>-->
+                            <group string="Please explain following in brief">
+                                <group>
+                                    <label for="existing_idea_description_type_of_business"/>
+                                    <field name="existing_idea_description_type_of_business" nolabel="1"/>
+                                    <label for="existing_idea_description_business_need_satisfy"/>
+                                    <field name="existing_idea_description_business_need_satisfy" nolabel="1"/>
+                                    <label for="existing_idea_description_potential_customers"/>
+                                    <field name="existing_idea_description_potential_customers" nolabel="1"/>
+                                    <label for="existing_idea_description_operate_business"/>
+                                    <field name="existing_idea_description_operate_business" nolabel="1"/>
+                                    <label for="existing_idea_description_operate_product_servivces"/>
+                                    <field name="existing_idea_description_operate_product_servivces" nolabel="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="business_running_time"/>
+                                    <field name="count_employees"/>
+                                    <field name="change_in_emp_count"/>
+                                    <field name="change_in_emp_reason"/>
+                                </group>
+                                <group>
+                                    <field name="estimate_annual_turnover" required="1"/>
+                                    <field name="change_in_turnover"/>
+                                    <field name="change_in_turnover_reason"/>
+                                    <field name="separate_bank_account"/>
+                                </group>
+                            </group>
+                            <group string="How Business Started?">
+                                <group>
+                                    <field name="business_start_method"/>
+                                    <field name="business_start_monetary_id"/>
+                                    <field name="business_operate_premises_id"/>
+                                    <field name="business_operate_premises_char"/>
+                                    <field name="business_premise"/>
+                                    <field name="business_area_description"/>
+
+
+                                </group>
+                                <group>
+                                    <field name="business_geographical_location_id"/>
+                                    <field name="business_sector_id"/>
+                                    <field name="business_sector_char"/>
+                                    <field name="growth_business_sector"/>
+                                    <field name="business_comply_industry"/>
+                                    <field name="startup_involvement"/>
+                                </group>
+                            </group>
+                            <group string="Business Management Experience">
+                                <group>
+                                    <field name="previous_work_on_industry"/>
+                                    <field name="previous_work_on_industry_duration"/>
+                                    <field name="business_management_experiance"/>
+                                    <field name="future_business_goals"/>
+                                    <!--                                     <field name="business_ownership_status_ids"/>-->
+                                </group>
+                                <group>
+                                    <field name="business_development_assistance_ids" widget="many2many_tags"/>
+                                    <!--                                    <field name="business_development_assistance" required="1"/>-->
+                                    <field name="business_assistance_improvements"/>
+                                    <field name="able_invest_resource"/>
+                                    <field name="able_invest_resource_description"/>
+                                </group>
+                            </group>
+                            <label for="business_ownership_status_ids"/>
+                            <field name="business_ownership_status_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="x_id_number"/>
+                                    <field name="position"/>
+                                    <field name="mobile"/>
+                                    <field name="disability"/>
+                                    <field name="gender"/>
+                                    <field name="geographical_type"/>
+                                    <field name="population_group"/>
+                                    <field name="ownership"/>
+                                </tree>
+                            </field>
+                            <label for="total_business_ownership_percent"/>
+                            <field name="total_business_ownership_percent" readonly="1"/>
+                        </page>
+
+                        <page name="supporting_document" string="SUPPORTING DOCUMENT">
+                            <group>
+                                <group>
+                                    <field name="identity_document_1_name" invisible="1"/>
+                                    <field name="identity_document_1" filename="identity_document_1_name" string="Identity Document" />
+                                    <field name="proof_of_residence_name" invisible="1"/>
+                                    <field name="proof_of_residence" filename="proof_of_residence_name"/>
+                                    <field name="company_profile_name" invisible="1"/>
+                                    <field name="company_profile" filename="company_profile_name"/>
+                                    <field name="x_bmt_certificate_name" invisible="1"/>
+                                    <field name="x_bmt_certificate" filename="x_bmt_certificate_name"/>                                    
+                                </group>
+                                <group>
+                                    <field name="company_registration_name" invisible="1"/>
+                                    <field name="company_registration" filename="company_registration_name"/>
+                                    <field name="current_employees_name" invisible="1"/>
+                                    <field name="current_employees" filename="current_employees_name"/>
+                                    <field name="other_doc_name" invisible="1"/>
+                                    <field name="other_doc" filename="other_doc_name"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page name="schedule_appointment" string="APPOINTMENT SCHEDULE">
+                            <group>
+                                <group>
+                                    <field name="user_name"/>
+                                    <field name="bdo_name" options="{'no_create_edit': True, 'no_open': True}"/>
+                                    <field name="appointment_date"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page name="voucher_isurance" string="VOUCHER ISSUANCE">
+                            <group>
+                                <group>
+                                    <field name="x_recommended_service"/>
+                                    <field name="x_service_provider" options="{'no_create_edit': True, 'no_open': True}"/>
+                                    <field name="x_sp_street_address"/>
+                                    <field name="x_sp_city"/>
+                                    <field name="x_sp_zip"/>
+                                </group>
+                                <group>
+                                    <!-- <field name="x_sp_country_id"/> -->
+                                    <field name="x_sp_company_email"/>
+                                    <field name="x_sp_company_website"/>
+                                    <field name="x_voucher_value"/>
+                                    <field name="x_voucher_start_date" string="Voucher Start Date"/>
+                                    <field name="x_voucher_end_date"/>
+                                    <field name="x_voucher_reissue_start_date"/>
+                                    <field name="x_voucher_reissue_end_date"/>
+                                </group>
+                            </group>
+                            <group>
+                              <group>
+                                <field name="x_voucher_number" string="Voucher Number"/>
+                              </group>
+                            </group>
+                        </page>
+
+                        <page name="Voucher_Internal_Report" string="INTERNAL REPORTS" groups="base.group_system,client_management.group_partner_service_provider, nyda_grant_and_voucher.group_grant_voucher_bda, nyda_grant_and_voucher.group_grant_voucher_bdo, nyda_grant_and_voucher.group_grant_voucher_pc_bc, nyda_grant_and_voucher.group_grant_voucher_bcs, nyda_grant_and_voucher.group_grant_voucher_qao, nyda_grant_and_voucher.group_grant_voucher_edm, nyda_grant_and_voucher.group_grant_voucher_fa">
+                            <group>
+                                <group string="Assessment Report">
+                                    <field name="assessment_report_name" invisible="1"/>
+                                    <field name="assessment_report" widget="binary" filename="assessment_report_name" readonly="1" />
+                                    <field name="x_attendance_register_name" invisible="1"/>
+                                    <field name="x_attendance_register" widget="binary" filename="x_attendance_register_name" readonly="1" />                                    
+                                </group>                              
+                                <group string="Voucher Recommendation">
+                                    <field name="x_recommended_service" string="Service" widget="many2many_tags" readonly="1" />
+                                    <field name="recommendationnote" readonly="1" />
+                                    <!-- <field name="x_pc_status" readonly="1" /> -->
+                                </group>
+                                <group string="Voucher Approval">
+                                    <field name="x_pc_bc_state" readonly="1" string="PC Status"/>
+                                    <field name="x_pc_bc_comments" readonly="1" />
+                                </group>                                
+                                <group string="Submitted Product">
+                                    <field name="product_doc_name" invisible="1"/>
+                                    <field name="product_doc" widget="binary" filename="product_doc_name" readonly="1"/>
+                                    <field name="invoice_doc_name" invisible="1"/>
+                                    <field name="invoice_doc" widget="binary" filename="invoice_doc_name" readonly="1"/>
+                                    <field name="timesheet_doc_name" invisible="1"/>
+                                    <field name="timesheet_doc" widget="binary" filename="timesheet_doc_name" readonly="1"/>
+                                    <field name="work_plan_report" widget="binary" filename="work_plan_report_name" string="Work Plan" readonly="1"/>
+                                    <field name="work_plan_report_name" invisible="1"/>                                    
+                                </group>                              
+                                <group string="Beneficiary Product Review">
+                                    <field name="client_approve_reject_state" widget="radio" readonly="1" options="{'horizontal': true}" string="Status"/>
+                                    <field name="client_approve_reject_description" readonly="1" string="Comments"/>
+                                </group>
+                                <group string="Branch Review">
+                                    <field name="x_bda_state" widget="radio" readonly="1" options="{'horizontal': true}" string="BDA Status"/>
+                                    <field name="x_bda_comments" readonly="1" string="Comments"/>
+                                    
+                                    <field name="x_bdo_state" widget="radio" readonly="1" options="{'horizontal': true}" string="BDO Status"/>
+                                    <field name="x_bdo_comments" readonly="1" string="Comments"/>
+                                    
+                                    <field name="x_pc_state" widget="radio" readonly="1" options="{'horizontal': true}" string="PC Status"/>
+                                    <field name="x_pc_comments" readonly="1" string="Comments"/>
+                                    
+                                    <field name="x_branch_manager_state" widget="radio" readonly="1" options="{'horizontal': true}" string="Branch Manager Status"/>
+                                    <field name="x_branch_manager_comments" readonly="1" string="Comments"/>                                    
+                                    
+                                    <!-- Remove Variables -->                                    
+                                    <field name="nyda_bda_bool" invisible="1"/>
+                                    <field name="nyda_bdo_bool" invisible="1"/>
+                                    <field name="reject_reason_pcbc" invisible="1"/>
+                                    <field name="query_pcbc" invisible="1"/>
+                                    <field name="nyda_pc_bc_bool" invisible="1"/>
+                                </group>
+                                <group string="NYDA Head Office Review">
+                                    <field name="x_ho_admin_state" widget="radio" readonly="1" options="{'horizontal': true}"/>
+                                    <field name="x_ho_admin_comments" readonly="1" string="Comments"/>
+                                    
+                                    <field name="x_qa_officer_state" widget="radio" readonly="1" options="{'horizontal': true}"/>
+                                    <field name="x_qa_officer_comments" readonly="1" string="Comments"/>
+                                    
+                                    <field name="x_ed_manager_state" widget="radio" readonly="1" options="{'horizontal': true}"/>
+                                    <field name="x_ed_manager_comments" readonly="1" string="Comments"/>
+                                </group>
+                                <group string="Proof Of Payment">
+                                    <field name="proof_of_payment_name" invisible="1"/>
+                                    <field name="proof_of_payment" widget="binary" filename="proof_of_payment_name" readonly="1"/>
+                                    <field name="proof_of_payment_date" readonly="1" string="Uploaded Date"/>
+                                    <!-- <field name="payment_approval_date" readonly="1"/> -->
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        
+        </field>
+    </record>
+
+    <record id="view_voucher_application_tree" model="ir.ui.view">
+        <field name="name">Voucher Applications</field>
+        <field name="model">voucher.application</field>
+        <field name="arch" type="xml">
+            <tree string="Voucher Applications"  delete="false" duplicate="false" create="false" edit="false">
+                <field name="serial_number"/>
+                <field name="application_date"/>
+                <field name="status"/>
+                <field name="name"/>
+                <field name="surname"/>
+                <field name="population_group"/>
+                <field name="telephone"/>
+                <field name="mobile"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_voucher_application_history_tree" model="ir.ui.view">
+        <field name="name">Voucher History</field>
+        <field name="model">voucher.application</field>
+        <field name="arch" type="xml">
+            <tree string="Voucher History"  delete="false" duplicate="false" create="false" edit="false">
+                <field name="serial_number"/>
+                <field name="create_date" string="Date"/>
+                <field name="voucher_value_vat"/>
+                <field name="service_provider"/>
+                <field name="beneficiary_id"/>
+                <!--                <field name="partner_service_ids"/>-->
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_voucher_enq_tree" model="ir.ui.view">
+        <field name="name">Voucher Enquiry</field>
+        <field name="model">youth.enquiry</field>
+        <field name="arch" type="xml">
+            <tree string="Voucher Enguiry"  delete="false" duplicate="false" create="false" edit="false">
+                <field name="create_date"/>
+                <field name="title"/>
+                <field name="name"/>
+                <field name="surname"/>
+                <field name="email"/>
+                <field name="cell_phone_number"/>
+                <field name="id_number"/>
+                <field name="product_information_type"/>
+                <field name="nearest_branch"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="voucher_application_calendar">
+        <field name="name">voucher.application.calendar</field>
+        <field name="model">voucher.application</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Calendar View" mode="month" date_start="appointment_date" color="bdo_name">
+                <field name="name"/>
+                <field name="bdo_name"/>
+                <field name="appointment_date"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_voucher_application_form_two" model="ir.ui.view">
+        <field name="name">view.voucher.application.form.two</field>
+        <field name="model">voucher.application</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Application"  delete="false" duplicate="false" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="serial_number" string="Serial #"/>
+                        <h1>
+                            <field name="serial_number" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group string="Personal Details">
+                        <group>
+                            <field name="name"/>
+                            <field name="sa_identity_number"/>
+                            <!--                            <field name="age"/>-->
+                            <field name="population_group"/>
+                            <field name="mobile"/>
+                            <field name="telephone"/>
+                            <field name="email" required="1"/>
+                            <field name="physical_address"/>
+                            <field name="physical_postal_code"/>
+                            <field name="province_id"/>
+                            <field name="trainings_attended"/>
+                        </group>
+                        <group>
+                            <field name="surname"/>
+                            <field name="gender"/>
+                            <field name="telephone"/>
+                            <!--                            <field name="home_language"/>-->
+                            <field name="disability"/>
+                            <!--                            <field name="disability_description" attrs="{'invisible': [('disability', '=', 'no')]}"/>-->
+                            <field name="fax"/>
+                            <field name="postal_address"/>
+                            <field name="postal_code"/>
+                            <field name="geographical_type"/>
+                            <field name="formal_qualification"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="next_of_kin"/>
+                            <field name="beneficiary_id" required="1"/>
+                            <field name="user_id" readonly="1"/>
+                            <field name="branch_id" readonly="1"/>
+                            <field name="relationship"/>
+                        </group>
+                        <group>
+                            <field name="relative_mobile"/>
+                            <field name="relative_physical_address"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="supporting_document" string="SUPPORTING DOCUMENT">
+                            <group string="Identity Document">
+                                <group>
+                                    <field name="identity_document_1_name" invisible="1"/>
+                                    <field name="identity_document_1" filename="identity_document_1_name"/>
+                                    <field name="identity_document_2_name" invisible="1"/>
+                                    <field name="identity_document_2" filename="identity_document_2_name"/>
+                                    <field name="identity_document_3_name" invisible="1"/>
+                                    <field name="identity_document_3" filename="identity_document_3_name"/>
+                                </group>
+                            </group>
+                            <group string="Supporting Document">
+                                <group>
+                                    <field name="proof_of_residence_name" invisible="1"/>
+                                    <field name="proof_of_residence" filename="proof_of_residence_name"/>
+                                    <field name="company_profile_name" invisible="1"/>
+                                    <field name="company_profile" filename="company_profile_name"/>
+                                    <!--                                    <field name="bank_statement_name" invisible="1"/>-->
+                                    <!--                                    <field name="bank_statement" filename="bank_statement_name"/>-->
+                                    <!--                                    <field name="quotations_grant_name" invisible="1"/>-->
+                                    <!--                                    <field name="quotations_grant" filename="quotations_grant_name"/>-->
+                                </group>
+                                <group>
+                                    <field name="company_registration_name" invisible="1"/>
+                                    <field name="company_registration" filename="company_registration_name"/>
+                                    <field name="current_employees_name" invisible="1"/>
+                                    <field name="current_employees" filename="current_employees_name"/>
+                                    <!--                                    <field name="business_plan_grant_name" invisible="1"/>-->
+                                    <!--                                    <field name="business_plan_grant" filename="business_plan_grant_name"/>-->
+                                    <field name="other_doc_name" invisible="1"/>
+                                    <field name="other_doc" filename="other_doc_name"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="voucher_isurance" string="Voucher Isurance(Service Provider Details)">
+                            <group>
+                                <field name="voucher_isurance_objective"/>
+                                <field name="voucher_value_vat"/>
+                                <field name="expected_turn_over_hidden_value" invisible="1"/>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="service_provider" options="{'no_create_edit': True, 'no_open': True}"/>
+                                    <field name="company_reg_number" readonly="1"/>
+                                    <field name="cell_phone_number" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="job_title" readonly="1"/>
+                                    <field name="service_provider_email" readonly="1"/>
+                                    <field name="service_enable_date"/>
+                                    <field name="nearest_branch" readonly="1"
+                                           options="{'no_create_edit': True, 'no_open': True}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="Voucher_Internal_report" string="INTERNAL REPORTS">
+                            <group>
+                                <group string="Work Plan Report">
+                                    <field name="work_plan_report" widget="binary" filename="work_plan_report_name"/>
+                                    <field name="work_plan_report_name" invisible="1"/>
+
+                                    <field name="product_inline_bcs_approved" widget="binary"
+                                           filename="product_inline_bcs_approved_name"/>
+                                    <field name="product_inline_bcs_approved_name" invisible="1"/>
+                                </group>
+                                <group string="Submitted Product">
+                                    <field name="product_doc_name" invisible="1"/>
+                                    <field name="product_doc" widget="binary" filename="product_doc_name"/>
+                                    <field name="invoice_doc_name" invisible="1"/>
+                                    <field name="invoice_doc" widget="binary" filename="invoice_doc_name"/>
+                                    <field name="timesheet_doc_name" invisible="1"/>
+                                    <field name="timesheet_doc" widget="binary" filename="timesheet_doc_name"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Client Product Approve/Reject">
+                                    <field name="client_approve_reject_state" widget="radio" readonly="1"
+                                           options="{'horizontal': true}"/>
+                                    <field name="client_approve_reject_description" readonly="1"/>
+                                    <field name="client_redemption_pack_name" invisible="1"/>
+                                    <field name="client_redemption_pack" widget="binary"
+                                           filename="client_redemption_pack_name"/>
+                                </group>
+                                <group string="NYDA Branch Review">
+                                    <field name="nyda_bda_bool" readonly="1"/>
+                                    <field name="nyda_bdo_bool" readonly="1"/>
+                                    <field name="nyda_pc_bc_bool" readonly="1"/>
+                                </group>
+                                <group string="NYDA Head Office Review">
+                                    <field name="nyda_bcs_bool" readonly="1"/>
+                                    <field name="nyda_qao_bool" readonly="1"/>
+                                    <field name="nyda_edm_bool" readonly="1"/>
+                                </group>
+                                <group string="Assessment Report">
+                                    <field name="assessment_report_name" invisible="1"/>
+                                    <field name="assessment_report" widget="binary"
+                                           filename="assessment_report_name"/>
+                                </group>
+                                <group string="Proof Of Payment">
+                                    <field name="finance_admin_id" required="0"
+                                           options="{'no_create_edit': True, 'no_open': True}"/>
+                                    <field name="proof_of_payment_name" invisible="0"/>
+                                    <field name="proof_of_payment" widget="binary"
+                                           filename="proof_of_payment_name"/>
+                                    <field name="proof_of_payment_date" readonly="1"/>
+                                    <field name="payment_approval_date" readonly="1"/>
+                                </group>
+                                <group string="Post Disbursement">
+                                    <field name="post_disbursement" invisible="1"/>
+                                    <field name="post_disbursement" widget="binary"
+                                           filename="post_disbursement_name"/>
+                                </group>
+                                <group string="Reject/Cancel Reasons">
+                                    <field name="bdo_reason_text"/>
+                                    <field name="cancel_voucher_reason"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_voucher_application_history" model="ir.actions.act_window">
+        <field name="name">Voucher History</field>
+        <field name="res_model">voucher.application</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('status', '=', 'approved'), ('is_valid', '=', True)]</field>
+        <field name="view_id" ref="view_voucher_application_history_tree"/>
+    </record>
+
+    <!--    <record id="action_voucher_application_main" model="ir.actions.act_window">-->
+    <!--        <field name="name">Voucher Application</field>-->
+    <!--        <field name="res_model">voucher.application</field>-->
+    <!--        <field name="view_type">form</field>-->
+    <!--        <field name="view_id" ref="view_voucher_application_form"/>-->
+    <!--        <field name="view_mode">calendar,tree,form</field>-->
+    <!--    </record>-->
+
+    <record id="action_voucher_application_main" model="ir.actions.act_window">
+        <field name="name">Voucher Application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">voucher.application</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_grant_and_voucher.view_voucher_application_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_grant_and_voucher.view_voucher_application_form')})]"/>
+    </record>
+     <record id="action_voucher_enq_main" model="ir.actions.act_window">
+        <field name="name">Voucher Enquiry</field>
+        <field name="res_model">youth.enquiry</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('product_information_type', '=', 'voucher')]</field>
+        <field name="context">[('is_youth_enquiry', '=', True)]</field>
+        <field name="view_id" ref="view_voucher_enq_tree"/>
+    </record>
+
+    <!-- Menu Item for Grant Application -->
+    <menuitem name="Voucher Application" id="menu_main_voucher_application"
+              parent="nyda_grant_and_voucher.main_menu_voucher"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"/>
+    <menuitem name="Voucher Application" id="menu_voucher_application"
+              action="nyda_grant_and_voucher.action_voucher_application_main"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp,client_management.group_branch_beneficiary"
+              parent="nyda_grant_and_voucher.menu_main_voucher_application" sequence="1"/>
+    
+    <menuitem name="Voucher Enquiry" id="menu_voucher_enq"
+              action="nyda_grant_and_voucher.action_voucher_enq_main"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp,client_management.group_branch_beneficiary"
+              parent="nyda_grant_and_voucher.main_menu_voucher" sequence="0"/>
+    
+    <menuitem name="Voucher History" id="menu_main_voucher_history"
+              action="nyda_grant_and_voucher.action_voucher_application_history"
+              parent="nyda_grant_and_voucher.menu_main_voucher_application" sequence="2"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"/>
+
+    <!--    SERVICE MENU MODEL IS IN CLIENT MANAGEMENT-->
+    <menuitem name="Config" id="menu_config_voucher"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"
+              parent="nyda_grant_and_voucher.main_menu_voucher" sequence="60"/>
+
+    <!--    <menuitem name="Voucher Service" id="menu_service"-->
+    <!--              action="client_management.service_action"-->
+    <!--              parent="nyda_grant_and_voucher.menu_config_voucher" sequence="1"/>-->
+
+</odoo>

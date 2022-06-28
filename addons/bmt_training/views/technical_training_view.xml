@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Technical Training Tree View-->
+        <record model="ir.ui.view" id="technical_training_tree_view">
+            <field name="name">technical.training.tree.view</field>
+            <field name="model">technical.training</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="branch_id"/>
+                    <field name="create_date"/>
+                    <field name="state"/>
+                    <field name="trainer_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Technical Training Form View-->
+        <record model="ir.ui.view" id="technical_training_form_view">
+            <field name="name">technical.training.form.view</field>
+            <field name="model">technical.training</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <header>
+                        <button name="start_training" string="Benificiary Recruitment" type="object"
+                                attrs="{'invisible': [('state', '!=', False)]}"
+                                groups="base.group_system,client_management.group_partner_service_provider,bmt_training.group_trainer"/>
+                        <button name="assign_company" string="Assign Company" type="object"
+                                groups="base.group_system,client_management.group_partner_service_provider,bmt_training.group_trainer"
+                                attrs="{'invisible': [('state','!=','start_training')]}"/>
+                        <button name="submit_to_ho" string="Upload Logbook" type="object"
+                                states="placed_at_company,ho_reject"
+                                groups="base.group_system,client_management.group_partner_service_provider,bmt_training.group_trainer"/>
+                        <button name="approve_ho" string="Approve" type="object"
+                                states="submit_head_office"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button string="Reject" states="submit_head_office"
+                                type="action" name="%(bmt_training.action_tech_training_rejection)d"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"/>
+                        <button string="Conducting Site Visit" name="conduct_site_visit" states="ho_approve"
+                                type="object"
+                                groups="base.group_system,client_management.group_partner_service_provider,bmt_training.group_nyda_specialist"/>
+                        <button string="Submit Site Visit Report" name="%(bmt_training.action_tech_training_sv_upload)d"
+                                states="conducting_site_visit,site_visit_reject" type="action"
+                                groups="base.group_system,client_management.group_partner_service_provider,bmt_training.group_nyda_specialist"/>
+                        <button string="Approve" name="site_visit_app" states="submit_sv_to_manager"
+                                type="object"
+                                groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <!--<button string="Site Visit Reject" name="site_visit_rej" states="submit_sv_to_manager"-->
+                                <!--type="object"-->
+                                <!--groups="base.group_system,bmt_training.group_ho_manager"/>-->
+                        <button string="Reject" name="%(bmt_training.action_tech_training_rejection)d"
+                                states="submit_sv_to_manager"
+                                type="action"
+                                groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <!--<button string="Submit To Senior Manager" name="submit_to_manager"/>-->
+                        <button name="%(bmt_training.action_tech_training_pc_upload)d" string="Submit Project Closeout Rpeort" type="action"
+                                states="site_visit_approve,nyda_reject"
+                                groups="base.group_system,client_management.group_partner_service_provider"/>
+                        <!--<button name="nyda_review"-->
+                                <!--groups="base.group_system,bmt_training.group_nyda_specialist"-->
+                                <!--type="object" string="NYDA Specialist Review"/>-->
+                        <button name="nyda_approve" states="pc_submit,pc_reject,nyda_review"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"
+                                type="object" string="Approve"/>
+                        <button name="%(bmt_training.action_tech_training_rejection)d"
+                                states="pc_submit,pc_reject,nyda_review"
+                                groups="base.group_system,bmt_training.group_nyda_specialist"
+                                type="action" string="Reject"/>
+                        <button string="Approve" name="pc_approve" states="nyda_approve"
+                                type="object"
+                                groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <button string="Reject"
+                                name="%(bmt_training.action_tech_training_rejection)d" states="nyda_approve"
+                                type="action"
+                                groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <button name="upload_certi" string="Upload Certificate" states="pc_approve" type="object"
+                                groups="base.group_system,client_management.group_partner_service_provider"/>
+                        <!--<button name="me_evaluate" string="Do the Evaluation" states="pc_approve" type="object"-->
+                                <!--groups="base.group_system,client_management.group_partner_service_provider"/>-->
+                        <!--<button name="complete_me_eval" string="Complete Evaluation" states="me_evaluation"-->
+                                <!--type="object"-->
+                                <!--groups="base.group_system,client_management.group_partner_service_provider"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="start_training,placed_at_company"
+                               type="object"/>
+                    </header>
+                    <sheet>
+                        <group string="Training Details" name="training_details">
+                            <group>
+                                <field name="name"/>
+                                <field name="branch_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                                <field name="programme_type" required="1"/>
+                                <field name="nyda_specialist_id" options="{'no_open': True, 'no_create': True}"
+                                       required="1"/>
+                            </group>
+                            <group>
+                                <field name="trainer_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                                <field name="ho_admin_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                                <field name="company_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+                                <field name="course_duration"/>
+                            </group>
+                        </group>
+                        <group name="upload_files" string="Upload Files">
+                            <!--<group>-->
+                                <!--<field name="mentorship_report_log_book" filename="log_book_file_name"/>-->
+                                <!--<field name="log_book_file_name" invisible="1"/>-->
+                            <!--</group>-->
+                            <!--<group>-->
+                                <!--<field name="site_visit_report" filename="site_visit_file_name" readonly="1"/>-->
+                                <!--<field name="site_visit_file_name" invisible="1"/>-->
+                            <!--</group>-->
+                            <!--<group>-->
+                            <field name="project_closeout_report" filename="project_closeout_file_name"
+                                   readonly="1"/>
+                            <field name="project_closeout_file_name" invisible="1"/>
+                            <field name="site_visit_file_ids" readonly="1"/>
+                            <!--</group>-->
+                        </group>
+                        <group>
+                            <field name="site_visit_reject" readonly="1"
+                                   attrs="{'invisible': [('site_visit_reject', '=', False)]}"/>
+                            <field name="prc_reject" readonly="1"
+                                   attrs="{'invisible': [('prc_reject', '=', False)]}"/>
+                            <field name="nyda_reject" readonly="1"
+                                   attrs="{'invisible': [('nyda_reject', '=', False)]}"/>
+                            <field name="ho_rejected" readonly="1"
+                                   attrs="{'invisible': [('ho_rejected', '=', False)]}"/>
+                        </group>
+                        <group name="enrolled_benificiaries" string="Enrolled Benificiaries">
+                            <field name="enrolled_users_ids" nolabel="1">
+                                <tree editable="top">
+                                    <field name="benificiary_id" required="1" string="Name" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="surname"/>
+                                    <field name="id_number"/>
+                                    <field name="contact_number" required="1"/>
+                                    <field name="e_mail" required="1"/>
+                                    <field name="gender"/>
+                                    <field name="population_group" required="1"/>
+                                    <field name="work_placement_id" options="{'no_open': True, 'no_create': True}"/>
+                                    <!--<field name="technical_training_id"/>-->
+                                    <field name="passed"/>
+                                    <field name="mentorship_report_log_book" filename="log_book_file_name"
+                                           widget="download"/>
+                                    <field name="log_book_file_name" invisible="1"/>
+                                    <field name="certificate_name" invisible="1"/>
+                                    <field name="certificate" filename="certificate_name" widget="download"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Short Skills Technical Training -->
+        <record model="ir.actions.act_window" id="action_technical_training_short_skills">
+            <field name="name">Short Skills Technical Training</field>
+            <field name="res_model">technical.training</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('programme_type', '=', 'short_skills')]</field>
+            <field name="context">{'default_programme_type': 'short_skills'}</field>
+        </record>
+
+        <!-- Action for Leanership Technical Training -->
+        <record model="ir.actions.act_window" id="action_technical_training_leanership">
+            <field name="name">Leanership Technical Training</field>
+            <field name="res_model">technical.training</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('programme_type', '=', 'leanership')]</field>
+            <field name="context">{'default_programme_type': 'leanership'}</field>
+        </record>
+
+        <!--Menu for Technical Training-->
+        <menuitem name="Technical Training" id="technical_training" parent="bmt_training.main_menu_training"
+                  sequence="3"
+                  groups="bmt_training.group_ho_manager,client_management.group_partner_service_provider,bmt_training.group_nyda_specialist,base.group_system"/>
+        <menuitem name="Short Skills Programme" id="technical_training_short_skills" parent="bmt_training.technical_training"
+                  action="action_technical_training_short_skills" sequence="1"/>
+        <menuitem name="Leanership Programme" id="technical_training_leanership" parent="bmt_training.technical_training"
+                  action="action_technical_training_leanership" sequence="2"/>
+
+    </data>
+</odoo>

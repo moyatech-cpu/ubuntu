@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_va_template">
+<t t-name="nyda_grant_and_voucher.report_va_template">
+        <t t-call="web.external_layout">
+
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_va_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Voucher Assessment Report</h1>
+                    </div>
+                    <h4>Date :
+                        <t t-esc="data['rec'].create_date"/>
+                    </h4>
+                    <h4>Voucher Application :
+                        <t t-esc="data['rec'].voucher_application_id.serial_number"/>
+                    </h4>
+                    <br/>
+
+<t t-if="data['rec'].x_no_business == True">
+
+                    <h2>Business Feasibility Assessment</h2>
+                    <h4>Total :
+                        <t t-esc="data['rec'].total"/>
+                    </h4>          
+                    <br/>
+                    <h4>Product Features :</h4>
+                    <span t-field="data['rec'].features_product"/>
+                    <h4>Product/Service Benifits:</h4>
+                    <span t-field="data['rec'].benefits_product"/>
+                    <h4>Product Equipments :</h4>
+                    <span t-field="data['rec'].equipment_product"/>
+                    <h4>Customer Description :</h4>
+                    <span t-field="data['rec'].describe_customer"/>
+                    <h4>Who Will Be Customers :</h4>
+                    <span t-field="data['rec'].currently_buying"/>
+                    <h4>Product Service :</h4>
+                    <span t-field="data['rec'].product_services"/>
+                    <h4>Calculated Startup :</h4>
+                    <span t-field="data['rec'].calculated_startup_cost"/>
+                    <h4>Calculated Expenses :</h4>
+                    <span t-field="data['rec'].calculated_expenses_potential_income"/>
+                    <h4>Contribution Startup :</h4>
+                    <span t-field="data['rec'].contribution_startup"/>
+                    <h4>Deliver Product :</h4>
+                    <span t-field="data['rec'].deliver_product"/>
+                    <h4>Business Management :</h4>
+                    <span t-field="data['rec'].business_management"/>
+                    <h4>Start Your Business :</h4>
+                    <span t-field="data['rec'].start_your_business"/>
+                    <h4>Regulatory Requirements :</h4>
+                    <span t-field="data['rec'].regulatory_requirements"/>
+                    <h4>Most Appropriate :</h4>
+                    <span t-field="data['rec'].most_appropriate"/>
+                    <br/>
+</t>
+<t t-if="data['rec'].x_existing_business == True">
+                    <h2>Business Growth and Sustainability Assessment Index</h2>
+                    <h4>Total :
+                        <t t-esc="data['rec'].assessment_index_total"/>
+                    </h4>         
+                    <br/>
+                    <h4>Growth Objectives :</h4>
+                    <span t-field="data['rec'].growth_objectives"/>
+                    <h4>Grow the Business :</h4>
+                    <span t-field="data['rec'].grow_the_business"/>
+                    <h4>Investment Requirements :</h4>
+                    <span t-field="data['rec'].investment_requirements"/>
+                    <h4>Adapt Changing :</h4>
+                    <span t-field="data['rec'].adapt_changing"/>
+                    <h4>Market Growing :</h4>
+                    <span t-field="data['rec'].market_growing"/>
+                    <h4>Changing Market :</h4>
+                    <span t-field="data['rec'].changing_market"/>
+                    <h4>Growing Demand :</h4>
+                    <span t-field="data['rec'].growing_demand"/>
+                    <h4>Sales Growth :</h4>
+                    <span t-field="data['rec'].sales_growth"/>
+                    <h4>Analyse Information :</h4>
+                    <span t-field="data['rec'].analyse_information"/>
+                    <h4>Customer Preferences :</h4>
+                    <span t-field="data['rec'].customer_preferences"/>
+                    <h4>Marketing Activities :</h4>
+                    <span t-field="data['rec'].marketing_activities"/>
+                    <h4>Marketing Capacity :</h4>
+                    <span t-field="data['rec'].marketing_capacity"/>
+                    <h4>Competition Market :</h4>
+                    <span t-field="data['rec'].competition_market"/>
+                    <h4>Undertake Competitor :</h4>
+                    <span t-field="data['rec'].undertake_competitor"/>
+                    <h4>Competitiveness :</h4>
+                    <span t-field="data['rec'].competitiveness"/>
+                    <h4>Required Funding :</h4>
+                    <span t-field="data['rec'].funding_required"/>
+                    <h4>Financial Planning Management :</h4>
+                    <span t-field="data['rec'].financial_planning_management"/>
+                    <h4>Performance Targets :</h4>
+                    <span t-field="data['rec'].performance_targets"/>
+                    <h4>Your Revenue :</h4>
+                    <span t-field="data['rec'].your_revenue"/>
+                    <h4>Your Growth Objectives :</h4>
+                    <span t-field="data['rec'].your_growth_objectives"/>
+                    <h4>General Business Advice :</h4>
+                    <span t-field="data['rec'].general_business_advice"/>
+                    <h4>Implemented Methods :</h4>
+                    <span t-field="data['rec'].implemented_methods"/>
+                    <br/>
+</t>
+<t t-if="data['rec'].x_business_idea == True">
+                    <h2>Business Viability Assessment</h2>
+                    <h4>Total :
+                        <t t-esc="data['rec'].viability_assessment_total"/>
+                    </h4>   
+                    <br/>
+                    <h4>Analyse the Environment :</h4>
+                    <span t-field="data['rec'].analyse_the_environment"/>
+                    <h4>Business Goals :</h4>
+                    <span t-field="data['rec'].set_business_goals"/>
+                    <h4>Develop Implement Plans :</h4>
+                    <span t-field="data['rec'].develop_implement_plans"/>
+                    <h4>Adapt Changing :</h4>
+                    <span t-field="data['rec'].adapt_changing"/>
+                    <h4>Your Customers :</h4>
+                    <span t-field="data['rec'].your_customers"/>
+                    <h4>Changes Happening :</h4>
+                    <span t-field="data['rec'].changes_happening"/>
+                    <h4>Undertake Marketing :</h4>
+                    <span t-field="data['rec'].undertake_marketing"/>
+                    <h4>Sales Targets :</h4>
+                    <span t-field="data['rec'].set_sales_targets"/>
+                    <h4>Marketing Capacities :</h4>
+                    <span t-field="data['rec'].marketing_capacitys"/>
+                    <h4>Undertake Financial Planning :</h4>
+                    <span t-field="data['rec'].undertake_financial_planning"/>
+                    <h4>Adequate Cash Flow :</h4>
+                    <span t-field="data['rec'].adequate_cash_flow"/>
+                    <h4>Maintain Financial Records :</h4>
+                    <span t-field="data['rec'].maintain_financial"/>
+                    <h4>Financial Controls :</h4>
+                    <span t-field="data['rec'].financial_controls"/>
+                    <h4>Established Financial Ratios :</h4>
+                    <span t-field="data['rec'].established_financial_ratios"/>
+                    <h4>Established Structure :</h4>
+                    <span t-field="data['rec'].established_structure"/>
+                    <h4>Coordinate Different :</h4>
+                    <span t-field="data['rec'].coordinate_different"/>
+                    <h4>Communicate Effectively :</h4>
+                    <span t-field="data['rec'].communicate_effectively"/>
+                    <h4>Required Management Capacity :</h4>
+                    <span t-field="data['rec'].required_management_capacity"/>
+                    <h4>Business Documented :</h4>
+                    <span t-field="data['rec'].business_documented"/>
+                    <h4>Necessary Controls :</h4>
+                    <span t-field="data['rec'].necessary_controls"/>
+                    <h4>Monitor Business:</h4>
+                    <span t-field="data['rec'].monitor_business"/>
+                    <br/>
+</t>
+                    <h2>Entrepreneurial Preparedness Assessment</h2>
+                    <h4>Total :
+                        <t t-esc="data['rec'].preparedness_assessment_total"/>
+                    </h4>   
+                    <br/>
+                    <h4>Business Opportunities :</h4>
+                    <span t-field="data['rec'].business_opportunities"/>
+                    <h4>Market Trends :</h4>
+                    <span t-field="data['rec'].market_trends"/>
+                    <h4>Potential Target Market :</h4>
+                    <span t-field="data['rec'].potential_target_market"/>
+                    <h4>Market Entry Strategy :</h4>
+                    <span t-field="data['rec'].market_entry_strategy"/>
+                    <h4>Test Business Ideas :</h4>
+                    <span t-field="data['rec'].Test_business_ideas"/>
+                    <h4>Make Plans :</h4>
+                    <span t-field="data['rec'].Make_plans"/>
+                    <h4>Organise Resources :</h4>
+                    <span t-field="data['rec'].Organise_resources"/>
+                    <h4>Coordinate Activities :</h4>
+                    <span t-field="data['rec'].coordinate_activities"/>
+                    <h4>Organise People :</h4>
+                    <span t-field="data['rec'].organise_people"/>
+                    <h4>Manage Time :</h4>
+                    <span t-field="data['rec'].Manage_time"/>
+                    <h4>Analyse Problems :</h4>
+                    <span t-field="data['rec'].Analyse_problems"/>
+                    <h4>Think Critically :</h4>
+                    <span t-field="data['rec'].Think_critically"/>
+                    <h4>Diagnose Problems :</h4>
+                    <span t-field="data['rec'].Diagnose_problems"/>
+                    <h4>Innovate :</h4>
+                    <span t-field="data['rec'].Innovate"/>
+                    <h4>Provide Solutions :</h4>
+                    <span t-field="data['rec'].Provide_solutions"/>
+                    <h4>Goal Oriented :</h4>
+                    <span t-field="data['rec'].Goal_oriented"/>
+                    <h4>Achievement Oriented :</h4>
+                    <span t-field="data['rec'].achievement_oriented"/>
+                    <h4>Follow Through :</h4>
+                    <span t-field="data['rec'].Follow_through"/>
+                    <h4>Self Disciplined :</h4>
+                    <span t-field="data['rec'].Self_disciplined"/>
+                    <h4>Competitiveness :</h4>
+                    <span t-field="data['rec'].Competitiveness"/>
+                    <h4>Required Physical:</h4>
+                    <span t-field="data['rec'].required_physical"/>
+                    <h4>Into Partnerships:</h4>
+                    <span t-field="data['rec'].into_partnerships"/>
+                    <h4>Acquire Resources:</h4>
+                    <span t-field="data['rec'].Acquire_resources"/>
+                    <h4>Allocate Resources:</h4>
+                    <span t-field="data['rec'].Allocate_resources"/>
+                    <h4>Use Of Resources:</h4>
+                    <span t-field="data['rec'].use_of_resources"/>
+                    <br/>
+                    <!--<table>-->
+                    <!--<tr>-->
+                    <!--<td><h4>Analyze the Environment : </h4></td>-->
+                    <!--<td><h4><span t-field="data['rec'].analyse_the_environment"/></h4></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td><h4>Business Goals : </h4></td>-->
+                    <!--<td><h4><span t-field="data['rec'].set_business_goals"/></h4></td>-->
+                    <!--</tr>-->
+                    <!--</table>-->
+                </div>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </t>
+    </template>
+
+    <template id="report_va">
+    <t t-name="nyda_grant_and_voucher.report_va">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_grant_and_voucher.report_va_template"/>
+            </t>
+        </t>
+    </t>
+    </template>
+
+</odoo>

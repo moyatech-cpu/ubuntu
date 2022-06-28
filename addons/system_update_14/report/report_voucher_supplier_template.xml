@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_voucher_supplier_temp">
+		<t t-name="system_update_14.report_voucher_supplier_temp">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_supplier_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Voucher Supplier Report</h1>
+                    </div>
+                
+                    <t t-if="doc.contract_state">
+                      <h4>Service Provider Contract Status : <t t-esc="doc.contract_state"/></h4>
+                    </t>
+                    <t t-if="doc.vouchers_state">
+                      <h4>Voucher Application Status : <t t-esc="doc.vouchers_state"/></h4>
+                    </t>
+					<t t-if="doc.province_id">
+                      <h4>Province: <t t-esc="doc.province_id.name"/></h4>
+                    </t>
+                    <br/>
+                </div>
+                <br/>
+                
+                <t t-if="data">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <t t-set="grand_total" t-value="0"/>
+                                <t t-foreach="data['service_providers']" t-as="rec_data">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center" colspan='9'><t t-esc="rec_data['display_name']"/> </th>
+                                </tr>
+                                <tr style="background: lightblue;">
+                                    <th class="t-center"> Serial Number </th>
+                                    <th class="t-center"> Beneficiary </th>
+                                    <th class="t-center"> Service </th>
+                                    <th class="t-center"> Voucher Number </th>
+                                    <th class="t-center"> Voucher End Date </th>
+                                    <th class="t-center"> Invoice Number </th>
+                                    <th class="t-center"> Invoice Date </th>
+                                    <th class="t-center"> Status </th>
+                                    <th class="t-center"> Voucher Value (R) </th>
+                                </tr>
+                                <t t-set="total_per_sp" t-value="0"/>
+                                <t t-foreach="data['vouchers']" t-as="v_data">
+                                    <t t-if="v_data['x_service_provider']['id'] == rec_data['id']">
+                                        <tr>
+                                            <td class="t-center"><t t-esc="v_data['serial_number']"/></td>
+                                            <td class="t-center"><t t-esc="v_data['name']"/> <t t-esc="v_data['surname']"/></td>
+                                            <td class="t-center">
+                                                <t t-foreach="v_data['x_recommended_service']" t-as="service_data">
+                                                    <t t-esc="service_data['name']"/> <br />
+                                                </t>
+                                            </td>
+                                            <td class="t-center"><t t-esc="v_data['x_voucher_number']"/></td>
+                                            <td class="t-center"><t t-esc="v_data['x_voucher_end_date']"/></td>
+                                            <td class="t-center"><t t-esc="v_data['invoice_number']"/></td>
+                                            <td class="t-center"><t t-esc="v_data['x_invoice_date']"/></td>
+                                            <td class="t-center"><t t-esc="v_data['status']"/></td>
+                                            <td class="t-center"><t t-esc="v_data['x_voucher_value']"/> <t t-set="total_per_sp" t-value="total_per_sp + v_data['x_voucher_value']"/>  </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <tr>
+                                    <td class="t-center" colspan='8' >Total R </td>
+                                    <td class="t-center"><t t-esc="total_per_sp"/></td>
+                                </tr>
+                                
+                                <t t-set="grand_total" t-value="grand_total + total_per_sp"/> 
+                                
+                                    
+                                </t>
+                                
+                            </table>
+                        </div>
+                        <div>
+                            <h4><b>Grand Total: R <t t-esc="grand_total" /></b></h4>
+                        </div>                        
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </t>
+
+    
+    </template>
+
+    <template id="report_voucher_supplier_template">
+        <t t-name="system_update_14.report_voucher_supplier_temp">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="system_update_14.report_voucher_supplier_temp"/>
+        </t>
+    </t>
+</t>
+    </template>
+
+</odoo>

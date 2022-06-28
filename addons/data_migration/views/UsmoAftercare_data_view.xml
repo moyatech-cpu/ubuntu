@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_aftercare_tree_view">
+            <field name="name">usmo.aftercare.tree.view</field>
+            <field name="model">usmo.aftercare</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="FinanceAmount"/>
+                    <field name="FinancerBranch"/>
+                    <field name="FinancerText"/>
+                    <field name="FinancerType"/>
+                    <field name="Followup1By"/>
+                    <field name="Followup1DT"/>
+                    <field name="Followup1DateOfContact"/>
+                    <field name="Followup1Notes"/>
+                    <field name="Followup1StateOfBusiness"/>
+                    <field name="Followup1TypeOfContact"/>
+                    <field name="Followup2By"/>
+                    <field name="Followup2DT"/>
+                    <field name="Followup2DateOfContact"/>
+                    <field name="Followup2Notes"/>
+                    <field name="Followup2StateOfBusiness"/>
+                    <field name="Followup2TypeOfContact"/>
+                    <field name="Voucher"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_aftercare_form_view">
+            <field name="name">usmo.aftercare.form.view</field>
+            <field name="model">usmo.aftercare</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="FinanceAmount"/>
+                                <field name="FinancerBranch"/>
+                                <field name="FinancerText"/>
+                                <field name="FinancerType"/>
+                                <field name="Followup1By"/>
+                                <field name="Followup1DT"/>
+                                <field name="Followup1DateOfContact"/>
+                                <field name="Followup1Notes"/>
+                            </group>
+                            <group>
+                                <field name="Followup1StateOfBusiness"/>
+                                <field name="Followup1TypeOfContact"/>
+                                <field name="Followup2By"/>
+                                <field name="Followup2DT"/>
+                                <field name="Followup2DateOfContact"/>
+                                <field name="Followup2Notes"/>
+                                <field name="Followup2StateOfBusiness"/>
+                                <field name="Followup2TypeOfContact"/>
+                                <field name="Voucher"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_aftercare">
+            <field name="name">Usmo Aftercare</field>
+            <field name="res_model">usmo.aftercare</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_aftercare" name="Usmo Aftercare"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_aftercare" sequence="20"/>
+    </data>
+</odoo>

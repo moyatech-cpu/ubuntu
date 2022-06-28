@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Views for Voucher application -->
+    <record id="view_voucher_isurance_form" model="ir.ui.view">
+        <field name="name">view.voucher.isurance.form</field>
+        <field name="model">voucher.isurance</field>
+        <field name="arch" type="xml">
+            <form string="Voucher Application"  delete="false" duplicate="false" create="false" edit="false">
+                <header>
+                    <button name="" string="Approve" class="oe_highlight" type="object" groups="nyda_grant_and_voucher.group_grant_voucher_pc_bc" attrs="{'invisible': [('status', '!=', 'recommended')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                     <div class="oe_title">
+                        <label for="serial_number" string="Serial #"/>
+                        <h1>
+                            <field name="serial_number" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group string="Beneficiary Details">
+                        <group>
+                            <field name="applicant_name"/>
+                            <field name="gender"/>
+                            <field name="start_date"/>
+                        </group>
+                        <group>
+                            <field name="applicant_email"/>
+                            <field name="mobile"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <group string="Service Provider Details">
+                        <group>
+                            <field name="service_provider"/>
+                            <field name="company_reg_number"/>
+                            <field name="nearest_branch"/>
+                        </group>
+                        <group>
+                            <field name="email"/>
+                            <field name="job_title"/>
+                            <field name="cell_phone_number"/>
+                        </group>
+                    </group>
+                    <group string="Voucher Details">
+                        <field name="voucher_applicant_id"/>
+                        <field name="voucher_isurance_objective"/>
+                        <field name="voucher_value_vat"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_voucher_isurance_tree" model="ir.ui.view">
+        <field name="name">view.voucher.isurance.tree</field>
+        <field name="model">voucher.isurance</field>
+        <field name="arch" type="xml">
+            <tree string="Voucher Application"  delete="false" duplicate="false" create="false" edit="false">
+                 <field name="serial_number"/>
+                 <field name="applicant_name"/>
+                 <field name="start_date"/>
+                 <field name="end_date"/>
+                 <field name="status"/>
+            </tree>
+        </field></record>
+
+    <record id="voucher_isurance_wizard_action" model="ir.actions.act_window">
+        <field name="name">Voucher Isurance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">voucher.isurance</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="view_voucher_isurance_form"/>
+    </record>
+
+     <record id="action_voucher_isurance_main" model="ir.actions.act_window">
+        <field name="name">Voucher Isurance</field>
+        <field name="res_model">voucher.isurance</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Voucher Insurance"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"
+              parent="nyda_grant_and_voucher.menu_main_voucher_application"
+              id="main_voucher_isurance" sequence="50"/>
+
+    <menuitem name="Voucher Insurance" id="menu_main_voucher_isurance" action="action_voucher_isurance_main"
+              parent="nyda_grant_and_voucher.main_voucher_isurance"
+              groups="nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bdo"/>
+</odoo>

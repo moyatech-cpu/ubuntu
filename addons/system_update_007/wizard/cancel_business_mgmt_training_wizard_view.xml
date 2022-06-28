@@ -1,0 +1,52 @@
+<odoo>
+    <record id="cancel_reason_business_mgmt_form" model="ir.ui.view">
+        <field name="name">cancel.reason.business.mgmt.training</field>
+        <field name="model">cancel.business.mgmt.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Business Management Training">
+                <group>
+                    <field name="cancel_b_mgmt_reason"/>
+                </group>
+                <footer>
+                    <button name="cancel_business_mgmt_training" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="reinstate_reason_business_mgmt_form" model="ir.ui.view">
+        <field name="name">reinstate.reason.business.mgmt.training</field>
+        <field name="model">cancel.business.mgmt.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reinstate Business Management Training">
+                <group>
+                    <field name="reinstate_b_mgmt_reason"/>
+                </group>
+                <footer>
+                    <button name="reinstate_business_mgmt_training" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="reinstate_business_mgmt_wizard_action" model="ir.actions.act_window">
+        <field name="name"> Business Management Training Reinstate Reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.business.mgmt.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="reinstate_reason_business_mgmt_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="cancel_business_mgmt_wizard_action" model="ir.actions.act_window">
+        <field name="name">Business Management Training Cancel Reason </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.business.mgmt.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="cancel_reason_business_mgmt_form"/>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>

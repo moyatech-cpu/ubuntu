@@ -1,0 +1,11 @@
+.d-none{
+    display: none;
+}
+
+.td-none{
+    text-decoration: none !important;
+}
+
+.bg-white{
+    background:white;
+}

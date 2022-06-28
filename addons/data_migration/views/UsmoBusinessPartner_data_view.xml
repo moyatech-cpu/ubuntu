@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_business_partner_tree_view">
+            <field name="name">usmo.business.partner.tree.view</field>
+            <field name="model">usmo.business.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Deleted"/>
+                    <field name="FirstName"/>
+                    <field name="IDNumber"/>
+                    <field name="IsDisabled"/>
+                    <field name="IsMale"/>
+                    <field name="IsRural"/>
+                    <field name="LastName"/>
+                    <field name="PartnerOfUser"/>
+                    <field name="PartnershipEndDate"/>
+                    <field name="PartnershipStartDate"/>
+                    <field name="Race"/>
+                    <field name="RowGUID"/>
+                    <field name="TelNo"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_business_partner_form_view">
+            <field name="name">usmo.business.partner.form.view</field>
+            <field name="model">usmo.business.partner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="Deleted"/>
+                                <field name="FirstName"/>
+                                <field name="IDNumber"/>
+                                <field name="IsDisabled"/>
+                                <field name="IsMale"/>
+                                <field name="IsRural"/>
+                                <field name="LastName"/>
+                            </group>
+                            <group>
+                                <field name="PartnerOfUser"/>
+                                <field name="PartnershipEndDate"/>
+                                <field name="PartnershipStartDate"/>
+                                <field name="Race"/>
+                                <field name="RowGUID"/>
+                                <field name="TelNo"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_business_partner">
+            <field name="name">Usmo Business Partner</field>
+            <field name="res_model">usmo.business.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_business_partner" name="Usmo Business Partner"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_business_partner" sequence="40"/>
+    </data>
+</odoo>

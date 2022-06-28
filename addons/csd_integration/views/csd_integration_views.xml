@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   	<record id="view_csd_main_dashboard" model="ir.ui.view">
+		<field name="name">CSD Data Migration</field>
+        <field name="model">csd.integration</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+           <form string="Users">
+                    <header>
+                    </header>
+                    <sheet>
+                        
+                    </sheet>
+                </form> 
+        </field>
+    </record>
+    <record id="view_csd_integration_tree" model="ir.ui.view">
+        <field name="name">CSD Data Migration</field>
+        <field name="model">csd.integration</field>
+        <field name="arch" type="xml">
+            <kanban string="Dashboard">
+            
+        	</kanban>
+        </field>
+    </record>
+    <record id="action_csd_integration_tree" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">csd.integration</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain"></field>
+    </record>
+
+    
+    <menuitem name="CSD Integration" sequence="0" id="csd_integration.menu_root" 
+    			groups="base.group_system" web_icon="csd_integration,static/src/img/icon.png" />
+    
+    <menuitem name="Dashboard" id="csd_integration.menu_1" action="action_csd_integration_tree" 
+    			parent="csd_integration.menu_root" groups="base.group_system"/>
+    
+</odoo>

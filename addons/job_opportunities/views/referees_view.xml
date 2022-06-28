@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Referees-->
+        <record model="ir.ui.view" id="referees_tree_view">
+            <field name="name">referees.tree.view</field>
+            <field name="model">referees</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="organisation" required="1"/>
+                    <field name="job_title_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                    <field name="telephone" required="1"/>
+                    <field name="mobile" required="1"/>
+                    <field name="jobs_database_id" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Referees-->
+        <record model="ir.actions.act_window" id="referees_action_window">
+            <field name="name">Referees</field>
+            <field name="res_model">referees</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem name="Referees" id="referees_menu" parent="job_opportunities.config_menu" sequence="5"
+                  action="referees_action_window"/>
+
+    </data>
+</odoo>

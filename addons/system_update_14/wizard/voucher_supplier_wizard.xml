@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="voucher_supplier_report_wiz_form" model="ir.ui.view">
+        <field name="name">Voucher Supplier Branch Report</field>
+        <field name="model">wiz.voucher.supplier</field>
+        <field name="arch" type="xml">
+            <form string="Applications Report">
+            <group>
+                <group>
+                    <field name="vouchers_state" required="1"/>
+                    <field name="contract_state" widget="radio" />
+                </group>
+                <group>
+                    <field name="province_id"  />
+                </group>
+            </group>
+                <footer>
+                    <button name="get_supplier_report" string="Get Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_voucher_supplier_report_wizard" model="ir.actions.act_window">
+        <field name="name">Voucher Supplier Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wiz.voucher.supplier</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="voucher_supplier_report_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_voucher_suppliers" name="Voucher Supplier Report" parent="voucher_suppliers.menu_root"
+            sequence="11" action="action_voucher_supplier_report_wizard"/>
+</odoo>

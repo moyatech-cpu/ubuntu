@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="opportunity_thanks" model="website.page">
+        <field name="name">Thanks</field>
+        <field name="type">qweb</field>
+        <field name="url">/opportunity-thank-you</field>
+        <field name="website_published">True</field>
+        <field name="key">market_linkage.opportunity_thanks</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="market_linkage.opportunity_thanks">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="oe_structure" id="oe_structure_website_crm_contact_us_thanks_1"/>
+                        <div class="container">
+                            <h1>Thanks!</h1>
+                            <div class="row">
+                                <t t-if="flag == True">
+                                    <div class="col-lg-8">
+                                        <div class="alert alert-success" role="status">
+                                            Your request has been successfully sent, you will be get response shortly
+                                            <button type="button" class="close" data-dismiss="alert">&amp;times;
+                                            </button>
+                                        </div>
+                                    </div>
+                                </t>
+                                <t t-if="flag==False">
+                                    <div class="col-lg-8">
+                                        <div class="alert alert-success" role="status">
+                                            You have been already send this request, you will be get response shortly
+                                            <button type="button" class="close" data-dismiss="alert">&amp;times;
+                                            </button>
+                                        </div>
+                                    </div>
+                                </t>
+                                <div class="col-lg-4">
+                                    <t t-call="website.company_description"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <template id="products_services_template" name="Register Form">
+        <t t-call="website.layout">
+            <div class="container" t-if="not request.website.is_public_user()">
+                <div class="row oppo_header">
+                    <div class="col-md-12 text-center">
+                        <h1>Market Linkages Opportunities</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <t t-foreach="opportunity" t-as="op">
+                        <div class="col-sm-12 col-md-4 mb16">
+                            <div class="card">
+                                <div class="custom-column-header">
+                                    <t t-esc="op.title"/>
+                                </div>
+                                <div class="custom-column-content">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <b>Opportunity Type:</b>
+                                            <t t-esc="op.oppo_type"/>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Description:</b>
+                                            <t t-esc="op.description"/>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Date Created:</b>
+                                            <t t-esc="op.posted_date"/>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Closing Date:</b>
+                                            <t t-esc="op.closing_date"/>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Company Name:</b>
+                                            <t t-esc="op.company"/>
+                                        </li>
+                                    </ul>
+                                    <!--                                    <div class="alert alert-success apply" role="status" style="display:none">-->
+                                    <!--                                        <p>Thank you for apply.</p>-->
+                                    <!--                                    </div>-->
+                                </div>
+                                <form method="post" action="/opportunity-enquiry-submit"
+                                      data-success_page="/opportunity-enquiry-submit">
+                                    <input type="hidden" name="id" t-att-value="op.id"/>
+                                    <div class="custom-column-footer">
+                                        <button class="btn btn-primary btn-lg submit_btn submit"
+                                                style="margin-bottom:20px" type="submit">Apply here
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="row d-flex align-items-stretch text-center">
+                    <t t-call="website.pager"/>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="register_mkl_template" name="Register MKL">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div class="wrapper">
+                <div class="container">
+                    <div class="row mt16 alert alert-info">
+                        <h2 class="text-center form-headings">MKL Registration Form</h2>
+                        <p class="text-right">*We have already fetched basic details from your Youth enquiry
+                            application.
+                        </p>
+                    </div>
+                </div>
+                <div class="container form-design mb32" style="padding-bottom:32px;">
+                    <form class="form-horizontal container-fluid mt32" action="/register-mkl/application/submit"
+                          method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="branch_id" t-att-value="branch_id" class="form-control"/>
+                        <input type="hidden" name="beneficiary_id" t-att-value="beneficiary_id" class="form-control"/>
+                        <center>
+                            <h3 class="form-headings">Personal Information</h3>
+                        </center>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="control-label" for="title">Title</label>
+                                <select name="title" class="form-control" disabled="disabled">
+                                    <!--                                    <t t-if=""></t>-->
+                                    <option value="Mr" t-att-selected="'selected' if enquiry.title=='Mr' else ''">Mr.
+                                    </option>
+                                    <option value="Ms" t-att-selected="'selected' if enquiry.title=='Ms' else ''">Ms.
+                                    </option>
+                                    <option value="Mrs" t-att-selected="'selected' if enquiry.title=='Mrs' else ''">
+                                        Mrs.
+                                    </option>
+                                    <option value="Dr" t-att-selected="'selected' if enquiry.title=='Dr' else ''">Dr.
+                                    </option>
+                                    <option value="Prof" t-att-selected="'selected' if enquiry.title=='Prof' else ''">
+                                        Prof.
+                                    </option>
+                                    <option value="Sir" t-att-selected="'selected' if enquiry.title=='Sir' else ''">
+                                        Sir
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label" for="name">Name of Company Representative</label>
+                                <input type="text" name="first_name" class="form-control" t-att-value="enquiry.name"
+                                       readonly="readonly"/>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label" for="surname">Surname</label>
+                                <input type="text" name="surname" class="form-control" t-att-value="enquiry.surname"
+                                       readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label class="control-label" for="saiDentityNumber">SA Identity Number</label>
+                                <input class="form-control" name="saiDentityNumber" t-att-value="enquiry.id_number"
+                                       readonly="readonly"/>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label" for="gender">Gender</label>
+                                <select class="form-control" name="gender" disabled="disabled">
+                                    <t t-if="enquiry.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="not_specify">Do not want to share</option>
+                                    </t>
+                                    <t t-if="enquiry.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                        <option value="not_specify">Do not want to share</option>
+                                    </t>
+                                    <t t-if="enquiry.gender == 'not_specify'">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="not_specify" selected="selected">Do not want to mention</option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label" for="email">Email</label>
+                                <input class="form-control" name="email" t-att-value="enquiry.email"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label" for="mobile">Mobile</label>
+                                <input class="form-control" name="mobile" t-att-value="enquiry.cell_phone_number"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label" for="homeTelephoneNumber">Home Telephone Number</label>
+                                <input class="form-control" name="homeTelephoneNumber"
+                                       t-att-value="enquiry.alternative_number" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label" for="level_of_education">Level of Education</label>
+                                <select name="level_of_education" class="form-control" disabled="disabled">
+                                    <t t-if="enquiry.level_of_education == 'below_8'">
+                                        <option value="below_8" selected="selected">Below Grade 8</option>
+                                    </t>
+                                    <t t-if="enquiry.level_of_education == 'below_12'">
+                                        <option value="below_12" selected="selected">Below Matric/Grade 12</option>
+                                    </t>
+                                    <t t-if="enquiry.level_of_education == 'grade_12'">
+                                        <option value="grade_12" selected="selected">Matric/Grade 12</option>
+                                    </t>
+                                    <t t-if="enquiry.level_of_education == 'scc'">
+                                        <option value="scc" selected="selected">Short Course Certificate</option>
+                                    </t>
+                                    <t t-if="enquiry.level_of_education == 'hc'">
+                                        <option value="hc" selected="selected">Higher Certificate</option>
+                                    </t>
+                                    <t t-if="enquiry.level_of_education == 'diploma'">
+                                        <option value="diploma" selected="selected">Diploma</option>
+                                    </t>
+                                    <t t-if="enquiry.level_of_education == 'degree'">
+                                        <option value="degree" selected="selected">Degree/Honours/Doctorate</option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label" for="population_group">Population Group</label>
+                                <select name="population_group" class="form-control" disabled="disabled">
+                                    <t t-if="enquiry.population_group == 'african'">
+                                        <option value="african" selected="selected">African</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'asian'">
+                                        <option value="asian" selected="selected">Asian</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'coloured'">
+                                        <option value="coloured" selected="selected">Coloured</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'indian'">
+                                        <option value="indian" selected="selected">Indian</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'white'">
+                                        <option value="white" selected="selected">White</option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label" for="province">Province</label>
+                                <select class="form-control" name="province" disabled="disabled">
+                                    <option value="">Please select an option</option>
+                                    <t t-foreach="province_ids" t-as="province">
+                                        <t t-if="province.id == enquiry.province.id">
+                                            <option t-att-value="province.id" selected="selected">
+                                                <t t-esc="province.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label requiredField" for="metro_municipality">
+                                    Metro Municipality
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="metro_municipality" name="metro_municipality"
+                                        disabled="disabled">
+                                    <option value="">Please Select Metro Municipality</option>
+                                    <t t-foreach="metro_municipality_ids" t-as="metro">
+                                        <t t-if="metro.id == enquiry.metro_municipality.id">
+                                            <option t-att-value="metro.id" selected="selected">
+                                                <t t-esc="metro.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-4" t-if="enquiry.municipality.id">
+                                <label class="control-label requiredField" for="municipality">
+                                    Municipality
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="municipality" name="municipality"
+                                        disabled="disabled">
+                                    <option value="">Please Select Municipality</option>
+                                    <t t-foreach="municipality_ids" t-as="municipality">
+                                        <t t-if="municipality.id == enquiry.municipality.id">
+                                            <option t-att-value="municipality.id" selected="selected">
+                                                <t t-esc="municipality.name"/>
+                                            </option>
+                                        </t>
+                                        <t t-if="municipality.id != enquiry.municipality.id">
+                                            <option t-att-value="municipality.id">
+                                                <t t-esc="municipality.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-4" t-if="enquiry.district.id">
+                                <div>
+                                    <label class="control-label requiredField" for="district">
+                                        District
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <select class="select form-control" id="select" name="district" disabled="disabled">
+                                        <option value="">Please Select District</option>
+                                        <t t-foreach="district_ids" t-as="district">
+                                            <t t-if="district.id == enquiry.district.id">
+                                                <option t-att-value="district.id" selected="selected">
+                                                    <t t-esc="district.name"/>
+                                                </option>
+                                            </t>
+                                            <t t-if="district.id != enquiry.district.id">
+                                                <option t-att-value="district.id">
+                                                    <t t-esc="district.name"/>
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label requiredField" for="near_branch">
+                                    Nearest Branch
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="branches" name="near_branch"
+                                        disabled="disabled">
+                                    <option value="" selected="selected">Please Select Nearest Branch</option>
+                                    <t t-foreach="branch_ids" t-as="branch">
+                                        <t t-if="branch.id == enquiry.nearest_branch.id">
+                                            <option t-att-value="branch.id" selected="selected">
+                                                <t t-esc="branch.name"/>
+                                            </option>
+                                        </t>
+                                        <t t-if="branch.id != enquiry.nearest_branch.id">
+                                            <option t-att-value="branch.id">
+                                                <t t-esc="branch.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label" for="geographic_location">Geographic Location</label>
+                                <select class="form-control" name="geographic_location" disabled="disabled">
+                                    <t t-if="enquiry.geographic_location == 'urban'">
+                                        <option value="urban" selected="selected">Urban</option>
+                                    </t>
+                                    <t t-if="enquiry.geographic_location == 'peri-urban'">
+                                        <option value="peri-urban" selected="selected">Peri Urban</option>
+                                    </t>
+                                    <t t-if="enquiry.geographic_location == 'rural-area-villages'">
+                                        <option value="rural-area-villages" selected="selected">Rural area - Villages
+                                        </option>
+                                    </t>
+                                    <t t-if="enquiry.geographic_location == 'rural-area-farms'">
+                                        <option value="rural-area-farms" selected="selected">Rural area - Farms</option>
+                                    </t>
+                                    <t t-if="enquiry.geographic_location == 'informa-settlement'">
+                                        <option value="informa-settlement" selected="selected">Informa settlement
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:20px">
+                            <div class="col-md-12">
+                                <center>
+                                    <h3 class="form-headings">Business Information</h3>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-md-6">
+                                <label class="control-label" for="business_name">Business Name</label>
+                                <input class="form-control" name="business_name" type="text" placeholder="Business Name" required="required"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label" for="registration_number">Registration Number</label>
+                                <input class="form-control" name="registration_number" type="text" placeholder="Registration Number" required="required"/>
+                            </div>
+                        </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                <label class="control-label" for="contact_person">Contact Person</label>
+                                <input class="form-control" name="contact_person" type="text" placeholder="Contact Person" required="required"/>
+                            </div>
+                             <div class="col-md-6">
+                                <label class="control-label" for="contact_details">Contact Details</label>
+                                <input class="form-control numericOnly" name="contact_details" type="text" placeholder="Contact Details" required="required"/>
+                            </div>
+
+<!--                            <div class="col-md-6">-->
+<!--                                <label class="control-label" for="contact_details">Contact Details</label>-->
+<!--                                 <textarea class="form-control" cols="40" id="contact_details" name="contact_details"-->
+<!--                                          placeholder="Contact Details" rows="5" required="required"></textarea>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label" for="title">Products/Services rendered</label>
+                                <input type="text" name="title" class="form-control"
+                                       placeholder="Products/Services rendered..." required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label" for="oppo_type">Business Type</label>
+                                <select name="oppo_type" class="form-control" required="required">
+                                    <option value="service">Service</option>
+                                    <option value="product">Product</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label" for="name">Description</label>
+                                <textarea class="form-control" cols="40" id="description" name="description"
+                                          placeholder="Description" rows="5" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <button class="btn btn-primary" name="submit" type="submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="mkl_form_submitted" name="Thanks">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <t t-if="registration_bool">
+                        <div class="notfound-404" style="opacity: 0.5 !important;">
+                            <h1>Thank you!</h1>
+                        </div>
+                        <h2 style="padding-top:125px">Thank you, you have been registered on the Market Linkage Database
+                        </h2>
+                        <a href="#" class="contact-btn">Contact us</a>
+                    </t>
+                    <t t-else="">
+                        <div class="notfound-404" style="opacity: 0.5 !important;">
+                            <h1>Sorry!</h1>
+                        </div>
+                        <h2 style="padding-top:125px">Sorry, you already have been registered on the Market Linkage Database
+                        </h2>
+                        <a href="#" class="contact-btn">Contact us</a>
+                    </t>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

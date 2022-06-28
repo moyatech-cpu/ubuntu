@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<record id="scm_tender_business_user_record_rule" model="ir.rule">
+        <field name="name">Business User Allowed records</field>
+        <field ref="model_nyda_scm_tender" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]
+        </field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4, ref('nyda_scm_tender_business_user'))]"/>
+    </record>
+
+    
+</odoo>

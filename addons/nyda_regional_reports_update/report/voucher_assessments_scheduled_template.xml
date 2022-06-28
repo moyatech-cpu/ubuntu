@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_regional_assessment_scheduled_template">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_voucher_assessments_scheduled_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Regional Assessment Appointment Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    <h4>Region : <t t-esc="data['region']"/></h4>
+                    <br/>
+                </div>
+                <br/>
+                <!--Table for Status Per Client-->
+                <t t-if="data['vouchers']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Serial Number</th>
+                                    <th class="t-center">Application Date</th>
+                                    <th class="t-center">Service</th>
+                                    <th class="t-center">Name</th>
+                                    <th class="t-center">Surname</th>
+                                    <th class="t-center">Branch</th>
+                                    <th class="t-center">Mobile</th>
+                                    <th class="t-center">Status</th>
+                                    <th class="t-center">Appointment Date</th>
+                                    <th class="t-center">BDO Name</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                
+                                <t t-foreach="data['vouchers']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>                              
+                                        <td>
+                                            <t t-esc="rec_data['serial_number']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['application_date']"/>
+                                        </td>
+                                        <td>
+                                          <t t-foreach="rec_data['service']" t-as="service_data">
+                                            <t t-esc="service_data['name']"/> <br />
+                                          </t>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['name']"/>
+                                        </td>                                        
+                                        <td>
+                                            <t t-esc="rec_data['surname']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['beneficiary_branch']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['mobile']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['status']"/>
+                                        </td>                                        
+                                        <td>
+                                            <t t-esc="rec_data['appointment_date']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['bdo_name']"/>
+                                        </td>                                        
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+        
+    </template>
+
+    <template id="report_voucher_assessments_scheduled">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="nyda_regional_reports_update.report_regional_assessment_scheduled_template"/>
+                </t>
+            </t>
+    </template>
+
+</odoo>

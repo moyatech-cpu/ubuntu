@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Users Report Wizard Form View-->
+    <record model="ir.ui.view" id="users_report_wizard_form_view">
+        <field name="name">users.report.wizard.form.view</field>
+        <field name="model">users.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="groups_id" options="{'no_create_edit': True, 'no_open': True}"
+                           attrs="{'required': [('all_users', '=', False), ('all_nyda_staff', '=', False)]}"/>
+                    <field name="all_users"/>
+                    <field name="all_nyda_staff"/>
+                    <field name="user_type" required="1"/>
+                </group>
+                <footer>
+                    <button string="Download Users Report" name="get_users_report" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Training Schedule Report Wizard -->
+    <record model="ir.actions.act_window" id="action_users_report_wizard">
+        <field name="name">Users Report Wizard</field>
+        <field name="res_model">users.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menu for Training Report-->
+    <!--<menuitem name="Reports" parent="nyda_grant_and_voucher.main_menu_voucher" id="menu_reporting"
+                  sequence="50"
+                  groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"/>
+   
+    <menuitem name="Users Report" parent="nyda_grant_and_voucher.reporting_status" id="menu_users_report"
+              sequence="30" action="nyda_grant_and_voucher.action_users_report_wizard"/>
+	 -->
+    </data>
+</odoo>

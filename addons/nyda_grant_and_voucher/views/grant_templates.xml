@@ -1,0 +1,1801 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="grant_template" name="Register Grant Form">
+    <t name="Register Grant Form" t-name="nyda_grant_and_voucher.grant_template">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/nyda_grant_and_voucher/static/src/css/voucher_style.css"/>
+
+            <form id="regForm" method="post" action="/grant-application-submit" enctype="multipart/form-data">
+                <input type="hidden" name="form_data"/>
+                <input type="hidden" name="beneficiary_id" t-att-value="enquiry.id"/>
+                <h1>Grant Application Form:</h1>
+
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section A: CLIENT DETAILS</b>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Name:
+                            <p>
+                                <input placeholder="First name..." name="name" t-att-value="enquiry.name" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Surname:
+                            <p>
+                                <input placeholder="Last name..." name="surname" t-att-value="enquiry.surname" readonly="1"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Identity Number:
+                            <p>
+                                <input placeholder="Identity Number..." oninput="this.className = ''" name="sa_identity_number" t-att-value="enquiry.id_number" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Gender:
+                            <p>
+                                <select name="gender" class="select_style" readonly="1">
+                                    <t t-if="enquiry.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                    </t>
+                                    <t t-if="enquiry.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                    </t>
+                                </select>
+                                <input type="hidden" name="gender" t-att-value="enquiry.gender"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Population Group:
+                            <p>
+                                <select name="population_group" class="select_style">
+                                    <t t-if="enquiry.population_group == 'african'">
+                                        <option value="african" selected="selected">African</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'asian'">
+                                        <option value="asian" selected="selected">Asian</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'coloured'">
+                                        <option value="coloured" selected="selected">Coloured</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'indian'">
+                                        <option value="indian" selected="selected">Indian</option>
+                                    </t>
+                                    <t t-if="enquiry.population_group == 'white'">
+                                        <option value="white" selected="selected">White</option>
+                                    </t>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Disability:
+                            <p>
+                                <select name="disability" class="select_style">
+                                    <option value="yes" selected="selected">Yes</option>
+                                    <option value="no" selected="selected">No</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Cell Phone No:
+                            <p>
+                                <input placeholder="Cell Phone No..." name="mobile" t-att-value="enquiry.cell_phone_number" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Telephone No:
+                            <p>
+                                <input placeholder="Telephone No..." name="telephone" t-att-value="client_pre_assessment.home_telephone" readonly="1"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Email:
+                            <p>
+                                <input placeholder="Email..." name="email" t-att-value="enquiry.email" readonly="1"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Fax No:
+                            <p>
+                                <input placeholder="Fax No..." name="fax"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="physical_address" name="physical_address" placeholder="Physical Address..." readonly="1" rows="5">
+                                    <t t-esc="client_pre_assessment.physical_address"/>
+                                </textarea>
+                                <!--                                <input class="form-control req" type="text" placeholder="Physical Address..."-->
+                                <!--                                       name="physical_address" t-att-value="client_pre_assessment.physical_address"-->
+                                <!--                                        rows="5" readonly="1" style="height:100px;width:500px;"/>-->
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Postal Code:
+                            <p>
+                                <input placeholder="Postal Code..." class="form-control numericOnly req" name="physical_postal_code" t-att-value="client_pre_assessment.postal_code" readonly="1"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Postal Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="postal_address" name="postal_address" placeholder="Postal Address..." rows="5"/>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Postal Code:
+                            <p>
+                                <input placeholder="Postal Code..." name="postal_code" class="form-control numericOnly"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Province:
+                            <p>
+                                <select class="select_style" name="province_id" disabled="disabled">
+                                    <option value="">Please select an option</option>
+                                    <t t-foreach="province_ids" t-as="province">
+                                        <t t-if="province.id == enquiry.province.id">
+                                            <option t-att-value="province.id" selected="selected">
+                                                <t t-esc="province.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                                <input type="hidden" name="province_id" t-att-value="enquiry.province.id"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Geographical Type:
+                            <p>
+                                <select name="geographical_type" class="select_style">
+                                    <option value="">Please Select Geographic Location</option>
+                                    <option value="urban">
+                                        Urban
+                                    </option>
+                                    <option value="peri-urban">
+                                        Peri Urban
+                                    </option>
+                                    <option value="rural-area-villages">
+                                        Rural area - Villages
+                                    </option>
+                                    <option value="rural-area-farms">
+                                        Rural area - Farms
+                                    </option>
+                                    <!--                                    <option value="informa-settlement">-->
+                                    <!--                                        Informa settlement-->
+                                    <!--                                    </option>-->
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            Training Courses Attended:
+                            <p>
+                                <textarea class="form-control" cols="40" id="trainings_attended" name="trainings_attended" placeholder="Training Courses Attended..." rows="5"/>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Formal Qualifications:
+                            <p>
+                                <input placeholder="Formal Qualifications..." name="formal_qualification"/>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Next of Kin:
+                            <p>
+                                <input placeholder="Next of Kin..." class="req" name="next_of_kin"/>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            Relationship:
+                            <p>
+                                <input placeholder="Relationship..." class="req" name="relationship"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Physical Address:
+                            <p>
+                                <textarea class="form-control req" cols="40" id="relative_physical_address" name="relative_physical_address" placeholder="Physical Address..." rows="5"/>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            Cell Number:
+                            <p>
+                                <input placeholder="Cell Number..." class="req numericOnly phone_val" maxlength="10" name="relative_mobile"/>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section B: ENTREPRENEURIAL STATUS</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>1. Do you have an existing business that is currently in operation?</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio1" name="existing_business" class="existing_business_button_hide" type="radio" value="True"/>
+                                        <label for="radio1">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio2" name="existing_business" class="existing_business_button_hide" type="radio" value="False"/>
+                                        <label for="radio2">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <h4>Grant Threshold:</h4>
+                                <p>
+                                    <select name="grant_threshold" class="select_style" id="selection_threshold" required="1">
+                                        <option disabled="1" selected="1">Select Grant Threshold
+                                        </option>
+                                        <option value="threshold_1">Threshold 1 - Idea generation and survivalist –
+                                            R1000 – R10 000
+                                        </option>
+                                        <option value="threshold_2">Threshold 2 - Start-ups, registered businesses
+                                            (pty,cc,co-ops) – R10 001 – R50 000
+                                        </option>
+                                        <option value="threshold_3">Threshold 3 - Early Development(existing for 2
+                                            years) and growth stage(pty,cc,co-ops) – R50 001 – R100 000
+                                        </option>
+                                        <option value="threshold_4">Threshold 4 - Growth And Expansion
+                                            Stage(pty,cc,co-ops) – R100 001 – R200 000, Co-ops up to R250 000
+                                        </option>
+                                        <!--                                        <option value="threshold_5">Threshold 5 - for agriculture and technology related-->
+                                        <!--                                            projects - maximum threshold is R250,000.00-->
+                                        <!--                                        </option>-->
+                                    </select>
+                                </p>
+                            </div>
+                    </div>
+                    
+                    <div class="row hidden exiting_business_grant_hide">
+                        <div class="demo_header">
+                            <h4>
+                                <b>START OR EXISTING BUSINESS(Grants)</b>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Business Name:
+                                <p>
+                                    <input placeholder="Business name..." name="grant_business_name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Type of Business:
+                                <p>
+                                    <input placeholder="Business Type..." name="grant_business_type"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>1. Please indicate the Sector in which your business is operating:</h4>
+                                <div class="row">
+                                    <t t-foreach="startup_business_sector_ids" t-as="startup_business_sector_id">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="startup_business_sector_id.name"/>
+                                                <input type="checkbox" name="grant_business_sector_ids" t-att-value="startup_business_sector_id.id"/>
+                                                <span class="checkmark"/>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." name="grant_business_sector_char"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>2. Please indicate the Legal Entity in which your business is operating:</h4>
+                                <div class="row">
+                                    <t t-foreach="startup_legal_entity_ids" t-as="startup_legal_entity_id">
+                                        <div class="col-md-6">
+
+                                            <label class="checkbox_style">
+                                                <span t-field="startup_legal_entity_id.name"/>
+                                                <input type="checkbox" name="grant_legal_entity_ids" t-att-value="startup_legal_entity_id.id"/>
+                                                <span class="checkmark"/>
+                                            </label>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Other:
+                                <p>
+                                    <input placeholder="Other..." name="grant_legal_entity_char"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>3. Business Registration:</h4>
+                                <!--                                <p>-->
+                                <!--                                    <input placeholder="Business Registration..." name="grant_business_registration"-->
+                                <!--                                           type="text"/>-->
+                                <!--                                </p>-->
+                                <p>
+                                    <input placeholder="Business Registration Number..." name="grant_business_registration_number" type="text"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        
+                        
+
+                        
+
+                        <!--                    <div class="th1 hidden">-->
+                        <!--                        <div class="row">-->
+                        <!--                        <div class="col-md-12">-->
+                        <!--                            <h4>1. Certified Identity document Copy (stamp not older than 3 months)-->
+                        <!--                                <b style="color:red">*</b>-->
+                        <!--                            </h4>-->
+                        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+                        <!--                                <div class="file-upload-wrapper" data-text="Certified Identity document 1">-->
+                        <!--                                    <input name="identity_document_1" type="file" class="file-upload-field identity"/>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
+                        <!--                    </div>-->
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="text-center">
+                                    <b>Utilization of funds</b>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>5. Grant Amount required:</h4>
+                                <p>
+                                    <input placeholder="Grant Amount required..." class="numericOnly" id="grant_amount_threshold" name="grant_amount_required" type="number" min="1" max="250000"/>
+                                </p>
+                                <span id="grant_error_display" class="text-center"/>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table id="utilization_fund" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">To be utilized as follows</th>
+                                        <th class="text-center">R</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="name" class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="amount" class="form-control numericOnly"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addUtilizeRow" value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <table id="grant_business_income" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="2">Business Income</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">R</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="name" class="select_style">
+                                                <option value="sales">Sales</option>
+                                                <option value="debtors">Debtors</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="rupees" class="form-control numericOnly"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addGrantBusinessIncomeRow" value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                Other Business Income:
+                                <p>
+                                    <input placeholder="Other Business Income..." name="grant_business_income_other"/>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                Other Business Income Rands:
+                                <p>
+                                    <input placeholder="Other Business Income Rands..." name="grant_business_income_other_rupees" class="numericOnly"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <table id="grant_personal_income" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="2">Personal Income</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">R</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="name" class="select_style">
+                                                <option value="applicant_salary">Applicant Salary</option>
+                                                <option value="spouse_salary">Spouse Salary</option>
+                                                <!--                                    <option value="total">Total</option>-->
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="rupees" class="form-control numericOnly"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addGrantPersonalIncomeRow" value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                Other Personal Income:
+                                <p>
+                                    <input placeholder="Other Personal Income..." name="grant_personal_income_other"/>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                Other Personal Income Rands:
+                                <p>
+                                    <input placeholder="Other Personal Income Rands..." name="grant_personal_income_other_rupees" class="numericOnly"/>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <table id="grant_business_expenses" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="2">Business Expenses</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">R</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="name" class="select_style">
+                                                <option value="rent">Rent</option>
+                                                <option value="equipment">Equipment</option>
+                                                <option value="stock_material">Purchases: Stock/Material</option>
+                                                <option value="water_electricity">Water/Electricity</option>
+                                                <option value="insurance">Insurance</option>
+                                                <option value="security">Security</option>
+                                                <option value="accounting_fees">Accounting fees</option>
+                                                <option value="petrol_transport">Petrol/Transport</option>
+                                                <option value="maintenance">Maintenance</option>
+                                                <option value="salaries_wages">Salaries/Wages</option>
+                                                <option value="owner_drawings">Owner’s Drawings</option>
+                                                <option value="rsc_levies">RSC Levies</option>
+                                                <option value="uif_contributions">UIF Contributions</option>
+                                                <option value="tel_fax_postage">Tel/Fax/Postage</option>
+                                                <option value="stationery">Stationery</option>
+                                                <option value="loan_1_repayment">Loan 1 Repayment</option>
+                                                <option value="loan_2_repayment">Loan 2 Repayment</option>
+                                                <option value="consumables">Consumables</option>
+                                                <option value="sundry_expenses">Sundry Expenses</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="rupees" class="form-control numericOnly"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addGrantBusinessExpensesRow" value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                Other Business Expenses:
+                                <p>
+                                    <input placeholder="Other Business Expenses..." name="grant_business_expenses_other"/>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                Other Business Expenses Rands:
+                                <p>
+                                    <input placeholder="Other Business Expenses Rands..." name="grant_business_expenses_other_rupees" class="numericOnly"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <table id="grant_personal_expenses" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="2">Personal Expenses</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">R</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="name" class="select_style">
+                                                <option value="rent_bond">Rent/Bond</option>
+                                                <option value="car_instalment">Car Instalment</option>
+                                                <option value="water_electricity">Water Electricity</option>
+                                                <option value="groceries">Groceries</option>
+                                                <option value="clothing">Clothing</option>
+                                                <option value="travel_transport">Travel/Transport</option>
+                                                <option value="entertainment">Entertainment</option>
+                                                <option value="medical_expenses">Medical Expenses</option>
+                                                <option value="donations_church">Donations/Church</option>
+                                                <option value="school_fees">School Fees</option>
+                                                <option value="family_commitments">Family Commitments</option>
+                                                <option value="insurance_fees">Insurance Fees</option>
+                                                <option value="life">Life</option>
+                                                <option value="endowment">Endowment</option>
+                                                <option value="investments">Investments</option>
+                                                <option value="funeral">Funeral</option>
+                                                <option value="study">Study</option>
+                                                <option value="savings_stokvel">Savings/stokvel</option>
+                                                <option value="store_cards">Store Cards</option>
+                                                <option value="telephone">Telephone</option>
+                                                <option value="hp_instalments">HP Instalments</option>
+                                                <option value="nlr_exposure">NLR Exposure</option>
+                                                <option value="cca_exposure">CCA Exposure</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="rupees" class="form-control numericOnly"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addGrantPersonalExpensesRow" value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                Other Personal Expenses:
+                                <p>
+                                    <input placeholder="Other Personal Expenses..." name="grant_personal_expenses_other"/>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                Other Personal Expenses Rands:
+                                <p>
+                                    <input placeholder="Other Personal Expenses Rands..." name="grant_personal_expenses_other_rupees" class="numericOnly"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <table id="grant_other_expenses" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="2">Other Additional Expenses</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">R</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="name" class="select_style">
+                                                <option value="land_buildings">Land/Buildings</option>
+                                                <option value="furniture_fittings">Furniture/Fittings</option>
+                                                <option value="equipment">Equipment</option>
+                                                <option value="vehicles">Vehicles</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="rupees" class="form-control numericOnly"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left;">
+                                            <input type="button" class="btn btn-primary" id="addGrantOtherExpensesRow" value="Add Row"/>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>2. Have you ever received Business Management Training</h4>
+                            <p>
+                                <div class="readio_style">
+                                    <div class="inputGroup">
+                                        <input id="radio3" name="entrepreneurial_training" type="radio" value="True"/>
+                                        <label for="radio3">Yes</label>
+                                    </div>
+                                    <div class="inputGroup">
+                                        <input id="radio4" name="entrepreneurial_training" type="radio" value="False"/>
+                                        <label for="radio4">No</label>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <!--  #########################################################################   -->
+                    <div class="row">
+                    <div class="col-md-12">
+                    <div class="hidden sfield1" id="sfield1">
+                            <div class="demo_header" style="text-align:center;">
+                                <h4>
+                                    <b>Supporting Documents for Application</b>
+                                </h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>NYDA business plan template</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="NYDA Business plan template">
+                                            <input name="nyda_business_plan_template_document" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden sfield2" id="sfield2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Provide Management Accounts</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Provide Management Accounts">
+                                            <input name="provide_management_accounts" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden sfield3" id="sfield3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Formal Business Plan</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Formal Business Plan ">
+                                            <input name="formal_business_plan" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden sfield4" id="sfield4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Certified ID copy of the applicant (not older than 3 months)
+                                    </h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Certified ID copy of the applicant (not older than 3 months), if Cooperative – Certified ID copies of all members">
+                                            <input name="certified_identity_document_applicant" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield5" id="sfield5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Proof of Business Registration</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Proof of Business Registration ">
+                                            <input name="proof_of_business_registration" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield6" id="sfield6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Proof of Bank Account</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Proof Of Bank Account">
+                                            <input name="business_bank_account" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield7" id="sfield7">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Financial Statements – prepared and signed by an Accountants</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Financial Statements">
+                                            <input name="financial_statement_signed_accountant" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield8" id="sfield8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Additional permanent jobs creation document.</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Additional permanent jobs creation document.">
+                                            <input name="additional_permanent_job_creation" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                    <div class="display_additional_jobs" style="color: red;">
+                                        <h6/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield9" id="sfield9">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Must have the required skill(s) to operate the business</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Must have the required skill(s) to operate the business">
+                                            <input name="requires_skills_operate_business" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield10" id="sfield10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Proof of market/Letters of intent or off-take contracts (where applicable).</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Proof of market/Letters of intent or off-take contracts.">
+                                            <input name="market_letters_off_take_contracts" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield11" id="sfield11">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Proof of business operational year.</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Proof of business operational year">
+                                            <input name="business_operational_years_document" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                    <div class="display_business_operational" style="color: red;">
+                                        <h6/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield12" id="sfield12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Valid Tax Clearance Certificate</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Valid Tax Clearance Certificate">
+                                            <input name="valid_tax_clearance_certificate" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden sfield13" id="sfield13">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Breakdown of the use of funds</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Breakdown of the use of funds">
+                                            <input name="breakdown_of_funds" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield14" id="sfield14">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Usage of working capital</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Usage of working capital">
+                                            <input name="usage_of_working_capital" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                    <div class="display_working_capital" style="color: red;">
+                                        <h6/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden sfield15" id="sfield15">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Any other document that might assist your application</h4>
+                                    <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                                        <div class="file-upload-wrapper" data-text="Other Document">
+                                            <input name="other_doc" type="file" class="file-upload-field"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--  #########################################################################   -->
+                    <div id="new_threshold_grant">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center">
+                                <b>Job Creation Information</b>
+                            </h3>
+                            <h3 class="text-center">
+                                <b>How many current jobs and/or jobs do you intend to create?</b>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table id="job_creation" class="order-list">
+                            <thead>
+                                <tr>
+                                    <th colspan="1"/>
+                                    <th style="text-align:center; font-size:18px;" colspan="6">Before Funding</th>
+                                    <th style="text-align:center; font-size:18px;" colspan="6">After Funding</th>
+                                </tr>
+                                <tr>
+                                    <th class="table_border">RACE</th>
+                                    <th class="table_border" colspan="2">Before Funding</th>
+                                    <th class="table_border" colspan="2">Disabled</th>
+                                    <th class="table_border" colspan="2">Average Age</th>
+                                    <th class="table_border" colspan="2">After Funding</th>
+                                    <th class="table_border" colspan="2">Disabled</th>
+                                    <th class="table_border" colspan="2">Average Age</th>
+                                </tr>
+                                <tr>
+                                    <th class="table_border_tr">#</th>
+                                    <th class="table_border_tr">Male</th>
+                                    <th class="table_border_tr">Female</th>
+                                    <th class="table_border_tr">Male</th>
+                                    <th class="table_border_tr">Female</th>
+                                    <th class="table_border_tr">Male</th>
+                                    <th class="table_border_tr">Female</th>
+                                    <th class="table_border_tr">Male</th>
+                                    <th class="table_border_tr">Female</th>
+                                    <th class="table_border_tr">Male</th>
+                                    <th class="table_border_tr">Female</th>
+                                    <th class="table_border_tr">Male</th>
+                                    <th class="table_border_tr">Female</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="table_border_td_">
+                                        <select name="population_group" class="select_style" id="select_geo">
+                                            <option value="african">African</option>
+                                            <option value="white">White</option>
+                                            <option value="indian">Indian</option>
+                                            <option value="coloured">Coloured</option>
+                                            <!--                                    <option value="total">Total</option>-->
+                                        </select>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="before_funding_male" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="before_funding_female" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="before_funding_disabled_male" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="before_funding_disabled_female" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="before_funding_age_male" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="before_funding_age_female" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="after_funding_male" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="after_funding_female" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="after_funding_disabled_male" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="after_funding_disabled_female" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="after_funding_age_male" class="form-control numericOnly"/>
+                                    </td>
+                                    <td class="table_border_td">
+                                        <input type="number" name="after_funding_age_female" class="form-control numericOnly"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="13" style="text-align: left; padding: 3px;">
+                                        <input type="button" class="btn btn-primary" id="addJobRow" value="Add Row"/>
+                                    </td>
+                                </tr>
+                                <tr/>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <div class="demo_header">
+                        <h4>
+                            <b>Section C: PRE-START-UP (no business idea/ have not started a business)</b>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>1. Why do you want to start a business?</h4>
+                            <div class="row">
+                                <t t-foreach="business_start_reason_ids" t-as="business_start_reason">
+                                    <div class="col-md-6">
+
+                                        <label class="checkbox_style">
+                                            <span t-field="business_start_reason.name"/>
+                                            <input type="checkbox" class="business_start_reason_ids" name="business_start_reason_ids" t-att-value="business_start_reason.id"/>
+                                            <span class="checkmark"/>
+                                        </label>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            Other:
+                            <p>
+                                <input placeholder="Other..." id="business_start_reason_char" name="business_start_reason_char"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>2. Please describe the goals you want to achieve in business</h4>
+                            <p>
+                                <textarea class="form-control req" cols="40" id="business_goals" name="business_goals" placeholder="Describe the goals..." rows="3"/>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center">
+                                <b>Business Experience</b>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>3. What type of business experience do you have and what type of business do you want to
+                                start?
+                            </h4>
+                            <p>
+                                <textarea class="form-control req" cols="40" id="business_experience" name="business_experience" placeholder="Business Experience..." rows="3"/>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>4. What knowledge or expertise do you have that is relevant to the proposed business?
+                            </h4>
+                            <p>
+                                <textarea class="form-control req" cols="40" id="expertise_in_business" name="expertise_in_business" placeholder="Knowledge or Expertise..." rows="3"/>
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="tab">
+
+                    <div class="row">
+                        <div class="col-md-12" style="color:red">
+                            <h3>
+                                <b>Declaration -</b>
+                            </h3>
+                        </div>
+                        <div class="col-md-12" style="color:rebeccapurple">
+                            <h4>1. I hereby declare that the information provided in this application is, to the best of
+                                my knowledge, true and accurate;
+                            </h4>
+                            <h4>2. I hereby declare that I understand the Business Consultancy Services Voucher/Grant
+                                terms and conditions and undertake to abide by such terms and conditions;
+                            </h4>
+                            <h4>3. I hereby indemnify the National Youth Development Agency and its Service Providers
+                                for any loss or damages whatsoever incurred as a result of an intervention rendered by
+                                the Service Provider in good faith.
+                            </h4>
+                            <h4>4. I hereby declare that the information in this application form is fair and a true
+                                reflection of the intended business/project and that all the documents accompanying this
+                                application are authentic. I further confirm that neither I nor my partner(s) have ever
+                                been declared insolvent. I herewith give the National Youth Development Agency
+                                permission to conduct a credit history check as well as any other enquiries they may
+                                deem necessary to process this application.
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn">Previous</button>
+                        <button type="button" id="nextBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                    <span class="step"/>
+                    <!--                    <span class="step"></span>-->
+                    <span class="step"/>
+                    <span class="step"/>
+                    <span class="step"/>
+                </div>
+            </form>
+            <div id="div_loading"/>
+        </t>
+    </t>
+
+
+    
+    </template>
+
+
+    <template id="check_total_app" name="OOPS !!">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404" style="opacity: 0.5 !important;">
+                        <h1 style="padding-top:100px">OOPS!!</h1>
+                    </div>
+                    <t t-if="grant_app_id">
+                        <h2 style="padding-top:185px">You have already applied for Grant
+                        </h2>
+                        <h3 style="color:white">Your Grant Application Number :
+                            <t t-esc="grant_app_id.serial_number"/>
+                        </h3>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="limit_reached_grant" name="OOPS !!">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404" style="opacity: 0.5 !important;">
+                        <h1 style="padding-top:100px">OOPS!!</h1>
+                    </div>
+                    <t t-if="grant_app_id">
+                        <h2 style="padding-top:185px">You cannot apply for new Grant
+                        </h2>
+                        <h3 style="color:white">Your Grant Application Numbers are :
+                            <t t-value="len(grant_app_id)" t-set="total_grant"/>
+                            <t t-value="0" t-set="total_grant_check"/>
+                            <t t-foreach="grant_app_id" t-as="app_id">
+                                <t t-set="total_grant_check" t-value="total_grant_check + 1"/>
+                                <t t-esc="app_id.serial_number"/>
+                                <t t-if="total_grant != total_grant_check">,</t>
+                                <t t-if="total_grant == total_grant_check">.</t>
+                            </t>
+                        </h3>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
+
+        <!--                    &lt;!&ndash;   CLASSES FOR  THRESHOLD 1 VISIBILITY&ndash;&gt;-->
+        <!--                    <div class="hidden th1" id="th1">-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>1. Certified ID copy of the applicant (not older than 3 months)</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="2. Certified ID copy of the applicant (not older than 3 months)">-->
+        <!--                                        <input name="certified_identity_document_applicant" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>2. NYDA business plan template</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="3. NYDA Business plan template">-->
+        <!--                                        <input name="nyda_business_plan_template_document" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>3. Usage of working capital – maximum R7000,00</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Usage of working capital – maximum R5000,00">-->
+        <!--                                        <input name="usage_of_working_capital" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>4. Must have a business bank account</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have a business bank account">-->
+        <!--                                        <input name="business_bank_account" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+
+        <!--&lt;!&ndash;   CLASSES FOR  THRESHOLD 2 VISIBILITY&ndash;&gt;-->
+
+
+        <!--                    <div class="hidden th2" id="th2">-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>1. Proof of Business Registration</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Proof of Business Registration ">-->
+        <!--                                        <input name="proof_of_business_registration" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>2. Certified ID copy of the applicant (not older than 3 months)</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="2. Certified ID copy of the applicant (not older than 3 months)">-->
+        <!--                                        <input name="certified_identity_document_applicant" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>3. NYDA business plan template</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="3. NYDA Business plan template">-->
+        <!--                                        <input name="nyda_business_plan_template_document" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>4. Usage of working capital – maximum R5000,00</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Usage of working capital – maximum R5000,00">-->
+        <!--                                        <input name="usage_of_working_capital" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>5. Must have a business bank account</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have a business bank account">-->
+        <!--                                        <input name="business_bank_account" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>6. Must have the required skill(s) to operate the business</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have the required skill(s) to operate the business">-->
+        <!--                                        <input name="requires_skills_operate_business" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>7. Must create at least one permanent additional job.</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must create at least one permanent additional job.">-->
+        <!--                                        <input name="additional_permanent_job_creation" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    &lt;!&ndash; CLASSES FOR THRESHOLD 3 VISIBILITY&ndash;&gt;-->
+
+        <!--                    <div class="hidden th3" id="th3">-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>1. Formal Business Plan </h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Formal Business Plan ">-->
+        <!--                                        <input name="formal_business_plan" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>2. Certified ID copy of the applicant (not older than 3 months), if Cooperative – Certified ID copies of all members</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Certified ID copy of the applicant (not older than 3 months), if Cooperative – Certified ID copies of all members">-->
+        <!--                                        <input name="certified_identity_document_applicant" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>3. Proof of Business Registration </h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Proof of Business Registration ">-->
+        <!--                                        <input name="proof_of_business_registration" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>4. Must have a business bank account</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have a business bank account">-->
+        <!--                                        <input name="business_bank_account" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>5. Provide Management Accounts</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Provide Management Accounts">-->
+        <!--                                        <input name="provide_management_accounts" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>6. Must create at least two permanent additional jobs (Must sustain at least 5 permanent jobs for cooperatives).</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must create at least two permanent additional jobs (Must sustain at least 5 permanent jobs for cooperatives).">-->
+        <!--                                        <input name="additional_permanent_job_creation" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>7. Must have the required skill(s) to operate the business</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have the required skill(s) to operate the business">-->
+        <!--                                        <input name="requires_skills_operate_business" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>8. Proof of market/Letters of intent or off-take contracts (where applicable).</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Proof of market/Letters of intent or off-take contracts (where applicable).">-->
+        <!--                                        <input name="market_letters_off_take_contracts" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>9. The business must be operational for a minimum of two years.</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="The business must be operational for a minimum of two years">-->
+        <!--                                        <input name="business_operational_years_document" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>10. Valid Tax Clearance Certificate</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Valid Tax Clearance Certificate">-->
+        <!--                                        <input name="valid_tax_clearance_certificate" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>11. Breakdown of the use of funds</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Breakdown of the use of funds">-->
+        <!--                                        <input name="breakdown_of_funds" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>12. Usage of working capital – maximum R10000,00 </h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Usage of working capital – maximum R10000,00 ">-->
+        <!--                                        <input name="usage_of_working_capital" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--CLASSes FOR THRESHOLD 4 VISIBILITY  ACCORDINGLY @@@@@@@@@@NEWWWWW-->
+
+
+        <!--                    &lt;!&ndash;CLASSes FOR THRESHOLD 5 VISIBILITY&ndash;&gt;-->
+        <!--                    <div class="hidden th5"  id="th5">-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>1. Formal Business Plan </h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Formal Business Plan ">-->
+        <!--                                        <input name="formal_business_plan" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>2. Certified ID copy of the applicant (not older than 3 months), if Cooperative – Certified ID copies of all members</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Certified ID copy of the applicant (not older than 3 months), if Cooperative – Certified ID copies of all members">-->
+        <!--                                        <input name="certified_identity_document_applicant" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>3. Proof of Business Registration </h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Proof of Business Registration ">-->
+        <!--                                        <input name="proof_of_business_registration" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>4. Must have a business bank account</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have a business bank account">-->
+        <!--                                        <input name="business_bank_account" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>5. Financial Statements – prepared and signed by an Accountants</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Financial Statements – prepared and signed by an Accountants">-->
+        <!--                                        <input name="financial_statement_signed_accountant" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>6. Must create at least three permanent additional jobs (Must sustain at least 5 permanent jobs for cooperatives).</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must create at least three permanent additional jobs (Must sustain at least 5 permanent jobs for cooperatives).">-->
+        <!--                                        <input name="additional_permanent_job_creation" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>7. Must have the required skill(s) to operate the business</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Must have the required skill(s) to operate the business">-->
+        <!--                                        <input name="requires_skills_operate_business" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>8. Proof of market/Letters of intent or off-take contracts (where applicable).</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Proof of market/Letters of intent or off-take contracts (where applicable).">-->
+        <!--                                        <input name="market_letters_off_take_contracts" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>9. The business must be operational for a minimum of three years.</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="The business must be operational for a minimum of three years">-->
+        <!--                                        <input name="business_operational_years_document" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>10. Valid Tax Clearance Certificate</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Valid Tax Clearance Certificate">-->
+        <!--                                        <input name="valid_tax_clearance_certificate" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>11. Breakdown of the use of funds</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Breakdown of the use of funds">-->
+        <!--                                        <input name="breakdown_of_funds" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-md-6">-->
+        <!--                                <h4>12. Usage of working capital – maximum R2000,00</h4>-->
+        <!--                                <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                    <div class="file-upload-wrapper" data-text="Usage of working capital – maximum R2000,00">-->
+        <!--                                        <input name="usage_of_working_capital" type="file" class="file-upload-field"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>Any other document that might assist your application</h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Other Document">-->
+        <!--                                    <input name="other_doc" type="file" class="file-upload-field"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    ENDING OF THRESHOLD DIV CLASSSESSS-->
+
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-12">-->
+        <!--                            <h4>1. Certified Identity document Copy (stamp not older than 3 months)-->
+        <!--                                <b style="color:red">*</b>-->
+        <!--                            </h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Certified Identity document 1">-->
+        <!--                                    <input name="identity_document_1" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                            &lt;!&ndash;                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                                <div class="file-upload-wrapper" data-text="Certified Identity document 2">&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                                    <input name="identity_document_2" type="file" class="file-upload-field"/>&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                                </div>&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                            </div>&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                                <div class="file-upload-wrapper" data-text="Certified Identity document 3">&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                                    <input name="identity_document_3" type="file" class="file-upload-field"/>&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                                </div>&ndash;&gt;-->
+        <!--                            &lt;!&ndash;                            </div>&ndash;&gt;-->
+
+
+        <!--                    <div class="row">-->
+        <!-- <div class="col-md-6">
+            <h4>2. Proof of Residence
+                <b style="color:red">*</b>
+            </h4>
+            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">
+                <div class="file-upload-wrapper" data-text="Proof of Residence">
+                    <input name="proof_of_residence" type="file" class="file-upload-field identity"/>
+                </div>
+            </div>
+        </div> -->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>3. Copy of Company Registration from CIPC <b style="color:red">*</b></h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Company Registration from CIPC">-->
+        <!--                                    <input name="company_registration" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>2. Copy of Company Registration from CIPC-->
+        <!--                                <b style="color:red">*</b>-->
+        <!--                            </h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Company Registration from CIPC">-->
+        <!--                                    <input name="company_registration" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>3. Company Profile-->
+        <!--                                <b style="color:red">*</b>-->
+        <!--                            </h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Company Profile">-->
+        <!--                                    <input name="company_profile" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>5. Detailed list of the current employees <b style="color:red">*</b></h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="List of the current employees">-->
+        <!--                                    <input name="current_employees" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>4. Detailed list of the current employees-->
+        <!--                                <b style="color:red">*</b>-->
+        <!--                            </h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="List of the current employees">-->
+        <!--                                    <input name="current_employees" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>5. Personal Bank Statement or Business Bank Statement-->
+        <!--                                <b style="color:red">*</b>-->
+        <!--                            </h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Bank Statement">-->
+        <!--                                    <input name="bank_statement" type="file" class="file-upload-field identity"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>7. Business Plan if looking for grant >R50 000</h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Business Plan">-->
+        <!--                                    <input name="business_plan_grant" type="file" class="file-upload-field"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+
+        <!--                    <div class="row">-->
+
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>6. Business Plan if looking for grant >R50 000</h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Business Plan">-->
+        <!--                                    <input name="business_plan_grant" type="file" class="file-upload-field"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>7. Quotations if looking for a grant</h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Quotations">-->
+        <!--                                    <input name="quotations_grant" type="file" class="file-upload-field"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-md-6">-->
+        <!--                            <h4>9. Any other document that might be required</h4>-->
+        <!--                            <div class="form_upload" style="padding-top:10px;padding-bottom:10px">-->
+        <!--                                <div class="file-upload-wrapper" data-text="Other Document">-->
+        <!--                                    <input name="other_doc" type="file" class="file-upload-field"/>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+
+        <!--                </div>-->
+
+
+
+
+

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_assessment_tree_view">
+            <field name="name">usmo.aftercare.tree.view</field>
+            <field name="model">usmo.assessment</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Answer01"/>
+                    <field name="Answer02"/>
+                    <field name="Answer03"/>
+                    <field name="Answer04"/>
+                    <field name="Answer05"/>
+                    <field name="Answer06"/>
+                    <field name="Answer07"/>
+                    <field name="Answer08"/>
+                    <field name="Answer09"/>
+                    <field name="Answer10"/>
+                    <field name="Answer11"/>
+                    <field name="Answer12"/>
+                    <field name="Answer13"/>
+                    <field name="Answer14"/>
+                    <field name="Answer15"/>
+                    <field name="Answer16"/>
+                    <field name="Answer17"/>
+                    <field name="Answer18"/>
+                    <field name="Answer19"/>
+                    <field name="Answer20"/>
+                    <field name="Answer21"/>
+                    <field name="Answer22"/>
+                    <field name="Answer23"/>
+                    <field name="Answer24"/>
+                    <field name="Answer25"/>
+                    <field name="Answer26"/>
+                    <field name="Answer27"/>
+                    <field name="Answer28"/>
+                    <field name="Answer29"/>
+                    <field name="Answer30"/>
+                    <field name="AssessedBy"/>
+                    <field name="AssessmentType"/>
+                    <field name="Client"/>
+                    <field name="CreatedDT"/>
+                    <field name="RowGUID"/>
+                    <field name="Voucher"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_assessment_form_view">
+            <field name="name">usmo.assessment.form.view</field>
+            <field name="model">usmo.assessment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="Answer01"/>
+                                <field name="Answer02"/>
+                                <field name="Answer03"/>
+                                <field name="Answer04"/>
+                                <field name="Answer05"/>
+                                <field name="Answer06"/>
+                                <field name="Answer07"/>
+                                <field name="Answer08"/>
+                                <field name="Answer09"/>
+                                <field name="Answer10"/>
+                                <field name="Answer11"/>
+                                <field name="Answer12"/>
+                                <field name="Answer13"/>
+                                <field name="Answer14"/>
+                                <field name="Answer15"/>
+                            </group>
+                            <group>
+                                <field name="Answer16"/>
+                                <field name="Answer17"/>
+                                <field name="Answer18"/>
+                                <field name="Answer19"/>
+                                <field name="Answer20"/>
+                                <field name="Answer21"/>
+                                <field name="Answer22"/>
+                                <field name="Answer23"/>
+                                <field name="Answer24"/>
+                                <field name="Answer25"/>
+                                <field name="Answer26"/>
+                                <field name="Answer27"/>
+                                <field name="Answer28"/>
+                                <field name="Answer29"/>
+                                <field name="Answer30"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="AssessedBy"/>
+                                <field name="AssessmentType"/>
+                                <field name="Client"/>
+                            </group>
+                            <group>
+                                <field name="CreatedDT"/>
+                                <field name="RowGUID"/>
+                                <field name="Voucher"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_assessment">
+            <field name="name">Usmo Assessment</field>
+            <field name="res_model">usmo.assessment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_assessment" name="Usmo Assessment"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_assessment" sequence="30"/>
+    </data>
+</odoo>

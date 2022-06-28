@@ -1,0 +1,370 @@
+<odoo>
+	<data>
+  
+		<record id="nyda_scm_rfq_kanban" model="ir.ui.view">
+       		<field name="name">nyda.scm.rfq.kanban.view</field>
+       		<field name="model">purchase.requisition</field>
+       		<field name="arch" type="xml"> 
+			<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';yellow:state=='Pending';red:state=='In Progress';red:state=='Closed';green:state=='Delivered';" disable_drag_drop_record="true" import="false" >
+                   <field name="name"/>
+                   <field name="rfq_number"/>
+                   <field name="employee"/>
+                   <field name="request_date"/>
+                   <field name="create_date"/>
+                   <field name="state"/>
+                   <field name="color"/>
+                   <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                   
+                   <templates>
+                       <t t-name="kanban-box">
+                           <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                               <div class="o_dropdown_kanban dropdown">
+
+                                   <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                       <span class="fa fa-ellipsis-v"/>
+                                   </a>
+                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                       <t t-if="widget.deletable">
+                                           <li><a type="delete">Delete</a></li>
+                                       </t>
+                                       <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                   </ul>
+                               </div>
+                               <div class="o_event_left">
+                                   <div class="o_day"><t t-esc="record.request_date.raw_value.getDate()"/></div>
+                                   <div>
+                                       <t t-esc="moment(record.request_date.raw_value).format('MMM')"/>
+                                       <t t-esc="record.request_date.raw_value.getFullYear()"/>
+                                   </div>
+                                   <div><t t-esc="moment(record.request_date.raw_value).format('LT')"/></div>
+                               </div>
+                               <div class="o_event_right">
+                                   <h4 class="o_kanban_record_title"><field name="rfq_number"/></h4>
+                                   <div>
+                                       <t t-if="record.employee.raw_value"> <b class="o_kanban_record_subtitle"> <field name="name"/> </b> <br/> </t>
+                                       <i class="fa fa-clock-o"/>
+                                       <b>Request Date</b> <t t-esc="moment(record.request_date.raw_value).format('lll')"/>
+                                   </div>
+                                   
+                               </div>
+                           </div>
+                       </t>
+                   </templates>
+			</kanban>
+            </field>
+	</record>
+	<record model="ir.ui.view" id="nyda_scm_rfq_tree_view">
+		<field name="name">nyda.scm.rfq.tree.view</field>
+		<field name="model">purchase.requisition</field>
+		<field name="arch" type="xml">
+		<tree >
+	        <field name="name"/>
+	        <field name="rfq_number"/>
+	        <field name="employee"/>
+	        <field name="division_id"/>
+	        <field name="request_date"/>
+	        <field name="state"/>
+		</tree>
+     	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_rfq_form_view">
+		<field name="name">nyda.scm.rfq.form.view</field>
+		<field name="model">purchase.requisition</field>
+		<field name="arch" type="xml">
+		<form string="Content Request Form">
+	     	<header>
+ 				<button name="new_completed" string="Proceed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'new')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_business_user,base.group_system"
+				/>
+				
+				<button name="select_suppliers_completed" string="Proceed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'select_suppliers')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>
+				
+				<button name="solicit_quotations_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'solicit_quotations')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/> 
+				
+				<button name="nyda_scm_rfq.cancel_rfq_reason_wizard_action" string="Cancel RFQ" type="action" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'solicit_quotations')]}"
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>				
+								
+				<button name="receive_quotations_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'receive_quotations')]}"
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/> 
+
+				<button name="nyda_scm_rfq.cancel_rfq_reason_wizard_action" string="Cancel RFQ" type="action" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'receive_quotations')]}"
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>
+								
+				<button name="compliance_evaluation_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'check_compliance')]}"
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>                         				
+				
+				<button name="functional_evaluation_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'functional_evaluation')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/> 
+
+				<button name="calculate_price_bee_score" string="Calculate Points" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'bee_price_evaluation')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>
+								
+				<button name="price_evaluation_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'bee_price_evaluation')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>
+				
+				<button name="recommendation_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'recommendation')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>                         
+
+				<button name="review_recommendation_approved" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'review_recommendation')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_specialist_user,nyda_scm_rfq.nyda_scm_rfq_manager,base.group_system"
+				/>                        
+				
+				<button name="nyda_scm_rfq.reject_recommendation_reason_wizard_action" string="Reject" type="action" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'review_recommendation')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_specialist_user,nyda_scm_rfq.nyda_scm_rfq_manager,base.group_system"
+				/>  
+				
+				<button name="nyda_scm_rfq.purchase_requisition_action_window" string="Quotations" type="action" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'raise_purchase_order')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_business_user,base.group_system"
+				 context="{'default_rfq_id': active_id, 'default_date_end': closing_date_time, 'default_ordering_date': request_date}"
+				/>                        
+				
+				<button name="raise_po_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'raise_purchase_order')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_business_user,base.group_system"
+				/>                        
+				
+				<button name="po_approval_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'purchase_order_approval')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_business_user,base.group_system"
+				/>                      
+				
+				<button name="send_po_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'send_servie_provider_po')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,nyda_scm_rfq.nyda_scm_rfq_specialist_user,base.group_system"
+				/>
+				
+				<button name="administer_contract_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'administer_contracts')]}"
+				 groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,base.group_system"
+				/>                   
+				
+				<button name="delivery_completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'confirm_delivery')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_business_user,base.group_system"
+				/>
+				
+				<button name="delivery_report_completed" string="Delivery Report" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'report_on_delivery')]}" 
+				 groups="nyda_scm_rfq.nyda_scm_rfq_business_user,base.group_system"
+				/>
+				
+	     	</header>
+	     	<sheet>	  
+                <div class="oe_button_box" name="button_box">
+					<button name="nyda_scm_rfq.supplier_shortlist_action_window" type="action" string="Suppliers Shortlist" style="width:197px !important" class="oe_inline oe_stat_button" icon="fa-book" help="Import Suppliers List" 
+                      attrs="{'invisible' : [('state', 'not in', ('select_suppliers','solicit_quotations','receive_quotations'))]}" 
+                      context="{'default_rfq_id': active_id}"
+                      />
+                      
+                    <button name="2798" type="action" string="Evaluation Sheet" style="width:197px !important" class="oe_inline oe_stat_button" icon="fa-book" help="RFQ Evaluation" 
+                      attrs="{'invisible' : [('state', '!=', 'functional_evaluation')]}"/>
+                      
+                    <button name="861" type="action" class="oe_stat_button" icon="fa-list-alt" attrs="{'invisible': [('state', 'not in', ('raise_purchase_order','purchase_order_approval','send_servie_provider_po','administer_contracts','confirm_delivery','report_on_delivery','finished'))]}">
+                        <field name="order_count" widget="statinfo" string="Orders"/>
+                    </button>
+                                          
+                </div>	     	
+				<div id="o_memo_container">
+			      	<div id="o_memo_main">
+			      		<group name="title" string="Details">
+			              	<group>
+			              		<field name="name" required="1"/>
+			              		<field name="state" readonly="1"/>
+								<field name="rfq_number" readonly="1"/>
+			                    <field name="employee" readonly="1"/>
+			                    <field name="contact_no" readonly="1"/>
+			                   	<field name="division_id" readonly="1"/>
+			                   	<field name="request_date" required="1"/>
+			                   	<field name="closing_date_time" attrs="{'invisible' : [('state', '!=', 'select_suppliers')]}"/>
+								<field name="rfq_validity_period" required="1"/>
+								<field name="submission_method" required="1"/>
+								<field name="functional_evaluation" required="1"/>
+								<field name="preference_point_system" required="0" attrs="{'invisible' : [('functional_evaluation', '=', False)]}"/>
+							</group>
+						</group>
+			       	</div>
+		     	</div>
+				<notebook colspan="8">	
+			     	<page name="description" string="Description">
+						<group name="container_row_2">
+							<field name="description" required="1"/>
+						</group>
+					</page>
+                    <page string="Products">
+                        <field name="line_ids">
+                            <tree string="Products" editable="bottom">
+                                <field name="product_id"/>
+                                <field name="product_qty"/>
+                                <field name="qty_ordered" invisible="1"/>
+                                <field name="product_uom_id" groups="product.group_uom" invisible="1"/>
+                                <field name="schedule_date" groups="base.group_no_one" invisible="1"/>
+                                <field name="account_analytic_id" groups="purchase.group_analytic_accounting" invisible="1"/>
+                                <field name="price_unit" invisible="1"/>
+                            </tree>
+                            <form string="Products">
+                                <group>
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="qty_ordered" invisible="1"/>
+                                    <field name="product_uom_id" invisible="1"/>
+                                    <field name="schedule_date" invisible="1"/>
+                                    <field name="account_analytic_id" groups="purchase.group_analytic_accounting" invisible="1"/>
+                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>					
+					<page name="compliance_supplier" string="Compliance Check" attrs="{'invisible' : [('state', 'in', ('new','select_suppliers','solicit_quotations','receive_quotations'))]}" groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,nyda_scm_rfq.nyda_scm_rfq_specialist_user,base.group_system">
+						<field name="supplier_shortlist" nolabel="1" >
+							<tree editable="bottom" create="false">
+								<field name="legal_name" readonly="1"/>
+								<field name="supplier_number" readonly="1"/>
+								<field name="name" readonly="1"/>
+								<field name="surname" readonly="1"/>
+								<field name="email_address" readonly="1"/>
+								<field name="cellphone_number" readonly="1"/>
+								<field name="compliance_eligibility"/>
+							</tree>
+						</field>
+					</page>     
+
+					<page name="compliance_supplier" string="Functional Evaluation" attrs="{'invisible' : ['|', ('functional_evaluation', '=', False), ('state', 'in', ('new','select_suppliers','solicit_quotations','receive_quotations','check_compliance'))]}" groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,nyda_scm_rfq.nyda_scm_rfq_specialist_user,base.group_system">
+						<field name="supplier_shortlist" nolabel="1" >
+							<tree editable="bottom" create="false">
+								<field name="legal_name" readonly="1"/>
+								<field name="supplier_number" readonly="1"/>
+								<field name="name" readonly="1"/>
+								<field name="surname" readonly="1"/>
+								<field name="email_address" readonly="1"/>
+								<field name="cellphone_number" readonly="1"/>
+								<field name="compliance_eligibility" readonly="1"/>
+								<field name="functionality_score"/>
+								<field name="functionality_score_pass"/>
+							</tree>
+						</field>
+					</page>   
+					
+					<page name="compliance_supplier" string="BEE plus Price" attrs="{'invisible' : [('state', 'in', ('new','select_suppliers','solicit_quotations','receive_quotations','check_compliance','functional_evaluation'))]}" groups="nyda_scm_rfq.nyda_scm_rfq_officer_user,nyda_scm_rfq.nyda_scm_rfq_specialist_user,base.group_system">
+						<field name="supplier_shortlist" nolabel="1" >
+							<tree editable="bottom" create="false">
+								<field name="legal_name" readonly="1"/>
+								<field name="supplier_number" readonly="1"/>
+								<field name="name" readonly="1"/>
+								<field name="surname" readonly="1"/>
+								<field name="email_address" readonly="1"/>
+								<field name="cellphone_number" readonly="1"/>
+								<field name="price_total" />
+								<field name="bee_level" />
+								<field name="price_score" readonly="1"/>
+								<field name="bee_score" readonly="1"/>
+								<field name="total_score" readonly="1"/>
+							</tree>
+						</field>
+					</page>   					
+					
+					<page name="recommendation" string="Recommendation" attrs="{'invisible' : [('state', 'not in', ('recommendation','review_recommendation', 'raise_purchase_order', 'purchase_order_approval','send_servie_provider_po', 'administer_contracts', 'confirm_delivery', 'report_on_delivery', 'finished'))]}" >
+						<field name="recommendation"/>
+						<div class="oe_clear"/>
+					</page>	
+									
+				</notebook>
+			</sheet>
+			<div class="oe_chatter" >
+	  			<field name="message_follower_ids" widget="mail_followers"/>
+	  			<field name="message_ids" widget="mail_thread"/>
+			</div>
+  		</form>
+    	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_rfq_supplier_shortlist_view">
+		<field name="name">nyda.scm.rfq.supplier.shortlist.tree</field>
+		<field name="model">scm.rfq.supplier.shortlist</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="rfq_id" invisible="1"/>
+		        <field name="legal_name"/>
+		        <field name="supplier_number"/>
+		        <field name="name"/>
+		        <field name="surname"/>
+		        <field name="cellphone_number"/>
+		        <field name="email_address"/>
+		        <field name="local_address"/>
+		        <field name="quotation_submitted"/>
+			</tree>
+     	</field>
+	</record>
+
+	<record model="ir.ui.view" id="scm_rfq_supplier_shortlist_form_view">
+		<field name="name">scm.rfq.supplier.shortlist.form.view</field>
+		<field name="model">scm.rfq.supplier.shortlist</field>
+		<field name="arch" type="xml">
+		<form string="Supplier Shortlist Form">
+	     	<sheet>	  	     	
+				<div id="o_memo_container">
+			      	<div id="o_memo_main">
+			      		<group name="title" string="Details">
+			              	<group>
+			              		<field name="rfq_id" invisible="1"/>
+						        <field name="legal_name" readonly="1"/>
+						        <field name="supplier_number" readonly="1"/>
+						        <field name="name" readonly="1"/>
+						        <field name="surname" readonly="1"/>
+						        <field name="cellphone_number" readonly="1"/>
+						        <field name="email_address" readonly="1"/>
+						        <field name="local_address" readonly="1"/>
+						        <field name="quotation_submitted"/>
+							</group>
+						</group>
+			       	</div>
+		     	</div>
+			</sheet>
+  		</form>
+    	</field>
+	</record>	
+	
+    <record model="ir.actions.act_window" id="nyda_scm_rfq.supplier_shortlist_action_window">
+      <field name="name">Supplier Shortlist</field>
+      <field name="res_model">scm.rfq.supplier.shortlist</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+        
+    <record model="ir.actions.act_window" id="nyda_scm_rfq.main_action_window">
+      <field name="name">Request for Quotation</field>
+      <field name="res_model">purchase.requisition</field>
+      <field name="view_mode">tree,kanban,form</field>
+    </record> 
+
+    <menuitem name="Supply Chain Management" id="nyda_scm_rfq.main_menu" web_icon="nyda_scm_rfq,static/description/icon.png"
+    			groups="base.group_system" />
+    <menuitem name="Request for Quotation" id="nyda_scm_rfq.submenu" parent="nyda_scm_rfq.main_menu"  sequence="0" action="nyda_scm_rfq.main_action_window"/>
+    
+  </data>
+</odoo>

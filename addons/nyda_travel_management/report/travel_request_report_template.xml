@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_travel_request_document">
+    
+	    <t t-call="web.external_layout">
+	        <style>
+	            table, th, td {
+	            border: 1px solid black;
+	            border-collapse: collapse;
+	            }
+	            th, td {
+	            padding: 5px;
+	            text-align: left;
+	            }
+	            .t-center{
+	            text-align:center;
+	            }
+	            .t-right{
+	            text-align:right;
+	            }
+	            .r-color{
+	            color: indianred;
+	            }
+	        </style>          
+	        <div class="page">
+	            <div class="oe_structure"/>
+	            <div class="row">
+	                <div class="col-lg-12 text-center">
+	                    <h1>Travel Request Report</h1>
+	                </div>
+	                <t t-value="doc.get_travel_request_data()" t-set="data"/>
+	                    <div>
+	                        <t t-if="data['start_date']">
+	                            <h4>Start Date :
+	                                <t t-esc="data['start_date']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['end_date']">
+	                            <h4>End Date :
+	                                <t t-esc="data['end_date']"/>
+	                            </h4>
+	                        </t>
+	                         <t t-if="data['mode']">
+	                            <h4>Mode:
+	                                <t t-esc="data['mode']"/>
+	                            </h4>
+	                        </t>
+	                        <!--  
+	                        <t t-if="data['type']">
+	                            <h4>Branch :
+	                                <t t-esc="data['type']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['state']">
+	                            <h4>Status :
+	                                <t t-esc="data['state']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['bur_ext_data']">
+	                            <h4>Total Records :
+	                                <t t-esc="len(data['bur_ext_data'])"/>
+	                            </h4>
+	                        </t>
+	                        -->
+	                    </div>
+	            </div>
+	            <br/>
+	            <t t-if="data['data']">
+	                <div class="row">
+	                    <div class="text-center p8">
+	                        <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+	                            <thead>
+	                                <tr style="background: lightblue;">
+	                                  <th class="t-center">No.</th>                                   
+	                                    <th class="t-center">Employee</th>
+	                                    <th class="t-center">Position</th>
+	                                    <th class="t-center">Branch</th>
+	                                    <th class="t-center">Travel Date</th>
+	                                    <th class="t-center">Travel Region</th>
+	                                    <th class="t-center">Places to Visit</th>
+	                                    <th class="t-center">Purpose of Visit</th>
+	                                    <th class="t-center">Emergency</th>
+	                                </tr>
+	                            </thead>
+	                            <t t-set="rec_no" t-value="1"/>
+	                            <t t-set="total_travel_requests" t-value="0"/>
+	                            <t t-foreach="data['data']" t-as="rec_data">
+	                                <tbody>
+	                                    <tr>
+	                                        <td class="t-center">
+	                                           <t t-esc="rec_no"/>
+	                                        </td>
+	                                        <t t-set="rec_no" t-value="rec_no + 1"/>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data['emp_name']"/>
+	                                        </td>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data['emp_position']"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data['emp_branch']"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data['travel_date']"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data['travel_region']"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data['travel_place_to_visit']"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data['travel_purpose_of_visit']"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data['travel_emergency']"/>
+	                                        </td>
+	                                    </tr>
+	                                </tbody>
+	                                <t t-set="total_travel_requests" t-value="10000.00" />
+	                            </t>                              
+	                        </table>
+	                    </div>
+	                </div>
+	            </t>
+	            <t t-else="">
+	                <div class="row">
+	                    <div class="text-center">
+	                        <h3>There are no travel requests on these dates.</h3>
+	                    </div>
+	                </div>
+	            </t>
+	            <div class="oe_structure"/>
+	        </div>
+	    </t>
+    </template>
+
+    <template id="report_travel_request">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_travel_management.report_travel_request_document"/>
+            </t>
+        </t>
+    </template>
+ 
+</odoo>

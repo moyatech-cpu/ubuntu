@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="action_report_voucher_beneficiaries"
+                string="Voucher Beneficiaries Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_beneficiaires"
+                name="nyda_grant_and_voucher.report_voucher_beneficiaires"
+                menu="False"
+        />
+
+        <report
+                id="action_report_voucher_expired_report"
+                string="Expired Vouchers Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_expired"
+                name="nyda_grant_and_voucher.report_voucher_expired"
+                menu="False"
+        />
+        
+        <report
+                id="action_report_voucher_reissued_report"
+                string="Reissue Vouchers Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_reissued"
+                name="nyda_grant_and_voucher.report_voucher_reissued"
+                menu="False"
+        />        
+
+        <report
+                id="action_report_aftercaree"
+                string="Status Per Aftercare Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_aftercares"
+                name="nyda_grant_and_voucher.report_status_aftercares"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_branch"
+                string="Status Per Branch Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_branch_grant"
+                name="nyda_grant_and_voucher.report_status_branch_grant"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_bdo"
+                string="Voucher BDO Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_bdo"
+                name="nyda_grant_and_voucher.report_status_bdo"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_branch_grant"
+                string="Status Per Branch Report(Grant)"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_branch_grant"
+                name="nyda_grant_and_voucher.report_status_branch_grant"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_branch_cons_grant"
+                string="Status Per Branch Report(Consilidated Grant)"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_branch_cons_grant"
+                name="nyda_grant_and_voucher.report_status_branch_cons_grant"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_branch_cons"
+                string="Status Per Branch Report(Consolidated)"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_branch_cons"
+                name="nyda_grant_and_voucher.report_status_branch_cons"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_disable"
+                string="Status Per Disabled Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_disable"
+                name="nyda_grant_and_voucher.report_status_disable"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_gender"
+                string="Status Per Gender Report"
+                model="aftercare.report.wizard"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_gender"
+                name="nyda_grant_and_voucher.report_status_gender"
+                menu="False"
+        />
+
+        <report
+                id="action_report_status_race"
+                string="Status Per Race Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_race"
+                name="nyda_grant_and_voucher.report_status_race"
+                menu="False"
+        />
+        <report
+                id="action_report_voucher_aftercare_report"
+                string="Multiple Vouchers Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_issuance_multiple"
+                name="nyda_grant_and_voucher.report_voucher_issuance_multiple"
+                menu="False"
+        />
+        <report
+                id="action_report_status_rural_urban"
+                string="Status Per Rural/Urban Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_rural_urban"
+                name="nyda_grant_and_voucher.report_status_rural_urban"
+                menu="False"
+        />
+        <report
+                id="action_report_status_sp"
+                string="Status Per Service Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_service"
+                name="nyda_grant_and_voucher.report_status_service"
+                menu="False"
+        />
+        <report
+                id="action_application_received_report"
+                string="Voucher Application Received Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_service_ratings"
+                name="nyda_grant_and_voucher.report_voucher_service_ratings"
+                menu="False"
+        />
+        <report
+                id="action_report_status_client_applications"
+                string="Voucher Applications Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_client_applications"
+                name="nyda_grant_and_voucher.report_status_client_applications"
+                menu="False"
+        />
+        <report
+                id="action_assessment_appointment_report"
+                string="Assessment Appointment Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_assessment_appointment"
+                name="nyda_grant_and_voucher.report_assessment_appointment"
+                menu="False"
+        />
+        <report
+                id="action_report_status_race"
+                string="Status Per Race Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_race"
+                name="nyda_grant_and_voucher.report_status_race"
+                menu="False"
+        />
+        <report
+                id="action_report_assessment_conducted"
+                string="Status Per Race Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_assessment_conducted"
+                name="nyda_grant_and_voucher.report_assessment_conducted"
+                menu="False"
+        />
+        <report
+                id="action_report_va"
+                string="Voucher Assessment Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_va"
+                name="nyda_grant_and_voucher.report_va"
+                menu="False"
+        />
+        <report
+                id="action_report_voucher_client_service_ratings"
+                string="Voucher Client Service Ratings Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_service_ratings"
+                name="nyda_grant_and_voucher.report_voucher_service_ratings"
+                menu="False"
+        />
+        <report
+                id="action_report_voucher_issuance_multiple_report"
+                string="Multiple Vouchers Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_issuance_multiple"
+                name="nyda_grant_and_voucher.report_voucher_issuance_multiple"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_issuance"
+                string="Voucher Issuance Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_status_client_"
+                name="nyda_grant_and_voucher.report_status_client_"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_payments"
+                string="Voucher Payments Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_payments"
+                name="nyda_grant_and_voucher.report_voucher_payments"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_redemptions"
+                string="Voucher Redemptions Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_redemptions"
+                name="nyda_grant_and_voucher.report_voucher_redemptions"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_service_provider_query_report"
+                string="Voucher Service Provider Query Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_service_provider_query"
+                name="nyda_grant_and_voucher.report_voucher_service_provider_query"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_service_providers"
+                string="Voucher Service Provider Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_service_provider"
+                name="nyda_grant_and_voucher.report_voucher_service_provider"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_jobs_created"
+                string="Jobs Report"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_jobs_created"
+                name="nyda_grant_and_voucher.report_voucher_jobs_created"
+                menu="False"
+        />
+         <report
+                id="action_report_voucher_payment_tracking"
+                string="Voucher payment tracking"
+                model="voucher.status.report.bdo"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_voucher_payment_tracking"
+                name="nyda_grant_and_voucher.report_voucher_payment_tracking"
+                menu="False"
+        />
+    <report
+        id="report_investment_memo"
+        string="Investment Memo Card"
+        model="investment.memo"
+        report_type="qweb-pdf"
+        name="nyda_grant_and_voucher.report_investment"
+        file="nyda_grant_and_voucher.report_investment"/>
+    </data>
+</odoo>

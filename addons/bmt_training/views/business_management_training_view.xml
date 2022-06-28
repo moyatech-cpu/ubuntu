@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--BMT Tree View-->
+        <record model="ir.ui.view" id="business_mgmt_training_tree_view">
+            <field name="name">business.mgmt.training.tree.view</field>
+            <field name="model">business.mgmt.training</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="branch_id"/>
+                    <field name="title"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="training_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--BMT Form View-->
+        <record model="ir.ui.view" id="business_mgmt_training_form_view">
+            <field name="name">business.mgmt.training.form.view</field>
+            <field name="model">business.mgmt.training</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <header>
+                        <button string="Create Pitching Training" type="object" name="start_pitch_training"
+                                attrs="{'invisible': ['|',('training_type', 'not in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'in', ['start_training', False])]}"
+                                class="oe_highlight"/>
+                        <button string="End Training" type="object" states="start_training" name="end_bmt_training"
+                                class="oe_highlight"/>
+                        <button string="Start Training" type="object" name="start_bmt_training"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state','!=', False)]}"/>
+                        <button string="Download Attendance Register" type="object" name="get_attendance_register"
+                                class="oe_highlight"/>
+                        <button string="Generate Certificate" type="object"
+                                name="generate_certificate"
+                                attrs="{'invisible': ['|', '|',('training_type', 'not in', ['gyb']), ('is_certi_generated', '=', True), ('state', 'in', ['start_training', False])]}"
+                                class="oe_highlight" groups="base.group_system,bmt_training.group_trainer"/>
+                        <button string="Generate Co-operative Governance Certificate" type="object"
+                                name="generate_coops_certificate"
+                                attrs="{'invisible': ['|', '|',('training_type', 'not in', ['syb_coops']), ('is_certi_generated', '=', True), ('state', '!=', 'completed')]}"
+	                            class="oe_highlight" groups="base.group_system,bmt_training.group_trainer"/>
+	                    <button string="Submit Report" type="object" states="end_training" name="submit_report"
+	                            class="oe_highlight" groups="base.group_system,bmt_training.group_trainer"/>
+	                    <button string="Co-ordinator Approval" type="object" states="coordinator_review"
+	                            name="approved_by_coordinator"
+	                            class="oe_highlight" groups="base.group_system,client_management.group_coordinator"/>
+	                    <button string="Co-ordinator Rejection" type="action" states="coordinator_review"
+	                            name="%(bmt_training.action_training_rejection)d"
+	                            class="oe_highlight" groups="base.group_system,client_management.group_coordinator"/>
+	                    <button string="Branch Manager Approval" type="object" states="bm_review"
+	                            name="approved_by_branch_manager"
+	                            class="oe_highlight" groups="base.group_system,client_management.group_branch_manager"/>
+	                    <button string="Branch Manager Rejection" type="action" states="bm_review"
+	                            name="%(bmt_training.action_training_rejection)d"
+	                            class="oe_highlight" groups="base.group_system,client_management.group_branch_manager"/>
+	                    <button string="HO Admin Approval" type="object" states="ho_admin_review"
+	                            name="approved_by_ho_admin"
+	                            class="oe_highlight" groups="base.group_system,bmt_training.group_ho_admin"/>
+	                    <button string="HO Admin Rejection" type="action" states="ho_admin_review"
+	                            name="%(bmt_training.action_training_rejection)d"
+	                            class="oe_highlight" groups="base.group_system,bmt_training.group_ho_admin"/>
+	                    <button string="HO Manager Approval" type="object" states="ho_manager_review"
+	                            name="approved_by_ho_manager"
+	                            class="oe_highlight" groups="base.group_system,bmt_training.group_ho_manager"/>
+	                    <button string="HO Manager Rejection" type="action" states="ho_manager_review"
+	                            name="%(bmt_training.action_training_rejection)d"
+	                            class="oe_highlight" groups="base.group_system,bmt_training.group_ho_manager"/>
+                        <field name='state' widget='statusbar'
+                               statusbar_visible="start_training,end_training"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group string="General Details" name="general_details">
+                            <group>
+                                <field name="intervention_type" invisible="1"/>
+                                <field name="facilitator_id" options='{"no_open": True, "no_create": True}' readonly="0" required="1"/>
+                                <field name="title" default_focus="1" required="1"/>
+                                <field name="branch_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                <field name="start_date"
+                                       attrs="{'readonly': [('state','!=', False)],'invisible': [('training_type', '=', False)], 'required': [('training_type', '!=', False)]}"/>
+                                <field name="end_date" readonly="1"
+                                       attrs="{'invisible': [('training_type', '=', False)], 'required': [('training_type', '!=', False)]}"/>
+                                <!--'readonly': [('state','!=', False)],-->
+                                <!--<field name="municipality"/>-->
+                                <field name="coordinator_review_id" required="1"
+                                       options="{'no_open': True, 'no_create': True}" groups="base.group_system"/>
+                                <field name="branch_manager_id" options="{'no_open': True, 'no_create': True}"
+                                       required="1" groups="base.group_system"/>
+                                <field name="ho_admin_id" options="{'no_open': True, 'no_create': True}" required="1"
+                                       groups="base.group_system"/>
+                                <field name="pitching_mail_sent" invisible="1"/>
+                                <field name="training_type_id" invisible="1"/>
+                                <field name="pdd_training_id" invisible="1"/>
+                                <field name="is_certi_generated"/>
+                            </group>
+                            <group>
+                                <field name="training_type" required="1" attrs="{'readonly': [('state','!=', False)]}"/>
+                                <field name="course_id" invisible="1"/>
+                                <field name="venue" required="1"/>
+                                <field name="max_attendees" options="{'negative_allow':False}"/>
+                                <field name="total_no_attended"/>
+                                <field name="total_youth" invisible="1"/>
+                                <field name="catering" invisible="1"/>
+                                <field name="user_id" invisible="1" readonly="1"/>
+                                <field name="product_id" invisible="1"/>
+                                <field name="pitching_start_date"
+                                        attrs="{'invisible': ['|',('training_type', 'not in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'in', ['start_training', False])], 'required':  [('training_type', 'in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'not in', ['start_training', False])], 'readonly':  ['|', ('training_type', 'not in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'in', ['start_training', False])]}"/>
+                                <field name="pitching_end_date"
+                                        attrs="{'invisible': ['|',('training_type', 'not in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'in', ['start_training', False])], 'required':  [('training_type', 'in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'not in', ['start_training', False])], 'readonly':  ['|', ('training_type', 'not in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'in', ['start_training', False])]}"/>
+                                <field name="bmt_pitching_id" readonly="1"
+                                       attrs="{'invisible': ['|',('training_type', 'not in', ['syb', 'iyb_one', 'iyb_two']), ('state', 'in', ['start_training', False])]}"/>
+                                <field name="ho_manager_id" options="{'no_open': True, 'no_create': True}" required="1"
+                                       groups="base.group_system"/>
+
+                            </group>
+                        </group>
+                        <group name="total_attendees_details" string="Total Attendee's Details">
+                            <group>
+                                <field name="no_of_males_attended"/>
+                                <field name="no_of_females_attended"/>
+                                <field name="no_of_males" invisible="1"/>
+                                <field name="no_of_females" invisible="1"/>
+                                <field name="no_of_rural_participants"/>
+                                <field name="no_of_urban_participants"/>
+                            </group>
+                            <group>
+                                <field name="no_of_disabled_participants"/>
+                                <field name="no_of_african_participants"/>
+                                <field name="no_of_coloured_participants"/>
+                                <field name="no_of_indian_participants"/>
+                                <field name="no_of_white_participants"/>
+                                <field name="no_of_asian_participants"/>
+                            </group>
+                        </group>
+                        <group name="service_coordinator_details" string="Service Co-ordinator Details" invisible="1">
+                            <group>
+                                <field name="services_coordinator_name" invisible="1"/>
+                                <field name="services_coordinator_signature" widget="signature" invisible="1"/>
+                            </group>
+                        </group>
+                        <group name="bmt_participants" string="BMT Participants">
+                            <field name="bmt_participants_ids" nolabel="1"
+                                   attrs="{'readonly': [('state', 'in', [False, 'start_training'])]}">
+                                <tree editable="top">
+                                    <field name="participant_id" required="1"
+                                           options='{"no_open": True, "no_create": True}'/>
+                                    <field name="surname"/>
+                                    <field name="related_participant_id" invisible="1"/>
+                                    <field name="dob"/>
+                                    <field name="gender"/>
+                                    <field name="area"/>
+                                    <field name="is_disabled"/>
+                                    <field name="race"/>
+                                    <!--<field name="mobile"/>-->
+                                    <field name="business_mgmt_training_id" invisible="1"/>
+                                    <field name="id" invisible="1"/>
+                                    <field name="state"/>
+                                    <button name="do_confirm" string="Confirm" type="object"
+                                            icon="fa-check text-success"/>
+                                    <button name="do_reject" string="Reject" type="object"
+                                            icon="fa-times-circle text-danger"/>
+                                    <field name="is_certi" readonly="1"/>
+                                    <field name="training_type" invisible="1"/>
+                                    <field name="day_one" readonly="1"/>
+                                    <field name="day_two" readonly="1"/>
+                                    <field name="day_three" readonly="1"/>
+                                    <field name="day_four" readonly="1" attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                    <field name="day_five" readonly="1" attrs="{'invisible': [('training_type', 'in', ['gyb','syb_coops'])]}"/>
+                                    <button
+                                            type="action"
+                                            name="%(bmt_training.action_signature_wizard)d"
+                                            string="Take Signature"
+                                            context="{'default_bmt_participants_id': id}"
+                                            class="oe_highlight"
+                                            attrs="{'invisible': [('day_one', '=', True), ('day_two', '=', True), ('day_three', '=', True), ('day_four', '=', True), ('day_five', '=', True)]}"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group invisible="1">
+                            <field name="facilitator_signature" widget="signature" invisible="1"/>
+                            <field name="date_of_facilitator_signature" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Business Management Training for kanban view-->
+        <record id="business_mgmt_training_kanban_view" model="ir.ui.view">
+            <field name="name">business.mgmt.training.kanban</field>
+            <field name="model">business.mgmt.training</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban class="o_pddd_training_kanban">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="training_type"/>
+                    <field name="facilitator_id"/>
+                    <field name="branch_id"/>
+                    <!--<field name="total_participants"/>-->
+                    <field name="training_type_kanban"/>
+                    <field name="total_no_attended"/>
+                    <field name="max_attendees" options="{'negative_allow':False}"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click p-0">
+                                <div t-attf-class="o_kanban_card_header p-5">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary">
+                                            <h4>
+                                                <t t-esc="record.name.value"/>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_top mb8 p-5">
+                                    <div class="col-xs-6 pl-0">
+                                        <strong class="o_kanban_record_title">
+                                            <span t-if="record.branch_id.raw_value"
+                                                  class="o_kanban_record_subtitle">
+                                                <i class="fa fa-bars"/>
+                                                <field name="branch_id"/>
+                                            </span>
+                                        </strong>
+                                    </div>
+                                    <div t-if="record.facilitator_id.raw_value"
+                                         class="col-xs-6 pl-0">
+                                        <i class="fa fa-user"/>
+                                        <field name="facilitator_id"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom p-5">
+                                    <div class="col-xs-6 plr-0">
+                                        <i class="fa fa-envelope"/>
+                                        <field name="state"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <i class="fa fa-rss"/>
+                                        <field name="training_type_kanban"/>
+                                    </div>
+                                </div>
+                                <div class="row margin-8 p-5">
+                                    <div class="col-xs-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="view_edit_training"
+                                                type="object">View/Edit
+                                        </button>
+                                    </div>
+                                    <!--<div class="col-xs-6 o_kanban_primary_right text-right">-->
+                                        <!--<button class="btn btn-primary" name="apply_for_training"-->
+                                                <!--type="object">Apply-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="col-xs-12 o_kanban_primary_bottom bottom_block row pg-bar">
+                                    <div class="col-xs-12 o_kanban_primary_bottom bottom_block">
+                                        <field name="total_no_attended" widget="progressbar"
+                                               title="Total Participants"
+                                               options="{'current_value': 'total_no_attended', 'max_value': 'max_attendees'}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--BMT Action-->
+        <record model="ir.actions.act_window" id="action_business_mgmt_training">
+            <field name="name">Business Management Training</field>
+            <field name="res_model">business.mgmt.training</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!--Menu for BMT Participants-->
+        <menuitem name="Business Management Training" id="business_mgmt_training" parent="bmt_training.trainings"
+                  action="action_business_mgmt_training"
+                  sequence="1"/>
+
+    </data>
+</odoo>

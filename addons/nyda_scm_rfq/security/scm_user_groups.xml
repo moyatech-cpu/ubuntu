@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_scm">
+        <field name="name">Supply Chain Management - RFQ</field>
+        <field name="description">Supply Chain Management - RFQ</field>
+        <field name="sequence">50</field>
+    </record>
+
+	<record id="nyda_scm_rfq_manager" model="res.groups">
+        <field name="name">SCM Manager</field>
+        <field name="category_id" ref="model_category_scm"/>
+        <field name="description">SCM Manager</field>
+    </record>
+    
+    <record id="nyda_scm_rfq_specialist_user" model="res.groups">
+        <field name="name">SCM Specialist</field>
+        <field name="category_id" ref="model_category_scm"/>
+        <field name="description">SCM Specialist</field>
+    </record>
+    
+    <record id="nyda_scm_rfq_officer_user" model="res.groups">
+        <field name="name">SCM Officer</field>
+        <field name="category_id" ref="model_category_scm"/>
+        <field name="description">SCM Officer</field>
+    </record>
+    
+    <record id="nyda_scm_rfq_business_user" model="res.groups">
+        <field name="name">SCM Employee</field>
+        <field name="category_id" ref="model_category_scm"/>
+        <field name="description">SCM Employee</field>
+    </record>
+
+</data>

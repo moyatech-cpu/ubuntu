@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Training Rejection view -->
+    <record id="training_rejection_view" model="ir.ui.view">
+        <field name="name">training.rejection.view</field>
+        <field name="model">training.rejection</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="comment" required="1"/>
+                </group>
+                <footer>
+                    <button name="button_reject" string="Reject" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Training Rejection -->
+    <record id="action_training_rejection" model="ir.actions.act_window">
+        <field name="name">Reason for Rejection</field>
+        <field name="res_model">training.rejection</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="training_rejection_view"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+
+        <!--Tree view of Service -->
+        <record model="ir.ui.view" id="service_tree_view">
+            <field name="name">service.tree.view</field>
+            <field name="model">service</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="service_item_seq"/>
+                    <field name="min_dur"/>
+                    <field name="voucher_value"/>
+                    <field name="is_enabled"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form view of Service -->
+        <record model="ir.ui.view" id="service_form_view">
+            <field name="name">service.form.view</field>
+            <field name="model">service</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="is_enabled" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="service_item_seq" required="1"/>
+                            </group>
+                            <group>
+                                <field name="voucher_value" required="1"/>
+                                <field name="min_dur" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Action of Services -->
+        <record model="ir.actions.act_window" id="service_action">
+            <field name="name">Services</field>
+            <field name="res_model">service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu of service-->
+        <menuitem name="Services" id="service_system" parent="nyda_grant_and_voucher.menu_main_config"
+                  action="nyda_system.service_action"
+                  sequence="1"/>
+
+    </data>
+</odoo>

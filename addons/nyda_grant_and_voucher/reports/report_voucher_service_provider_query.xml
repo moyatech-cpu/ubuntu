@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_voucher_service_provider_query_template">
+<t t-name="nyda_grant_and_voucher.report_voucher_service_provider_query_template">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_service_provider_query_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Voucher Service Provider Query Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    <h4>Branch : <t t-esc="data['branch']"/></h4>
+                    <br/>
+                </div>
+                <br/>
+
+                <t t-if="data['vouchers']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Client</th>
+                                    <th class="t-center">Voucher Number</th>
+                                    <th class="t-center">Service Provider</th>
+                                    <th class="t-center">Service Received</th>
+                                    <th class="t-center">Client Query</th>
+                                    <th class="t-center">BDA Query</th>
+                                    <th class="t-center">Application Date</th>
+                                </tr>
+                         
+                                <t t-set="rec_no" t-value="1"/>
+                                
+                                <t t-foreach="data['vouchers']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>                              
+                                        <td>
+                                            <t t-esc="rec_data['name']"/> <t t-esc="rec_data['surname']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['x_voucher_number']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['x_service_provider']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['x_recommended_service']"/>
+                                        </td>                                        
+                                        <td>
+                                            <t t-esc="rec_data['client_approve_reject_description']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['x_bda_comments']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['application_date']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </t>
+    </template>
+    <template id="report_voucher_service_provider_query">
+<t t-name="nyda_grant_and_voucher.report_voucher_service_provider_query">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="nyda_grant_and_voucher.report_voucher_service_provider_query_template"/>
+        </t>
+    </t>
+</t>
+    </template>
+
+
+</odoo>

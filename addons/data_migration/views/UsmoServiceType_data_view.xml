@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_service_type_tree_view">
+            <field name="name">usmo.service.type.tree.view</field>
+            <field name="model">usmo.service.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Composition"/>
+                    <field name="CreatedDT"/>
+                    <field name="DefaultValue"/>
+                    <field name="Enabled"/>
+                    <field name="MinimumDuration"/>
+                    <field name="RowGUID"/>
+                    <field name="ServiceItemID"/>
+                    <field name="ServiceName"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_service_type_form_view">
+            <field name="name">usmo.service.type.form.view</field>
+            <field name="model">usmo.service.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="Composition"/>
+                                <field name="CreatedDT"/>
+                                <field name="DefaultValue"/>
+                                <field name="Enabled"/>
+                            </group>
+                            <group>
+                                <field name="MinimumDuration"/>
+                                <field name="RowGUID"/>
+                                <field name="ServiceItemID"/>
+                                <field name="ServiceName"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_service_type">
+            <field name="name">Usmo Financer Type</field>
+            <field name="res_model">usmo.service.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_service_type" name="Usmo Service Type"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_service_type" sequence="80"/>
+    </data>
+</odoo>

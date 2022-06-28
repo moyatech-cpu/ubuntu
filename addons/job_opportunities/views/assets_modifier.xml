@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <template id="assets_modifier" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/job_opportunities/static/src/js/reg_data.js"></script>
+                <link href="/job_opportunities/static/src/css/reg_data.css" rel="stylesheet"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

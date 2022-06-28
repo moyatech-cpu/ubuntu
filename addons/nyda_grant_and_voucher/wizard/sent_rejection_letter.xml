@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="view_rejection_letter_form" model="ir.ui.view">
+            <field name="name">rejection.letter.form</field>
+            <field name="model">send.rejection.letter.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Rejection Letter">
+                    <group>
+                        <field name="rejection_letter_name" invisible="1"/>
+                        <field name="rejection_letter" widget="binary" filename="rejection_letter_name"/>
+                        <field name="rejection_letter_send_date"/>
+                    </group>
+                    <footer>
+                        <button name="reject_letter_req" string="Submit and Send" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_rejection_letter" model="ir.actions.act_window">
+            <field name="name">Rejection Letter</field>
+            <field name="res_model">send.rejection.letter.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_rejection_letter_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

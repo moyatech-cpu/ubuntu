@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+			<report
+                id="action_voucher_jobs_created_report"
+                string="Regional Voucher Applications Report"
+                model="voucher.jobs.createrd.report"
+                report_type="qweb-pdf"
+                file="nyda_regional_reports_update.report_regional_voucher_jobs_created"
+                name="nyda_regional_reports_update.report_regional_voucher_jobs_created"
+                menu="False" />
+    </data>
+</odoo>

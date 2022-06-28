@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo>
+    <record id="client_approve_reject_wizard_form" model="ir.ui.view">
+        <field name="name">client.approve.reject.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Client Review">
+                <group>
+<!--                    <field name="client_user_id" readonly="1"/>-->
+                    <group>
+                        <field name="client_approve_reject_state" widget="radio" required="1" options="{'horizontal': true}"/>
+                        <!--<field name="client_redemption_pack" widget="binary"
+                           filename="client_redemption_pack_name"
+                           attrs="{'invisible': [('client_approve_reject_state', '!=', 'approve')],
+                           'required': [('client_approve_reject_state', '=', 'approve')]}"/>
+                        <field name="client_redemption_pack_name" invisible="1"/>-->
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <group>
+                        <field name="final_product" widget="binary"
+                            filename="final_product_name" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="final_product_name" invisible="1" readonly="1"/>
+                        <field name="client_approve_reject_description" string="Comments" attrs="{'required': [('client_approve_reject_state','!=','approve')]}" />
+                        <!--<button name="confirm_client_decision" string="View file" type="object" class="btn-primary"/>-->
+                    </group>
+                    <!--<group>
+                        <field name="final_product_name" invisible="1" readonly="1"/>
+
+                        <field name="client_approve_reject_description" required="1"/>
+                    </group>-->
+                </group>
+                <footer>
+                    <button name="submit_client_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_ed_manager_review_form" model="ir.ui.view">
+        <field name="name">ed_manager.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="ED Manager Review">
+                <group>
+                    <group>
+                        <field name="x_ed_manager_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_ed_manager_comments" string="Comments" attrs="{'required':[('x_ed_manager_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_ed_manager_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_qa_officer_review_form" model="ir.ui.view">
+        <field name="name">qa_officer.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="QA Officer Review">
+                <group>
+                    <group>
+                        <field name="x_qa_officer_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_qa_officer_comments" string="Comments" attrs="{'required':[('x_qa_officer_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_qa_officer_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_ho_admin_review_form" model="ir.ui.view">
+        <field name="name">ho_admin.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="HO Admin Review">
+                <group>
+                    <group>
+                        <field name="x_ho_admin_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_ho_admin_comments" string="Comments" attrs="{'required':[('x_ho_admin_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_ho_admin_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_branch_manager_review_form" model="ir.ui.view">
+        <field name="name">branch_manager.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Branch Manager Review">
+                <group>
+                    <group>
+                        <field name="x_branch_manager_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_branch_manager_comments" string="Comments" attrs="{'required':[('x_branch_manager_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_branch_manager_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_pc_review_form" model="ir.ui.view">
+        <field name="name">pc.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BDO Review">
+                <group>
+                    <group>
+                        <field name="x_pc_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_pc_comments" string="Comments" attrs="{'required':[('x_pc_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_pc_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_bdo_review_form" model="ir.ui.view">
+        <field name="name">bdo.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BDO Review">
+                <group>
+                    <group>
+                        <field name="x_bdo_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_bdo_comments" string="Comments" attrs="{'required':[('x_bdo_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_bdo_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_bda_review_form" model="ir.ui.view">
+        <field name="name">bda.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BDA Review">
+                <group>
+                    <group>
+                        <field name="x_bda_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_bda_comments" string="Comments" attrs="{'required':[('x_bda_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_bda_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_voucher_pc_bc_review_form" model="ir.ui.view">
+        <field name="name">pc.review.wizard.form</field>
+        <field name="model">client.approve.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="PC Review">
+                <group>
+                    <group>
+                        <field name="x_pc_bc_state" widget="radio" required="1" options="{'horizontal':true}"/>
+                    </group>
+                </group>
+                <br/>
+                <group>
+                    <field name="x_pc_bc_comments" string="Comments" attrs="{'required':[('x_pc_bc_state','!=','Approved')]}"/>
+                </group>
+                <footer>
+                    <button name="submit_pc_bc_decision" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="client_approve_reject_wizard" model="ir.actions.act_window">
+        <field name="name">ClientApproveRejectWizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">client.approve.reject.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="client_approve_reject_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="boa_rule_register_oppotunity" model="ir.rule">
+        <field name="name">BOA can see their own branch register oppotunity</field>
+        <field ref="market_linkage.model_register_opportunity" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('mentorship.group_bao'))]"/>
+    </record>
+
+    <record id="hou_rule_register_oppotunity" model="ir.rule">
+        <field name="name">Head Officier can see their all branch register oppotunity</field>
+        <field ref="market_linkage.model_register_opportunity" name="model_id"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('mentorship.group_hou'))]"/>
+    </record>
+
+    <record id="partner_service_rule_register_oppotunity" model="ir.rule">
+        <field name="name">Service Provider can see their own branch register oppotunity</field>
+        <field ref="market_linkage.model_register_opportunity" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('client_management.group_partner_service_provider'))]"/>
+    </record>
+
+    <record id="beneficiary_rule_register_oppotunity" model="ir.rule">
+        <field name="name">Beneficiary can see their own branch register oppotunity</field>
+        <field ref="market_linkage.model_register_opportunity" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('client_management.group_branch_beneficiary'))]"/>
+    </record>
+
+    <record id="boa_rule_mkl_beneficiary" model="ir.rule">
+        <field name="name">BOA can see their own branch Beneficiary Request</field>
+        <field ref="market_linkage.model_mkl_beneficiary" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('mentorship.group_bao'))]"/>
+    </record>
+
+    <record id="hou_rule_mkl_beneficiary" model="ir.rule">
+        <field name="name">Head Officiercan see their all branch Beneficiary Request</field>
+        <field ref="market_linkage.model_mkl_beneficiary" name="model_id"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('mentorship.group_hou'))]"/>
+    </record>
+
+    <record id="partner_service_rule_mkl_beneficiary" model="ir.rule">
+        <field name="name">Service Provider can see their all the Branch Beneficiary Request</field>
+        <field ref="market_linkage.model_mkl_beneficiary" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('client_management.group_partner_service_provider'))]"/>
+    </record>
+
+    <record id="beneficiary_rule_mkl_beneficiary" model="ir.rule">
+        <field name="name">Beneficiary can see their own branch Request</field>
+        <field ref="market_linkage.model_mkl_beneficiary" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('client_management.group_branch_beneficiary'))]"/>
+    </record>
+
+    <record id="boa_rule_opportunity_match" model="ir.rule">
+        <field name="name">BOA can see their own branch Match</field>
+        <field ref="market_linkage.model_opportunity_match" name="model_id"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="groups" eval="[(4, ref('mentorship.group_bao'))]"/>
+    </record>
+
+    <record id="partner_service_rule_opportunity_match" model="ir.rule">
+        <field name="name">Service Provider can see their own Match</field>
+        <field ref="market_linkage.model_opportunity_match" name="model_id"/>
+        <field name="domain_force">[('oppo_provider_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('client_management.group_partner_service_provider'))]"/>
+    </record>
+
+    <record id="beneficiary_rule_opportunity_match" model="ir.rule">
+        <field name="name">Beneficiary can see their own Match</field>
+        <field ref="market_linkage.model_opportunity_match" name="model_id"/>
+        <field name="domain_force">[('beneficiary_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('client_management.group_branch_beneficiary'))]"/>
+    </record>
+
+<!--    <record id="boa_rule_request_oppotunity" model="ir.rule">-->
+<!--        <field name="name">BOA can see their own branch request oppotunity</field>-->
+<!--        <field ref="market_linkage.model_request_service_provider" name="model_id"/>-->
+<!--        <field name="domain_force">[('opportunity_task_id.branch_id', '=', user.branch_id.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('mentorship.group_bao'))]"/>-->
+<!--    </record>-->
+
+<!--    <record id="partner_service_rule_request_oppotunity" model="ir.rule">-->
+<!--        <field name="name">Service Provider can see their own request</field>-->
+<!--        <field ref="market_linkage.model_request_service_provider" name="model_id"/>-->
+<!--        <field name="domain_force">[('service_provider_id', '=', user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('client_management.group_partner_service_provider'))]"/>-->
+<!--    </record>-->
+
+<!--    <record id="beneficiary_rule_request_oppotunity" model="ir.rule">-->
+<!--        <field name="name">Beneficiary can see their own service Provider</field>-->
+<!--        <field ref="market_linkage.model_request_service_provider" name="model_id"/>-->
+<!--        <field name="domain_force">[('beneficiary_id', '=', user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('client_management.group_branch_beneficiary'))]"/>-->
+<!--    </record>-->
+
+</odoo>

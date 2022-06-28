@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+   	<record id="view_realtime_enquiry_view" model="ir.ui.view">
+		<field name="name">Realtime Enquiry</field>
+        <field name="model">realtime.enquiry</field>
+        <field name="arch" type="xml">
+           <form string="Real Time Enquiry">
+           	<header>
+ 				<button name="run_realtime" string="Process" type="object" class="oe_highlight"/>
+           	</header>
+           	<sheet>
+           		<group string="Supplier details">
+           			<field name="name"/>
+                </group>
+           	</sheet>
+          </form> 
+        </field>
+    </record>
+    
+    <record id="view_realtime_enquiry_tree" model="ir.ui.view">
+        <field name="name">Real Time Enquiries</field>
+        <field name="model">realtime.enquiry</field>
+        <field name="arch" type="xml">
+            <tree string="Real Time Enquiries">
+				<field name="name" />
+        	</tree>
+        </field>
+    </record>
+    
+    <record id="action_realtime_enquiry" model="ir.actions.act_window">
+        <field name="name">Real time enquiry</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">realtime.enquiry</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain"></field>
+    </record>
+	
+	<menuitem name="Real Time Enquiry" sequence="1" id="csd_integration.realtime_enquiry_menu" action="action_realtime_enquiry" parent="csd_integration.menu_root" groups="base.group_system"/>
+
+</odoo>

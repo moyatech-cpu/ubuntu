@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="seq_scm_tender_bsc" model="ir.sequence">
+            <field name="name">BSC No</field>
+            <field name="code">scm.tender.bsc.code</field>
+            <field name="prefix">NYDA-BSC-</field>
+            <field name="padding">4</field>
+            <field name="document_number" eval="False"/>
+        </record>
+    </data>
+    <data>
+        <record id="seq_scm_tender_bec" model="ir.sequence">
+            <field name="name">BEC No</field>
+            <field name="code">scm.tender.bec.code</field>
+            <field name="prefix">NYDA-BEC-</field>
+            <field name="padding">4</field>
+            <field name="document_number" eval="False"/>
+        </record>
+    </data>
+    <data>
+        <record id="seq_scm_tender_bac" model="ir.sequence">
+            <field name="name">BAC No</field>
+            <field name="code">scm.tender.bac.code</field>
+            <field name="prefix">NYDA-BAC-</field>
+            <field name="padding">4</field>
+            <field name="document_number" eval="False"/>
+        </record>
+    </data>        
+</odoo>

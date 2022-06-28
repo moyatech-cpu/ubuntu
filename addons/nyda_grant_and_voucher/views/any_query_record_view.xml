@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_any_query_record_form" model="ir.ui.view">
+      <field name="name">any.query.record.form</field>
+      <field name="model">any.query.record</field>
+      <field name="arch" type="xml">
+          <form string="Any Query">
+              <group>
+                <field name="query"/>
+                <field name="create_date"/>
+                <field name="status"/>
+                <field name="voucher_id"/>
+              </group>
+          </form>
+      </field>
+  </record>
+
+  <record id="view_any_query_record_tree" model="ir.ui.view">
+      <field name="name">any.query.record.tree</field>
+      <field name="model">any.query.record</field>
+      <field name="arch" type="xml">
+          <tree>
+            <field name="query"/>
+            <field name="status"/>
+          </tree>
+      </field>
+  </record>
+
+  <record id="action_any_query_record" model="ir.actions.act_window">
+      <field name="name">Any Query Record</field>
+      <field name="res_model">any.query.record</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+  </record>
+</odoo>

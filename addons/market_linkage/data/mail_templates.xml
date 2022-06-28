@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- BOA Assign Service Provider to Beneficiary mail template -->
+        <record id="boa_assign_service_provider_to_beneficiary_email_template" model="mail.template">
+            <field name="name">BOA Assign Service Provider to Beneficiary mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_opportunity_match"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.oppo_provider_id.login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Assign Beneficiary.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>There is a find Beneficiary for Opportunity ${object.title}.</p>
+    <p>Opportunity ${object.title} has been match and assign Beneficiary.</p>
+    <p>Please check and contact Beneficiary ${object.beneficiary_id.name}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- BOA Assign Beneficiary to Opportunity Provider mail template-->
+        <record id="boa_assign_beneficiary_to_service_provider_email_template" model="mail.template">
+            <field name="name">BOA Assign Beneficiary to Opportunity Provider mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_opportunity_match"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.beneficiary_id.login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Assign Opportunity Provider.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>There is a find Opportunity Provider for Opportunity ${object.title}.</p>
+    <p>Opportunity ${object.title} has been match and assign Opportunity Provider.</p>
+    <p>Please check and contact Opportunity Provider ${object.oppo_provider_id.name}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Opportunity Provider Match Beneficiary Request mail template-->
+        <record id="match_beneficiary_request_mail_template" model="mail.template">
+            <field name="name">Opportunity Provider Match Beneficiary Request mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_mkl_beneficiary"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.beneficiary_id.login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Opportunity Provider Interest.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>Opportunity Provider ${user.name}  is interested on your request ${object.title}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Opportunity Provider Match BOA Request mail template-->
+        <record id="match_boa_request_mail_template" model="mail.template">
+            <field name="name">Opportunity Provider Match BOA Request mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_mkl_beneficiary"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ctx['u'].login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Opportunity Provider Interest.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>There is Opportunity Provider ${user.name}  is interested on beneficiary request ${object.title}.</p>
+    <p>Please check and evaluate.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Opportunity Provider Create Opportunity mail template-->
+        <record id="opportunity_provider_mail_template" model="mail.template">
+            <field name="name">Opportunity Provider Create Opportunity mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_register_opportunity"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ctx['u'].login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Opportunity Provider Create Opportunity.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>Opportunity Provider ${object.create_uid.name} has been created opportunity ${object.title}.</p>
+    <p>Please check and evaluate.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+
+        <!-- Beneficiary Apply Opportunity BOA mail template-->
+        <record id="beneficiary_apply_opportunity_mail_template" model="mail.template">
+            <field name="name">Beneficiary Apply Opportunity mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_register_opportunity"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ctx['u'].login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Beneficiary Apply Opportunity.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>Beneficiary ${ctx['b'].name} has been apply the opportunity ${object.title}.</p>
+    <p>Please check and evaluate.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Beneficiary Confirm Opportunity Beneficiary mail template-->
+        <record id="beneficiary_confirm_opportunity_mail_template" model="mail.template">
+            <field name="name">Beneficiary Confirm Opportunity mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_register_opportunity"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ctx['u'].login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Confirm Opportunity.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>You have successfully apply the opportunity ${object.title}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+
+        <!-- Beneficiary Create BML Record mail Beneficiary template-->
+        <record id="beneficiary_create_mkl_record_beneficiary_template" model="mail.template">
+            <field name="name">Beneficiary Create mkl Record mail Beneficiary template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_mkl_beneficiary"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.beneficiary_id.login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Your Data Successfully save in MKL Database.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>You have successfully saved data ${object.title} in MKL database.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Beneficiary Create BML Record mail BOA template-->
+        <record id="beneficiary_create_mkl_record_boa_template" model="mail.template">
+            <field name="name">Beneficiary Create mkl Record mail BOA template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_mkl_beneficiary"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ctx['u'].login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Beneficiary saved Data in MKL Database.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>Beneficiary ${object.create_uid.name} has been saved data ${object.title} in MKL database.</p>
+    <p>Please check and evaluate.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+		<!-- Opportunity Provider Match Beneficiary Request mail template for opportunity.application-->
+        <record id="beneficiary_match_opportunity" model="mail.template">
+            <field name="name">Opportunity Provider Match Beneficiary Request mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_opportunity_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.user_id.login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Opportunity Provider Interest.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>Opportunity Provider ${user.name}  is interested on your request ${object.mkl_beneficiary_id.title}.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+		<!-- Opportunity Provider Match BOA Request mail template for opportunity.application-->
+        <record id="match_boa_request_mail_template_alt" model="mail.template">
+            <field name="name">Opportunity Provider Match BOA Request mail template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="market_linkage.model_opportunity_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ctx['u'].login}</field>
+            <field name="email_to">${object.create_uid.login}</field>
+            <field name="subject"><![CDATA[Regarding Opportunity Provider Interest.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>There is a notification by Market linkage at ${object.branch_id.name} Branch.</p>
+    <p>There is Opportunity Provider ${user.name}  is interested on beneficiary request ${object.mkl_beneficiary_id.title}.</p>
+    <p>Please check and evaluate.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

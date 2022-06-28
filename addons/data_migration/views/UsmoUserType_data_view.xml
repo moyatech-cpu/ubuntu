@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_user_type_tree_view">
+            <field name="name">usmo.user.type.tree.view</field>
+            <field name="model">usmo.user.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Description"/>
+                    <field name="IsBranchUser"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_user_type_form_view">
+            <field name="name">usmo.user.type.form.view</field>
+            <field name="model">usmo.user.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="Description"/>
+                            </group>
+                            <group>
+                                <field name="IsBranchUser"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_user_type">
+            <field name="name">Usmo User Type</field>
+            <field name="res_model">usmo.user.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_user_type" name="Usmo User Type"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_user_type" sequence="100"/>
+    </data>
+</odoo>

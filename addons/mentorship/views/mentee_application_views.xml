@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- mentee application form view -->
+
+        <record model="ir.ui.view" id="view_mentee_application_form">
+            <field name="name">view_mentee_application_form</field>
+            <field name="model">mentee.application</field>
+            <field name="arch" type="xml">
+                <form string="mentee form">
+                    <header>
+<!--                            <button class="oe_stat_button" type="object" name="acceptedFuncation" string='Approve' groups="mentorship.group_bao, mentorship.group_bmp" attrs="{'invisible': [('state', '!=', 'new')]}"/>-->
+<!--                            <button class="oe_stat_button" type="action" name="%(action_wiz_application_reject)d" string='Reject' groups="mentorship.group_bao, mentorship.group_bmp" attrs="{'invisible': [('state', '!=', 'new')]}"/>-->
+                            <field name='state' widget='statusbar' statusbar_visible='new,accepted,reject' invisible="1"/>
+                    </header>
+                    <sheet>
+                        <h2 style="color:#337AB7">SECTION1: PERSONAL INFORMATION</h2>
+                        <group>
+                            <group>
+                                <field name="surname" required='1'/>
+                                <field name="user_id" invisible='1' groups="mentorship.group_bao, mentorship.group_bmp"/>
+                                <field name="saiDentityNumber" required='1'/>
+                                <field name="gender" required='1'/>
+                                <field name="homeTelephoneNumber"/>
+                                <field name="fax"/>
+                                <label for="physical_street" string="Physical Address"/>
+                                <div>
+                                    <div class="o_address_format">
+                                        <field name="physical_street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="physical_street2" placeholder="Street 2..."
+                                               class="o_address_street"/>
+                                        <field name="physical_city" placeholder="City" class="o_address_city"
+                                               required=''/>
+                                        <field name="physical_state_id" class="o_address_state" placeholder="Province"/>
+                                        <field name="physical_zip" placeholder="ZIP" class="o_address_zip"
+                                               required='0'/>
+                                    </div>
+                                </div>
+                                <field name="typeOfLocation"/>
+                                <field name="describeDisability"
+                                       attrs="{'invisible': [('disabledPerson', '!=', 'yes')]}"/>
+                                <h4 style="color:#337AB7">REFERENCES: Relative/Friend</h4>
+                                <field name="refNameTwo"/>
+                                <field name="refTelTwo"/>
+                                <field name="refRelationshipTwo"/>
+
+                            </group>
+
+                            <group>
+                                <field name="firstName" required='1'/>
+                                <field name="dateOfBirth" required='0'/>
+                                <field name="populationGroup"/>
+                                <field name="mobile" required='1'/>
+                                <field name="email" required='1'/>
+                                <field name="branch_id"/>
+                                <label for="postal_street" string="Postal Address"/>
+                                <div>
+                                    <div class="o_address_format">
+                                        <field name="postal_street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="postal_street2" placeholder="Street 2..."
+                                               class="o_address_street"/>
+                                        <field name="postal_city" placeholder="City" class="o_address_city"/>
+                                        <field name="postal_state_id" class="o_address_state" placeholder="Province"/>
+                                        <field name="postal_zip" placeholder="ZIP" class="o_address_zip"/>
+                                    </div>
+                                </div>
+                                <field name="disabledPerson"/>
+                                <h4 style="color:#337AB7">REFERENCES: Relative/Friend</h4>
+                                <field name="refNameOne"/>
+                                <field name="refTelOne"/>
+                                <field name="refRelationshipOne"/>
+
+                            </group>
+                        </group>
+                        <h2 style="color:#337AB7">SECTION 2: YOU AND NYDA</h2>
+                        <group>
+                            <group>
+                                <field name="mentorshipService"/>
+                            </group>
+                            <group>
+                                <field name="nydaFundedServices"/>
+                            </group>
+                        </group>
+                        <h2 style="color:#337AB7">SECTION 3: BUSINESS INFORMATION</h2>
+                        <h4 style="color:#337AB7">A. FOR EXISTING BUSINESSES ONLY</h4>
+                        <group>
+                            <group>
+                                <field name="businessName"/>
+                                <field name="legalEntity" widget="many2many_checkboxes"/>
+                                <field name="legalEntityBool" invisible="1"/>
+                                <field name="legalEntityChar" attrs="{'invisible': [('legalEntityBool', '=', False)]}"/>
+                                <field name="vatRegistrationNumber"/>
+                                <field name="BEEShareholding"/>
+                                <label for="business_street" string="Business Street Address"/>
+                                <div>
+                                    <div class="o_address_format">
+                                        <field name="business_street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="business_street2" placeholder="Street 2..."
+                                               class="o_address_street"/>
+                                        <field name="business_city" placeholder="City" class="o_address_city"/>
+                                        <field name="business_state_id" class="o_address_state" placeholder="Province"/>
+                                        <field name="business_zip" placeholder="ZIP" class="o_address_zip"/>
+
+                                    </div>
+                                </div>
+                                <field name="businessTelephone"/>
+                                <field name="businessEmail"/>
+                                <field name="averageAnnualTurnover"/>
+                                <field name="numberOfEmployees"/>
+                            </group>
+                            <group>
+                                <field name="yearEstablished"/>
+                                <field name="registrationNumber"/>
+                                <field name="setaNumber"/>
+                                <field name="SectorIndustry" invisible="1"/>
+                                <label for="business_postal_street" string="Business Postal Address"/>
+                                <div>
+                                    <div class="o_address_format">
+                                        <field name="business_postal_street" placeholder="Street..."
+                                               class="o_address_street"/>
+                                        <field name="business_postal_street2" placeholder="Street 2..."
+                                               class="o_address_street"/>
+                                        <field name="business_postal_city" placeholder="City" class="o_address_city"/>
+                                        <field name="business_postal_state_id" class="o_address_state"
+                                               placeholder="Province"/>
+                                        <field name="business_postal_zip" placeholder="ZIP" class="o_address_zip"/>
+
+                                    </div>
+                                </div>
+                                <field name="businessFax"/>
+                                <field name="webAddress"/>
+                                <field name="financialYear"/>
+                                <field name="totalAssetValue"/>
+<!--                                 <field name="Close_bol_one" invisible="1"/>
+                                <field name="PTY_bol_one" invisible="1"/>
+                                <field name="Co_ops_bol_one" invisible="1"/>
+                                <field name="Other_bol_one" invisible="1"/> -->
+                            </group>
+                        </group>
+                        <group>
+                            <field name="brieflyDescribeYourBusiness"/>
+                        </group>
+                        <h4 style="color:#337AB7">B. FOR PRE-START UPS AND START UP BUSINESSES ONLY</h4>
+                        <group>
+                            <group>
+                                <field name="proposedBusinessName"/>
+                                <field name="slegalEntity" widget="many2many_checkboxes"/>
+                                <field name="slegalEntityBool" invisible="1"/>
+                                <field name="slegalEntityChar" attrs="{'invisible': [('slegalEntityBool', '=', False)]}"/>
+                                <field name="sector" widget="many2many_checkboxes"/>
+                            </group>
+                            <group>
+                                <field name="proposedStartDate"/>
+                                <field name="sBEEShareholding"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="proposedBusiness"/>
+                            <field name="startThisBusiness"/>
+                        </group>
+                        <h2 style="color:#337AB7">SECTION 4: BUSINESS GOALS AND SUPPORT REQUIREMENTS</h2>
+                        <group>
+                            <field name="personalGoals"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="areasSupport" widget="many2many_checkboxes"/>
+                                <field name="areasSupportBool" invisible="1"/>
+                                <field name="areasSupportChar" attrs="{'invisible': [('areasSupportBool', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="mentoringSupport" widget="many2many_checkboxes"/>
+
+                            </group>
+                        </group>
+                        <label for="mentorshipProgramme"
+                               string="How do you see this mentorship programme assist you to achieve your business and personal goals? Explain:"/>
+                        <field name="mentorshipProgramme"/>
+                        <h2 style="color:#337AB7">
+                            SECTION 5: RELEVANT BUSINESS EXPERIENCE
+                        </h2>
+                        <label for="courseOne"
+                               string="Please indicate any business skills training you attended"/>
+                        <field name="skillsTraining_ids">
+                            <tree editable="bottom">
+                                <field name="course"/>
+                                <field name="institutionOrganisation"/>
+                                <field name="duration"/>
+                                <field name="when"/>
+                            </tree>
+                        </field>
+                        <label for="courseOne"
+                               string="Please indicate any business skills training you attended"/>
+                        <field name="experienceInManagingABusiness"/>
+                        <group>
+                            <group>
+                                <field name="highestStandardPassed"/>
+                            </group>
+                            <group>
+                                <field name="Qualifications"/>
+                            </group>
+                        </group>
+                        <h2 style="color:#337AB7">SECTION 6: MOTIVATION</h2>
+                        <label for="motivation_ids"
+                               string="Please write a motivation why you should be accepted into the programme. Also, state your expectations from the programme."/>
+                        <field name="motivation_ids">
+                            <tree editable="bottom">
+                                <field name="motivationText"/>
+                            </tree>
+                        </field>
+                        <h2 style="color:#337AB7" attrs="{'invisible': [('state', '=', 'reject')]}">SECTION 7: DECLARATION</h2>
+                        <h4 attrs="{'invisible': [('state', '=', 'reject')]}">I herby apply for affiliation as a member of Volunteer Enterprise Mentorship Programme. I
+                            declare that the information provided in this application is, to the best of my knowledge,
+                            true
+                            and accurate. I acknowledge that in the event any information provided is shown to be false,
+                            incorrect or misleading, that my application and membership may be cancelled. I further
+                            acknowledge that NYDA reserves the right in its absolute discretion to refuse to accept my
+                            application and to require to cease my membership to this programme for any reason
+                            whatsoever.
+                        </h4>
+                        <group attrs="{'invisible': [('state', '=', 'reject')]}">
+                            <group>
+                                <field name="signature" widget="signature"/>
+                            </group>
+                            <group>
+                                <field name="dateTime_application"/>
+                                <field name="attachment_name" invisible="1"/>
+                                <field name="attachment_id" filename="attachment_name"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="reject_reason" attrs="{'invisible': [('state', '!=', 'reject')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- mentee application tree view -->
+        <record model="ir.ui.view" id="view_mentee_application_tree">
+            <field name="name">view_mentee_application_tree</field>
+            <field name="model">mentee.application</field>
+            <field name="arch" type="xml">
+                <tree string="mentee tree" toolbar="1">
+                    <field name="firstName"/>
+                    <field name="surname"/>
+                    <field name="saiDentityNumber"/>
+                    <field name="mobile"/>
+                    <field name="email"/>
+                    <field name="typeOfLocation"/>
+                    <field name="businessName"/>
+                    <field name="yearEstablished"/>
+                    <field name="branch_id"/>
+<!--                    <field name="state"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <!-- mentee application action -->
+
+        <record model="ir.actions.act_window" id="action_mentee_application">
+            <field name="name">Mentee Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mentee.application</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- mentee application menu -->
+
+        <menuitem id="menu_mentorship_main_root" name="Mentorship" sequence="9"
+                  groups="client_management.group_branch_beneficiary,mentorship.group_bao,mentorship.group_bmp,client_management.group_partner_service_provider,base.group_system"
+                  web_icon="mentorship,static/description/mentee.png"/>
+
+        <menuitem id="menu_application" name="Application" parent="menu_mentorship_main_root" sequence="2"/>
+
+<!--        <menuitem id="menu_mentee_application" name="Mentee Application" parent="menu_application" action="action_mentee_application"-->
+<!--                   groups="client_management.group_branch_beneficiary,mentorship.group_bao,mentorship.group_bmp"-->
+<!--                  sequence="2"/>-->
+
+         <!-- mentee approved action -->
+
+        <record id="view_mentee_application_tree_inherit" model="ir.ui.view">
+            <field name="name">view.mentee.application.tree.inherit</field>
+            <field name="model">mentee.application</field>
+            <field name="inherit_id" ref="mentorship.view_mentee_application_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='email']" position="after">
+                    <field name="is_assigned"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mentee_approved">
+            <field name="name">Mentee Approved</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mentee.application</field>
+            <field name="domain">[]</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_mentee_application_tree_inherit"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <!-- mentee approved menu -->
+
+<!--        <menuitem id="menu_approved" name="Approved" parent="menu_mentorship_main_root"/>-->
+
+        <menuitem id="menu_mentee_approved" name="Mentee Database" parent="menu_mentorship_main_root" action="action_mentee_approved" groups="mentorship.group_bao,mentorship.group_bmp" sequence="3"/>
+
+        <!-- mentee enquiry action -->
+
+        <record id="action_mentee_enquiry" model="ir.actions.act_window">
+            <field name="name">Mentee Enquiry</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">youth.enquiry</field>
+<!--            <field name="domain">['|',('nearest_branch','=',uid.branch_id.id),('nearest_branch','=',uid.branch_id.id)]</field>-->
+            <field name="domain">[]</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+        </record>
+
+        <record id="action_mentor_enquiry" model="ir.actions.act_window">
+            <field name="name">Mentor Enquiry</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">partner.enquiry</field>
+<!--            <field name="domain">['|',('nearest_branch','=',uid.branch_id.id),('nearest_branch','=',uid.branch_id.id)]</field>-->
+            <field name="domain">[]</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+        </record>
+
+         <!-- mentee enquiry menu -->
+
+        <menuitem id="menu_enquiry" name="Enquiry" parent="menu_mentorship_main_root" sequence="1" groups="mentorship.group_bao,base.group_system"/>
+
+        <menuitem id="menu_mentee_enquiry" name="Mentee Enquiry" parent="menu_enquiry" action="action_mentee_enquiry"
+                  groups="mentorship.group_bao,mentorship.group_bmp,base.group_system"
+                  sequence="2"/>
+
+        <menuitem id="menu_mentor_enquiry" name="Mentor Enquiry" parent="menu_enquiry" action="action_mentor_enquiry"
+                   groups="mentorship.group_bao,mentorship.group_bmp,base.group_system"
+                  sequence="3"/>
+
+    </data>
+</odoo>

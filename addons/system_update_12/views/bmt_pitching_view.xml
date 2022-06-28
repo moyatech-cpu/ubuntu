@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--BMT Pitching Form View-->
+        <record model="ir.ui.view" id="business_mgmt_training_pitching_form_view_inherit">
+            <field name="name">business.mgmt.training.pitching.form.view.inherit</field>
+            <field name="model">business.mgmt.training.pitching</field>
+            <field name="inherit_id" ref="bmt_training.business_mgmt_training_pitching_form_view"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//button[@name='add_report']" position="after">
+                   <button string="Download Attendance Register" type="object" name="get_attendance_register"
+                                class="oe_highlight"/>
+            	</xpath>
+              
+            </field>
+        </record>
+
+        </data>
+</odoo>

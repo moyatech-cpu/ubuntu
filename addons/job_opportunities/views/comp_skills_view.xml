@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Computer Skills-->
+        <record model="ir.ui.view" id="computer_skills_tree_view">
+            <field name="name">computer.skills.tree.view</field>
+            <field name="model">computer.skills</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="qualification" required="1"/>
+                    <field name="ms_word" required="1"/>
+                    <field name="excel" required="1"/>
+                    <field name="database_system" required="1"/>
+                    <field name="graphic_design"/>
+                    <field name="int_mo"/>
+                    <field name="accounts"/>
+                    <field name="quali_att" filename="quali_att_name" widget="download"/>
+                    <field name="quali_att_name" invisible="1"/>
+                    <field name="jobs_database_id" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Computer Skills-->
+        <record model="ir.actions.act_window" id="computer_skills_action_window">
+            <field name="name">Computer Skills</field>
+            <field name="res_model">computer.skills</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Computer Skills" id="computer_skills" parent="job_opportunities.config_menu" sequence="3"
+                  action="computer_skills_action_window"/>
+
+    </data>
+</odoo>

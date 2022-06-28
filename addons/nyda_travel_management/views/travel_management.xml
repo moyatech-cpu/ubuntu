@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Committee Views -->
+    <record id="view_scm_travel_management_form" model="ir.ui.view">
+        <field name="name">scm.travel.management.form</field>
+        <field name="model">scm.travel.management</field>
+        <field name="arch" type="xml">
+            <form string="Travel Management">
+                    <header>
+                          <field name="travel_delegated_authority" invisible="1"/>
+                        
+                          <button name="set_internal_review" string="Proceed" type="object" class="oe_highlight"
+                           attrs="{'invisible' : [('state', '!=', 'new')]}"
+                          />
+                           	<!-- Branch Manager Approval -->
+                          <button name="set_approved" string="Approve" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'Branch Manager')]}" 
+                           groups="nyda_travel_management.nyda_scm_travel_branch_manager,base.group_system"
+                          />                          
+                          
+                          <button name="action_reject_travel" string="Reject" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'Branch Manager')]}"
+                           groups="nyda_travel_management.nyda_scm_travel_branch_manager,base.group_system"
+                          />
+							
+							<!-- Executive Approval -->                                                     	
+                          <button name="set_approved" string="Approve" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'Executive')]}" 
+                           groups="nyda_travel_management.nyda_scm_travel_business_excutive,base.group_system"
+                          />                          
+                          
+                          <button name="action_reject_travel" string="Reject" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'Executive')]}"
+                           groups="nyda_travel_management.nyda_scm_travel_business_excutive,base.group_system"
+                          />                  
+							
+							<!-- CEO Approval -->
+                          <button name="set_approved" string="Approve" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'CEO')]}" 
+                           groups="nyda_travel_management.nyda_scm_travel_ceo,base.group_system"
+                          />                          
+                          
+                          <button name="action_reject_travel" string="Reject" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'CEO')]}"
+                           groups="nyda_travel_management.nyda_scm_travel_ceo,base.group_system"
+                          /> 
+                          
+                          <!-- Chairperson Approval -->
+                          <button name="set_approved" string="Approve" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'Chairperson')]}" 
+                           groups="nyda_travel_management.nyda_scm_travel_board_chairperson,base.group_system"
+                          />                          
+                          
+                          <button name="action_reject_travel" string="Reject" type="object" class="oe_highlight"
+                           attrs="{'invisible' : ['|', ('state', '!=', 'review'), ('travel_delegated_authority', '!=', 'Chairperson')]}"
+                           groups="nyda_travel_management.nyda_scm_travel_board_chairperson,base.group_system"
+                          />
+                          
+						  <button name="action_purchase_order" type="object" string="Purchase Order" class="oe_highlight" 
+                          	attrs="{'invisible' : [('state', '!=', 'approved')]}"
+                          	groups="nyda_travel_management.nyda_scm_travel_division_admin,base.group_system"
+                          />
+                          <button name="set_authorised" string="Authorised" type="object" class="oe_highlight"
+                           attrs="{'invisible' : [('state', '!=', 'approved')]}"
+                           groups="nyda_travel_management.nyda_scm_travel_division_admin,base.group_system"
+                          />                          
+                                                   
+                         <field name="state" widget="statusbar" clickable="True" options="{'fold_field': 'fold'}"/>
+					</header>            
+                <sheet>
+                    <group>
+                        <group>
+                        	<field name="travel_scm_officer" invisible="1"/>
+							<field name="travel_employee" attrs="{'readonly': [('travel_scm_officer', '=', False)]}" options="{'no_create_edit': True}" />
+							<field name="traveller" widget="many2many_tags"/>
+                            <field name="travel_full_name"/>
+                            <field name="travel_identity_number"/>
+                            <field name="travel_contact_details"/>
+                            <field name="travel_branch"/>
+                            <field name="travel_position"/>
+                            <field name="travel_line_manager"/>
+                            <field name="travel_delegated_authority"/>
+                            <field name="travel_budget_allocation"/>
+                            <field name="travel_programme" required="1"/>
+                            <field name="travel_region" required="1"/>
+                            <field name="travel_place_to_visit" required="1"/>
+                            <field name="travel_purpose_of_visit" required="1"/>
+                            <field name="travel_emergency" widget="radio"/>
+                            <field name="travel_date" required="1"/>
+							<field name="travel_completion_date" readonly="0" required="1"/>
+							
+							<field name="travel_group_life_insurance" attrs="{'invisible' : [('state', '!=', 'authorised'),('travel_region', '!=', 'International')]}" groups="nyda_travel_management.nyda_scm_travel_officer_user, base.group_system"/>
+							<field name="travel_international_travel_insurance" attrs="{'invisible' : [('state', '!=', 'authorised'),('travel_region', '!=', 'International')]}" groups="nyda_travel_management.nyda_scm_travel_officer_user, base.group_system"/>
+							
+                            <field name="travel_match_to_flight" attrs="{'invisible' : [('state', '!=', 'authorised')]}" groups="nyda_travel_management.nyda_scm_travel_division_admin,base.group_system"/>
+                            <field name="travel_match_to_accomodation" attrs="{'invisible' : [('state', '!=', 'authorised')]}" groups="nyda_travel_management.nyda_scm_travel_division_admin,base.group_system"/>
+                            <field name="travel_match_to_car_hire" attrs="{'invisible' : [('state', '!=', 'authorised')]}" groups="nyda_travel_management.nyda_scm_travel_division_admin,base.group_system"/>							
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Section A - Car Hire">
+							<div>
+								<field name="travel_car_hire_id">
+									<tree string="Car Hire" editable	="top">
+										<field name="travel_emp" widget="many2many_tags"/>
+										<field name="car_hire_from"/>
+										<field name="car_hire_to"/>
+										<field name="car_hire_est_km"/>
+										<field name="car_hire_group"/>
+										<field name="car_hire_departure_date"/>
+										<field name="car_hire_return_date"/>
+									</tree>
+								</field>
+							</div>
+						</page>
+						<page string="Section B - Fleet Hire">
+                              <div>
+                                   <field name="travel_fleet_hire_id" >
+                                       <tree string="Fleet Hire"  editable="top">
+	                                       	<field name="travel_emp" widget="many2many_tags"/>
+	                                       	<field name="fleet_hire_from" />
+	                                       	<field name="fleet_hire_to" />
+	                                       	<field name="fleet_hire_est_km" />
+	                                       	<field name="fleet_hire_group" />
+	                                       	<field name="fleet_hire_departure_date" />
+	                                       	<field name="fleet_hire_return_date" />
+                                       </tree>
+                                   </field>
+                               </div>
+                           </page>
+                           <page string="Section C - Flight">
+                              <div>
+                                   <field name="travel_flight_id" >
+                                       <tree string="Flight"  editable="top">
+	                                       	<field name="travel_emp" widget="many2many_tags"/>
+	                                       	<field name="flight_from" />
+	                                       	<field name="flight_to" />
+	                                       	<field name="flight_departure_date" />
+	                                       	<field name="flight_return_date" />
+                                       </tree>
+                                   </field>
+                               </div>
+                           </page>
+                           <page string="Section D - Shuttle Hire">
+                              <div>
+                                   <field name="travel_shuttle_hire_id" >
+                                       <tree string="Shuttle "  editable="top">
+	                                       	<field name="travel_emp" widget="many2many_tags"/>
+	                                       	<field name="shuttle_hire_from" />
+	                                       	<field name="shuttle_hire_to" />
+	                                       	<field name="shuttle_hire_est_km" />
+	                                       	<field name="shuttle_hire_group" />
+	                                       	<field name="shuttle_hire_departure_date" />
+	                                       	<field name="shuttle_hire_return_date" />
+                                       </tree>
+                                      
+                                   </field>
+                               </div>
+                           </page>
+                       	<page string="Section E - Accommodation">
+                              <div>
+                                   <field name="accommodation_id" >
+                                       <tree string="Accommodation "  editable="top">
+                                       	
+                                       	<field name="travel_emp" widget="many2many_tags"/>
+                                       	<field name="accommodation_name" />
+                                       	<field name="accommodation_meals_incl" />
+                                       	<field name="accommodation_check_in_date" />
+                                       	<field name="accommodationtravel_accom_checkout_date" />
+                                       	<field name="accommodation_shuttle_required" />
+                                       	
+                                       </tree>
+                                      
+                                   </field>
+                               </div>
+                           </page>
+                           <page string="Section F - International">
+                              <div>
+                                   <field name="intl_travel_id" >
+                                       <tree string="Accommodation "  editable="top">
+                                       	
+                                       	<field name="travel_emp" widget="many2many_tags"/>
+                                       	<field name="perdium_int_travel_depart_date" />
+                                       	<field name="perdium_int_travel_return_date" />
+                                       	<field name="perdium_int_travel_num_nights" />
+                                       	<field name="perdium_int_travel_amount" />
+                                       	
+                                       </tree>
+                                      
+                                   </field>
+                               </div>
+                           </page>
+                       	<page name="reject_reason" string="Reject Reason" attrs="{'invisible' : [('state', '!=', 'rejected')]}">
+                        	<group>
+	                            <field name="reject_reason"/>
+                            </group>
+                       	</page>                                                                                    
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+	<record id="scm_travel_reject_reason_form" model="ir.ui.view">
+        <field name="name">scm.travel.management.form</field>
+        <field name="model">scm.travel.management</field>
+        <field name="arch" type="xml">
+            <form string="Reject Content">
+                <group>
+                    <field name="reject_reason"/>
+                </group>
+                <footer>
+                    <button name="set_rejected" string="Reject" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+   	</record>
+    	
+    <record id="view_scm_travel_management_tree" model="ir.ui.view">
+        <field name="name">scm.travel.management.tree</field>
+        <field name="model">scm.travel.management</field>
+        <field name="arch" type="xml">
+            <tree string="Travel Management">
+                <field name="travel_employee"/>
+                <field name="travel_place_to_visit"/>
+                <field name="travel_purpose_of_visit"/>
+                <field name="travel_completion_date"/>
+                <field name="state"/>
+                <field name="travel_programme"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_scm_travel_management" model="ir.actions.act_window">
+        <field name="name">Travel Management</field>
+        <field name="res_model">scm.travel.management</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--Menu for Bursary External Report -->
+    <menuitem name="Travel" id="menu_scm_travel_management" sequence="3" parent="nyda_scm_rfq.main_menu"
+     			web_icon="nyda_travel_management,static/description/icon.png" groups="base.group_system" />
+
+    <menuitem id="menu_scm_travel_request"
+              name="Travel Request"
+              action="action_scm_travel_management"
+              parent="menu_scm_travel_management"
+              sequence="1"/>
+
+</odoo>

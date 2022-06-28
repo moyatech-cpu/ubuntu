@@ -1,0 +1,52 @@
+<odoo>
+    <record id="cancel_reason_bmt_form" model="ir.ui.view">
+        <field name="name">Cancel Reason BMT Form</field>
+        <field name="model">cancel.bmt.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel BMT Application">
+                <group>
+                    <field name="cancel_bmt_reason"/>
+                </group>
+                <footer>
+                    <button name="cancel_bmt_application" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="reinstate_bmt_form" model="ir.ui.view">
+        <field name="name">Reinstate Reason BMT Form</field>
+        <field name="model">cancel.bmt.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reinstate BMT Application">
+                <group>
+                    <field name="reinstate_bmt_reason"/>
+                </group>
+                <footer>
+                    <button name="reinstate_bmt_application" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="reinstate_bmt_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reinstate BMT Reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.bmt.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="reinstate_bmt_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="cancel_reason_bmt_wizard_action" model="ir.actions.act_window">
+        <field name="name">Cancel Reason BMT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.bmt.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="cancel_reason_bmt_form"/>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>

@@ -1,0 +1,155 @@
+<odoo>
+    <record id="view_approve_letter_form" model="ir.ui.view">
+        <field name="name">approve.letter.form</field>
+        <field name="model">approve.letter.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Apprival Pack">
+                <group>
+                    <field name="approval_letter_name" invisible="1"/>
+                    <field name="approval_letter" widget="binary" required="1" filename="approval_letter_name"/>
+                    <!--                    <field name="declaration_of_interest_name" invisible="1"/>-->
+                    <!--                    <field name="declaration_of_interest" widget="binary" required="1"-->
+                    <!--                           filename="declaration_of_interest_name"/>-->
+                    <!--                    <field name="minutes_name" invisible="1"/>-->
+                    <!--                    <field name="minutes" widget="binary" required="1" filename="minutes_name"/>-->
+                </group>
+                <footer>
+                    <button name="approve_letter_req" string="Submit and Send" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_approve_letter" model="ir.actions.act_window">
+        <field name="name">Approval Letter</field>
+        <field name="res_model">approve.letter.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_approve_letter_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_uploaded_approve_letter_form" model="ir.ui.view">
+        <field name="name">uploaded.approve.letter.form</field>
+        <field name="model">upload.approval.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Contracting">
+                <group>
+                    <field name="contract_name" invisible="1"/>
+                    <field name="contract" widget="binary" filename="contract_name" string="Signed Contract"/>
+                    <field name="uploaded_approval_letter1_name" invisible="1"/>
+                    <field name="uploaded_approval_letter1" widget="binary"
+                           filename="uploaded_approval_letter1_name" string="Signed Approval Letter"/>
+                </group>
+                <footer>
+                    <button name="uploaded_approve_letter_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_uploaded_approve_letter" model="ir.actions.act_window">
+        <field name="name">Contracting</field>
+        <field name="res_model">upload.approval.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_uploaded_approve_letter_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hogac_uploaded_approve_letter_form" model="ir.ui.view">
+        <field name="name">hogac.approve.letter.form</field>
+        <field name="model">hogac.approve.letter.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Uploaded Approve Letter">
+                <group>
+                    <!--                    <field name="hogac_approval_letter_name" invisible="1"/>-->
+                    <!--                    <field name="hogac_approval_letter" widget="binary" required="1"-->
+                    <!--                           filename="hogac_approval_letter_name" string="Signed Approval Letter"/>-->
+<!--                    <field name="hogac_declaration_of_interest_name" invisible="1"/>-->
+<!--                    <field name="hogac_declaration_of_interest" widget="binary" required="1"-->
+<!--                           filename="hogac_declaration_of_interest_name" string="Signed Declaration of Interest"/>-->
+                    <field name="hogac_minutes_name" invisible="1"/>
+                    <field name="hogac_minutes" widget="binary" required="1" filename="hogac_minutes_name"/>
+                </group>
+                <footer>
+                    <button name="hogac_approve_letter_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hogac_action_uploaded_approve_letter" model="ir.actions.act_window">
+        <field name="name">Hogac Documentation</field>
+        <field name="res_model">hogac.approve.letter.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_hogac_uploaded_approve_letter_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <record id="view_hogac_uploaded_reject_letter_form" model="ir.ui.view">
+        <field name="name">hogac.reject.report.wiz.form</field>
+        <field name="model">hogac.reject.report.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Uploaded Approve Letter">
+                <group>
+<!--                    <field name="hogac_rejection_report" required="1"/>-->
+                    <field name="hogac_minutes_file_name" invisible="1"/>
+                    <field name="hogac_minutes_file" widget="binary" required="1"
+                           filename="hogac_minutes_file_name" string="Minutes"/>
+                </group>
+                <footer>
+                    <button name="hogac_reject_letter_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hogac_action_uploaded_reject_letter" model="ir.actions.act_window">
+        <field name="name">Hogac Outcome</field>
+        <field name="res_model">hogac.reject.report.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_hogac_uploaded_reject_letter_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_bgarg_uploaded_reject_letter_form" model="ir.ui.view">
+        <field name="name">bgarc.reject.report.wiz.form</field>
+        <field name="model">bgarg.reject.report.wiz</field>
+        <field name="arch" type="xml">
+            <form string="BGARC Rejection report">
+                <group>
+                    <field name="bgarg_rejection_report" required="1"/>
+                    <field name="bgarc_declaration_of_interest_name_reject" invisible="1"/>
+                    <field name="bgarc_declaration_of_interest_reject" widget="binary"
+                           filename="bgarc_declaration_of_interest_name_reject"/>
+                    <field name="bgarc_minutes_name_reject" invisible="1"/>
+                    <field name="bgarc_minutes_reject" widget="binary"
+                           filename="bgarc_minutes_name_reject"/>
+                </group>
+                <footer>
+                    <button name="bgarg_reject_letter_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="bgarg_reject_reason" model="ir.actions.act_window">
+        <field name="name">BGARC Rejection Documentation</field>
+        <field name="res_model">bgarg.reject.report.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_bgarg_uploaded_reject_letter_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

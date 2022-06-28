@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_training_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>Training Review Report</h1>
+                    </div>
+                    <t t-value="doc.get_training_data()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['rep_print_type'] == 'training'">
+                                <t t-if="data['type']">
+                                    <h4>Intervention type :
+                                        <t t-esc="data['type']"/>
+                                    </h4>
+                                </t>
+                            </t>
+                            <t t-if="data['rep_print_type'] == 'branch'">
+                                <t t-if="data['type']">
+                                    <h4>Branch :
+                                        <t t-esc="data['type']"/>
+                                    </h4>
+                                </t>
+                            </t>
+                            <t t-if="data['training']">
+                                <h4>Total Trainings :
+                                    <t t-esc="len(data['training'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div>
+                <br/>
+                <t t-if="data['training']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <t t-if="data['rep_print_type'] == 'training'">
+                                            <th>Name</th>
+                                        </t>
+                                        <t t-if="data['rep_print_type'] == 'training'">
+                                            <th>Branch</th>
+                                        </t>
+                                        <t t-elif="data['rep_print_type'] == 'branch'">
+                                            <th>Training</th>
+                                        </t>
+                                        <t t-if="data['rep_type'] in ['all','bmt']">
+                                            <th>Training Start Date</th>
+                                        </t>
+                                        <t t-else="">
+                                            <th>Training Date</th>
+                                        </t>
+                                        <t t-if="data['rep_type'] in ['all','bmt']">
+                                            <th>Training End Date</th>
+                                        </t>
+                                        <th>Total Attendees</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>African</th>
+                                        <th>Indian</th>
+                                        <th>Coloured</th>
+                                        <th>White</th>
+                                        <th>Asian</th>
+                                        <th>Disability</th>
+                                        <th>Rural</th>
+                                        <th>Urban</th>
+                                    </tr>
+                                </thead>
+                                <t t-set="total_beneficiaries" t-value="0"/>
+                                <t t-set="total_no_of_males" t-value="0"/>
+                                <t t-set="total_no_of_females" t-value="0"/>
+                                <t t-set="total_no_of_african_participants" t-value="0"/>
+                                <t t-set="total_no_of_indian_participants" t-value="0"/>
+                                <t t-set="total_no_of_coloured_participants" t-value="0"/>
+                                <t t-set="total_no_of_white_participants" t-value="0"/>
+                                <t t-set="total_no_of_asian_participants" t-value="0"/>
+                                <t t-set="total_no_of_disabled_participants" t-value="0"/>
+                                <t t-set="total_no_of_rural_participants" t-value="0"/>
+                                <t t-set="total_no_of_urban_participants" t-value="0"/>                                
+                                <t t-foreach="data['training']" t-as="rec_data">
+                                    <tbody>
+                                        <tr>
+                                            <t t-if="data['rep_print_type'] == 'training'">
+                                                <td>
+                                                    <t t-esc="rec_data.name"/>
+                                                </td>
+                                            </t>
+                                            <t t-if="data['rep_print_type'] == 'training'">
+                                                <td>
+                                                    <t t-esc="rec_data.branch_id.name"/>
+                                                </td>
+                                            </t>
+                                            <t t-if="data['rep_print_type'] == 'branch'">
+                                                <td>
+                                                    <span t-field="rec_data.intervention_type"/>
+                                                </td>
+                                            </t>
+                                            <td>
+                                                <t t-esc="rec_data.start_date"/>
+                                            </td>
+                                            <t t-if="data['rep_type'] in ['all','bmt']">
+                                                <td>
+                                                    <span t-field="rec_data.end_date"/>
+                                                </td>
+                                            </t>
+                                            <td>
+                                                <t t-esc="rec_data.total_youth"/>
+                                                <t t-set="total_beneficiaries" t-value="total_beneficiaries+rec_data.total_youth"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_males"/>
+                                                <t t-set="total_no_of_males" t-value="total_no_of_males+rec_data.no_of_males"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_females"/>
+                                                <t t-set="total_no_of_females" t-value="total_no_of_females+rec_data.no_of_females"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_african_participants"/>
+                                                <t t-set="total_no_of_african_participants" t-value="total_no_of_african_participants+rec_data.no_of_african_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_indian_participants"/>
+                                                <t t-set="total_no_of_indian_participants" t-value="total_no_of_indian_participants+rec_data.no_of_indian_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_coloured_participants"/>
+                                                <t t-set="total_no_of_coloured_participants" t-value="total_no_of_coloured_participants+rec_data.no_of_coloured_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_white_participants"/>
+                                                <t t-set="total_no_of_white_participants" t-value="total_no_of_white_participants+rec_data.no_of_white_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_asian_participants"/>
+                                                <t t-set="total_no_of_asian_participants" t-value="total_no_of_asian_participants+rec_data.no_of_asian_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_disabled_participants"/>
+                                                <t t-set="total_no_of_disabled_participants" t-value="total_no_of_disabled_participants+rec_data.no_of_disabled_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_rural_participants"/>
+                                                <t t-set="total_no_of_rural_participants" t-value="total_no_of_rural_participants+rec_data.no_of_rural_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_urban_participants"/>
+                                                <t t-set="total_no_of_urban_participants" t-value="total_no_of_urban_participants+rec_data.no_of_urban_participants"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4">                                                
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_beneficiaries"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_males"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_females"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_african_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_indian_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_coloured_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_white_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_asian_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_disabled_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_rural_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="total_no_of_urban_participants"/>
+                                            </td>
+                                        </tr>
+                                    </tfoot>                                    
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Trainings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_training">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="bmt_training.report_training_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

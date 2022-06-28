@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Degree-->
+        <record model="ir.ui.view" id="degree_tree_view">
+            <field name="name">degree.tree.view</field>
+            <field name="model">degree</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Degree-->
+        <record model="ir.actions.act_window" id="degree_action_window">
+            <field name="name">Degree</field>
+            <field name="res_model">degree</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Degree" id="degree_menu" parent="job_opportunities.config_menu"
+                  action="degree_action_window"/>
+
+    </data>
+</odoo>

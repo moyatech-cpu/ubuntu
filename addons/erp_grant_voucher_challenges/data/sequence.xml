@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="seq_gr_grant_approval_ref" model="ir.sequence">
+            <field name="name">GR Number</field>
+            <field name="code">gr.number</field>
+            <field name="prefix">GR</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</odoo>

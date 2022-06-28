@@ -1,0 +1,26 @@
+<odoo>
+
+    <record id="bm_accept_confirm_wiz_form" model="ir.ui.view">
+        <field name="name">BM.Confirm.Accept.form</field>
+        <field name="model">bm.accept.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BM Accept Confirm Reason">
+                <field name="bm_confirm_text" readonly="1"/>
+                <footer>
+                    <button name="submit_confirm" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bm_accept_confirm_wiz" model="ir.actions.act_window">
+        <field name="name">BM Accept Confirm Wizard</field>
+        <field name="res_model">bm.accept.confirm.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bm_accept_confirm_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_learning_development,access_learning_development,model_learning_development,,1,1,1,1
+
+access_institution,access_institution,model_institution,,1,1,1,1

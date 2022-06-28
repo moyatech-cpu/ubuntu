@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_bmt_pitching_attendance"
+                string="BMT Pitching Attendance Report"
+                model="business.mgmt.training.pitching"
+                report_type="qweb-pdf"
+                paperformat="bmt_training.paperformat_landscape"
+                file="system_update_12.report_bus_mgmt_attendance_register"
+                name="system_update_12.report_bus_mgmt_attendance_register"
+                menu="True"
+        />
+
+       
+    </data>
+</odoo>

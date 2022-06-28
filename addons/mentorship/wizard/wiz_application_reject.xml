@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Wizard to insert reason for rejection. -->
+    <record id="view_wiz_application_reject_form" model="ir.ui.view">
+        <field name="name">view.wiz.application.reject.form</field>
+        <field name="model">wiz.application.reject</field>
+        <field name="arch" type="xml">
+            <form string="Reason for Rejection of Application">
+                <sheet>
+                    <group>
+                        <field name="reason_rejected" required="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="reject_application" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_application_reject" model="ir.actions.act_window">
+        <field name="name">Reject Application</field>
+        <field name="res_model">wiz.application.reject</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

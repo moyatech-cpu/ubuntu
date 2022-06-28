@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="umso_voucher_tree_view">
+            <field name="name">umso.voucher.tree.view</field>
+            <field name="model">umso.voucher</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="AdminComplianceCheckBy"/>
+                    <field name="AdminComplianceCheckDT"/>
+                    <field name="AdminComplianceCheckNotes"/>
+                    <field name="AdminComplianceInvoiceRating"/>
+                    <field name="AfterCareBy"/>
+                    <field name="AfterCareDT"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="umso_voucher_form_view">
+            <field name="name">umso.voucher.form.view</field>
+            <field name="model">umso.voucher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="AdminComplianceCheckBy"/>
+                                <field name="AdminComplianceCheckDT"/>
+                                <field name="AdminComplianceCheckNotes"/>
+                                <field name="AdminComplianceInvoiceRating"/>
+                                <field name="AfterCareBy"/>
+                                <field name="AfterCareDT"/>
+                                <field name="AfterCareDone"/>
+                                <field name="AfterCareDueDT"/>
+                                <field name="AfterCareJobsCreated"/>
+                                <field name="AfterCareNewBusiness"/>
+                                <field name="AfterCareStory"/>
+                                <field name="ApprovedBy"/>
+                                <field name="ApprovedDT"/>
+                                <field name="ApprovedNotes"/>
+                                <field name="AssignedToAtCancellation"/>
+                                <field name="CancelledBy"/>
+                                <field name="CancelledDT"/>
+                                <field name="CancelledNotes"/>
+                                <field name="ClientAppointmentDT"/>
+                                <field name="ClientInvoice"/>
+                                <field name="ClientSignOffDT"/>
+                                <field name="ClientSignOffNotes"/>
+                                <field name="ClientSignOffNotes"/>
+                                <field name="CreatedBy"/>
+                                <field name="CreatedDT"/>
+                                <field name="CurrentlyAssignedTo"/>
+                                <field name="DeclinedBy"/>
+                                <field name="DeclinedDT"/>
+                                <field name="DeclinedNotes"/>
+                                <field name="Enabled"/>
+                                <field name="EvalDT"/>
+                                <field name="EvalFacilities"/>
+                                <field name="EvalFriendliness"/>
+                                <field name="EvalNotes"/>
+                                <field name="EvalOverall"/>
+                                <field name="EvalProfessionalism"/>
+                                <field name="EvalWaitTime"/>
+                                <field name="ExpiryDT"/>
+                                <field name="ExpiryDoneDT"/>
+                                <field name="ExpiryGPDoneDT"/>
+                                <field name="Invoice"/>
+                                <field name="InvoiceAmount"/>
+                                <field name="InvoiceNumber"/>
+                                <field name="IsFromArchive"/>
+                                <field name="IssuedBy"/>
+                                <field name="IssuedDT"/>
+                                <field name="IssuedGPConfirmDT"/>
+                                <field name="IssuedNotes"/>
+                                <field name="Location"/>
+                                <field name="NextInPackage"/>
+                                <field name="PaymentAmount"/>
+                                <field name="PaymentApprovedBy"/>
+                                <field name="PaymentApprovedDT"/>
+                                <field name="RowGUID2"/>
+                                <field name="SPName"/>
+                                <field name="SPVatNumber"/>
+                                <field name="SPVendorID"/>
+                                <field name="TelNo"/>
+                                <field name="UmsoSPRatingLatest"/>
+                                <field name="UpdatedDT"/>
+                                <field name="UserName"/>
+                                <field name="UserType"/>
+                                <field name="BranchID"/>
+                                <field name="DistrictOffice"/>
+                                <field name="Enabled3"/>
+                                <field name="GLCode"/>
+                                <field name="Name"/>
+                                <field name="Province"/>
+                                <field name="RowGUID3"/>
+                            </group>
+                            <group>
+                                <field name="PaymentApprovedGroupID"/>
+                                <field name="PaymentApprovedNotes"/>
+                                <field name="PaymentDT"/>
+                                <field name="ProdComplianceCheckBy"/>
+                                <field name="ProdComplianceCheckDT"/>
+                                <field name="ProdComplianceCheckNotes"/>
+                                <field name="ProdComplianceProductRating"/>
+                                <field name="Product"/>
+                                <field name="ProductVerifiedBy"/>
+                                <field name="ProductVerifiedDT"/>
+                                <field name="ProductVerifiedNotes"/>
+                                <field name="QueriedBy"/>
+                                <field name="QueriedWhat"/>
+                                <field name="ReIssueAtDT"/>
+                                <field name="ReIssueAtStatus"/>
+                                <field name="ReIssueBy"/>
+                                <field name="Recommendation"/>
+                                <field name="RecommendedBy"/>
+                                <field name="RecommendedDT"/>
+                                <field name="RecommendedNotes"/>
+                                <field name="ReviewedDT"/>
+                                <field name="ReviewedNotes"/>
+                                <field name="RowGUID"/>
+                                <field name="ServiceCompletedDT"/>
+                                <field name="ServiceType"/>
+                                <field name="Status"/>
+                                <field name="StatusAtCancellation"/>
+                                <field name="StatusAtExpiry"/>
+                                <field name="StatusBeforeQuery"/>
+                                <field name="SubmittedForPaymentBy"/>
+                                <field name="SubmittedForPaymentDT"/>
+                                <field name="SubmittedForPaymentNotes"/>
+                                <field name="Timesheet"/>
+                                <field name="UmsoUser"/>
+                                <field name="Used"/>
+                                <field name="UsedBy"/>
+                                <field name="VerifiedBy"/>
+                                <field name="VerifiedDT"/>
+                                <field name="VerifiedNotes"/>
+                                <field name="VoucherExpiryExtendedBy"/>
+                                <field name="VoucherExpiryExtendedDT"/>
+                                <field name="VoucherExpiryExtendedNotes"/>
+                                <field name="VoucherNumber"/>
+                                <field name="VoucherValue"/>
+                                <field name="BusinessName"/>
+                                <field name="BusinessStarted"/>
+                                <field name="CellNo"/>
+                                <field name="CreatedDT2"/>
+                                <field name="EmailAddress"/>
+                                <field name="Enabled2"/>
+                                <field name="FailLoginCount"/>
+                                <field name="FirstName"/>
+                                <field name="HasExistingBusiness"/>
+                                <field name="HasTempUserName"/>
+                                <field name="IDNumber"/>
+                                <field name="Image"/>
+                                <field name="IsDisabled"/>
+                                <field name="IsInactiveSP"/>
+                                <field name="IsMale"/>
+                                <field name="IsRural"/>
+                                <field name="LastName"/>
+                                <field name="Location2"/>
+                                <field name="MustChangePassword"/>
+                                <field name="Notes"/>
+                                <field name="Password"/>
+                                <field name="PasswordLastChanged"/>
+                                <field name="PhysicalAddress"/>
+                                <field name="PreferredComsMethod"/>
+                                <field name="Race"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_umso_voucher">
+            <field name="name">Umso Voucher</field>
+            <field name="res_model">umso.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for BMT Pitching Participants-->
+        <menuitem id="main_menu_data_migration" name="Data Migration"/>
+        <menuitem id="menu_data_migration" name="Data Migration" parent="data_migration.main_menu_data_migration"/>
+
+<!--        <menuitem id="menu_umso_voucher" name="Usmo Voucher"-->
+<!--                  parent="data_migration.menu_data_migration"-->
+<!--                  action="action_umso_voucher" sequence="1"/>-->
+    </data>
+</odoo>

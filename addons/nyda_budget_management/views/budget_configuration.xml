@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>     
+       
+    <record id="view_budget_division_form" model="ir.ui.view">
+        <field name="name">budget.division.form</field>
+        <field name="model">budget.division</field>
+        <field name="arch" type="xml">
+            <form string="Budgetary Position">
+                <field name="code"/>
+                <field name="name"/>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_budget_division_tree" model="ir.ui.view">
+        <field name="name">budget.division.tree</field>
+        <field name="model">budget.division</field>
+        <field name="arch" type="xml">
+            <tree string="Budgetary Position">
+                <field name="code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>  
+    
+	<record id="action_budget_division_management" model="ir.actions.act_window">
+        <field name="name">Budget Division</field>
+        <field name="res_model">budget.division</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record id="view_budget_business_unit_form" model="ir.ui.view">
+        <field name="name">budget.business.unit.form</field>
+        <field name="model">budget.business.unit</field>
+        <field name="arch" type="xml">
+            <form string="Budgetary Position">
+                <field name="code"/>
+                <field name="name"/>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_budget_business_unit_tree" model="ir.ui.view">
+        <field name="name">budget.business.unit.tree</field>
+        <field name="model">budget.business.unit</field>
+        <field name="arch" type="xml">
+            <tree string="Budgetary Position">
+                <field name="code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>    
+
+	<record id="action_budget_business_unit_management" model="ir.actions.act_window">
+        <field name="name">Budget Business unit</field>
+        <field name="res_model">budget.business.unit</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_budget_division" name="Division" 
+    		action="action_budget_division_management"
+            parent="menu_config_budget_management"
+            sequence="0"/>
+                        
+    <menuitem id="menu_budget_business_unit" name="Business Unit" 
+    		action="action_budget_business_unit_management"
+            parent="menu_config_budget_management"
+            sequence="1"/>
+                                             
+
+</odoo>

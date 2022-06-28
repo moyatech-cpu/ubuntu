@@ -1,0 +1,53 @@
+<odoo>
+	<data>
+		<record id="scm_tender_reject_reason_form" model="ir.ui.view">
+	        <field name="name">scm.tender.reject.form</field>
+	        <field name="model">scm.tender.reject</field>
+	        <field name="arch" type="xml">
+	            <form string="Reject Content">
+	                <group>
+	                    <field name="reject_reason"/>
+	                </group>
+	                <footer>
+	                    <button name="submit_reject_reason" string="Reject" type="object" class="btn-primary"/>
+	                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+	                </footer>
+	            </form>
+	        </field>
+    	</record>
+    
+		<record id="scm_tender_cancel_reason_form" model="ir.ui.view">
+			<field name="name">scm.tender.cancel.form</field>
+	        <field name="model">scm.tender.cancel</field>
+	        <field name="arch" type="xml">
+	            <form string="Cancel Tender">
+	                <group>
+	                    <field name="cancel_reason"/>
+	                </group>
+	                <footer>
+	                    <button name="submit_cancel_reason" string="Cancel" type="object" class="btn-primary"/>
+	                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+	                </footer>
+	            </form>
+	        </field>
+	    </record>
+	        
+	    <record id="reject_tender_reason_wizard_action" model="ir.actions.act_window">
+	        <field name="name">reject.tender.reason.action</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">scm.tender.reject</field>
+	        <field name="view">form</field>
+	        <field name="view_id" ref="scm_tender_reject_reason_form"/>
+	        <field name="target">new</field>
+	    </record>
+	
+	    <record id="cancel_tender_reason_wizard_action" model="ir.actions.act_window">
+	        <field name="name">cancel.tender.reason.action</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">scm.tender.cancel</field>
+	        <field name="view">form</field>
+	        <field name="view_id" ref="scm_tender_cancel_reason_form"/>
+	        <field name="target">new</field>
+	    </record>    
+	</data>    
+</odoo>

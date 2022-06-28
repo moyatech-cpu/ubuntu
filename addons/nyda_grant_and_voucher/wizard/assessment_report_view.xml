@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_assessment_report_form" model="ir.ui.view">
+        <field name="name">assessment.report.form</field>
+        <field name="model">assessment.report</field>
+        <field name="arch" type="xml">
+            <form string="Assessment Report Upload">
+                <group>
+                    <field name="assessment_report_name" invisible="1"/>
+                    <field name="assessment_report" widget="binary" required="1" filename="assessment_report_name"/>
+                </group>
+                <footer>
+                    <button name="assessment_report_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_assessment_report_report" model="ir.actions.act_window">
+        <field name="name">Assessment Report Upload</field>
+        <field name="res_model">assessment.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_assessment_report_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

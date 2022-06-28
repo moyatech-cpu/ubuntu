@@ -1,0 +1,32 @@
+<odoo>
+	<record id="view_beneficiary_wiz_form" model="ir.ui.view">
+		<field name="name">beneficiary.wiz.form</field>
+		<field name="model">beneficiary.wiz</field>
+		<field name="arch" type="xml">
+			<form string="Assign Beneficiary">
+                <group>
+                    <field name="applied_on" widget="radio"/>
+                    <field name="branch_id" attrs="{'invisible':[('applied_on', '!=', 'nearest_branch')], 'required':[('applied_on', '=', 'nearest_branch')]}"/>
+                    <field name="province_id" attrs="{'invisible':[('applied_on', '!=', 'province')], 'required':[('applied_on', '=', 'province')]}"/>
+                    <field name="sector_id" attrs="{'invisible':[('applied_on', '!=', 'sector')], 'required':[('applied_on', '=', 'sector')]}"/>
+                    <field name = "oppo_provider_id" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+                    <field name = "beneficiary_id" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+				</group>
+			     <footer>
+	                 <button name="assign_beneficiary" string="Assign Beneficiary" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+
+			</form>
+		</field>
+	</record>
+    <record id="action_assign_beneficiary" model="ir.actions.act_window">
+            <field name="name">Assign Beneficiary</field>
+            <field name="res_model">beneficiary.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_beneficiary_wiz_form"/>
+           <field name="target">new</field>
+        </record>
+
+</odoo>

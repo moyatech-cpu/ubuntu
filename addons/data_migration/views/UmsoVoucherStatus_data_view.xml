@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="umso_voucher_status_tree_view">
+            <field name="name">umso.voucher.status.tree.view</field>
+            <field name="model">umso.voucher.status</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ID"/>
+                    <field name="Description"/>
+                    <field name="Status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="umso_voucher_status_form_view">
+            <field name="name">umso.voucher.status.form.view</field>
+            <field name="model">umso.voucher.status</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ID"/>
+                                <field name="Description"/>
+                            </group>
+                            <group>
+                                <field name="Status"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_umso_voucher_status">
+            <field name="name">Umso Voucher</field>
+            <field name="res_model">umso.voucher.status</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_voucher_status" name="Usmo Voucher Status"
+                  parent="data_migration.menu_data_migration"
+                  action="action_umso_voucher_status" sequence="10"/>
+    </data>
+</odoo>

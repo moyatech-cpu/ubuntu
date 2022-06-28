@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Organisations-->
+        <record model="ir.ui.view" id="organisations_tree_view">
+            <field name="name">organisations.tree.view</field>
+            <field name="model">organisations</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name_of_organisation" required="1"/>
+                    <field name="start_date" required="1"/>
+                    <field name="end_date" required="1"/>
+                    <field name="position_held_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                    <field name="reason_for_leaving"/>
+                    <field name="jobs_database_id" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action for Organisations-->
+        <record model="ir.actions.act_window" id="organisations_action_window">
+            <field name="name">Organisations</field>
+            <field name="res_model">organisations</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem name="Organisations" id="organisations" parent="job_opportunities.config_menu" sequence="4"
+                  action="organisations_action_window"/>
+
+    </data>
+</odoo>

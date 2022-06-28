@@ -1,0 +1,210 @@
+<odoo>
+    <data>
+
+        <!--Added thank you message for Thanking Registration of Oppotunity Provider-->
+        <template id="thank_you_opp_pro" name="Thank You">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+                <div id="notfound">
+                    <div class="notfound-bg"></div>
+                    <div class="notfound">
+                        <h2>Thank you , your request has been registered for Opportunity Provider.</h2>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <!--Already registered for Oppotunity Provider-->
+        <template id="regd_opp_pro" name="Thank You">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+                <div id="notfound">
+                    <div class="notfound-bg"></div>
+                    <div class="notfound">
+                        <h2>You are already registered for Opportunity Provider.</h2>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="register_form_sp" name="Service Provier Registration Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Service Provider Registration Form</h1>
+                    </div>
+                </div>
+                <form id="spRegister" method="post" action="/opp_reg_done" enctype="multipart/form-data">
+                    <div id="basic_info">
+                        <div class="row pt_30">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <h3 class="text-center">Personal Details</h3>
+                            </div>
+                            <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="name">
+                                        Name
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" t-att-value="user.name" id="name" name="name"
+                                           placeholder="Name" type="text" required="required"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="cellphone">
+                                        Cell phone number
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" t-att-value="user.phone" id="cellphone"
+                                           name="cellphone" placeholder="Cell phone number" type="tel"
+                                           minlength="10" maxlength="10" pattern="[0-9]{10}" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label " for="mobile">
+                                        Mobile
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" id="mobile" name="mobile"
+                                           placeholder="Mobile number" type="tel" minlength="10" maxlength="10"
+                                           pattern="[0-9]{10}" required="required"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="email">
+                                        Email
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" id="email" name="email" t-att-value="user.login"
+                                           placeholder="Email" type="email" required="required"/>
+                                    <label id="email-error" class="error hidden" for="email">Please enter valid email.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="user_branch">
+                                        Branch
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <select class="select form-control" id="user_branch" name="user_branch" required="required">
+                                        <option value="">Please Select Branch</option>
+                                        <t t-foreach="branch" t-as="sbranch">
+                                            <t t-if="sbranch.id == user.branch_id.id">
+                                                <option t-att-value="sbranch.id" selected="selected">
+                                                    <t t-esc="sbranch.name"/>
+                                                </option>
+                                            </t>
+                                            <t t-else="">
+                                                <option t-att-value="sbranch.id">
+                                                    <t t-esc="sbranch.name"/>
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="comp_no">
+                                        Company Number
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" id="comp_no" name="comp_no" type="tel" minlength="10"
+                                           maxlength="10" pattern="[0-9]{10}"
+                                           required="required" placeholder="Enter Company Number"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="tax_no">
+                                        Tax number
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" id="tax_num" placeholder="Enter Tax number" type="number"
+                                           required="required" name="tax_num"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="vat">
+                                        Vat
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" id="vat"
+                                           name="vat_num" placeholder="Enter Vat Number" type="number" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="street">
+                                        Address
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="form-control" id="street" name="street" placeholder="Street" type="text" required="required"/>
+                                    <input class="form-control" id="street2" name="street2" placeholder="Street 2" type="text" required="required"/>
+                                    <input class="form-control" id="town" name="town" type="text" placeholder="Town" required="required"/>
+                                    <select class="select form-control" id="province" name="province" required="required">
+                                        <option value="">Please Select Province</option>
+                                        <t t-foreach="provinces" t-as="province">
+                                            <option t-att-value="province.id">
+                                                <t t-esc="province.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                    <input class="form-control" id="pcode" name="pcode" type="number"
+                                           placeholder="Postal Code" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 col-sm-1 col-xs-">
+                                <div class="form-group">
+                                    <div>
+                                        <button class="btn btn-primary " name="submit" type="submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </t>
+    </template>
+
+    </data>
+</odoo>

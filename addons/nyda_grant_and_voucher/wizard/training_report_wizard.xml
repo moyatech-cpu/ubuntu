@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Training Report Wizard Form View-->
+    <record model="ir.ui.view" id="training_report_wizard_form_view">
+        <field name="name">training.report.wizard.form.view</field>
+        <field name="model">training.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="report_type" invisible="1"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}"
+                           attrs="{'required': [('report_type', 'in', ['branch', 'training_schedule'])], 'invisible':[('report_type', 'not in', ['branch', 'training_schedule'])]}"/>
+                    <field name="intervention_type"
+                           attrs="{'required': [('report_type', '=', 'training')], 'invisible':[('report_type', '!=', 'training')]}"/>
+                </group>
+                <footer>
+                    <button string="Download Training Report" name="get_training_report" type="object"
+                            class="btn-primary" attrs="{'invisible':[('report_type', 'not in', ['training'])]}"/>
+                    <button string="Download Branch Report" name="get_training_report" type="object"
+                            class="btn-primary" attrs="{'invisible':[('report_type', 'not in', ['branch'])]}"/>
+                    <button string="Download Training Schedule Report" name="get_training_report" type="object"
+                            class="btn-primary" attrs="{'invisible':[('report_type', 'not in', ['training_schedule'])]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Training Report Wizard -->
+    <record model="ir.actions.act_window" id="action_training_report_wizard">
+        <field name="name">Training Report Wizard</field>
+        <field name="res_model">training.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_report_type': 'training'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Action for Branch Report Wizard -->
+    <record model="ir.actions.act_window" id="action_branch_report_wizard">
+        <field name="name">Branch Report Wizard</field>
+        <field name="res_model">training.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_report_type': 'branch'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Action for Training Schedule Report Wizard -->
+    <record model="ir.actions.act_window" id="action_training_schedule_report_wizard">
+        <field name="name">Training Schedule Report Wizard</field>
+        <field name="res_model">training.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_report_type': 'training_schedule'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menu for Training Report-->
+    <menuitem name="Reporting" parent="bmt_training.main_menu_training" id="menu_reporting" sequence="12"
+              action="bmt_training.action_training_report_wizard"/>
+    <menuitem name="Training Report" parent="bmt_training.menu_reporting" id="menu_training_reports" sequence="1"
+              action="bmt_training.action_training_report_wizard"/>
+    <menuitem name="Branch Report" parent="bmt_training.menu_reporting" id="menu_branch_report" sequence="2"
+              action="bmt_training.action_branch_report_wizard"/>
+    <menuitem name="Training Schedule Report" parent="bmt_training.menu_reporting" id="menu_training_schedule" sequence="3"
+              action="bmt_training.action_training_schedule_report_wizard"/>
+    <!--groups="base.group_system,facility.facility_manager,facility.facility_officer"-->
+
+    </data>
+</odoo>

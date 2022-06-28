@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_employee_tree_view">
+            <field name="name">usmo.employee.tree.view</field>
+            <field name="model">usmo.employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="CreatedDT"/>
+                    <field name="Deleted"/>
+                    <field name="EmployeeOfUser"/>
+                    <field name="EmploymentEndDate"/>
+                    <field name="EmploymentStartDate"/>
+                    <field name="FirstName"/>
+                    <field name="IDNumber"/>
+                    <field name="IsDisabled"/>
+                    <field name="IsMale"/>
+                    <field name="IsRural"/>
+                    <field name="LastName"/>
+                    <field name="Race"/>
+                    <field name="RowGUID"/>
+                    <field name="TelNo"/>
+                    <field name="TypeOfEmployment"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_employee_form_view">
+            <field name="name">usmo.employee.form.view</field>
+            <field name="model">usmo.employee</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="CreatedDT"/>
+                                <field name="Deleted"/>
+                                <field name="EmployeeOfUser"/>
+                                <field name="EmploymentEndDate"/>
+                                <field name="EmploymentStartDate"/>
+                                <field name="FirstName"/>
+                                <field name="IDNumber"/>
+                                <field name="IsDisabled"/>
+                                <field name="IsMale"/>
+                            </group>
+                            <group>
+                                <field name="IsRural"/>
+                                <field name="LastName"/>
+                                <field name="Race"/>
+                                <field name="RowGUID"/>
+                                <field name="TelNo"/>
+                                <field name="TypeOfEmployment"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_employee">
+            <field name="name">Usmo Employee</field>
+            <field name="res_model">usmo.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_employee" name="Usmo Employee"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_employee" sequence="50"/>
+    </data>
+</odoo>

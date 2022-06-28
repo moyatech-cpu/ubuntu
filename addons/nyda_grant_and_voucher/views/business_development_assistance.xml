@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Views for bussiness_developemnt_assistance -->
+    <record id="view_business_development_assistance_form" model="ir.ui.view">
+        <field name="name">business.development.assistance</field>
+        <field name="model">business.development.assistance</field>
+        <field name="arch" type="xml">
+            <form string="Bussiness Developemnt Assistance">
+                <sheet>
+                    <!--                    <div class="oe_button_box" name="button_box">&ndash;&gt;-->
+                    <!--                        <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">-->
+                    <!--                            <field name="is_enabled" widget="boolean_button" options='{"terminology": "archive"}'/>-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="service_item_seq"/>
+                        </group>
+                        <group>
+                            <field name="voucher_value"/>
+                            <field name="min_dur"/>
+                            <field name="partner_enquiry_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bussiness_developemnt_assistance_tree" model="ir.ui.view">
+        <field name="name">view.bussiness.developemnt.assistance.tree</field>
+        <field name="model">business.development.assistance</field>
+        <field name="arch" type="xml">
+            <tree string="Bussiness Developemnt Assistance">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="service_item_seq"/>
+                <field name="voucher_value"/>
+                <field name="min_dur"/>
+                <field name="partner_enquiry_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="voucher_bussiness_developemnt_assistance_action" model="ir.actions.act_window">
+        <field name="name">Voucher Services </field>
+        <field name="res_model">business.development.assistance</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    <record id="action_financer_type_record" model="ir.actions.act_window">-->
+<!--        <field name="name">Financer Type</field>-->
+<!--        <field name="res_model">financer.type</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+
+    <menuitem name="Service's" id="menu_bussiness_developemnt_assistance"
+              action="voucher_bussiness_developemnt_assistance_action"
+              parent="nyda_grant_and_voucher.menu_config_voucher" sequence="2"/>
+</odoo>

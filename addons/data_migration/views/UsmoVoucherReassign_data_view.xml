@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="umso_voucher_reassign_tree_view">
+            <field name="name">umso.voucher.reassign.tree.view</field>
+            <field name="model">umso.voucher.reassign</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ID"/>
+                    <field name="OriClientInvoice"/>
+                    <field name="OriExpiryDT"/>
+                    <field name="OriIssueDT"/>
+                    <field name="OriIssuedBy"/>
+                    <field name="OriIssuedNotes"/>
+                    <field name="OriUsedBy"/>
+                    <field name="OriVoucherNumber"/>
+                    <field name="ReassignDT"/>
+                    <field name="UmsoVoucher"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="umso_voucher_reassign_form_view">
+            <field name="name">umso.voucher.reassign.form.view</field>
+            <field name="model">umso.voucher.reassign</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ID"/>
+                                <field name="OriClientInvoice"/>
+                                <field name="OriExpiryDT"/>
+                                <field name="OriIssueDT"/>
+                                <field name="OriIssuedBy"/>
+                                <field name="OriIssuedNotes"/>
+                            </group>
+                            <group>
+                                <field name="OriUsedBy"/>
+                                <field name="OriVoucherNumber"/>
+                                <field name="ReassignDT"/>
+                                <field name="UmsoVoucher"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_umso_voucher_reassign">
+            <field name="name">Umso Voucher Reassign</field>
+            <field name="res_model">umso.voucher.reassign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_voucher_reassign" name="Usmo Voucher Reassign"
+                  parent="data_migration.menu_data_migration"
+                  action="action_umso_voucher_reassign" sequence="120"/>
+    </data>
+</odoo>

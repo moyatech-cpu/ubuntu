@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_finance_budget_mid_org_template">
+
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_budget_mid_org_report_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Medium Term Budget Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    
+                    <t t-if="data['department']">
+                      <h4>Department : <t t-esc="data['department']"/></h4>
+                    </t>                    
+                    <t t-if="data['branch']">
+                      <h4>Branch : <t t-esc="data['branch']"/></h4>
+                    </t>  
+                    <t t-if="data['budget_type']">
+                      <h4>Budget Type : <t t-esc="data['budget_type']"/></h4>
+                    </t>                    
+                    <br/>
+                </div>
+                <br/>
+                
+                <t t-if="data['budgets']">
+                    <div class="row">
+                        <div class="text-center p8">
+                          <t t-set="rec_no" t-value="1"/>
+                                
+                          <t t-foreach="data['budgets']" t-as="rec_data">
+                          
+                            <table style="width:50%;border: 1px solid black;border-collapse: collapse;">
+                            	<!--  
+                                <tr style="background: lightblue;">
+                                    <td class="t-left">No.</td>
+                                    <td class="t-center">
+                                        <t t-esc="rec_no"/>
+                                    </td>
+                                    <t t-set="rec_no" t-value="rec_no + 1"/>                                    
+                                </tr>
+                                -->                                
+                                <tr>
+                              		<td class="t-left">Name</td>
+                                    <td>
+                                        <t t-esc="rec_data['name']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>                
+                                	<td class="t-left">Responsible</td>                    
+                                    <td>
+                                        <t t-esc="rec_data['responsible']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>   
+                                	<td class="t-left">Department</td>                                 
+                                    <td>
+                                        <t t-esc="rec_data['department']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>        
+                                	<td class="t-left">Date From</td>                            
+                                    <td>
+                                        <t t-esc="rec_data['date_from']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>    
+                                	<td class="t-left">Date To</td>                                                                        
+                                    <td>
+                                        <t t-esc="rec_data['date_to']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>       
+                                	<td class="t-left">Budget Total</td>                             
+                                    <td>
+                                        <t t-esc="rec_data['budget_total']"/>
+                                    </td>
+                                </tr>
+                            </table>                            
+                          	<t t-set="line_no" t-value="1"/>
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Budgetary Item</th>
+                                    <th class="t-center">Project</th>
+                                    <th class="t-center">Date From</th>
+                                    <th class="t-center">Date To</th>
+                                    <th class="t-center">Year 1</th>
+                                    <th class="t-center">Year 2</th>
+                                    <th class="t-center">Year 3</th>
+                                </tr>                            
+	                            <t t-foreach="rec_data['budget_lines']" t-as="line_data">
+	                                <tr>
+	                                    <td class="t-center">
+	                                        <t t-esc="line_no"/>
+	                                    </td>
+	                                    <t t-set="line_no" t-value="line_no + 1"/>                              
+	                                    <td style="width:30%;">
+	                                        <t t-esc="line_data['general_budget_id']['name']"/>
+	                                    </td>
+	                                    <td style="width:20%;">
+	                                        <t t-esc="line_data['analytic_account_id']['name']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['date_from']"/>
+	                                    </td>                                        
+	                                    <td>
+	                                        <t t-esc="line_data['date_to']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['planned_amount']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_planned_amount_y2']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_planned_amount_y3']"/>
+	                                    </td>	                                    	                                    
+	                                </tr>
+	                            </t> 
+                            </table>
+                            <br /><br />
+	                                                      
+                            
+                          </t>
+                            
+                        </div>
+                        <div>
+                            <h4><b>Total: R <t t-esc="data['total_budget']" /></b></h4>
+                        </div>                        
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>    
+
+    </template>
+
+    <template id="report_finance_budget_mid_org">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_finance_reports.report_finance_budget_mid_org_template"/>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_finance_budget_mid_period_template">
+
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_budget_mid_org_report_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Medium Term Period Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    <h4>Period : <t t-esc="data['period']"/></h4>
+                                        
+                    <t t-if="data['department']">
+                      <h4>Department : <t t-esc="data['department']"/></h4>
+                    </t>                    
+                    <t t-if="data['branch']">
+                      <h4>Branch : <t t-esc="data['branch']"/></h4>
+                    </t>  
+                    <t t-if="data['budget_type']">
+                      <h4>Budget Type : <t t-esc="data['budget_type']"/></h4>
+                    </t>                    
+                    <br/>
+                </div>
+                <br/>
+                
+                <t t-if="data['budgets']">
+                    <div class="row">
+                        <div class="text-center p8">
+                          <t t-set="rec_no" t-value="1"/>
+                                
+                          <t t-foreach="data['budgets']" t-as="rec_data">
+                          
+                            <table style="width:50%;border: 1px solid black;border-collapse: collapse;">
+                            	<!--  
+                                <tr style="background: lightblue;">
+                                    <td class="t-left">No.</td>
+                                    <td class="t-center">
+                                        <t t-esc="rec_no"/>
+                                    </td>
+                                    <t t-set="rec_no" t-value="rec_no + 1"/>                                    
+                                </tr>
+                                -->                                
+                                <tr>
+                              		<td class="t-left">Name</td>
+                                    <td>
+                                        <t t-esc="rec_data['name']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>                
+                                	<td class="t-left">Responsible</td>                    
+                                    <td>
+                                        <t t-esc="rec_data['responsible']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>   
+                                	<td class="t-left">Department</td>                                 
+                                    <td>
+                                        <t t-esc="rec_data['department']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>        
+                                	<td class="t-left">Date From</td>                            
+                                    <td>
+                                        <t t-esc="rec_data['date_from']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>    
+                                	<td class="t-left">Date To</td>                                                                        
+                                    <td>
+                                        <t t-esc="rec_data['date_to']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>       
+                                	<td class="t-left">Budget Total</td>                             
+                                    <td>
+                                        <t t-esc="rec_data['budget_total']"/>
+                                    </td>
+                                </tr>
+                            </table>                            
+                          	<t t-set="line_no" t-value="1"/>
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Budgetary Item</th>
+                                    <th class="t-center">Project</th>
+                                    <th class="t-center">Date From</th>
+                                    <th class="t-center">Date To</th>
+                                    <th class="t-center">Period</th>
+                                </tr>                            
+	                            <t t-foreach="rec_data['budget_lines']" t-as="line_data">
+	                                <tr>
+	                                    <td class="t-center">
+	                                        <t t-esc="line_no"/>
+	                                    </td>
+	                                    <t t-set="line_no" t-value="line_no + 1"/>                              
+	                                    <td style="width:30%;">
+	                                        <t t-esc="line_data['general_budget_id']['name']"/>
+	                                    </td>
+	                                    <td style="width:20%;">
+	                                        <t t-esc="line_data['analytic_account_id']['name']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['date_from']"/>
+	                                    </td>                                        
+	                                    <td>
+	                                        <t t-esc="line_data['date_to']"/>
+	                                    </td>
+	                                    
+	                                    <t t-if="data['period'] == 'Year 1'">
+		                                    <td>
+		                                        <t t-esc="line_data['planned_amount']"/>
+		                                    </td>
+	                                    </t>
+	                                    
+	                                    <t t-if="data['period'] == 'Year 2'">
+		                                    <td>
+		                                        <t t-esc="line_data['x_planned_amount_y2']"/>
+		                                    </td>
+	                                    </t>
+	                                    
+	                                    <t t-if="data['period'] == 'Year 3'">
+		                                    <td>
+		                                        <t t-esc="line_data['x_planned_amount_y3']"/>
+		                                    </td>	
+	                                    </t>                                    	                                    
+	                                </tr>
+	                            </t> 
+                            </table>
+                            <br /><br />
+	                                                      
+                            
+                          </t>
+                            
+                        </div>
+                        <div>
+                            <h4><b>Total: R <t t-esc="data['total_budget']" /></b></h4>
+                        </div>                        
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>    
+
+    </template>
+
+    <template id="report_finance_budget_mid_period">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_finance_reports.report_finance_budget_mid_period_template"/>
+            </t>
+        </t>
+    </template>
+        
+    <template id="report_finance_budget_management_template">
+
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_budget_management_report_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Budget Management Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    
+                    <t t-if="data['department']">
+                      <h4>Department : <t t-esc="data['department']"/></h4>
+                    </t>                    
+                    <t t-if="data['branch']">
+                      <h4>Branch : <t t-esc="data['branch']"/></h4>
+                    </t>  
+                    <t t-if="data['budget_type']">
+                      <h4>Budget Type : <t t-esc="data['budget_type']"/></h4>
+                    </t>                    
+                    <br/>
+                </div>
+                <br/>
+                
+                <t t-if="data['budgets']">
+                    <div class="row">
+                        <div class="text-center p8">
+                          <t t-set="rec_no" t-value="1"/>
+                                
+                          <t t-foreach="data['budgets']" t-as="rec_data">
+                          
+                            <table style="width:50%;border: 1px solid black;border-collapse: collapse;">
+                            	<!--  
+                                <tr style="background: lightblue;">
+                                    <td class="t-left">No.</td>
+                                    <td class="t-center">
+                                        <t t-esc="rec_no"/>
+                                    </td>
+                                    <t t-set="rec_no" t-value="rec_no + 1"/>                                    
+                                </tr>
+                                -->                                
+                                <tr>
+                              		<td class="t-left">Name</td>
+                                    <td>
+                                        <t t-esc="rec_data['name']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>                
+                                	<td class="t-left">Responsible</td>                    
+                                    <td>
+                                        <t t-esc="rec_data['responsible']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>   
+                                	<td class="t-left">Department</td>                                 
+                                    <td>
+                                        <t t-esc="rec_data['department']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>        
+                                	<td class="t-left">Date From</td>                            
+                                    <td>
+                                        <t t-esc="rec_data['date_from']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>    
+                                	<td class="t-left">Date To</td>                                                                        
+                                    <td>
+                                        <t t-esc="rec_data['date_to']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>       
+                                	<td class="t-left">Budget Total</td>                             
+                                    <td>
+                                        <t t-esc="rec_data['budget_total']"/>
+                                    </td>
+                                </tr>
+                            </table>                            
+                          	<t t-set="line_no" t-value="1"/>
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Budgetary Item</th>
+                                    <th class="t-center">Project</th>
+                                    <th class="t-center">Date From</th>
+                                    <th class="t-center">Date To</th>
+                                    <th class="t-center">Planned Amount</th>
+                                    <th class="t-center">Payment Interval</th>
+                                </tr>                            
+	                            <t t-foreach="rec_data['budget_lines']" t-as="line_data">
+	                                <tr>
+	                                    <td class="t-center">
+	                                        <t t-esc="line_no"/>
+	                                    </td>
+	                                    <t t-set="line_no" t-value="line_no + 1"/>                              
+	                                    <td style="width:30%;">
+	                                        <t t-esc="line_data['general_budget_id']['name']"/>
+	                                    </td>
+	                                    <td style="width:20%;">
+	                                        <t t-esc="line_data['analytic_account_id']['name']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['date_from']"/>
+	                                    </td>                                        
+	                                    <td>
+	                                        <t t-esc="line_data['date_to']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['planned_amount']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_payment_interval']"/>
+	                                    </td>	                                    
+	                                </tr>
+	                            </t> 
+                            </table>
+                            <br /><br />
+	                                                      
+                            
+                          </t>
+                            
+                        </div>
+                        <div>
+                            <h4><b>Total: R <t t-esc="data['total_budget']" /></b></h4>
+                        </div>                        
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>    
+
+    </template>
+
+    <template id="report_finance_budget_management">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_finance_reports.report_finance_budget_management_template"/>
+            </t>
+        </t>
+    </template>
+ 
+ 
+     <template id="report_finance_budget_expenditure_template">
+
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_budget_management_report_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Budget Expenditure Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    
+                    <t t-if="data['department']">
+                      <h4>Department : <t t-esc="data['department']"/></h4>
+                    </t>                    
+                    <t t-if="data['branch']">
+                      <h4>Branch : <t t-esc="data['branch']"/></h4>
+                    </t>  
+                    <t t-if="data['budget_type']">
+                      <h4>Budget Type : <t t-esc="data['budget_type']"/></h4>
+                    </t>                    
+                    <br/>
+                </div>
+                <br/>
+                
+                <t t-if="data['budgets']">
+                    <div class="row">
+                        <div class="text-center p8">
+                          <t t-set="rec_no" t-value="1"/>
+                                
+                          <t t-foreach="data['budgets']" t-as="rec_data">
+                          
+                            <table style="width:50%;border: 1px solid black;border-collapse: collapse;">
+                            	<!--  
+                                <tr style="background: lightblue;">
+                                    <td class="t-left">No.</td>
+                                    <td class="t-center">
+                                        <t t-esc="rec_no"/>
+                                    </td>
+                                    <t t-set="rec_no" t-value="rec_no + 1"/>                                    
+                                </tr>
+                                -->                                
+                                <tr>
+                              		<td class="t-left">Name</td>
+                                    <td>
+                                        <t t-esc="rec_data['name']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>                
+                                	<td class="t-left">Responsible</td>                    
+                                    <td>
+                                        <t t-esc="rec_data['responsible']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>   
+                                	<td class="t-left">Department</td>                                 
+                                    <td>
+                                        <t t-esc="rec_data['department']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>        
+                                	<td class="t-left">Date From</td>                            
+                                    <td>
+                                        <t t-esc="rec_data['date_from']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>    
+                                	<td class="t-left">Date To</td>                                                                        
+                                    <td>
+                                        <t t-esc="rec_data['date_to']"/>
+                                    </td>
+                                </tr>                                
+                                <tr>       
+                                	<td class="t-left">Budget Total</td>                             
+                                    <td>
+                                        <t t-esc="rec_data['budget_total']"/>
+                                    </td>
+                                </tr>
+                            </table>                            
+                          	<t t-set="line_no" t-value="1"/>
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Budgetary Item</th>
+                                    <th class="t-center">Project</th>
+                                    <!--  
+                                    <th class="t-center">Date From</th>
+                                    <th class="t-center">Date To</th>
+                                    -->
+                                    <th class="t-center">Planned Amount</th>
+                                    <th class="t-center">Payment Interval</th>
+                                    <th class="t-center">Amount Spent</th>
+                                    <th class="t-center">Percentage Spent</th>
+                                </tr>                            
+	                            <t t-foreach="rec_data['budget_lines']" t-as="line_data">
+	                                <tr>
+	                                    <td class="t-center">
+	                                        <t t-esc="line_no"/>
+	                                    </td>
+	                                    <t t-set="line_no" t-value="line_no + 1"/>                              
+	                                    <td style="width:30%;">
+	                                        <t t-esc="line_data['general_budget_id']['name']"/>
+	                                    </td>
+	                                    <td style="width:20%;">
+	                                        <t t-esc="line_data['analytic_account_id']['name']"/>
+	                                    </td>
+	                                    <!--
+	                                    <td>
+	                                        <t t-esc="line_data['date_from']"/>
+	                                    </td>                                        
+	                                    <td>
+	                                        <t t-esc="line_data['date_to']"/>
+	                                    </td>
+	                                    -->
+	                                    <td>
+	                                        <t t-esc="line_data['planned_amount']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['x_payment_interval']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['practical_amount']"/>
+	                                    </td>
+	                                    <td>
+	                                        <t t-esc="line_data['percentage']"/>
+	                                    </td>	                                    	                                    	                                    
+	                                </tr>
+	                            </t> 
+                            </table>
+                            <br /><br />
+	                                                      
+                            
+                          </t>
+                            
+                        </div>
+                        <div>
+                            <h4><b>Total: R <t t-esc="data['total_budget']" /></b></h4>
+                        </div>                        
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>    
+
+    </template>
+
+    <template id="report_finance_budget_expenditure">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_finance_reports.report_finance_budget_expenditure_template"/>
+            </t>
+        </t>
+    </template>
+    
+ 
+</odoo>

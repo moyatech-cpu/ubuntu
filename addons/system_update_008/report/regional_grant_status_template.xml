@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_regional_grant_status_document">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_regional_grant_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Regional Status Per Branch Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    <h4>Region : <t t-esc="data['region']"/></h4>
+                    <br/>
+                </div>
+                <br/>
+                <!--Table for Status Per Branch-->
+                <t t-if="data['grant']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">No.</th>
+                                    <th class="t-center">Name</th>
+                                    <th class="t-center">Surname</th>
+                                    <th class="t-center">Branch</th>
+                                    <th class="t-center">Approved</th>
+                                    <th class="t-center">Declined</th>
+                                    <th class="t-center">Paid</th>
+                                    <th class="t-center">Cancelled</th>
+                                    <th class="t-center">Branch Total</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                <t t-set="app" t-value="0"/>
+                                <t t-set="dec" t-value="0"/>
+                                <t t-set="paid" t-value="0"/>
+                                <t t-set="can" t-value="0"/>
+                                <t t-set="total" t-value="0"/>
+                                <t t-foreach="data['grant']" t-as="rec_data">
+                                    <tr>
+                                        <td class="t-center">
+                                            <t t-esc="rec_no"/>
+                                        </td>
+                                        <t t-set="rec_no" t-value="rec_no + 1"/>
+                                        <td>
+                                            <t t-esc="rec_data['branch']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['name']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['surname']"/>
+                                        </td>                                    
+                                        <td>
+                                            <t t-if="data['show']=='grant_values'">R </t><t t-esc="rec_data['approved']"/>
+                                        </td>
+                                        <td>
+                                          	<t t-if="data['show']=='grant_values'">R </t><t t-esc="rec_data['declined']"/>
+                                        </td>
+                                        <td>
+                                           	<t t-if="data['show']=='grant_values'">R </t><t t-esc="rec_data['paid']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['show']=='grant_values'">R </t><t t-esc="rec_data['cancelled']"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="data['show']=='grant_values'">R </t><t t-esc="rec_data['total']"/>
+                                        </td>
+                                        <t t-set="app" t-value="app + rec_data['approved']"/>
+                                        <t t-set="dec" t-value="dec + rec_data['declined']"/>
+                                        <t t-set="can" t-value="can + rec_data['cancelled']"/>
+                                        <t t-set="paid" t-value="paid + rec_data['paid']"/>
+                                        <t t-set="total" t-value="total + rec_data['total']"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th colspan="2" class="t-right">Status Total</th>
+                                    
+                                    <td class="r-color">
+                                        <b><t t-if="data['show']=='grant_values'">R </t><t t-esc="app"/></b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b><t t-if="data['show']=='grant_values'">R </t><t t-esc="dec"/></b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b><t t-if="data['show']=='grant_values'">R </t><t t-esc="paid"/></b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b><t t-if="data['show']=='grant_values'">R </t><t t-esc="can"/></b>
+                                    </td>
+                                    <td class="r-color">
+                                        <b><t t-if="data['show']=='grant_values'">R </t><t t-esc="total"/></b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4><b>Report Total:<t t-if="data['show']=='grant_values'">R </t> <t t-esc="total"/></b></h4>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Records.</h3>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+    
+    <template id="regional_report_grant_status">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="system_update_008.report_regional_grant_status_document"/>
+            </t>
+        </t>
+    </template>
+    
+    
+  </odoo>

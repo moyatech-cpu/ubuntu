@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Aftercare Report Wizard Form View-->
+    <record model="ir.ui.view" id="aftercare_report_wizard_form_view">
+        <field name="name">aftercare.report.wizard.form.view</field>
+        <field name="model">aftercare.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <!--<field name="all_branch"/>-->
+                    <!--<field name="branch_id" options="{'no_open': True, 'no_create': True}" required="1"/>-->
+                    <field name="all_branch"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}"
+                           attrs="{'required': [('all_branch', '=', False)]}"/>
+                </group>
+                <footer>
+                    <button string="Download Aftercare Report" name="get_aftercare_report" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Aftercare Report Wizard -->
+    <record model="ir.actions.act_window" id="action_aftercare_report_wizard">
+        <field name="name">Aftercare Report Wizard</field>
+        <field name="res_model">aftercare.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menu for Aftercare Report
+    <menuitem name="Aftercare Results" parent="nyda_grant_and_voucher.reporting_status"
+              id="menu_aftercare_report" sequence="31"
+              action="nyda_grant_and_voucher.action_aftercare_report_wizard"/>
+	-->
+    </data>
+</odoo>

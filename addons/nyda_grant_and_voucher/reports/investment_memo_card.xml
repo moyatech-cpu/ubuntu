@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_investment_cards">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <style>
+                        table, th, td {
+                        padding: 10px;
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        }
+                    </style>
+                    <div class="page">
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <div>
+                                <h1 align="center">ENTERPRISE FINANCE:</h1>
+                                <h1 align="center">GRANT PROGRAMME</h1>
+                                    <h1 align="center">
+                                        <p style="font-size:39px;" align="center" t-field="o.business_name"></p>
+                                    </h1>
+
+
+                            </div>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <h2 align="center">GRANT MEMORANDUM</h2>
+
+                        </div>
+                        <div>
+
+                            <h3 align="center">DOCUMENT NUMBER: </h3>
+                            <h1 align="center">
+                                <p style="font-size:24px;" align="center" t-field="o.document_number"></p>
+                            </h1>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <h1 align="center"></h1>
+                            <h1 align="center">
+                                <p style="font-size:24px;" align="center" t-field="o.document_present_date"></p>
+                            </h1>
+                        </div>
+                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                        <div>
+                            <div class="col-md-6" style="margin:auto">
+                                <h4><strong>GRANT MEMORANDUM</strong></h4>
+                                <table class="table table-condensed" style="border: 3px solid black !important;">
+                                    <tr>
+                                        <td>City/Area</td>
+                                        <td>
+                                            <p t-field="o.city_area"></p>
+                                        </td>
+                                        <td>Province</td>
+                                        <td>
+                                            <p t-field="o.province"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+<!--                                        <td>Project Name</td>-->
+<!--                                        <td>-->
+<!--                                            <p t-field="o.project_name"></p>-->
+<!--                                        </td>-->
+                                        <td>Company/Individual</td>
+                                        <td>
+                                            <p t-field="o.company_individual"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sector</td>
+                                        <td>
+                                            <p t-field="o.sector"></p>
+                                        </td>
+                                        <td>Activity</td>
+                                        <td>
+                                            <p t-field="o.activity"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Product</td>
+                                        <td>
+                                            <p t-field="o.product"></p>
+                                        </td>
+                                        <td>Grant Officer/CDF Officer</td>
+                                        <td>
+                                            <p t-field="o.grant_officer.name"></p>
+                                        </td>
+                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <td></td>-->
+<!--                                        <td></td>-->
+<!--&lt;!&ndash;                                        <td>Source</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <p t-field="o.source"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </td>&ndash;&gt;-->
+<!--                                    </tr>-->
+                                    <tr>
+                                        <td>Amount</td>
+                                        <td>
+                                            <p t-field="o.amount"></p>
+                                        </td>
+                                        <td>Branch Manager</td>
+                                        <td>
+                                            <p t-field="o.branch_manager"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+<!--                                        <td>Date</td>-->
+<!--                                        <td>-->
+<!--                                            <p t-field="o.date"></p>-->
+<!--                                        </td>-->
+                                        <td>Chairperson</td>
+                                        <td>
+                                            <p t-field="o.chairperson"></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <tr>
+                                <td><strong>EXECUTIVE SUMMARY</strong></td>
+                                <td></td>
+                            </tr>
+                            <br></br>
+                            <tr>
+                                <td><strong>Transaction Overview:</strong></td>
+                                <td>
+                                    <p t-field="o.business_name"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>project Description:</strong></td>
+                                <td>
+                                    <p t-field="o.business_name"></p>
+                                </td>
+                            </tr>
+
+                            <th><strong>Summary Proposal:</strong></th>
+                            <table class="table table-condensed" style="border: 3px solid black !important;">
+                                <tr>
+                                    <td>
+                                        <h5><strong>PROPOSED APPLICATION OF FUNDS:</strong></h5>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Stock</td>
+                                    <td>
+                                        <p t-field="o.stock"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Working capital</td>
+                                    <td>
+                                        <p t-field="o.working_capital"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Equipment</td>
+                                    <td>
+                                        <p t-field="o.equipment"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TOTAL GRANT AMOUNT REQUIRED</strong></td>
+                                    <td><strong><p t-field="o.total_grant"></p></strong></td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4><strong>POLICY &amp; PROGRAMME FIT</strong></h4>
+                            <table class="table table-condensed" style="border: 3px solid black !important;">
+
+                                <tr>
+                                    <th>Programme Elements</th>
+                                    <th>NYDA Requirement</th>
+                                    <th>Actual</th>
+                                </tr>
+                                <tr>
+                                    <td>Stage of business</td>
+                                    <td>Must be Nascent or New business</td>
+                                    <td>Meets definition 100%</td>
+                                </tr>
+                                <tr>
+                                    <td>Youth shareholding</td>
+                                    <td>100% Youth Owned</td>
+                                    <td>100% Youth Owned</td>
+                                </tr>
+                                <tr>
+                                    <td>Operational involvement</td>
+                                    <td>Sponsor(s) actives</td>
+                                    <td>Sponsor is active</td>
+                                </tr>
+                                <tr>
+                                    <td>Grant size</td>
+                                    <td>R&lt;100,000
+                                    </td>
+                                    <td>R0</td>
+                                </tr>
+                                <tr>
+                                    <td>Profitable</td>
+                                    <td>Must be profitable</td>
+                                    <td>Cash Flow Projections are positive</td>
+                                </tr>
+                            </table>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <tr>
+                                <td>
+                                    <h5><strong>NYDA Role:</strong></h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <p t-field="o.nyda_role"></p>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5><strong>Youth Employment:</strong></h5>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <p t-field="o.employement"></p>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <h4><strong>SPONSORS, MANAGEMENT &amp; EMPLOYEES</strong></h4>
+                            <tr>
+                                <td><strong>The Sponsor:</strong></td>
+                                <td>
+                                    <p t-field="o.sponser"></p>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Management team:</strong></td>
+                                <td>
+                                        <p t-field="o.management_team"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Employees:</strong></td>
+                                <td>
+                                    <p t-field="o.employees"></p>
+
+                                </td>
+                            </tr>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <h4>
+                                <strong><p style="font-size:22px;" t-field="o.sponser">PERSONAL BALANCE SHEET:</p></strong>
+                            </h4>
+                            <table class="table table-condensed" style="border: 3px solid black !important;">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Assets</th>
+                                    <th>Description</th>
+                                    <th>Liabilities</th>
+                                </tr>
+                                <tr>
+                                    <td>Residential Property</td>
+                                    <td>
+                                        <p t-field="o.residential_property"></p>
+                                    </td>
+                                    <td>Bond</td>
+                                    <td>
+                                        <p t-field="o.bond"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Motor vehicle</td>
+                                    <td>
+                                        <p t-field="o.motor_vehicle"></p>
+                                    </td>
+                                    <td>HP balance</td>
+                                    <td>
+                                        <p t-field="o.hp_balance"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Personal effects</td>
+                                    <td>
+                                        <p t-field="o.personal_effects"></p>
+                                    </td>
+                                    <td>Personal Loan</td>
+                                    <td>
+                                        <p t-field="o.personal_loan"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cash</td>
+                                    <td>
+                                        <p t-field="o.cash"></p>
+                                    </td>
+                                    <td>Credit Card</td>
+                                    <td>
+                                        <p t-field="o.credit_card"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Business Interest (Zibusele construction &amp; BMF)</td>
+                                    <td>
+                                        <p t-field="o.business_interest"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>
+                                        <p t-field="o.others_asset"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Total</h5>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.total_asset"></p>
+                                    </td>
+                                    <td>
+                                        <h5>Total</h5>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.total_liabilities"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4>Net Worth</h4>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.net_total"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <br></br><br></br><br></br><br></br><br></br><br></br>
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <h4><strong>SPONSOR’S INCOME &amp; EXPENDITURE STATEMENT:</strong></h4>
+                            <table class="table table-condensed" style="border: 3px solid black !important;">
+
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Income</th>
+                                    <th>Description</th>
+                                    <th>Expenditure</th>
+                                </tr>
+                                <tr>
+                                    <td>Owner’s Net Salar</td>
+                                    <td>
+                                        <p t-field="o.owner_net_sal"></p>
+                                    </td>
+                                    <td>Rent</td>
+                                    <td>
+                                        <p t-field="o.rent"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Spouse’s Net Salary</td>
+                                    <td>
+                                        <p t-field="o.spouse_net_sal"></p>
+                                    </td>
+                                    <td>Water &amp; Lights</td>
+                                    <td>
+                                        <p t-field="o.water_light"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Groceries</td>
+                                    <td>
+                                        <p t-field="o.groceries"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Clothing</td>
+                                    <td>
+                                        <p t-field="o.clothing"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Medical expenses</td>
+                                    <td>
+                                        <p t-field="o.medical_expences"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Membership</td>
+                                    <td>
+                                        <p t-field="o.membership"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>School Fees</td>
+                                    <td>
+                                        <p t-field="o.school_fees"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>DSTV</td>
+                                    <td>
+                                        <p t-field="o.dstv"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Insurance Policies</td>
+                                    <td>
+                                        <p t-field="o.insurance_policy"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Furniture Accounts</td>
+                                    <td>
+                                        <p t-field="o.furniture_accounts"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Travel/ Petrol</td>
+                                    <td>
+                                        <p t-field="o.travel"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Telephone</td>
+                                    <td>
+                                        <p t-field="o.telephone"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Entertainment</td>
+                                    <td>
+                                        <p t-field="o.entertainment"></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <h4>Total Salary</h4>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.total_sal"></p>
+                                    </td>
+                                    <td>
+                                        <h4>Total Expenditure</h4>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.total_expen"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4>Disposable Income</h4>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.disposable_income"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+                        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+                        <div>
+                            <h4><strong>SOURCE AND APPLICATION OF FUNDS</strong></h4>
+                            <table>
+                                <tr>
+                                    <td><strong>Source of Funds</strong></td>
+                                    <td></td>
+                                    <td><strong>Application of funds</strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Member’s contr</td>
+                                    <td>
+                                        <p t-field="o.member_contr"></p>
+                                    </td>
+                                    <td><strong>Fixed assets</strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>NYDA funding</td>
+                                    <td>
+                                        <p t-field="o.nyda_funding"></p>
+                                    </td>
+                                    <td>Equipment</td>
+                                    <td>
+                                        <p t-field="o.equipment_fund"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Motor vehicles</td>
+                                    <td>
+                                        <p t-field="o.motor_veh"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Working Capital</strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Rental</td>
+                                    <td>
+                                        <p t-field="o.rental"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Salaries</td>
+                                    <td>
+                                        <p t-field="o.salaries"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Stock</td>
+                                    <td>
+                                        <p t-field="o.stock_cap"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Source of Funds</strong></td>
+                                    <td>
+                                        <p t-field="o.total_fund"></p>
+                                    </td>
+                                    <td><strong>Total App of Funds</strong></td>
+                                    <td>
+                                        <p t-field="o.tot_app_funds"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Grand Total</strong></td>
+                                    <td>
+                                        <p t-field="o.source_app_tot"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div>
+                            <h4><strong>PROPOSED TERMS</strong></h4>
+                            <table class="table table-condensed" style="border: 3px solid black !important;">
+
+
+                                <tr>
+                                    <th>GRANT</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        KEY TERMS
+                                    </th>
+                                    <th colspan="3">
+                                        DETAILS
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Grant Amount
+                                    </td>
+                                    <td colspan="3">
+                                        <p t-field="o.grant_amount"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Tenure
+                                    </td>
+                                    <td colspan="3">
+                                        <p t-field="o.tenure"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Start date
+                                    </td>
+                                    <td colspan="3">
+                                        <p t-field="o.start_date"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Estimated due date
+                                    </td>
+                                    <td colspan="3">
+                                        <p t-field="o.est_due_date"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Additional Conditions
+                                    </td>
+                                    <td colspan="3">
+                                        <p t-field="o.add_condit"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" rowspan="3">
+                                        Disbursement
+                                    </td>
+                                    <td colspan="3" rowspan="3">
+                                        <ul>
+
+                                            <li>Funds to purchase equipment to be paid directly to the
+                                                suppliers
+                                                of
+                                                equipment;
+                                            </li>
+                                            <li>The funds for stock to be paid directly to the farmers who
+                                                will
+                                                supply the
+                                                business with livestock;
+                                            </li>
+                                            <li>The funds to purchase vehicle (truck)to be made directly to
+                                                the
+                                                motor
+                                                vehicle dealer;
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br></br><br></br>
+                        <div>
+                            <tr>
+                                <td><strong>MARKET REVIEW</strong></td>
+                                <td>
+                                    <p t-field="o.strengths"></p>
+                                </td>
+                            </tr>
+                        </div>
+                        <br></br><br></br><br></br>
+                        <div>
+                            <h4><strong>SWOT ANALYSIS</strong></h4>
+                            <table class="table table-condensed" style="border: 3px solid black !important;">
+
+
+                                <tr>
+                                    <th>STRENGTHS</th>
+                                    <td>
+                                        <p t-field="o.strengths"></p>
+                                    </td>
+                                    <th>WEAKNESSES</th>
+                                    <td>
+                                        <p t-field="o.weakness"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>OPPORTUNITIES</th>
+                                    <td>
+                                        <p t-field="o.opportunities"></p>
+                                    </td>
+                                    <th>THREATS</th>
+                                    <td>
+                                        <p t-field="o.threats"></p>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div>
+                            <h4><strong>DUE DILIGENCE FINDINGS</strong></h4>
+                            <table>
+
+
+                                <tr>
+                                    <td><strong>
+                                        Credit Checks:</strong>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.credit_check"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Company Check:</strong>
+                                    </td>
+                                    <td>
+                                        A company credit check was done and no judgements or defaults reported
+                                        on the business. A valid tax clearance certificate for the business has
+                                        been provided.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Business Premises:</strong>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.business_premises"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Human Resource:</strong>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.human_resource"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><strong>
+                                        Compliance:</strong>
+                                    </th>
+                                    <td>
+                                        <p t-field="o.compliance"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Integration with other NYDA products &amp; services:</strong>
+                                    </td>
+                                    <td>
+                                        <p t-field="o.int_oth_pro_ser"></p>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div>
+                            <h4><strong>RISK ANALYSIS</strong></h4>
+                            <table>
+
+                                <tr>
+                                    <th>
+                                        Financial controls
+                                    </th>
+                                    <td>
+                                        <p t-field="o.financial_control"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Pilferage
+                                    </th>
+                                    <td>
+                                        <p t-field="o.pilferage"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Stock Obsolescence
+                                    </th>
+                                    <td>
+                                        <p t-field="o.stock_obsolescence"></p>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div>
+                            <h4><strong>FINANCIAL ANALYSIS</strong></h4>
+                            <table>
+
+                                <tr>
+                                    <th>
+                                        Revenues
+                                    </th>
+                                    <td>
+                                        <p t-field="o.revenues"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Cost of Sales &amp; GP %
+                                    </th>
+                                    <td>
+                                        <p t-field="o.sales_cost_gp"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        RENT
+                                    </th>
+                                    <td>
+                                        <p t-field="o.rent_analy"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        SALARY AND WAGES
+                                    </th>
+                                    <td>
+                                        <p t-field="o.salary_wages"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        RECOMMENDATION
+                                    </th>
+                                    <td>
+                                        <p t-field="o.recommendation"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        The transaction has the following salient attributes:
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p t-field="o.transaction"></p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p t-field="o.transaction"></p>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+                        <br></br>
+
+
+                        <div>
+                            <h4><strong>STATS SHEET</strong></h4>
+                            <h5><strong>Company Details</strong></h5>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Company Name
+                                    </td>
+                                    <td>
+                                        <p t-field="o.company_name"></p>
+                                    </td>
+                                    <td>Company Reg. No.</td>
+                                    <td>
+                                        <p t-field="o.comp_reg_no"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Trading as (t/a)
+                                    </td>
+                                    <td>
+                                        <p t-field="o.trading_as"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Member’s Names
+                                    </td>
+                                    <td>
+                                        <p t-field="o.member_names"></p>
+                                    </td>
+                                    <td>Member’s ID No.</td>
+                                    <td>
+                                        <p t-field="o.member_id_no"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Interest
+                                    </td>
+                                    <td>
+                                        <p t-field="o.interest"></p>
+                                    </td>
+                                    <td>Member’s Gender</td>
+                                    <td>
+                                        <p t-field="o.gender"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Key (default) Person
+                                    </td>
+                                    <td>
+                                        <p t-field="o.key_person"></p>
+                                    </td>
+                                    <td>Member’s Race</td>
+                                    <td>
+                                        <p t-field="o.member_race"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Company Dom cilium
+                                    </td>
+                                    <td>
+                                        <p t-field="o.company_domcilium"></p>
+                                    </td>
+                                    <td>Year end</td>
+                                    <td>
+                                        <p t-field="o.year_end"></p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h5><strong>Company Contact Information</strong></h5>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Contact person
+                                    </td>
+                                    <td>
+                                        <p t-field="o.contact_person"></p>
+                                    </td>
+                                    <td></td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Tel. work
+                                    </td>
+                                    <td>
+                                        <p t-field="o.tel_work"></p>
+                                    </td>
+                                    <td>Fax. Work</td>
+                                    <td>
+                                        <p t-field="o.fax_work"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Postal Address
+                                    </td>
+                                    <td>
+                                        <p t-field="o.post_address"></p>
+                                    </td>
+                                    <td>Physical Address</td>
+                                    <td>
+                                        <p t-field="o.phy_address"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Cell Number
+                                    </td>
+                                    <td>
+                                        <p t-field="o.cell_number"></p>
+                                    </td>
+                                    <td>Tel. Home</td>
+                                    <td>
+                                        <p t-field="o.tel_home"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        E-mail
+                                    </td>
+                                    <td>
+                                        <p t-field="o.email"></p>
+                                    </td>
+                                    <td>Web site</td>
+                                    <td>
+                                        <p t-field="o.web_site"></p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h5><strong>Business Details</strong></h5>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Industry
+                                    </td>
+                                    <td>
+                                        <p t-field="o.industry"></p>
+                                    </td>
+                                    <td>Activity</td>
+                                    <td>
+                                        <p t-field="o.stat_activity"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Province
+                                    </td>
+                                    <td>
+                                        <p t-field="o.stat_province"></p>
+                                    </td>
+                                    <td>Town</td>
+                                    <td>
+                                        <p t-field="o.stat_town"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Employees:
+                                    </th>
+                                    <td>
+
+                                    </td>
+                                    <td>HDP</td>
+                                    <td>
+                                        <p t-field="o.hdp"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Existing
+                                    </td>
+                                    <td>
+                                        <p t-field="o.emp_exist"></p>
+                                    </td>
+                                    <td>Youth</td>
+                                    <td>
+                                        <p t-field="o.youth"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        New
+                                    </td>
+                                    <td>
+                                        <p t-field="o.emp_new"></p>
+                                    </td>
+                                    <td>Gender</td>
+                                    <td>
+                                        <p t-field="o.gender_bus_det"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Cost per job
+                                    </td>
+                                    <td>
+                                        <p t-field="o.cost_per_job"></p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <h5><strong>Timelines:</strong></h5>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Date appl. received
+                                    </td>
+                                    <td>
+                                        <p t-field="o.t_app_rec_date"></p>
+                                    </td>
+                                    <td>Source</td>
+                                    <td>
+                                        <p t-field="o.timeline_source"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Due diligence date
+                                    </td>
+                                    <td>
+                                        <p t-field="o.t_due_diligence_date"></p>
+                                    </td>
+                                    <td>Grants/CDF Officer</td>
+                                    <td>
+                                        <p t-field="o.grants_cdf_Officer"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Approval Date
+                                    </td>
+                                    <td>
+                                        <p t-field="o.approval_date"></p>
+                                    </td>
+                                    <td>Stage of business</td>
+                                    <td>
+                                        <p t-field="o.t_stage_of_business"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>PTS Project Number</td>
+                                    <td>
+                                        <p t-field="o.pts_project_number"></p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h4><strong>Facility Details:</strong></h4>
+                            <br></br>
+
+                            <h5><strong>Grant</strong></h5>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        Loan Amount
+                                    </td>
+                                    <td>
+                                        <p t-field="o.loan_amount"></p>
+                                    </td>
+                                    <td>Period</td>
+                                    <td>
+                                        <p t-field="o.period"></p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h5><strong>Disbursement Method</strong></h5>
+                            <br></br>
+                            <tr>
+                                <td>
+                                    <h6><strong>Suppliers</strong></h6>
+                                </td>
+                                <td><p t-field="o.suppliers"></p></td>
+                            </tr>
+                            <table>
+                                <tr>
+                                    <td>Account Name:</td>
+                                    <td><p t-field="o.s_account_name"></p> </td>
+                                </tr>
+                                <tr>
+                                    <td>Bank Name:</td>
+                                    <td><p t-field="o.s_bank_name"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Branch Name:</td>
+                                    <td><p t-field="o.s_branch_name"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Account number:</td>
+                                    <td><p t-field="o.s_account_number"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Branch number:</td>
+                                    <td><p t-field="o.s_branch_number"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Account type</td>
+                                    <td><p t-field="o.s_account_type"></p></td>
+                                </tr>
+                            </table>
+
+                            <br></br>
+                            <tr>
+                                <td>
+                                    <h6><strong>Working Capital</strong></h6>
+                                </td>
+                                <td><p t-field="o.w_working_capital"></p></td>
+                            </tr>
+                            <table>
+                                <tr>
+                                    <td>Account Name:</td>
+                                    <td><p t-field="o.w_account_name"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Bank Name:</td>
+                                    <td><p t-field="o.w_bank_name"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Branch Name:</td>
+                                    <td><p t-field="o.w_branch_name"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Account number:</td>
+                                    <td><p t-field="o.w_account_number"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Branch number:</td>
+                                    <td><p t-field="o.w_branch_number"></p></td>
+                                </tr>
+                                <tr>
+                                    <td>Account type</td>
+                                    <td><p t-field="o.w_account_type"></p></td>
+                                </tr>
+                            </table>
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td>Suppliers</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.suppliers"></p>-->
+<!--                                    </td>-->
+<!--                                    <td>Account Name:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.s_account_name"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Bank Name:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.s_bank_name"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Branch Name:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.s_branch_name"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Account number:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.s_account_number"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Branch number:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.s_branch_number"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Account type</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.s_account_type"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Working capital</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_working_capital"></p>-->
+<!--                                    </td>-->
+<!--                                    <td>Account Name:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_account_name"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Bank Name:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_bank_name"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Branch Name:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_branch_name"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Account number:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_account_number"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Branch number:</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_branch_number"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td>Account type</td>-->
+<!--                                    <td>-->
+<!--                                        <p t-field="o.w_account_type"></p>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+
+
+<!--                            </table>-->
+
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="report_investment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nyda_grant_and_voucher.report_investment_cards"/>
+            </t>
+        </t>
+    </template>
+</odoo>

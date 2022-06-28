@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  
+ 	<record id="view_banking_details_view" model="ir.ui.view">
+		<field name="name">Banking Details</field>
+        <field name="model">bank.account</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+           <form string="Users">
+           	<header>
+           	
+           	</header>
+           	<sheet>
+           		<group>
+				<div class="col-md-6 oe_title">
+                      <label for="UniqueRegistrationReferenceNumber" string="Serial #"/>
+                      <h1>
+                          <field name="supplier_identification" readonly="1"/>
+                      </h1>
+                </div>
+                </group>
+                <group>
+                <field name="user_id" invisible="True"/>
+           		<field name="IsActive"/>
+<field name="LastVerficationDate"/>
+<field name="EditDate"/>
+<field name="IsPreferred"/>
+<field name="CreatedDate"/>
+<field name="BankAccountID"/>
+<field name="IsForeignBankAccount"/>
+<field name="AccountHolder"/>
+<field name="BankAccountTypeCode"/>
+<field name="BankName"/>
+<field name="BankCode"/>
+<field name="BranchName"/>
+<field name="BranchNumber"/>
+<field name="AccountNumber"/>
+<field name="BankAccountStatusCode"/>
+<field name="BankAccountVerificationDate"/>
+<field name="AddressLine1"/>
+<field name="AddressLine2"/>
+<field name="CountryCode"/>
+<field name="ZipCode"/>
+<field name="FirstName"/>
+<field name="Initials"/>
+<field name="LastName"/>
+<field name="Title"/>
+<field name="IsIdentifierLinkedAtBank"/>
+<field name="IsSharedFundingAccount"/>
+<field name="FundingContacts"/>
+           		
+
+</group>
+           	</sheet>
+          </form> 
+        </field>
+    </record>
+    <record id="view_banking_details_tree" model="ir.ui.view">
+        <field name="name">Banking Details</field>
+        <field name="model">bank.account</field>
+        <field name="arch" type="xml">
+            <tree string="Banking Details">
+
+<field name="IsActive"/>
+<field name="LastVerficationDate"/>
+<field name="EditDate"/>
+<field name="IsPreferred"/>
+<field name="CreatedDate"/>
+<field name="BankAccountID"/>
+<field name="IsForeignBankAccount"/>
+<field name="AccountHolder"/>
+<field name="BankAccountTypeCode"/>
+<field name="BankName"/>
+<field name="BankCode"/>
+<field name="BranchName"/>
+<field name="BranchNumber"/>
+<field name="AccountNumber"/>
+<field name="BankAccountStatusCode"/>
+<field name="BankAccountVerificationDate"/>
+<field name="AddressLine1"/>
+<field name="AddressLine2"/>
+<field name="CountryCode"/>
+<field name="ZipCode"/>
+<field name="FirstName"/>
+<field name="Initials"/>
+<field name="LastName"/>
+<field name="Title"/>
+<field name="IsIdentifierLinkedAtBank"/>
+<field name="IsSharedFundingAccount"/>
+<field name="FundingContacts"/>
+
+
+        	</tree>
+        </field>
+    </record>
+    
+    <record id="action_banking_details" model="ir.actions.act_window">
+        <field name="name">Banking Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bank.account</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain"></field>
+    </record>
+	
+	<menuitem name="Banking Details" id="csd_integration.banking_details_menu" action="action_banking_details" parent="csd_integration.supplier_details_menu" groups="base.group_system"/>
+    
+</odoo>

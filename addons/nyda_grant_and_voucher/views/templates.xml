@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Template for not recommended page -->
+    <template id="not_recommended_yet" name="Not Recommended">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <!--<h2>You cannot apply for
+                        <t t-esc="application_type.capitalize()"/>
+                        until your pre-assessment application is reviewed.
+                    </h2>-->
+                    <h2>You pre-assessment application is being processed, you will receive either a call or
+                    an email from us communicating the outcome.
+                    </h2>
+                    <!-- <a href="/contactus" class="contact-btn">Contact us</a> -->
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Template for not applied for pre-assessment application -->
+    <template id="apply_for_pre_assessment" name="Application not found">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <!--                    <h2>We cannot find your pre-assessment application</h2>-->
+                    <!--<h2>You cannot apply for
+                        <t t-esc="application_type.capitalize()"/>
+                        until you have already applied for pre-assessment application.
+                    </h2>-->
+                    <h2>You need to complete the Grant Pre-assessment application first before 
+                    you can be eligible to apply for a Grant.
+                    </h2>
+                    <a href="/pre-assessment-application" class="contact-btn">Pre-Assessment Application</a>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!-- Template for applied for pre-assessment application but not processed yet-->
+    <template id="not_processed_yet" name="Application not processed">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <!--                    <h2>We cannot find your pre-assessment application</h2>-->
+                    <!--<h2>You cannot apply for
+                        <t t-esc="application_type.capitalize()"/>
+                        until you have already applied for pre-assessment application.
+                    </h2>-->
+                    <h2>You cannot apply for Grant until your pre-assessment application has been processed
+                    </h2>
+                    <!-- <a href="/contactus" class="contact-btn">Contact us</a> -->
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <template id="voucher_application_exists" name="Application not processed">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <!--                    <h2>We cannot find your pre-assessment application</h2>-->
+                    <!--<h2>You cannot apply for
+                        <t t-esc="application_type.capitalize()"/>
+                        until you have already applied for pre-assessment application.
+                    </h2>-->
+                    <h2>You cannot apply for another Voucher because you already have a voucher application being processed.
+                    </h2>
+                    <!-- <a href="/contactus" class="contact-btn">Contact us</a> -->
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="action_finance_budget_management_report"
+                string="Budget Management Report"
+                model="finance.budget.report"
+                report_type="qweb-pdf"
+                file="nyda_finance_reports.report_finance_budget_management"
+                name="nyda_finance_reports.report_finance_budget_management"
+                menu="False" />
+
+        <report
+                id="action_finance_budget_expenditure_report"
+                string="Budget Expedinture Report"
+                model="finance.budget.report"
+                report_type="qweb-pdf"
+                file="nyda_finance_reports.report_finance_budget_expenditure"
+                name="nyda_finance_reports.report_finance_budget_expenditure"
+                menu="False" />
+                                
+        <report
+                id="action_finance_budget_mid_org_report"
+                string="Budget Medium Term Report"
+                model="finance.budget.report"
+                report_type="qweb-pdf"
+                file="nyda_finance_reports.report_finance_budget_mid_org"
+                name="nyda_finance_reports.report_finance_budget_mid_org"
+                menu="False" />  
+                
+        <report
+                id="action_finance_budget_mid_division_report"
+                string="Budget Medium Term Division Report"
+                model="finance.budget.report"
+                report_type="qweb-pdf"
+                file="nyda_finance_reports.report_finance_budget_mid_org"
+                name="nyda_finance_reports.report_finance_budget_mid_org"
+                menu="False" />
+                
+        <report
+                id="action_finance_budget_mid_period_report"
+                string="Budget Medium Term Period Report"
+                model="finance.budget.report"
+                report_type="qweb-pdf"
+                file="nyda_finance_reports.report_finance_budget_mid_period"
+                name="nyda_finance_reports.report_finance_budget_mid_period"
+                menu="False" />                                              
+                       
+    </data>
+</odoo>

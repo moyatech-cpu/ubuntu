@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_user_service_tree_view">
+            <field name="name">usmo.user.service.tree.view</field>
+            <field name="model">usmo.user.service</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="RowGUID"/>
+                    <field name="ServiceType"/>
+                    <field name="ServiceUser"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_user_service_form_view">
+            <field name="name">usmo.user.service.form.view</field>
+            <field name="model">usmo.user.service</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="RowGUID"/>
+                                <field name="ServiceType"/>
+                            </group>
+                            <group>
+                                <field name="ServiceUser"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_user_service">
+            <field name="name">Usmo User Service</field>
+            <field name="res_model">usmo.user.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_user_service" name="Usmo User Service"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_user_service" sequence="90"/>
+    </data>
+</odoo>

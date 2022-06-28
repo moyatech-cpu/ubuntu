@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    <record model="ir.ui.view" id="res_partner_enquiry_form_view_inherit">-->
+    <!--        <field name="name">res.partner.enquiry.form.view.inherit</field>-->
+    <!--        <field name="model">partner.enquiry</field>-->
+    <!--        <field name="inherit_id" ref="client_management.view_partner_enquiry_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//group[@name='location_information']" position="before">-->
+    <!--                <h1>TESTTTTT</h1>-->
+    <!--&lt;!&ndash;                <group name="service_offered_partner" string="Service Offered By Partner">&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;                    <field name="partner_service_ids" widget="many2many_tags"/>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;                </group>&ndash;&gt;-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+</odoo>

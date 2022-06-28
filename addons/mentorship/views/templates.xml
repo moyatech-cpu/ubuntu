@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Not authorized template -->
+    <template id="not_applicable_form" name="Login Required">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!!</h1>
+                    </div>
+                    <h2>We are sorry, but you must be a Beneficiary/Service Provider to access this page.</h2>
+                    <a href="/register" class="contact-btn">Register</a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Thanks template -->
+    <template id="form_submitted" name="Thanks">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="notfound">
+                <div class="notfound-bg"></div>
+                <div class="notfound">
+                    <div class="notfound-404" style="opacity: 0.5 !important;">
+                        <h1>Thank you!</h1>
+                    </div>
+                    <h2>Your Application has been submitted, you will be notified once your application has been
+                        processed.
+                    </h2>
+                    <!-- <a href="#" class="contact-btn">Contact us</a> -->
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="mentorship_description" name="About Mentorship">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div id="wrap" class="oe_structure">
+                <div class="container">
+                    <div class="row mt16 alert alert-info">
+                        <center>
+                            <h2>Mentorship</h2>
+                        </center>
+                    </div>
+
+                    <div class="row">
+                        <h4>Background</h4>
+                        <p>Volunteer Enterprise Mentorship Programme is a programme that provides mentorship support to
+                            youth businesses. Mentors and young entrepreneurs are assessed, qualified and matched to
+                            form an ongoing mentoring relationship aimed at improving the sustainability and growth of a
+                            start-up or existing businesses of South African young entrepreneurs.
+                        </p>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <h4>Programme Objectives</h4>
+                        <ol>
+                            <li>Transfer business skills and knowledge among South African young entrepreneurs</li>
+                            <li>Increase sustainability and growth chances of youth businesses</li>
+                        </ol>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <h4>Why volunteer mentoring?</h4>
+                        <p>Around the world, most of the businesses are started with the financial support of family and
+                            friends, and with this support normally comes business advice, mentorship and access to
+                            markets. In South Africa, the NYDA attempts to fill the role of the family for unemployed
+                            and self-employed young people.
+                        </p>
+                        <p>It is firstly necessary to recognise that the challenge of sourcing business finance is often
+                            an arduous and time-consuming task for a start-up enterprise. Once the start-up capital for
+                            their businesses have been secured, the young entrepreneurs have to immediately start making
+                            an income to pay off what is generally expensive finance. With these time and financial
+                            challenges placed on the entrepreneur, he/she is hardly in a position to shop around for a
+                            credible business consultant, nor pay exorbitant business consulting fees. The volunteer
+                            mentorship programme thus introduces the young entrepreneur to the potential value of good
+                            business advice and support services.
+                        </p>
+                        <p>Involving corporate volunteers and postgraduates as business mentors will promote socially
+                            responsible business practice that will benefit business and society, and it will help
+                            achieve social, economic and environmentally sustainable development. It is a credible and
+                            productive form of employee engagement and it can facilitate the development of business
+                            links between the corporate sector and small enterprises. It is also contributes to
+                            Enterprise Development as outlined in the BBBEE policy.
+                        </p>
+                    </div>
+                    <hr/>
+                    <div class="row mt-16 alert alert-dark">
+                        Are you a professional with the interest of becoming a mentor?
+                    </div>
+                    <div class="row mt-16 alert alert-dark">
+                        Mentor applications and supporting documents must be emailed to:
+                        <a href="mailto:mentorship@nyda.gov.za" class="btn btn-primary">Mentorship Dept.</a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="mentee_application_form" name="Mentee Application">
+        <!--        <center>-->
+        <!--            <h3 class="form-headings mt32">Reference Details</h3>-->
+        <!--        </center>-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-6">-->
+        <!--                <center>-->
+        <!--                    <h4>Relative/Friend</h4>-->
+        <!--                </center>-->
+        <!--                <label class="control-label" for="refNameOne">Name</label>-->
+        <!--                <input type="text" name="refNameOne" class="form-control"/>-->
+        <!--                <label class="control-label" for="refTelOne">Contact Number</label>-->
+        <!--                <input type="text" name="refTelOne" class="form-control"/>-->
+        <!--                <label class="control-label" for="refRelationshipOne">Relationship</label>-->
+        <!--                <input type="text" name="refRelationshipOne" class="form-control"/>-->
+        <!--            </div>-->
+        <!--            <div class="col-md-6">-->
+        <!--                <center>-->
+        <!--                    <h4>Relative/Friend</h4>-->
+        <!--                </center>-->
+        <!--                <label class="control-label" for="refNameTwo">Name</label>-->
+        <!--                <input type="text" name="refNameTwo" class="form-control"/>-->
+        <!--                <label class="control-label" for="refTelTwo">Contact Number</label>-->
+        <!--                <input type="text" name="refTelTwo" class="form-control"/>-->
+        <!--                <label class="control-label" for="refRelationshipTwo">Relationship</label>-->
+        <!--                <input type="text" name="refRelationshipTwo" class="form-control"/>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <center>
+            <h3 class="form-headings mt32">YOU AND NYDA :</h3>
+        </center>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" for="mentorshipService">How did you hear about this mentorship service?
+                </label>
+                <input class="form-control" name="mentorshipService" type="text"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="nydaFundedServices">Have you benefited from any NYDA funded services
+                    before? If Yes Please specify (Leave blank if does not apply.)
+                </label>
+                <input class="form-control" name="nydaFundedServices" type="text"/>
+            </div>
+        </div>
+        <!--        <center>-->
+        <!--            <h3 class="form-headings mt32">BUSINESS INFORMATION</h3>-->
+        <!--        </center>-->
+        <div class="row">
+            <h4 class="form-headings" style="text-transform: capitalize ! important">For Existing Business Only
+                (operating)
+            </h4>
+            <div class="col-md-6">
+                <label class="control-label" for="businessName">Business Name</label>
+                <input type="text" name="businessName" class="form-control"/>
+                <div class="col-md-12">
+                    <label class="control-label" for="legalEntity">Legal Entity</label>
+                    <t t-foreach="legal_entity_ids" t-as="legal_entity">
+                        <input type="checkbox" name="legalEntity" t-att-value="legal_entity.id if legal_entity.name != 'Other' else 'other'"/>
+                        <span t-field="legal_entity.name"/>
+                    </t>
+                    <input name="legalEntityChar" class="form-control hidden" type="text"/>
+                </div>
+                <label class="control-label" for="vatRegistrationNumber">VAT Registration Number</label>
+                <input type="text" name="vatRegistrationNumber" class="form-control"/>
+                <label class="control-label" for="BEEShareholding">% of BEE Shareholding(in %)</label>
+                <input type="number" name="BEEShareholding" class="form-control"/>
+                <label class="control-label" for="business_street">Business Street Address</label>
+                <input type="text" name="business_street" class="form-control"/>
+                <label class="control-label" for="businessTelephone">Business Telephone</label>
+                <input type="text" name="businessTelephone" class="form-control"/>
+                <label class="control-label" for="businessEmail">Business Email</label>
+                <input type="text" name="businessEmail" class="form-control"/>
+                <label class="control-label" for="averageAnnualTurnover">Average Annual Turnover(R)</label>
+                <input type="number" name="averageAnnualTurnover" class="form-control"/>
+                <label class="control-label" for="numberOfEmployees">Number of Employees</label>
+                <!--                <input type="text" name="numberOfEmployees" class="form-control"/>-->
+                <select name="numberOfEmployees" class="form-control">
+                    <option value="1-5">1 - 5</option>
+                    <option value="5-10">5 - 10</option>
+                    <option value="15-20">15 - 20</option>
+                    <option value=">20">&gt; 20</option>
+                </select>
+                <label class="control-label" for="brieflyDescribeYourBusiness">Briefly describe your business</label>
+                <textarea name="brieflyDescribeYourBusiness" class="form-control" rows="3"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="yearEstablished">Year Established</label>
+                <input type="date" name="yearEstablished" class="form-control"/>
+                <label class="control-label" for="registrationNumber">Registration Number :</label>
+                <input type="text" name="registrationNumber" class="form-control"/>
+                <label class="control-label" for="setaNumber">SETA Number</label>
+                <input type="text" name="setaNumber" class="form-control"/>
+                <label class="control-label" for="SectorIndustry">Sector/Industry</label>
+                <input type="text" name="SectorIndustry" class="form-control"/>
+                <label class="control-label" for="yearEstablished">Business Postal Address</label>
+                <input type="text" name="yearEstablished" class="form-control"/>
+                <label class="control-label" for="yearEstablished">Business Fax</label>
+                <input type="text" name="yearEstablished" class="form-control"/>
+                <label class="control-label" for="webAddress">Web Address</label>
+                <input type="text" name="webAddress" class="form-control"/>
+                <label class="control-label" for="financialYear">Profit in the last financial year(R)</label>
+                <input type="number" name="financialYear" class="form-control"/>
+                <label class="control-label" for="totalAssetValue">Total Asset Value(R)</label>
+                <input type="number" name="totalAssetValue" class="form-control"/>
+            </div>
+        </div>
+        <div class="row mt32">
+            <h4 class="form-headings">FOR PRE-START UPS AND START UP BUSINESSES ONLY</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="control-label" for="proposedBusinessName">Proposed Business Name</label>
+                    <input type="text" name="proposedBusinessName" class="form-control"/>
+                    <div class="col-md-12">
+                        <label class="control-label" for="slegalEntity">Legal Entity</label>
+                        <t t-foreach="legal_entity_ids" t-as="legal_entity">
+                            <input type="checkbox" name="slegalEntity" t-att-value="legal_entity.id if legal_entity.name != 'Other' else 'other'"/>
+                            <span t-field="legal_entity.name"/>
+                        </t>
+                        <input name="slegalEntityChar" class="form-control hidden" type="text"/>
+                    </div>
+                    <label class="control-label" for="proposedBusiness">Briefly explain your proposed business
+                    </label>
+                    <textarea name="proposedBusiness" class="form-control" rows="3"/>
+                    <label class="control-label" for="startThisBusiness">Why do you want to start this business?
+                    </label>
+                    <textarea name="startThisBusiness" class="form-control" rows="3"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label" for="proposedStartDate">Proposed Start Date</label>
+                    <input type="date" name="proposedStartDate" class="form-control"/>
+                    <label class="control-label" for="sBEEShareholding">% of BEE Shareholding(in %)</label>
+                    <input type="text" name="sBEEShareholding" class="form-control"/>
+                    <label class="control-label" for="sector">Sector</label>
+                    <t t-foreach="sector_ids" t-as="sector">
+                        <input type="checkbox" name="sector" t-att-value="sector.id"/>
+                        <span t-field='sector.name'/>
+                    </t>
+                    <!--                    <input type="text" name="sector" class="form-control"/>-->
+                </div>
+            </div>
+        </div>
+        <center>
+            <h3 class="form-headings mt32">BUSINESS GOALS AND SUPPORT REQUIREMENTS</h3>
+        </center>
+        <div class="row">
+            <label class="control-label" for="personalGoals">Describe your Business and Personal goals for next two
+                years
+            </label>
+            <textarea class="form-control" name="personalGoals" rows="3"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Please indicate the areas you would like to be supported on :</h3>
+                <t t-foreach="supported_area_ids" t-as="area">
+                    <div class="col-md-10 col-md-offset-1">
+                        <input type="checkbox" name="areasSupport" t-att-value="area.id"/>
+                        <span t-field='area.name'/>
+                    </div>
+                </t>
+            </div>
+            <div class="col-md-6">
+                <h3>Please indicate the form of mentoring support you are interested in :</h3>
+                <t t-foreach="mentoring_support_ids" t-as="support">
+                    <t t-if="support.name != 'Group Mentoring'">
+                        <div class="col-md-10 col-md-offset-1">
+                            <input type="checkbox" name="mentoringSupport" t-att-value="support.id"/>
+                            <span t-field='support.name'/>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label" for="mentorshipProgramme">How do you see this mentorship programme assist you
+                to achieve your business and personal goals? Explain:
+            </label>
+            <textarea class="form-control" name="mentorshipProgramme" rows="3"/>
+        </div>
+
+        <!-- New Section for Experience details -->
+        <center>
+            <h3 class="form-headings mt32">Relevant Business Skill Training</h3>
+            <h4 class="form-headings mt32">Please indicate any business related training courses you attended</h4>
+        </center>
+        <div class="row">
+            <table id="experience_table" class="table order-list">
+                <thead>
+                    <tr>
+                        <td>Course</td>
+                        <td>Institution/Organization</td>
+                        <td>Duration</td>
+                        <td>When</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-sm-4">
+                            <input type="text" name="course" class="form-control"/>
+                        </td>
+                        <td class="col-sm-4">
+                            <input type="text" name="institutionOrganisation" class="form-control"/>
+                        </td>
+                        <td class="col-sm-2">
+                            <input type="number" name="duration" class="form-control"/>
+                        </td>
+                        <td class="col-sm-2">
+                            <input type="date" name="when" class="form-control"/>
+                        </td>
+                        <td class="col-sm-2">
+                            <a class="deleteRow"></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: left;">
+                            <input type="button" class="btn btn-primary" id="addrow" value="Add Row"/>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+            <label class="control-label" for="experienceInManagingABusiness">Briefly describe your experience in
+                managing a business
+            </label>
+            <textarea class="form-control" name="experienceInManagingABusiness" rows="3"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" for="highestStandardPassed">Highest Standard Passed</label>
+                <select class="form-control" name="highestStandardPassed">
+                    <option value="below8">Below 8</option>
+                    <option value="grade9">Below 9</option>
+                    <option value="grade10">Below 10</option>
+                    <option value="grade11">Below 11</option>
+                    <option value="grade12">Below 12(Matric)</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="Qualifications">Qualifications (if any) :</label>
+                <input class="form-control" name="Qualifications" type="text"/>
+            </div>
+        </div>
+        <center>
+            <h3 class="form-headings mt32">MOTIVATION</h3>
+        </center>
+        <div class="row">
+            <h4>Please write a motivation why you should be accepted into the programme. Also, state your expectations
+                from the programme.
+                <table id="motivation_table" class="table order-list">
+                    <thead>
+                        <tr>
+                            <td>Write Something that motivates you !!!</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-sm-10">
+                                <textarea name="motivationText" class="form-control motivation"/>
+                            </td>
+                            <td class="col-sm-2">
+                                <a class="deleteRow"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: left;">
+                                <input type="button" class="btn btn-primary" id="addmotivationrow" value="Add Row"/>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </h4>
+
+        </div>
+        <!-- Declaration Section -->
+        <center>
+            <h3 class="form-headings mt32">DECLARATION</h3>
+        </center>
+        <div class="row">
+            <h4>I declare that the information provided in this application is, to the best of my knowledge, true and
+                accurate. I acknowledge that in the event any information provided is shown to be false, incorrect or
+                misleading, that my application and membership may be cancelled. I further acknowledge that NYDA
+                reserves the right in its absolute discretion to refuse to accept my application and to require to cease
+                my membership to this programme for any reason whatsoever.
+            </h4>
+            <div class="col-md-6 hidden">
+                <label class="control-label" for="signature">Signature (Please attach image of your signature)</label>
+                <input type="file" class="form-control" name="signature" accept="image/*"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="attachment_id">Upload ID Copy</label>
+                <input type="file" class="form-control" required="required" name="attachment_id" accept="application/pdf"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="mentor_application_form" name="Mentee Application">
+        <center>
+            <h3 class="form-headings mt32">Business/Professional Information</h3>
+        </center>
+        <div class="row">
+            <!--            <div class="col-md-6">-->
+            <!--                <label class="control-label" for="business_name">Business Name</label>-->
+            <!--                <input type="text" name="business_name" class="form-control"/>-->
+            <!--            </div>-->
+            <div class="col-md-6">
+                <label class="control-label" for="occupation">Occupation</label>
+                <select name="occupation" class="form-control">
+                    <option value="professional">Professional</option>
+                    <option value="business">Business</option>
+                    <option value="owner">Owner</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="qualification_obtained">Qualification Obtained</label>
+                <input type="text" name="qualification_obtained" class="form-control"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="company">Company/Institution (if applicable)</label>
+                <input type="text" name="company" class="form-control"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="no_year_as_mentor">No. of years involved as a mentor</label>
+                <input type="number" name="no_year_as_mentor" class="form-control"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="institute_name_as_mentor">Institutions Name – involved as a mentor
+                </label>
+                <input type="text" name="institute_name_as_mentor" class="form-control"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="no_year_experience_bussiness">No. of years of experience in Sector
+                </label>
+                <input type="number" name="no_year_experience_bussiness" class="form-control"/>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" for="explain_experience">Explain your experience in mentoring</label>
+                <textarea name="explain_experience" class="form-control" rows="4"/>
+            </div>
+            <div class="col-md-6">
+                <label class="control-form" for="attachment_cv">Upload of 2 refrences</label>
+                <input class="form-control" type="file" name="doc_refrence_1"/>
+                <br/>
+                <input class="form-control" type="file" name="doc_refrence_2"/>
+            </div>
+        </div>
+        <center>
+            <h3 class="form-headings mt32">Skills &amp; Experience</h3>
+        </center>
+        <div class="row">
+            <div class="col-md-4">
+                <label class="control-label" for="area_support_id">Supported Areas</label>
+                <select class="form-control" name="area_support_id">
+                    <t t-foreach="supported_area_ids" t-as="area">
+                        <option t-att-value="area.id">
+                            <t t-esc="area.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <label class="control-label" for="bussiness_skill">Provide details of the Business Skills that you must
+                    support the NYDA – VBMP:
+                </label>
+                <textarea class="form-control" name="bussiness_skill" rows="3"/>
+            </div>
+            <div class="col-md-12">
+                <label class="control-label" for="short_profile_explaining" style="text-align: left !important;">Please
+                    provide a short profile explaining the mentoring that your provided to young entrepreneurs/ or would
+                    like to provide to young people and the value it added to their businesses/ or will intend to have.
+                </label>
+                <textarea class="form-control" name="short_profile_explaining" rows="3"/>
+            </div>
+            <div class="col-md-12">
+                <label class="control-label" for="ideal_profile_of_mentee">Give your ideal profile of the mentee you
+                    would like to be matched or paired with.
+                </label>
+                <textarea class="form-control" name="ideal_profile_of_mentee" rows="3"/>
+            </div>
+            <div class="col-md-12">
+                <label class="control-label" for="benefit_mentor">State what you hope to benefit from the programme as a
+                    Mentor
+                </label>
+                <textarea class="form-control" name="benefit_mentor" rows="3"/>
+            </div>
+        </div>
+        <hr/>
+        <center>
+            <h3 class="form-headings mt32">Sectors and Business Types</h3>
+        </center>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Business Types</h3>
+                <t t-foreach="sector_ids" t-as="sector">
+                    <div class="row">
+                        <input type="checkbox" name="sector" t-att-value="sector.id"/>
+                        <span t-field='sector.name'/>
+                    </div>
+                </t>
+            </div>
+            <div class="col-md-6">
+                <h3>Sectors</h3>
+                <t t-set="count" t-value="0"/>
+                <t t-foreach="business_type_ids" t-as="bt">
+                    <div class="row">
+                        <div class="col-md-6" t-if="count &lt; len(business_type_ids) and business_type_ids[count].name not in ['Other1', 'Other2', 'Other3']">
+                            <input type="checkbox" name="business_type" t-att-value="business_type_ids[count].id"/>
+                            <span t-field='business_type_ids[count].name'/>
+                        </div>
+                        <t t-set="count" t-value="count + 1"/>
+                        <div class="col-md-6" t-if="count &lt; len(business_type_ids) and business_type_ids[count].name not in ['Other1', 'Other2', 'Other3']">
+                            <input type="checkbox" name="business_type" t-att-value="business_type_ids[count].id"/>
+                            <span t-field='business_type_ids[count].name'/>
+                        </div>
+                        <t t-set="count" t-value="count + 1"/>
+                    </div>
+                </t>
+                <label for="business_type_other1" class="control-label">Others</label>
+                <div class="col-md-12">
+                    <div class="col-md-6 mb8">
+                        <input type="text" name="business_type_other1" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb8">
+                        <input type="text" name="business_type_other2" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb8">
+                        <input type="text" name="business_type_other3" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center>
+            <h3>Indicate the name of the NYDA Branch/ Branches that you would like to service as a mentor:</h3>
+        </center>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" for="nyda_branch_1">Preferred Branch 1</label>
+                <select class="form-control" name="nyda_branch_1">
+                    <t t-foreach="branch_id" t-as="branch">
+                        <option t-att-value="branch.id">
+                            <t t-esc="branch.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="nyda_branch_2">Preferred Branch 2</label>
+                <select class="form-control" name="nyda_branch_2">
+                    <t t-foreach="branch_id" t-as="branch">
+                        <option t-att-value="branch.id">
+                            <t t-esc="branch.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="nyda_branch_3">Preferred Branch 3</label>
+                <select class="form-control" name="nyda_branch_3">
+                    <t t-foreach="branch_id" t-as="branch">
+                        <option t-att-value="branch.id">
+                            <t t-esc="branch.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="nyda_branch_4">Preferred Branch 4</label>
+                <select class="form-control" name="nyda_branch_4">
+                    <t t-foreach="branch_id" t-as="branch">
+                        <option t-att-value="branch.id">
+                            <t t-esc="branch.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="criminal_record">Criminal Record</label>
+                <input type="text" name="criminal_record" class="form-control"/>
+            </div>
+        </div>
+        <h4>
+            <!--            <input type="checkbox" required="required" name="agree_terms"/>-->Please note that Mentors
+            are required to sign a Memorandum of Understanding which outlines the terms of their engagement in the
+            programme prior to any service rendering.
+        </h4>
+        <div class="row hidden">
+            <div class="col-md-4">
+                <label class="control-label" for="signature">Signature (Please attach image of your signature)</label>
+                <input class="form-control" type="file" name="signature" accept="image/*"/>
+            </div>
+        </div>
+        <center>
+            <h4 class="mt32">Supporting Documents</h4>
+            <div class="row">
+                <div class="col-md-4 text-left">
+                    <label class="control-form" for="attachment_cv">Your CV</label>
+                    <input class="form-control" type="file" name="attachment_cv" required="required"/>
+                </div>
+            </div>
+            <table id="supporting_doc_table" class="table order-list">
+                <thead>
+                    <tr>
+                        <td>Supporting Documents (Qualifications)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-sm-10">
+                            <input type="file" name="supportingdoc" class="form-control" required="1"/>
+                        </td>
+                        <td class="col-sm-2">
+                            <a class="deleteRow"></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: left;">
+                            <input type="button" class="btn btn-primary" id="adddocrow" value="Add Row"/>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </tfoot>
+            </table>
+
+        </center>
+
+
+        <center>
+            <h3 class="form-headings mt32">DECLARATION</h3>
+        </center>
+        <div class="row">
+            <h4>I declare that the information provided in this application is, to the best of my knowledge, true and
+                accurate. I acknowledge that in the event any information provided is shown to be false, incorrect or
+                misleading, that my application and membership may be cancelled. I further acknowledge that NYDA
+                reserves the right in its absolute discretion to refuse to accept my application and to require to cease
+                my membership to this programme for any reason whatsoever.
+            </h4>
+        </div>
+
+
+        <center>
+            <h3>Thank you for your interest in applying to be a mentor and for completing this form.</h3>
+        </center>
+    </template>
+
+    <!-- Template for Mentorship Application -->
+    <template id="mentorship_application_form" name="Application">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/mentorship/static/src/css/website_styles.css"/>
+            <div class="wrapper">
+                <div class="container">
+                    <div class="row mt16 alert alert-info">
+
+                        <t t-if="is_mentee">
+                            <h2 class="text-center form-headings">Mentee Registration Form</h2>
+                        </t>
+                        <t t-if="is_mentor">
+                            <h2 class="text-center form-headings">Mentor Application Form</h2>
+                        </t>
+                        <!--                        <h2 class="text-center form-headings">Mentor Application Form</h2>-->
+                        <p class="text-right">*We have already fetched basic details from your
+                            <t t-if="is_mentee">Youth</t>
+                            <t t-if="is_mentor">Partner</t>
+                            enquiry application.
+                            <br/>
+                            You can fill-out other details here.
+                        </p>
+                    </div>
+                </div>
+                <div class="container form-design mb32">
+                    <form class="form-horizontal container-fluid mt32" id="mentorship-application" action="/mentorship/application/submit" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="formatted_data"/>
+                        <!--                        <center>-->
+                        <!--                            <h3 class="form-headings">Personal Information</h3>-->
+                        <!--                        </center>-->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="control-label" for="title">Title</label>
+                                <select name="title" class="form-control">
+                                    <!--                                    <t t-if=""></t>-->
+                                    <option value="Mr" t-att-selected="'selected' if enquiry.title=='Mr' else ''">Mr.
+                                    </option>
+                                    <option value="Ms" t-att-selected="'selected' if enquiry.title=='Ms' else ''">Ms.
+                                    </option>
+                                    <option value="Mrs" t-att-selected="'selected' if enquiry.title=='Mrs' else ''">
+                                        Mrs.
+                                    </option>
+                                    <option value="Dr" t-att-selected="'selected' if enquiry.title=='Dr' else ''">Dr.
+                                    </option>
+                                    <option value="Prof" t-att-selected="'selected' if enquiry.title=='Prof' else ''">
+                                        Prof.
+                                    </option>
+                                    <option value="Sir" t-att-selected="'selected' if enquiry.title=='Sir' else ''">
+                                        Sir
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label" for="name">Name</label>
+                                <input type="text" name="first_name" class="form-control" t-att-value="enquiry.name if is_mentee else enquiry.name_entity_representative" readonly="readonly"/>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label" for="surname">Surname</label>
+                                <input type="text" name="surname" readonly="readonly" class="form-control" t-att-value="enquiry.surname or ''"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <t t-if="is_mentee">
+                                <div class="col-md-5">
+                                    <label class="control-label" for="saiDentityNumber">SA Identity Number</label>
+                                    <input class="form-control" name="saiDentityNumber" t-att-value="enquiry.id_number" readonly="readonly"/>
+                                </div>
+                            </t>
+                            <t t-if="is_mentor">
+                                <div class="col-md-5">
+                                    <label class="control-label" for="company_reg_number">Company Registration Number
+                                    </label>
+                                    <input class="form-control" name="company_reg_number" t-att-value="enquiry.company_reg_number" readonly="readonly"/>
+                                </div>
+                            </t>
+                            <div class="col-md-2">
+                                <label class="control-label" for="gender">Gender</label>
+                                <select class="form-control" name="gender">
+                                    <t t-if="enquiry.gender == 'male'">
+                                        <option value="male" selected="selected">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="not_specify">Do not want to share</option>
+                                    </t>
+                                    <t t-if="enquiry.gender == 'female'">
+                                        <option value="male">Male</option>
+                                        <option value="female" selected="selected">Female</option>
+                                        <option value="not_specify">Do not want to share</option>
+                                    </t>
+                                    <t t-if="enquiry.gender == 'not_specify'">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="not_specify" selected="selected">Do not want to mention</option>
+                                    </t>
+                                </select>
+                            </div>
+                            <t t-if="is_mentor">
+                                <div class="col-md-5">
+                                    <label class="control-label" for="date_of_birth">Date of Birth
+                                    </label>
+                                    <input type="date" name="date_of_birth" class="form-control"/>
+                                </div>
+                            </t>
+                            <div class="col-md-5">
+                                <label class="control-label" for="email">Email</label>
+                                <input class="form-control" name="email" t-att-value="enquiry.email"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label" for="mobile">Mobile</label>
+                                <input class="form-control" name="mobile" t-att-value="enquiry.cell_phone_number"/>
+                            </div>
+                            <t t-if="is_mentee">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="homeTelephoneNumber">Home Telephone Number</label>
+                                    <input class="form-control" name="homeTelephoneNumber" t-att-value="enquiry.alternative_number"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="fax">Social Media</label>
+                                    <input class="form-control" name="fax"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label" for="physical_street">Physical Address</label>
+                                    <textarea class="form-control" name="physical_street"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label" for="postal_street">Postal Address</label>
+                                    <textarea class="form-control" name="postal_street"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="typeOfLocation">Geographic Location</label>
+                                    <select class="form-control" name="typeOfLocation">
+                                        <option value="rural">Rural</option>
+                                        <option value="urban">Urban</option>
+                                        <option value="peri_urban">Peri-Urban</option>
+                                        <option value="informal_settlement">Informal Settlement</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="describeDisability">Disability (If you have any,
+                                        otherwise leave it blank.)
+                                    </label>
+                                    <input class="form-control" name="describeDisability"/>
+                                </div>
+                            </t>
+                            <t t-if="is_mentor">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="work_phone_number">Work Phone Number</label>
+                                    <input class="form-control" name="work_phone_number" t-att-value="enquiry.alternative_number"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="preferred_contact_number">Preferred Contact Number
+                                    </label>
+                                    <input class="form-control" name="preferred_contact_number"/>
+                                </div>
+                            </t>
+                        </div>
+                        <!--                        <div class="row hidden">-->
+                        <!--                            <div class="col-md-4">-->
+
+                        <!--                                                    </div>-->
+                        <!--                            <div class="col-md-4">-->
+                        <!--                                <div>-->
+                        <!--                                    <label class="control-label requiredField" for="metro_municipality">-->
+                        <!--                                        Metro Municipality-->
+                        <!--                                        <span class="asteriskField">-->
+                        <!--                                            *-->
+                        <!--                                        </span>-->
+                        <!--                                    </label>-->
+                        <!--                                    <select class="select form-control" id="metro_municipality" name="metro_municipality" required="required">-->
+                        <!--                                        <option value="">Please Select Metro Municipality</option>-->
+                        <!--                                        <t t-foreach="metro_municipality_ids" t-as="metro">-->
+                        <!--                                            <t t-if="metro.id == enquiry.metro_municipality.id">-->
+                        <!--                                                <option t-att-value="metro.id" selected="selected">-->
+                        <!--                                                    <t t-esc="metro.name"/>-->
+                        <!--                                                </option>-->
+                        <!--                                            </t>-->
+                        <!--                                            <t t-if="metro.id != enquiry.metro_municipality.id">-->
+                        <!--                                                <option t-att-value="metro.id">-->
+                        <!--                                                    <t t-esc="metro.name"/>-->
+                        <!--                                                </option>-->
+                        <!--                                            </t>-->
+                        <!--                                        </t>-->
+                        <!--                                    </select>-->
+                        <!--                                </div>-->
+                        <!--                                <div>-->
+                        <!--                                    <label class="control-label requiredField" for="municipality">-->
+                        <!--                                        Municipality-->
+                        <!--                                        <span class="asteriskField">-->
+                        <!--                                            *-->
+                        <!--                                        </span>-->
+                        <!--                                    </label>-->
+                        <!--                                    <select class="select form-control" id="municipality" name="municipality" required="required">-->
+                        <!--                                        <option value="">Please Select Municipality</option>-->
+                        <!--                                        <t t-foreach="municipality_ids" t-as="municipality">-->
+                        <!--                                            <t t-if="municipality.id == enquiry.municipality.id">-->
+                        <!--                                                <option t-att-value="municipality.id" selected="selected">-->
+                        <!--                                                    <t t-esc="municipality.name"/>-->
+                        <!--                                                </option>-->
+                        <!--                                            </t>-->
+                        <!--                                            <t t-if="municipality.id != enquiry.municipality.id">-->
+                        <!--                                                <option t-att-value="municipality.id">-->
+                        <!--                                                    <t t-esc="municipality.name"/>-->
+                        <!--                                                </option>-->
+                        <!--                                            </t>-->
+                        <!--                                        </t>-->
+                        <!--                                    </select>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-md-4">-->
+                        <!--                                <div>-->
+
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div>
+                                    <label class="control-label requiredField" for="near_branch">
+                                        Nearest Branch
+                                        <span class="asteriskField">
+                                            *
+                                        </span>
+                                    </label>
+                                    <select class="select form-control" id="branches" name="branch_id" readonly="readonly">
+                                        <option value="" selected="selected">Please Select Nearest Branch</option>
+                                        <t t-foreach="branch_id" t-as="branch">
+                                            <t t-if="branch.id == enquiry.nearest_branch.id">
+                                                <option t-att-value="branch.id" selected="selected">
+                                                    <t t-esc="branch.name"/>
+                                                </option>
+                                            </t>
+                                            <t t-if="branch.id != enquiry.nearest_branch.id">
+                                                <option t-att-value="branch.id">
+                                                    <t t-esc="branch.name"/>
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <label class="control-label requiredField" for="district">
+                                    District
+                                    <span class="asteriskField">
+                                        *
+                                    </span>
+                                </label>
+                                <select class="select form-control" id="select" name="district" required="required">
+                                    <option value="">Please Select District</option>
+                                    <t t-foreach="district_ids" t-as="district">
+                                        <t t-if="district.id == enquiry.district.id">
+                                            <option t-att-value="district.id" selected="selected">
+                                                <t t-esc="district.name"/>
+                                            </option>
+                                        </t>
+                                        <t t-if="district.id != enquiry.district.id">
+                                            <option t-att-value="district.id">
+                                                <t t-esc="district.name"/>
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                                <!--                                <label class="control-label" for="province">Province</label>-->
+                                <!--                                <select class="form-control" name="province">-->
+                                <!--                                    <option value="">Please select an option</option>-->
+                                <!--                                    <t t-foreach="province_ids" t-as="province">-->
+                                <!--                                        <t t-if="province.id == enquiry.province.id">-->
+                                <!--                                            <option t-att-value="province.id" selected="selected">-->
+                                <!--                                                <t t-esc="province.name"/>-->
+                                <!--                                            </option>-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="province.id != enquiry.province.id">-->
+                                <!--                                            <option t-att-value="province.id">-->
+                                <!--                                                <t t-esc="province.name"/>-->
+                                <!--                                            </option>-->
+                                <!--                                        </t>-->
+                                <!--                                    </t>-->
+                                <!--                                </select>-->
+                            </div>
+                        </div>
+                        <t t-if="is_mentee">
+                            <input type="hidden" name="application_type" value="mentee_application"/>
+                            <t t-call="mentorship.mentee_application_form"/>
+                        </t>
+                        <t t-if="is_mentor">
+                            <input type="hidden" name="application_type" value="mentor_application"/>
+                            <t t-call="mentorship.mentor_application_form"/>
+                        </t>
+                        <div class="row mt32">
+                            <button type="submit" id="form-submit" class="btn btn-primary pull-right">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_report_attendance_registerr"
+                string="Attendance Report"
+                model="sales.pitch.training"
+                report_type="qweb-pdf"
+                file="bmt_training.report_attendance_register"
+                name="bmt_training.report_attendance_register"
+                menu="False"
+        />
+
+        <report
+                id="action_report_multiple_attendance_registerr"
+                string="Sale Pitch Training Attendance Report"
+                model="sales.pitch.training"
+                report_type="qweb-pdf"
+                file="bmt_training.report_multiple_attendance_register"
+                name="bmt_training.report_multiple_attendance_register"
+                menu="False"
+        />
+
+        <report
+                id="action_report_coop_gov_attendance_register"
+                string="Co-operative Governance Attendance Report"
+                model="cooperative.governance.training"
+                report_type="qweb-pdf"
+                file="bmt_training.report_coop_gov_attendance_register"
+                name="bmt_training.report_coop_gov_attendance_register"
+                menu="False"
+        />
+
+        <report
+                id="action_report_bus_gov_attendance_register"
+                string="BMT Attendance Report"
+                model="business.mgmt.training"
+                report_type="qweb-pdf"
+                paperformat="bmt_training.paperformat_landscape"
+                file="bmt_training.report_bus_mgmt_attendance_register"
+                name="bmt_training.report_bus_mgmt_attendance_register"
+                menu="False"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="mentor_external_layout_standard">
+		<div class="header hidden">
+		</div>
+		<div class="article o_report_layout_standard">
+			<t t-raw="0" />
+		</div>
+		<div class="footer hidden">
+		</div>
+	</template>
+
+	<template id="mentor_application_form_report">
+		<t t-call="mentorship.mentor_external_layout_standard">
+			<t t-foreach="docs" t-as="o">
+				<div class="row">
+					<div class='col-xs-12'>
+						<p><b>VOLUNTEER MENTOR - APPLICATION FORM</b></p>
+					</div>
+				</div>
+				<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+				<br/>
+ 				<p><b><u> PERSONAL DETAILS </u></b></p>
+				<table class="table" width="100%" style='font-size:14px !important; border: 1px; border: 1px solid black;border-collapse: collapse;'>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Mr. / Mrs. / Ms. / Dr. / Prof. / Sir </b>							
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.title" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Surname</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.surname" />
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<b>First Names</b>
+						</td>
+						<td style='border: 1px; border: 1px solid black;'>
+							<span t-field="o.name" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Date of Birth</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.date_of_birth" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Street Address</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.street_address" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Postal Address</b>
+						</td>
+						<td style='border: 1px; border: 1px solid black;'>
+							<span t-field="o.postal_address" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>City/ suburb / Village</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.city" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Municipality</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.municipality.name" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Province</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.province" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>E-mail</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.email" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Work Phone No.</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.work_phone_number" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Mobile Phone No.</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.mobile_phone_number" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Preferred Contact No.</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.preferred_contact_number" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Business Name</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.business_name" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Qualification Obtained</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.qualification_obtained" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Company / Institution</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.company" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Are you a professional/business owner/ employee</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.occupation" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>No. of years of experience in business</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.no_year_experience_bussiness" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Criminal Recordv</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.criminal_record" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>No. of years involved as a mentor</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.no_year_as_mentor" />
+						</td>
+					</tr>
+					<tr>
+						<td style='border: 1px solid black;'>
+							<b>Institutions Name – involved as a mentor</b>
+						</td>
+						<td style='border: 1px solid black;'>
+							<span t-field="o.institute_name_as_mentor" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style='border: 1px solid black;'>
+							<b>Explain your experience in mentoring</b>	
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style='border: 1px solid black;'>
+							<span t-field="o.explain_experience"/>
+						</td>
+					</tr>
+				</table>
+				<table class="table" width="100%" style='font-size:14px !important; border: 1px; border: 1px solid black;border-collapse: collapse;'>
+					<tr>
+						<td colspan="4" style='border: 1px solid black;'>
+							<b><u>SKILLS &amp; EXPEREINCE</u></b>
+							<table class="table" width="100%" style='font-size:14px !important; border: 1px; border: 1px solid black;border-collapse: collapse;'>
+								<tr>
+									<td style='border: 1px; border: 1px solid black;'>
+										<b>Provide details of the Business Skills that you must support the NYDA – VBMP:</b>
+									</td>
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<span t-field="o.bussiness_skill"/>
+									</td>
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<b>Please provide a short profile explaining the mentoring that your provided to young 
+										entrepreneurs/ or would like to provide to young people and the value it added to their 
+										businesses/ or will intend to have.</b>
+									</td>
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<span t-field="o.short_profile_explaining"/>
+									</td>								
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<b>Give your ideal profile of the mentee you would like to be matched or paired with.</b>
+									</td>								
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<span t-field="o.ideal_profile_of_mentee"/>
+									</td>
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<b>State what you hope to benefit from the programme as a Mentor </b>
+									</td>
+								</tr>
+								<tr>
+									<td style='border: 1px solid black;'>
+										<span t-field="o.benefit_mentor"/>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" style='border: 1px solid black;'>
+							<b><u>SECTORS &amp; BUSINESS TYPES:</u></b>
+							<br/><br/>
+							<p><b>Tick all relevant sectors and business types that apply to your skills and
+							 	experience areas where your strengths  and double tick those that are strongly developed</b></p>
+						</td>
+					</tr>
+<!--					<tr>-->
+<!--						<td colspan="4" style='border: 1px solid black;'>-->
+
+<!--						</td>-->
+<!--					</tr>-->
+					<tr>
+						<t t-if="o._get_sector_value()">
+							<t t-foreach="o._get_sector_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Retail_Wholesale'] == True">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Retail / Wholesale
+									</td>
+								</t>
+								<t t-if="vals['Retail_Wholesale'] == False">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" /> Retail / Wholesale
+									</td>
+								</t>
+								<t t-if="vals['Service'] == True">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Service
+									</td>
+								</t>
+								<t t-if="vals['Service'] == False">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox"/> Service
+									</td>
+								</t>
+								<t t-if="vals['Manufacturing'] == True">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Manufacturing
+									</td>
+								</t>
+								<t t-if="vals['Manufacturing'] == False">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" /> Manufacturing
+									</td>
+								</t>
+								<t t-if="vals['Franchising'] == True">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Franchising
+									</td>
+								</t>
+								<t t-if="vals['Franchising'] == False">
+									<td style='border: 1px solid black;'>
+										<input type="checkbox" /> Franchising
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Agriculture'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Agriculture
+									</td>
+								</t>
+								<t t-if="vals['Agriculture'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Agriculture
+									</td>
+								</t>
+								<t t-if="vals['Pottery_and_Glassware'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Pottery and Glassware
+									</td>
+								</t>
+								<t t-if="vals['Pottery_and_Glassware'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Pottery and Glassware
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Arts_and_Entertainment'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Arts and Entertainment
+									</td>
+								</t>
+								<t t-if="vals['Arts_and_Entertainment'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Arts and Entertainment
+									</td>
+								</t>
+								<t t-if="vals['Restaurant_and_Fast_Foods'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Restaurant and Fast Foods
+									</td>
+								</t>
+								<t t-if="vals['Restaurant_and_Fast_Foods'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Restaurant and Fast Foods
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Building_and_Construction'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Building and Construction
+									</td>
+								</t>
+								<t t-if="vals['Building_and_Construction'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Building and Construction
+									</td>
+								</t>
+								<t t-if="vals['Textiles_and_Soft_Furnishing'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Textiles and Soft Furnishing
+									</td>
+								</t>
+								<t t-if="vals['Textiles_and_Soft_Furnishing'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Textiles and Soft Furnishing
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Business_Services'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Business Services
+									</td>
+								</t>
+								<t t-if="vals['Business_Services'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Business Services
+									</td>
+								</t>
+								<t t-if="vals['Timber_and_Wood'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Timber and Wood
+									</td>
+								</t>
+								<t t-if="vals['Timber_and_Wood'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Timber and Wood
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Chemical_and_Pharmaceutical'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Chemical and Pharmaceutical
+									</td>
+								</t>
+								<t t-if="vals['Chemical_and_Pharmaceutical'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Chemical and Pharmaceutical
+									</td>
+								</t>
+								<t t-if="vals['Tourism_and_Hospitality'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Tourism and Hospitality
+									</td>
+								</t>
+								<t t-if="vals['Tourism_and_Hospitality'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Tourism and Hospitality
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+ 					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Electrical_and_Electronics'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Electrical and Electronics
+									</td>
+								</t>
+								<t t-if="vals['Electrical_and_Electronics'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Electrical and Electronics
+									</td>
+								</t>
+								<t t-if="vals['Vehicle_Repairs_and_Parts'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Vehicle Repairs and Parts
+									</td>
+								</t>
+								<t t-if="vals['Vehicle_Repairs_and_Parts'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Vehicle Repairs and Parts
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Fashion_and_Clothing'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Fashion and Clothing
+									</td>
+								</t>
+								<t t-if="vals['Fashion_and_Clothing'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Fashion and Clothing
+									</td>
+								</t>
+								<t t-if="vals['Water'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Water
+									</td>
+								</t>
+								<t t-if="vals['Water'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<input type="checkbox" /> Water
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Food_and_Beverages'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Food and Beverages
+									</td>
+								</t>
+								<t t-if="vals['Food_and_Beverages'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Food and Beverages
+									</td>
+								</t>
+								<t t-if="vals['Other1'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<table>
+											<tr>
+												<td>
+													<input type="checkbox" checked="True"/> Other1 &amp;nbsp;
+												</td>
+												<td>
+													<span t-field="o.business_type_other1"/>
+													<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</t>
+								<t t-if="vals['Other1'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<table>
+											<tr>
+												<td>
+													<input type="checkbox" /> Other1 &amp;nbsp;
+												</td>
+												<td>
+													<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Information_Technology'] == True">
+									<td colspan="1" style='border: 1px; border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Information Technology
+									</td>
+								</t>
+								<t t-if="vals['Information_Technology'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Information Technology
+									</td>
+								</t>
+								<t t-if="vals['Other2'] == True">
+									<td colspan="3" style='border: 1px; border: 1px solid black;'>
+										<table>
+											<tr>
+												<td>
+													<input type="checkbox" checked="True"/> Other2 &amp;nbsp;
+												</td>
+												<td>
+													<span t-field="o.business_type_other2"/>
+													<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</t>
+								<t t-if="vals['Other2'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<table>
+											<tr>
+												<td>
+													<input type="checkbox" /> Other2 &amp;nbsp;
+												</td>
+												<td>
+													<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+												</td>
+											</tr>
+										</table>										
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+					<tr>
+						<t t-if="o._get_business_type_value()">
+							<t t-foreach="o._get_business_type_value()" t-as="vals" style="border:1px">
+								<t t-if="vals['Paper_and_Printing'] == True">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" checked="True"/> Paper and Printing
+									</td>
+								</t>
+								<t t-if="vals['Paper_and_Printing'] == False">
+									<td colspan="1" style='border: 1px solid black;'>
+										<input type="checkbox" /> Paper and Printing
+									</td>
+								</t>
+								<t t-if="vals['Other3'] == True">
+									<td colspan="3" style='border: 1px solid black;'>
+										<table>
+											<tr>
+												<td>
+													<input type="checkbox" checked="True"/> Other3 &amp;nbsp;
+												</td>
+												<td>
+													<span t-field="o.business_type_other3"/>
+													<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</t>
+								<t t-if="vals['Other3'] == False">
+									<td colspan="3" style='border: 1px solid black;'>
+										<table>
+											<tr>
+												<td>
+													<input type="checkbox" /> Other3 &amp;nbsp;
+												</td>
+												<td>
+													<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</t>
+							</t>
+						</t>
+					</tr>
+				</table>
+				<p><b>Terms and Conditions : </b></p>
+				<p>
+					<ul>
+						<li>
+							The Business Mentorship Programme is implemented through the support of volunteer Mentors
+						</li>
+					</ul>
+				</p>
+				<p>
+					<ul>
+						<li>
+							Mentees are recruited and assessed by the Branches of the NYDA
+						</li>
+					</ul>
+				</p>
+				<p>
+					<ul>
+						<li>
+							Mentees are matched with mentors based on the assessment 
+						</li>
+					</ul>
+				</p>
+				<p>
+					<ul>
+						<li>
+							Only NYDA – Mentorship Programme contracted mentors should render mentoring support to mentees
+						</li>
+					</ul>
+				</p>
+				<b>Indicate the name of the NYDA Branch/ Branches that you would like to service as a mentor : </b>
+				<div class="row">
+					<div class='col-xs-12'>
+						<div class="row">
+							<t t-if="o.nyda_branch_1">
+								<div class='col-xs-6'>
+									<span t-field="o.nyda_branch_1"/>
+									<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+								</div>
+							</t>
+							<t t-if="not o.nyda_branch_1">
+								<div class='col-xs-6'>
+									_______________________________________
+								</div>
+							</t>
+							<t t-if="o.nyda_branch_2">
+								<div class='col-xs-6'>
+									<span t-field="o.nyda_branch_2"/>
+									<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+								</div>
+							</t>
+							<t t-if="not o.nyda_branch_2">
+								<div class='col-xs-6'>
+									_______________________________________
+								</div>
+							</t>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-xs-12'>
+						<div class="row">
+							<t t-if="o.nyda_branch_3">						
+								<div class='col-xs-6'>
+									<span t-field="o.nyda_branch_3"/>
+									<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+								</div>
+							</t>
+							<t t-if="not o.nyda_branch_3">
+								<div class='col-xs-6'>
+									_______________________________________
+								</div>
+							</t>
+							<t t-if="o.nyda_branch_4">
+								<div class='col-xs-6'>
+									<span t-field="o.nyda_branch_4"/>
+									<hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;padding: 0px 0;"/>
+								</div>
+							</t>
+							<t t-if="not o.nyda_branch_4">
+								<div class='col-xs-6'>
+									_______________________________________
+								</div>
+							</t>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<br/>
+				<br/>
+				<p>Thank you for your interest in applying to be a mentor and for completing this form.  </p>
+				<br/>
+				Please note that Mentors are required to sign a Memorandum of Understanding which outlines the terms of their engagement in the programme prior to any service rendering. 
+				<table class="table" width="100%" style='font-size:14px !important; border: 1px; border: 1px solid black;border-collapse: collapse;'>
+					<tr>
+						<td style='border: 1px solid black;'>
+							SIGNATURE : <img t-attf-src="data:image;base64,{{o.signature}}" width="200" height="100"/>
+							
+						</td>
+						<td style='border: 1px solid black;'>
+							Date : <span t-field="o.dateTime_application" />
+						</td>
+					</tr>
+				</table>
+				<p>Please attach copy of your CV for vetting </p>
+				<p>Mentor applications and supporting documents must be submitted to the nearest NYDA office/branch.</p>
+			</t>
+		</t>
+	</template>
+</odoo>
+							

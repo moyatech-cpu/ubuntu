@@ -1,0 +1,37 @@
+  <odoo>   
+        <record id="grant_application_button_update" model="ir.ui.view">
+            <field name="name">Grant Application Update Cancel Button</field>
+            <field name="model">grant.application</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_grant_application_form"/>
+            <field name="arch" type="xml">
+              
+             <xpath expr="//field[@name='status']" position="replace">
+             			<field name="status" widget="statusbar" statusbar_visible="new,cancelled,bgarg_review"/></xpath>
+             <xpath expr="//button[@name='set_cancelled']" position="replace">
+             		
+             			<button name="btn_cancel_grant" string="Cancel Grant" type="object"
+                                class="oe_highlight" >
+
+                        </button>
+             
+             </xpath>
+             <xpath expr="//button[@name='btn_cancel_grant']" position="after">
+             		
+             			<button name="btn_reinstate_grant" string="Reinstate Grant" type="object" attrs="{'invisible': [('status', '!=', 'cancelled')]}"
+                                class="oe_highlight" >
+
+                        </button>
+             
+             </xpath>
+             <xpath expr="//page[@name='Internal_report']" position="inside">
+                       <group string="Grant Status History">
+                                    <field name="cancel_grant_reason" readonly="1" />
+                                    <field name="reinstate_grant_reason" readonly="1" />
+                                    <!-- <field name="x_pc_status" readonly="1" /> -->
+                                </group>
+            </xpath>
+             
+            
+            </field>
+        </record>
+  </odoo>

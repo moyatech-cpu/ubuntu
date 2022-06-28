@@ -1,0 +1,132 @@
+<odoo>
+	<data>
+	
+	<record model="ir.ui.view" id="scm_tender_pre_evaluation_assessment_form_view">
+		<field name="name">scm.tender.pre.evaluation.assessment.form.view</field>
+		<field name="model">scm.tender.preevaluation.assessment</field>
+		<field name="arch" type="xml">
+			<form string="Tender Pre-Evaluation Assessment" class="o_form_project_tasks" create="false">
+				<sheet string="Tender Pre-Evaluation Assessment">
+	                <div class="oe_button_box" name="button_box">
+	                    <button name="complete_assessment" type="object" string="Complete Assessment" style="width:197px !important" 
+	                    		class="oe_inline oe_stat_button" icon="fa-check-square" help="Click on this button to complete the assessment."/>
+	                </div>					
+					<div class="oe_title">
+					    <h1 class="o_row">
+					        <field name="submission_bidder" readonly="1"/>
+					    </h1>
+					</div>
+					<group>
+					    <group>
+					        <field name="tender_id" string="Tender ID" readonly="1"/>
+					        <field name="employee" string="Assessor" readonly="1"/>
+					    </group>
+					</group>
+					<notebook>
+					    <page name="pre_evaluation_sheet" string="Tender Pre-Evaluation Sheet">
+					      <field name="bidder_evaluation_sheet" >
+					           <tree string="Evaluation Sheet" editable="bottom" create="false" delete="false">
+					            <field name="sheet_id" style="font-weight:normal" string="Requirement" readonly="1"/>
+					            <field name="item_compliance" style="font-weight:normal"/>
+					          </tree>
+					          <form string="Tender Evaluation Sheet">
+					              <sheet>
+					                  <group>
+					                      <group>
+					                        <field name="sheet_id" style="font-weight:normal"/>
+					                        <field name="item_compliance" style="font-weight:normal"/>
+					                      </group>
+					                  </group>
+					              </sheet>
+					          </form>
+					       </field>
+					     </page>
+					    <page name="description_page" string="Comments">
+					        <field name="comments" type="html"/>
+					        <div class="oe_clear"/>
+					    </page>
+					</notebook>
+				</sheet>
+			</form>
+    	</field>
+	</record>	
+	
+	<record id="scm_tender_pre_evaluation_assessment_wizard_action" model="ir.actions.act_window">
+		<field name="name">scm.tender.pre.evaluation.assessment.wizard.action</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">scm.tender.preevaluation.assessment</field>
+		<field name="view">form</field>
+		<field name="view_id" ref="scm_tender_pre_evaluation_assessment_form_view"/>
+		<field name="target">new</field>
+	</record>
+	
+	<record model="ir.ui.view" id="scm_tender_scoring_assessment_form_view">
+		<field name="name">scm.tender.scoring.assessment.form.view</field>
+		<field name="model">scm.tender.scoring.assessment</field>
+		<field name="arch" type="xml">
+			<form string="Tender Assessment" class="o_form_project_tasks" create="false">
+				<sheet string="Tender Assessment">
+					<div class="oe_button_box" name="button_box">
+						<button name="complete_assessment" type="object" string="Complete Assessment" style="width:197px !important" class="oe_inline oe_stat_button" icon="fa-check-square" help="Click on this button to complete the assessment."/>
+					</div>
+					<div class="oe_title">
+						<h1 class="o_row">
+							<field name="submission_bidder" readonly="1"/>
+						</h1>
+					</div>
+					<group>
+						<group>
+							<field name="tender_id" string="Tender ID" readonly="1"/>
+							<field name="employee" string="Evaluator" readonly="1"/>
+						</group>
+						<group>
+							<field name="total_assessment_score" readonly="1"/>    
+							<field name="assessment_percentage" readonly="1"/>
+							<field name="minimum_score_obtained" readonly="1"/>
+						</group>
+	                  </group>
+	                  <notebook>
+	                      <page name="scoring_evaluation_sheet" string="Tender Evaluation Sheet">
+	                        <field name="scoring_evaluation_sheet" >
+	                             <tree string="Scoring Sheet" editable="bottom" create="false" delete="false">
+	                              <field name="sheet_id" style="font-weight:normal" string="Assessment" readonly="1"/>
+	                              <field name="weight" style="font-weight:normal" string="Weight" sum="Total Weight" readonly="1"/>
+	                              <field name="item_score" style="font-weight:normal" string="Score"/>
+	                              <field name="item_total" style="font-weight:normal" string="Total" sum="Total"/>
+	                            </tree>
+	                            <form string="Tender Evaluation Sheet">
+	                                <sheet>
+	                                    <group>
+	                                        <group>
+	                                         <field name="sheet_id" style="font-weight:normal" string="Name"/>
+	                                         <field name="weight" style="font-weight:normal" string="Weight"/>
+	                                         <field name="item_score" style="font-weight:normal" string="Score (%)"/>
+	                                         <field name="item_total" style="font-weight:normal" string="Total"/>
+	                                        </group>
+	                                    </group>
+	                                </sheet>
+	                            </form>
+	                         </field>
+	                       </page>
+	                      <page name="description_page" string="Comments">
+	                          <field name="comments" type="html"/>
+	                          <div class="oe_clear"/>
+	                      </page>
+	                  </notebook>
+                  </sheet>
+              </form>
+
+    	</field>
+	</record>	
+            	
+	<record id="scm_tender_scoring_assessment_wizard_action" model="ir.actions.act_window">
+		<field name="name">scm.tender.scoring.assessment.wizard.action</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">scm.tender.scoring.assessment</field>
+		<field name="view">form</field>
+		<field name="view_id" ref="scm_tender_scoring_assessment_form_view"/>
+		<field name="target">new</field>
+	</record>	
+	
+  </data>
+</odoo>

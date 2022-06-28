@@ -1,0 +1,36 @@
+<odoo>
+  <record id="cancel_co-op_governance_training" model="ir.ui.view">
+  <field name="name">cancel.co-op.gov.training.view</field>
+  <field name="model">cooperative.governance.training</field>
+  <field name="inherit_id" ref="bmt_training.cooperative_governance_training_form_view"/>
+  <field name="arch" type="xml">
+  
+  	<xpath expr="//field[@name='state']" position="replace">
+
+		<field name="state" widget="statusbar" statusbar_visible="new,start_training,end_training,coordinator_review,bm_review,ho_admin_review,ho_manager_review,completed,cancelled"/>
+
+	</xpath>
+	
+    <xpath expr="//button[@name='get_attendance_register']" position="after">
+
+		<button string="Cancel Training" name="btn_cancel_coop_traning" attrs="{'invisible': [('state', '=', 'cancelled')]}" type="object" class="oe_highlight"/>
+
+	</xpath>
+	<xpath expr="//button[@name='btn_cancel_coop_traning']" position="after">
+
+		<button string="Reinstate Training" name="btn_reinstate_coop_training" attrs="{'invisible': [('state', '!=', 'cancelled')]}" type="object" class="oe_highlight"/>
+ 
+	</xpath>
+
+	 <xpath expr="//group[@name='total_attendees']" position="after">
+	<group name="record_status_history" string="Record Status History">
+		<group>
+			<field name="cancel_gov_training_reason" readonly="1"/>
+			<field name="reinstate_gov_training_reason" readonly="1"/>
+		</group>	 
+	</group>
+</xpath>
+
+  </field>
+</record>
+</odoo>

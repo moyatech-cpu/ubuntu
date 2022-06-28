@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="mentor_external_layout_standard">
+		<div class="header hidden">
+		</div>
+		<div class="article o_report_layout_standard">
+			<t t-raw="0" />
+		</div>
+		<div class="footer hidden">
+		</div>
+	</template>
+    <template id="mentee_application_form_report_test">
+        <t t-call="mentorship.mentor_external_layout_standard">
+            <t t-foreach="docs" t-as="o">
+                <div class="row">
+                    <div class='col-xs-12' align="center">
+                        <img t-attf-src="data:image;base64,{{env.user.company_id.logo}}" width="80" height="60"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <h3><b><span t-field="o.branch_id.name" /></b></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12' align="center">
+                        <h4>MENTOR- MENTEE ENGAGEMENT TEMPLATE (One-on-One)</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <h4><b>MENTEE DETAILS</b></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                       <table class="table">
+                           <tr>
+                               <td style="border:1px solid black">
+                                   Mentee Name
+                               </td>
+                                <td colspan='8' style="border:1px solid black">
+                                    <span t-field="o.mentee_id.firstName" />
+                               </td>
+                           </tr>
+                           <tr>
+                               <td style="border:1px solid black">
+                                   Identity Number
+                               </td>
+                                <td colspan='8' style="border:1px solid black">
+                                    <span t-field="o.mentee_id.saiDentityNumber" />
+                               </td>
+                           </tr>
+                           <tr>
+                               <td style="border:1px solid black">
+                                    Demographics
+                               </td>
+                                <td style="border:1px solid black">
+                                    Male/Female
+                               </td>
+                                <td style="border:1px solid black">
+                                   <span t-field="o.mentee_id.gender" />
+                               </td>
+                                <td style="border:1px solid black">
+                                    Rural/ Urban
+                               </td>
+                                <td style="border:1px solid black">
+                                    <span t-field="o.typeOfLocation" />
+                               </td>
+                                <td style="border:1px solid black">
+                                    Disabled
+                               </td>
+                                <td style="border:1px solid black">
+                                   <span t-field="o.disabledPerson" />
+                               </td>
+                                <td style="border:1px solid black">
+                                    Race(A/C/I/W)
+                               </td>
+                               <td style="border:1px solid black">
+                                    <span t-field="o.populationGroup" />
+                               </td>
+                           </tr>
+                           <tr>
+                               <td style="border:1px solid black">
+                                   Type of Business
+                               </td>
+                                <td colspan='3' style="border:1px solid black">
+                                    <span t-field="o.mentee_id.businessName" />
+                               </td>
+                                <td style="border:1px solid black">
+                                   Sector
+                               </td>
+                                <td colspan='4' style="border:1px solid black">
+                                    <span t-field="o.mentee_id.SectorIndustry" />
+                               </td>
+                           </tr>
+                           <tr>
+                               <td style="border:1px solid black">
+                                   Contact Number
+                               </td>
+                                <td colspan='3' style="border:1px solid black">
+                                    <span t-field="o.mentee_id.mobile" />
+                               </td>
+                                <td style="border:1px solid black">
+                                   E-mail Address
+                               </td>
+                                <td colspan='4' style="border:1px solid black">
+                                        <span t-field="o.mentee_id.email" />
+                               </td>
+                           </tr>
+                       </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <h4><b>MENTOR DETAILS</b></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table" width="100%">
+                            <tr>
+                                <td style="border:1px solid black" colspan="1">Mentor Name</td>
+                                <td style="border:1px solid black" colspan="3"> <span t-field="o.mentor_id.name" /></td>
+                            </tr>
+                             <tr>
+                                <td style="border:1px solid black" colspan="1">Business Name</td>
+                                <td style="border:1px solid black" colspan="3"> <span t-field="o.mentor_id.business_name" /></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid black" >Contact Number</td>
+                                <td style="border:1px solid black" ><span t-field="o.mentor_id.mobile_phone_number" /></td>
+                                <td style="border:1px solid black" >E-mail Address</td>
+                                <td style="border:1px solid black" ><span t-field="o.mentor_id.email" /></td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <h4><b>MENTEE – BUSINESS MENTORING PLAN</b></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table" width="100%">
+                            <tr>
+                                <td style="border:1px solid black" width="10%"></td>
+                                <td style="border:1px solid black" width="65%" align="center">Mentee Business Needs</td>
+                                <td style="border:1px solid black" width="25%" align="center">Projected Time Frame (Per Session)</td>
+                            </tr>
+                            <t t-set="index" t-value="1"/>
+                            <t t-foreach="o.bmp_ids" t-as="bmp_id">
+                             <tr>
+                                <td style="border:1px solid black"><t t-esc="index"/></td>
+                                <td style="border:1px solid black"><span t-field="bmp_id.business_needs" /></td>
+                                <td style="border:1px solid black"><span t-field="bmp_id.projected_time_frame" /></td>
+                            </tr>
+                                 <t t-set="index" t-value="index+1"/>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <table class="table" border="0">
+                            <tr>
+                                <td style="border:0" width="25%"><h4><b>Date of Engagement:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0"><span t-field="o.date_of_engagement" /></td>
+                                <td style="border:0"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class='col-xs-12'>
+                        <p>I hereby commit to participate in the mentoring engagement process as set out in the Mentee Business Mentoring plan.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table" border="0">
+                            <tr>
+                                <td style="border:0" width="22%"><h4><b>Mentee Signature:</b></h4></td>
+                                <td style="border-top:0"  width="28%"><img t-attf-src="data:image;base64,{{o.mentee_sign}}" width="200" height="100"/></td>
+                                 <td style="border:0" width="8%"><h4><b>Date:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0;margin-top:10px"  width="28%"><span t-field="o.mentee_sign_date" /></td>
+                                <td style="border:0"></td>
+                            </tr>
+                        </table>
+                </div>
+                <div class="row">
+                    <table class="table" border="0">
+                            <tr>
+                                <td style="border:0" width="22%"><h4><b>Mentor Signature:</b></h4></td>
+                                <td style="border-top:0"  width="28%"><img t-attf-src="data:image;base64,{{o.mentor_sign}}" width="200" height="100"/></td>
+                                 <td style="border:0" width="8%"><h4><b>Date:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0;margin-top:10px"  width="28%"><span t-field="o.mentee_sign_date" /></td>
+                                <td style="border:0"></td>
+                            </tr>
+                        </table>
+                </div>
+                <div class="row">
+                    <table class="table" border="0">
+                            <tr>
+                                <td style="border:0" width="15%"><h4><b>BAS Officer:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0"  width="23%"></td>
+                                <td style="border:0" width="15%"><h4><b>Signature:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0"  width="22%"></td>
+                                 <td style="border:0" width="8%"><h4><b>Date:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0" width="12%"></td>
+                                 <td style="border:0"></td>
+                            </tr>
+                        </table>
+                </div>
+                <div class="row">
+                    <table class="table" border="0">
+                            <tr>
+                                <td style="border:0" width="15%"><h4><b>Product Co-ordinator:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0"  width="23%"></td>
+                                <td style="border:0" width="15%"><h4><b>Signature:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0"  width="22%"></td>
+                                 <td style="border:0" width="8%"><h4><b>Date:</b></h4></td>
+                                <td style="border-bottom:1px solid black;border-top:0" width="12%"></td>
+                                 <td style="border:0"></td>
+                            </tr>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

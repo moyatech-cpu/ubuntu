@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Grant Status Report Form View-->
+    <record model="ir.ui.view" id="grant_status_report_form_view">
+        <field name="name">grant.status.report.form.view</field>
+        <field name="model">grant.status.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="report_type" required="1"/>
+                </group>
+                <footer>
+                    <button string="Download Status Per Branch Report" name="get_status_report" type="object"
+                            class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_branch')]}"/>
+                    <button string="Download Status Per Branch Report(Consolidated)" name="get_status_report"
+                            type="object"
+                            class="btn-primary" attrs="{'invisible': [('type', '!=', 'status_branch_cons')]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Grant Status Report Branch-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_branch_grant">
+        <field name="name">Status Per Branch Report</field>
+        <field name="res_model">grant.status.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_branch'}</field>
+    </record>
+
+    <!-- Action for Grant Status Report Branch Report(Consolidated)-->
+    <record model="ir.actions.act_window" id="action_voucher_status_report_branch_cons_grant">
+        <field name="name">Status Per Branch Report(Consolidated)</field>
+        <field name="res_model">grant.status.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type': 'status_branch_cons'}</field>
+    </record>
+
+    <!--Menu for Grant Status Report-->
+    <menuitem name="Reporting Status" parent="nyda_grant_and_voucher.main_menu_client_preassessment"
+              id="reporting_status_grant" sequence="4"/>
+    <menuitem name="Status Per Branch" parent="nyda_grant_and_voucher.reporting_status_grant"
+              id="menu_status_per_branch_grant" sequence="1"
+              action="nyda_grant_and_voucher.action_voucher_status_report_branch_grant"/>
+    <menuitem name="Status Per Branch(Consolidated)" parent="nyda_grant_and_voucher.reporting_status_grant"
+              id="menu_status_per_branch_cons_grant" sequence="2"
+              action="nyda_grant_and_voucher.action_voucher_status_report_branch_cons_grant"/>
+    
+    </data>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--BMT Pitching Participants Tree View-->
+        <record model="ir.ui.view" id="bmt_pitching_participants_tree_view">
+            <field name="name">bmt.pitching.participants.tree.view</field>
+            <field name="model">bmt.pitching.participants</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="participant_id"/>
+                    <field name="dob"/>
+                    <field name="gender"/>
+                    <field name="area"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--BMT Pitching Participants Form View-->
+        <record model="ir.ui.view" id="bmt_pitching_participants_form_view">
+            <field name="name">bmt.pitching.participants.form.view</field>
+            <field name="model">bmt.pitching.participants</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="participant_id" required="1"/>
+                                <field name="related_participant_id" invisible="1"/>
+                                <field name="dob"/>
+                                <field name="gender" required="1"/>
+                                <field name="area" required="1"/>
+                                <field name="attended_full_training"/>
+                            </group>
+                            <group>
+                                <field name="is_disabled"/>
+                                <field name="race" required="1"/>
+                                <field name="mobile"/>
+                                <field name="business_mgmt_training_pitching_id" required="1"/>
+                            </group>
+                        </group>
+                        <group string="Signature">
+                            <field name="signature" widget="signature"/>
+                            <field name="sign_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--BMT Pitching Participants Action-->
+        <record model="ir.actions.act_window" id="action_bmt_pitching_participants">
+            <field name="name">BMT Pitching Participants</field>
+            <field name="res_model">bmt.pitching.participants</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for BMT Pitching Participants-->
+        <menuitem name="BMT Pitching Participants" id="bmt_pitching_participants" parent="bmt_training.trainings" action="action_bmt_pitching_participants"
+                  sequence="4"/>
+
+    </data>
+</odoo>

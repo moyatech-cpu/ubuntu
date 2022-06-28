@@ -1,0 +1,52 @@
+<odoo>
+    <record id="cancel_reason_coop_gov_form" model="ir.ui.view">
+        <field name="name">cancel.reason.coop.gov.training</field>
+        <field name="model">cancel.coop.governance.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Co-Operative Governance Training">
+                <group>
+                    <field name="cancel_gov_training_reason"/>
+                </group>
+                <footer>
+                    <button name="cancel_coop_gov_training" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="reinstate_reason_coop_gov_form" model="ir.ui.view">
+        <field name="name">reinstate.reason.coop.gov.training</field>
+        <field name="model">cancel.coop.governance.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reinstate Business Management Training">
+                <group>
+                    <field name="reinstate_gov_training_reason"/>
+                </group>
+                <footer>
+                    <button name="reinstate_coop_gov_training" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="reinstate_business_mgmt_wizard_action" model="ir.actions.act_window">
+        <field name="name"> reinstate.co-operative.governance.training.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.coop.governance.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="reinstate_reason_coop_gov_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="cancel_business_mgmt_wizard_action" model="ir.actions.act_window">
+        <field name="name">cancel.co-operative.governance.training.action </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.coop.governance.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="cancel_reason_coop_gov_form"/>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>

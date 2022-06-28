@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Committee Views -->
+    <record id="view_mid_term_budget_management_form" model="ir.ui.view">
+        <field name="name">mid.term.budget.management.form</field>
+        <field name="model">crossovered.budget</field>
+        <field name="arch" type="xml">
+			<form string="Budget">
+				<header>
+				    <!-- PM -->
+				    <button string="Confirm" name="action_budget_confirm" states="draft" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_manager,nyda_budget_management.nyda_budget_finance_officer,base.group_system" />
+				    
+				    <!-- ED -->
+				    <button string="Approve" name="action_budget_1st_review" states="confirm" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_officer,nyda_budget_management.nyda_budget_executive_director,base.group_system" />
+				    <button string="Reject" name="action_budget_draft" states="confirm" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_officer,nyda_budget_management.nyda_budget_executive_director,base.group_system" />
+				    
+				    <!-- Budget Officer -->
+				    <button string="Approve" name="action_budget_2nd_review" states="1st_review" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_officer,base.group_system" />
+				    <button string="Reject" name="action_budget_confirm" states="1st_review" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_officer,base.group_system" />
+				    
+				    <!-- Budget Manager -->
+				    <button string="Approve" name="action_budget_3rd_review" states="2nd_review" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_manager,base.group_system" />
+				    <button string="Reject" name="action_budget_1st_review" states="2nd_review" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_manager,base.group_system" />                        
+				    
+				    <!-- FIN - SM-->
+				    <button string="Approve" name="action_budget_validate" states="3rd_review" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_snr_manager,base.group_system"/>
+				    <button string="Reject" name="action_budget_2nd_review" states="3rd_review" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_snr_manager,base.group_system"/>
+				    
+				    <button string="Done" name="action_budget_done" states="validate" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_officer,base.group_system"/>
+				    <button string="Adjustment" name="action_budget_adjustment" states="validate" type="object" class="oe_highlight" groups="nyda_budget_management.nyda_budget_finance_officer,base.group_system"/>
+				    <button string="Authorised Changes" name="action_budget_draft" states="cancel" type="object" groups="nyda_budget_management.nyda_budget_finance_officer,base.group_system"/>
+				    <button string="Cancel Budget" name="action_budget_cancel" states="confirm,validate" type="object" groups="nyda_budget_management.nyda_budget_finance_snr_manager,base.group_system"/>
+				    <field name="state" widget="statusbar" statusbar_visible="draft,confirm" clickable="true" />
+				</header>
+				<sheet string="Budget">
+				    <div class="oe_title">
+				        <label for="name" class="oe_edit_only"/>
+				        <h1>
+				            <field name="name" attrs="{'readonly':[('state','!=','draft')]}" placeholder="Budget Name"/>
+				        </h1>
+				    </div>
+				    <group>
+				        <group>
+				            <field name="creating_user_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+				            <field name="department_id"/>
+				            <field name="branch_id"/>
+				            <field name="budget_type" invisible="1"/>
+				        </group>
+				        <group>
+				            <label for="date_from" string="Period"/>
+				            <div>
+				                <field name="date_from" class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/> - 
+				                <field name="date_to" class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}" nolabel="1"/>
+				                <field name="budget_type" invisible="1"/>
+				            </div>
+				            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+				        </group>
+				    </group>
+				    <notebook>
+				        <page string="Budget Lines">
+				            <field name="crossovered_budget_line" context="{'default_date_from': date_from,'default_date_to': date_to}" colspan="4" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}">
+				                <tree string="Budget Lines">
+				                    <field name="general_budget_id" string="Budgetary Items" domain="[('is_ledger','!=',False)]" />
+				                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting" required="1" string="Analytic Account"
+				                    		domain="[('is_ledger','!=',False)]" options="{'no_create': True, 'no_create_edit':True}" />
+				                    <field name="planned_amount" string="Planned Amount Year 1"/>
+				                    <field name="planned_amount_y2"/>
+				                    <field name="planned_amount_y3"/>
+				                    <field name="date_from" class="oe_inline" invisible="1"/>
+				                    <field name="date_to" class="oe_inline" invisible="1"/>                                        
+				                    
+				                    <!--
+				                      <field name="practical_amount" sum="Practical Amount" widget="monetary"/>
+				                      <field name="theoritical_amount" sum="Theoretical Amount" widget="monetary" invisible="1 "/>
+				                      <field name="percentage"/>
+				                    -->
+				                </tree>
+				                <form string="Budget Lines">
+				                    <group>
+				                          <field name="general_budget_id" options="{'no_create': True, 'no_create_edit':True}" />
+				                          <field name="analytic_account_id" groups="analytic.group_analytic_accounting" required="1" 
+				                          		 domain="[('is_ledger','!=',False)]" options="{'no_create': True, 'no_create_edit':True}" />
+				                          <!-- <label for="planned_amount" string="Planned Amounts"/> -->
+				                          <field name="date_from" class="oe_inline" invisible="0"/>
+				                          <field name="date_to" class="oe_inline" invisible="0"/>
+				                          <field name="planned_amount" string="Year 1" widget="monetary"/>
+				                          <field name="planned_amount_y2" string="Year 2" widget="monetary"/>
+				                          <field name="planned_amount_y3" string="Year 3" widget="monetary"/>
+				                    </group>
+				                </form>
+				            </field>
+				        </page>
+				    </notebook>
+				</sheet>
+				<div class="oe_chatter">
+				    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+				    <field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+            
+        </field>
+    </record>
+    	
+    <record id="view_mid_term_budget_management_tree" model="ir.ui.view">
+        <field name="name">mid.term.budget.management.tree</field>
+        <field name="model">crossovered.budget</field>
+        <field name="arch" type="xml">
+			<tree decoration-info="state == 'draft'" decoration-muted="state in ('done','cancel')" string="Budget">
+				<field name="name" colspan="1"/>
+				<field name="date_from"/>
+				<field name="date_to"/>
+				<field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+				<field name="creating_user_id"/>
+				<field name="state"/>
+			</tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="crossovered_budget_view_form">
+        <field name="name">crossovered.budget.view.form</field>
+        <field name="model">crossovered.budget</field>
+        <field name="arch" type="xml">
+            <form string="Budget">
+                <header>
+                    <button string="Confirm" name="action_budget_confirm" states="draft" type="object" class="oe_highlight"/>
+                    <button string="Approve" name="action_budget_validate" states="confirm" type="object" class="oe_highlight"/>
+                    <button string="Done" name="action_budget_done" states="validate" type="object" class="oe_highlight"/>
+                    <button string="Reset to Draft" name="action_budget_draft" states="cancel" type="object" />
+                    <button string="Cancel Budget" name="action_budget_cancel" states="confirm,validate" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                </header>
+                <sheet string="Budget">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" attrs="{'readonly':[('state','!=','draft')]}" placeholder="Budget Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="creating_user_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/> - 
+                                <field name="date_to" class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}" nolabel="1"/>
+                                <field name="budget_type" invisible="1"/>
+                            </div>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Budget Lines">
+                            <field name="crossovered_budget_line" context="{'default_date_from': date_from,'default_date_to': date_to}" colspan="4" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree string="Budget Lines">
+                                    <field name="general_budget_id" string="Budgetary Items" options="{'no_create': True, 'no_create_edit':True}" />
+                                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting" 
+                                    			domain="[('is_ledger','!=',False)]" required="1" string="Analytic Account" options="{'no_create': True, 'no_create_edit':True}" />
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                    <field name="paid_date" groups="base.group_no_one"/>
+                                    <field name="planned_amount" sum="Planned Amount" widget="monetary"/>
+                                    <field name="practical_amount" sum="Practical Amount" widget="monetary"/>
+                                    <field name="theoritical_amount" sum="Theoretical Amount" widget="monetary"/>
+                                    <field name="percentage"/>
+                                </tree>
+                                <form string="Budget Lines">
+                                    <group>
+                                        <group>
+                                            <field name="general_budget_id" options="{'no_create': True, 'no_create_edit':True}" />
+                                            <field name="planned_amount" widget="monetary"/>
+                                            <field name="analytic_account_id" groups="analytic.group_analytic_accounting" required="1" options="{'no_create': True, 'no_create_edit':True}" />
+                                        </group>
+                                        <group>
+                                            <label for="date_from" string="Period"/>
+                                            <div>
+                                                <field name="date_from" class="oe_inline"/> - 
+                                                <field name="date_to" class="oe_inline"/>
+                                            </div>
+                                            <field name="paid_date" groups="base.group_no_one"/>
+                                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crossovered_budget_view_tree">
+        <field name="name">crossovered.budget.view.tree</field>
+        <field name="model">crossovered.budget</field>
+        <field name="arch" type="xml">
+           <tree decoration-info="state == 'draft'" decoration-muted="state in ('done','cancel')" string="Budget">
+                <field name="name" colspan="1"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                <field name="creating_user_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>   
+    
+    <record id="action_annual_budget_management" model="ir.actions.act_window">
+        <field name="name">Annual Budget</field>
+        <field name="res_model">crossovered.budget</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('budget_type','=','standard')]</field>
+        <field name="context">{'default_budget_type': 'standard'}</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_budget_management.crossovered_budget_view_tree')}),
+                          		 (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_budget_management.crossovered_budget_view_form')})]"/>        
+    </record>
+
+    <record id="view_budget_post_search" model="ir.ui.view">
+        <field name="name">account.budget.post.search</field>
+        <field name="model">account.budget.post</field>
+        <field name="arch" type="xml">
+            <search string="Budgetary Position">
+                <field name="name" filter_domain="[('name','ilike',self)]" string="Budgetary Position"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_budget_post_tree" model="ir.ui.view">
+        <field name="name">account.budget.post.tree</field>
+        <field name="model">account.budget.post</field>
+        <field name="arch" type="xml">
+            <tree string="Budgetary Position">
+                <field name="name"/>              
+                <field name="account_ids"/>
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_budget_post_form">
+        <field name="name">account.budget.post.form</field>
+        <field name="model">account.budget.post</field>
+        <field name="arch" type="xml">
+            <form string="Budgetary Position">
+                <group col="4">
+                    <field name="name"/>
+                    <field name="code"/>
+                </group>
+                <notebook>
+                    <page string="Accounts">
+                        <field name="account_ids">
+                            <tree>
+                                <field name="code"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_budget_postition" model="ir.actions.act_window">
+        <field name="name">Budgetary Positions</field>
+        <field name="res_model">account.budget.post</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="view_budget_post_tree"/>
+        <field name="search_view_id" ref="view_budget_post_search"/>
+     <field name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_budget_management.view_budget_post_tree')}),
+                       		 (0, 0, {'view_mode': 'form', 'view_id': ref('nyda_budget_management.view_budget_post_form')})]"/>            
+        
+    </record>        
+       
+    <record id="view_budget_objective_form" model="ir.ui.view">
+        <field name="name">budget.objective.form</field>
+        <field name="model">budget.objective</field>
+        <field name="arch" type="xml">
+            <form string="Budgetary Position">
+                <field name="name"/>
+                <field name="description"/>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_budget_objective_tree" model="ir.ui.view">
+        <field name="name">budget.objective.tree</field>
+        <field name="model">budget.objective</field>
+        <field name="arch" type="xml">
+            <tree string="Budgetary Position">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+           
+    <record id="action_budget_management_objectives" model="ir.actions.act_window">
+        <field name="name">Budget Objectives</field>
+        <field name="res_model">budget.objective</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record> 
+    
+    <record id="view_product_template_tree" model="ir.ui.view">
+        <field name="name">product.template.tree</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree string="Products">
+            	<field name="default_code"/>
+                <field name="name"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="action_budget_product_template" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+	    <field name="view_ids"
+	            eval="[(5, 0, 0),	(0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_budget_management.view_product_template_tree')}),
+	                       		 	(0, 0, {'view_mode': 'form', 'view_id': ref('product.product_template_only_form_view')})]"/>        
+    </record> 
+                    
+    <record id="action_adjustment_budget_management" model="ir.actions.act_window">
+        <field name="name">Adjustment Budget</field>
+        <field name="res_model">crossovered.budget</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','adjustment')]</field>
+    </record>       
+    
+    <record id="action_mid_term_budget_management" model="ir.actions.act_window">
+        <field name="name">Mid-Term Budget</field>
+        <field name="res_model">crossovered.budget</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('budget_type','=','mid-term')]</field>
+        <field name="context">{'default_budget_type': 'mid-term'}</field>
+    </record>    
+            
+    <record id="view_budget_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">budget.account.analytic.account.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <form string="Analytic Account">
+            	<group>
+            		<group>
+		                <field name="name"/>
+		                <field name="division_id"/>
+	                </group>
+	                <group>
+		                <field name="business_unit_id"/>
+		                <field name="product_id"/>
+	                </group>
+	                <group>
+		                <field name="objective_id"/>
+		                <field name="account_id"/>
+		                <field name="is_ledger"/>
+	                </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_budget_account_analytic_account_tree" model="ir.ui.view">
+        <field name="name">budget.account.analytic.account.tree</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+			<tree string="Analytic Accounts">
+	            <field name="display_name"/>
+	            <field name="code"/>
+	            <field name="debit"/>
+	            <field name="credit"/>
+	            <field name="balance"/>
+	        </tree>
+        </field>
+    </record>
+                    
+    <record id="action_account_analytic_account_management" model="ir.actions.act_window">
+        <field name="name">Analytic Accounts</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_ledger','!=', False)]</field>
+        <field name="context">{'default_is_ledger': True}</field>
+	    <field name="view_ids"
+	            eval="[(5, 0, 0),	(0, 0, {'view_mode': 'tree', 'view_id': ref('nyda_budget_management.view_budget_account_analytic_account_tree')}),
+	                       		 	(0, 0, {'view_mode': 'form', 'view_id': ref('nyda_budget_management.view_budget_account_analytic_account_form')})]"/>           
+    </record>       
+
+    <record id="action_budget_items_management" model="ir.actions.act_window">
+        <field name="name">Budget Lines</field>
+        <field name="res_model">crossovered.budget.lines</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>     
+	    <field name="view_ids"
+	            eval="[(5, 0, 0),	(0, 0, {'view_mode': 'tree', 'view_id': ref('account_budget.view_crossovered_budget_line_tree')}),
+	                       		 	(0, 0, {'view_mode': 'form', 'view_id': ref('account_budget.view_crossovered_budget_line_form')})]"/>                   
+    </record>
+                  
+    <!--Menu for Bursary External Report -->
+    <menuitem name="Budget Management" id="menu_budget_management" web_icon="nyda_budget_management,static/description/icon.png"
+    			groups="base.group_system"/>
+
+    <menuitem id="menu_main_budget_management" name="Budget Management" parent="menu_budget_management" sequence="1"/>
+
+    <menuitem id="menu_admin_budget_management" name="Administration" 
+            parent="menu_budget_management"
+            sequence="0"/>
+
+    <menuitem id="menu_budget_items_management" name="Budget Lines" 
+    		action="action_budget_items_management"
+            parent="menu_admin_budget_management"
+            sequence="0"/>
+            
+    <menuitem id="menu_annual_budget_management" name="Annual Budget" 
+    		action="action_annual_budget_management"
+            parent="menu_admin_budget_management"
+            sequence="1"/>
+            
+    <menuitem id="menu_mid_term_budget_management" name="Mid-Term Budget" 
+    		action="action_mid_term_budget_management"
+            parent="menu_admin_budget_management"
+            sequence="2"/>
+
+    <menuitem id="menu_management_budget" name="Management" 
+            parent="menu_budget_management"
+            sequence="2"/>
+                        
+    <menuitem id="menu_adjustment_budget_management" name="Budget Adjustment" 
+    		action="action_adjustment_budget_management"
+            parent="menu_management_budget"
+            sequence="0"/>
+            
+    <menuitem id="menu_config_budget_management" name="Configuration" 
+    		action="action_annual_budget_management"
+            parent="menu_budget_management"
+            sequence="3"/>
+
+    <menuitem id="menu_budget_products" name="Products" 
+    		action="action_budget_product_template"
+            parent="menu_config_budget_management"
+            sequence="9"/>
+                        
+    <menuitem id="menu_budget_objectives" name="Budget Objectives" 
+    		action="action_budget_management_objectives"
+            parent="menu_config_budget_management"
+            sequence="10"/>
+                        
+    <menuitem id="menu_items_budget_management" name="Budget Positions" 
+    		action="action_budget_postition"
+            parent="menu_config_budget_management"
+            sequence="11"/>
+
+    <menuitem id="menu_items_budget_analytic_accounts" name="Analytic Accounts" 
+    		action="action_account_analytic_account_management"
+            parent="menu_config_budget_management"
+            sequence="12"/>                                                             
+
+</odoo>

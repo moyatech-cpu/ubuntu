@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Views and action for Decline agreement wizard -->
+    <record id="wiz_agreement_decline_form" model="ir.ui.view">
+        <field name="name">wiz.agreement.decline.form</field>
+        <field name="model">wizard.agreement.decline</field>
+        <field name="arch" type="xml">
+            <form string="Confirm">
+                <h4>Are you sure you want to reject this mentorship recommendation?
+                </h4>
+                <footer>
+                    <button name="agreement_declined" string="Accept" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_agreement_decline" model="ir.actions.act_window">
+        <field name="name">Decline Agreement</field>
+        <field name="res_model">wizard.agreement.decline</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

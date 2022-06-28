@@ -1,0 +1,201 @@
+<odoo>
+	<data>
+	<record id="nyda_scm_tender_committees_kanban" model="ir.ui.view">
+       		<field name="name">nyda.scm.committees.kanban.view</field>
+       		<field name="model">nyda.scm.tender.committee</field>
+       		<field name="arch" type="xml"> 
+			<kanban class="o_event_kanban_view" default_group_by="state" colors="green:state=='New';yellow:state=='Pending';red:state=='In Progress';red:state=='Closed';green:state=='Delivered';" disable_drag_drop_record="true" import="false" >
+                   <field name="name"/>
+                   <field name="start_date"/>
+                   <field name="end_date"/>
+                   <field name="create_date"/>
+                   <field name="state"/>
+                   <field name="color"/>
+                   <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                   
+                   <templates>
+                       <t t-name="kanban-box">
+                           <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                               <div class="o_dropdown_kanban dropdown">
+
+                                   <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                       <span class="fa fa-ellipsis-v"/>
+                                   </a>
+                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                       <t t-if="widget.deletable">
+                                           <li><a type="delete">Delete</a></li>
+                                       </t>
+                                       <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                   </ul>
+                               </div>
+                               <div class="o_event_left">
+                                   <div class="o_day"><t t-esc="record.create_date.raw_value.getDate()"/></div>
+                                   <div>
+                                       <t t-esc="moment(record.create_date.raw_value).format('MMM')"/>
+                                       <t t-esc="record.create_date.raw_value.getFullYear()"/>
+                                   </div>
+                                   <div><t t-esc="moment(record.create_date.raw_value).format('LT')"/></div>
+                               </div>
+                               <div class="o_event_right">
+                                   <h4 class="o_kanban_record_title"><field name="name"/></h4>
+                                   <div>
+                                       <t t-if="record.name.raw_value"> <b class="o_kanban_record_subtitle"> <field name="committee_members"/> </b> <br/> </t>
+                                       <i class="fa fa-clock-o"/>
+                                       <b>Create Date</b> <t t-esc="moment(record.create_date.raw_value).format('lll')"/>
+                                   </div>
+                               </div>
+                           </div>
+                       </t>
+                   </templates>
+			</kanban>
+            </field>
+	</record>
+	
+	<record model="ir.ui.view" id="nyda_scm_tender_committees_tree_view">
+		<field name="name">nyda.scm.tender.committee.tree.view</field>
+		<field name="model">nyda.scm.tender.committee</field>
+		<field name="arch" type="xml">
+			<tree >
+		        <field name="name"/>
+		        <field name="start_date"/>
+		        <field name="end_date"/>
+		        <field name="committee_members"/>
+			</tree>
+     	</field>
+	</record>
+
+	<record model="ir.ui.view" id="nyda_scm_tender_committees_form_view">
+		<field name="name">nyda.scm.tender.committee.form.view</field>
+		<field name="model">nyda.scm.tender.committee</field>
+		<field name="arch" type="xml">
+		<form string="Committee Form">
+	     	<header>
+ 				<button name="new_completed" string="Proceed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'new')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"
+				/>
+				
+				<button name="manager_approval" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'manager_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,base.group_system"
+				/>
+				
+				<button name="manager_reject" string="Reject" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'manager_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_manager,base.group_system"
+				/> 
+				
+				<button name="ceo_approval" string="Approve" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'ceo_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_ceo,base.group_system"
+				/>
+				
+				<button name="ceo_reject" string="Reject" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'ceo_review')]}" 
+				 groups="nyda_scm_tender.nyda_scm_tender_ceo,base.group_system"
+				/>				
+								
+				<button name="completed" string="Completed" type="object" class="oe_highlight"
+				 attrs="{'invisible' : [('state', '!=', 'active')]}"
+				 groups="nyda_scm_tender.nyda_scm_tender_officer_user,base.group_system"
+				/> 
+	     	</header>
+	     	<sheet>	  	     	
+				<div id="o_memo_container">
+			      	<div id="o_memo_main">
+			      		<group name="title" string="Details">
+			              	<group>
+			              		<field name="state" invisible="1"/>
+			              		<field name="committee_type" invisible="1"/>
+			              		<field name="name" required="1"/>
+			              		<field name="start_date" required="1"/>
+			                    <field name="end_date" required="1"/>
+							</group>
+						</group>
+			       	</div>
+		     	</div>
+				<notebook colspan="8">	
+					<page name="committee_members" string="Committee Members" >
+						<field name="committee_members" nolabel="1" >
+							<tree editable="bottom">
+								<field name="member"/>
+								<field name="role"/>
+							</tree>
+						</field>
+					</page>   					
+					<page name="motivation" string="Motivation" >
+						<field name="motivation"/>
+						<div class="oe_clear"/>
+					</page>	
+					<page name="ceo_remarks" string="CEO Remarks" attrs="{'invisible' : [('state', 'not in', ('ceo_review','active','completed'))]}">
+						<field name="ceo_remarks"/>
+						<div class="oe_clear"/>
+					</page>						
+				</notebook>
+			</sheet>
+			<!--
+			<div class="oe_chatter" >
+	  			<field name="message_follower_ids" widget="mail_followers"/>
+	  			<field name="message_ids" widget="mail_thread"/>
+			</div>
+			-->
+  		</form>
+    	</field>
+	</record>
+	
+    <record model="ir.actions.act_window" id="nyda_scm_tender.bsc_tender_action_window">
+      <field name="name">Bid Specific Committee</field>
+      <field name="res_model">nyda.scm.tender.committee</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('committee_type', '=', 'bsc')]</field>
+      <field name="context">{'default_committee_type': 'bsc'}</field>
+    </record>
+        
+    <record model="ir.actions.act_window" id="nyda_scm_tender.bec_tender_action_window">
+      <field name="name">Bid Evaluation Committee</field>
+      <field name="res_model">nyda.scm.tender.committee</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('committee_type', '=', 'bec')]</field>
+      <field name="context">{'default_committee_type': 'bec'}</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="nyda_scm_tender.bac_tender_action_window">
+      <field name="name">Bid Adjudication Committee</field>
+      <field name="res_model">nyda.scm.tender.committee</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('committee_type', '=', 'bac')]</field>
+      <field name="context">{'default_committee_type': 'bac'}</field>
+    </record> 
+
+	<!--
+    <menuitem name="Management" id="nyda_scm_tender.scm_management_menu" parent="nyda_scm_rfq.main_menu" 
+    			sequence="4" action="nyda_scm_tender.bsc_tender_action_window" />
+
+	
+    <menuitem name="Administration" id="nyda_scm_tender.admin_menu" parent="nyda_scm_tender.scm_management_menu" 
+    			sequence="1" action="nyda_scm_tender.bsc_tender_action_window" />
+	      			
+    <menuitem name="Products and Services" id="nyda_scm_tender.products_services_menu" parent="nyda_scm_tender.admin_menu" 
+    			sequence="2" action="stock.product_template_action_product" />
+    			
+    <menuitem name="Supplier Invoices" id="nyda_scm_tender.supplier_invoices_menu" parent="nyda_scm_tender.admin_menu" 
+    			sequence="3" action="account.action_invoice_tree2" />
+    			
+    <menuitem name="Purchase Orders" id="nyda_scm_tender.purchase_orders_menu" parent="nyda_scm_tender.admin_menu" 
+    			sequence="4" action="purchase.purchase_form_action" />
+	-->
+	    			    			    			    			
+    <menuitem name="Committees" id="nyda_scm_tender.scm_management_comm_menu" parent="nyda_scm_rfq.scm_management_menu" 
+    			sequence="5" action="nyda_scm_tender.bsc_tender_action_window" />
+    			    
+    <menuitem name="Bid Specific Committee" id="nyda_scm_tender.bsc_menu" parent="nyda_scm_tender.scm_management_comm_menu" 
+    			sequence="6" action="nyda_scm_tender.bsc_tender_action_window" />
+    
+    <menuitem name="Bid Evaluation Committee" id="nyda_scm_tender.bec_menu" parent="nyda_scm_tender.scm_management_comm_menu" 
+    			sequence="7" action="nyda_scm_tender.bec_tender_action_window" />
+    
+    <menuitem name="Bid Adjudication Committee" id="nyda_scm_tender.bac_menu" parent="nyda_scm_tender.scm_management_comm_menu" 
+    			sequence="8" action="nyda_scm_tender.bac_tender_action_window" />
+    
+  </data>
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+	<record id="preassessment_application_button_update" model="ir.ui.view">
+            <field name="name">Preassessment Application Update Cancel Button</field>
+            <field name="model">client.preassessment</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_client_preassessment_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='state']" position="after">
+                        <field name="cancel_state" widget="statusbar" statusbar_visible="cancelled" attrs="{'invisible': [('cancel_state', '!=', 'cancelled')]}" type="object"/>
+
+            </xpath>
+               
+               <xpath expr="//button[@name='create_pitch_and_polish']" position="after">
+                        <button name="btn_cancel_assessment" string="Cancel Assessment" attrs="{'invisible': [('cancel_state', '=', 'cancelled')]}" type="object"
+                                class="oe_highlight" >
+
+                        </button>
+            </xpath>
+             <xpath expr="//button[@name='btn_cancel_assessment']" position="after">
+                        <button name="btn_reinstate_assessment" string="Reinstate Assessment" attrs="{'invisible': [('cancel_state', '!=', 'cancelled')]}" type="object"
+                                class="oe_highlight" >
+
+                        </button>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+            			<group name = "number_of_grant_applications">
+            				<group>
+                        		<field name="number_of_grants" readonly="1" options="{'no_open':True,'no_create':True}"/>
+                        	</group>
+                        </group>
+            </xpath>
+            
+            </field>
+        </record>
+       
+  </data>
+</odoo>

@@ -1,0 +1,553 @@
+<odoo>
+    <data>
+
+        <!--Tree view for Learning Development-->
+        <record model="ir.ui.view" id="learning_development_tree_view">
+            <field name="name">learning.development.tree.view</field>
+            <field name="model">learning.development</field>
+            <field name="arch" type="xml">
+                <tree import="false">
+                    <field name="forename"/>
+                    <field name="surname"/>
+                    <field name="emp_number"/>
+                    <field name="division_id"/>
+                    <field name="branch_id"/>
+                    <field name="province_id"/>
+                    <field name="proposed_qualification"/>
+                    <field name="nqf_level"/>
+                    <field name="bursary_institution_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Kanban view for Learning Development-->
+        <record id="learning_development_kanban_view" model="ir.ui.view">
+            <field name="name">learning.development.kanban</field>
+            <field name="model">learning.development</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+
+				<kanban default_group_by="state" disable_drag_drop_record="true" import="false">
+                    <field name="state"/>
+                    <field name="app_id_num"/>
+                    <field name="position_id"/>
+                    <field name="division_id"/>
+                    <field name="province_id"/>
+                    <field name="forename"/>
+                    <field name="surname"/>
+                    <field name="type"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click p-0">
+                                <div t-attf-class="o_kanban_card_header p-5">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary">
+                                            <h4>
+                                                <t t-esc="record.forename.value"/> <t t-esc="record.surname.value"/>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_top p-5">
+                                    <div class="col-xs-6 pl-0">
+                                        <strong class="o_kanban_record_title" t-if="record.division_id.raw_value">
+                                            <i class="fa fa-bars"/>
+                                            <field name="division_id"/>
+                                        </strong>
+                                    </div>
+                                    <div class="col-xs-6 pl-0">
+                                        <span t-if="record.position_id.raw_value">
+                                            <i class="fa fa-user"/>
+                                            <field name="position_id"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom p-5">
+                                    <div class="col-xs-12 plr-0">
+                                        <span t-if="record.manager_id.raw_value" class="o_kanban_record_subtitle">
+                                            <i class="fa fa-user-circle" aria-hidden="true"/>
+                                            <field name="manager_id"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom p-5">
+                                    <div class="col-xs-12 plr-0">
+                                        <field name="proposed_qualification"/>
+                                    </div>
+                                </div>
+                                <div class="row margin-8 p-5">
+                                    <div class="col-xs-6 o_kanban_primary_left">
+                                        <span t-if="record.type.raw_value == 'bursary_request'">
+                                            <button class="btn btn-primary" name="bursary_request" type="object">
+                                                View
+                                            </button>
+                                        </span>
+                                        <span t-if="record.type.raw_value == 'ext_courses'">
+                                            <button class="btn btn-primary" name="bursary_request" type="object">
+                                                View
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+
+            </field>
+        </record>
+
+        <!--Form view for Learning Development-->
+        <record model="ir.ui.view" id="learning_development_form_view">
+            <field name="name">learning.development.form.view</field>
+            <field name="model">learning.development</field>
+            <field name="arch" type="xml">
+            
+				<form>
+                    <header>
+                        <button type="object" name="submit_request" string="Send to Line Manager" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'bursary_req')]}"
+                          groups="learning_development.group_learn_dev_admin"
+                        />
+                        <button name="lm_app_req" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'line_manager')]}"
+                          groups="strategy_and_planning.group_line_manager"
+                        />
+                        <button name="lm_rej_req" type="object" class="oe_highlight" string="Reject" attrs="{'invisible': [('state', '!=', 'line_manager')]}"
+                          groups="strategy_and_planning.group_line_manager"
+                        />
+
+                        <button name="hod_app_req" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'hod')]}"
+                          groups="learning_development.group_hod"
+                        />
+                        <button name="hod_rej_req" type="object" class="oe_highlight" string="Reject" attrs="{'invisible': [('state', '!=', 'hod')]}"
+                          groups="learning_development.group_hod"
+                        />
+
+                        <button name="ldm_app_req" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'adjudication')]}"
+                          groups="learning_development.group_ld_manager"
+                        />
+                        <button name="ldm_rej_req" type="object" class="oe_highlight" string="Reject" attrs="{'invisible': [('state', '!=', 'adjudication')]}"
+                          groups="learning_development.group_ld_manager"
+                        />
+                        
+                        <button name="ldm_app_req" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'ld_manager')]}"
+                          groups="learning_development.group_ld_manager"
+                        />
+                        <button name="ldm_rej_req" type="object" class="oe_highlight" string="Reject" attrs="{'invisible': [('state', '!=', 'ld_manager')]}"
+                          groups="learning_development.group_ld_manager"
+                        />
+                        
+                        <button name="ceo_app_req" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'ceo')]}"
+                          groups="strategy_and_planning.group_ceo"
+                        />
+                        <button name="ceo_rej_req" type="object" class="oe_highlight" string="Reject" attrs="{'invisible': [('state', '!=', 'ceo')]}"
+                          groups="strategy_and_planning.group_ceo"
+                        />                        
+                        
+                        
+                        <field name="state" widget="statusbar" statusbar_visible="bursary_req,line_manager,hod,adjudication,ld_manager,ceo,bursary_app,bursary_reject"/>
+                    </header>
+                    <sheet>
+                        <group string="Personal Details" name="personal_details">
+                            <group>
+                                <field name="type" readonly="1" invisible="1"/>
+                                <field name="forename" readonly="1"/>
+                                <field name="emp_number" readonly="1"/>
+                                <field name="app_id_num" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="manager_id" readonly="1"/>
+                                <field name="surname" readonly="1"/>
+                                <field name="position_id" options="{'no_open': True,'no_create': True}" readonly="1"/>
+                                <field name="physical_address" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="division_id" options="{'no_open': True,'no_create': True}" readonly="1"/>
+                                <field name="branch_id" options="{'no_open': True,'no_create': True}" readonly="1"/>
+                                <field name="province_id" options="{'no_open': True,'no_create': True}" readonly="1" context="{'country_id': 247}" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="obtained_qualifications" readonly="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Booking Info" name="booking_info" attrs="{'invisible': [('type', '!=', 'ext_courses')]}">
+                                <group>
+                                    <field name="inst_name"/>
+                                    <field name="inst_add"/>
+                                    <field name="inst_number"/>
+                                    <field name="inst_course_name"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="duration" widget="float_time"/>
+                                    </group>
+                                    <group>
+                                        <field name="date"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="qual_obtained"/>
+                                    <field name="total_costs"/>
+                                </group>
+                            </page>
+                            <page string="Travel Arrangements" name="travel_arrangements" attrs="{'invisible': [('type', '!=', 'ext_courses')]}">
+                                <group>
+                                    <group>
+                                        <field name="req_travel"/>
+                                        <field name="dept_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="dept_place"/>
+                                        <field name="return_date"/>
+                                    </group>
+                                </group>
+                                <div class="pl-0 col-md-12">
+                                    <div class="pl-0 col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="air_travel"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="air_travel"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="inst_province_id"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="inst_province_id" options="{'no_open': True,'no_create': True}"/>
+                                            </div>
+                                        </div>
+                                        <!--  
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="airpot_id"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="airpot_id" options="{'no_open': True,'no_create': True}"/>
+                                            </div>
+                                        </div>
+                                        -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="voyage_number"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="voyage_number"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <group/>
+                                <div class="pl-0 col-md-12">
+                                    <div class="pl-0 col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="acc_req"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="acc_req"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="smoking"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="smoking"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="non_smoking"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <field name="non_smoking"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <group>
+                                    <group>
+                                        <field name="land_travel"/>
+                                    </group>
+                                    <group>
+                                        <field name="car_rental"/>
+                                        <field name="shuttle_service"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Bursary Request" name="bursary_request" attrs="{'invisible': [('type', '!=', 'bursary_request')]}">
+                                <group>
+                                    <group>
+                                        <field name="previous_sponsored" attrs="{'required': [('type', '=', 'bursary_request')]}" options="{'horizontal': True}"/>
+                                    </group>
+                                    <group>
+                                        <field name="new_qualification" attrs="{'required': [('type', '=', 'bursary_request')]}" options="{'horizontal': True}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="app_motivation"/>
+                                    <field name="proposed_qualification" attrs="{'required': [('type', '=', 'bursary_request')]}"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="nqf_level" attrs="{'required': [('type', '=', 'bursary_request')]}"/>
+                                        <field name="bursary_institution_id" options="{'no_open': True,'no_create': True}"/>
+                                        <field name="year_of_study"/>
+                                    </group>
+                                    <group>
+                                        <field name="method_of_study"/>
+                                        <field name="anticipated_year_of_completion" attrs="{'required': [('type', '=', 'bursary_request')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Previous Sponsored Studies" name="previous_sponsored_studies" attrs="{'invisible': [('type', '!=', 'bursary_request')]}">
+                                <group>
+                                    <field name="previous_sponsored_qualification_studies"/>
+                                </group>
+                                <group>
+                                    <field name="studies_institution_id"/>
+                                </group>
+                                <group>
+                                    <field name="student_number"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="commenced_support_year"/>
+                                        <field name="commenced_study_year"/>
+                                    </group>
+                                    <group>
+                                        <field name="qualification_completed"/>
+                                        <field name="studies_completion_date"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="previous_academic_record" filename="previous_academic_record_name" widget="download"/>
+                                    <field name="previous_academic_record_name" invisible="1"/>
+                                </group>
+                            </page>
+                            <page string="Disclaimer" name="disclaimer">
+                                <h1 style="color:#337AB7;font-weight: bold;">Undertaking by Employee to Repay</h1>
+                                <h4>1. I hereby undertake to repay the National Youth Development Agency (NYDA) the full
+                                    bursary amount paid to the sum of
+                                </h4>
+                                <group>
+                                    <field name="total_repay" required="1"/>
+                                    <field name="amt_in_words" required="1"/>
+                                </group>
+                                <h4>
+                                    2. In this regard I accept that the amount recorded above:<br/><br/>
+
+                                    - Shall become immediately due and payable on the last day of my employment with the NYDA,<br/>
+                                    - Will not be reduced proportionately in accordance with the amount of time I worked from the
+                                    time I signed this undertaking, and<br/>
+                                    - Will be repaid in full by myself if I am unable to complete the studies or part thereof due
+                                    to failure or any other circumstances and/or breach of any the terms and conditions of the Bursary Scheme.<br/>
+                                    - Where deemed necessary, repayment installments shall be at the discretion of the NYDA, who
+                                    may choose to negotiate reasonable terms of repayment with me.<br/><br/>
+
+                                    In addition:<br/>
+                                    3. The NYDA may deduct the Bursary monies from any monies payable to me provided that the amount(s)
+                                    are deductible by law.<br/>
+                                    4.  I hereby choose as my physical address for all purposes in terms of this undertaking, where all
+                                    notice and /or processes may validly be delivered or served the following address:<br/>
+                                </h4>
+                                <group>
+                                    <field name="disc_address" required="1"/>
+                                </group>
+                                <h4>
+                                    5. In terms of Section 45 of the Magistrates Act of 1944 as amended, I hereby consent to NYDA
+                                    taking legal proceedings for the enforcing of its rights herein or for the recovery of any moneys
+                                    claimable herein or otherwise in the magistrate’s Court for the district having jurisdiction in
+                                    respect of any such proceedings against me by virtue of Section 28 (1) of the said Act.<br/><br/>
+
+                                    6. In the event of it being necessary for the NYDA to institute any legal proceedings against me,
+                                    I shall be responsible for the payment of all legal fees and disbursements thereby incurred by the
+                                    Agency, including collection commission on the scale as between attorney and client.<br/><br/>
+                                </h4>
+                                <group>
+                                    <field name="app_signature" widget="signature" required="1"/>
+                                </group>
+                                <group string="First Witnesss">
+                                    <group>
+                                        <field name="first_witness_name" required="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="first_witness_surname" required="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="first_witness_signature" required="1" widget="signature"/>
+                                </group>
+                                <group string="Second Witnesss">
+                                    <group>
+                                        <field name="second_witness_name" required="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="second_witness_surname" required="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="second_witness_signature" required="1" widget="signature"/>
+                                </group>
+                            </page>
+                            <page name="documents" string="Documents">
+                                <group>
+                                    <group>
+                                        <field name="proof_of_reg" widget="download" filename="proof_of_reg_name" required="1"/>
+                                        <field name="proof_of_reg_name" invisible="1"/>
+                                        <field name="course_outline" widget="download" filename="course_outline_name" required="1"/>
+                                        <field name="course_outline_name" invisible="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="quotation" widget="download" filename="quotation_name" required="1"/>
+                                        <field name="quotation_name" invisible="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Line Manager" name="line_manager" attrs="{'invisible': [('state', '=', 'bursary_req')]}">
+                                <group/>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label for="ind_perf"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <field name="ind_perf" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label for="app_per"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <field name="app_per" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label for="app_study"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <field name="app_study" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="car_dev"/>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <field name="car_dev" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label for="nyda_prop_study"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <field name="nyda_prop_study" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="prop_study"/>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <field name="prop_study" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label for="provided_support"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <field name="provided_support" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="motivation"/>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <field name="motivation" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="previous_year_motivation"/>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <field name="previous_year_motivation" attrs="{'readonly': [('state', '!=', 'line_manager')]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+	                <div class="oe_chatter">
+	                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+	                    <field name="activity_ids" widget="mail_activity"/>
+	                    <field name="message_ids" widget="mail_thread"/>
+	                </div>                    
+                </form>
+                
+            </field>
+        </record>
+
+        <!--Action for Bursary Request-->
+        <record model="ir.actions.act_window" id="busrary_applications_action">
+            <field name="name">Bursary Applications</field>
+            <field name="res_model">learning.development</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="perm_create">false</field>
+            <field name="domain">[('type', '=', 'bursary_request')]</field>
+            <field name="context">{'default_type': 'bursary_request'}</field>
+        </record>
+
+        <!--Action for External Courses-->
+        <record model="ir.actions.act_window" id="external_request_action">
+            <field name="name">External Courses</field>
+            <field name="res_model">learning.development</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('type', '=', 'ext_courses')]</field>
+            <field name="context">{'default_type': 'ext_courses'}</field>
+        </record>
+
+        <!--Menu for Learning Development-->
+        <menuitem name="Learning Development" id="learning_development_main_menu" parent="__export__.ir_ui_menu_867"
+                  groups="monitoring_and_evaluation.group_nyda_employees,strategy_and_planning.group_line_manager,strategy_and_planning.group_ceo,learning_development.group_hod,learning_development.group_ld_manager,learning_development.group_learn_dev_admin,base.group_system"
+                  web_icon="learning_development,static/description/icon.png"/>
+        <menuitem name="Bursary Applications" id="busrary_applications_menu" action="busrary_applications_action"
+                  parent="learning_development.learning_development_main_menu" sequence="1"/>
+        <menuitem name="External Courses" id="external_courses_menu" action="external_request_action"
+                  parent="learning_development.learning_development_main_menu" sequence="2"/>
+
+    </data>
+</odoo>

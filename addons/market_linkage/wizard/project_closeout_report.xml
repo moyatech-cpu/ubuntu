@@ -1,0 +1,28 @@
+<odoo>
+	<record id="view_project_closeout_form" model="ir.ui.view">
+		<field name="name">project.closeout.form</field>
+		<field name="model">project.closeout</field>
+		<field name="arch" type="xml">
+			<form string="Project Closeout Report">
+                <group>
+                    <field name="file_name" invisible="1"/>
+					<field name="project_closeout_report" widget="binary" required="1" filename="file_name"/>
+				</group>
+			     <footer>
+	                 <button name="project_closeout_report_req" string="Project Closeout Report" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+
+			</form>
+		</field>
+	</record>
+    <record id="action_project_closeout_report" model="ir.actions.act_window">
+            <field name="name">Project Closeout Report</field>
+            <field name="res_model">project.closeout</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_project_closeout_form"/>
+           <field name="target">new</field>
+        </record>
+
+</odoo>

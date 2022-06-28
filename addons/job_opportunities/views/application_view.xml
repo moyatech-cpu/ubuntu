@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Tree view of Application-->
+        <record model="ir.ui.view" id="application_tree_view">
+            <field name="name">application.tree.view</field>
+            <field name="model">application</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date" string="Creation Date"/>
+                    <field name="name"/>
+                    <field name="applicant_name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="opportunity_id"/>
+                    <field name="stage"/>
+                    <field name="medium"/>
+                    <field name="source"/>
+                    <field name="appreciation"/>
+                    <field name="official_responsible_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Tree view of Application(Documents)-->
+        <record model="ir.ui.view" id="application_doc_tree_view">
+            <field name="name">application.doc.tree.view</field>
+            <field name="model">application</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date" string="Creation Date"/>
+                    <field name="name"/>
+                    <field name="applicant_name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="opportunity_id"/>
+                    <field name="stage"/>
+                    <field name="resume" filename="resume_name" widget="download"/>
+                    <field name="resume_name" invisible="1"/>
+                    <field name="opportunity_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View of Application-->
+        <record model="ir.ui.view" id="application_form_view">
+            <field name="name">application.form.view</field>
+            <field name="model">application</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <header>
+                        <button name="shortlist_ben" string="Shortlist Beneficiary" type="object"
+                                attrs="{'invisible': [('stage', '!=', 'new')]}"/>
+                        <button name="placed_ben" string="Place Beneficiary" type="object"
+                                attrs="{'invisible': [('stage', '!=', 'shortlisted')]}"/>
+                        <button name="not_placed_ben" string="Not Placed Beneficiary" type="object"
+                                attrs="{'invisible': [('stage', 'not in', ['new', 'shortlisted'])]}"/>
+                        <field name='stage' widget='statusbar' statusbar_visible="new,shortlisted,placed,not_placed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Subject / Application Name"/>
+                            <h3>
+                                <field name="name" required="1"/>
+                            </h3>
+                            <label for="applicant_name" string="Applicant's Name"/>
+                            <h3>
+                                <field name="applicant_name" required="1"/>
+                            </h3>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="contact_id" options='{"no_open": True, "no_create": True}' required="1"/>
+                                <field name="applied_user_id"/>
+                                <field name="email" required="1"/>
+                                <field name="phone" required="1"/>
+                                <field name="mobile" required="1"/>
+                                <field name="degree_id" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group>
+                                <field name="official_responsible_id" options='{"no_open": True, "no_create": True}'
+                                       required="1"/>
+                                <field name="appreciation"/>
+                                <field name="source" invisible="1"/>
+                                <field name="referred_by"/>
+                                <field name="resume" filename="resume_name" widget="download" required="1"/>
+                                <field name="resume_name" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Details" name="details">
+                            <field name="opportunity_id" options='{"no_open": True, "no_create": True}' required="1"/>
+                            <field name="department_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="jobs_training"/>
+                        </group>
+                        <group string="Application Summary" name="application_summary">
+                            <field name="description" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Kanban view for Opportunities-->
+        <!--<record id="kanban_view_opportunities" model="ir.ui.view">-->
+            <!--<field name="name">opportunities.kanban</field>-->
+            <!--<field name="model">opportunities</field>-->
+            <!--<field name="priority">10</field>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<kanban class="o_hr_employee_kanban">-->
+                    <!--<field name="id"/>-->
+                    <!--<field name="name"/>-->
+                    <!--<templates>-->
+                        <!--<t t-name="kanban-box">-->
+                            <!--&lt;!&ndash;<div class="oe_kanban_global_click">&ndash;&gt;-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-12">-->
+                                    <!--<strong><t t-esc="record.name.raw_value"/></strong>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-6">-->
+                                    <!--<button class="btn btn-primary" style="margin-top:15px;"-->
+                                            <!--name="apps_opportunity"-->
+                                            <!--type="object">APPLICATION(S)-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-6">-->
+                                    <!--<a type="open">-->
+                                        <!--View/Edit-->
+                                    <!--</a><br/>-->
+                                    <!--<a type="object" name="doc_opportunity">-->
+                                        <!--Documents-->
+                                    <!--</a><br/>-->
+                                    <!--<a type="object" name="rec_opportunity">-->
+                                        <!--Recruitment Done-->
+                                    <!--</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</t>-->
+                    <!--</templates>-->
+                <!--</kanban>-->
+            <!--</field>-->
+        <!--</record>-->
+
+        <!--Action for Application-->
+        <record model="ir.actions.act_window" id="application_action_window">
+            <field name="name">Application</field>
+            <field name="res_model">application</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="application_tree_view"/>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Application" id="application_menu"
+                  parent="job_opportunities.job_opportunities_main_menu" sequence="4"
+                  action="application_action_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Wizard for Mentee to sign agreement. -->
+    <record id="wiz_agreement_mentee_form" model="ir.ui.view">
+        <field name="name">wiz.agreement.mentee.form</field>
+        <field name="model">wizard.agreement.mentee</field>
+        <field name="arch" type="xml">
+            <form string="Mentorship Agreement Sign">
+                <h4>I hereby commit to participate in the mentoring engagement process as set out in the Mentee Business Mentoring plan.</h4>
+<!--                    <field name="accept" required="1"/>-->
+                <footer>
+	                 <button name="accepted_by_mentee" string="Accept" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_agreement_mentee" model="ir.actions.act_window">
+        <field name="name">Mentee Agreement</field>
+        <field name="res_model">wizard.agreement.mentee</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- New Opportunity mail template -->
+        <record id="new_opp_email_template" model="mail.template">
+            <field name="name">New Opportunity Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="job_opportunities.model_opportunities"/>
+            <field name="lang">${object.lang}</field>
+            <field name="subject"><![CDATA[Regarding New Job Opportunity]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ,</p>
+    <p>These mail is regarding to let you know that new opportunity has been posted for position of ${object.name|safe}.</p>
+    <p>Regards,<br/>
+    NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Job Application mail template -->
+        <record id="job_app_email_template" model="mail.template">
+            <field name="name">Job Application Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="job_opportunities.model_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.applied_user_id.company_id.email|safe}</field>
+            <field name="email_to">${object.email|safe}</field>
+            <field name="subject"><![CDATA[Regarding Job Application]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello ${object.applicant_name|safe},</p>
+    <p>Thank you for your enquiry.</p>
+    <p>Your application for the post "${object.opportunity_id.name|safe}" has been received. Should you be shortlisted we will get in touch with you.</p>
+    <p>Regards,<br/>
+    NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<odoo>
+  <record id="cancel_bmt_training_upgrade_view" model="ir.ui.view">
+  <field name="name">cancel.bmt.training.view</field>
+  <field name="model">bmt.training.application</field>
+  <field name="inherit_id" ref="bmt_training.bmt_training_application_form_view"/>
+  <field name="arch" type="xml">
+    <xpath expr="//button[@name='confirm_trainee']" position="after">
+
+	<button string="Cancel" name="btn_cancel_application" attrs="{'invisible': [('status', '=', 'cancelled')]}" type="object" class="oe_highlight"/>
+
+	</xpath>
+	<xpath expr="//button[@name='btn_cancel_application']" position="after">
+
+	<button string="Reinstate" name="btn_reinstate_application" attrs="{'invisible': [('status', '!=', 'cancelled')]}" type="object" class="oe_highlight"/>
+ 
+</xpath>
+<xpath expr="//button[@name='btn_reinstate_application']" position="after">
+
+	<field name="status" widget="statusbar" statusbar_visible="new,cancelled"  attrs="{'invisible': [('status', '!=', 'cancelled')]}"/>
+
+</xpath>
+  </field>
+</record>
+</odoo>

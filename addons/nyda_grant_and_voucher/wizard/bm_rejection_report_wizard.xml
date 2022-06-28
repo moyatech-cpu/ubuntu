@@ -1,0 +1,29 @@
+<odoo>
+
+    <record id="bm_rejection_report_wizard_form" model="ir.ui.view">
+        <field name="name">BM.Rejection.Report.form</field>
+        <field name="model">bm.rejection.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BM Rejection Report">
+                <group>
+                      <field name="bm_rejection_report" required="1"/>
+                </group>
+                <footer>
+                    <button name="submit_bm_rejection_report" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="bm_rejection_report_wizard" model="ir.actions.act_window">
+        <field name="name">BM Rejection Report Wizard</field>
+        <field name="res_model">bm.rejection.report.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bm_rejection_report_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
+

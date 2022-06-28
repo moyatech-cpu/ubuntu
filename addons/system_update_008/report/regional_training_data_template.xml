@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_regional_training_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                    	<br />
+                        <h1>Regional Training Review Report</h1>
+                        <br />
+                    </div>
+                    <t t-value="doc.get_regional_training_data()" t-set="data"/>
+                        <div>
+                            <t t-if="data['start_date']">
+                                <h4>Start Date :
+                                    <t t-esc="data['start_date']"/>
+                                </h4>
+                            </t>
+                            <t t-if="data['end_date']">
+                                <h4>End Date :
+                                    <t t-esc="data['end_date']"/>
+                                </h4>
+                            </t>
+                            
+                            <t t-if="data['region']">
+                                <h4>Region :
+                                    <t t-esc="data['region']"/>
+                                </h4>
+                            </t>
+                           
+                            <t t-if="data['training']">
+                                <h4>Total Trainings :
+                                    <t t-esc="len(data['training'])"/>
+                                </h4>
+                            </t>
+                        </div>
+                </div>
+                <br/>
+                <t t-if="data['training']">
+                    <div class="row">
+                        <div class="text-center p8">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Branch</th>
+                                       	<th>Training</th>
+										<th>Training Start Date</th>
+										<th>Training End Date</th>
+                                        <th>Total Attendees</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>African</th>
+                                        <th>Indian</th>
+                                        <th>Coloured</th>
+                                        <th>White</th>
+                                        <th>Asian</th>
+                                        <th>Disability</th>
+                                        <th>Rural</th>
+                                        <th>Urban</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="data['training']" t-as="rec_data">
+                                    <tbody>
+                                        <tr>
+                                           <td>
+                                               <t t-esc="rec_data.name"/>
+                                           </td>
+                                          <td>
+                                             <t t-esc="rec_data.branch_id.name"/>
+                                          </td>
+                                          <td>
+                                             <span t-field="rec_data.intervention_type"/>
+                                          </td>
+                                        
+                                           <td>
+                                               <t t-esc="rec_data.start_date"/>
+                                           </td>
+                                          
+                                           <td>
+                                               <span t-field="rec_data.end_date"/>
+                                           </td>
+                                          
+                                            <td>
+                                                <t t-esc="rec_data.total_youth"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_males"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_females"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_african_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_indian_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_coloured_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_white_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_asian_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_disabled_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_rural_participants"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="rec_data.no_of_urban_participants"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="text-center">
+                            <h3>There are no Trainings on these dates.</h3>
+                        </div>
+                    </div>
+                </t>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="regional_report_training">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="system_update_008.report_regional_training_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

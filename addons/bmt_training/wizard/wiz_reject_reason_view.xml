@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- wiz.reject.reason view -->
+    <record id="wiz_reject_reason_view" model="ir.ui.view">
+        <field name="name">wiz.reject.reason.view</field>
+        <field name="model">wiz.reject.reason</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="comment" required="1"/>
+                <footer>
+                    <button name="action_button_reject" string="Reject" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- action for wiz.reject.reason -->
+    <record id="action_wiz_report_reject_comment" model="ir.actions.act_window">
+        <field name="name">Reason for Reject</field>
+        <field name="res_model">wiz.reject.reason</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wiz_reject_reason_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

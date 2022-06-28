@@ -1,0 +1,52 @@
+<odoo>
+      <record id="reject_recommendation_reason_form" model="ir.ui.view">
+        <field name="name">reject.recommendation.reason.form</field>
+        <field name="model">rfq.recommendation.reject</field>
+        <field name="arch" type="xml">
+            <form string="Reject Content">
+                <group>
+                    <field name="rejection_reason"/>
+                </group>
+                <footer>
+                    <button name="submit_reject_reason" string="Reject" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+	<record id="cancel_rfq_reason_form" model="ir.ui.view">
+		<field name="name">cancel.rfq.reason.form</field>
+        <field name="model">cancel.rfq.reason</field>
+        <field name="arch" type="xml">
+            <form string="Cancel RFQ">
+                <group>
+                    <field name="cancellation_reason"/>
+                </group>
+                <footer>
+                    <button name="submit_cancel_reason" string="Cancel" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+        
+    <record id="reject_recommendation_reason_wizard_action" model="ir.actions.act_window">
+        <field name="name">reject.recommendation.reason.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rfq.recommendation.reject</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="reject_recommendation_reason_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="cancel_rfq_reason_wizard_action" model="ir.actions.act_window">
+        <field name="name">cancel.rfq.reason.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.rfq.reason</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="cancel_rfq_reason_form"/>
+        <field name="target">new</field>
+    </record>    
+    
+</odoo>

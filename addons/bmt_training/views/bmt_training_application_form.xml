@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--BMT Training Application Tree View-->
+        <record model="ir.ui.view" id="bmt_training_application_tree_view">
+            <field name="name">bmt.training.application.tree.view</field>
+            <field name="model">bmt.training.application</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="participant_name"/>
+                    <field name="participant_surname"/>
+                    <field name="cellphone_number"/>
+                    <field name="email_address"/>
+                    <field name="training_type"/>
+                    <field name="part_ref_number"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--BMT Training Application Form View-->
+        <record model="ir.ui.view" id="bmt_training_application_form_view">
+            <field name="name">bmt.training.application.form.view</field>
+            <field name="model">bmt.training.application</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <header>
+                        <button name="confirm_trainee" string="Confirm Trainee" type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|', ('is_trainer', '=', False), ('is_trainee_confirm', '=', True)]}"/>
+                        <!--<button name="submit_application" string="Submit Application" type="object" class="oe_highlight"-->
+                                <!--attrs="{'invisible': ['|', ('is_benificiary', '=', False), ('application_submitted', '=', True)]}"/>-->
+                        <button name="thank_you" string="Back to Home" type="object" class="oe_highlight"
+                                attrs="{'invisible': [('id', '=', False)]}" groups="client_management.group_branch_beneficiary"/>
+                    </header>
+                    <sheet>
+                        <group string="Participants and Background Information"
+                               name="participants_and_background_information">
+                            <group>
+                                <field name="id" invisible="1"/>
+                                <field name="participant_name" required="1"
+                                       attrs="{'readonly': [('is_benificiary', '=', True)]}" string="Name"/>
+                                <field name="branch_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="participant_surname" required="1"
+                                       attrs="{'readonly': [('is_benificiary', '=', True)]}" string="Surname"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="physical_address" required="1"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="cellphone_number" required="1"/>
+                            </group>
+                            <group>
+                                <field name="telephone_number"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="email_address" required="1"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="south_african_identity_number" required="1"/>
+                            </group>
+                            <group>
+                                <field name="age"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="race"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="gender"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="employment_status"/>
+                                <field name="highest_standard_of_education_completed"/>
+                            </group>
+                            <group>
+                                <field name="disability_status"/>
+                                <field name="home_language"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="read_write_english" string="What is your understanding level of English?"/>
+                            <field name="please_explain_english"
+                                   attrs="{'invisible': [('read_write_english', '!=', 'no')], 'required': [('read_write_english', '=', 'no')]}"/>
+                        </group>
+                        <group>
+                            <field name="simple_calculations"/>
+                            <field name="please_explain_simple_calculations"
+                                    attrs="{'invisible': [('simple_calculations', '!=', 'no')], 'required': [('simple_calculations', '=', 'no')]}"/>
+                        </group>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="attended_bus_mgmt_skills"/>
+                            </div>
+                            <div class="col-md-4">
+                                <field name="attended_bus_mgmt_skills"/>
+                            </div>
+                        </div>
+                        <group>
+                            <field name="bus_mgmt_skills_days"
+                                   attrs="{'invisible': [('attended_bus_mgmt_skills', '!=', 'yes')], 'required': [('attended_bus_mgmt_skills', '=', 'yes')]}"/>
+                        </group>
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-5">-->
+                                <!--<label for="attended_tech_voc_skills"/>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-4">-->
+                                <!--<field name="attended_tech_voc_skills"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<group>-->
+                            <!--<field name="tech_voc_skills_days"-->
+                                   <!--attrs="{'invisible': [('attended_tech_voc_skills', '!=', 'yes')], 'required': [('attended_tech_voc_skills', '=', 'yes')]}"/>-->
+                        <!--</group>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-5">-->
+                                <!--<label for="current_occupation_employment"/>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-4">-->
+                                <!--<field name="current_occupation_employment"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<group>-->
+                            <!--<field name="employment_type"-->
+                                   <!--attrs="{'invisible': [('current_occupation_employment', 'not in', ['public_sector_employed','private_sector_employed'])],-->
+                                   <!--'required': [('current_occupation_employment', 'in', ['public_sector_employed','private_sector_employed'])]}"/>-->
+                            <!--<field name="public_sector_employed"/>-->
+                            <!--<field name="private_sector_employed"/>-->
+                            <!--<field name="are_you_unemployed"/>-->
+                        <!--</group>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-5">-->
+                                <!--<label for="average_income"/>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-4">-->
+                                <!--<field name="average_income"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<group string="Select Training">-->
+                            <group>
+                                <!--<field name="benificiary_bmt_id" options="{'no_open': True, 'no_create': True}"-->
+                                       <!--attrs="{'required': [('is_benificiary', '=', True)], 'readonly': ['|',('application_submitted', '=', True), ('is_benificiary', '=', False)]}"/>-->
+                                <!--<field name="benificiary_bmt_start_date" readonly="1"/>-->
+                                <!--<field name="benificiary_bmt_end_date" readonly="1"/>-->
+                                <field name="user_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <!--<field name="benificiary_trainer_id" readonly="1"/>-->
+                                <!--<field name="benificiary_training_type" readonly="1"/>-->
+                                <field name="is_benificiary" invisible="1"/>
+                                <!--<field name="application_submitted" invisible="1"/>-->
+                            </group>
+                        <!--</group>-->
+                        <h4 groups="client_management.group_branch_beneficiary">Note: Please click on the submit
+                            application after filling the whole form.
+                        </h4>
+                        <group string="Are you currently in business ? (actively Trading)">
+                            <field name="not_in_business"/>
+                            <field name="operating_informal_business"/>
+                            <field name="operating_formal_business"/>
+                        </group>
+                        <div name="start_your_business"
+                               attrs="{'invisible': [('operating_formal_business', '=', True)]}">
+                            <h2 style="color:#337AB7"><b>Start Your Business</b></h2>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="tested_bus_idea"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <field name="tested_bus_idea"/>
+                                </div>
+                            </div>
+                            <label for="describe_bus_idea"
+                                   attrs="{'invisible': [('tested_bus_idea', '!=', 'yes')], 'required': [('tested_bus_idea', '=', 'yes')]}"/>
+                            <field name="describe_bus_idea"
+                                    attrs="{'invisible': [('tested_bus_idea', '!=', 'yes')], 'required': [('tested_bus_idea', '=', 'yes')]}"/>
+                            <label for="reason_to_start_business"/>
+                            <field name="reason_to_start_business"/>
+                            <group>
+                                <field name="is_business_registered"/>
+                                <field name="business_type"
+                                       attrs="{'invisible': [('is_business_registered', '!=', True)], 'required': [('is_business_registered', '=', True)]}"/>
+                                <field name="other_business_type"
+                                       attrs="{'invisible': ['|', ('is_business_registered', '=', False), ('business_type','!=','other')], 'required': [('business_type','=','other')]}"/>
+                            </group>
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-5">-->
+                                    <!--<label for="when_to_start_business"/>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-4">-->
+                                    <!--<field name="when_to_start_business"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="relevant_tech_skills"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <field name="relevant_tech_skills"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="funding_required"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <field name="funding_required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div name="improve_your_business"
+                               attrs="{'invisible': ['|', ('not_in_business', '=', True), ('operating_informal_business', '=', True)]}">
+                            <h2 style="color:#337AB7"><b>Improve your business</b></h2>
+                            <group>
+                                <field name="name_of_business"/>
+                                <field name="current_business_activities"/>
+                                <field name="product_type_services"/>
+                            </group>
+                            <group>
+                                <field name="current_business_line"/>
+                                <field name="business_line_specify"
+                                   attrs="{'invisible': [('current_business_line', 'not in', ['other'])],'required':  [('current_business_line', 'in', ['other'])]}"/>
+                            </group>
+                            <group>
+                                <field name="is_business_not_registered"/>
+                                <!--<field name="is_business_registered"/>-->
+                                <!--<field name="business_type"-->
+                                       <!--attrs="{'invisible': [('is_business_registered', '!=', True)], 'required': [('is_business_registered', '=', True)]}"/>-->
+                                <!--<field name="other_business_type"-->
+                                       <!--attrs="{'invisible': ['|', ('is_business_registered', '=', False), ('business_type','!=','other')], 'required': [('business_type','=','other')]}"/>-->
+                            </group>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="comm_viable_business"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="comm_viable_business"/>
+                                </div>
+                            </div>
+                            <group>
+                                <field name="why_not_comm_viable"
+                                       attrs="{'invisible': [('comm_viable_business', '!=', 'no')], 'required': [('comm_viable_business', '=', 'no')]}"/>
+                            </group>
+                            <group>
+                                <field name="business_position"/>
+                            </group>
+                            <!--<group>-->
+                                <!--<field name="percentage_ownership"/>-->
+                            <!--</group>-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="daily_customers"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="daily_customers"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="future_business_plans"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="future_business_plans"/>
+                                </div>
+                            </div>
+                            <group>
+                                <field name="business_started"/>
+                            </group>
+                            <!--<group>-->
+                                <!--<field name="how_long"-->
+                                       <!--attrs="{'invisible': [('business_started','!=','mt_one_year')], 'required': [('business_started','=','mt_one_year')]}"/>-->
+                            <!--</group>-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="avg_daily_sales"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="avg_daily_sales"/>
+                                </div>
+                            </div>
+                            <!--<group>-->
+                                <!--<field name="emp_full_time"/>-->
+                            <!--</group>-->
+                            <!--<group>-->
+                                <!--<field name="emp_part_time"/>-->
+                            <!--</group>-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="sars_registrations"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="sars_registrations"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="dol_registrations"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="dol_registrations"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="more_than_one_business"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="more_than_one_business"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="business_number"
+                                           attrs="{'invisible': [('more_than_one_business', '!=', 'yes')], 'required': [('more_than_one_business','=','yes')]}"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="business_number"
+                                           attrs="{'invisible': [('more_than_one_business', '!=', 'yes')], 'required': [('more_than_one_business','=','yes')]}"/>
+                                </div>
+                            </div>
+                            <group>
+                                <field name="what_business"
+                                           attrs="{'invisible': [('more_than_one_business', '!=', 'yes')], 'required': [('more_than_one_business','=','yes')]}"/>
+                            </group>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="interest_in_other_business"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="interest_in_other_business"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="other_interest_numbers"
+                                            attrs="{'invisible': [('interest_in_other_business', '!=', 'yes')], 'required': [('interest_in_other_business','=','yes')]}"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="other_interest_numbers"
+                                            attrs="{'invisible': [('interest_in_other_business', '!=', 'yes')], 'required': [('interest_in_other_business','=','yes')]}"/>
+                                </div>
+                            </div>
+                            <group>
+                                <field name="what_business_other"
+                                       attrs="{'invisible': [('interest_in_other_business', '!=', 'yes')], 'required': [('interest_in_other_business','=','yes')]}"/>
+                            </group>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="business_funded_before"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="business_funded_before"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="business_funded_by"
+                                            attrs="{'invisible': [('business_funded_before', 'not in', ['yes'])], 'required': [('business_funded_before', 'in', ['yes'])]}"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <field name="business_funded_by"
+                                            attrs="{'invisible': [('business_funded_before', 'not in', ['yes'])], 'required': [('business_funded_before', 'in', ['yes'])]}"/>
+                                </div>
+                            </div>
+                            <!--<field name="business_funded_by"-->
+                                   <!--attrs="{'invisible': [('business_funded_before', 'not in', ['yes'])], 'required': [('business_funded_before', 'in', ['yes'])]}"/>-->
+                            <group>
+                                <field name="business_funded_before_others"
+                                       attrs="{'invisible': [('business_funded_by', '!=', 'other')], 'required': [('business_funded_by','=','other')]}"/>
+                            </group>
+                        </div>
+                        <h2 style="color:#337AB7">General Questions</h2>
+                        <label for="diff_costs" string="Please list all the different types of Costs one should consider when calculating the total cost of your product/ Service"/>
+                        <field name="diff_costs"/>
+                        <label for="business_plan" string="Describe the main components of your business plan"/>
+                        <field name="business_plan"/>
+                        <label for="" string="Describe the main components of your marketing plan"/>
+                        <field name="marketing_plan"/>
+                        <label string="List the different types of employee benefits you know	" for="emp_benifits"/>
+                        <field name="emp_benifits"/>
+                        <label for="safe_healthy_environment" string="What constitutes a safe and healthy work environment"/>
+                        <field name="safe_healthy_environment"/>
+                        <h2 style="color:#337AB7">General Information</h2>
+                        <label for="learning_expectation" string="What do you expect to learn from the training ?"/>
+                        <field name="learning_expectation"/>
+                        <h2 style="color:#337AB7">Terms and Conditions</h2>
+                        <h4>- Participant must be a South African citizen (certified copy of the South African ID must
+                              be summited with application)<br/><br/>
+
+                            - Participant must be between the ages of 18-35 years<br/><br/>
+
+                            - Must be committed to attend the full duration of the business management training course<br/><br/>
+
+                            - Participants attending the SYB and IYB training courses are required to attend the
+                              follow up session for presentation.Certificates are only issued to participants that
+                              attend the business management training course in full and have presented their
+                              presentation at the follow up session.<br/><br/>
+
+                            - Participants cannot attend the same training more than once<br/><br/>
+
+                            - Training is applicable only to the applicant and is not transferrable<br/><br/>
+
+                            - All trainings are conducted in English<br/><br/>
+
+                            - On completion of the training, participants are required to provide information
+                              regarding their business to the NYDA<br/><br/>
+
+                            I hereby confirm that I have read and understood the content of the application form and
+                            accept the terms and conditions of the NYDA Entrepreneurship Development Programme
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-2 vcenter">
+                                <h3 style="color:#337AB7" class="m-0">I Accept</h3>
+                            </div>
+                            <div class="col-md-2 vcenter">
+                                <field name="is_accepted" class="checkbox-color"/>
+                            </div>
+                        </div>
+                        <group>
+                            <field name="participant_signature" widget="signature" invisible="1"/>
+                            <field name="signature_date" invisible="1"/>
+                        </group>
+                        <group name="trainer_details" string="Only for Trainer Use"
+                               groups="bmt_training.group_trainer,base.group_system">
+                            <field name="is_trainer" invisible="1"/>
+                            <field name="bmt_id" options="{'no_open': True, 'no_create': True}"
+                                   domain="[('state', '=', False)]"
+                                   attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>
+                            <field name="course_start_date"
+                                   attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>
+                            <field name="course_end_date"
+                                   attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>
+                            <field name="course_trainer_id" readonly="1" options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>
+                            <field name="training_type"
+                                   attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>
+                            <field name="part_ref_number" readonly="1"/>
+                            <!--attrs="{'readonly': [('is_trainee_confirm', '=', True)]}"/>-->
+                            <field name="is_trainee_confirm" invisible="1"/>
+                            <field name="youth_enquiry_id" readonly="1" invisible="1"/>
+                        </group>
+                        <!--<group groups="bmt_training.group_trainer,base.group_system">-->
+                            <!--<group>-->
+                                <!--<field name="assessed_by_id" options="{'no_open': True, 'no_create': True}"-->
+                                       <!--attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>-->
+                            <!--</group>-->
+                            <!--<group>-->
+                                <!--<field name="assessement_date"-->
+                                       <!--attrs="{'required': [('is_trainer', '=', True)], 'readonly': [('is_trainee_confirm', '=', True)]}"/>-->
+                            <!--</group>-->
+                        <!--</group>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--BMT Training Application Action-->
+        <record model="ir.actions.act_window" id="action_bmt_training_application">
+            <field name="name">BMT Training Application</field>
+            <field name="res_model">bmt.training.application</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for BMT Training Application-->
+        <menuitem name="BMT Training Application" id="bmt_training_application_menu" parent="bmt_training.trainings"
+                  action="action_bmt_training_application"
+                  sequence="1"/>
+
+    </data>
+</odoo>

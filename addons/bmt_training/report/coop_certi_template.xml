@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="coops_certificate_document">
+        <t t-call="web.basic_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="/bmt_training/static/description/nyda_logo.png" style="height: 200px;"/>
+                    <h1><b><i>Certificate Of Completion</i></b></h1>
+                    <h2>AWARDED TO</h2>
+                    <h3><t t-esc="doc.participant_id.name"/></h3>
+                    <h3>ID: <t t-esc="doc.participant_id.id_number"/></h3>
+                    <h2>FOR COMPLETING OF THE</h2>
+                    <h2>
+                        <t t-if="doc.coop_gov_id.name">
+                            <b><t t-esc="doc.coop_gov_id.name"/></b>
+                        </t>
+                    </h2>
+                    <h2><b>&amp;</b></h2>
+                    <h2>
+                        <t t-if="doc.business_mgmt_training_id.title">
+                            <b><t t-esc="doc.business_mgmt_training_id.title"/></b>
+                        </t>
+                    </h2>
+                    <h2>from the</h2>
+                    <h3>
+                        <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(doc.business_mgmt_training_id.start_date, '%Y-%m-%d %H:%M:%S'), '%e %B %Y')"/>
+                          -
+                        <t t-esc="datetime.datetime.strftime(datetime.datetime.strptime(doc.business_mgmt_training_id.end_date, '%Y-%m-%d %H:%M:%S'), '%e %B %Y')"/>
+                    </h3>
+                </div>
+            </div>
+            <div class="row mt32 mb32">
+                <div class="col-xs-4"/>
+                <div class="col-xs-4 text-center">
+                    <hr></hr>
+                    <h3>Branch Manager:</h3>
+                </div>
+                <div class="col-xs-4"/>
+            </div>
+            <div class="oe_structure"/>
+        </div>
+        </t>
+    </template>
+
+    <template id="coops_certificate">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="bmt_training.coops_certificate_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

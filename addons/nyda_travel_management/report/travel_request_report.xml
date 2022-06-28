@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_travel_request_report"
+                string="Report"
+                model="travel.request.report"
+                report_type="qweb-pdf"
+                file="nyda_travel_management.report_travel_request"
+                name="nyda_travel_management.report_travel_request"
+                paperformat="nyda_travel_management.paperformat_report_travel_request"
+                menu="False" />
+                       
+    </data>
+</odoo>

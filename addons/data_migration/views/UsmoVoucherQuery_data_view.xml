@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_voucher_query_tree_view">
+            <field name="name">usmo.voucher.query.tree.view</field>
+            <field name="model">usmo.voucher.query</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Invoice"/>
+                    <field name="InvoiceAmount"/>
+                    <field name="InvoiceNumber"/>
+                    <field name="OriCompletedDT"/>
+                    <field name="Product"/>
+                    <field name="QueriedBy"/>
+                    <field name="QueryDT"/>
+                    <field name="QueryType"/>
+                    <field name="Reason"/>
+                    <field name="RowGUID"/>
+                    <field name="VoucherID"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_voucher_query_form_view">
+            <field name="name">usmo.voucher.query.form.view</field>
+            <field name="model">usmo.voucher.query</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="Invoice"/>
+                                <field name="InvoiceAmount"/>
+                                <field name="InvoiceNumber"/>
+                                <field name="OriCompletedDT"/>
+                                <field name="Product"/>
+                                <field name="QueriedBy"/>
+                            </group>
+                            <group>
+                                <field name="QueryDT"/>
+                                <field name="QueryType"/>
+                                <field name="Reason"/>
+                                <field name="RowGUID"/>
+                                <field name="VoucherID"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_voucher_query">
+            <field name="name">Usmo Voucher Query</field>
+            <field name="res_model">usmo.voucher.query</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <!--Menu-->
+        <menuitem id="menu_umso_voucher_query" name="Usmo Voucher Query"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_voucher_query" sequence="110"/>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_coops_certificate"
+                string="Co-operative Governance BMT Certificate"
+                model="bmt.participants"
+                report_type="qweb-pdf"
+                file="bmt_training.coops_certificate"
+                name="bmt_training.coops_certificate"
+                menu="False"
+                paperformat="bmt_training.certificate_potrait"
+        />
+
+    </data>
+
+</odoo>

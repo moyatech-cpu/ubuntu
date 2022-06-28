@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Link Trainer Tree View-->
+        <record model="ir.ui.view" id="link_trainer_tree_view">
+            <field name="name">link.trainer.tree.view</field>
+            <field name="model">link.trainer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="trainer_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Link Trainer Form View-->
+        <record model="ir.ui.view" id="link_trainer_form_view">
+            <field name="name">link.trainer.form.view</field>
+            <field name="model">link.trainer</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <sheet>
+                        <group string="Details" name="trainer_details">
+                            <group>
+                                <field name="trainer_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                <field name="coordinator_id" required="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="head_office_manager_id" required="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group>
+                                <field name="branch_manager_id" required="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="head_office_admin_id" required="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Link Trainer -->
+        <record model="ir.actions.act_window" id="action_link_trainer">
+            <field name="name">Link Trainer</field>
+            <field name="res_model">link.trainer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for Company-->
+        <menuitem name="Link Trainer" id="link_trainer" parent="bmt_training.configuration_menu"
+                  action="action_link_trainer" groups="base.group_system"/>
+
+    </data>
+</odoo>

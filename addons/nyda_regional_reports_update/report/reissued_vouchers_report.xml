@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+			<report
+                id="action_voucher_reissued_report"
+                string="Regional Voucher Reissued Report"
+                model="voucher.reissue.report"
+                report_type="qweb-pdf"
+                file="nyda_regional_reports_update.report_regional_voucher_reissued"
+                name="nyda_regional_reports_update.report_regional_voucher_reissued"
+                menu="False" />
+    </data>
+</odoo>

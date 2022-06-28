@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo>
+    <record id="view_recommendation_note_form" model="ir.ui.view">
+        <field name="name">Recommendation Note</field>
+        <field name="model">recommendation.note</field>
+        <field name="arch" type="xml">
+            <form string="Recommendation Note">
+                <group>
+                    <field name="x_recommended_service" widget="many2many_tags"/>
+                    <field name="recommendationnote"/>
+                </group>
+
+                <footer>
+                    <button name="default_recommendationnote" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_recommendation_note" model="ir.actions.act_window">
+        <field name="name">Recommendation Note</field>
+        <field name="res_model">recommendation.note</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_recommendation_note_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

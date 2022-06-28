@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_print_grant_app_report"
+		string="Applications Detail Report"
+		model="report.applications.grant"
+		report_type="qweb-pdf"
+		name="erp_grant_voucher_challenges.report_grant_app_report_template"
+		file="erp_grant_voucher_challenges.report_grant_app_report_template"
+	/>
+</data>
+	
+    
+</odoo>

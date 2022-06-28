@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Views and action for Wizard of mentor acceptance in Mentorship agreement -->
+    <record id="wiz_mentor_application_upload_form" model="ir.ui.view">
+        <field name="name">wiz.mentor.application.form</field>
+        <field name="model">wizard.mentor.application.signed</field>
+        <field name="arch" type="xml">
+            <form string="Mentorship Agreement Sign">
+                <h4>Please attach Mentor Agreement signed by the Mentor</h4>
+                    <field name="signed_agreement" required="1"/>
+                <footer>
+	                 <button name="accepted_by_mentor" string="Accept" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_mentor_application_signed" model="ir.actions.act_window">
+        <field name="name">Mentor Application Signed</field>
+        <field name="res_model">wizard.mentor.application.signed</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Views and action for Wizard of mentor acceptance in Mentorship agreement -->
+    <record id="wiz_mentor_bgarg_review_form" model="ir.ui.view">
+        <field name="name">wiz.mentor.bgarg.review.form</field>
+        <field name="model">wizard.bgarg.review.upload</field>
+        <field name="arch" type="xml">
+            <form string="BGARG Review Minutes Upload Form">
+                <h4>Please attach Minutes report from BGARG Review</h4>
+                    <field name="bgarg_minutes" required="1"/>
+                <footer>
+	                 <button name="accepted_by_mentor" string="Accept" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_mentor_bgarg_review" model="ir.actions.act_window">
+        <field name="name">Mentor BGARG Review</field>
+        <field name="res_model">wizard.bgarg.review.upload</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="wiz_mentor_recommendation_upload_form" model="ir.ui.view">
+        <field name="name">wiz.mentor.recommendation.upload.form</field>
+        <field name="model">wizard.recommendation.upload</field>
+        <field name="arch" type="xml">
+            <form string="Recommendation">
+                <h4>Recommendation:</h4>
+                    <field name="recommendation_char" required="1"/>
+                <footer>
+	                 <button name="accepted_recommendation_char" string="Recommend" type="object" class="btn-primary"/>
+	                 <button string="Cancel" class="btn-default" special="cancel"/>
+                 </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_mentor_recommendation_upload" model="ir.actions.act_window">
+        <field name="name">Mentor Recommendation Upload</field>
+        <field name="res_model">wizard.recommendation.upload</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

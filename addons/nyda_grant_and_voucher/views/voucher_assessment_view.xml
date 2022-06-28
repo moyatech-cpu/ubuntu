@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Views for Voucher assessment -->
+        <record id="view_voucher_assessment_form" model="ir.ui.view">
+            <field name="name">Voucher Assessment Form</field>
+            <field name="model">voucher.assessment</field>
+            <field name="arch" type="xml">
+                <form string="Voucher Assessment"  delete="false" duplicate="false" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <field name="voucher_application_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Business Feasibility Assessment">
+                                <group>
+                                    <label for="features_product"
+                                           string="Describe the main features of the product/service."/>
+                                    <field name="features_product"/>
+                                    <label for="benefits_product"
+                                           string="What are the benefits of the product/service?"/>
+                                    <field name="benefits_product"/>
+                                    <label for="equipment_product"
+                                           string="Do you know what materials or equipment is needed to make the product/or deliver the service?"/>
+                                    <field name="equipment_product"/>
+                                    <label for="reasons_product"
+                                           string="Explain the reasons why customers will buy your product/service"/>
+                                    <field name="reasons_product"/>
+                                    <label for="describe_customer"
+                                           string="Explain the reasons why customers will buy your product/service"/>
+
+                                    <field name="describe_customer"/>
+                                    <label for="currently_buying"
+                                           string="Identify and describe who your customers will be"/>
+                                    <field name="currently_buying"/>
+
+                                    <label for="customers_currently"
+                                           string="Explain why customers will buy the product/service from you, rather than where they are currently buying it from"/>
+                                    <field name="customers_currently"/>
+
+                                    <label for="product_services"
+                                           string="Do you know who your customers currently buy the product/service from"/>
+                                    <field name="product_services"/>
+
+                                    <label for="calculated_startup_cost"
+                                           string="Do you know who your customers currently buy the product/service from"/>
+                                    <field name="calculated_startup_cost"/>
+
+                                    <label for="calculated_expenses_potential_income"
+                                           string="Do you know who your customers currently buy the product/service from"/>
+
+                                    <field name="calculated_expenses_potential_income"/>
+
+                                    <label for="contribution_startup"
+                                           string="Have you identified and calculated your start-up costs?"/>
+
+                                    <field name="contribution_startup"/>
+
+                                    <label for="deliver_product"
+                                           string="Have you estimated and calculated your expenses and potential income?"/>
+                                    <field name="deliver_product"/>
+
+                                    <label for="business_management"
+                                           string="Are you able to make a contribution to the start-up and operating costs of your business?"/>
+                                    <field name="business_management"/>
+
+                                    <label for="start_your_business"
+                                           string="Do you have experience in the field in which you want to start your business?"/>
+                                    <field name="start_your_business"/>
+
+                                    <label for="regulatory_requirements"
+                                           string="Do you meet the business and regulatory requirements for running your business?"/>
+                                    <field name="regulatory_requirements"/>
+
+                                    <label for="most_appropriate"
+                                           string="Do you know what type of entity is most appropriate for your business?"/>
+                                    <field name="most_appropriate"/>
+                                </group>
+                                <group>
+                                    <field name="related_total" invisible="1"/>
+                                    <field name="total" readonly="1"/>
+                                </group>
+                            </page>
+                            <page string="Business Growth and Sustainability Assessment Index">
+                                <label for="growth_objectives"
+                                       string="Have you defined your growth objectives for the business?"/>
+                                <field name="growth_objectives"/>
+
+                                <label for="grow_the_business"
+                                       string="Have you decided how you want to grow the business (growth strategy) and what you need to do to achieve your growth objectives (implementation plan)?"/>
+                                <field name="grow_the_business"/>
+
+                                <label for="investment_requirements"
+                                       string="Have you assessed the investment requirements for achieve your growth objectives?"/>
+                                <field name="investment_requirements"/>
+
+                                <label for="adapt_changing"
+                                       string="Are you able to adapt to a changing business environment?"/>
+                                <field name="adapt_changing"/>
+
+                                <label for="market_growing"
+                                       string="Is your market growing?"/>
+                                <field name="market_growing"/>
+
+                                <label for="changing_market"
+                                       string="Do you respond to changing market requirements?"/>
+                                <field name="changing_market"/>
+
+                                <label for="growing_demand"
+                                       string="Do you have evidence that there is a growing demand for your product or service?"/>
+                                <field name="growing_demand"/>
+
+                                <label for="sales_growth"
+                                       string="Describe your sales growth over the last 12 months."/>
+                                <field name="sales_growth"/>
+
+                                <label for="analyse_information"
+                                       string="Do you analyse information on your customers?"/>
+                                <field name="analyse_information"/>
+
+                                <label for="customer_preferences"
+                                       string="Are you able to respond to changing customer preferences?"/>
+                                <field name="customer_preferences"/>
+
+                                <label for="marketing_activities"
+                                       string="How effective are your marketing activities?"/>
+                                <field name="marketing_activities"/>
+
+                                <label for="marketing_capacity"
+                                       string="Are you able to increase your marketing capacity to support the business growth?"/>
+                                <field name="marketing_capacity"/>
+
+                                <label for="competition_market"
+                                       string="Describe the level of competition in your market."/>
+                                <field name="competition_market"/>
+
+                                <label for="undertake_competitor"
+                                       string="Do you undertake competitor analysis?"/>
+                                <field name="undertake_competitor"/>
+
+                                <label for="competitiveness"
+                                       string="How do you rate your competitiveness when compared to your competitors in your market?"/>
+                                <field name="competitiveness"/>
+
+                                <label for="funding_required"
+                                       string="Have you identified the level of funding required to finance your growth?"/>
+                                <field name="funding_required"/>
+
+                                <label for="financial_planning_management"
+                                       string="Do you have a sound financial planning management system in place?"/>
+                                <field name="financial_planning_management"/>
+
+                                <label for="performance_targets"
+                                       string="Do you have financial performance targets that you monitor?"/>
+                                <field name="performance_targets"/>
+
+                                <label for="your_revenue"
+                                       string="Do you expect an increase in your revenue of the next 12 months?"/>
+                                <field name="your_revenue"/>
+
+                                <label for="your_growth_objectives"
+                                       string="Have you identified the demands on the management skills and knowledge to achieve your growth objectives?"/>
+                                <field name="your_growth_objectives"/>
+
+                                <label for="general_business_advice"
+                                       string="Do you use external advice to access general business advice and assistance in the different business functions?"/>
+                                <field name="general_business_advice"/>
+
+                                <label for="implemented_methods"
+                                       string="Have you developed or implemented new methods or concepts in your business over the last 12 months?"/>
+                                <field name="implemented_methods"/>
+                                <group>
+                                    <field name="related_assessment_index_total" invisible="1"/>
+                                    <field name="assessment_index_total" readonly="1"/>
+                                </group>
+                            </page>
+                            <page string="Business Viability Assessment">
+                                <label for="analyse_the_environment"
+                                       string="Do you analyse the environment in which the business operates?"/>
+                                <field name="analyse_the_environment"/>
+
+                                <label for="set_business_goals"
+                                       string="Do you set business goals?"/>
+                                <field name="set_business_goals"/>
+
+                                <label for="develop_implement_plans"
+                                       string="Do you develop and implement plans to achieve your business goals?"/>
+                                <field name="develop_implement_plans"/>
+
+                                <label for="your_customers"
+                                       string="Do you know who your customers are?"/>
+                                <field name="your_customers"/>
+
+                                <label for="changes_happening"
+                                       string="Do you know what changes are happening in your market?"/>
+                                <field name="changes_happening"/>
+
+                                <label for="undertake_marketing"
+                                       string="Do you undertake marketing and promotional activities?"/>
+                                <field name="undertake_marketing"/>
+
+                                <label for="set_sales_targets"
+                                       string="Do you set sales targets?"/>
+                                <field name="set_sales_targets"/>
+
+                                <label for="marketing_capacitys"
+                                       string="Do you have marketing and sales capacity?"/>
+                                <field name="marketing_capacitys"/>
+
+                                <label for="undertake_financial_planning"
+                                       string="Do you undertake financial planning (budgeting)?"/>
+                                <field name="undertake_financial_planning"/>
+
+                                <label for="adequate_cash_flow"
+                                       string="Do you have adequate cash flow?"/>
+                                <field name="adequate_cash_flow"/>
+
+                                <label for="maintain_financial"
+                                       string="Do you maintain financial records?"/>
+                                <field name="maintain_financial"/>
+
+                                <label for="financial_controls"
+                                       string="Do you maintain financial controls?"/>
+                                <field name="financial_controls"/>
+
+                                <label for="established_financial_ratios"
+                                       string="Have you identified and established financial ratios?"/>
+                                <field name="established_financial_ratios"/>
+
+                                <label for="established_structure"
+                                       string="Have you established a structure that enables you to run the business effectively?"/>
+                                <field name="established_structure"/>
+
+                                <label for="coordinate_different"
+                                       string="Are you able to coordinate the different activities within the business effectively?"/>
+                                <field name="coordinate_different"/>
+
+                                <label for="communicate_effectively"
+                                       string="Do you communicate effectively with staff, suppliers and customers?"/>
+                                <field name="communicate_effectively"/>
+
+                                <label for="required_management_capacity"
+                                       string="Do you and your team have the required management capacity to manage the business effectively?"/>
+                                <field name="required_management_capacity"/>
+
+                                <label for="business_documented"
+                                       string="Are the processes in the business documented?"/>
+                                <field name="business_documented"/>
+
+                                <label for="necessary_controls"
+                                       string="Have you developed the necessary controls to ensure safety and security?"/>
+                                <field name="necessary_controls"/>
+
+                                <label for="monitor_business"
+                                       string="Do you monitor business risks?"/>
+                                <field name="monitor_business"/>
+
+                                <label for="monitor_business"
+                                       string="Do you monitor business risks?"/>
+                                <field name="monitor_business"/>
+                                <group>
+                                    <field name="related_viability_assessment_total" invisible="1"/>
+                                    <field name="viability_assessment_total" readonly="1"/>
+                                </group>
+                            </page>
+                            <page string="Entrepreneurial Preparedness Assessment">
+                                <label for="business_opportunities"
+                                       string="Find information on business opportunities."/>
+                                <field name="business_opportunities"/>
+
+                                <label for="market_trends"
+                                       string="Identify market trends."/>
+                                <field name="market_trends"/>
+
+                                <label for="potential_target_market"
+                                       string="Define potential target market."/>
+                                <field name="potential_target_market"/>
+
+                                <label for="market_entry_strategy"
+                                       string="Select market entry strategy (for example: finding new products for existing customers; taking existing local products to new markets; imitating a successful product or services; or buying a business)."/>
+                                <field name="market_entry_strategy"/>
+
+                                <label for="Test_business_ideas"
+                                       string="Test business ideas."/>
+                                <field name="Test_business_ideas"/>
+
+                                <label for="Make_plans"
+                                       string="Make plans."/>
+                                <field name="Make_plans"/>
+
+                                <label for="Organise_resources"
+                                       string="Organise resources."/>
+                                <field name="Organise_resources"/>
+
+                                <label for="coordinate_activities"
+                                       string="Coordinate activities."/>
+                                <field name="coordinate_activities"/>
+
+                                <label for="organise_people"
+                                       string="Organise and lead people."/>
+                                <field name="organise_people"/>
+
+                                <label for="Manage_time"
+                                       string="Manage time."/>
+                                <field name="Manage_time"/>
+
+                                <label for="Analyse_problems"
+                                       string="Analyse problems."/>
+                                <field name="Analyse_problems"/>
+
+                                <label for="Think_critically"
+                                       string="Think critically."/>
+                                <field name="Think_critically"/>
+
+                                <label for="Diagnose_problems"
+                                       string="Diagnose problems."/>
+                                <field name="Diagnose_problems"/>
+
+                                <label for="Innovate"
+                                       string="Innovate"/>
+                                <field name="Innovate"/>
+
+                                <label for="Provide_solutions"
+                                       string="Provide solutions."/>
+                                <field name="Provide_solutions"/>
+
+                                <label for="Goal_oriented"
+                                       string="Goal oriented."/>
+                                <field name="Goal_oriented"/>
+
+                                <label for="achievement_oriented"
+                                       string="Achievement oriented."/>
+                                <field name="achievement_oriented"/>
+
+                                <label for="Follow_through"
+                                       string="Follow through."/>
+                                <field name="Follow_through"/>
+
+                                <label for="Self_disciplined"
+                                       string="Self-disciplined and motivated"/>
+                                <field name="Self_disciplined"/>
+
+                                <label for="Competitiveness"
+                                       string="Competitiveness"/>
+                                <field name="Competitiveness"/>
+
+                                <label for="required_physical"
+                                       string="Identify the required physical, financial and human business start-up resources."/>
+                                <field name="required_physical"/>
+
+                                <label for="into_partnerships"
+                                       string="Form and tap into partnerships."/>
+                                <field name="into_partnerships"/>
+
+                                <label for="Acquire_resources"
+                                       string="Acquire resources."/>
+                                <field name="Acquire_resources"/>
+
+                                <label for="Allocate_resources"
+                                       string="Allocate resources."/>
+                                <field name="Allocate_resources"/>
+
+                                <label for="use_of_resources"
+                                       string="Monitor the use of resources"/>
+                                <field name="use_of_resources"/>
+
+                                <group>
+                                    <field name="related_preparedness_assessment_total" invisible="1"/>
+                                    <field name="preparedness_assessment_total" readonly="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Views for Voucher SP Service assessment -->
+        <record id="view_voucher_service_provider_form" model="ir.ui.view">
+            <field name="name">Voucher Service Rating Form</field>
+            <field name="model">voucher.assessment</field>
+            <field name="arch" type="xml">
+                <form string="Service Provider Assessment"  delete="false" duplicate="false" create="false" edit="true">
+                    <sheet>
+                        <group string="Service Rating">
+                            <field name="voucher_application_id" readonly="1"/>
+                            <br /><br />
+                
+                            <label for="x_waiting_period" string="1. How long did you wait to see the service provider?" style="width: 700px;"/>
+                            <field name="x_waiting_period" nolabel="1" />
+                
+                            <label for="x_sp_facilities" string="2. How would you rate the service provider's facilities" style="700px"/>
+                            <field name="x_sp_facilities" nolabel="1" />
+                
+                            <label for="x_sp_friendliness" string="3. In dealing with the service provider, how would you rate their friendliness?" style="700px"/>
+                            <field name="x_sp_friendliness" nolabel="1" />
+                
+                            <label for="x_sp_professionalism" string="4. In dealing with the service provider, how would you rate their professionalism?" style="700px"/>
+                            <field name="x_sp_professionalism" nolabel="1" />
+                
+                            <label for="x_overall_experience" string="5. Overall how was your experience with the service provider" style="700px"/>
+                            <field name="x_overall_experience" nolabel="1" />
+                            
+                            <field name="service_rating_assessment_total" readonly="1" invisible="1"/>
+                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_voucher_sp_assessment" model="ir.actions.act_window">
+            <field name="name">Service Rating</field>
+            <field name="res_model">voucher.assessment</field>
+            <field name="view_type">form</field>
+            <field name="context">{'search_default_voucher_application_id': 1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="view_voucher_assessment_tree" model="ir.ui.view">
+            <field name="name">Voucher Assessment</field>
+            <field name="model">voucher.assessment</field>
+            <field name="arch" type="xml">
+                <tree string="Voucher Applications"  delete="false" duplicate="false" create="false" edit="false">
+                    <field name="voucher_application_id"/>
+                    <field name="create_date"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="voucher_assessment_search" model="ir.ui.view">
+            <field name="name">Assessment Serach</field>
+            <field name="model">voucher.assessment</field>
+            <field name="arch" type="xml">
+                <search string="Assessment Search">
+                    <filter name="voucher_application_id" string="Voucher Application" icon="terp-partner"
+                            context="{'group_by':'voucher_application_id'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_voucher_assessment" model="ir.actions.act_window">
+            <field name="name">Voucher Assessment</field>
+            <field name="res_model">voucher.assessment</field>
+            <field name="view_type">form</field>
+            <field name="context">{'search_default_voucher_application_id': 1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+
+        <menuitem name="Assessment" id="menu_voucher_assessment"
+                  groups="nyda_grant_and_voucher.group_grant_voucher_bcs,nyda_grant_and_voucher.group_grant_voucher_bdo,nyda_grant_and_voucher.group_grant_voucher_edm,nyda_grant_and_voucher.group_grant_voucher_fa,nyda_grant_and_voucher.group_grant_voucher_hogac,nyda_grant_and_voucher.group_grant_voucher_bscvp,nyda_grant_and_voucher.group_grant_voucher_qao,nyda_grant_and_voucher.group_grant_voucher_ro,nyda_grant_and_voucher.group_grant_voucher_bda,nyda_grant_and_voucher.group_grant_voucher_bgarg,nyda_grant_and_voucher.group_grant_voucher_ea,nyda_grant_and_voucher.group_grant_voucher_ia,nyda_grant_and_voucher.group_grant_voucher_hod,nyda_grant_and_voucher.group_grant_voucher_pc_bc,nyda_grant_and_voucher.group_grant_voucher_ra,nyda_grant_and_voucher.group_grant_voucher_sp_admin,base.group_system,client_management.group_partner_service_provider,nyda_grant_and_voucher.group_grant_voucher_sp"
+                  action="nyda_grant_and_voucher.action_voucher_assessment"
+                  parent="nyda_grant_and_voucher.main_menu_voucher" sequence="20"/>
+
+    </data>
+</odoo>

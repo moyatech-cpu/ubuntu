@@ -1,0 +1,52 @@
+<odoo>
+    <record id="cancel_sales_pitch_training_form" model="ir.ui.view">
+        <field name="name">cancel.reason.sales.pitch.training</field>
+        <field name="model">cancel.sales.pitch.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Sales Pitch Training">
+                <group>
+                    <field name="cancel_sales_pitch_reason"/>
+                </group>
+                <footer>
+                    <button name="cancel_pitch" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+      <record id="reinstate_reason_sales_pitch_training_form" model="ir.ui.view">
+        <field name="name">reinstate.reason.sales.pitch.training</field>
+        <field name="model">cancel.sales.pitch.training.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reinstate Sales Pitch Training">
+                <group>
+                    <field name="reinstate_sales_pitch_reason"/>
+                </group>
+                <footer>
+                    <button name="reinstate_pitch" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="reinstate_pitch_training_wizard_action" model="ir.actions.act_window">
+        <field name="name"> Business Sales Pitch Training Reinstate Reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.sales.pitch.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="reinstate_reason_sales_pitch_training_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="cancel_pitch_training_wizard_action" model="ir.actions.act_window">
+        <field name="name">Business Sales Pitch Training Cancel Reason </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cancel.sales.pitch.training.wizard</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="cancel_sales_pitch_training_form"/>
+        <field name="target">new</field>
+    </record>
+    
+</odoo>

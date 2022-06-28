@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Tree View-->
+        <record model="ir.ui.view" id="usmo_financer_type_tree_view">
+            <field name="name">usmo.financer.type.tree.view</field>
+            <field name="model">usmo.financer.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ID"/>
+                    <field name="Name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!--Form View-->
+        <record model="ir.ui.view" id="usmo_financer_type_form_view">
+            <field name="name">usmo.financer.type.form.view</field>
+            <field name="model">usmo.financer.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ID"/>
+                            </group>
+                            <group>
+                                <field name="Name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_usmo_financer_type">
+            <field name="name">Usmo Financer Type</field>
+            <field name="res_model">usmo.financer.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="menu_umso_financer_type" name="Usmo Financer Type"
+                  parent="data_migration.menu_data_migration"
+                  action="action_usmo_financer_type" sequence="70"/>
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_system_update_009_system_update_009,system_update_009.system_update_009,model_system_update_009_system_update_009,,1,0,0,0

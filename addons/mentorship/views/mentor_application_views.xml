@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- mentor.application views -->
+    <record id="view_mentor_application_form" model="ir.ui.view">
+        <field name="name">mentor.application.form</field>
+        <field name="model">mentor.application</field>
+        <field name="arch" type="xml">
+            <form string="Mentor Application">
+                <header>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_mentor_application_signed)d" attrs="{'invisible': [('state', '!=', 'bgarg_review')]}" string='Approve' groups="mentorship.group_bao, mentorship.group_bmp"/>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_mentor_recommendation_upload)d" attrs="{'invisible': [('state', '!=', 'new')]}" string='Recommend' groups="mentorship.group_bao, mentorship.group_bmp"/>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_mentor_bgarg_review)d" attrs="{'invisible': [('state', '!=', 'recommended')]}" string='BGARG Review' groups="mentorship.group_bao, mentorship.group_bmp"/>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_application_reject)d" attrs="{'invisible': [('state', 'in', ['accepted'])]}" string='Reject' groups="mentorship.group_bao, mentorship.group_bmp"/>
+                    <button class="oe_stat_button" type="object" name="action_process_application" string="Assign Mentee" attrs="{'invisible': [('state', '!=', 'accepted')]}" groups="mentorship.group_bao"/>
+                    <field name='state' widget='statusbar' statusbar_visible='new,recommended,bgarg_review,accepted,reject'/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_suggested_mentee" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('state', '!=', 'accepted')]}">
+                            Suggested Mentee
+                        </button>
+                    </div>
+                    <group name="personal_details" string="Personal Details">
+                        <group>
+                            <field name='title'/>
+                            <field name="surname"/>
+                            <field name="name"/>
+                            <field name="user_id" groups="mentorship.group_bao, mentorship.group_bmp" invisible="1"/>
+                            <field name="date_of_birth"/>
+                            <field name="email"/>
+                            <field name="work_phone_number"/>
+                            <field name="mobile_phone_number"/>
+                            <field name="preferred_contact_number"/>
+                        </group>
+                        <group>
+                            <field name="branch_id"/>
+                            <field name="city"/>
+                            <field name="municipality"/>
+                            <field name="province"/>
+                            <field name="street_address"/>
+                            <field name="postal_address"/>
+                        </group>
+                    </group>
+                    <group name="business_information" string="Business Information">
+                        <group>
+                            <field name="business_name"/>
+                            <field name="company"/>
+                            <field name="occupation"/>
+                            <field name="no_year_experience_bussiness"/>
+                            <field name="qualification_obtained"/>
+                            <field name="doc_refrence_1"/>
+                             <field name="doc_refrence_2"/>
+                        </group>
+                        <group>
+                            <field name="criminal_record"/>
+                            <field name="no_year_as_mentor"/>
+                            <field name="institute_name_as_mentor"/>
+                            <field name="explain_experience"/>
+                        </group>
+                    </group>
+                    <group name="skills_and_expereince" string="Skills And Expereince">
+                        <lable for="area_support_id" string="Supported Areas"/>
+                        <field name="area_support_id" options="{'no_create_edit': True, 'no_create' : True,}"/>
+                        <lable for="bussiness_skill" string="Provide details of the Business Skills that you must support the NYDA – VBMP:"/>
+                        <field name="bussiness_skill"/>
+                        <lable for="short_profile_explaining" string="Please provide a short profile explaining the mentoring that your provided to young entrepreneurs/ or would \
+                        like to provide to young people and the value it added to their businesses/ or will intend to have."/>
+                        <field name="short_profile_explaining"/>
+                        <lable for="ideal_profile_of_mentee" string="Give your ideal profile of the mentee you would like to be matched or paired with."/>
+                        <field name="ideal_profile_of_mentee"/>
+                        <lable for="benefit_mentor" string="State what you hope to benefit from the programme as a Mentor."/>
+                        <field name="benefit_mentor"/>
+                    </group>
+                    <group name="sectors_and_business_types" string="Sectors and Business Types">
+                        <group>
+                            <field name="business_type" widget="many2many_checkboxes"/>
+                            <field name="bool_other_1" invisible="1"/>
+                            <field name="bool_other_2" invisible="1"/>
+                            <field name="bool_other_3" invisible="1"/>
+                            <field name="business_type_other1" attrs="{'invisible': [('bool_other_1','!=', True)]}"/>
+                            <field name="business_type_other2" attrs="{'invisible': [('bool_other_2','!=', True)]}"/>
+                            <field name="business_type_other3" attrs="{'invisible': [('bool_other_3','!=', True)]}"/>
+                        </group>
+                        <group>
+                            <field name="sector" widget="many2many_checkboxes"/>
+                        </group>
+                    </group>
+                    <h2 style="color:#337AB7">Terms and Conditions:</h2>
+                    <ul>
+                        <li>
+                            <b>The Business Mentorship Programme is implemented through the support of volunteer Mentors
+                            </b>
+                        </li>
+                        <li>
+                            <b>Mentees are recruited and assessed by the Branches of the NYDA</b>
+                        </li>
+                        <li>
+                            <b>Mentees are matched with mentors based on the assessment</b>
+                        </li>
+                        <li>
+                            <b>Only NYDA – Mentorship Programme contracted mentors should render mentoring support to
+                                mentees
+                            </b>
+                        </li>
+                    </ul>
+                    <h3 style="color:#337AB7">Indicate the name of the NYDA Branch/ Branches that you would like to
+                        service as a mentor:
+                    </h3>
+                    <group>
+                        <group>
+                            <field name="nyda_branch_1"/>
+                            <field name="nyda_branch_2"/>
+                             <field name="recommendation_char" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="nyda_branch_3"/>
+                            <field name="nyda_branch_4"/>
+
+                        </group>
+                    </group>
+                    <h4 style="color:#337AB7">Thank you for your interest in applying to be a mentor and for completing
+                        this form.
+                    </h4>
+                    <h4 style="color:#337AB7">Please note that Mentors are required to sign a Memorandum of
+                        Understanding which outlines the terms of their engagement in the programme prior to any service
+                        rendering.
+                    </h4>
+                    <group>
+                        <group>
+                            <field name="signature" widget="signature"/>
+                        </group>
+                        <group>
+                            <field name="dateTime_application"/>
+                        </group>
+                    </group>
+                    <h4 style="color:#337AB7">Please attach copy of your CV for vetting</h4>
+                    <group>
+                        <field name="attachment_cv"/>
+                        <field name="supporting_document_ids">
+                            <form>
+                                <group>
+                                    <field name="supporting_doc_name" invisible="1"/>
+                                    <field name="supporting_doc" filename="supporting_doc_name"/>
+                                </group>
+                            </form>
+                            <tree>
+                                <field name="supporting_doc_name" invisible="1"/>
+                                <field name="supporting_doc" filename="supporting_doc_name"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="reject_reason" attrs="{'invisible': [('state', '!=', 'reject')]}"/>
+                        </group>
+                    </group>
+                    <group groups="mentorship.group_bao, mentorship.group_bmp">
+                        <group>
+                            <field name="bgarg_minutes" groups="mentorship.group_bao, mentorship.group_bmp"/>
+                        </group>
+                        <group>
+                            <field name="signed_agreement" groups="mentorship.group_bao, mentorship.group_bmp"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mentor_application_tree" model="ir.ui.view">
+        <field name="name">mentor.application.tree</field>
+        <field name="model">mentor.application</field>
+        <field name="arch" type="xml">
+            <tree string="Mentor Application">
+                <field name='title'/>
+                <field name="surname"/>
+                <field name="name"/>
+                <field name="date_of_birth"/>
+                <field name="email"/>
+                <field name="work_phone_number"/>
+                <field name="mobile_phone_number"/>
+                <field name="preferred_contact_number"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mentor_application" model="ir.actions.act_window">
+        <field name="name">Mentor Application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mentor.application</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_mentor_application_tree_inherit" model="ir.ui.view">
+        <field name="name">view.mentor.application.tree.inherit</field>
+        <field name="model">mentor.application</field>
+        <field name="inherit_id" ref="mentorship.view_mentor_application_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='preferred_contact_number']" position="after">
+                <field name="active_agreements" class="text-center"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_mentor_database">
+        <field name="name">Mentor Database</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mentor.application</field>
+        <field name="domain">[('state','=','new')]</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_mentor_application_tree_inherit"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_mentor_approved"
+              name="Mentor Database"
+              parent="menu_mentorship_main_root"
+              action="action_mentor_database"
+              groups="mentorship.group_bao,mentorship.group_bmp,base.group_system"
+              sequence="4"/>
+
+    <!-- MenuItem for mentor.application -->
+    <!--    <menuitem action="action_mentor_application" id="menu_mentor_application" groups="mentorship.group_mentor,mentorship.group_bao,mentorship.group_bmp" name='Mentor Application'-->
+    <!--              sequence="11" web_icon="mentorship,static/description/mentor.png"/>-->
+    <menuitem id="menu_mentor_application" name="Mentor Application" parent="menu_application" action="action_mentor_application" groups="client_management.group_partner_service_provider,mentorship.group_bao,mentorship.group_bmp,base.group_system" sequence="2"/>
+
+</odoo>

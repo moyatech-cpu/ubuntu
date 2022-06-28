@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Overall Training mail template -->
+        <record id="overall_training_email_template" model="mail.template">
+            <field name="name">Overall Training Mail Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="bmt_training.model_pddd_training"/>
+            <field name="lang">${object.lang}</field>
+            <!--<field name="email_from">${object.oppo_provider_id.login}</field>-->
+            <!--<field name="email_to">${object.create_uid.login}</field>-->
+            <field name="subject"><![CDATA[Regarding Overall Training.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div>
+    <p>Hello,</p>
+    <p>There is a notification by Overall Training of ${object.title}.It's state has been changed to
+    %if object.states in ['start_batch']:
+        Start Batch
+    %endif
+    %if object.states in ['confirm_batch']:
+        Confirm Batch
+    %endif
+    %if object.states in ['reject_coordinator']:
+        Reject by Co-ordinator
+    %endif
+    %if object.states in ['app_coordinator']:
+        Approved by Co-ordinator
+    %endif
+    %if object.states in ['submit_coordinator']:
+        Submitted to Co-ordinator
+    %endif
+    %if object.states in ['submit_branch_manager']:
+        Submitted to Branch Manager
+    %endif
+    %if object.states in ['app_branch_manager']:
+        Approved by Branch Manager
+    %endif
+    %if object.states in ['reject_branch_manager']:
+        Rejected by Branch Manager
+    %endif
+    %if object.states in ['submit_head_office']:
+        Submitted to Head Office
+    %endif
+    %if object.states in ['app_head_office']:
+        Approved by Head Office
+    %endif
+    %if object.states in ['reject_head_office']:
+        Rejected by Head Office
+    %endif
+    %if object.states in ['submit_senior_manager']:
+        Submitted to Senior Manager
+    %endif
+    %if object.states in ['app_senior_manager']:
+        Approved by Senior Manager
+    %endif
+    %if object.states in ['reject_senior_manager']:
+        Rejected by Senior Manager
+    %endif
+    %if object.states in ['submit_me_personnal']:
+        Submitted to M&E Personnal
+    %endif
+    %if object.states in ['app_me_personnal']:
+        Approved by M&E Personnal
+    %endif
+    %if object.states in ['reject_me_personnal']:
+        Rejected by M&E Personnal
+    %endif
+    .</p>
+    <p>Regards,</p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

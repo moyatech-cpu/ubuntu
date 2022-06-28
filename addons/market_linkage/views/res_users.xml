@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Inherited form view of Users-->
+        <record model="ir.ui.view" id="view_res_users_form_opportunity_inherit">
+            <field name="name">res.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_simple_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/field[@name='image']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="btn_get_beneficiary" class="oe_stat_button" type="object" icon="fa-th-list"
+                          attrs="{'invisible': [('beneficiary_count', '=', 0)]}">
+                            <field name="beneficiary_count" widget="statinfo" string="Opportunity"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

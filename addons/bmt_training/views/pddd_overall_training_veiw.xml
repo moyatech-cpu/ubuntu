@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--PDDD overall training Tree View-->
+        <record model="ir.ui.view" id="pddd_training_tree_view">
+            <field name="name">pddd.training.tree.view</field>
+            <field name="model">pddd.training</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="title"/>
+                    <field name="training_type_id"/>
+                    <field name="trainer_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--PDDD overall training Form View-->
+        <record model="ir.ui.view" id="pddd_training_form_view">
+            <field name="name">pddd.training.form.view</field>
+            <field name="model">pddd.training</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <header>
+                        <!--                        <button string="Request Trainer" type="object" name="req_trainer" class="oe_highlight"/>-->
+                        <button string="Confirm Batch" type="object" name="confirm_batch" class="oe_highlight"
+                                attrs="{'invisible':['|',('bool_count','!=',True), ('states','!=','new')]}"/>
+                        <button string="Start Batch" type="object" name="start_batch" class="oe_highlight"
+                                attrs="{'invisible':['|',('states','!=','confirm_batch'),('is_start_batch', '=', True)]}"
+                                groups="bmt_security.group_trainer,base.group_system"/>
+                        <button string="Submit to Co-ordinator" type="object" name="submit_to_coordinator"
+                                class="oe_highlight" state="start_batch,reject_coordinator"
+                                attrs="{'invisible': [('states', '!=', 'start_batch'), ('states','!=','reject_coordinator')]}"
+                                groups="bmt_security.group_trainer,base.group_system"/>
+                        <button string="Approve by Co-ordinator" type="object" name="app_by_coordinator"
+                                class="oe_highlight" attrs="{'invisible': [('states', '!=', 'submit_coordinator')]}"
+                                groups="client_management.group_coordinator,base.group_system"/>
+                        <button string="Rejected by Co-ordinator" type="object" name="reject_by_coordinator"
+                                class="oe_highlight" attrs="{'invisible': [('states', '!=', 'submit_coordinator')]}"
+                                groups="client_management.group_coordinator,base.group_system"/>
+                        <button string="Submit to Branch Manager" type="object" name="submit_to_branch_manager"
+                                class="oe_highlight" groups="client_management.group_coordinator,base.group_system"
+                                attrs="{'invisible': [('states','!=','app_coordinator'), ('states', '!=', 'reject_branch_manager')]}"/>
+                        <button string="Approve by Branch Manager" type="object" name="app_by_branch_manager"
+                                class="oe_highlight" groups="client_management.group_branch_manager,base.group_system"
+                                attrs="{'invisible': [('states','!=','submit_branch_manager')]}"/>
+                        <button string="Rejected by Branch Manager" type="object" name="reject_by_branch_manager"
+                                class="oe_highlight" groups="client_management.group_branch_manager,base.group_system"
+                                attrs="{'invisible': [('states','!=','submit_branch_manager')]}"/>
+                        <button string="Submit to Head Office" type="object" name="submit_to_head_office"
+                                class="oe_highlight" groups="client_management.group_branch_manager,base.group_system"
+                                attrs="{'invisible': [('states','!=','reject_head_office'), ('states', '!=', 'app_branch_manager')]}"/>
+                        <button string="Approve by Head Office" type="object" name="app_by_head_office"
+                                class="oe_highlight" groups="mentorship.group_bmp,base.group_system"
+                                attrs="{'invisible': [('states','!=','submit_head_office')]}"/>
+                        <button string="Rejected by Head Office" type="object" name="reject_by_head_office"
+                                class="oe_highlight" groups="mentorship.group_bmp,base.group_system"
+                                attrs="{'invisible': [('states','!=','submit_head_office')]}"/>
+                        <button string="Submit to M&amp;E Personnal" type="object" name="submit_to_me_personnal"
+                                class="oe_highlight" groups="mentorship.group_bmp,base.group_system"
+                                attrs="{'invisible': [('states','!=','reject_me_personnal'), ('states', '!=', 'app_head_office')]}"/>
+                        <button string="Approve by M&amp;E Personnal" type="object" name="app_by_me_personnal"
+                                class="oe_highlight"
+                                groups="monitoring_and_evaluation.group_me_personnal,base.group_system"
+                                attrs="{'invisible': [('states','!=','submit_me_personnal')]}"/>
+                        <button string="Rejected by M&amp;E Personnal" type="object" name="reject_by_me_personnal"
+                                class="oe_highlight"
+                                groups="monitoring_and_evaluation.group_me_personnal,base.group_system"
+                                attrs="{'invisible': [('states','!=','submit_me_personnal')]}"/>
+                        <field name='states' widget='statusbar' statusbar_visible="new,confirm_batch,start_batch"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="title" placeholder="Training Title..." required="1"/>
+                            </h1>
+                            <h3>
+                                <field name="branch_id" placeholder="Select Branch" required="1"/>
+                            </h3>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="training_type_id" required="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="trainer_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                <field name="is_start_batch" invisible="1"/>
+                                <field name="bool_count" invisible="1"/>
+                                <field name="total_participants" invisible="1"/>
+                                <field name="max_count" required="1"/>
+                            </group>
+                            <group>
+                                <field name="business_mgmt_training_id"
+                                       attrs="{'invisible': [('business_mgmt_training_id', '=', False)]}"/>
+                                <field name="sales_pitch_training_id"
+                                       attrs="{'invisible': [('sales_pitch_training_id', '=', False)]}"/>
+                                <field name="upload_report"
+                                       attrs="{'invisible': [('states','in',['new','confirm_batch'])], 'required': [('states','not in',['new','confirm_batch'])]}"
+                                       filename="file_name"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="bool_count" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="participants_ids" context="{'default_branch_id': branch_id}">
+                                <tree editable="top" delete="false">
+                                    <field name="participants_id" context="{'participant':'1'}"
+                                           options='{"always_reload": True}'
+                                           domain="[('nearest_branch', '=', branch_id)]" required="1"/>
+                                    <field name="dob"/>
+                                    <field name="gender"/>
+                                    <field name="training_state" invisible="1"/>
+                                    <field name="id_number" invisible="1"/>
+                                    <field name="geographic_location"/>
+                                     <field name="is_disabled"/>
+                                    <field name="population_group"/>
+                                    <field name="cell_phone_number"/>
+                                    <field name="state" attrs="{'invisible':[('training_state','=','new')]}"/>
+                                    <field name="branch_id" invisible="1"/>
+                                    <button name="do_confirm" string="Confirm" type="object"
+                                            icon="fa-check text-success"
+                                            attrs="{'invisible':[('training_state','=','new')]}"/>
+                                    <button name="do_reject" string="Reject" type="object"
+                                            icon="fa-times-circle text-danger"
+                                            attrs="{'invisible':[('training_state','=','new')]}"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Overall Training for kanban view-->
+        <record id="overall_training_kanban_view" model="ir.ui.view">
+            <field name="name">pddd.training.kanban</field>
+            <field name="model">pddd.training</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban class="o_pddd_training_kanban">
+                    <field name="title"/>
+                    <field name="states"/>
+                    <field name="training_type_id"/>
+                    <field name="trainer_id"/>
+                    <field name="branch_id"/>
+                    <field name="max_count"/>
+                    <field name="total_participants"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click p-0">
+                                <div t-attf-class="o_kanban_card_header p-5">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary">
+                                            <h4><t t-esc="record.title.value"/></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_top mb8 p-5">
+                                    <div class="col-xs-6 pl-0">
+                                        <strong class="o_kanban_record_title">
+                                            <span t-if="record.branch_id.raw_value"
+                                                  class="o_kanban_record_subtitle">
+                                                <i class="fa fa-bars"/>
+                                                <field name="branch_id"/>
+                                            </span>
+                                        </strong>
+                                    </div>
+                                    <div t-if="record.trainer_id.raw_value"
+                                          class="col-xs-6 pl-0">
+                                        <i class="fa fa-user"/>
+                                        <field name="trainer_id"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom p-5">
+                                    <div class="col-xs-6 plr-0">
+                                        <i class="fa fa-envelope"/>
+                                        <field name="states"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <i class="fa fa-rss"/> <field name="training_type_id"/>
+                                    </div>
+                                </div>
+                                <div class="row margin-8 p-5">
+                                    <div class="col-xs-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="view_edit_training"
+                                                type="object">View/Edit
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-6 o_kanban_primary_right text-right">
+                                        <button class="btn btn-primary" name="apply_for_training"
+                                                type="object">Apply
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 o_kanban_primary_bottom bottom_block row pg-bar">
+                                    <div class="col-xs-12 o_kanban_primary_bottom bottom_block">
+                                        <field name="total_participants" widget="progressbar"
+                                               title="Total Participants"
+                                               options="{'current_value': 'total_participants', 'max_value': 'max_count'}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--PDDD overall training Action-->
+        <record model="ir.actions.act_window" id="action_pddd_training">
+            <field name="name">Pitch Default Training</field>
+            <field name="res_model">pddd.training</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <!--Menu for PDDD overall training-->
+        <menuitem name="Pitch Default Training" id="pddd_training_menu" parent="bmt_training.main_menu_training"
+                  action="action_pddd_training" groups="base.group_system"
+                  sequence="1"/>
+
+        <!--PDDD type training Tree View-->
+        <record model="ir.ui.view" id="pddd_type_training_tree_view">
+            <field name="name">pddd.type.training.tree.view</field>
+            <field name="model">pddd.type.training</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--PDDD type training Form View-->
+        <record model="ir.ui.view" id="pddd_type_training_form_view">
+            <field name="name">pddd.type.training.form.view</field>
+            <field name="model">pddd.type.training</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--PDDD type training Action-->
+        <record model="ir.actions.act_window" id="action_pddd_type_training">
+            <field name="name">Pddd Training Type</field>
+            <field name="res_model">pddd.type.training</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for PDDD type training-->
+        <menuitem name="Configuration" id="configuration_menu" parent="bmt_training.main_menu_training"
+                  sequence="7" groups="base.group_system"/>
+
+        <menuitem name="PDDD type training" id="pddd_type_training_menu" parent="bmt_training.configuration_menu"
+                  action="action_pddd_type_training"
+                  sequence="3"/>
+
+
+    </data>
+</odoo>

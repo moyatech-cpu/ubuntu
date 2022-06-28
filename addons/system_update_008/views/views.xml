@@ -1,0 +1,273 @@
+<odoo>
+  <data>
+	<record id="voucher_status_report_button_update" model="ir.ui.view">
+            <field name="name">voucher.status.report.button.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.voucher_status_report_bdo_form_view"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_payment_report_update" model="ir.ui.view">
+            <field name="name">voucher.payment.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_payment_report"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='x_service_provider']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_payment_tracking_report_update" model="ir.ui.view">
+            <field name="name">voucher.payment.tracking.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_payment_tracking_report"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='x_service_provider']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_assessment_conducted_report_update" model="ir.ui.view">
+            <field name="name">voucher.assessment.conducted.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.assessment_conducted_report_bdo_view"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_assessment_appointment_report_update" model="ir.ui.view">
+            <field name="name">voucher.assessment.appointment.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.assessment_appointment_report_bdo_view"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_service_provider_report_update" model="ir.ui.view">
+            <field name="name">voucher.service.provider.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_service_provider_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_service_provider_query_report_update" model="ir.ui.view">
+            <field name="name">voucher.service.provider.query.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_service_provider_query_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_service_provider_ratings_report_update" model="ir.ui.view">
+            <field name="name">voucher.service.provider.ratings.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_service_provider_ratings_report"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='x_service_provider']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+       <record id="voucher_voucher_issuance_report_update" model="ir.ui.view">
+            <field name="name">voucher.voucher.issuance.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_issuance_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_voucher_issuance_multiple_report_update" model="ir.ui.view">
+            <field name="name">voucher.voucher.issuance.multiple.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_issuance_multiple_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_voucher_beneficiaries_report_update" model="ir.ui.view">
+            <field name="name">voucher.beneficiaries.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_beneficiaries_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_expired_report_update" model="ir.ui.view">
+            <field name="name">voucher.expired.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_expired_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_reissued_report_update" model="ir.ui.view">
+            <field name="name">voucher.reissued.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_reissued_report_dbo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_jobs_created_report_update" model="ir.ui.view">
+            <field name="name">voucher.jobs.created.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_jobs_report_bdo"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+        
+        <record id="voucher_redemption_report_update" model="ir.ui.view">
+            <field name="name">voucher.redemption.report.update</field>
+            <field name="model">voucher.status.report.bdo</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_redemption_report"/>
+            <field name="arch" type="xml">
+               
+             <xpath expr="//field[@name='all_branch']" position="before">
+                        
+                        <field name="regional_report" />
+                        <field name="region_id" attrs="{'invisible': [('regional_report', '=', False)]}"/>
+                        
+                        
+            </xpath>
+            
+            
+            </field>
+        </record>
+  </data>
+</odoo>

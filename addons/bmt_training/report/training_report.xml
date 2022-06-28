@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_report_training"
+                string="Training Report"
+                model="training.report.wizard"
+                report_type="qweb-pdf"
+                file="bmt_training.report_training"
+                name="bmt_training.report_training"
+                menu="False"
+                paperformat="bmt_training.paperformat_landscape"
+        />
+
+        <report
+                id="action_report_training_schedule"
+                string="Training Schedule Report"
+                model="training.report.wizard"
+                report_type="qweb-pdf"
+                file="bmt_training.report_training_schedule"
+                name="bmt_training.report_training_schedule"
+                menu="False"
+                paperformat="bmt_training.paperformat_landscape"
+        />
+
+    </data>
+</odoo>

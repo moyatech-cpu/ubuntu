@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Training Report Wizard Form View-->
+    <record model="ir.ui.view" id="regional_grant_status_report_wizard_form_view">
+        <field name="name">regional.grant.status.report.wizard.form.view</field>
+        <field name="model">regional.grant.status.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                
+                	<field name="region_id" options="{'no_open': True, 'no_create': True}" required='1'/>
+                	<field name="show" required='1'/>
+                	
+                </group>
+               
+                <footer>
+                    <button string="Download Grant Report" name="get_regional_grant_report" type="object"
+                            class="btn-primary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Regional Report Wizard -->
+    <record model="ir.actions.act_window" id="action_regional_report_grant_status_wizard">
+        <field name="name">Regional Grant Status Report Wizard</field>
+        <field name="res_model">regional.grant.status.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    
+
+    <!--Menu for Training Report-->
+    
+    <menuitem name="Grant Status Regional Report" parent="nyda_grant_and_voucher.reporting_status_grant" id="menu_regional_grant_report" sequence="4"
+              action="system_update_008.action_regional_report_grant_status_wizard"/>
+    <!--groups="base.group_system,facility.facility_manager,facility.facility_officer"-->
+
+    </data>
+</odoo>

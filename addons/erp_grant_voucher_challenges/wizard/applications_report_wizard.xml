@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="grant_applications_report_wiz_form" model="ir.ui.view">
+        <field name="name">Applications Branch Report</field>
+        <field name="model">report.applications.grant</field>
+        <field name="arch" type="xml">
+            <form string="Applications Report">
+            <group>
+                <group>
+                    <field name="start_date" required="1"/>
+                    <field name="status" />
+                </group>
+                <group>
+                    <field name="end_date" required="1"/>
+                    <field name="all_branches" />
+                    <field name="branch" attrs="{'invisible': [('all_branches','=',True)]}"/>
+                </group>
+            </group>
+                <footer>
+                    <button name="get_detail_report" string="Get Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_grant_application_report_wiz_wizard" model="ir.actions.act_window">
+        <field name="name">Applications Branch Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.applications.grant</field>
+        <field name="view">form</field>
+        <field name="view_id" ref="grant_applications_report_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_grant_applications_report" name="Applications Report" parent="nyda_grant_and_voucher.main_grant_report"
+    sequence="11" action="action_grant_application_report_wiz_wizard"/>
+</odoo>

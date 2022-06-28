@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_bursary_external_document">
+    
+	    <t t-call="web.external_layout">
+	        <style>
+	            table, th, td {
+	            border: 1px solid black;
+	            border-collapse: collapse;
+	            }
+	            th, td {
+	            padding: 5px;
+	            text-align: left;
+	            }
+	            .t-center{
+	            text-align:center;
+	            }
+	            .t-right{
+	            text-align:right;
+	            }
+	            .r-color{
+	            color: indianred;
+	            }
+	        </style>          
+	        <div class="page">
+	            <div class="oe_structure"/>
+	            <div class="row">
+	                <div class="col-lg-12 text-center">
+	                    <h1>Learning and Development Report</h1>
+	                </div>
+	                <t t-value="doc.get_bursary_external_data()" t-set="data"/>
+	                    <div>
+	                        <t t-if="data['start_date']">
+	                            <h4>Start Date :
+	                                <t t-esc="data['start_date']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['end_date']">
+	                            <h4>End Date :
+	                                <t t-esc="data['end_date']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['type']">
+	                            <h4>Type :
+	                                <t t-esc="data['type']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['state']">
+	                            <h4>Status :
+	                                <t t-esc="data['state']"/>
+	                            </h4>
+	                        </t>
+	                        <t t-if="data['bur_ext_data']">
+	                            <h4>Total Records :
+	                                <t t-esc="len(data['bur_ext_data'])"/>
+	                            </h4>
+	                        </t>
+	                    </div>
+	            </div>
+	            <br/>
+	            <t t-if="data['bur_ext_data']">
+	                <div class="row">
+	                    <div class="text-center p8">
+	                        <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+	                            <thead>
+	                                <tr style="background: lightblue;">
+	                                  <th class="t-center">No.</th>  
+	                                    <th class="t-center">Employment Number</th>                                      
+	                                    <th class="t-center">Name</th>
+	                                    <th class="t-center">Surname</th>
+	                                    <th class="t-center">Position</th>
+	                                    <th class="t-center">ID Number</th>
+	                                    <th class="t-center">Branch</th>
+	                                    
+	                                    <th class="t-center">Course</th>
+	                                    <th class="t-center">Institution</th>
+	                                    <th class="t-center">Amount</th>
+	                                    <th class="t-center">NQF Level</th>
+	                                    <th class="t-center">Date</th>
+	                                </tr>
+	                            </thead>
+	                            <t t-set="rec_no" t-value="1"/>
+	                            <t t-set="total_bursaries" t-value="0"/>
+	                            <t t-foreach="data['bur_ext_data']" t-as="rec_data">
+	                                <tbody>
+	                                    <tr>
+	                                        <td class="t-center">
+	                                           <t t-esc="rec_no"/>
+	                                        </td>
+	                                        <t t-set="rec_no" t-value="rec_no + 1"/>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data.emp_number"/>
+	                                        </td>                                          
+	                                        <td>
+	                                            <t t-esc="rec_data.forename"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.surname"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.position_id.name"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.app_id_num"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.branch_id.name"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.proposed_qualification"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.bursary_institution_id.name"/>
+	                                        </td>
+	                                        <td>
+	                                            R <t t-esc="rec_data.total_repay"/>
+	                                        </td>
+	                                        <td>
+	                                            <t t-esc="rec_data.nqf_level"/>
+	                                        </td>                                            
+	                                        <td>
+	                                            <t t-esc="rec_data.create_date"/>
+	                                        </td>                                            
+	                                    </tr>
+	                                </tbody>
+	                                <t t-set="total_bursaries" t-value="total_bursaries + rec_data.total_repay" />
+	                                
+	                            </t>
+	                            <tr>
+	                                <th colspan="9" class="t-right">Total: </th>
+	                                <td class="r-color">
+	                                    R <t t-esc="total_bursaries"/>
+	                                </td>
+	                            </tr>                                
+	                        </table>
+	                    </div>
+	                </div>
+	            </t>
+	            <t t-else="">
+	                <div class="row">
+	                    <div class="text-center">
+	                        <h3>There are no <t t-esc="data['state']"/> <t t-esc="data['type']"/> on these dates.</h3>
+	                    </div>
+	                </div>
+	            </t>
+	            <div class="oe_structure"/>
+	        </div>
+	    </t>
+        
+        
+    </template>
+
+    <template id="report_bursary_external">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="learning_development.report_bursary_external_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

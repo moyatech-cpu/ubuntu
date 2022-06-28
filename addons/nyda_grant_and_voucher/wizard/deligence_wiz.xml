@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_deligence_wiz_form" model="ir.ui.view">
+        <field name="name">deligence.wiz.form</field>
+        <field name="model">deligence.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Due Deligence Report">
+                <group>
+                    <field name="inspection_report_name" invisible="1"/>
+                    <field name="inspection_report" widget="binary" required="1" filename="inspection_report_name"/>
+                    <field name="financial_assessment_name" invisible="1"/>
+                    <field name="financial_assessment" widget="binary" required="1" filename="financial_assessment_name"/>
+                    <field name="business_plan_name" invisible="1"/>
+                    <field name="business_plan" widget="binary" filename="business_plan_name"/>
+                    <!-- <field name="itc_report_name" invisible="1"/>
+                    <field name="itc_report" widget="binary" required="1" filename="itc_report_name"/> -->
+<!--                    <field name="due_deligence_checklist_name" invisible="1"/>-->
+<!--                    <field name="due_deligence_checklist" widget="binary" required="1" filename="due_deligence_checklist_name"/>-->
+                </group>
+                <footer>
+                    <button name="deligence_report_req" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_deligence_report" model="ir.actions.act_window">
+        <field name="name">Due Deligence Report</field>
+        <field name="res_model">deligence.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_deligence_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

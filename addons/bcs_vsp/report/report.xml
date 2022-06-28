@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+	<report
+		id="action_report_bcs_vsp"
+		string="BCS VSP19 Form"
+		model="bcs.vsp"
+		report_type="qweb-pdf"
+		name="bcs_vsp.report_bcs_vsp_template"
+		file="bcs_vsp.report_bcs_vsp_template"
+		menu="True"
+	/>
+</data>
+	
+    
+</odoo>

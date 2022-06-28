@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_grant_and_voucher_update_grant_and_voucher_update,grant_and_voucher_update.grant_and_voucher_update,model_grant_and_voucher_update_grant_and_voucher_update,,1,0,0,0

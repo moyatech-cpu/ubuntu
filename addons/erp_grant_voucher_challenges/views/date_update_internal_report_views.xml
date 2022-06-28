@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="view_disbursement_wiz_form_inherit" model="ir.ui.view">
+        <field name="name">disbursement.pack.wiz.form.inherit</field>
+        <field name="model">disbursement.pack.wiz</field>
+        <field name="inherit_id" ref="nyda_grant_and_voucher.view_disbursement_wiz_form_1"/><!-- <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_application_form_restricted"/> -->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_registration_attech_ids']" position="after">
+            <field name="disbursement_amount" widget="monetary" required="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_grant_application_form_inherit" model="ir.ui.view">
+        <field name="name">view.grant.application.form.inherit</field>
+        <field name="model">grant.application</field>
+        <field name="inherit_id" ref="nyda_grant_and_voucher.view_grant_application_form"/><!-- <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_application_form_restricted"/> -->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ict_report']" position="after">
+       			<field name="ict_report_upload_date" />
+       			<field name="ict_uploaded_by" />
+       			<field name="schedule_date" />
+       			<field name="schedule_by" />
+            </xpath>
+            <xpath expr="//field[@name='approval_letter_send_date']" position="after">
+       			<field name="approval_letter_upload_date" />
+       			<field name="approval_letter_upload_by" />
+            </xpath>
+            <xpath expr="//field[@name='inspection_report']" position="after">
+       			<field name="deligence_by" />
+       			<field name="deligence_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='upload_investiment_memo']" position="after">
+       			<field name="investment_memo_upload_by" />
+       			<field name="investment_memo_upload_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='bgarg_approval_letter_send_date']" position="after">
+       			<field name="bgarg_approve_by" />
+       			<field name="bgarg_approve_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='bgarg_approval_letter_send_date']" position="after">
+       			<field name="bgarg_approve_by" />
+       			<field name="bgarg_approve_date" />
+            </xpath>
+            <xpath expr="//field[@name='rejection_letter']" position="after">
+       			<field name="bgarg_reject_by" />
+       			<field name="bgarg_reject_date" />
+            </xpath>
+            <xpath expr="//field[@name='refer_correction']" position="after">
+       			<field name="hogac_reject_by" />
+       			<field name="hogac_reject_date" />
+            </xpath>
+            <xpath expr="//field[@name='contract']" position="after">
+       			<field name="disbursement_amount" widget="monetary" />
+                
+                <field name="contracting_by" />
+       			<field name="contracting_date" />
+                <field name="disbursement_upload_by" />
+                <field name="disbursement_upload_date" />
+            </xpath>
+            <xpath expr="//field[@name='nyda_bdo_bool']" position="after">
+                <field name="bdo_approver" />
+       			<field name="bdo_approve_date" />
+            </xpath>
+            <xpath expr="//field[@name='bdo_rejection_report']" position="after">
+                <field name="bdo_reject_by" />
+       			<field name="bdo_reject_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='nyda_branch_manager_bool']" position="after">
+                <field name="bm_approve_user" />
+       			<field name="bm_approve_date" />
+            </xpath>
+            <xpath expr="//field[@name='bm_rejection_report']" position="after">
+                <field name="bm_reject_user" />
+       			<field name="bm_reject_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='nyda_bcs_bool']" position="after">
+                <field name="bcs_approve_by" />
+       			<field name="bcs_approve_date" />
+            </xpath>
+            <xpath expr="//field[@name='bcs_rejection_report']" position="after">
+                <field name="bcs_reject_user" />
+       			<field name="bcs_reject_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='nyda_qao_bool']" position="after">
+                <field name="qao_approve_by" />
+       			<field name="qao_approve_date" />
+            </xpath>
+            <xpath expr="//field[@name='qao_rejection_report']" position="after">
+                <field name="qao_reject_by" />
+       			<field name="qao_reject_date" />
+            </xpath>
+
+            <xpath expr="//field[@name='nyda_edm_bool']" position="after">
+                <field name="edm_approve_by" />
+       			<field name="edm_approve_date" />
+            </xpath>
+            <xpath expr="//field[@name='edm_rejection_report']" position="after">
+                <field name="edm_reject_user" />
+       			<field name="edm_reject_date" />
+            </xpath>
+            <xpath expr="//field[@name='approval_letter']" position="after">
+                <field name="gr_number"/>
+            </xpath>
+        </field>    
+      </record>
+   
+</odoo>

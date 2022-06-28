@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_budget_management">
+        <field name="name">Budget Management</field>
+        <field name="description">Budget Management</field>
+        <field name="sequence">51</field>
+    </record>
+
+	<record id="nyda_budget_manager" model="res.groups">
+        <field name="name">Budget Manager</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">Budget Manager</field>
+    </record>  
+    
+    <record id="nyda_budget_senior_manager" model="res.groups">
+        <field name="name">Budget Senior Manager</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">Budget Senior Manager</field>
+    </record>
+    
+    <record id="nyda_budget_executive_director" model="res.groups">
+        <field name="name">Budget Executive Director</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">Budget Executive Director</field>
+    </record>
+    
+	<record id="nyda_budget_finance_officer" model="res.groups">
+        <field name="name">Finance Officer</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">Finance Officer</field>
+    </record>
+        
+	<record id="nyda_budget_finance_manager" model="res.groups">
+        <field name="name">Finance Manager</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">Budget Manager</field>
+    </record>
+    
+	<record id="nyda_budget_finance_snr_manager" model="res.groups">
+        <field name="name">Finance Snr. Manager</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">Finance Snr. Manager</field>
+    </record>
+    
+	<record id="nyda_budget_cfo" model="res.groups">
+        <field name="name">CFO</field>
+        <field name="category_id" ref="model_category_budget_management"/>
+        <field name="description">CFO</field>
+    </record>        
+
+</data>

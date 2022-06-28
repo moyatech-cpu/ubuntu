@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="approve_reject_wizard_view" model="ir.ui.view">
+        <field name="name">approval.rejection</field>
+        <field name="model">approve.reject</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="type" invisible="1"/>
+                    <field name="learn_dev_id" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                </group>
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'line_manager'), ('type', '!=', 'reject')]}">
+                    <div class="col-md-10">
+                        <label for="lm_not_support_emp_app"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="lm_not_support_emp_app" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'line_manager'), ('type', '=', 'reject')]}"/>
+                    </div>
+                </div>
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'line_manager'), ('type', '!=', 'approve')]}">
+                    <div class="col-md-5">
+                        <label for="lm_support_emp_app"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="lm_support_emp_app" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'line_manager'), ('type', '=', 'approve')]}"/>
+                    </div>
+                </div>
+				<div class="row" attrs="{'invisible': [('state', '!=', 'line_manager')]}">
+					<div class="col-md-5">
+                       <label for="line_comments"/>
+					</div>  					
+					<div class="col-md-7">
+                       <field name="line_comments" />
+					</div>
+				</div>
+
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'hod'), ('type', '!=', 'reject')]}">
+                    <div class="col-md-10">
+                        <label for="hod_not_exe_man_cluster"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="hod_not_exe_man_cluster" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'hod'), ('type', '=', 'reject')]}"/>
+                    </div>
+                </div>
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'hod'), ('type', '!=', 'approve')]}">
+                    <div class="col-md-10">
+                        <label for="hod_exe_man_cluster"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="hod_exe_man_cluster" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'hod'), ('type', '=', 'approve')]}"/>
+                    </div>
+                </div>
+				<div class="row" attrs="{'invisible': [('state', '!=', 'hod')]}">
+                    <div class="col-md-5">
+                        <label for="hod_comments"/>
+                    </div>     					
+					<div class="col-md-7">
+                        <field name="hod_comments" />
+                    </div>
+				</div>
+				
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'adjudication'), ('type', '!=', 'reject')]}">
+                    <div class="col-md-10">
+                        <label for="adjudication_not_confirm_busary_app"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="adjudication_not_confirm_busary_app" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'adjudication'), ('type', '=', 'reject')]}"/>
+                    </div>
+                </div>
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'adjudication'), ('type', '!=', 'approve')]}">
+                    <div class="col-md-10">
+                        <label for="adjudication_confirm_busary_app"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="adjudication_confirm_busary_app" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'adjudication'), ('type', '=', 'approve')]}"/>
+                    </div>
+                </div>
+                <div class="row" attrs="{'invisible': [('state', '!=', 'adjudication')]}">
+                    <div class="col-md-5">
+                        <label for="adjudication_comments"/>
+                    </div>                	
+					<div class="col-md-7">
+                        <field name="adjudication_comments" />
+                    </div>
+				</div>				
+				                
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'ld_manager'), ('type', '!=', 'reject')]}">
+                    <div class="col-md-10">
+                        <label for="ld_not_confirm_busary_app"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="ld_not_confirm_busary_app" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'ld_manager'), ('type', '=', 'reject')]}"/>
+                    </div>
+                </div>
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'ld_manager'), ('type', '!=', 'approve')]}">
+                    <div class="col-md-10">
+                        <label for="ld_confirm_busary_app"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="ld_confirm_busary_app" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'ld_manager'), ('type', '=', 'approve')]}"/>
+                    </div>
+                </div>
+                <div class="row" attrs="{'invisible': [('state', '!=', 'ld_manager')]}">
+                   <div class="col-md-5">
+                       <label for="ld_comments"/>
+                   </div>  	                	
+					<div class="col-md-7">
+                       <field name="ld_comments" />
+                   </div>
+				</div>
+				
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'ceo'), ('type', '!=', 'reject')]}">
+                    <div class="col-md-10">
+                        <label for="ceo_not_confirm_bursary"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="ceo_not_confirm_bursary" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'ceo'), ('type', '=', 'reject')]}"/>
+                    </div>
+                </div>
+                <div class="row"
+                     attrs="{'invisible': ['|', ('state', '!=', 'ceo'), ('type', '!=', 'approve')]}">
+                    <div class="col-md-10">
+                        <label for="ceo_confirm_bursary"/>
+                    </div>
+                    <div class="col-md-2">
+                        <field name="ceo_confirm_bursary" options="{'no_open': True,'no_create': True}"
+                               attrs="{'required': [('state', '=', 'ceo'), ('type', '=', 'approve')]}"/>
+                    </div>
+                </div>
+				<div class="row" attrs="{'invisible': [('state', '!=', 'ceo')]}">
+					<div class="col-md-5">
+                       <label for="ceo_comments"/>
+                   </div>					
+					<div class="col-md-7">
+                       <field name="ceo_comments" />
+                   </div>
+				</div>                
+                <footer>
+                    <button string="Submit" name="submit_request" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_approve_wizard" model="ir.actions.act_window">
+        <field name="name">Approve Request</field>
+        <field name="res_model">approve.reject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_type': 'approve', 'default_learn_dev_id': active_id}</field>
+        <field name="view_id" ref="approve_reject_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+
+        <record id="action_reject_wizard" model="ir.actions.act_window">
+        <field name="name">Reject Request</field>
+        <field name="res_model">approve.reject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_type': 'reject', 'default_learn_dev_id': active_id}</field>
+        <field name="view_id" ref="approve_reject_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

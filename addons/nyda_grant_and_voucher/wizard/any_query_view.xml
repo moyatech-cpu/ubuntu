@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_any_query_form" model="ir.ui.view">
+        <field name="name">any.query.form</field>
+        <field name="model">any.query</field>
+        <field name="arch" type="xml">
+            <form string="Any Query">
+                <group>
+                  <group>
+                    <field name="query"/>
+                  </group>
+                </group>
+                <footer>
+                    <button name="query_for_voucher" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_any_query_payment" model="ir.actions.act_window">
+        <field name="name">Any Query</field>
+        <field name="res_model">any.query</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_any_query_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

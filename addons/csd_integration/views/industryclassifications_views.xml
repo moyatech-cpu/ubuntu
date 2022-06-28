@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+   	<record id="view_industry_classification_view" model="ir.ui.view">
+		<field name="name">Industry Classification</field>
+        <field name="model">industry.classification</field>
+        <field name="arch" type="xml">
+           <form string="Industry Classification">
+           	<header>
+           	
+           	</header>
+           	<sheet>
+           		<group>
+				<div class="col-md-6 oe_title">
+                      <label for="UniqueRegistrationReferenceNumber" string="Serial #"/>
+                      <h1>
+                          <field name="supplier_identification" readonly="1"/>
+                      </h1>
+                </div>
+                </group>
+                <group string="Industry Classification Details">
+                        <group>
+                        	<field name="user_id" invisible="True"/>
+                            <field name="IndustryClassificationCode"/>
+                            <field name="PercentageRanking"/>
+                            <field name="CoreIndustryIndicator"/>
+                        </group>
+                        
+                 </group>
+				 
+           	</sheet>
+          </form> 
+        </field>
+    </record>
+    
+    <record id="view_industry_classification_tree" model="ir.ui.view">
+        <field name="name">Industry Classification</field>
+        <field name="model">industry.classification</field>
+        <field name="arch" type="xml">
+            <tree string="Industry Classification">
+				<field name="UniqueRegistrationReferenceNumber"/>
+					<field name="IndustryClassificationCode"/>
+					<field name="PercentageRanking"/>
+					<field name="CoreIndustryIndicator"/>
+
+        	</tree>
+        </field>
+    </record>
+    
+    <record id="action_industry_classification" model="ir.actions.act_window">
+        <field name="name">Industry Classification</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">industry.classification</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain"></field>
+    </record>
+	
+	<menuitem name="Industry Classification" id="csd_integration.industry_classification_menu" action="action_industry_classification" parent="csd_integration.supplier_details_menu" groups="base.group_system"/>
+
+</odoo>

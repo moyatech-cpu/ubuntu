@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_knowledge_management,access_knowledge_management,model_knowledge_management,,1,1,1,1
+access_knowledge_document,access_knowledge_document,model_knowledge_document,,1,1,1,1

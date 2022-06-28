@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="action_report_va"
+                string="Voucher Assessment Report"
+                model="voucher.assessment"
+                report_type="qweb-pdf"
+                file="nyda_grant_and_voucher.report_va"
+                name="nyda_grant_and_voucher.report_va"
+                menu="True"
+        />
+
+    </data>
+</odoo>

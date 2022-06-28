@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+    <!--Training Report Wizard Form View-->
+    <record model="ir.ui.view" id="jobs_report_wizard_form_view">
+        <field name="name">jobs.report.wizard.form.view</field>
+        <field name="model">jobs.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="end_date" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="report_type"/>
+                    <field name="branch_id" options="{'no_open': True, 'no_create': True}"
+                           attrs="{'required': [('report_type', 'in', ['branch'])], 'invisible':[('report_type', 'not in', ['branch'])]}"/>
+                    <field name="job_id" options="{'no_open': True, 'no_create': True}"
+                           attrs="{'required': [('report_type', 'in', ['jobs'])], 'invisible':[('report_type', 'not in', ['jobs'])]}"/>
+                </group>
+                <footer>
+                    <button string="Download Jobs Report" name="get_report" type="object"
+                            class="btn-primary" attrs="{'invisible':[('report_type', 'not in', ['jobs'])]}"/>
+                    <button string="Download Branch Report" name="get_report" type="object"
+                            class="btn-primary" attrs="{'invisible':[('report_type', 'not in', ['branch'])]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Jobs Report Wizard -->
+    <record model="ir.actions.act_window" id="action_jobs_report_wizard">
+        <field name="name">Jobs Report Wizard</field>
+        <field name="res_model">jobs.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_report_type': 'jobs'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Action for Branch Report Wizard -->
+    <record model="ir.actions.act_window" id="action_branch_report_wizard">
+        <field name="name">Branch Report Wizard</field>
+        <field name="res_model">jobs.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_report_type': 'branch'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menu for Jobs Report-->
+    <menuitem name="Reporting" parent="job_opportunities.job_opportunities_main_menu" id="menu_reporting" sequence="5"/>
+    <menuitem name="Jobs Report" parent="job_opportunities.menu_reporting" id="menu_jobs_reports" sequence="1"
+              action="job_opportunities.action_jobs_report_wizard"/>
+    <menuitem name="Branch Report" parent="job_opportunities.menu_reporting" id="menu_branch_report" sequence="2"
+              action="job_opportunities.action_branch_report_wizard"/>
+
+    </data>
+</odoo>

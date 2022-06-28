@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- mentorship agreement mail template -->
+        <record id="mentorship_agreement_email_template" model="mail.template">
+            <field name="name">Mentorship Agreement Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentorship_agreement"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${object.create_uid.email}</field>
+            <field name="email_to">${object.mentee_email},${object.mentor_email}</field>
+            <field name="subject"><![CDATA[Mentorship Agreement.]]></field>
+            <field name="body_html">
+                <![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>Your Mentorship Agreement has been created</p>
+    <p>between ${object.mentee_id.firstName} and ${object.mentor_id.name}</p>
+    <p>Please contact the administration if you have any query.</p>
+    <p>Regards, </p>
+    <p>NYDA</p>
+</div>
+            ]]>
+            </field>
+        </record>
+
+        <!-- Mentorship Application for mentee acceptance mail template -->
+        <record id="mentee_application_accept_mail_template" model="mail.template">
+            <field name="name">Mentee Application Accept Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentee_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ ctx['mail_from'] }</field>
+            <field name="email_to">${ object.email }</field>
+            <field name="subject"><![CDATA[Mentorship Programme Application status - Accepted.]]></field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <center><h2>NYDA Team</h2><center>
+                    <p>Hello ${object.name} ${object.surname},</p>
+                    <p>We are pleased to inform you that your application for Mentorship as a Mentee/Beneficiary has been accepted.</p>
+                    <p>You can login to the system and check your application. We will match you with the Mentor that best suits with your profile.</p>
+                    <p><b>Do not hesitate to contact us for any query.</b></p>
+                    <center><p>Thank you.</p></center>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Mentorship Application for mentor acceptance mail template -->
+        <record id="mentor_application_accept_mail_template" model="mail.template">
+            <field name="name">Mentor Application Accept Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentor_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ ctx['mail_from'] }</field>
+            <field name="email_to">${ object.email }</field>
+            <field name="subject"><![CDATA[Mentorship Programme Application status - Accepted.]]></field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <center><h2>NYDA Team</h2><center>
+                    <p>Hello ${object.name} ${object.surname},</p>
+                    <p>We are pleased to inform you that your application for Mentorship as a Mentor/Service Provider has been accepted.</p>
+                    <p>You can login to system and check suggested Mentees. Also you can apply for Mentorship Agreement with suggested Mentees.</p>
+                    <p>Do not hesitate to contact us for any query.</p>
+                    <center><p>Thank you.</p></center>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Mentorship Application for mentor recommended mail template -->
+        <record id="mentor_application_recommended_mail_template" model="mail.template">
+            <field name="name">Mentor Application Accept Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentor_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ ctx['mail_from'] }</field>
+            <field name="email_to">${ object.email }</field>
+            <field name="subject"><![CDATA[Mentorship Programme Application status - Recommended.]]></field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <center><h2>NYDA Team</h2><center>
+                    <p>Hello ${object.name} ${object.surname},</p>
+                    <p>We are pleased to inform you that your application for Mentorship as a Mentor/Service Provider has been moved to Recommended state..</p>
+                    <p>Please wait till your application has been reviewed.</p>
+                    <p>Do not hesitate to contact us for any query.</p>
+                    <center><p>Thank you.</p></center>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Mentee application rejection mail template -->
+        <record id="mentee_application_reject_mail_template" model="mail.template">
+            <field name="name">Mentee Application Reject Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentee_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ ctx['mail_from'] }</field>
+            <field name="email_to">${ object.email }</field>
+            <field name="subject"><![CDATA[Mentorship Programme Application status.]]></field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <center><h2>NYDA Team</h2><center>
+                    <p>Hello ${object.name} ${object.surname},</p>
+                    <p>We regret to tell you that your application for Mentorship as a Mentor/Service Provider has been rejected.</p>
+                    <p>Reason for application rejection is mentioned below. Please let us know for further queries.</p>
+                    <p><b>${ object.reject_reason }</b></p>
+                    <center><p>Thank you.</p></center>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Mentor application rejection mail template -->
+        <record id="mentor_application_reject_mail_template" model="mail.template">
+            <field name="name">Mentor Application Reject Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentor_application"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ ctx['mail_from'] }</field>
+            <field name="email_to">${ object.email }</field>
+            <field name="subject"><![CDATA[Mentorship Programme Application status.]]></field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <center><h2>NYDA Team</h2><center>
+                    <p>Hello ${object.name} ${object.surname},</p>
+                    <p>We regret to tell you that your application for Mentorship as a Mentor/Service Provider has been rejected.</p>
+                    <p>Reason for application rejection is mentioned below. Please let us know for further queries.</p>
+                    <p><b>${ object.reject_reason }</b></p>
+                    <center><p>Thank you.</p></center>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Mentorship Agreement signed mail template for BAO user. -->
+        <record id="mentor_application_signed_bao_mail_template" model="mail.template">
+            <field name="name">Mentor Application Reject Template</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="model_id" ref="mentorship.model_mentorship_agreement"/>
+            <field name="lang">${object.lang}</field>
+            <field name="email_from">${ object.create_uid.partner_id.email }</field>
+            <field name="email_to">${ object.email }</field>
+            <field name="subject"><![CDATA[Mentorship Agreement signed.]]></field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <center><h2>NYDA Team</h2><center>
+                    <p>Hello ${object.name} ${object.surname},</p>
+                    <p>Mentroship Agreement has been signed by both Mentee and Mentor.</p>
+                    <p>Please take next steps for the mentorship programme and submit related documents.</p>
+                    <center><p>Thank you.</p></center>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

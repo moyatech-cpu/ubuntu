@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Mentorship Agreement views along with menu items -->
+    <record id="view_mentorship_agreement_form" model="ir.ui.view">
+        <field name="name">view.mentorship.agreement.form</field>
+        <field name="model">mentorship.agreement</field>
+        <field name="arch" type="xml">
+            <form string="Mentorship Agreement">
+                <header>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_agreement_mentee)d" states="new,mentor_signed" string='Accepted by Mentee' groups="client_management.group_branch_beneficiary,mentorship.group_bao"/>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_agreement_mentor)d" states="new,mentee_signed" string='Accepted by Mentor' groups="client_management.group_partner_service_provider,mentorship.group_bao"/>
+                    <button class="oe_stat_button" type="action" name="%(action_wiz_agreement_decline)d" states="new,mentee_signed,mentor_signed" string='Decline' groups="client_management.group_partner_service_provider, client_management.group_branch_beneficiary,mentorship.group_bao"/>
+                    <field name="state" widget='statusbar'/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="branch_id"/>
+                        </group>
+                    </group>
+                    <group string="Mentee Details">
+                        <group>
+                            <field name="mentee_id"/>
+<!--                            <field name="mentee_id" domain="[('branch_id', '=', branch_id),('is_assigned', '=', False),('areasSupport', 'in', area_support_id)]"/>-->
+                        </group>
+                        <group>
+                            <field name="mentee_identity"/>
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                            <field name="populationGroup"/>
+                            <field name="signed_by_mentee" invisible="1"/>
+                            <field name="signed_by_mentor" invisible="1"/>
+                            <field name="mentee_email"/>
+                        </group>
+                        <group>
+                            <field name="disabledPerson"/>
+                            <field name="typeOfLocation"/>
+                        </group>
+                    </group>
+                    <group string="Mentor Details">
+                        <group>
+                            <field name="mentor_id"/>
+                            <field name="area_support_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="business_name"/>
+                        </group>
+                        <group>
+                            <field name="contact_number"/>
+                        </group>
+                        <group>
+                            <field name="mentor_email"/>
+                        </group>
+                    </group>
+                    <group string="Mentee - Business Monitoring Plan">
+                        <field name="description"/>
+                        <field name="bmp_ids" nolable="1">
+                            <tree editable="bottom">
+                                <field name="business_needs"/>
+                                <field name="projected_time_frame"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="date_of_engagement"/>
+                        </group>
+                        <group>
+                            <field name="end_date_of_engagement"/>
+                        </group>
+                    </group>
+                    <group>
+                        <h4 attrs="{'invisible': [('state', '!=', 'accepted')]}">I hereby commit to participate in the mentoring engagement process as set out in the Mentee
+                            Business Mentoring plan.
+                        </h4>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="mentee_sign" widget="signature"/>
+                        </group>
+                        <group>
+                            <field name="mentee_sign_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="mentor_sign" widget="signature"/>
+                        </group>
+                        <group>
+                            <field name="mentor_sign_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mentorship_agreement_tree" model="ir.ui.view">
+        <field name="name">view.mentorship.agreement</field>
+        <field name="model">mentorship.agreement</field>
+        <field name="arch" type="xml">
+            <tree string="Mentorship Agreements" toolbar="1">
+                <field name="branch_id"/>
+                <field name="name"/>
+                <field name="mentee_id"/>
+                <field name="mentor_id"/>
+                <field name="date_of_engagement"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mentorship_agreement_matched_tree" model="ir.ui.view">
+        <field name="name">view.mentorship.agreement.matched.tree</field>
+        <field name="model">mentorship.agreement</field>
+        <field name="arch" type="xml">
+            <tree string="Matched Mentorship" create="false" delete="false" edit="false">
+                <field name="mentee_id"/>
+                <field name="mentor_id"/>
+                <field name="date_of_engagement"/>
+                <field name="end_date_of_engagement"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mentorship_agreement" model="ir.actions.act_window">
+        <field name="name">Mentorship Agreement</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mentorship.agreement</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_mentorship_agreement_matched" model="ir.actions.act_window">
+        <field name="name">Mentorship Agreement</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mentorship.agreement</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="mentorship.view_mentorship_agreement_matched_tree"/>
+        <field name="domain">[('state', '=', 'accepted')]</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_mentorship_agreement_declined" model="ir.actions.act_window">
+        <field name="name">Mentorship Agreement</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mentorship.agreement</field>
+        <field name="view_type">form</field>
+<!--        <field name="view_id" ref="mentorship.view_mentorship_agreement_matched_tree"/>-->
+        <field name="domain">[('state', '=', 'declined')]</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_mentorship_agreement"
+              name="Mentorship Agreement"
+              parent="menu_mentorship_main_root"
+              action="action_mentorship_agreement"
+    />
+
+    <menuitem id="menu_mentorship_agreement_matched"
+              name="Matched"
+              parent="menu_mentorship_main_root"
+              action="action_mentorship_agreement_matched"
+    />
+
+<!--    <menuitem id="menu_mentorship_agreement_declined"-->
+<!--              name="Declined"-->
+<!--              parent="menu_mentorship_main_root"-->
+<!--              action="action_mentorship_agreement_declined"-->
+<!--    />-->
+</odoo>

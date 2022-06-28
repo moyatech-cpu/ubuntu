@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+	<record id="voucher_application_button_update" model="ir.ui.view">
+            <field name="name">Voucher Application Button</field>
+            <field name="model">voucher.application</field>
+            <field name="inherit_id" ref="nyda_grant_and_voucher.view_voucher_application_form"/>
+            <field name="arch" type="xml">
+               
+               <xpath expr="//field[@name='status']" position="replace">
+					<field name="status" widget="statusbar" statusbar_visible="new,assessment_report,recommended,approved,work_plan,client_review,ed_manager_review,cancelled"> </field>
+			</xpath>
+			<xpath expr="//field[@name='status']" position="before">
+					<button name="btn_reinstate_voucher" string="Reinstate Application" type="object" attrs="{'invisible': [('status', '!=', 'cancelled')]}" class="oe_highlight"> </button>
+			</xpath>
+            <xpath expr="//button[@name='set_cancelled']" position="replace">
+                        <button name="btn_cancel_voucher" string="Cancel Application" type="object" attrs="{'invisible': [('status', '=', 'cancelled')]}"
+                                class="oe_highlight" >
+
+                        </button>
+            </xpath>
+ 			<xpath expr="//page[@name='Voucher_Internal_Report']" position="inside">
+                       <group string="Voucher Status History">
+                                    <field name="cancel_voucher_reason" readonly="1" />
+                                    <field name="reinstate_voucher_reason" readonly="1" />
+                                    <!-- <field name="x_pc_status" readonly="1" /> -->
+                                </group>
+            </xpath>           
+            
+            </field>
+        </record>
+  </data>
+</odoo>

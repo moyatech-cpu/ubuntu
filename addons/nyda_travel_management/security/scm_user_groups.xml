@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+    <record model="ir.module.category" id="model_category_scm_travel">
+        <field name="name">Supply Chain Management - Travel</field>
+        <field name="description">Supply Chain Management - Travel</field>
+        <field name="sequence">50</field>
+    </record>
+
+	<record id="nyda_scm_travel_manager" model="res.groups">
+        <field name="name">SCM Manager</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">SCM Manager</field>
+    </record>  
+    
+    <record id="nyda_scm_travel_specialist_user" model="res.groups">
+        <field name="name">SCM Specialist</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">SCM Specialist</field>
+    </record>
+    
+    <record id="nyda_scm_travel_officer_user" model="res.groups">
+        <field name="name">SCM Officer</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">SCM Officer</field>
+    </record>
+    
+	<record id="nyda_scm_travel_board_chairperson" model="res.groups">
+        <field name="name">Board Chairperson</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">Board Chairperson</field>
+    </record>
+        
+	<record id="nyda_scm_travel_ceo" model="res.groups">
+        <field name="name">CEO</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">CEO</field>
+    </record>
+
+    <record id="nyda_scm_travel_division_admin" model="res.groups">
+        <field name="name">Division Admin</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">Division Administrator</field>
+    </record> 
+    
+    <record id="nyda_scm_travel_business_excutive" model="res.groups">
+        <field name="name">Division Executive</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">Division Executive</field>
+    </record>    
+
+    <record id="nyda_scm_travel_branch_manager" model="res.groups">
+        <field name="name">Branch Manager</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">Branch Manager</field>
+    </record> 
+    
+    <record id="nyda_scm_travel_business_user" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="model_category_scm_travel"/>
+        <field name="description">Employee</field>
+    </record>
+
+</data>

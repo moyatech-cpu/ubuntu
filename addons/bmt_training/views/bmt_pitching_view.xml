@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--BMT Pitching Tree View-->
+        <record model="ir.ui.view" id="business_mgmt_training_pitching_tree_view">
+            <field name="name">business.mgmt.training.pitching.tree.view</field>
+            <field name="model">business.mgmt.training.pitching</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="business_mgmt_training_id"/>
+                    <field name="branch_id"/>
+                    <field name="start_date" invisible="1"/>
+                    <field name="end_date" invisible="1"/>
+                    <field name="pitching_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--BMT Pitching Form View-->
+        <record model="ir.ui.view" id="business_mgmt_training_pitching_form_view">
+            <field name="name">business.mgmt.training.pitching.form.view</field>
+            <field name="model">business.mgmt.training.pitching</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <header>
+                        <button string="End Training" type="object" states="start_pitching_training" name="end_pitch_training"
+                                class="oe_highlight"/>
+                        <button string="Start Training" type="object" name="start_pitch_training"
+                                class="oe_highlight"
+                                attrs="{'invisible': ['|', ('state','in', ['start_pitching_training', 'end_pitching_training']), ('start_date', '=', False)]}"/>
+                        <button string="Generate Certificate" type="object" states="end_pitching_training" name="add_report"
+                                class="oe_highlight"/>
+                        <field name='state' widget='statusbar'
+                               statusbar_visible="start_pitching_training,end_pitching_training"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name" required="1"/>
+                            </h1>
+                        </div>
+                        <group string="General Details" name="general_details">
+                            <group>
+                                <field name="branch_id" required="1" options='{"no_open": True, "no_create": True}'/>
+                                <field name="start_date" readonly="1"/>
+                                <field name="end_date" readonly="1"/>
+                                <field name="business_mgmt_training_id" required="1 "/>
+                            </group>
+                            <group>
+                                <field name="pitching_date" readonly="1"/>
+                                <field name="pitching_venue"/>
+                                <field name="facilitator_id" required="1"/>
+                            </group>
+                        </group>
+                        <group name="bmt_participants" string="BMT Participants">
+                            <field name="pitching_participants_ids" nolabel="1">
+                                <tree editable="top">
+                                    <field name="participant_id" required="1"
+                                           options='{"no_open": True, "no_create": True}'/>
+                                    <field name="related_participant_id" invisible="1"/>
+                                    <field name="dob"/>
+                                    <field name="gender"/>
+                                    <field name="area"/>
+                                    <field name="is_disabled"/>
+                                    <field name="race"/>
+                                    <field name="mobile"/>
+                                    <field name="business_mgmt_training_pitching_id" invisible="1"/>
+                                    <field name="attended_full_training"/>
+                                    <field name="is_certi"/>
+                                    <field name="id" invisible="1"/>
+                                    <button
+                                            type="action"
+                                            name="%(bmt_training.action_signature_wizard)d"
+                                            string="Take Signature"
+                                            context="{'default_bmt_pitching_participants_id': id}"
+                                            class="oe_highlight"
+                                            attrs="{'invisible': [('attended_full_training', '=', True)]}"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="facilitator_signature" widget="signature"/>
+                            <field name="date_of_facilitator_signature"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--BMT Pitching Action-->
+        <record model="ir.actions.act_window" id="action_business_mgmt_training_pitching">
+            <field name="name">Business Management Training Pitching</field>
+            <field name="res_model">business.mgmt.training.pitching</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for BMT Pitching Participants-->
+        <menuitem name="BMT Pitching" id="business_mgmt_training_pitching" parent="bmt_training.trainings"
+                  action="action_business_mgmt_training_pitching"
+                  sequence="2"/>
+
+        <!--Benificiary Action-->
+        <record model="ir.actions.act_window" id="action_check_details">
+            <field name="name">Your Details</field>
+            <field name="res_model">youth.enquiry</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('user_id', '=', uid)]</field>
+        </record>
+
+        <!--Menu for Benificiary(main menu)-->
+        <menuitem id="main_menu_ben_certi" name="Your Details"
+                  groups="client_management.group_branch_beneficiary"
+                  web_icon="bmt_training,static/description/ben_certi.png"/>
+
+        <!--Menu for Showing benificiary details to logged in user-->
+        <menuitem name="Details" id="ben_details" parent="bmt_training.main_menu_ben_certi" sequence="1"
+                  action="action_check_details" groups="client_management.group_branch_beneficiary"/>
+    </data>
+</odoo>

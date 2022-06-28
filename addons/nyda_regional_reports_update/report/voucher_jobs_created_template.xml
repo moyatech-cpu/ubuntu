@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_regional_voucher_jobs_created_template">
+<t t-name="nyda_grant_and_voucher.report_regional_voucher_jobs_created_template">
+        <t t-call="web.external_layout">
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 5px;
+                text-align: left;
+                }
+                .t-center{
+                text-align:center;
+                }
+                .t-right{
+                text-align:right;
+                }
+                .r-color{
+                color: indianred;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <t t-value="doc.get_voucher_jobs_created_data()" t-set="data"/>
+                    <div class="col-lg-12 text-center">
+                        <h1>Regional Voucher Jobs Report</h1>
+                    </div>
+                    <h4>Start Date : <t t-esc="data['start_date']"/></h4>
+                    <h4>End Date : <t t-esc="data['end_date']"/></h4>
+                    <h4>Region : <t t-esc="data['region']"/></h4>
+                    <br/>
+                </div>
+                <br/>
+
+                <t t-if="data['final_list_before']">
+                    <div class="row">
+                        <h5>Before Funding</h5>
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                    <th class="t-center">Voucher No.</th>
+                                    <th class="t-center">No. Male</th>
+                                    <th class="t-center">No. Female</th>
+                                    <th class="t-center">No. Disabled Male</th>
+                                    <th class="t-center">No. Disabled Female</th>
+                                    <th class="t-center">Avg. Age Male</th>
+                                    <th class="t-center">Avg. Age Female</th>
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                
+                                <t t-foreach="data['final_list_before']" t-as="rec_data">
+                                    <tr>
+                                       <td>
+                                           <t t-esc="rec_data['voucher_number']"/> 
+                                       </td>
+                                       <td>
+                                           <t t-esc="rec_data['before_funding_male']"/> 
+                                       </td>
+                                        <td>
+                                            <t t-esc="rec_data['before_funding_female']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['before_funding_disabled_male']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['before_funding_disabled_female']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['before_funding_age_male']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['before_funding_age_female']"/>
+                                        </td>                                        
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-if="data['final_list_after']">
+                  
+                    <div class="row">
+                        <h5>After Funding</h5>
+                        <div class="text-center p8">
+                            <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+                                <tr style="background: lightblue;">
+                                  <th class="t-center">Voucher No.</th>
+                                    <th class="t-center">No. Male</th>
+                                    <th class="t-center">No. Female</th>
+                                    <th class="t-center">No. Disabled Male</th>
+                                    <th class="t-center">No. Disabled Female</th>
+                                    <th class="t-center">Avg. Age Male</th>
+                                    <th class="t-center">Avg. Age Female</th>                                    
+                                </tr>
+                                <t t-set="rec_no" t-value="1"/>
+                                
+                                <t t-foreach="data['final_list_after']" t-as="rec_data">
+                                    <tr>
+                                       <td>
+                                           <t t-esc="rec_data['voucher_number']"/> 
+                                       </td>                                      
+                                       <td>
+                                           <t t-esc="rec_data['after_funding_male']"/> 
+                                       </td>
+                                        <td>
+                                            <t t-esc="rec_data['after_funding_female']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['after_funding_disabled_male']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['after_funding_disabled_female']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['after_funding_age_male']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec_data['after_funding_age_female']"/>
+                                        </td>                                        
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+
+                <br/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </t>
+    </template>
+    <template id="report_regional_voucher_jobs_created">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="nyda_regional_reports_update.report_regional_voucher_jobs_created_template"/>
+        </t>
+    </t>
+    </template>
+
+
+</odoo>

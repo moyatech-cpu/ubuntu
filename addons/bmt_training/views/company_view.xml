@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!--Company Tree View-->
+        <record model="ir.ui.view" id="company_tree_view">
+            <field name="name">company.tree.view</field>
+            <field name="model">company</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="contact_number"/>
+                    <field name="e_mail"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Company Form View-->
+        <record model="ir.ui.view" id="company_form_view">
+            <field name="name">company.form.view</field>
+            <field name="model">company</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false">
+                    <sheet>
+                        <group string="Company Details" name="company_details">
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="e_mail" required="1"/>
+                            </group>
+                            <group>
+                                <field name="contact_number" required="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="physical_address" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Company -->
+        <record model="ir.actions.act_window" id="action_company">
+            <field name="name">Company</field>
+            <field name="res_model">company</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menu for Company-->
+        <menuitem name="Company" id="company" parent="bmt_training.configuration_menu" action="action_company"/>
+
+    </data>
+</odoo>
