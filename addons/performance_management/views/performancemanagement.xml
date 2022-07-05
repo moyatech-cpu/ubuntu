@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <!-- agreement tree/list view -->
-        <record model="ir.ui.view" id="agreement_tree_view">
-            <field name="name">agreement.tree</field>
-            <field name="model">performancemanagement.agreement</field>
+    <!-- compliance tree/list view -->
+        <record model="ir.ui.view" id="compliance_tree_view">
+            <field name="name">compliance.tree</field>
+            <field name="model">performancemanagement.compliance</field>
             <field name="arch" type="xml">
-                <tree string="Agreement Tree">
+                <tree string="Compliance Tree">
                     <field name="name"/>
                     <field name="agreement_start"/>
                     <field name="agreement_end"/>
@@ -14,19 +14,12 @@
             </field>
         </record>
 
-        <!-- agreement form view -->
-        <record model="ir.ui.view" id="agreement_form_view">
-            <field name="name">agreement.form</field>
-            <field name="model">performancemanagement.agreement</field>
+        <!-- compliance form view -->
+        <record model="ir.ui.view" id="compliance_form_view">
+            <field name="name">compliance.form</field>
+            <field name="model">performancemanagement.compliance</field>
             <field name="arch" type="xml">
-                <form string="Agreement Form">
-                    <header>
-                        <button id="send_to_lm" name="action_to_lm" string="Send to Line Manager" type="object" states="new" class="btn-primary"/>
-                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="review" class="btn-primary"/>
-                        <button id="send_to_con" name="action_to_con" string="Contract" type="object" states="performance dialogue" class="btn-primary"/>
-                        <button id="send_complete" name="action_completed" string="Complete" type="object" states="performance contract" class="btn-primary"/>
-                        <field name="state" widget="statusbar"/>
-                    </header>
+                <form string="Compliance Form">
                     <sheet>
                         <field name="name"/>
                         <group>
@@ -54,6 +47,116 @@
             </field>
         </record>
 
+
+        <!-- compliance calendar view -->
+        <record model="ir.ui.view" id="compliance_calendar">
+            <field name="name">compliance.calendar</field>
+            <field name="model">performancemanagement.compliance</field>
+            <field name="arch" type="xml">
+                <calendar string="Performance Calendar" date_start="agreement_start" date_stop="agreement_end">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- window action HR Manager-->
+        <record model="ir.actions.act_window" id="compliance_list_action">
+            <field name="name">Complaince Calendar</field>
+            <field name="res_model">performancemanagement.compliance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Here, you can create a new Compliance Calender
+                for Performance Management.</p>
+            </field>
+        </record>
+
+        <!-- window action Employee-->
+        <record model="ir.actions.act_window" id="employee_view_action">
+            <field name="name">Performance Agreement</field>
+            <field name="res_model">performancemanagement.agreement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_performancemanagement_menu" name="HR" sequence="11" groups="strategy_and_planning.group_line_manager,base.group_user"/>
+
+        <menuitem id="performancemanagement_menu" name="Performance Management" parent="main_performancemanagement_menu"/>
+
+        <menuitem id="performanceagreement_menu" name="Complaince Calendar" parent="performancemanagement_menu" groups="strategy_and_planning.group_line_manager"
+                  action="compliance_list_action"/>
+
+        <menuitem id="performance_employee_agreement_menu" name="Performance Agreement" parent="performancemanagement_menu" groups="base.group_user"
+                  action="employee_view_action"/>
+
+
+        <!-- agreement form view -->
+        <record model="ir.ui.view" id="agreement_form_view">
+            <field name="name">agreement.form</field>
+            <field name="model">performancemanagement.agreement</field>
+            <field name="arch" type="xml">
+                <form string="Agreement Form">
+                    <header>
+                        <button id="send_to_lm" name="action_to_lm" string="Send to Line Manager" type="object" states="new" class="btn-primary"/>
+                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="review" class="btn-primary"/>
+                        <button id="send_to_con" name="action_to_con" string="Contract" type="object" states="performance dialogue" class="btn-primary"/>
+                        <button id="send_complete" name="action_completed" string="Complete" type="object" states="performance contract" class="btn-primary"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1><field name="name"/></h1>
+                        <group>
+                                <field name="employee"/>
+                                <field name="employee_pos"/>
+                                <field name="line_manager"/>
+                                <field name="manager_pos"/>
+                                <field name="date_start"/>
+                        </group>
+                        <notebook>
+                            <page string="Performance Management">
+                                <field name="pmanagement">
+                                    <tree string="P Management">
+                                        <field name="perspective"/>
+                                        <field name="kpa"/>
+                                        <field name="kpi"/>
+                                        <field name="weight"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Personal Development Plan">
+                                <field name="personal_dev">
+                                    <tree string="P Dev Plan">
+                                        <field name="t_type"/>
+                                        <field name="competence"/>
+                                        <field name="method"/>
+                                        <field name="responsibility"/>
+                                        <field name="t_frame"/>
+                                        <field name="e_outcome"/>
+                                        <field name="a_cost"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Employee Comments">
+                                <field name="emp_comments"/>
+                            </page>
+                            <!-- <page string="Additional Duties">
+                                <field name="description"/>
+                            </page>
+                            <page string="Manager's Comments">
+                                <field name="description"/>
+                            </page> -->
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
         <!-- agreement kanban view -->
         <record model="ir.ui.view" id="agreement_kanban">
             <field name="name">agreement.kanban</field>
@@ -68,30 +171,14 @@
                                 t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
                                             oe_kanban_global_click_edit oe_semantic_html_override
                                             oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
-                                <div class="oe_dropdown_kanban">
-                                     <!-- dropdown menu -->
-                                    <div class="oe_dropdown_toggle">
-                                        <i class="fa fa-ellipsis-h fa-lg"/>
-                                        <ul class="oe_dropdown_menu">
-                                            <li>
-                                                <a type="delete">Delete</a>
-                                            </li>
-                                            <li>
-                                                <ul class="oe_kanban_colorpicker"
-                                                    data-field="color"/>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="oe_clear"></div>
-                                </div>
+                                
                                 <div t-attf-class="oe_kanban_content">
                                     <!-- title -->
-                                    Session name:
                                     <field name="name"/>
                                     <br/><br/>
-                                    Start date:
+                                    Start date :
                                     <br/>
-                                    <b><field name="agreement_start"/></b>
+                                    <b><field name="date_start"/></b>
                                 </div>
                             </div>
                         </t>
@@ -100,47 +187,15 @@
             </field>
         </record>
 
-        <!-- calendar view -->
+        <!-- agreement calendar view -->
         <record model="ir.ui.view" id="agreement_calendar">
             <field name="name">agreement.calendar</field>
             <field name="model">performancemanagement.agreement</field>
             <field name="arch" type="xml">
-                <calendar string="Performance Calendar" date_start="agreement_start" date_stop="agreement_end">
+                <calendar string="Performance Calendar" date_start="date_start" date_stop="date_end">
                     <field name="name"/>
                 </calendar>
             </field>
         </record>
-
-        <!-- agreement search view -->
-        <!-- <record model="ir.ui.view" id="course_search_view">
-            <field name="name">course.search</field>
-            <field name="model">openacademy.course</field>
-            <field name="arch" type="xml">
-                <search>
-                    <field name="name"/>
-                    <field name="description"/>
-                </search>
-            </field>
-        </record> -->
-
-        <!-- window action -->
-        <record model="ir.actions.act_window" id="agreement_list_action">
-            <field name="name">Performance Agreement</field>
-            <field name="res_model">performancemanagement.agreement</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form,calendar</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Here, you can create a new Compliance Calender
-                for Performance Management.</p>
-            </field>
-        </record>
-
-        <!-- top level menu: no parent -->
-        <menuitem id="main_performancemanagement_menu" name="HR" sequence="11"/>
-
-        <menuitem id="performancemanagement_menu" name="Performance Management" parent="main_performancemanagement_menu"/>
-
-        <menuitem id="performanceagreement_menu" name="Performance Agreement" parent="performancemanagement_menu"
-                  action="agreement_list_action"/>
 
 </odoo>
