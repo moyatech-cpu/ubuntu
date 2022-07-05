@@ -35,7 +35,7 @@
                             <field name="cell_phone_number" required="1"/>
                             <field name="alternative_number"/>
                             <field name="landline"/>
-                             <field name="email"/>
+                            <field name="email"/>
                         </group>
                     </group>
                     <group name="enquire_information" string="Enquire Information">

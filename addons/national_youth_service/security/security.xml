@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_national_youth_service">
+            <field name="name">National Youth Service</field>
+            <field name="sequence">151</field>
+        </record>
+
+        <record id="group_beneficiary_nys" model="res.groups">
+            <field name="name">Beneficiary NYS</field>
+            <field name="category_id" ref="national_youth_service.module_category_national_youth_service"/>
+        </record>
+
+              <record id="group_partner_nys" model="res.groups">
+            <field name="name">Partner NYS</field>
+            <field name="category_id" ref="national_youth_service.module_category_national_youth_service"/>
+        </record>
+    </data>
+</odoo>
