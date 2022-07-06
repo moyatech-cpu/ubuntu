@@ -46,7 +46,7 @@ class Agreement(models.Model):
         )
     employee_id = fields.Many2one(
         'hr.employee',
-        string="Related Employee"
+        string="Related Employee",default='_get_employee_id'
         )
 
     date_start = fields.Datetime(
@@ -90,6 +90,8 @@ class Agreement(models.Model):
         string="Personal Development Plan"
         )
     emp_comments = fields.Html()
+    add_duties = fields.Html()
+    manager_comments = fields.Text()
     color = fields.Integer()
     state = fields.Selection(
         [
@@ -104,6 +106,17 @@ class Agreement(models.Model):
         group_expand='_expand_states',
         default='new'
         )
+    
+    readonly_employee = fields.Boolean('Boolean',compute="_check_user_role")
+
+    def _get_employee_id(self):
+        # assigning the related employee of the logged in user
+        employee_rec = self.env['hr.employee'].sudo().search([('user_id', '=', self.env.user.id)], limit=1)
+        return employee_rec.id
+
+    @api.depends('employee_id')
+    def _check_user_role(self):
+        return self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def action_to_lm(self):
         self.state = 'review'
@@ -117,13 +130,21 @@ class Agreement(models.Model):
     def action_completed(self):
         self.state = 'completed'
 
+    def schedule_activiy(self):
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': 'My Profile',
+            'res_model': 'mail.activity',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'form_view_initial_mode': 'edit'},
+        }
+
+        return action
+
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
-
-    # @api.model
-    # def create(self, values):
-    #     record = self.env['performancemanagement.compliance'].create(values)
-    #     return record
 
 class P_Management(models.Model):
     _name = 'performancemanagement.performance'

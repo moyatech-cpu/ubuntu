@@ -87,7 +87,7 @@
         <menuitem id="performanceagreement_menu" name="Complaince Calendar" parent="performancemanagement_menu" groups="strategy_and_planning.group_line_manager"
                   action="compliance_list_action"/>
 
-        <menuitem id="performance_employee_agreement_menu" name="Performance Agreement" parent="performancemanagement_menu" groups="base.group_user"
+        <menuitem id="performance_employee_agreement_menu" name="Performance Agreement" parent="performancemanagement_menu" groups="monitoring_and_evaluation.group_nyda_employees"
                   action="employee_view_action"/>
 
 
@@ -98,15 +98,17 @@
             <field name="arch" type="xml">
                 <form string="Agreement Form">
                     <header>
-                        <button id="send_to_lm" name="action_to_lm" string="Send to Line Manager" type="object" states="new" class="btn-primary"/>
-                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="review" class="btn-primary"/>
-                        <button id="send_to_con" name="action_to_con" string="Contract" type="object" states="performance dialogue" class="btn-primary"/>
+                        <button id="send_to_lm" name="action_to_lm" string="Send to Line Manager" type="object" states="new" class="btn-primary" groups="monitoring_and_evaluation.group_nyda_employees"/>
+                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="scheduling_activity" name="schedule_activiy" string="Schedule" type="object" states="performance dialogue" class="btn-primary"/>
+                        <button id="send_to_con" name="action_to_con" string="Approve" type="object" states="performance dialogue" class="btn-primary"/>
                         <button id="send_complete" name="action_completed" string="Complete" type="object" states="performance contract" class="btn-primary"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
                         <h1><field name="name"/></h1>
                         <group>
+                                <field name="employee_id"/>
                                 <field name="employee"/>
                                 <field name="employee_pos"/>
                                 <field name="line_manager"/>
@@ -138,14 +140,15 @@
                                 </field>
                             </page>
                             <page string="Employee Comments">
-                                <field name="emp_comments"/>
+                                <field name="readonly_employee" invisible="1"/>
+                                <field name="emp_comments" attrs="{'readonly':[('readonly_employee','!=',True)]}"/>
                             </page>
-                            <!-- <page string="Additional Duties">
-                                <field name="description"/>
+                            <page string="Additional Duties" attrs="{'invisible':[('state','=', 'new')]}">
+                                <field name="add_duties"/>
                             </page>
-                            <page string="Manager's Comments">
-                                <field name="description"/>
-                            </page> -->
+                            <page string="Manager's Comments" attrs="{'invisible':[('state','=', 'new')]}">
+                                <field name="manager_comments"/>
+                            </page>
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">
@@ -165,11 +168,12 @@
                 <kanban default_group_by="state">
                     <field name="name"/>
                     <field name="color"/>
+                    <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div
                                 t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
-                                            oe_kanban_global_click_edit oe_semantic_html_override
+                                            oe_kanban_global_click oe_semantic_html_override
                                             oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
                                 
                                 <div t-attf-class="oe_kanban_content">
