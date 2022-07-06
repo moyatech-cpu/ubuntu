@@ -29,7 +29,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/nysviews.xml',
-        # 'views/nys_partners.xml',
+        'views/nys_partners.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

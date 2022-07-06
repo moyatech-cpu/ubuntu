@@ -7,17 +7,17 @@ class Person(models.Model):
     _name = 'nationalyouth.partner'
 
     #benificiary_id = fields.Many2one('youth.enquiry', string="Hello World")
-    partner_id = fields.Many2one('youth.enquiry')
+    partner_id = fields.Many2one('youth.enquiry', default=lambda self: self.env['youth.enquiry'].sudo().search([('user_id','=',self.env.user.id)]))
 
     # Personal details fields
     title = fields.Selection([('Mr', 'Mr'), ('Ms', 'Ms'), ('Mrs', 'Mrs'), ('Miss', 'Miss'), ('Dr', 'Dr'), ('Prof', 'Prof')], string="Title")
-    name = fields.Char(string='Name')
-    surname = fields.Char('Surname')
-    id_no = fields.Char(string="Id Numbers")
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('not_specify', 'Not Specify')], string="Gender")
+    name = fields.Char(string='Name',related="partner_id.name")
+    surname = fields.Char('Surname',related="partner_id.surname")
+    id_no = fields.Char(string="Id Numbers", related="partner_id.id_number")
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('not_specify', 'Not Specify')], string="Gender", related = "partner_id.gender")
     disability = fields.Char(string="Disability")
-    cell_phone_number = fields.Char('Cell Phone No')
-    email = fields.Char('Email')
+    cell_phone_number = fields.Char('Cell Phone No', related = "partner_id.cell_phone_number")
+    email = fields.Char('Email', related = "partner_id.email")
     home_language = fields.Selection([('English', 'English'), ('Afrikaans', 'Afrikaans'), ('Zulu', 'Zulu'),('Swati', 'Swati'), 
     ('Xhosa', 'Xhosa'), ('Ndebele','Ndebele'), ('Pedi','Pedi'), ('Sotho','Sotho'), ('Venda','Venda'), ('Tswana','Tswana'), ('Tsonga','Tsonga')], string="Home Language")
     employment_status = fields.Selection([('Unemployed', 'Unemployed'), ('Employed', 'Employed')], string="Employment Status")
@@ -35,7 +35,7 @@ class Person(models.Model):
     marital_status = fields.Selection([('Single', 'Single'), ('Married', 'Married'),('Divorced', 'Divorced'), ('Widowed', 'Widowed')], string="Martital Status")
     branch_id = fields.Char('Branch')
     municipality = fields.Char('Municipality')
-    Address = fields.Char('Address')
+    address = fields.Char('Address')
     
     # Education
     primary_education = fields.One2many('nationalyouth.primaryeducation', 'candidate_id', string ="Primary School")
@@ -44,3 +44,9 @@ class Person(models.Model):
     references = fields.One2many('nationalyouth.references', 'candidate_id', string ="Telephone")
     tertiary_education = fields.One2many('nationalyouth.tertiary', 'candidate_id', string ="Tertiary Education")
     computer_skills = fields.One2many('nationalyouth.computerskills', 'candidate_id', string ="Computer Skills")
+
+    # for kanaban view
+    color = fields.Integer()
+
+    # # for contacts in beneficiaries
+    # def get_my_profile(self):

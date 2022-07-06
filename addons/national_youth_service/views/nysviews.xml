@@ -9,14 +9,15 @@
                 <sheet>
                     <group>
                         <group string = "Personal Details" name="group_left">
-                            <field name="title"/>
-                            <field name="name"/>
-                            <field name="surname"/>
-                            <field name="id_no"/>
-                            <field name="gender"/>
+                            <field name="partner_id"/>
+                            <field name="title" readonly="1"/>
+                            <field name="name" readonly="1"/>
+                            <field name="surname" readonly="1"/>
+                            <field name="id_no" readonly="1"/>
+                            <field name="gender" readonly="1"/>
                             <field name="disability"/>
-                            <field name="cell_phone_number"/>
-                            <field name="email"/>
+                            <field name="cell_phone_number" readonly="1"/>
+                            <field name="email" readonly="1"/>
                             <field name="home_language"/>
                             <field name="employment_status"/>
                             <field name="occupation"/>
@@ -31,7 +32,7 @@
                             <field name="marital_status"/>
                             <field name="branch_id"/>
                             <field name="municipality"/>
-                            <field name="Address"/>
+                            <field name="address"/>
                         </group>
                     </group>
 
@@ -123,65 +124,37 @@
     </record>
 
     <!-- Action the profile -->
-    <record model="ir.actions.act_window" id = "profile_menu_action">
+    <record model="ir.actions.server" id = "profile_menu_action_add">
         <field name="name">Profile</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">nationalyouth.partner</field>
-        <!-- <field name="view_type">form</field> -->
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="model_id" ref="model_nationalyouth_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+employee_id = env['nationalyouth.partner'].sudo().search([('partner_id.user_id','=',env.user.id)])
+if employee_id:
+    action = {
+        'type': 'ir.actions.act_window',
+        'name': 'My Profile',
+        'res_model': 'nationalyouth.partner',
+        'view_type': 'form',
+        'view_mode': 'form',
+        'target': 'current',
+        'res_id':employee_id.id,
+        'context': {'form_view_initial_mode': 'edit'},
+    }
+else:
+    action = {
+        'type': 'ir.actions.act_window',
+        'name': 'My Profile',
+        'res_model': 'nationalyouth.partner',
+        'view_type': 'form',
+        'view_mode': 'form',
+        'target': 'current',
+    }
+        </field>
     </record>
 
     <!-- menu for the profile -->
     <menuitem id="main_nys_menu" name="National Youth Service"/>
-    <menuitem id="profile_menu" parent="main_nys_menu" name="Beneficiary Profile" action= "profile_menu_action" groups="national_youth_service.group_beneficiary_nys"/>
-<!-- 
-    Partner views -->
-
-    <record id="nys_kanban_view" model="ir.ui.view">
-        <field name="name">nationalyouth.partnerz.kanban</field>
-        <field name="model">nationalyouth.partnerz</field>
-        <field name="arch" type="xml">
-           <kanban>
-                <field name="name"/>
-                <field name="date"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_content">
-                            <!-- title -->
-                            <!-- Session name: -->
-                            <field name="name"/>
-                            <br/>
-                            <br/>
-                            Created:
-                            <br/>
-                            <field name="date"/>
-                            <br/>
-                            <div class="oe_kanban_bottom_left">
-                                <span class='oe_kanban_mail_new' title='Unread Messages'>
-                                    <i class="fa fa-star-o"/>
-                                    <i class="fa fa-clock-o"/>
-                                </span>
-                            </div>
-                            <div class="oe_kanban_bottom_right">
-                                <span class='oe_kanban_mail_new' title='Unread Messages'>
-                                    <i class="fa fa-circle" aria-hidden="false"/>
-                                    <i class="fa fa-user" aria-hidden="true"/>
-                                </span>
-                            </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id = "partner_menu_action">
-        <field name="name">NYS Project Application</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">nationalyouth.partnerz</field>
-        <field name="view_mode">kanban,tree,form</field>
-    </record>
-
-    <menuitem id="beneficiary_menu" parent="main_nys_menu" name="project Application" action= "partner_menu_action" groups="national_youth_service.group_partner_nys"/>
+    <menuitem id="profile_menu" parent="main_nys_menu" name="Beneficiary Profile" action= "profile_menu_action_add" groups="national_youth_service.group_beneficiary_nys"/>
 
 </odoo>
