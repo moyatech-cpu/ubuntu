@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    <record model="ir.ui.view" id="specialist_enquire_form_view">
+        <field name="name">specialistenquire.form</field>
+        <field name="model">nationalyouth.specialist</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="subject"/>
+                        <group name="group_left">
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="assign_person"/>
+                            <field name="assign_team"/>
+                            <field name="priority"/>
+                        </group>                    
+                    </group>
+
+                    <group>
+                        <notebook>
+                            <page string="Client Notes">
+                                <field name="notes"/>
+                            </page>                        
+                            <page string="Extra info">
+                                <field name="info"/>
+                            </page>                         
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <!-- Enquires Action -->
+        <record model="ir.actions.act_window" id = "specialist_enquires_menu_action">
+            <field name="name">NYS Enquires</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nationalyouth.specialist</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Enquires menuitem -->
+        <menuitem id="specialist_enquires_menu" parent="main_nys_menu" name="Enquires" action= "specialist_enquires_menu_action" groups="national_youth_service.group_apecialist_nys"/>
+    </data>
+</odoo>

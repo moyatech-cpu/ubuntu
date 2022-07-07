@@ -11,8 +11,13 @@
             <field name="category_id" ref="national_youth_service.module_category_national_youth_service"/>
         </record>
 
-              <record id="group_partner_nys" model="res.groups">
+        <record id="group_partner_nys" model="res.groups">
             <field name="name">Partner NYS</field>
+            <field name="category_id" ref="national_youth_service.module_category_national_youth_service"/>
+        </record>
+
+        <record id="group_apecialist_nys" model="res.groups">
+            <field name="name">NYS Specialist</field>
             <field name="category_id" ref="national_youth_service.module_category_national_youth_service"/>
         </record>
     </data>

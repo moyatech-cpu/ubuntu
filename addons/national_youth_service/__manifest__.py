@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr', 'client_management'],
+    'depends': ['base','contacts','hr', 'client_management', 'account'],
 
     # always loaded
     'data': [
@@ -30,6 +30,7 @@
         'views/templates.xml',
         'views/nysviews.xml',
         'views/nys_partners.xml',
+        'views/nys_specialist.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

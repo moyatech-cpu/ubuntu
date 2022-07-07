@@ -1,5 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <!-- Partner Project Application Form View -->
+    <record model="ir.ui.view" id="profile_form_view">
+        <field name="name">profile.form</field>
+        <field name="model">nationalyouth.partnerz</field>
+        <field name="arch" type="xml">
+            <form string="Partner Enquiry">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <span>
+                            <h1>
+                                <i class="fa fa-star-o"/> 
+                                <span><field name="name"/></span> 
+                            </h1>
+                        </span>
+                    </group>
+                    <group string="Section A">
+                        <group string = "" name="group_left">
+                            <field name="partner_id"/>
+                            <field name="project_type"/>
+                            <field name="partner_type"/>
+                        </group>                    
+                        <group string = "" name="group_right">
+                            <field name="project_application"/>
+                            <field name="Branch"/>
+                        </group>
+                    </group>
+
+                    <group string = "" >
+                        <notebook>
+                            <page string="Project Summary/Synopsis">
+                                <field name="project_summary"/>
+                            </page>                        
+                            <page string="Project Info">
+                                <group string = "" name="group_right">
+                                    <field name="program_sector"/>
+                                    <field name="nature" placeholder="e.g Home and Community-based care..."/>
+                                    <field name="province"/>
+                                    <field name="age_cohort"/>
+                                    <field name="male_req"/>
+                                    <field name="female_req"/>
+                                    <field name="educational_req"/>
+                                    <field name="previous_volunteer"/>
+                                    <field name="other_criteria"/>
+                                    <field name="project_duration"/>
+                                </group>
+                            </page>
+                            <page string="Project Description">
+                                <ul>
+                                    <li>Describe the nature of the proposed volunteer/service activities</li>
+                                    <field name="describe_nature" placeholder = "e.g Health"/>                                    
+                                    <li>Describe the primary and secondary beneficiaries of the service intervention</li>
+                                    <field name="describe_beneficiaries" placeholder = "e.g Home and community-based care"/>
+                                    <li>Project Objective/s</li>
+                                    <field name="project_objectives"/>
+                                    <li>What are the proposed exit pathways post event</li>
+                                    <field name="exit_pathways" placeholder = "e.g Pathways"/>
+                                </ul>
+                            </page>                            
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
     <!-- Partner Project Application Kanban views -->
     <record id="nys_kanban_view" model="ir.ui.view">
         <field name="name">nationalyouthpartnerz.kanban</field>
@@ -55,7 +124,7 @@
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
-    <menuitem id="beneficiary_menu" parent="main_nys_menu" name="Project Application" action= "partner_menu_action" groups="national_youth_service.group_partner_nys"/>
+    <menuitem id="beneficiary_menu" parent="main_nys_menu" name="Project Application" action= "partner_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
 
     <!-- Project Opportunities / Events or campaign actions   -->
     <record model="ir.actions.act_window" id = "events_campaign_menu_action">
@@ -66,7 +135,7 @@
     </record>
 
     <!-- Menu item for the project opportunities -->
-    <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" groups="national_youth_service.group_partner_nys"/>
+    <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
     <!-- Events or campaign menuitem -->
     <menuitem id="events_campaign_menu" parent="project_opportunities_menu" name="Events/Campaigns" action = "events_campaign_menu_action"/>
 
@@ -124,7 +193,7 @@
         <field name="view_mode">kanban,form</field>
     </record>
 
-    <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" groups="national_youth_service.group_partner_nys"/>
+    <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
 
     <!-- Reporting Action -->
     <record model="ir.actions.act_window" id = "reporting_menu_action">
@@ -135,7 +204,7 @@
     </record>
 
     <!-- Reporting menuitem -->
-    <menuitem id="reporting_menu" parent="main_nys_menu" name="Reporting" action= "reporting_menu_action" groups="national_youth_service.group_partner_nys"/>
+    <menuitem id="reporting_menu" parent="main_nys_menu" name="Reporting" action= "reporting_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
 
     <!-- Define the form view for the partner profile -->
     <record model="ir.ui.view" id="view_partner_profile_form">
@@ -165,18 +234,102 @@
                     <group>
                         <notebook>
                             <page string="Contacts">
-                                <!-- <kanban>
-                                    <field name="contacts"/>
-                                </kanban> -->
-                                <!-- <field name="work_experience" >
-                                    <tree string="Work experience" editable="bottom">
+                                <field name="contacts">
+                                    <kanban>
+                                        <field name="color"/>
                                         <field name="name"/>
-                                        <field name="start_date"/>
-                                        <field name="end_date"/>
-                                        <field name="position"/>
-                                        <field name="reason_for_leaving"/>
-                                    </tree>
-                                </field> -->
+                                        <field name="title"/>
+                                        <field name="type"/>
+                                        <field name="email"/>
+                                        <field name="parent_id"/>
+                                        <field name="is_company"/>
+                                        <field name="function"/>
+                                        <field name="phone"/>
+                                        <field name="street"/>
+                                        <field name="street2"/>
+                                        <field name="zip"/>
+                                        <field name="city"/>
+                                        <field name="country_id"/>
+                                        <field name="mobile"/>
+                                        <field name="state_id"/>
+                                        <field name="image_small"/>
+                                        <field name="lang"/>
+                                        <field name="comment"/>
+                                        <field name="customer"/>
+                                        <field name="display_name"/>
+                                        <field name="supplier"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                                <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                                    <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                                    <div class="o_kanban_image">
+                                                        <img t-if="record.image_small.raw_value" t-att-src="'data:image/png;base64,'+record.image_small.raw_value"/>
+                                                        <t t-if="!record.image_small.raw_value">
+                                                            <img t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/src/img/truck.png&quot;"/>
+                                                            <img t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/src/img/money.png&quot;"/>
+                                                            <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
+                                                                <img t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/src/img/company_image.png&quot;"/>
+                                                                <img t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/src/img/avatar.png&quot;"/>
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                    <div class="oe_kanban_details">
+                                                        <field name="name"/>
+                                                        <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                        <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                                        <div t-if="record.type.raw_value != 'contact'">
+                                                            <div>
+                                                                <field name="zip"/>
+                                                                <field name="city"/>
+                                                            </div>
+                                                            <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                            <field name="country_id"/>
+                                                        </div>
+                                                        <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+                                                        <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>                                   
+                                    </kanban>
+                                    <form string="Contact / Address">
+                                        <sheet>
+   
+                                            <field name="type" required="1" widget="radio" options="{'horizontal': true}"/>
+                                            <field name="parent_id" invisible="1"/>
+                                            <hr/>
+                                            <group>
+                                                <group attrs="{'invisible': [('type','=', 'contact')]}">
+                                                    <label for="street" string="Address"/>
+                                                    <div>
+                                                        <div class="o_address_format" name="div_address">
+                                                            <field name="street" placeholder="Street..." class="o_address_street"/>
+                                                            <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                                            <field name="city" placeholder="City" class="o_address_city"/>
+                                                            <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" context="{'country_id': country_id, 'zip': zip}"/>
+                                                            <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                                        </div>
+                                                    </div>
+                                                </group>
+                                                <group>
+                                                    <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}"/>
+                                                    <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                                                    <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                                                    <field name="email"/>
+                                                    <field name="phone" widget="phone"/>
+                                                    <field name="mobile" widget="phone"/>
+                                                    <field name="comment" placeholder="internal note..."/>
+                                                </group>
+                                            </group>
+                                            <field name="supplier" invisible="True"/>
+                                            <field name="customer" invisible="True"/>
+                                            <field name="lang" invisible="True"/>
+                                            <field name="image" invisible="True"/>
+                                        </sheet>
+                                    </form>
+                                </field>
                             </page>     
                         </notebook>
                     </group>
@@ -190,9 +343,9 @@
         <field name="name">NYS Service Provider</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">nationalyouth.partnerz.profile</field>
-        <field name="view_mode">form,tree</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Partner Database menuitem -->
-    <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" groups="national_youth_service.group_partner_nys"/>
+    <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
 </odoo>
