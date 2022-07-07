@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Partner Project Application Kanban views -->
+    <record id="nys_kanban_view" model="ir.ui.view">
+        <field name="name">nationalyouthpartnerz.kanban</field>
+        <field name="model">nationalyouth.partnerz</field>
+        <field name="arch" type="xml">
+           <kanban default_group_by="state">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="color"/>
+                <field name="state"/>
+                <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                <templates>
+                    <t t-name="kanban-box">
+                     <div
+                                    t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                                  oe_kanban_global_click oe_semantic_html_override
+                                                  oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                        <div t-attf-class="oe_kanban_content">
+                            <!-- title -->
+                            <!-- Session name: -->
+                            <field name="name"/>
+                            <br/>
+                            <br/>
+                            Created:
+                            <br/>
+                            <field name="date"/>
+                            <br/>
+                            <div class="oe_kanban_bottom_left">
+                                <span class='oe_kanban_mail_new' title='Unread Messages'>
+                                    <i class="fa fa-star-o"/>
+                                    <i class="fa fa-clock-o"/>
+                                </span>
+                            </div>
+                            <div class="oe_kanban_bottom_right">
+                                <span class='oe_kanban_mail_new' title='Unread Messages'>
+                                    <i class="fa fa-circle" aria-hidden="false"/>
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Project Application actions -->
+    <record model="ir.actions.act_window" id = "partner_menu_action">
+        <field name="name">NYS Project Application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partnerz</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem id="beneficiary_menu" parent="main_nys_menu" name="Project Application" action= "partner_menu_action" groups="national_youth_service.group_partner_nys"/>
+
+    <!-- Project Opportunities / Events or campaign actions   -->
+    <record model="ir.actions.act_window" id = "events_campaign_menu_action">
+        <field name="name">NYS Project Application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partnerz</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu item for the project opportunities -->
+    <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" groups="national_youth_service.group_partner_nys"/>
+    <!-- Events or campaign menuitem -->
+    <menuitem id="events_campaign_menu" parent="project_opportunities_menu" name="Events/Campaigns" action = "events_campaign_menu_action"/>
+
+    <!-- Project Opportunities / Skills training projects actions   -->
+    <record model="ir.actions.act_window" id = "skills_training_menu_action">
+        <field name="name">NYS Project Application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partnerz</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Skills training projects menuitem -->
+    <menuitem id="skills_training_menu" parent="project_opportunities_menu" name="Skills Training Projects" action = "skills_training_menu_action"/>
+
+    <!-- Define the Volunteer Kanaban view -->
+    <record id="view_volunteer_database_kanaban" model="ir.ui.view">
+        <field name="name">volunteerdatabase.kanban</field>
+        <field name="model">nationalyouth.partner</field>
+        <field name="arch" type="xml">
+           <kanban>
+                <field name="name"/>
+                <field name="address"/>
+                <field name="id_no"/>
+                <field name="color"/>
+                <field name="email"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="_s + &quot;/base/static/src/img/avatar.png&quot;"/>
+                            </div>
+                            <div t-attf-class="oe_kanban_content">
+                                <field name="name"/>
+                                <br/>
+                                <field name="address"/>
+                                <br/>
+                                <field name="id_no"/>                                
+                                <br/>                                
+                                <field name="gender"/>                                
+                                <br/>
+                                <field name="email"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Volunteer Database Action -->
+    <record model="ir.actions.act_window" id = "volunteer_database_menu_action">
+        <field name="name">Youth Database</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partner</field>
+        <field name="view_mode">kanban,form</field>
+    </record>
+
+    <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" groups="national_youth_service.group_partner_nys"/>
+
+    <!-- Reporting Action -->
+    <record model="ir.actions.act_window" id = "reporting_menu_action">
+        <field name="name">NYS Events Analysis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partnerz</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+
+    <!-- Reporting menuitem -->
+    <menuitem id="reporting_menu" parent="main_nys_menu" name="Reporting" action= "reporting_menu_action" groups="national_youth_service.group_partner_nys"/>
+
+    <!-- Define the form view for the partner profile -->
+    <record model="ir.ui.view" id="view_partner_profile_form">
+        <field name="name">nationalyouth.partnerz.profile.form</field>
+        <field name="model">nationalyouth.partnerz.profile</field>
+        <field name="arch" type="xml">
+            <form string="Partner Profile Form">
+                <sheet>
+                    <group string="NYS Service Provider">
+                        <group string="">
+                            <field name="reg_no"/>
+                            <field name="tax_no"/>
+                            <field name="vat_vendor"/>
+                            <field name="vat"/>
+                            <field name="inst_type"/>
+                            <field name="org_sector"/>
+                        </group>                        
+                        <group string="">
+                            <field name="phone"/>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                            <field name="website"/>
+                            <field name="address"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <notebook>
+                            <page string="Contacts">
+                                <!-- <kanban>
+                                    <field name="contacts"/>
+                                </kanban> -->
+                                <!-- <field name="work_experience" >
+                                    <tree string="Work experience" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="position"/>
+                                        <field name="reason_for_leaving"/>
+                                    </tree>
+                                </field> -->
+                            </page>     
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Partner Database Action -->
+    <record model="ir.actions.act_window" id = "partner_database_menu_action">
+        <field name="name">NYS Service Provider</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partnerz.profile</field>
+        <field name="view_mode">form,tree</field>
+    </record>
+
+    <!-- Partner Database menuitem -->
+    <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" groups="national_youth_service.group_partner_nys"/>
+</odoo>

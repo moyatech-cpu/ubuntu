@@ -126,9 +126,6 @@ class YouthEnquiry(models.Model):
             raise UserError(_('You are already registered on our system. \nPlease login with your provided credentials.'))
         else:
             res = super(YouthEnquiry, self).create(vals)
-            #LM Mahasha 2022/03/07 07:50
-            res.write({
-                'state': 'accepted'})
             #enquiry_email_template = self.env.ref('client_management.new_enquiry_youth_email_template')
             #enquiry_email_template.send_mail(res.id, force_send=True)
             return res
@@ -146,7 +143,7 @@ class YouthEnquiry(models.Model):
                     'mobile': rec.alternative_number,
                     'groups_id': [(4, self.env.ref('base.group_portal').id),
                                   (4, self.env.ref('base.group_user').id),
-                                  (4, self.env.ref('__export__.res_groups_177').id), # NYS Youth Permissions
+                                  #(4, self.env.ref('__export__.res_groups_177').id), # NYS Youth Permissions
                                   (4, self.env.ref('client_management.group_branch_beneficiary').id)
                                   ],
                     'action_id': self.env.ref('website.action_website').id or False

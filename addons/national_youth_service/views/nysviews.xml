@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Profile form view -->
+    <record model="ir.ui.view" id="profile_form_view">
+        <field name="name">profile.form</field>
+        <field name="model">nationalyouth.partner</field>
+        <field name="arch" type="xml">
+            <form string="Partner Enquiry">
+                <sheet>
+                    <group>
+                        <group string = "Personal Details" name="group_left">
+                            <field name="partner_id"/>
+                            <field name="title" readonly="1"/>
+                            <field name="name" readonly="1"/>
+                            <field name="surname" readonly="1"/>
+                            <field name="id_no" readonly="1"/>
+                            <field name="gender" readonly="1"/>
+                            <field name="disability"/>
+                            <field name="cell_phone_number" readonly="1"/>
+                            <field name="email" readonly="1"/>
+                            <field name="home_language"/>
+                            <field name="employment_status"/>
+                            <field name="occupation"/>
+                            <field name="location_type"/>
+                            <field name="population_group"/>
+                            <field name="highest_education"/>
+                            <field name="alternative_number"/>
+                        </group>                    
+                        <group string = "Address Details" name="group_right">
+                            <field name="drivers_license"/>
+                            <field name="license_code"/>
+                            <field name="marital_status"/>
+                            <field name="branch_id"/>
+                            <field name="municipality"/>
+                            <field name="address"/>
+                        </group>
+                    </group>
+
+                    <!-- Education and training -->
+                    <group string = "Education and Training" >
+                        <notebook>
+                            <page string="Primary School">
+                                <field name="primary_education" >
+                                    <tree string="Primary education" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="subjects"/>
+                                        <field name="year"/>
+                                    </tree>
+                                </field>
+                            </page>                        
+                            <page string="High School">
+                                <field name="secondary_education" >
+                                    <tree string="Secondary education" editable="bottom">
+                                        <field name="subject"/>
+                                        <field name="achievement_level"/>
+                                        <field name="symbol"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Tertiary or Higher Education">
+                                <field name="tertiary_education" >
+                                    <tree string="Tertiary education" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="subjects"/>
+                                        <field name="year"/>
+                                        <field name="qualification" widget="many2many_binary"/>
+                                    </tree>
+                                </field>
+                            </page>                            
+                            <page string="Computer Skills">
+                                <field name="computer_skills" >
+                                    <tree string="Tertiary education" editable="bottom">
+                                        <field name="qualification"/>
+                                        <field name="ms_word"/>
+                                        <field name="excel"/>
+                                        <field name="database"/>
+                                        <field name="graphic_design"/>
+                                        <field name="outlook"/>
+                                        <field name="accounts"/>
+                                        <field name="attachments" widget="many2many_binary"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <!-- Work experience -->
+                    <group string = "Work experience" >
+                        <notebook>
+                            <page>
+                                <field name="work_experience" >
+                                    <tree string="Work experience" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="position"/>
+                                        <field name="reason_for_leaving"/>
+                                    </tree>
+                                </field>
+                            </page>     
+                        </notebook>
+                    </group>
+
+                    <!-- References -->
+                    <group string="References">
+                        <notebook>
+                            <page string="Reference">
+                                <field name="references" >
+                                    <tree string="References" editable="bottom">
+                                        <field name="organisation"/>
+                                        <field name="name"/>
+                                        <field name="job_title"/>
+                                        <field name="telephone"/>
+                                        <field name="Mobile"/>
+                                    </tree>
+                                </field>
+                            </page>     
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+    <!-- Action the profile -->
+    <record model="ir.actions.server" id = "profile_menu_action_add">
+        <field name="name">Profile</field>
+        <field name="model_id" ref="model_nationalyouth_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+employee_id = env['nationalyouth.partner'].sudo().search([('partner_id.user_id','=',env.user.id)])
+if employee_id:
+    action = {
+        'type': 'ir.actions.act_window',
+        'name': 'My Profile',
+        'res_model': 'nationalyouth.partner',
+        'view_type': 'form',
+        'view_mode': 'form',
+        'target': 'current',
+        'res_id':employee_id.id,
+        'context': {'form_view_initial_mode': 'edit'},
+    }
+else:
+    action = {
+        'type': 'ir.actions.act_window',
+        'name': 'My Profile',
+        'res_model': 'nationalyouth.partner',
+        'view_type': 'form',
+        'view_mode': 'form',
+        'target': 'current',
+    }
+        </field>
+    </record>
+
+    <!-- menu for the profile -->
+    <menuitem id="main_nys_menu" name="National Youth Service"/>
+    <menuitem id="profile_menu" parent="main_nys_menu" name="Beneficiary Profile" action= "profile_menu_action_add" groups="national_youth_service.group_beneficiary_nys"/>
+
+</odoo>
