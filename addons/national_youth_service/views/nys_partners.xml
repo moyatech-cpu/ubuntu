@@ -7,6 +7,9 @@
         <field name="arch" type="xml">
             <form string="Partner Enquiry">
                 <header>
+                    <button id="proceed_to_review" name="Proceed_to_review" string="PROCEED" type="object" states="new" class="btn btn-primary" groups="national_youth_service.group_apecialist_nys"/>
+                    <button id="proceed_to_accepted" name="Proceed_to_accepted" string="APPROVED" type="object" states="review" class="btn btn-primary" groups="national_youth_service.group_manager_nys"/>
+                    <button id="proceed_to_rejected" name="Proceed_to_rejected" string="REJECTED" type="object" states="review" class="btn btn-primary" groups="national_youth_service.group_manager_nys"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -64,8 +67,12 @@
                         </notebook>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
-
         </field>
     </record>
 
@@ -94,7 +101,7 @@
                             <br/>
                             Created:
                             <br/>
-                            <field name="date"/>
+                            <field name="create_date"/>
                             <br/>
                             <div class="oe_kanban_bottom_left">
                                 <span class='oe_kanban_mail_new' title='Unread Messages'>
@@ -124,30 +131,8 @@
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
-    <menuitem id="beneficiary_menu" parent="main_nys_menu" name="Project Application" action= "partner_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
-
-    <!-- Project Opportunities / Events or campaign actions   -->
-    <record model="ir.actions.act_window" id = "events_campaign_menu_action">
-        <field name="name">NYS Project Application</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">nationalyouth.partnerz</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <!-- Menu item for the project opportunities -->
-    <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
-    <!-- Events or campaign menuitem -->
-    <menuitem id="events_campaign_menu" parent="project_opportunities_menu" name="Events/Campaigns" action = "events_campaign_menu_action"/>
-
-    <!-- Project Opportunities / Skills training projects actions   -->
-    <record model="ir.actions.act_window" id = "skills_training_menu_action">
-        <field name="name">NYS Project Application</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">nationalyouth.partnerz</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-    <!-- Skills training projects menuitem -->
-    <menuitem id="skills_training_menu" parent="project_opportunities_menu" name="Skills Training Projects" action = "skills_training_menu_action"/>
+    <menuitem id="beneficiary_menu" parent="main_nys_menu" name="Project Application" action= "partner_menu_action" 
+    groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
     <!-- Define the Volunteer Kanaban view -->
     <record id="view_volunteer_database_kanaban" model="ir.ui.view">
@@ -193,7 +178,8 @@
         <field name="view_mode">kanban,form</field>
     </record>
 
-    <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
+    <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" 
+    groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
     <!-- Reporting Action -->
     <record model="ir.actions.act_window" id = "reporting_menu_action">
@@ -204,7 +190,8 @@
     </record>
 
     <!-- Reporting menuitem -->
-    <menuitem id="reporting_menu" parent="main_nys_menu" name="Reporting" action= "reporting_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
+    <menuitem id="reporting_menu" parent="main_nys_menu" name="Reporting" action= "reporting_menu_action" 
+    groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
     <!-- Define the form view for the partner profile -->
     <record model="ir.ui.view" id="view_partner_profile_form">
@@ -347,5 +334,6 @@
     </record>
 
     <!-- Partner Database menuitem -->
-    <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys"/>
+    <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" 
+    groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 </odoo>

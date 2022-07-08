@@ -4,6 +4,7 @@ from odoo import models, fields, api
 
 class partners(models.Model):
     _name = 'nationalyouth.partnerz'
+    _inherit = ['mail.thread','mail.activity.mixin']
 
     name = fields.Char('Name')
     date = fields.Datetime('Date')
@@ -27,7 +28,7 @@ class partners(models.Model):
     ('Bloemfontein','Bloemfontein'), ('Cape Town', 'Cape Town'), ('Kimberly', 'Kimberly')], string="Partner Type")
     project_summary = fields.Html()
 
-    state = fields.Selection([('new', 'New'), ('review', 'Review'), ('approved', 'Approved'), ('rejected', 'Rejected')], group_expand = '_expand_states', default = 'new')
+    state = fields.Selection([('new', 'New'), ('review', 'Review'), ('approved', 'Approved'), ('rejected', 'Rejected')], readonly=True, group_expand = '_expand_states', default = 'new')
 
     # Project info
     program_sector = fields.Many2one('res.partner.industry', string = "Programme Sector")
@@ -36,7 +37,7 @@ class partners(models.Model):
 
     province = fields.Selection([('Mpumalanga', 'Mpumalanga'), ('Gauteng', 'Gauteng'), ('Free State', 'Free State'), ('Kwazulu-natal', 'Kwazulu-natal'),
     ('North West', 'North West'), ('Northern Cape', 'Northern Cape'), ('Western Cape', 'Western Cape'), ('Eastern Cape', 'Eastern Cape')
-    , ('Limpopo', 'Limpopo')], string="Project Type")
+    , ('Limpopo', 'Limpopo')], string="Province")
 
     age_cohort = fields.Selection([('14 - 18', '14 - 18'), ('18 - 21', '18 - 21'), ('21 - 26', '21 - 26'), ('26 - 30', '30 - 35')], string="Age Cohort")
 
@@ -67,6 +68,18 @@ class partners(models.Model):
     # status bar function 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
+
+    # functions for NYS specialist
+    def Proceed_to_review(self):
+        self.state = 'review'
+
+    # functions for NYS manager
+    def Proceed_to_accepted(self):
+        self.state = 'approved'
+
+    def Proceed_to_rejected(self):
+        self.state = 'rejected'
+
 
 class partner_profile(models.Model):
     _name = 'nationalyouth.partnerz.profile'

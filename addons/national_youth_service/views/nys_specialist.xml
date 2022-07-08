@@ -1,38 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-    <record model="ir.ui.view" id="specialist_enquire_form_view">
-        <field name="name">specialistenquire.form</field>
-        <field name="model">nationalyouth.specialist</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="subject"/>
-                        <group name="group_left">
-                            <field name="name"/>
-                            <field name="email"/>
-                            <field name="phone"/>
-                            <field name="assign_person"/>
-                            <field name="assign_team"/>
-                            <field name="priority"/>
-                        </group>                    
-                    </group>
+        <!-- Enquirer tree view-->
+        <record model="ir.ui.view" id="specialist_enquire_tree_view">
+            <field name="name">specialistenquire.tree</field>
+            <field name="model">nationalyouth.specialist</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date"/>
+                    <field name="subject"/>
+                    <field name="name"/>
+                    <field name="city"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="enquiry_channel"/>
+                </tree>
+            </field>
+        </record>
 
-                    <group>
-                        <notebook>
-                            <page string="Client Notes">
-                                <field name="notes"/>
-                            </page>                        
-                            <page string="Extra info">
-                                <field name="info"/>
-                            </page>                         
-                        </notebook>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+        <!-- Enquirer form view -->
+        <record model="ir.ui.view" id="specialist_enquire_form_view">
+            <field name="name">specialistenquire.form</field>
+            <field name="model">nationalyouth.specialist</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1><field name="subject"/></h1>
+                        <group>
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                                <field name="assign_person"/>
+                                <field name="assign_team"/>
+                                <field name="priority" widget="priority"/>
+                            </group>                    
+                        </group>
+
+                        <group>
+                            <notebook>
+                                <page string="Client Notes">
+                                    <field name="notes"/>
+                                </page>                        
+                                <page string="Extra info">
+                                    <field name="info"/>
+                                </page>                         
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <!-- Enquires Action -->
         <record model="ir.actions.act_window" id = "specialist_enquires_menu_action">
@@ -43,6 +64,126 @@
         </record>
 
         <!-- Enquires menuitem -->
-        <menuitem id="specialist_enquires_menu" parent="main_nys_menu" name="Enquires" action= "specialist_enquires_menu_action" groups="national_youth_service.group_apecialist_nys"/>
+        <menuitem id="specialist_enquires_menu" parent="main_nys_menu" name="Enquires" action= "specialist_enquires_menu_action" 
+        groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+
+
+        <!-- Project Management Action -->
+        <record model="ir.actions.act_window" id = "specialist_projectmanagement_menu_action">
+            <field name="name">NYS Project Managemnet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nationalyouth.specialist.projectmanagment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- Project Management menuitem -->
+        <menuitem id="specialist_projectmanagement_menu" parent="main_nys_menu" name="Project Management" action= "specialist_projectmanagement_menu_action" 
+        groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+
+        <!-- kanban view for events and campaign -->
+        <record id="events_campaign_kanban_view" model="ir.ui.view">
+            <field name="name">eventsandcampaign.kanban</field>
+            <field name="model">nationalyouth.specialist.events</field>
+            <field name="arch" type="xml">
+            <kanban>
+                    <field name="due"/>
+                    <field name="title"/>
+                    <field name="country"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div style="margin:0px;padding:0px"
+                                            t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                                        oe_kanban_global_click oe_semantic_html_override
+                                                        oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                                <div class="o_kanban_image" style="color:white;background-color:blue;" >
+                                    <br/>
+                                    <br/>
+                                    <field name="create_date"/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </div>
+                                <div t-attf-class="oe_kanban_content">
+                                        <field name="title"/>
+                                        <br/>
+                                        <field name="country"/>
+                                        <br/>
+                                        <br/>
+                                        <i class="fa fa-clock-o"/>
+                                        To 
+                                        <field name="due"/>
+                                        <!-- <field name="title"/> -->
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- form view for events and campaign -->
+        <record model="ir.ui.view" id="session_form_view">
+            <field name="name">eventsandcampaign.form</field>
+            <field name="model">nationalyouth.specialist.events</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="title" style="font-size: 40px;" placeholder = "NYS Event Name"/>
+                        <group>
+                            <group>
+                                <field name="organiser"/>
+                                <field name="address_line1" placeholder = "Street..."/>
+                                <field name="address_line2" placeholder = "Street 2..."/>
+                                <field name="address_line3" placeholder = "Town"/>
+                                <field name="address_line4" placeholder = "Province"/>
+                                <field name="address_line5" placeholder = "Postal Code"/>
+                                <field name="responsible"/>
+                            </group>                        
+                            <group>
+                                <field name="category"/>
+                                <!-- # -->
+                                <field name="twitter"/>
+                                <field name="project"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                            <group>
+                                <field name="min_att"/>
+                                <field name="max_att"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Project Opportunities / Events or campaign actions   -->
+        <record model="ir.actions.act_window" id = "events_campaign_menu_action">
+            <field name="name">NYS Project Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nationalyouth.specialist.events</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+
+        <!-- Menu item for the project opportunities -->
+        <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" 
+        groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+        <!-- Events or campaign menuitem -->
+        <menuitem id="events_campaign_menu" parent="project_opportunities_menu" name="Events/Campaigns" action = "events_campaign_menu_action"/>
+
+        <!-- Project Opportunities / Skills training projects actions   -->
+        <record model="ir.actions.act_window" id = "skills_training_menu_action">
+            <field name="name">NYS Project Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nationalyouth.partnerz</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Skills training projects menuitem -->
+        <menuitem id="skills_training_menu" parent="project_opportunities_menu" name="Skills Training Projects" action = "skills_training_menu_action"/>
     </data>
 </odoo>
