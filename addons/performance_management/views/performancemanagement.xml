@@ -124,9 +124,9 @@
                                 </field>
                             </page>
                             <page string="Employee Comments">
-                                <!-- <field name="readonly_employee" invisible="1"/> -->
-                                <field name="emp_comments"/>
-                                <!-- attrs="{'readonly':[('readonly_employee','!=',True)]}" -->
+                                <field name="readonly_employee" invisible="1"/>
+                                <field name="emp_comments" attrs="{'readonly':[('readonly_employee','!=',True)]}"/>
+                                
                             </page>
                             <page string="Additional Duties" attrs="{'invisible':[('state','=', 'new')]}">
                                 <field name="add_duties"/>
@@ -134,7 +134,7 @@
                             <page string="Managers Comments" attrs="{'invisible':[('state','=', 'new')]}">
                                 <field name="manager_comments"/>
                             </page>
-                            <page string="Executive Comments" attrs="{'invisible':['|', '|', ('state','=', 'new'), ('state', '=', 'review'), ('state', '=', 'performance dialogue')]}">
+                            <page string="Executive Comments" attrs="{'invisible':['|', '|', '|', ('state','=', 'new'), ('state', '=', 'review'), ('state', '=', 'performance dialogue'), ('state', '=', 'training intervention')]}">
                                 <field name="executive_comments"/>
                             </page>
                         </notebook>
@@ -199,6 +199,22 @@
             <field name="arch" type="xml">
                 <form string="Monitoring Form">
                     <header>
+                        <!-- Buttons for NEW stage -->
+                        <button id="send_to_review" name="action_to_review" string="Proceed" type="object" states="new" class="btn-primary" groups="monitoring_and_evaluation.group_nyda_employees"/>
+                        <!-- Buttons for REVIEW stage -->
+                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <!-- Buttons for MODERATE PERFORMANCE stage -->
+                        <button id="send_to_hr" name="action_to_hr" string="Send to HR" type="object" states="moderate performance" class="btn-primary"/>
+                        <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="moderate performance" class="btn-primary"/>
+                        <!-- Buttons for HR stage -->
+                        <button id="send_to_complete" name="action_to_complete" string="HR Approved" type="object" states="hr" class="btn-primary"/>
+                        <!-- Buttons for PERFORMANCE DIALOGUE stage -->
+                        <button id="scheduling_activity" name="schedule_activiy" string="Schedule" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_grieve" name="action_to_grieve" string="Grievance" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <!-- Buttons for GRIEVANCE stage -->
+                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="grievance" class="btn-primary"/>
                         <field name="state" widget="statusbar" statusbar_visible="new,review,moderate performance,hr"/>
                     </header>
                     <sheet>
@@ -213,12 +229,15 @@
                         </group>
                         <notebook>
                             <page string="Performance Management">
-                                <field name="pmanagement">
-                                    <tree string="P Management">
+                                <field name="scores">
+                                    <tree string="P Management Scores" editable="bottom">
                                         <field name="perspective"/>
                                         <field name="kpa"/>
                                         <field name="kpi"/>
                                         <field name="weight"/>
+                                        <field name="i_score"/>
+                                        <field name="lm_score"/>
+                                        <field name="m_score"/>
                                     </tree>
                                 </field>
                             </page>

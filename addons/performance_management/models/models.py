@@ -90,6 +90,8 @@ class Agreement(models.Model):
         "development_id", 
         string="Personal Development Plan"
         )
+
+    readonly_employee = fields.Boolean('Boolean',compute="_check_user_role")
     emp_comments = fields.Html()
     add_duties = fields.Html()
     manager_comments = fields.Text()
@@ -111,16 +113,14 @@ class Agreement(models.Model):
         default='new'
         )
 
-    # readonly_employee = fields.Boolean('Boolean',compute="_check_user_role")
-
     # def _get_employee_id(self):
     #     # assigning the related employee of the logged in user
     #     employee_rec = self.env['hr.employee'].sudo().search([('user_id', '=', self.env.user.id)], limit=1)
     #     return employee_rec.id
 
     # @api.depends('employee_id')
-    # def _check_user_role(self):
-    #     return self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+    def _check_user_role(self):
+        return self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def action_to_lm(self):
         self.state = 'review'
@@ -140,8 +140,11 @@ class Agreement(models.Model):
     def action_completed(self):
         self.state = 'completed'
 
+    @api.multi
     def action_to_monitoring(self):
-        monitoring_info = {
+        monitoring_info = 0
+
+        monitoring_record = self.env['performancemanagement.monitoring'].create({
             'name': self.name,
             'date_start': self.date_start,
             'date_end': self.date_end,
@@ -151,20 +154,42 @@ class Agreement(models.Model):
             'employee_pos': self.employee_pos.id,
             'line_manager': self.line_manager.id,
             'manager_pos': self.manager_pos,
-            'pmanagement': self.pmanagement.id,
-            'personal_dev': self.personal_dev.id,
+            ###############################
+            #'pmanagement': self.pmanagement,
+            #'personal_dev': self.personal_dev,
+            ###############################
             'emp_comments': self.emp_comments,
             'add_duties': self.add_duties,
             'manager_comments': self.manager_comments,
             'executive_comments': self.executive_comments
 
-        }
-        self.env['performancemanagement.monitoring'].create(monitoring_info)
+        })
+        
+        for rec in self.pmanagement:
+            self.env['performancemanagement.performance'].create({
+                'perspective': rec.perspective,
+                'kpa': rec.kpa,
+                'kpi': rec.kpi,
+                'weight': rec.weight,
+                'monitoring_id': monitoring_record.id
+            })
+
+        for rec in self.personal_dev:
+            self.env['performancemanagement.development'].create({
+                't_type': rec.t_type,
+                'competence': rec.competence,
+                'method': rec.method,
+                'responsibility': rec.responsibility,
+                't_frame': rec.t_frame,
+                'e_outcome': rec.e_outcome,
+                'a_cost': rec.a_cost,
+                'monitoring_id': monitoring_record.id
+            })
 
     def schedule_activiy(self):
         action = {
             'type': 'ir.actions.act_window',
-            'name': 'My Profile',
+            'name': 'Schedule',
             'res_model': 'mail.activity',
             'view_type': 'form',
             'view_mode': 'form',
@@ -189,6 +214,10 @@ class P_Management(models.Model):
         'performancemanagement.agreement',
         ondelete="cascade"
     )
+    monitoring_id = fields.Many2one(
+        'performancemanagement.monitoring',
+        ondelete="cascade"
+    )
 
 class P_Development(models.Model):
     _name = 'performancemanagement.development'
@@ -200,7 +229,6 @@ class P_Development(models.Model):
             ('long term', 'LONG TERM')
         ],
         string="Training Type",
-        group_expand='_expand_states',
         default='short term'
         )
     competence = fields.Char("Competence")
@@ -212,6 +240,47 @@ class P_Development(models.Model):
 
     development_id = fields.Many2one(
         'performancemanagement.agreement',
+        ondelete="cascade"
+    )
+    monitoring_id = fields.Many2one(
+        'performancemanagement.monitoring',
+        ondelete="cascade"
+    )
+
+class P_Scores(models.Model):
+    _name = 'performancemanagement.scores'
+    _inherit = 'performancemanagement.performance'
+
+    i_score = fields.Selection(
+        [
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+            ('4', '4')
+        ],
+        string="Inidividual Score"
+        )
+    lm_score = fields.Selection(
+        [
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+            ('4', '4')
+        ],
+        string="Line Manager Score"
+        )
+    m_score = fields.Selection(
+        [
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+            ('4', '4')
+        ],
+        string="Moderated Score"
+        )
+
+    scores_id = fields.Many2one(
+        'performancemanagement.monitoring',
         ondelete="cascade"
     )
 
@@ -294,6 +363,11 @@ class Monitoring(models.Model):
         "development_id", 
         string="Personal Development Plan"
         )
+    scores = fields.One2many(
+        "performancemanagement.scores", 
+        "scores_id", 
+        string="Scores"
+        )
     emp_comments = fields.Html()
     add_duties = fields.Html()
     manager_comments = fields.Text()
@@ -301,3 +375,34 @@ class Monitoring(models.Model):
 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
+
+    def action_to_review(self):
+        self.state = 'review'
+
+    def action_agree(self):
+        self.state = 'moderate performance'
+
+    def action_disagree(self):
+        self.state = 'performance dialogue'
+
+    def action_to_hr(self):
+        self.state = 'hr'
+
+    def action_to_complete(self):
+        self.state = 'completed'
+
+    def action_to_grieve(self):
+        self.state = 'grievance'
+
+    def schedule_activiy(self):
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': 'Schedule',
+            'res_model': 'mail.activity',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'form_view_initial_mode': 'edit'},
+        }
+
+        return action
