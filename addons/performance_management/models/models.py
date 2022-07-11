@@ -91,10 +91,12 @@ class Agreement(models.Model):
         string="Personal Development Plan"
         )
 
-    readonly_employee = fields.Boolean('Boolean',compute="_check_user_role")
+    readonly_employee = fields.Boolean(compute="_check_user_role", store=False)
     emp_comments = fields.Html()
     add_duties = fields.Html()
+    readonly_manager = fields.Boolean(compute="_check_manager_role", store=False)
     manager_comments = fields.Text()
+    readonly_executive = fields.Boolean(compute="_check_executive_role", store=False)
     executive_comments = fields.Text()
     color = fields.Integer()
     state = fields.Selection(
@@ -120,7 +122,13 @@ class Agreement(models.Model):
 
     # @api.depends('employee_id')
     def _check_user_role(self):
-        return self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+        self.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+
+    def _check_manager_role(self):
+        self.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
+
+    def _check_executive_role(self):
+        self.readonly_executive = self.env.user.has_group('strategy_and_planning.group_executive_director')
 
     def action_to_lm(self):
         self.state = 'review'
@@ -154,37 +162,31 @@ class Agreement(models.Model):
             'employee_pos': self.employee_pos.id,
             'line_manager': self.line_manager.id,
             'manager_pos': self.manager_pos,
-            ###############################
-            #'pmanagement': self.pmanagement,
-            #'personal_dev': self.personal_dev,
-            ###############################
             'emp_comments': self.emp_comments,
-            'add_duties': self.add_duties,
             'manager_comments': self.manager_comments,
-            'executive_comments': self.executive_comments
-
         })
         
         for rec in self.pmanagement:
-            self.env['performancemanagement.performance'].create({
+            self.env['performancemanagement.scores'].create({
                 'perspective': rec.perspective,
                 'kpa': rec.kpa,
                 'kpi': rec.kpi,
                 'weight': rec.weight,
-                'monitoring_id': monitoring_record.id
+                'monitoring_id': monitoring_record.id,
+                'scores_id': monitoring_record.id,
             })
 
-        for rec in self.personal_dev:
-            self.env['performancemanagement.development'].create({
-                't_type': rec.t_type,
-                'competence': rec.competence,
-                'method': rec.method,
-                'responsibility': rec.responsibility,
-                't_frame': rec.t_frame,
-                'e_outcome': rec.e_outcome,
-                'a_cost': rec.a_cost,
-                'monitoring_id': monitoring_record.id
-            })
+        # for rec in self.personal_dev:
+        #     self.env['performancemanagement.development'].create({
+        #         't_type': rec.t_type,
+        #         'competence': rec.competence,
+        #         'method': rec.method,
+        #         'responsibility': rec.responsibility,
+        #         't_frame': rec.t_frame,
+        #         'e_outcome': rec.e_outcome,
+        #         'a_cost': rec.a_cost,
+        #         'monitoring_id': monitoring_record.id
+        #     })
 
     def schedule_activiy(self):
         action = {
@@ -278,11 +280,40 @@ class P_Scores(models.Model):
         ],
         string="Moderated Score"
         )
+    # state = fields.Selection(
+    #     [
+    #         ('new', 'NEW'),
+    #         ('review', 'REVIEW'),
+    #         ('moderate performance', 'MODERATE PERFORMANCE'),
+    #         ('hr', 'HR'),
+    #         ('completed', 'COMPLETED'),
+    #         ('performance dialogue', 'PERFORMANCE DIALOGUE'),
+    #         ('grievance', 'GRIEVANCE')
+    #     ],
+    #     string='Status',
+    #     readonly=True,
+    #     group_expand='_expand_states',
+    #     default='new',
+    #     related='scores_id.state'
+    #     )
+
+    readonly_individual = fields.Boolean(compute="_check_individual", store=False)
+    readonly_lmanager = fields.Boolean(compute="_check_lmanager", store=False)
+    readonly_exec = fields.Boolean(compute="_check_executive", store=False)
 
     scores_id = fields.Many2one(
         'performancemanagement.monitoring',
         ondelete="cascade"
     )
+
+    def _check_individual(self):
+        self.readonly_individual = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+
+    def _check_lmanager(self):
+        self.readonly_lmanager = self.env.user.has_group('strategy_and_planning.group_line_manager')
+
+    def _check_executive(self):
+        self.readonly_exec = self.env.user.has_group('strategy_and_planning.group_executive_director')
 
 class Monitoring(models.Model):
     _name = 'performancemanagement.monitoring'
@@ -299,18 +330,14 @@ class Monitoring(models.Model):
         )
 
     name = fields.Char(
-        string="Title",
-        related="agreement_id.name"
+        string="Title"
         )
 
     date_start = fields.Datetime(
-        string="Date Started",
-        related="compliance_id.agreement_start",
-        readonly=True
+        string="Date Started"
         )
     date_end = fields.Date(
-        string="Date Ending",
-        related="compliance_id.agreement_end"
+        string="Date Ending"
         )
 
     state = fields.Selection(
@@ -352,26 +379,31 @@ class Monitoring(models.Model):
     manager_pos = fields.Char(
         string="Manager Position"
         )
-    
     pmanagement = fields.One2many(
         "performancemanagement.performance", 
         "performance_id", 
         string="Performance Management"
-        )
-    personal_dev = fields.One2many(
-        "performancemanagement.development", 
-        "development_id", 
-        string="Personal Development Plan"
         )
     scores = fields.One2many(
         "performancemanagement.scores", 
         "scores_id", 
         string="Scores"
         )
+    readonly_employee = fields.Boolean(compute="_check_user_role", store=False)
     emp_comments = fields.Html()
-    add_duties = fields.Html()
+    readonly_manager = fields.Boolean(compute="_check_manager_role", store=False)
     manager_comments = fields.Text()
-    executive_comments = fields.Text()
+
+    # readonly_individual = fields.Boolean(compute="_check_individual", store=False)
+
+    def _check_user_role(self):
+        self.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+
+    def _check_manager_role(self):
+        self.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
+
+    # def _check_individual(self):
+    #     self.readonly_individual = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]

@@ -125,17 +125,18 @@
                             </page>
                             <page string="Employee Comments">
                                 <field name="readonly_employee" invisible="1"/>
-                                <field name="emp_comments" attrs="{'readonly':[('readonly_employee','!=',True)]}"/>
-                                
+                                <field name="emp_comments" attrs="{'readonly':[('readonly_employee','=',False),('id','>',0)]}"/>
                             </page>
                             <page string="Additional Duties" attrs="{'invisible':[('state','=', 'new')]}">
                                 <field name="add_duties"/>
                             </page>
                             <page string="Managers Comments" attrs="{'invisible':[('state','=', 'new')]}">
-                                <field name="manager_comments"/>
+                                <field name="readonly_manager" invisible="1"/>
+                                <field name="manager_comments" attrs="{'readonly':[('readonly_manager','=',False),('id','>',0)]}"/>
                             </page>
                             <page string="Executive Comments" attrs="{'invisible':['|', '|', '|', ('state','=', 'new'), ('state', '=', 'review'), ('state', '=', 'performance dialogue'), ('state', '=', 'training intervention')]}">
-                                <field name="executive_comments"/>
+                                <field name="readonly_executive" invisible="1"/>
+                                <field name="executive_comments" attrs="{'readonly':[('readonly_executive','=',False),('id','>',0)]}"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -235,38 +236,24 @@
                                         <field name="kpa"/>
                                         <field name="kpi"/>
                                         <field name="weight"/>
-                                        <field name="i_score"/>
-                                        <field name="lm_score"/>
-                                        <field name="m_score"/>
-                                    </tree>
-                                </field>
-                            </page>
-                            <page string="Personal Development Plan">
-                                <field name="personal_dev">
-                                    <tree string="P Dev Plan" editable="bottom">
-                                        <field name="t_type"/>
-                                        <field name="competence"/>
-                                        <field name="method"/>
-                                        <field name="responsibility"/>
-                                        <field name="t_frame"/>
-                                        <field name="e_outcome"/>
-                                        <field name="a_cost"/>
+                                        <field name="readonly_individual" invisible="1"/>
+                                        <field name="i_score" attrs="{'readonly':[('readonly_individual','=',False),('id','>',0)]}"/>
+                                        <field name="readonly_lmanager" invisible="1"/>
+                                        <field name="lm_score" attrs="{'readonly':[('readonly_lmanager','=',False),('id','>',0)]}"/>
+                                        <!-- <field name="state" invisible="1"/> -->
+                                        <field name="readonly_exec" invisible="1"/>
+                                        <field name="m_score" attrs="{'readonly':[('readonly_exec','=',False),('id','>',0)]}"/>
+                                        <!-- ,('state','in',('new', 'review', 'performance dialogue')) -->
                                     </tree>
                                 </field>
                             </page>
                             <page string="Employee Comments">
-                                <!-- <field name="readonly_employee" invisible="1"/> -->
-                                <field name="emp_comments"/>
-                                <!-- attrs="{'readonly':[('readonly_employee','!=',True)]}" -->
-                            </page>
-                            <page string="Additional Duties">
-                                <field name="add_duties"/>
+                                <field name="readonly_employee" invisible="1"/>
+                                <field name="emp_comments" attrs="{'readonly':[('readonly_employee','=',False),('id','>',0)]}"/>
                             </page>
                             <page string="Managers Comments">
-                                <field name="manager_comments"/>
-                            </page>
-                            <page string="Executive Comments">
-                                <field name="executive_comments"/>
+                                <field name="readonly_manager" invisible="1"/>
+                                <field name="manager_comments" attrs="{'readonly':[('readonly_manager','=',False),('id','>',0)]}"/>
                             </page>
                         </notebook>
                     </sheet>
