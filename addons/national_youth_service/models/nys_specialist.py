@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from datetime import datetime
+from datetime import datetime, date, time
 
 class partners(models.Model):
     _name = 'nationalyouth.specialist'
@@ -55,3 +55,14 @@ class ProjectOpportunities(models.Model):
 
     min_att = fields.Integer('Minimum Attendees')
     max_att = fields.Selection([('Limited', 'Limited'), ('Unlimited', 'Unlimited')], string="Maximum Attendees")
+
+    # these fields for time munipulation
+    month = fields.Char('Month',default=datetime.now().strftime("%B"))
+
+    @api.onchange('create_date')
+    def _get_day(self):
+        for r in self:
+            date = datetime.strptime(r.create_date, "%d/%m/%Y %H:%M:%S")
+            month = date.month
+            year = date.year
+    

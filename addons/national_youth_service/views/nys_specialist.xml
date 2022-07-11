@@ -81,7 +81,7 @@
         groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
         <!-- kanban view for events and campaign -->
-        <record id="events_campaign_kanban_view" model="ir.ui.view">
+        <!-- <record id="events_campaign_kanban_view" model="ir.ui.view">
             <field name="name">eventsandcampaign.kanban</field>
             <field name="model">nationalyouth.specialist.events</field>
             <field name="arch" type="xml">
@@ -92,14 +92,15 @@
                     <field name="color"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div style="margin:0px;padding:0px"
+                            <div style="margin-right:5px;padding:0px"
                                             t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
                                                         oe_kanban_global_click oe_semantic_html_override
                                                         oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
-                                <div class="o_kanban_image" style="color:white;background-color:blue;" >
+                                <div class="o_kanban_image" style="color:white;background-color:blue;width: 150px;" >
                                     <br/>
                                     <br/>
-                                    <field name="create_date"/>
+                                    <field name="month"/>
+                                    <p><field name="create_date"/></p>
                                     <br/>
                                     <br/>
                                     <br/>
@@ -113,17 +114,17 @@
                                         <i class="fa fa-clock-o"/>
                                         To 
                                         <field name="due"/>
-                                        <!-- <field name="title"/> -->
+                 
                                 </div>
                             </div>
                         </t>
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- form view for events and campaign -->
-        <record model="ir.ui.view" id="session_form_view">
+        <!-- <record model="ir.ui.view" id="session_form_view">
             <field name="name">eventsandcampaign.form</field>
             <field name="model">nationalyouth.specialist.events</field>
             <field name="arch" type="xml">
@@ -142,7 +143,6 @@
                             </group>                        
                             <group>
                                 <field name="category"/>
-                                <!-- # -->
                                 <field name="twitter"/>
                                 <field name="project"/>
                             </group>
@@ -160,13 +160,13 @@
                     </sheet>
                 </form>
             </field>
-        </record>
+        </record> -->
 
         <!-- Project Opportunities / Events or campaign actions   -->
         <record model="ir.actions.act_window" id = "events_campaign_menu_action">
             <field name="name">NYS Project Application</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">nationalyouth.specialist.events</field>
+            <field name="res_model">event.event</field>
             <field name="view_mode">kanban,form</field>
         </record>
 

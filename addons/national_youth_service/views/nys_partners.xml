@@ -141,7 +141,8 @@
         <field name="arch" type="xml">
            <kanban>
                 <field name="name"/>
-                <field name="address"/>
+                <field name="address_line1"/>
+                <field name="address_line2"/>
                 <field name="id_no"/>
                 <field name="color"/>
                 <field name="email"/>
@@ -155,7 +156,8 @@
                             <div t-attf-class="oe_kanban_content">
                                 <field name="name"/>
                                 <br/>
-                                <field name="address"/>
+                                <field name="address_line1"/>
+                                <field name="address_line2"/>
                                 <br/>
                                 <field name="id_no"/>                                
                                 <br/>                                
@@ -181,11 +183,38 @@
     <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" 
     groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
+    <!-- Reporting pivot view -->
+    <!-- <record id="view_reporting_pivot" model="ir.ui.view">
+        <field name="name">reporting.pivot</field>
+        <field name="model">nationalyouth.specialist.events</field>
+        <field name="arch" type="xml">
+           <pivot>
+                <field name="min_att"/>
+                <field name="max_att"/>
+            </pivot>
+        </field>
+    </record> -->
+
+
+    <!-- Reporting graph view -->
+    <!-- <record id="view_reporting_graph" model="ir.ui.view">
+        <field name="name">reporting.pivot</field>
+        <field name="model">nationalyouth.specialist.events</field>
+        <field name="arch" type="xml">
+           <graph>
+                <field name="title"/>
+                <field name="min_att"/>
+                <field name="max_att"/>
+            </graph>
+        </field>
+    </record> -->
+
+
     <!-- Reporting Action -->
     <record model="ir.actions.act_window" id = "reporting_menu_action">
         <field name="name">NYS Events Analysis</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">nationalyouth.partnerz</field>
+        <field name="res_model">event.event</field>
         <field name="view_mode">pivot,graph</field>
     </record>
 
@@ -202,10 +231,10 @@
                 <sheet>
                     <group string="NYS Service Provider">
                         <group string="">
-                            <field name="reg_no"/>
-                            <field name="tax_no"/>
-                            <field name="vat_vendor"/>
-                            <field name="vat"/>
+                            <field name="reg_no" readonly="True"/>
+                            <field name="tax_no" readonly="1"/>
+                            <field name="vat_vendor" readonly="1"/>
+                            <!-- <field name="vat"/> -->
                             <field name="inst_type"/>
                             <field name="org_sector"/>
                         </group>                        
@@ -214,7 +243,11 @@
                             <field name="mobile"/>
                             <field name="email"/>
                             <field name="website"/>
-                            <field name="address"/>
+                            <field name="address_line1"/>
+                            <field name="address_line2"/>
+                            <field name="address_line3"/>
+                            <field name="address_line4"/>
+                            <field name="address_line5"/>
                         </group>
                     </group>
 
@@ -326,10 +359,33 @@
     </record>
 
     <!-- Partner Database Action -->
-    <record model="ir.actions.act_window" id = "partner_database_menu_action">
+    <record model="ir.actions.server" id = "partner_database_menu_action">
         <field name="name">NYS Service Provider</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">nationalyouth.partnerz.profile</field>
+        <field name="model_id" ref="model_nationalyouth_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+employee_id = env['nationalyouth.partnerz.profile'].sudo().search([('partner_id.user_id','=',env.user.id)])
+if employee_id:
+    action = {
+        'type': 'ir.actions.act_window',
+        'name': 'Partner Profile',
+        'res_model': 'nationalyouth.partnerz.profile',
+        'view_type': 'form',
+        'view_mode': 'form',
+        'target': 'current',
+        'res_id':employee_id.id,
+        'context': {'form_view_initial_mode': 'edit'},
+    }
+else:
+    action = {
+        'type': 'ir.actions.act_window',
+        'name': 'Partner Profile',
+        'res_model': 'nationalyouth.partnerz.profile',
+        'view_type': 'form',
+        'view_mode': 'form',
+        'target': 'current',
+    }
+        </field>
         <field name="view_mode">tree,form</field>
     </record>
 

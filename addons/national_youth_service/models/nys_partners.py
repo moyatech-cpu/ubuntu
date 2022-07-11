@@ -9,7 +9,7 @@ class partners(models.Model):
     name = fields.Char('Name')
     date = fields.Datetime('Date')
     color = fields.Integer()
-    partner_id = fields.Many2one('youth.enquiry', string="Partner")
+    partner_id = fields.Many2one('res.partner', string="Partner")
 
     # project details
     project_type = fields.Selection([('Category 1 - Learning Community Service and Linkages', 'Category 1 - Learning Community Service and Linkages'), 
@@ -84,17 +84,27 @@ class partners(models.Model):
 class partner_profile(models.Model):
     _name = 'nationalyouth.partnerz.profile'
 
-    reg_no = fields.Char('Registration Number')
-    tax_no = fields.Char('Tax No')
-    vat_vendor = fields.Char('VAT Vendor')
-    vat = fields.Char('VAT')
+    partner_id = fields.Many2one('partner.enquiry', default=lambda self: self.env['partner.enquiry'].sudo().search([('user_id','=',self.env.user.id)]))
+
+    name = fields.Char(related = "partner_id.entity_name")
+    reg_no = fields.Char('Registration Number', related = "partner_id.company_reg_number")
+    tax_no = fields.Char('Name of Entity', related = "partner_id.name_entity_representative")
+    vat_vendor = fields.Char('Surname', related = "partner_id.surname")
+    # vat = fields.Char('VAT')
     inst_type = fields.Char('Institution Type')
     org_sector = fields.Char('Organisation Sector')
     phone = fields.Char(string="Phone")
     mobile = fields.Char(string="Mobile")
     email = fields.Char(string="Email")
     website = fields.Char(string="Website")
-    address = fields.Char(string="Address")
+    # address fields
+    address_line1 = fields.Char('Address')
+    address_line2 = fields.Char(' ')
+    address_line3 = fields.Char(' ')
+    address_line4 = fields.Selection([('Mpumalanga', 'Mpumalanga'), ('Gauteng', 'Gauteng'), ('Free State', 'Free State'), ('Kwazulu-natal', 'Kwazulu-natal'),
+    ('North West', 'North West'), ('Northern Cape', 'Northern Cape'), ('Western Cape', 'Western Cape'), ('Eastern Cape', 'Eastern Cape')
+    , ('Limpopo', 'Limpopo')], string=" ")
+    address_line5 = fields.Char(' ')
 
     contacts = fields.One2many('res.partner','related_nys_partner',string = "Contacts")
 

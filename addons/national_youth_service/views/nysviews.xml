@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Profile form view -->
-    <record model="ir.ui.view" id="profile_form_view">
-        <field name="name">profile.form</field>
+    <record model="ir.ui.view" id="profile_form_new_view">
+        <field name="name">profile.form.new</field>
         <field name="model">nationalyouth.partner</field>
         <field name="arch" type="xml">
             <form string="Partner Enquiry">
                 <sheet>
                     <group>
                         <group string = "Personal Details" name="group_left">
-                            <field name="partner_id"/>
+                            <field name="partner_id" invisible="1"/>
                             <field name="title" readonly="1"/>
                             <field name="name" readonly="1"/>
                             <field name="surname" readonly="1"/>
@@ -32,7 +32,11 @@
                             <field name="marital_status"/>
                             <field name="branch_id"/>
                             <field name="municipality"/>
-                            <field name="address"/>
+                            <field name="address_line1"/>
+                            <field name="address_line2"/>
+                            <field name="address_line3"/>
+                            <field name="address_line4"/>
+                            <field name="address_line5"/>
                         </group>
                     </group>
 
@@ -153,8 +157,13 @@ else:
         </field>
     </record>
 
+    <!-- Actions for the nys opportunies -->
+
+
+
     <!-- menu for the profile -->
     <menuitem id="main_nys_menu" name="National Youth Service"/>
     <menuitem id="profile_menu" parent="main_nys_menu" name="Beneficiary Profile" action= "profile_menu_action_add" groups="national_youth_service.group_beneficiary_nys"/>
+    <menuitem id="beneficiary_nys_opportunity_menu" parent="main_nys_menu" name="NYS Opportunities" action= "events_campaign_menu_action" groups="national_youth_service.group_beneficiary_nys"/>
 
 </odoo>
