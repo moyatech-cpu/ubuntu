@@ -11,7 +11,6 @@ class Compliance(models.Model):
         )
     agreement_start = fields.Datetime(
         string="Agreement Start" 
-        # default=fields.Datetime.today
         )
     agreement_end = fields.Date(
         string="Agreement End"
@@ -46,8 +45,7 @@ class Agreement(models.Model):
         )
     employee_id = fields.Many2one(
         'hr.employee',
-        string="Related Employee"
-        # default='_get_employee_id'
+        string="Employee"
         )
 
     date_start = fields.Datetime(
@@ -64,10 +62,7 @@ class Agreement(models.Model):
         string="Title",
         related="compliance_id.name"
         )
-    employee = fields.Char(
-        string="Employee",
-        related="employee_id.name"
-        )
+
     employee_pos = fields.Many2one(
         string="Employee Position",
         related="employee_id.job_id"
@@ -76,8 +71,9 @@ class Agreement(models.Model):
         string="Line Manager",
         related="employee_id.parent_id"
         )
-    manager_pos = fields.Char(
-        string="Manager Position"
+    manager_pos = fields.Many2one(
+        string="Manager Position",
+        related="employee_id.parent_id.job_id"
         )
     
     pmanagement = fields.One2many(
@@ -115,12 +111,6 @@ class Agreement(models.Model):
         default='new'
         )
 
-    # def _get_employee_id(self):
-    #     # assigning the related employee of the logged in user
-    #     employee_rec = self.env['hr.employee'].sudo().search([('user_id', '=', self.env.user.id)], limit=1)
-    #     return employee_rec.id
-
-    # @api.depends('employee_id')
     def _check_user_role(self):
         self.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
@@ -158,7 +148,6 @@ class Agreement(models.Model):
             'date_end': self.date_end,
             'compliance_id': self.compliance_id.id,
             'employee_id': self.employee_id.id,
-            'employee': self.employee,
             'employee_pos': self.employee_pos.id,
             'line_manager': self.line_manager.id,
             'manager_pos': self.manager_pos,
@@ -175,18 +164,6 @@ class Agreement(models.Model):
                 'monitoring_id': monitoring_record.id,
                 'scores_id': monitoring_record.id,
             })
-
-        # for rec in self.personal_dev:
-        #     self.env['performancemanagement.development'].create({
-        #         't_type': rec.t_type,
-        #         'competence': rec.competence,
-        #         'method': rec.method,
-        #         'responsibility': rec.responsibility,
-        #         't_frame': rec.t_frame,
-        #         'e_outcome': rec.e_outcome,
-        #         'a_cost': rec.a_cost,
-        #         'monitoring_id': monitoring_record.id
-        #     })
 
     def schedule_activiy(self):
         action = {
@@ -280,22 +257,6 @@ class P_Scores(models.Model):
         ],
         string="Moderated Score"
         )
-    # state = fields.Selection(
-    #     [
-    #         ('new', 'NEW'),
-    #         ('review', 'REVIEW'),
-    #         ('moderate performance', 'MODERATE PERFORMANCE'),
-    #         ('hr', 'HR'),
-    #         ('completed', 'COMPLETED'),
-    #         ('performance dialogue', 'PERFORMANCE DIALOGUE'),
-    #         ('grievance', 'GRIEVANCE')
-    #     ],
-    #     string='Status',
-    #     readonly=True,
-    #     group_expand='_expand_states',
-    #     default='new',
-    #     related='scores_id.state'
-    #     )
 
     readonly_individual = fields.Boolean(compute="_check_individual", store=False)
     readonly_lmanager = fields.Boolean(compute="_check_lmanager", store=False)
@@ -318,6 +279,8 @@ class P_Scores(models.Model):
 class Monitoring(models.Model):
     _name = 'performancemanagement.monitoring'
     _inherit = ['mail.thread','mail.activity.mixin']
+
+    active = fields.Boolean('Active', default=True)
 
     compliance_id = fields.Many2one(
         'performancemanagement.compliance', 
@@ -360,24 +323,20 @@ class Monitoring(models.Model):
 
     employee_id = fields.Many2one(
         'hr.employee',
-        string="Related Employee"
-        # default='_get_employee_id'
+        string="Employee"
         )
 
-    employee = fields.Char(
-        string="Employee",
-        related="employee_id.name"
-        )
     employee_pos = fields.Many2one(
         string="Employee Position",
         related="employee_id.job_id"
         )
-    line_manager = fields.Many2one(
+    line_manager = fields.Many2one('res.users',
         string="Line Manager",
         related="employee_id.parent_id"
         )
-    manager_pos = fields.Char(
-        string="Manager Position"
+    manager_pos = fields.Many2one('hr.job',
+        string="Manager Position",
+        related="employee_id.parent_id.job_id"
         )
     pmanagement = fields.One2many(
         "performancemanagement.performance", 
@@ -394,16 +353,11 @@ class Monitoring(models.Model):
     readonly_manager = fields.Boolean(compute="_check_manager_role", store=False)
     manager_comments = fields.Text()
 
-    # readonly_individual = fields.Boolean(compute="_check_individual", store=False)
-
     def _check_user_role(self):
         self.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def _check_manager_role(self):
         self.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
-
-    # def _check_individual(self):
-    #     self.readonly_individual = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
