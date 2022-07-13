@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from datetime import datetime
+
 
 class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
     _inherit = ['mail.thread','mail.activity.mixin']
 
     name = fields.Char(
-        string="Title"
+        string="Title",
+        required=True
         )
     agreement_start = fields.Datetime(
-        string="Agreement Start" 
+        string="Agreement Start",
+        compute="check_date"
         )
     agreement_end = fields.Date(
         string="Agreement End"
@@ -34,6 +38,15 @@ class Compliance(models.Model):
         self.env['performancemanagement.agreement'].create(agreement_info)
 
         return result
+    
+    @api.depends('agreement_start')
+    def check_date(self):
+        for rec in self:
+            start = fields.Datetime.from_string(rec.agreement_start)
+            current = datetime.now()
+
+            if (current = (start-1)):
+
 
 class Agreement(models.Model):
     _name = 'performancemanagement.agreement'
@@ -68,10 +81,12 @@ class Agreement(models.Model):
         related="employee_id.job_id"
         )
     line_manager = fields.Many2one(
+        'hr.employee',
         string="Line Manager",
         related="employee_id.parent_id"
         )
     manager_pos = fields.Many2one(
+        "hr.job",
         string="Manager Position",
         related="employee_id.parent_id.job_id"
         )
@@ -112,13 +127,16 @@ class Agreement(models.Model):
         )
 
     def _check_user_role(self):
-        self.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+        for rec in self:
+            rec.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def _check_manager_role(self):
-        self.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
+        for rec in self:
+            rec.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
 
     def _check_executive_role(self):
-        self.readonly_executive = self.env.user.has_group('strategy_and_planning.group_executive_director')
+        for rec in self:
+            rec.readonly_executive = self.env.user.has_group('strategy_and_planning.group_executive_director')
 
     def action_to_lm(self):
         self.state = 'review'
@@ -150,7 +168,7 @@ class Agreement(models.Model):
             'employee_id': self.employee_id.id,
             'employee_pos': self.employee_pos.id,
             'line_manager': self.line_manager.id,
-            'manager_pos': self.manager_pos,
+            'manager_pos': self.manager_pos.id,
             'emp_comments': self.emp_comments,
             'manager_comments': self.manager_comments,
         })
@@ -187,7 +205,7 @@ class P_Management(models.Model):
     perspective = fields.Char("Perspective")
     kpa = fields.Char("KPA")
     kpi = fields.Char("KPI")
-    weight = fields.Integer("Weight", default=25, readonly=True)
+    weight = fields.Integer("Weight")
 
     performance_id = fields.Many2one(
         'performancemanagement.agreement',
@@ -268,13 +286,16 @@ class P_Scores(models.Model):
     )
 
     def _check_individual(self):
-        self.readonly_individual = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+        for rec in self:
+            rec.readonly_individual = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def _check_lmanager(self):
-        self.readonly_lmanager = self.env.user.has_group('strategy_and_planning.group_line_manager')
+        for rec in self:
+            rec.readonly_lmanager = self.env.user.has_group('strategy_and_planning.group_line_manager')
 
     def _check_executive(self):
-        self.readonly_exec = self.env.user.has_group('strategy_and_planning.group_executive_director')
+        for rec in self:
+            rec.readonly_exec = self.env.user.has_group('strategy_and_planning.group_executive_director')
 
 class Monitoring(models.Model):
     _name = 'performancemanagement.monitoring'
@@ -330,7 +351,8 @@ class Monitoring(models.Model):
         string="Employee Position",
         related="employee_id.job_id"
         )
-    line_manager = fields.Many2one('res.users',
+    line_manager = fields.Many2one(
+        'hr.employee',
         string="Line Manager",
         related="employee_id.parent_id"
         )
@@ -354,10 +376,12 @@ class Monitoring(models.Model):
     manager_comments = fields.Text()
 
     def _check_user_role(self):
-        self.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
+        for rec in self:
+            rec.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
 
     def _check_manager_role(self):
-        self.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
+        for rec in self:
+            rec.readonly_manager = self.env.user.has_group('strategy_and_planning.group_line_manager')
 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]

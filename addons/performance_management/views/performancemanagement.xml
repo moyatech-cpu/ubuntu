@@ -60,6 +60,18 @@
             </field>
         </record>
 
+        <record model="ir.cron" id="compliance_calendar_schedule_reminder_action">
+            <field name="name">Reminder scheduler</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">2</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'performancemanagement.compliance'" name="model"/>
+            <field eval="'_check_date'" name="function"/>
+        </record>
+
         <!-- PERFORMANCE AGREEMENT -->
 
         <!-- agreement form view -->
@@ -100,7 +112,7 @@
                         <notebook>
                             <page string="Performance Management">
                                 <field name="pmanagement">
-                                    <tree string="P Management">
+                                    <tree string="P Management" editable="bottom">
                                         <field name="perspective"/>
                                         <field name="kpa"/>
                                         <field name="kpi"/>
@@ -170,6 +182,21 @@
                                     Start date :
                                     <br/>
                                     <b><field name="date_start"/></b>
+                                    <br/>
+                                    <span>
+                                    <div class="oe_kanban_bottom_left">
+                                        <span class="oe_kanban_mail_new" title="Unread Messages">
+                                            <i class="fa fa-star-o"/>
+                                            <i class="fa fa-clock-o"/>
+                                        </span>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <span class="oe_kanban_mail_new" title="Unread Messages">
+                                            <i class="fa fa-circle" aria-hidden="false"/>
+                                            <i class="fa fa-user" aria-hidden="true"/>
+                                        </span>
+                                    </div>
+                                    </span>
                                 </div>
                             </div>
                         </t>
