@@ -49,7 +49,6 @@
             </field>
         </record>
 
-
         <!-- compliance calendar view -->
         <record model="ir.ui.view" id="compliance_calendar">
             <field name="name">compliance.calendar</field>
@@ -61,7 +60,33 @@
             </field>
         </record>
 
+        <!-- <record forcecreate="True" model="ir.cron" id="ir_cron_compliance_calendar_schedule_reminder">
+            <field name="name">Reminder scheduler</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">2</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'performancemanagement.compliance'" name="model"/>
+            <field eval="'_check_date'" name="function"/>
+        </record> -->
+
         <!-- PERFORMANCE AGREEMENT -->
+
+        <!-- agreement tree/list view -->
+        <record model="ir.ui.view" id="agreement_tree_view">
+            <field name="name">agreement.tree</field>
+            <field name="model">performancemanagement.agreement</field>
+            <field name="arch" type="xml">
+                <tree string="Agreement Tree">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="line_manager"/>
+                    <field name="date_start"/>
+                </tree>
+            </field>
+        </record>
 
         <!-- agreement form view -->
         <record model="ir.ui.view" id="agreement_form_view">
@@ -79,21 +104,20 @@
                         <button id="scheduling_activity" name="schedule_activiy" string="Schedule" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <button id="send_to_con" name="action_to_con" string="Approve" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <!-- Buttons for PERFORMANCE CONTRACT stage -->
-                        <button id="send_to_grieve" name="action_to_grieve" string="Grievance" type="object" states="performance contract" class="btn-primary"/>
-                        <button id="send_complete" name="action_completed" string="Signed" type="object" states="performance contract" class="btn-primary"/>
+                        <button id="send_to_grieve" name="action_to_grieve" string="Grievance" type="object" states="performance contract" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        <button id="send_complete" name="action_completed" string="Signed" type="object" states="performance contract" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
                         <!-- Buttons for COMPLETED stage -->
-                        <button id="send_to_monitoring" name="action_to_monitoring" string="HR Approved" type="object" states="completed" class="btn-primary"/>
+                        <button id="send_to_monitoring" name="action_to_monitoring" string="HR Approved" type="object" states="completed" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <!-- Buttons for TRAINING INTERVENTION stage -->
-                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="training intervention" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="training intervention" class="btn-primary" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
                         <!-- Buttons for GRIEVANCE stage -->
-                        <button id="send_complete" name="action_completed" string="Signed" type="object" states="grievance" class="btn-primary"/>
+                        <button id="send_complete" name="action_completed" string="Signed" type="object" states="grievance" class="btn-primary" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
                         <field name="state" widget="statusbar" statusbar_visible="new,review,performance dialogue,performance contract,completed"/>
                     </header>
                     <sheet>
                         <span><h1><i class="fa fa-star-o" aria-hidden="true"/><field name="name"/></h1></span>
                         <group>
                                 <field name="employee_id"/>
-                                <field name="employee"/>
                                 <field name="employee_pos"/>
                                 <field name="line_manager"/>
                                 <field name="manager_pos"/>
@@ -102,7 +126,7 @@
                         <notebook>
                             <page string="Performance Management">
                                 <field name="pmanagement">
-                                    <tree string="P Management">
+                                    <tree string="P Management" editable="bottom">
                                         <field name="perspective"/>
                                         <field name="kpa"/>
                                         <field name="kpi"/>
@@ -155,8 +179,10 @@
             <field name="model">performancemanagement.agreement</field>
             <field name="arch" type="xml">
                 <kanban default_group_by="state">
+                    <field name="id"/>
                     <field name="name"/>
                     <field name="color"/>
+                    <field name="image_small"/>
                     <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
                     <templates>
                         <t t-name="kanban-box">
@@ -172,6 +198,21 @@
                                     Start date :
                                     <br/>
                                     <b><field name="date_start"/></b>
+                                    <br/>
+                                    <div>
+                                        <div class="oe_kanban_bottom_left" style="display: inline-block; float: left; font-size: 20px">
+                                            <span class="oe_kanban_mail_new" title="Status">
+                                                <field name="priority" widget="priority"/>
+                                                <i class="fa fa-clock-o"/>
+                                            </span>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right" style="display: inline-block; float: right;">
+                                            <span class="oe_kanban_mail_new" title="Status">
+                                                <field name="kanban_state" class="oe_inline" widget="kanban_state_selection"/>
+                                                <img style="width:40%;" t-att-src="kanban_image('performancemanagement.agreement', 'image_small', record.id.raw_value)"/>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -193,6 +234,20 @@
 
         <!-- PERFORMANCE MONITORING -->
 
+        <!-- monitoring tree/list view -->
+        <record model="ir.ui.view" id="monitoring_tree_view">
+            <field name="name">monitoring.tree</field>
+            <field name="model">performancemanagement.monitoring</field>
+            <field name="arch" type="xml">
+                <tree string="Monitoring Tree">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="line_manager"/>
+                    <field name="date_start"/>
+                </tree>
+            </field>
+        </record>
+
         <!-- monitoring form view -->
         <record model="ir.ui.view" id="monitoring_form_view">
             <field name="name">monitoring.form</field>
@@ -206,23 +261,27 @@
                         <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <!-- Buttons for MODERATE PERFORMANCE stage -->
-                        <button id="send_to_hr" name="action_to_hr" string="Send to HR" type="object" states="moderate performance" class="btn-primary"/>
-                        <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="moderate performance" class="btn-primary"/>
+                        <button id="send_to_hr" name="action_to_hr" string="Send to HR" type="object" states="moderate performance" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="moderate performance" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
                         <!-- Buttons for HR stage -->
-                        <button id="send_to_complete" name="action_to_complete" string="HR Approved" type="object" states="hr" class="btn-primary"/>
+                        <button id="send_to_complete" name="action_to_complete" string="HR Approved" type="object" states="hr" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <!-- Buttons for PERFORMANCE DIALOGUE stage -->
                         <button id="scheduling_activity" name="schedule_activiy" string="Schedule" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <button id="send_to_grieve" name="action_to_grieve" string="Grievance" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
                         <!-- Buttons for GRIEVANCE stage -->
-                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="grievance" class="btn-primary"/>
+                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="grievance" class="btn-primary" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
                         <field name="state" widget="statusbar" statusbar_visible="new,review,moderate performance,hr"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
                         <span><h1><i class="fa fa-star-o" aria-hidden="true"/><field name="name"/></h1></span>
                         <group>
                                 <field name="employee_id"/>
-                                <field name="employee"/>
                                 <field name="employee_pos"/>
                                 <field name="line_manager"/>
                                 <field name="manager_pos"/>
@@ -240,10 +299,8 @@
                                         <field name="i_score" attrs="{'readonly':[('readonly_individual','=',False),('id','>',0)]}"/>
                                         <field name="readonly_lmanager" invisible="1"/>
                                         <field name="lm_score" attrs="{'readonly':[('readonly_lmanager','=',False),('id','>',0)]}"/>
-                                        <!-- <field name="state" invisible="1"/> -->
                                         <field name="readonly_exec" invisible="1"/>
                                         <field name="m_score" attrs="{'readonly':[('readonly_exec','=',False),('id','>',0)]}"/>
-                                        <!-- ,('state','in',('new', 'review', 'performance dialogue')) -->
                                     </tree>
                                 </field>
                             </page>
@@ -272,8 +329,10 @@
             <field name="model">performancemanagement.monitoring</field>
             <field name="arch" type="xml">
                 <kanban default_group_by="state">
+                    <field name="id"/>
                     <field name="name"/>
                     <field name="color"/>
+                    <field name="image_small"/>
                     <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
                     <templates>
                         <t t-name="kanban-box">
@@ -289,6 +348,21 @@
                                     Start date :
                                     <br/>
                                     <b><field name="date_start"/></b>
+                                    <br/>
+                                    <div>
+                                        <div class="oe_kanban_bottom_left" style="display: inline-block; float: left; font-size: 20px">
+                                            <span class="oe_kanban_mail_new" title="Status">
+                                                <field name="priority" widget="priority"/>
+                                                <i class="fa fa-clock-o"/>
+                                            </span>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right" style="display: inline-block; float: right;">
+                                            <span class="oe_kanban_mail_new" title="Status">
+                                                <field name="kanban_state" class="oe_inline" widget="kanban_state_selection"/>
+                                                <img style="width:40%;" t-att-src="kanban_image('performancemanagement.agreement', 'image_small', record.id.raw_value)"/>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -335,7 +409,7 @@
             <field name="name">Performance Monitoring</field>
             <field name="res_model">performancemanagement.monitoring</field>
             <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
         </record>
 
         <!-- top level menu: no parent -->
