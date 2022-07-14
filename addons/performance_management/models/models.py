@@ -2,11 +2,13 @@
 
 from odoo import models, fields, api
 from datetime import datetime
+# import base64
 
 
 class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
     _inherit = ['mail.thread','mail.activity.mixin']
+    # , 'calendar.event'
 
     name = fields.Char(
         string="Title",
@@ -14,11 +16,12 @@ class Compliance(models.Model):
         )
     agreement_start = fields.Datetime(
         string="Agreement Start",
-        compute="check_date"
+        # compute="check_date"
         )
     agreement_end = fields.Date(
         string="Agreement End"
         )
+
     monitoring_start = fields.Date(
         string="Monitoring Start"
         )
@@ -39,14 +42,19 @@ class Compliance(models.Model):
 
         return result
     
-    @api.depends('agreement_start')
-    def check_date(self):
-        for rec in self:
-            start = fields.Datetime.from_string(rec.agreement_start)
-            current = datetime.now()
+    # @api.depends('agreement_start', 'agreement_end')
+    # def set_date(self):
+    #     for rec in self:
+    #         rec.start_datetime = rec.agreement_start
+    #         rec.stop_date = rec.agreement_end
 
-            if (current = (start-1)):
+    # @api.depends('agreement_start')
+    # def check_date(self):
+    #     for rec in self:
+    #         start = fields.Datetime.from_string(rec.agreement_start)
+    #         current = datetime.now()
 
+    #         if (current = (start-1)):
 
 class Agreement(models.Model):
     _name = 'performancemanagement.agreement'
@@ -60,6 +68,7 @@ class Agreement(models.Model):
         'hr.employee',
         string="Employee"
         )
+    image_small = fields.Binary('Image', related='employee_id.image_small')
 
     date_start = fields.Datetime(
         string="Date Started",
@@ -126,6 +135,18 @@ class Agreement(models.Model):
         default='new'
         )
 
+    priority = fields.Selection(
+        [
+            ('level 1', 'LEVEL 1'), 
+            ('level 2', 'LEVEL 2')
+        ])
+    kanban_state = fields.Selection(
+        [
+            ('ready', 'Ready'), 
+            ('blocked', 'Blocked'),
+            ('normal', 'Normal')
+        ])
+
     def _check_user_role(self):
         for rec in self:
             rec.readonly_employee = self.env.user.has_group('monitoring_and_evaluation.group_nyda_employees')
@@ -166,6 +187,9 @@ class Agreement(models.Model):
             'date_end': self.date_end,
             'compliance_id': self.compliance_id.id,
             'employee_id': self.employee_id.id,
+            'image_small': self.image_small,
+            'priority': self.priority,
+            'kanban_state': self.kanban_state,
             'employee_pos': self.employee_pos.id,
             'line_manager': self.line_manager.id,
             'manager_pos': self.manager_pos.id,
@@ -346,6 +370,7 @@ class Monitoring(models.Model):
         'hr.employee',
         string="Employee"
         )
+    image_small = fields.Binary('Image', related='employee_id.image_small')
 
     employee_pos = fields.Many2one(
         string="Employee Position",
@@ -374,6 +399,18 @@ class Monitoring(models.Model):
     emp_comments = fields.Html()
     readonly_manager = fields.Boolean(compute="_check_manager_role", store=False)
     manager_comments = fields.Text()
+
+    priority = fields.Selection(
+        [
+            ('level 1', 'LEVEL 1'), 
+            ('level 2', 'LEVEL 2')
+        ])
+    kanban_state = fields.Selection(
+        [
+            ('ready', 'Ready'), 
+            ('blocked', 'Blocked'),
+            ('normal', 'Normal')
+        ])
 
     def _check_user_role(self):
         for rec in self:
