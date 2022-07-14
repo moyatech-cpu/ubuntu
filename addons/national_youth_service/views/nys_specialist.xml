@@ -67,12 +67,28 @@
         <menuitem id="specialist_enquires_menu" parent="main_nys_menu" name="Enquires" action= "specialist_enquires_menu_action" 
         groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
+        <!-- Project Management tree view-->
+        <record model="ir.ui.view" id="specialist_projectmanagement_tree_view">
+            <field name="name">projectmanagement.tree.view</field>
+            <field name="model">nationalyouth.partnerz</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_type"/>
+                    <field name="project_type"/>
+                    <field name="nature"/>
+                    <field name="province"/>
+                    <field name="project_duration"/>
+                    <field name="age_cohort"/>
+                </tree>
+            </field>
+        </record>
 
         <!-- Project Management Action -->
         <record model="ir.actions.act_window" id = "specialist_projectmanagement_menu_action">
             <field name="name">NYS Project Managemnet</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">nationalyouth.specialist.projectmanagment</field>
+            <field name="res_model">nationalyouth.partnerz</field>
             <field name="view_mode">tree,form</field>
         </record>
         
@@ -80,96 +96,85 @@
         <menuitem id="specialist_projectmanagement_menu" parent="main_nys_menu" name="Project Management" action= "specialist_projectmanagement_menu_action" 
         groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 
-        <!-- kanban view for events and campaign -->
-        <!-- <record id="events_campaign_kanban_view" model="ir.ui.view">
-            <field name="name">eventsandcampaign.kanban</field>
-            <field name="model">nationalyouth.specialist.events</field>
-            <field name="arch" type="xml">
-            <kanban>
-                    <field name="due"/>
-                    <field name="title"/>
-                    <field name="country"/>
-                    <field name="color"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div style="margin-right:5px;padding:0px"
-                                            t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
-                                                        oe_kanban_global_click oe_semantic_html_override
-                                                        oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
-                                <div class="o_kanban_image" style="color:white;background-color:blue;width: 150px;" >
-                                    <br/>
-                                    <br/>
-                                    <field name="month"/>
-                                    <p><field name="create_date"/></p>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                </div>
-                                <div t-attf-class="oe_kanban_content">
-                                        <field name="title"/>
-                                        <br/>
-                                        <field name="country"/>
-                                        <br/>
-                                        <br/>
-                                        <i class="fa fa-clock-o"/>
-                                        To 
-                                        <field name="due"/>
-                 
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record> -->
-
-        <!-- form view for events and campaign -->
-        <!-- <record model="ir.ui.view" id="session_form_view">
+        <record model="ir.ui.view" id="events_and_campaign_form_view">
             <field name="name">eventsandcampaign.form</field>
-            <field name="model">nationalyouth.specialist.events</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form" />
             <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <field name="title" style="font-size: 40px;" placeholder = "NYS Event Name"/>
-                        <group>
-                            <group>
-                                <field name="organiser"/>
-                                <field name="address_line1" placeholder = "Street..."/>
-                                <field name="address_line2" placeholder = "Street 2..."/>
-                                <field name="address_line3" placeholder = "Town"/>
-                                <field name="address_line4" placeholder = "Province"/>
-                                <field name="address_line5" placeholder = "Postal Code"/>
-                                <field name="responsible"/>
-                            </group>                        
-                            <group>
-                                <field name="category"/>
-                                <field name="twitter"/>
-                                <field name="project"/>
-                            </group>
-                        </group>
-                        <group>
-                            <group>
-                                <field name="start_date"/>
-                                <field name="end_date"/>
-                            </group>
-                            <group>
-                                <field name="min_att"/>
-                                <field name="max_att"/>
-                            </group>
-                        </group>
-                    </sheet>
-                </form>
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" 
+                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys,national_youth_service.group_partner_nys"/>
+                </xpath>
+                <xpath expr="//button[@name='button_confirm']" position="replace">
+                    <button string="Confirm Event" name="button_confirm" states="draft" type="object" class="oe_highlight" 
+                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+                </xpath>
+                <xpath expr="//button[@name='button_done']" position="replace">
+                    <button string="Finish Event" name="button_done" states="confirm" type="object" class="oe_highlight" 
+                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+                </xpath>
+                <xpath expr="//button[@name='button_draft']" position="replace">
+                    <button string="Set To Draft" name="button_draft" states="cancel,done" type="object" 
+                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="attributes">
+                    <attribute name="groups">base.group_user,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys</attribute>
+                </xpath>
+                <xpath expr="//button[@name='801']" position="replace">
+                    <button name="801" type="action" class="oe_stat_button" icon="fa-users" help="Register with this event"  groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys">
+                        <field name="seats_expected" widget="statinfo" string="Attendees"/>
+                    </button>
+                </xpath>
+                <xpath expr="//button[@name='toggle_active']" position="replace">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive"  groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </xpath>
             </field>
-        </record> -->
+        </record>
+
+        <record model="ir.ui.view" id="events_and_campaign_website_form_view">
+            <field name="name">eventsandcampaign.form.website</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="website_event.event_event_view_form_inherit_website" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='website_publish_button']" position="replace">
+                    <button name="website_publish_button" type="object" class="oe_stat_button" icon="fa-globe"
+                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys">
+                        <field name="website_published" widget="website_button"/>
+                    </button>
+                    <button name="ApplyForEvent" type="object" class="oe_stat_button" string="Apply"
+                    groups="national_youth_service.group_beneficiary_nys">
+                        <!-- <field name="website_published" widget="website_button"/> -->
+                    </button>
+                </xpath>
+                <xpath expr="//button[@name='action_open_badge_editor']" position="replace">
+                     <button name="action_open_badge_editor" type="object" string="Preview Badges" class="oe_highlight"
+                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="events_and_campaign_mail_form_view">
+            <field name="name">eventsandcampaign.form.mail</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="mass_mailing_event.event_event_view_form_inherit_mass_mailing" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_mass_mailing_attendees']" position="attributes">
+                    <attribute name="groups">national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys</attribute>
+                </xpath>
+            </field>
+        </record>
 
         <!-- Project Opportunities / Events or campaign actions   -->
         <record model="ir.actions.act_window" id = "events_campaign_menu_action">
             <field name="name">NYS Project Application</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">event.event</field>
+            <!-- <field name="form_view_id" ref="events_and_campaign_form_view"/> -->
             <field name="view_mode">kanban,form</field>
         </record>
-
+ 
         <!-- Menu item for the project opportunities -->
         <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" 
         groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
@@ -185,5 +190,9 @@
         </record>
         <!-- Skills training projects menuitem -->
         <menuitem id="skills_training_menu" parent="project_opportunities_menu" name="Skills Training Projects" action = "skills_training_menu_action"/>
+
+        <!-- Documents menuitem -->
+        <menuitem id="documents" parent="main_nys_menu" name="Documents" action = "muk_dms.action_dms_documents"
+        groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
     </data>
 </odoo>

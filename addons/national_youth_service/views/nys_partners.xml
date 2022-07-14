@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="action_event_projectmanagement" model="ir.actions.act_window">
+            <field name="name">Project Events</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.event</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban</field>
+            <!-- <field name="domain">[('category_id.type', '=', 'purchase'), ("company_id", "=", [user.company_id.id])]</field> -->
+            <!-- <field name="context">{'record_id' : active_id}</field> -->
+            <field name="target">current</field>
+    </record>
     <!-- Partner Project Application Form View -->
     <record model="ir.ui.view" id="profile_form_view">
         <field name="name">profile.form</field>
@@ -13,6 +23,15 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="bman" groups="base.group_user">
+                            <!-- <button name="801" type="action" class="oe_stat_button" icon="fa-users" help="Register with this event"> -->
+                            <button name="%(national_youth_service.action_event_projectmanagement)d" type="action" class="oe_stat_button" icon="fa-tasks" string="Events" >
+                                <!-- <field name="seats_expected" widget="statinfo" string="Attendees"/> -->
+                            </button>
+                            <button name="%(national_youth_service.action_event_projectmanagement)d" type="action" class="oe_stat_button" icon="fa-tasks" string="Training" >
+                                <!-- <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/> -->
+                            </button>
+                        </div>
                     <group>
                         <span>
                             <h1>
@@ -89,33 +108,43 @@
                 <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
                 <templates>
                     <t t-name="kanban-box">
-                     <div
-                                    t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
-                                                  oe_kanban_global_click oe_semantic_html_override
-                                                  oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
-                        <div t-attf-class="oe_kanban_content">
-                            <!-- title -->
-                            <!-- Session name: -->
-                            <field name="name"/>
-                            <br/>
-                            <br/>
-                            Created:
-                            <br/>
-                            <field name="create_date"/>
-                            <br/>
-                            <div class="oe_kanban_bottom_left">
-                                <span class='oe_kanban_mail_new' title='Unread Messages'>
-                                    <i class="fa fa-star-o"/>
-                                    <i class="fa fa-clock-o"/>
-                                </span>
+                        <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}} oe_kanban_global_click oe_semantic_html_override
+                        oe_kanban_card">
+                            <div t-attf-class="oe_kanban_content" >
+                                <div>
+                                    <field name="name"/>
+                                    <br/>
+                                    <br/>
+                                    Created:
+                                    <br/>
+                                    <field name="create_date"/>
+                                    <br/>
+                                </div>
+
+                                <div class="oe_kanban_bottom_left">
+                                    <div class="pull-left">
+                                        <field name="priority" widget="priority"/>
+                                        <span style="font-size: 18px;">
+                                            <i class="fa fa-clock-o"/>
+                                        </span>
+                                    </div>
+     
+                                    <div class="pull-right" style="font-size: 18px;">
+                                        <field name="kanban_state" widget="kanban_state_selection"/>
+                                        <span>
+                                            <i class="fa fa-user" aria-hidden="true"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- <div class="oe_kanban_bottom_right">
+                                    <div class="pull-left">
+                                        <field name="kanban_state" widget="kanban_state_selection"/>
+                                        <span>
+                                            <i class="fa fa-user" aria-hidden="true"/>
+                                        </span>
+                                    </div>
+                                </div> -->
                             </div>
-                            <div class="oe_kanban_bottom_right">
-                                <span class='oe_kanban_mail_new' title='Unread Messages'>
-                                    <i class="fa fa-circle" aria-hidden="false"/>
-                                    <i class="fa fa-user" aria-hidden="true"/>
-                                </span>
-                            </div>
-                        </div>
                         </div>
                     </t>
                 </templates>

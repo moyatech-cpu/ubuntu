@@ -33,7 +33,7 @@ class Person(models.Model):
     drivers_license = fields.Selection([('Yes', 'Yes'), ('No', 'No')], string="Drivers License")
     license_code = fields.Char('License Code')
     marital_status = fields.Selection([('Single', 'Single'), ('Married', 'Married'),('Divorced', 'Divorced'), ('Widowed', 'Widowed')], string="Martital Status")
-    branch_id = fields.Many2one('res.branch', string="Branch", related = "partner_id.nearest_branch")
+    branch_id = fields.Many2one(comodel='res.branch', string="Branch", related = "partner_id.nearest_branch")
     municipality = fields.Many2one('res.municipality', string="Municipality", related = "partner_id.municipality")
     # address fields
     address_line1 = fields.Char('Address')

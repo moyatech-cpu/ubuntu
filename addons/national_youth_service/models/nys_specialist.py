@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 from datetime import datetime, date, time
+from odoo.addons.http_routing.models.ir_http import slug
 
 class partners(models.Model):
     _name = 'nationalyouth.specialist'
@@ -65,4 +66,15 @@ class ProjectOpportunities(models.Model):
             date = datetime.strptime(r.create_date, "%d/%m/%Y %H:%M:%S")
             month = date.month
             year = date.year
-    
+
+class Events(models.Model):
+    _inherit = 'event.event'
+
+    def ApplyForEvent(self):
+        self.ensure_one()
+        # return self._compute_website_url()
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': '/event',
+        }

@@ -159,8 +159,6 @@ else:
 
     <!-- Actions for the nys opportunies -->
 
-
-
     <!-- menu for the profile -->
     <menuitem id="main_nys_menu" name="National Youth Service"/>
     <menuitem id="profile_menu" parent="main_nys_menu" name="Beneficiary Profile" action= "profile_menu_action_add" groups="national_youth_service.group_beneficiary_nys"/>

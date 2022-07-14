@@ -6,7 +6,7 @@ class partners(models.Model):
     _name = 'nationalyouth.partnerz'
     _inherit = ['mail.thread','mail.activity.mixin']
 
-    name = fields.Char('Name')
+    name = fields.Char('Project Title')
     date = fields.Datetime('Date')
     color = fields.Integer()
     partner_id = fields.Many2one('res.partner', string="Partner")
@@ -64,6 +64,10 @@ class partners(models.Model):
     project_objectives = fields.Selection([('Further Education And Training', 'Further Education and Training'),('Employment', 'Employment'), 
     ('Enterprise Development', 'Enterprise Development'), ('Other', 'Other')], string="Project Duration")
     exit_pathways = fields.Text()
+
+    # for kanban view
+    kanban_state = fields.Selection([('ready', 'Ready'), ('blocked', 'Blocked'),('normal', 'Normal')])
+    priority = fields.Selection([('Lelev 1', 'Level 1'), ('Lelev 2', 'Level 2')])
 
     # status bar function 
     def _expand_states(self, states, domain, order):
