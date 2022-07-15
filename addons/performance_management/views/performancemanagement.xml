@@ -23,7 +23,7 @@
             <field name="arch" type="xml">
                 <form string="Compliance Form">
                     <sheet>
-                        <span><h1><i class="fa fa-star-o" aria-hidden="true"/><field name="name"/></h1></span>
+                        <span><h1><field name="priority" widget="priority"/><field name="name"/></h1></span>
                         <group>
                             <group name="group_left">
                                 <field name="agreement_start"/>
@@ -115,7 +115,7 @@
                         <field name="state" widget="statusbar" statusbar_visible="new,review,performance dialogue,performance contract,completed"/>
                     </header>
                     <sheet>
-                        <span><h1><i class="fa fa-star-o" aria-hidden="true"/><field name="name"/></h1></span>
+                        <span><h1><field name="priority" widget="priority"/><field name="name"/></h1></span>
                         <group>
                                 <field name="employee_id"/>
                                 <field name="employee_pos"/>
@@ -183,7 +183,8 @@
                     <field name="name"/>
                     <field name="color"/>
                     <field name="image_small"/>
-                    <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/>
+                    <!-- <progressbar field="state" colors="{&quot;done&quot;: &quot;success&quot;, &quot;blocked&quot;: &quot;danger&quot;}"/> -->
+                    <progressbar field="kanban_state" colors='{"done": "success", "blocked": "danger"}' />
                     <templates>
                         <t t-name="kanban-box">
                             <div
@@ -197,19 +198,19 @@
                                     <br/><br/>
                                     Start date :
                                     <br/>
-                                    <b><field name="date_start"/></b>
+                                    <strong><field name="date_start"/></strong>
                                     <br/>
-                                    <div>
-                                        <div class="oe_kanban_bottom_left" style="display: inline-block; float: left; font-size: 20px">
+                                    <div class="oe_kanban_footer">
+                                        <div class="oe_kanban_footer_left" style="display: inline-block; float: left;">
                                             <span class="oe_kanban_mail_new" title="Status">
                                                 <field name="priority" widget="priority"/>
-                                                <i class="fa fa-clock-o"/>
+                                                <field name="activity_ids" widget="kanban_activity"/>
                                             </span>
                                         </div>
-                                        <div class="oe_kanban_bottom_right" style="display: inline-block; float: right;">
+                                        <div class="oe_kanban_footer_right" style="display: inline-block; float: right;">
                                             <span class="oe_kanban_mail_new" title="Status">
                                                 <field name="kanban_state" class="oe_inline" widget="kanban_state_selection"/>
-                                                <img style="width:40%;" t-att-src="kanban_image('performancemanagement.agreement', 'image_small', record.id.raw_value)"/>
+                                                <img t-att-src="kanban_image('performancemanagement.agreement', 'image_small', record.id.raw_value)" width="24" height="24" class="oe_kanban_avatar"/>
                                             </span>
                                         </div>
                                     </div>
@@ -279,7 +280,7 @@
                                 <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                             </button>
                         </div>
-                        <span><h1><i class="fa fa-star-o" aria-hidden="true"/><field name="name"/></h1></span>
+                        <span><h1><field name="priority" widget="priority"/><field name="name"/></h1></span>
                         <group>
                                 <field name="employee_id"/>
                                 <field name="employee_pos"/>
@@ -347,19 +348,19 @@
                                     <br/><br/>
                                     Start date :
                                     <br/>
-                                    <b><field name="date_start"/></b>
+                                    <strong><field name="date_start"/></strong>
                                     <br/>
-                                    <div>
-                                        <div class="oe_kanban_bottom_left" style="display: inline-block; float: left; font-size: 20px">
+                                    <div class="oe_kanban_footer">
+                                        <div class="oe_kanban_footer_left" style="display: inline-block; float: left;">
                                             <span class="oe_kanban_mail_new" title="Status">
                                                 <field name="priority" widget="priority"/>
-                                                <i class="fa fa-clock-o"/>
+                                                <field name="activity_ids" widget="kanban_activity"/>
                                             </span>
                                         </div>
-                                        <div class="oe_kanban_bottom_right" style="display: inline-block; float: right;">
+                                        <div class="oe_kanban_footer_right" style="display: inline-block; float: right;">
                                             <span class="oe_kanban_mail_new" title="Status">
                                                 <field name="kanban_state" class="oe_inline" widget="kanban_state_selection"/>
-                                                <img style="width:40%;" t-att-src="kanban_image('performancemanagement.agreement', 'image_small', record.id.raw_value)"/>
+                                                <img t-att-src="kanban_image('performancemanagement.agreement', 'image_small', record.id.raw_value)" width="24" height="24" class="oe_kanban_avatar"/>
                                             </span>
                                         </div>
                                     </div>

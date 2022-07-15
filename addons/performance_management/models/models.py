@@ -29,6 +29,11 @@ class Compliance(models.Model):
         string="Monitoring End"
         )
     description = fields.Html()
+    priority = fields.Selection(
+        [
+            ('level 1', 'LEVEL 1'), 
+            ('level 2', 'LEVEL 2')
+        ])
 
     @api.model
     def create(self, vals):
@@ -36,7 +41,8 @@ class Compliance(models.Model):
         agreement_info ={
             'name': result.name,
             'date_start': result.agreement_start,
-            'compliance_id': result.id
+            'compliance_id': result.id,
+            'priority': result.priority
         }
         self.env['performancemanagement.agreement'].create(agreement_info)
 
@@ -142,10 +148,13 @@ class Agreement(models.Model):
         ])
     kanban_state = fields.Selection(
         [
-            ('ready', 'Ready'), 
+            ('done', 'Done'), 
             ('blocked', 'Blocked'),
             ('normal', 'Normal')
-        ])
+        ],
+        'Kanban State',
+        default='normal'
+        )
 
     def _check_user_role(self):
         for rec in self:
@@ -407,10 +416,12 @@ class Monitoring(models.Model):
         ])
     kanban_state = fields.Selection(
         [
-            ('ready', 'Ready'), 
+            ('done', 'Done'), 
             ('blocked', 'Blocked'),
             ('normal', 'Normal')
-        ])
+        ],
+        'Kanban State'
+        )
 
     def _check_user_role(self):
         for rec in self:
