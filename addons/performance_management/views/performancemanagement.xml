@@ -60,18 +60,6 @@
             </field>
         </record>
 
-        <!-- <record forcecreate="True" model="ir.cron" id="ir_cron_compliance_calendar_schedule_reminder">
-            <field name="name">Reminder scheduler</field>
-            <field eval="False" name="active"/>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_number">2</field>
-            <field name="interval_type">days</field>
-            <field name="numbercall">1</field>
-            <field eval="False" name="doall"/>
-            <field eval="'performancemanagement.compliance'" name="model"/>
-            <field eval="'_check_date'" name="function"/>
-        </record> -->
-
         <!-- PERFORMANCE AGREEMENT -->
 
         <!-- agreement tree/list view -->
@@ -231,6 +219,22 @@
                     <field name="name"/>
                 </calendar>
             </field>
+        </record>
+
+        <!-- agreement calendar cron -->
+        <record model="ir.cron" id="ir_cron_agreement_calendar_reminder">
+            <field name="name">Reminder scheduler</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="nextcall" eval="(datetime.now() + timedelta(days=0)).strftime('%Y-%m-%d 23:59:59')" />
+            <field name="model_id" ref="performance_management.model_performancemanagement_agreement"/>
+            <!-- <field name="function" eval="'_check_date'"/> -->
+            <field name="code">model._check_date()</field>
+            <field name="state">code</field>
         </record>
 
         <!-- PERFORMANCE MONITORING -->
