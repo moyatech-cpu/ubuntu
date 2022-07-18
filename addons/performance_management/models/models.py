@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from datetime import datetime
+from datetime import datetime, timedelta
 # import base64
 
 
@@ -9,9 +9,19 @@ class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
     _inherit = ['mail.thread','mail.activity.mixin']
     # , 'calendar.event'
+    
+    @api.multi 
+    def _default_comp_title(self):
+        total_len = self.env['performancemanagement.compliance'].search_count([])
+        new_entry = total_len + 1
+        comp_title = ("EMP%s - Performance Agreement" %new_entry)
+
+        return comp_title
 
     name = fields.Char(
         string="Title",
+        default=_default_comp_title,
+        readonly=True,
         required=True
         )
     agreement_start = fields.Datetime(
@@ -21,7 +31,6 @@ class Compliance(models.Model):
     agreement_end = fields.Date(
         string="Agreement End"
         )
-
     monitoring_start = fields.Date(
         string="Monitoring Start"
         )
@@ -64,7 +73,7 @@ class Compliance(models.Model):
 
 class Agreement(models.Model):
     _name = 'performancemanagement.agreement'
-    _inherit = ['mail.thread','mail.activity.mixin']
+    _inherit = ['mail.thread','mail.activity.mixin', 'mail.mail']
 
     compliance_id = fields.Many2one(
         'performancemanagement.compliance', 
@@ -75,7 +84,6 @@ class Agreement(models.Model):
         string="Employee"
         )
     image_small = fields.Binary('Image', related='employee_id.image_small')
-
     date_start = fields.Datetime(
         string="Date Started",
         related="compliance_id.agreement_start",
@@ -85,12 +93,10 @@ class Agreement(models.Model):
         string="Date Ending",
         related="compliance_id.agreement_end"
         )
-
     name = fields.Char(
         string="Title",
         related="compliance_id.name"
         )
-
     employee_pos = fields.Many2one(
         string="Employee Position",
         related="employee_id.job_id"
@@ -105,7 +111,6 @@ class Agreement(models.Model):
         string="Manager Position",
         related="employee_id.parent_id.job_id"
         )
-    
     pmanagement = fields.One2many(
         "performancemanagement.performance", 
         "performance_id", 
@@ -116,7 +121,6 @@ class Agreement(models.Model):
         "development_id", 
         string="Personal Development Plan"
         )
-
     readonly_employee = fields.Boolean(compute="_check_user_role", store=False)
     emp_comments = fields.Html()
     add_duties = fields.Html()
@@ -140,7 +144,6 @@ class Agreement(models.Model):
         group_expand='_expand_states',
         default='new'
         )
-
     priority = fields.Selection(
         [
             ('level 1', 'LEVEL 1'), 
@@ -231,6 +234,52 @@ class Agreement(models.Model):
 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
+
+    @api.depends('date_start') 
+    def _check_date(self):
+        agreement_obj = self.env['performancemanagement.agreement']
+        mail_mail = self.env['mail.mail']
+        mail_ids = []
+        today = datetime.now().date()
+        #date = agreement_obj.date_start.date()
+        day_before = today - timedelta(days=1) 
+        comp_id = agreement_obj.search([('date_start','like',day_before)])
+        if comp_id:
+            try:
+                for val in comp_id:
+                    email = val.employee_id.work_email
+                    name = val.employee_id.name
+                    subject = "Performance Agreement Starting"
+                    body = _("Hello %s,\n" %(name))
+                    body += _("\tYour performance agreement is starting at %s\n" %(date_start))
+                    footer = _("Kind regards.\n")
+                    footer += _("%s\n\n"%val.employee_id.company_id)
+                    mail_ids.append(mail_mail.create({
+                        'email_to': email,
+                        'subject': subject,
+                        'body_html': '<pre><span class="inner-pre" style="font-size: 15px">%s<br>%s</span></pre>' %(body, footer),
+                        'notification': True
+                     }))
+                    mail_mail.send(mail_ids)
+            except Exception:
+                print("Exception")
+        return None
+
+    #This function is called when the scheduler goes off
+    # def process_demo_scheduler_queue(self, cr, uid, context=None):
+    #     print('Thai123')
+    #     scheduler_line_obj = self.pool.get('scheduler.demo')
+    #     #Contains all ids for the model scheduler.demo
+    #     scheduler_line_ids = self.pool.get('scheduler.demo').search(cr, uid, [])
+    #     #Loops over every record in the model scheduler.demo
+    #     for scheduler_line_id in scheduler_line_ids :
+    #         #Contains all details from the record in the variable scheduler_line
+    #         scheduler_line =scheduler_line_obj.browse(cr, uid,scheduler_line_id ,context=context)
+    #         numberOfUpdates = scheduler_line.numberOfUpdates
+    #         #Prints out the name of every record.
+    #         _logger.info('line: ' + scheduler_line.name)
+    #         #Update the record
+    #         scheduler_line_obj.write(cr, uid, scheduler_line_id, {'numberOfUpdates': (numberOfUpdates +1), 'lastModified': datetime.date.today()}, context=context)
 
 class P_Management(models.Model):
     _name = 'performancemanagement.performance'
