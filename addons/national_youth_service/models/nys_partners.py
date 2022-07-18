@@ -6,11 +6,14 @@ class partners(models.Model):
     _name = 'nationalyouth.partnerz'
     _inherit = ['mail.thread','mail.activity.mixin']
 
+    #partner_id = fields.Many2one('partner.enquiry', default=lambda self: self.env['partner.enquiry'].sudo().search([('user_id','=',self.env.user.id)]), readonly=True)
+
     name = fields.Char('Project Title')
     date = fields.Datetime('Date')
     color = fields.Integer()
-    partner_id = fields.Many2one('res.partner', string="Partner")
-
+    
+    another_id = fields.Many2one('partner.enquiry', string = "Partner", default=lambda self: self.env['partner.enquiry'].sudo().search([('user_id','=',self.env.user.id)]), readonly=True)
+    partner_id = fields.Char(string="Partner", related = "another_id.entity_name")
     # project details
     project_type = fields.Selection([('Category 1 - Learning Community Service and Linkages', 'Category 1 - Learning Community Service and Linkages'), 
     ('Category 2 - Voluntary Service', 'Category 2 - Voluntary Service'), ('Category 3 - Gap Year', 'Category 3 - Gap Year')], string="Project Type")
@@ -66,7 +69,7 @@ class partners(models.Model):
     exit_pathways = fields.Text()
 
     # for kanban view
-    kanban_state = fields.Selection([('ready', 'Ready'), ('blocked', 'Blocked'),('normal', 'Normal')])
+    kanban_state = fields.Selection([('normal', 'In Progress'),('blocked', 'Blocked'),('done', 'Ready for next stage')],'Kanban State',default='normal')
     priority = fields.Selection([('Lelev 1', 'Level 1'), ('Lelev 2', 'Level 2')])
 
     # status bar function 

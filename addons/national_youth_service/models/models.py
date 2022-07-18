@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 # nys beneficiary
 class Person(models.Model):
@@ -55,5 +55,16 @@ class Person(models.Model):
     # for kanaban view
     color = fields.Integer()
 
-    # # for contacts in beneficiaries
-    # def get_my_profile(self):
+    # validation rules
+    @api.constrains('alternative_number','address_line5')
+    def _check_defined_number(self):
+        for r in self:
+            if not r.alternative_number.isnumeric():
+                raise exceptions.ValidationError( "Phone should be a number")
+            if len(r.alternative_number) != 10:
+                raise exceptions.ValidationError( "Phone number must have 10 characters")
+            if not r.address_line5.isnumeric():
+                raise exceptions.ValidationError( "Postal code should be a number")
+            if len(r.address_line5) != 4:
+                raise exceptions.ValidationError( "Code has 4 numbers")
+                

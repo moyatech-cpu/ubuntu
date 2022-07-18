@@ -1,16 +1,26 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 class Primary(models.Model):
     _name = 'nationalyouth.primaryeducation'
 
-    name = fields.Char('Name')
+    name = fields.Char('Name', required=True)
     subjects = fields.Text('Major Subjects')
     year = fields.Char('Year Completed')
     
     candidate_id = fields.Many2one('nationalyouth.partner', ondelete='cascade', string = "Candidate")
-    
+
+    @api.constrains('year','name')
+    def _primary_education_constraints(self):
+        for r in self:
+            if r.year != False:
+                if not r.year.isnumeric():
+                    raise exceptions.ValidationError( "Year must be a number")
+                if len(r.year) != 4:
+                    raise exceptions.ValidationError( "Year has 4 numbers")
+            if r.name == False or r.name == None:
+                raise exceptions.ValidationError( "Name of the primary school is required")
 
 class HighSchool(models.Model):
     _name = 'nationalyouth.secondaryeducation'
@@ -24,15 +34,34 @@ class HighSchool(models.Model):
      ('Music','Music'),('Physical Science', 'Physical Science'), ('Religion Studies', 'Religion Studies'),('Second Additional Language','Second Additional Language'),
      ('Third Additional Language', 'Third Additional Language'), ('Tourism','Tourism'), ('Visual Arts', 'Visual Arts'), ('English (HL/FAL)', 'English (HL/FAL)'),
      ('Isizulu (HL/FAL)','Isizulu (HL/FAL)'), ('IsiXhosa (HL/FAL)','IsiXhosa (HL/FAL)'), ('Afrikaans (FAL)', 'Afrikaans (FAL)'), ('Mathematics','Mathematics'),
-     ('Mathematical Literacy', 'Mathematical Literacy'), ('Accounting','Accounting'), ('Economics','Economics')], string="Subjects")
+     ('Mathematical Literacy', 'Mathematical Literacy'), ('Accounting','Accounting'), ('Economics','Economics')], string="Subjects", required=True)
 
     achievement_level = fields.Selection([('Level 7: 80 - 100%', 'Level 7: 80 - 100%'), ('Level 6: 70 - 80%', 'Level 6: 70 - 80%'), ('Level 5: 60 - 70%', 'Level 5: 60 - 70%'),
     ('Level 4: 50 - 60%', 'Level 4: 50 - 60%'), ('Level 3: 40 - 50%', 'Level 3: 40 - 50%'), ('Level 2: 30 - 40%', 'Level 2: 30 - 40%'), ('Level 1: 0 - 30%', 'Level 1: 0 - 30%'), 
     ], string="Achievement Level")
 
-    symbol = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'),('E', 'E'),('F','F'),('G','G')], string="Symbol")
+    #symbol = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'),('E', 'E'),('F','F'),('G','G')], string="Symbol", readonly=True)
+    symbol = fields.Char( string="Symbol", readonly=True, compute = '_get_symbol')
     
-    candidate_id = fields.Many2one('nationalyouth.partner', ondelete='cascade', string = "Candidate")
+    candidate_id = fields.Many2one('nationalyouth.partner', ondelete='cascade', string = "Candidate", readonly = True)
+
+    @api.depends('achievement_level')
+    def _get_symbol(self):
+        for r in self:
+            if r.achievement_level == 'Level 7: 80 - 100%':
+                r.symbol = 'A'
+            elif r.achievement_level == 'Level 6: 70 - 80%':
+                r.symbol = 'B'
+            elif r.achievement_level == 'Level 5: 60 - 70%':
+                r.symbol = 'C'
+            elif r.achievement_level == 'Level 4: 50 - 60%':
+                r.symbol = 'D'
+            elif r.achievement_level == 'Level 3: 40 - 50%':
+                r.symbol = 'E'
+            elif r.achievement_level == 'Level 2: 30 - 40%':
+                r.symbol = 'F'
+            elif r.achievement_level == 'Level 1: 0 - 30%':
+                r.symbol = 'G'
 
 class Tertiary(models.Model):
     _name = 'nationalyouth.tertiary'
@@ -45,6 +74,17 @@ class Tertiary(models.Model):
     
     
     candidate_id = fields.Many2one('nationalyouth.partner', ondelete='cascade', string = "Candidate")
+
+    @api.constrains('year')
+    def _tertiary_education_constraints(self):
+        for r in self:
+            if r.year != False:
+                if not r.year.isnumeric():
+                    raise exceptions.ValidationError( "Year must be a number")
+                if len(r.year) != 4:
+                    raise exceptions.ValidationError( "Year has 4 numbers")
+            if r.name == False or r.name == None:
+                raise exceptions.ValidationError( "Name of the tertiary institutiion is required")
 
 class Skills(models.Model):
     _name = 'nationalyouth.computerskills'
@@ -83,3 +123,19 @@ class Reference(models.Model):
     Mobile = fields.Char('Mobile')
 
     candidate_id = fields.Many2one('nationalyouth.partner', ondelete='cascade', string = "Candidate")
+
+    @api.constrains('telephone','name', 'mobile')
+    def _reference_constraints(self):
+        for r in self:
+            if r.telephone != False:
+                if not r.telephone.isnumeric():
+                    raise exceptions.ValidationError( "Telephone must be a number")
+                if len(r.telephone) != 10:
+                    raise exceptions.ValidationError( "Telephone must have 10 characters")
+            if r.mobile != False:
+                if not r.mobile.isnumeric():
+                    raise exceptions.ValidationError( "Telephone must be a number")
+                if len(r.mobile) != 10:
+                    raise exceptions.ValidationError( "Telephone must have 10 characters")
+            if r.name == False or r.name == None:
+                raise exceptions.ValidationError( "Name of the referee is required")

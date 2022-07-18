@@ -23,7 +23,7 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="bman" groups="base.group_user">
+                    <div class="oe_button_box pull-right" name="bman" groups="base.group_user">
                             <!-- <button name="801" type="action" class="oe_stat_button" icon="fa-users" help="Register with this event"> -->
                             <button name="%(national_youth_service.action_event_projectmanagement)d" type="action" class="oe_stat_button" icon="fa-tasks" string="Events" >
                                 <!-- <field name="seats_expected" widget="statinfo" string="Attendees"/> -->
@@ -34,15 +34,15 @@
                         </div>
                     <group>
                         <span>
-                            <h1>
-                                <i class="fa fa-star-o"/> 
-                                <span><field name="name"/></span> 
-                            </h1>
+                            <div class="pull-left" style="font-size:24px;">
+                                <field name="priority" widget="priority" class="oe_inline"/>
+                                <field name="name" class="oe_inline"/>
+                            </div>
                         </span>
                     </group>
                     <group string="Section A">
                         <group string = "" name="group_left">
-                            <field name="partner_id"/>
+                            <field name="another_id"/>
                             <field name="project_type"/>
                             <field name="partner_type"/>
                         </group>                    
@@ -124,9 +124,9 @@
                                 <div class="oe_kanban_bottom_left">
                                     <div class="pull-left">
                                         <field name="priority" widget="priority"/>
-                                        <span style="font-size: 18px;">
-                                            <i class="fa fa-clock-o"/>
-                                        </span>
+                                        <!-- <span style="font-size: 18px;"> -->
+                                        <field name="activity_ids" widget="kanban_activity" />
+                                        <!-- </span> -->
                                     </div>
      
                                     <div class="pull-right" style="font-size: 18px;">
@@ -136,14 +136,6 @@
                                         </span>
                                     </div>
                                 </div>
-                                <!-- <div class="oe_kanban_bottom_right">
-                                    <div class="pull-left">
-                                        <field name="kanban_state" widget="kanban_state_selection"/>
-                                        <span>
-                                            <i class="fa fa-user" aria-hidden="true"/>
-                                        </span>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </t>
@@ -211,33 +203,6 @@
 
     <menuitem id="volunteer_database_menu" parent="main_nys_menu" name="Volunteer Database" action= "volunteer_database_menu_action" 
     groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-
-    <!-- Reporting pivot view -->
-    <!-- <record id="view_reporting_pivot" model="ir.ui.view">
-        <field name="name">reporting.pivot</field>
-        <field name="model">nationalyouth.specialist.events</field>
-        <field name="arch" type="xml">
-           <pivot>
-                <field name="min_att"/>
-                <field name="max_att"/>
-            </pivot>
-        </field>
-    </record> -->
-
-
-    <!-- Reporting graph view -->
-    <!-- <record id="view_reporting_graph" model="ir.ui.view">
-        <field name="name">reporting.pivot</field>
-        <field name="model">nationalyouth.specialist.events</field>
-        <field name="arch" type="xml">
-           <graph>
-                <field name="title"/>
-                <field name="min_att"/>
-                <field name="max_att"/>
-            </graph>
-        </field>
-    </record> -->
-
 
     <!-- Reporting Action -->
     <record model="ir.actions.act_window" id = "reporting_menu_action">
@@ -387,7 +352,7 @@
         </field>
     </record>
 
-    <!-- Partner Database Action -->
+    <!-- Partner Database Action for the NYS Partner-->
     <record model="ir.actions.server" id = "partner_database_menu_action">
         <field name="name">NYS Service Provider</field>
         <field name="model_id" ref="model_nationalyouth_partner"/>
@@ -420,5 +385,14 @@ else:
 
     <!-- Partner Database menuitem -->
     <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" 
-    groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
+    groups="national_youth_service.group_partner_nys"/>
+
+    <record model="ir.actions.act_window" id = "partner_profile_menu_action">
+        <field name="name">Youth Database</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nationalyouth.partnerz.profile</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <menuitem id="partner_profile_menu" parent="main_nys_menu" name="Partner Database" action= "partner_profile_menu_action" 
+    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
 </odoo>
