@@ -2,8 +2,9 @@
 
 from odoo import models, fields, api
 from datetime import datetime, timedelta
+import logging
+_logger = logging.getLogger(__name__)
 # import base64
-
 
 class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
@@ -116,6 +117,17 @@ class Agreement(models.Model):
         "performance_id", 
         string="Performance Management"
         )
+    weight_total = fields.Integer(string='Weight Total', store=True, readonly=True, compute="compute_weight")
+
+    @api.multi
+    @api.depends('pmanagement.weight')
+    def compute_weight(self):
+        for rec in self:
+            total = 0
+            total += rec.pmanagement.weight
+
+        rec.weight_total = total
+
     personal_dev = fields.One2many(
         "performancemanagement.development", 
         "development_id", 
@@ -242,44 +254,36 @@ class Agreement(models.Model):
         mail_ids = []
         today = datetime.now().date()
         #date = agreement_obj.date_start.date()
-        day_before = today - timedelta(days=1) 
-        comp_id = agreement_obj.search([('date_start','like',day_before)])
+        day_before = today + timedelta(days=1)
+        _logger.info("Checking date for rec in self: %s",day_before)
+        comp_id = agreement_obj.search([])
+
+        _logger.info("Checking date for rec in self: %s",comp_id)
+
         if comp_id:
             try:
                 for val in comp_id:
-                    email = val.employee_id.work_email
-                    name = val.employee_id.name
-                    subject = "Performance Agreement Starting"
-                    body = _("Hello %s,\n" %(name))
-                    body += _("\tYour performance agreement is starting at %s\n" %(date_start))
-                    footer = _("Kind regards.\n")
-                    footer += _("%s\n\n"%val.employee_id.company_id)
-                    mail_ids.append(mail_mail.create({
-                        'email_to': email,
-                        'subject': subject,
-                        'body_html': '<pre><span class="inner-pre" style="font-size: 15px">%s<br>%s</span></pre>' %(body, footer),
-                        'notification': True
-                     }))
-                    mail_mail.send(mail_ids)
+                    if val.date_start[:10] == str(day_before):
+                        email = val.employee_id.work_email
+                        name = val.employee_id.name
+                        subject = "Performance Agreement Starting"
+                        body = _("Hello %s,\n",name)
+                        body += _("\tYour performance agreement is starting at %s\n" ,date_start)
+                        footer = _("Kind regards.\n")
+                        footer += _("%s\n\n",val.employee_id.company_id)
+                        email_template = self.env['mail.mail'].create({
+                            'email_from': self.env.user.email or '',
+                            'subject': subject,
+                            'body_html': '<pre><span class="inner-pre" style="font-size: 15px">'+body+'<br>'+footer+'</span></pre>', 
+                            'notification': True
+                        })
+                        email_template.write({'email_to': email})
+                        _logger.info("Checking date for rec in self: %s ======",email_template)
+                        
+                        email_template.send(force_send=True)
             except Exception:
                 print("Exception")
         return None
-
-    #This function is called when the scheduler goes off
-    # def process_demo_scheduler_queue(self, cr, uid, context=None):
-    #     print('Thai123')
-    #     scheduler_line_obj = self.pool.get('scheduler.demo')
-    #     #Contains all ids for the model scheduler.demo
-    #     scheduler_line_ids = self.pool.get('scheduler.demo').search(cr, uid, [])
-    #     #Loops over every record in the model scheduler.demo
-    #     for scheduler_line_id in scheduler_line_ids :
-    #         #Contains all details from the record in the variable scheduler_line
-    #         scheduler_line =scheduler_line_obj.browse(cr, uid,scheduler_line_id ,context=context)
-    #         numberOfUpdates = scheduler_line.numberOfUpdates
-    #         #Prints out the name of every record.
-    #         _logger.info('line: ' + scheduler_line.name)
-    #         #Update the record
-    #         scheduler_line_obj.write(cr, uid, scheduler_line_id, {'numberOfUpdates': (numberOfUpdates +1), 'lastModified': datetime.date.today()}, context=context)
 
 class P_Management(models.Model):
     _name = 'performancemanagement.performance'
@@ -288,6 +292,7 @@ class P_Management(models.Model):
     kpa = fields.Char("KPA")
     kpi = fields.Char("KPI")
     weight = fields.Integer("Weight")
+    # weight_total = fields.Integer(string='Weight Total', store=True, readonly=True, compute="compute_weight")
 
     performance_id = fields.Many2one(
         'performancemanagement.agreement',
@@ -297,6 +302,17 @@ class P_Management(models.Model):
         'performancemanagement.monitoring',
         ondelete="cascade"
     )
+
+    # @api.multi
+    # @api.depends('weight')
+    # def compute_weight(self):
+    #     for rec in self:
+    #         total = 0
+    #         total += rec.weight
+
+    #     rec.weight_total = total
+
+
 
 class P_Development(models.Model):
     _name = 'performancemanagement.development'
