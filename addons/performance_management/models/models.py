@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 from datetime import datetime, timedelta
+from odoo.exceptions import UserError, ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 # import base64
@@ -9,7 +10,6 @@ _logger = logging.getLogger(__name__)
 class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
     _inherit = ['mail.thread','mail.activity.mixin']
-    # , 'calendar.event'
     
     @api.multi 
     def _default_comp_title(self):
@@ -26,8 +26,7 @@ class Compliance(models.Model):
         required=True
         )
     agreement_start = fields.Datetime(
-        string="Agreement Start",
-        # compute="check_date"
+        string="Agreement Start"
         )
     agreement_end = fields.Date(
         string="Agreement End"
@@ -48,33 +47,25 @@ class Compliance(models.Model):
     @api.model
     def create(self, vals):
         result = super(Compliance, self).create(vals)
-        agreement_info ={
-            'name': result.name,
-            'date_start': result.agreement_start,
-            'compliance_id': result.id,
-            'priority': result.priority
+        cron_info = {
+            'name': 'Agreement Card Scheduler',
+            'active': True,
+            'user_id': 'base.user_root',
+            'interval_number': 0,
+            'interval_type': 'hours',
+            'numbercall': -1,
+            'doall': False,
+            'nextcall': result.agreement_start,
+            'model_id': 'performance_management.model_performancemanagement_agreement'
         }
-        self.env['performancemanagement.agreement'].create(agreement_info)
+        self.env['ir.cron'].create(cron_info)
 
         return result
-    
-    # @api.depends('agreement_start', 'agreement_end')
-    # def set_date(self):
-    #     for rec in self:
-    #         rec.start_datetime = rec.agreement_start
-    #         rec.stop_date = rec.agreement_end
-
-    # @api.depends('agreement_start')
-    # def check_date(self):
-    #     for rec in self:
-    #         start = fields.Datetime.from_string(rec.agreement_start)
-    #         current = datetime.now()
-
-    #         if (current = (start-1)):
 
 class Agreement(models.Model):
     _name = 'performancemanagement.agreement'
     _inherit = ['mail.thread','mail.activity.mixin', 'mail.mail']
+    _rec_name = "name"
 
     compliance_id = fields.Many2one(
         'performancemanagement.compliance', 
@@ -117,17 +108,6 @@ class Agreement(models.Model):
         "performance_id", 
         string="Performance Management"
         )
-    weight_total = fields.Integer(string='Weight Total', store=True, readonly=True, compute="compute_weight")
-
-    @api.multi
-    @api.depends('pmanagement.weight')
-    def compute_weight(self):
-        for rec in self:
-            total = 0
-            total += rec.pmanagement.weight
-
-        rec.weight_total = total
-
     personal_dev = fields.One2many(
         "performancemanagement.development", 
         "development_id", 
@@ -182,6 +162,17 @@ class Agreement(models.Model):
     def _check_executive_role(self):
         for rec in self:
             rec.readonly_executive = self.env.user.has_group('strategy_and_planning.group_executive_director')
+
+    @api.constrains('pmanagement')
+    def _check_total(self):
+        for rec in self:
+            total = 0
+            for weight in rec['pmanagement']:
+                total += weight['weight']
+        if total > 100:
+            raise ValidationError('Weight total cannot be greater than 100.')
+        elif total < 100:
+            raise ValidationError('Weight total cannot be lesser than 100.')
 
     def action_to_lm(self):
         self.state = 'review'
@@ -247,7 +238,6 @@ class Agreement(models.Model):
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
 
-    @api.depends('date_start') 
     def _check_date(self):
         agreement_obj = self.env['performancemanagement.agreement']
         mail_mail = self.env['mail.mail']
@@ -257,7 +247,6 @@ class Agreement(models.Model):
         day_before = today + timedelta(days=1)
         _logger.info("Checking date for rec in self: %s",day_before)
         comp_id = agreement_obj.search([])
-
         _logger.info("Checking date for rec in self: %s",comp_id)
 
         if comp_id:
@@ -292,7 +281,6 @@ class P_Management(models.Model):
     kpa = fields.Char("KPA")
     kpi = fields.Char("KPI")
     weight = fields.Integer("Weight")
-    # weight_total = fields.Integer(string='Weight Total', store=True, readonly=True, compute="compute_weight")
 
     performance_id = fields.Many2one(
         'performancemanagement.agreement',
@@ -302,17 +290,6 @@ class P_Management(models.Model):
         'performancemanagement.monitoring',
         ondelete="cascade"
     )
-
-    # @api.multi
-    # @api.depends('weight')
-    # def compute_weight(self):
-    #     for rec in self:
-    #         total = 0
-    #         total += rec.weight
-
-    #     rec.weight_total = total
-
-
 
 class P_Development(models.Model):
     _name = 'performancemanagement.development'

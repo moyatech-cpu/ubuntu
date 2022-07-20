@@ -60,6 +60,20 @@
             </field>
         </record>
 
+        <!-- compliance agreement card cron -->
+        <record model="ir.cron" id="ir_cron_agreement_card">
+            <!-- <field name="function" eval="'_check_date'"/> -->
+            <field name="code">
+                agreement_info = {
+                    'name': result.name,
+                    'date_start': result.agreement_start,
+                    'compliance_id': result.id,
+                    'priority': result.priority
+                }
+            </field>
+            <field name="state">code</field>
+        </record>
+
         <!-- PERFORMANCE AGREEMENT -->
 
         <!-- agreement tree/list view -->
@@ -70,8 +84,10 @@
                 <tree string="Agreement Tree">
                     <field name="name"/>
                     <field name="employee_id"/>
+                    <field name="employee_pos"/>
                     <field name="line_manager"/>
-                    <field name="date_start"/>
+                    <field name="manager_pos"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -118,12 +134,9 @@
                                         <field name="perspective"/>
                                         <field name="kpa"/>
                                         <field name="kpi"/>
-                                        <field name="weight"/>
+                                        <field name="weight" sum="Total" style="color:Red;"/>
                                     </tree>
                                 </field>
-                                <group class="oe_subtotal_footer oe_right" colspan="2">
-                                    <field name="weight_total"/>
-                                </group>
                             </page>
                             <page string="Personal Development Plan">
                                 <field name="personal_dev">
@@ -233,9 +246,9 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="nextcall" eval="(datetime.now() + timedelta(days=0)).strftime('%Y-%m-%d 23:59:59')" />
+            <field name="nextcall" eval="(datetime.now() + timedelta(days=0)).strftime('%Y-%m-%d 05:59:59')" />
             <field name="model_id" ref="performance_management.model_performancemanagement_agreement"/>
-            <!-- <field name="function" eval="'_check_date'"/> -->
+            <field name="function" eval="'_check_date'"/>
             <field name="code">model._check_date()</field>
             <field name="state">code</field>
         </record>
@@ -250,8 +263,10 @@
                 <tree string="Monitoring Tree">
                     <field name="name"/>
                     <field name="employee_id"/>
+                    <field name="employee_pos"/>
                     <field name="line_manager"/>
-                    <field name="date_start"/>
+                    <field name="manager_pos"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -392,7 +407,7 @@
 
         <!-- WINDOW ACTIONS -->
 
-        <!-- window action Compliance Calender-->
+        <!-- window action Compliance Calender -->
         <record model="ir.actions.act_window" id="compliance_list_action">
             <field name="name">Complaince Calendar</field>
             <field name="res_model">performancemanagement.compliance</field>
@@ -404,7 +419,7 @@
             </field>
         </record>
 
-        <!-- window action Agreement-->
+        <!-- window action Agreement -->
         <record model="ir.actions.act_window" id="agreement_view_action">
             <field name="name">Performance Agreement</field>
             <field name="res_model">performancemanagement.agreement</field>
@@ -412,12 +427,28 @@
             <field name="view_mode">kanban,tree,form,calendar</field>
         </record>
 
-        <!-- window action Monitoring-->
+        <!-- window action Agreement Report-->
+        <record model="ir.actions.act_window" id="agreement_reports_view_action">
+            <field name="name">Performance Agreement</field>
+            <field name="res_model">performancemanagement.agreement</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="context">{'group_by':'state'}</field>
+        </record>
+
+        <!-- window action Monitoring -->
         <record model="ir.actions.act_window" id="monitoring_view_action">
             <field name="name">Performance Monitoring</field>
             <field name="res_model">performancemanagement.monitoring</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form,calendar</field>
+        </record>
+
+        <!-- window action Monitoring Report-->
+        <record model="ir.actions.act_window" id="monitoring_reports_view_action">
+            <field name="name">Performance Monitoring</field>
+            <field name="res_model">performancemanagement.monitoring</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="context">{'group_by':'state'}</field>
         </record>
 
         <!-- top level menu: no parent -->
@@ -426,12 +457,21 @@
         <menuitem id="performancemanagement_menu" name="Performance Management" parent="main_performancemanagement_menu"/>
 
         <menuitem id="performanceagreement_menu" name="Complaince Calendar" parent="performancemanagement_menu" groups="strategy_and_planning.group_line_manager"
-                  action="compliance_list_action"/>
+                action="compliance_list_action"/>
 
         <menuitem id="performance_employee_agreement_menu" name="Performance Agreement" parent="performancemanagement_menu" groups="monitoring_and_evaluation.group_nyda_employees"
-                  action="agreement_view_action"/>
+                action="agreement_view_action"/>
 
         <menuitem id="performance_employee_monitoring_menu" name="Performance Monitoring" parent="performancemanagement_menu" groups="monitoring_and_evaluation.group_nyda_employees"
-                  action="monitoring_view_action"/>
+                action="monitoring_view_action"/>
+
+        <menuitem id="reports_views" name="View Reports" parent="performance_management.performancemanagement_menu"
+                groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
+
+        <menuitem id="pa_reports" name="Performance Agreement Report" parent="performance_management.reports_views" 
+                action="agreement_reports_view_action"/>
+
+        <menuitem id="pm_reports" name="Performance Monitoring Report" parent="performance_management.reports_views" 
+                action="monitoring_reports_view_action"/>
 
 </odoo>
