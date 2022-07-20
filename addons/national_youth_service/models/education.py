@@ -16,9 +16,9 @@ class Primary(models.Model):
         for r in self:
             if r.year != False:
                 if not r.year.isnumeric():
-                    raise exceptions.ValidationError( "Year must be a number")
+                    raise exceptions.ValidationError( "Invalid phone year")
                 if len(r.year) != 4:
-                    raise exceptions.ValidationError( "Year has 4 numbers")
+                    raise exceptions.ValidationError( "Invalid phone year")
             if r.name == False or r.name == None:
                 raise exceptions.ValidationError( "Name of the primary school is required")
 
@@ -129,13 +129,13 @@ class Reference(models.Model):
         for r in self:
             if r.telephone != False:
                 if not r.telephone.isnumeric():
-                    raise exceptions.ValidationError( "Telephone must be a number")
+                    raise exceptions.ValidationError( "Invalid phone telephone")
                 if len(r.telephone) != 10:
-                    raise exceptions.ValidationError( "Telephone must have 10 characters")
+                    raise exceptions.ValidationError( "Invalid phone telephone")
             if r.mobile != False:
                 if not r.mobile.isnumeric():
-                    raise exceptions.ValidationError( "Telephone must be a number")
+                    raise exceptions.ValidationError( "Invalid phone mobile number")
                 if len(r.mobile) != 10:
-                    raise exceptions.ValidationError( "Telephone must have 10 characters")
+                    raise exceptions.ValidationError( "Invalid phone mobile number")
             if r.name == False or r.name == None:
                 raise exceptions.ValidationError( "Name of the referee is required")

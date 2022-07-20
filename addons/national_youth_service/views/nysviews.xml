@@ -158,10 +158,17 @@ else:
     </record>
 
     <!-- Actions for the nys opportunies -->
+    <record model="ir.actions.act_window" id = "nys_opportunities">
+        <field name="name">NYS Events opportunities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">event.event</field>
+        <field name="domain">['|',('event_type_id','ilike','Physical Event'),('event_type_id','ilike','Training')]</field>
+        <field name="view_mode">kanban,form</field>
+    </record>
 
     <!-- menu for the profile -->
     <menuitem id="main_nys_menu" name="National Youth Service"/>
     <menuitem id="profile_menu" parent="main_nys_menu" name="Beneficiary Profile" action= "profile_menu_action_add" groups="national_youth_service.group_beneficiary_nys"/>
-    <menuitem id="beneficiary_nys_opportunity_menu" parent="main_nys_menu" name="NYS Opportunities" action= "events_campaign_menu_action" groups="national_youth_service.group_beneficiary_nys"/>
+    <menuitem id="beneficiary_nys_opportunity_menu" parent="main_nys_menu" name="NYS Opportunities" action= "nys_opportunities" groups="national_youth_service.group_beneficiary_nys"/>
 
 </odoo>

@@ -31,6 +31,7 @@
         'views/nysviews.xml',
         'views/nys_partners.xml',
         'views/nys_specialist.xml',
+        'views/events.xml',
         'data/rules.xml',
     ],
     # only loaded in demonstration mode

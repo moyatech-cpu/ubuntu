@@ -60,11 +60,11 @@ class Person(models.Model):
     def _check_defined_number(self):
         for r in self:
             if not r.alternative_number.isnumeric():
-                raise exceptions.ValidationError( "Phone should be a number")
+                raise exceptions.ValidationError( "Invalid phone number")
             if len(r.alternative_number) != 10:
-                raise exceptions.ValidationError( "Phone number must have 10 characters")
+                raise exceptions.ValidationError( "Invalid phone number")
             if not r.address_line5.isnumeric():
-                raise exceptions.ValidationError( "Postal code should be a number")
+                raise exceptions.ValidationError( "Invalid phone postal code")
             if len(r.address_line5) != 4:
-                raise exceptions.ValidationError( "Code has 4 numbers")
+                raise exceptions.ValidationError( "Invalid phone postal code")
                 

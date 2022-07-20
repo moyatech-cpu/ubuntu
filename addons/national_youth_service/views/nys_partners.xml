@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="action_event_projectmanagement" model="ir.actions.act_window">
-            <field name="name">Project Events</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">event.event</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban</field>
-            <!-- <field name="domain">[('category_id.type', '=', 'purchase'), ("company_id", "=", [user.company_id.id])]</field> -->
-            <!-- <field name="context">{'record_id' : active_id}</field> -->
-            <field name="target">current</field>
+    <record id="action_event_projectmanagement" model="ir.actions.server">
+        <field name="name">Project Events</field>
+        <field name="model_id" ref="model_nationalyouth_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+#employee_id = env['nationalyouth.partnerz'].sudo().search([('another_id','=',env.user.id)])
+#if employee_id:
+action = {
+    'type': 'ir.actions.act_window',
+    'name': 'Partner Events',
+    'res_model': 'event.event',
+    'view_type': 'form',
+    'view_mode': 'kanban',
+    'domain': [('project','=',record)],
+    'target': 'current',
+    #'res_id':employee_id.another_id,
+    'context': {'form_view_initial_mode': 'edit'},
+}
+        </field>
     </record>
+
     <!-- Partner Project Application Form View -->
     <record model="ir.ui.view" id="profile_form_view">
         <field name="name">profile.form</field>
@@ -23,22 +34,24 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                    <span>
+                        <div class="pull-left" style="font-size:24px;">
+                            <field name="kanban_state" widget="kanban_state_selection"/>
+                            <br/>
+                            <field name="priority" widget="priority"/>
+                            <field name="name" class="oe_inline"/>
+                        </div>
+                    </span>
                     <div class="oe_button_box pull-right" name="bman" groups="base.group_user">
-                            <!-- <button name="801" type="action" class="oe_stat_button" icon="fa-users" help="Register with this event"> -->
-                            <button name="%(national_youth_service.action_event_projectmanagement)d" type="action" class="oe_stat_button" icon="fa-tasks" string="Events" >
+                            <button name="run_action1" type="object" class="oe_stat_button" icon="fa-tasks" string="Events" >
                                 <!-- <field name="seats_expected" widget="statinfo" string="Attendees"/> -->
                             </button>
-                            <button name="%(national_youth_service.action_event_projectmanagement)d" type="action" class="oe_stat_button" icon="fa-tasks" string="Training" >
+                            <button name="run_action2" type="object" class="oe_stat_button" icon="fa-tasks" string="Training" >
                                 <!-- <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/> -->
                             </button>
                         </div>
                     <group>
-                        <span>
-                            <div class="pull-left" style="font-size:24px;">
-                                <field name="priority" widget="priority" class="oe_inline"/>
-                                <field name="name" class="oe_inline"/>
-                            </div>
-                        </span>
+
                     </group>
                     <group string="Section A">
                         <group string = "" name="group_left">
@@ -387,11 +400,41 @@ else:
     <menuitem id="partner_database_menu" parent="main_nys_menu" name="Partner Database" action= "partner_database_menu_action" 
     groups="national_youth_service.group_partner_nys"/>
 
+        <!-- Define the Partner Database Kanaban view -->
+    <record id="view_partner_database_kanaban" model="ir.ui.view">
+        <field name="name">partner.database.kanban</field>
+        <field name="model">nationalyouth.partnerz.profile</field>
+        <field name="arch" type="xml">
+           <kanban>
+                <field name="name"/>
+                <field name="image"/>
+                <field name="address_line4"/>
+                <field name="email"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <field name="image" widget="image"/>
+                            </div>
+                            <div t-attf-class="oe_kanban_content">
+                                <field name="name"/>
+                                <br/>
+                                <field name="address_line4"/>
+                                <br/>
+                                <field name="email"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id = "partner_profile_menu_action">
         <field name="name">Youth Database</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">nationalyouth.partnerz.profile</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
     <menuitem id="partner_profile_menu" parent="main_nys_menu" name="Partner Database" action= "partner_profile_menu_action" 
     groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>

@@ -89,107 +89,13 @@
             <field name="name">NYS Project Managemnet</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">nationalyouth.partnerz</field>
+            <field name="domain">[('state','ilike','approved')]</field>
             <field name="view_mode">tree,form</field>
         </record>
         
         <!-- Project Management menuitem -->
         <menuitem id="specialist_projectmanagement_menu" parent="main_nys_menu" name="Project Management" action= "specialist_projectmanagement_menu_action" 
         groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-
-        <record model="ir.ui.view" id="events_and_campaign_form_view">
-            <field name="name">eventsandcampaign.form</field>
-            <field name="model">event.event</field>
-            <field name="inherit_id" ref="event.view_event_form" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='state']" position="replace">
-                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" 
-                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys,national_youth_service.group_partner_nys"/>
-                </xpath>
-                <xpath expr="//button[@name='button_confirm']" position="replace">
-                    <button string="Confirm Event" name="button_confirm" states="draft" type="object" class="oe_highlight" 
-                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-                </xpath>
-                <xpath expr="//button[@name='button_done']" position="replace">
-                    <button string="Finish Event" name="button_done" states="confirm" type="object" class="oe_highlight" 
-                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-                </xpath>
-                <xpath expr="//button[@name='button_draft']" position="replace">
-                    <button string="Set To Draft" name="button_draft" states="cancel,done" type="object" 
-                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-                </xpath>
-                <xpath expr="//button[@name='button_cancel']" position="attributes">
-                    <attribute name="groups">base.group_user,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys</attribute>
-                </xpath>
-                <xpath expr="//button[@name='801']" position="replace">
-                    <button name="801" type="action" class="oe_stat_button" icon="fa-users" help="Register with this event"  groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys">
-                        <field name="seats_expected" widget="statinfo" string="Attendees"/>
-                    </button>
-                </xpath>
-                <xpath expr="//button[@name='toggle_active']" position="replace">
-                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive"  groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys">
-                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                    </button>
-                </xpath>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="events_and_campaign_website_form_view">
-            <field name="name">eventsandcampaign.form.website</field>
-            <field name="model">event.event</field>
-            <field name="inherit_id" ref="website_event.event_event_view_form_inherit_website" />
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='website_publish_button']" position="replace">
-                    <button name="website_publish_button" type="object" class="oe_stat_button" icon="fa-globe"
-                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys">
-                        <field name="website_published" widget="website_button"/>
-                    </button>
-                    <button name="ApplyForEvent" type="object" class="oe_stat_button" string="Apply"
-                    groups="national_youth_service.group_beneficiary_nys">
-                        <!-- <field name="website_published" widget="website_button"/> -->
-                    </button>
-                </xpath>
-                <xpath expr="//button[@name='action_open_badge_editor']" position="replace">
-                     <button name="action_open_badge_editor" type="object" string="Preview Badges" class="oe_highlight"
-                    groups="national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-                </xpath>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="events_and_campaign_mail_form_view">
-            <field name="name">eventsandcampaign.form.mail</field>
-            <field name="model">event.event</field>
-            <field name="inherit_id" ref="mass_mailing_event.event_event_view_form_inherit_mass_mailing" />
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='action_mass_mailing_attendees']" position="attributes">
-                    <attribute name="groups">national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys</attribute>
-                </xpath>
-            </field>
-        </record>
-
-        <!-- Project Opportunities / Events or campaign actions   -->
-        <record model="ir.actions.act_window" id = "events_campaign_menu_action">
-            <field name="name">NYS Project Application</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">event.event</field>
-            <!-- <field name="form_view_id" ref="events_and_campaign_form_view"/> -->
-            <field name="view_mode">kanban,form</field>
-        </record>
- 
-        <!-- Menu item for the project opportunities -->
-        <menuitem id="project_opportunities_menu" parent="main_nys_menu" name="Project Opportunities" 
-        groups="national_youth_service.group_partner_nys,national_youth_service.group_apecialist_nys,national_youth_service.group_manager_nys"/>
-        <!-- Events or campaign menuitem -->
-        <menuitem id="events_campaign_menu" parent="project_opportunities_menu" name="Events/Campaigns" action = "events_campaign_menu_action"/>
-
-        <!-- Project Opportunities / Skills training projects actions   -->
-        <record model="ir.actions.act_window" id = "skills_training_menu_action">
-            <field name="name">NYS Project Application</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">nationalyouth.partnerz</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-        <!-- Skills training projects menuitem -->
-        <menuitem id="skills_training_menu" parent="project_opportunities_menu" name="Skills Training Projects" action = "skills_training_menu_action"/>
 
         <!-- Documents menuitem -->
         <menuitem id="documents" parent="main_nys_menu" name="Documents" action = "muk_dms.action_dms_documents"

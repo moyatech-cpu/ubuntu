@@ -28,7 +28,7 @@ class partners(models.Model):
     Branch = fields.Selection([('Head Office', 'Head Office'), ('Johannesburg', 'Johannesburg'), ('Tshwane', 'Tshwane'), ('Soweto', 'Soweto'),
     ('Emalahleni', 'Emalahleni'),('Nelspruit', 'Nelspruit'), ('Secunda', 'Secunda'), ('Polokwane', 'Polokwane'), ('Thulamela', 'Thulamela'),
     ('East London', 'East London'), ('Port Elizabeth', 'Port Elizabeth'), ('Durban', 'Durban'),('Empangeni', 'Empangeni'), ('Rustenburg', 'Rustenburg'),
-    ('Bloemfontein','Bloemfontein'), ('Cape Town', 'Cape Town'), ('Kimberly', 'Kimberly')], string="Partner Type")
+    ('Bloemfontein','Bloemfontein'), ('Cape Town', 'Cape Town'), ('Kimberly', 'Kimberly')], string="Branch")
     project_summary = fields.Html()
 
     state = fields.Selection([('new', 'New'), ('review', 'Review'), ('approved', 'Approved'), ('rejected', 'Rejected')], readonly=True, group_expand = '_expand_states', default = 'new')
@@ -87,12 +87,30 @@ class partners(models.Model):
     def Proceed_to_rejected(self):
         self.state = 'rejected'
 
+    def run_action1(self):
+        views = [(self.env.ref('event.view_event_kanban').id, 'kanban'), (self.env.ref('event.view_event_form').id, 'form')]
+        return{
+                'name': 'Physical Events',
+                'view_type': 'form',
+                'view_mode': 'kanban,form',
+                'view_id': False,
+                'res_model': 'event.event',
+                'views': views,
+                'domain': [('project','=',self.id),('event_type_id','=','Physical Event')],
+                'type': 'ir.actions.act_window',
+            }
+
+    def run_action2(self):
+        action = self.run_action1()
+        action['domain'][1] = ('event_type_id','=','Training')
+        return action
+
 
 class partner_profile(models.Model):
     _name = 'nationalyouth.partnerz.profile'
 
     partner_id = fields.Many2one('partner.enquiry', default=lambda self: self.env['partner.enquiry'].sudo().search([('user_id','=',self.env.user.id)]))
-
+    image = fields.Binary('res.partner')
     name = fields.Char(related = "partner_id.entity_name")
     reg_no = fields.Char('Registration Number', related = "partner_id.company_reg_number")
     tax_no = fields.Char('Name of Entity', related = "partner_id.name_entity_representative")
