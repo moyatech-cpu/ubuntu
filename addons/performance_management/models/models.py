@@ -2,13 +2,14 @@
 
 from odoo import models, fields, api
 from datetime import datetime, timedelta
+from odoo.exceptions import UserError, ValidationError
+import logging
+_logger = logging.getLogger(__name__)
 # import base64
-
 
 class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
     _inherit = ['mail.thread','mail.activity.mixin']
-    # , 'calendar.event'
     
     @api.multi 
     def _default_comp_title(self):
@@ -25,8 +26,7 @@ class Compliance(models.Model):
         required=True
         )
     agreement_start = fields.Datetime(
-        string="Agreement Start",
-        # compute="check_date"
+        string="Agreement Start"
         )
     agreement_end = fields.Date(
         string="Agreement End"
@@ -47,33 +47,25 @@ class Compliance(models.Model):
     @api.model
     def create(self, vals):
         result = super(Compliance, self).create(vals)
-        agreement_info ={
-            'name': result.name,
-            'date_start': result.agreement_start,
-            'compliance_id': result.id,
-            'priority': result.priority
+        cron_info = {
+            'name': 'Agreement Card Scheduler',
+            'active': True,
+            'user_id': 'base.user_root',
+            'interval_number': 0,
+            'interval_type': 'hours',
+            'numbercall': -1,
+            'doall': False,
+            'nextcall': result.agreement_start,
+            'model_id': 'performance_management.model_performancemanagement_agreement'
         }
-        self.env['performancemanagement.agreement'].create(agreement_info)
+        self.env['ir.cron'].create(cron_info)
 
         return result
-    
-    # @api.depends('agreement_start', 'agreement_end')
-    # def set_date(self):
-    #     for rec in self:
-    #         rec.start_datetime = rec.agreement_start
-    #         rec.stop_date = rec.agreement_end
-
-    # @api.depends('agreement_start')
-    # def check_date(self):
-    #     for rec in self:
-    #         start = fields.Datetime.from_string(rec.agreement_start)
-    #         current = datetime.now()
-
-    #         if (current = (start-1)):
 
 class Agreement(models.Model):
     _name = 'performancemanagement.agreement'
     _inherit = ['mail.thread','mail.activity.mixin', 'mail.mail']
+    _rec_name = "name"
 
     compliance_id = fields.Many2one(
         'performancemanagement.compliance', 
@@ -171,6 +163,17 @@ class Agreement(models.Model):
         for rec in self:
             rec.readonly_executive = self.env.user.has_group('strategy_and_planning.group_executive_director')
 
+    @api.constrains('pmanagement')
+    def _check_total(self):
+        for rec in self:
+            total = 0
+            for weight in rec['pmanagement']:
+                total += weight['weight']
+        if total > 100:
+            raise ValidationError('Weight total cannot be greater than 100.')
+        elif total < 100:
+            raise ValidationError('Weight total cannot be lesser than 100.')
+
     def action_to_lm(self):
         self.state = 'review'
 
@@ -235,51 +238,41 @@ class Agreement(models.Model):
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
 
-    @api.depends('date_start') 
     def _check_date(self):
         agreement_obj = self.env['performancemanagement.agreement']
         mail_mail = self.env['mail.mail']
         mail_ids = []
         today = datetime.now().date()
         #date = agreement_obj.date_start.date()
-        day_before = today - timedelta(days=1) 
-        comp_id = agreement_obj.search([('date_start','like',day_before)])
+        day_before = today + timedelta(days=1)
+        _logger.info("Checking date for rec in self: %s",day_before)
+        comp_id = agreement_obj.search([])
+        _logger.info("Checking date for rec in self: %s",comp_id)
+
         if comp_id:
             try:
                 for val in comp_id:
-                    email = val.employee_id.work_email
-                    name = val.employee_id.name
-                    subject = "Performance Agreement Starting"
-                    body = _("Hello %s,\n" %(name))
-                    body += _("\tYour performance agreement is starting at %s\n" %(date_start))
-                    footer = _("Kind regards.\n")
-                    footer += _("%s\n\n"%val.employee_id.company_id)
-                    mail_ids.append(mail_mail.create({
-                        'email_to': email,
-                        'subject': subject,
-                        'body_html': '<pre><span class="inner-pre" style="font-size: 15px">%s<br>%s</span></pre>' %(body, footer),
-                        'notification': True
-                     }))
-                    mail_mail.send(mail_ids)
+                    if val.date_start[:10] == str(day_before):
+                        email = val.employee_id.work_email
+                        name = val.employee_id.name
+                        subject = "Performance Agreement Starting"
+                        body = _("Hello %s,\n",name)
+                        body += _("\tYour performance agreement is starting at %s\n" ,date_start)
+                        footer = _("Kind regards.\n")
+                        footer += _("%s\n\n",val.employee_id.company_id)
+                        email_template = self.env['mail.mail'].create({
+                            'email_from': self.env.user.email or '',
+                            'subject': subject,
+                            'body_html': '<pre><span class="inner-pre" style="font-size: 15px">'+body+'<br>'+footer+'</span></pre>', 
+                            'notification': True
+                        })
+                        email_template.write({'email_to': email})
+                        _logger.info("Checking date for rec in self: %s ======",email_template)
+                        
+                        email_template.send(force_send=True)
             except Exception:
                 print("Exception")
         return None
-
-    #This function is called when the scheduler goes off
-    # def process_demo_scheduler_queue(self, cr, uid, context=None):
-    #     print('Thai123')
-    #     scheduler_line_obj = self.pool.get('scheduler.demo')
-    #     #Contains all ids for the model scheduler.demo
-    #     scheduler_line_ids = self.pool.get('scheduler.demo').search(cr, uid, [])
-    #     #Loops over every record in the model scheduler.demo
-    #     for scheduler_line_id in scheduler_line_ids :
-    #         #Contains all details from the record in the variable scheduler_line
-    #         scheduler_line =scheduler_line_obj.browse(cr, uid,scheduler_line_id ,context=context)
-    #         numberOfUpdates = scheduler_line.numberOfUpdates
-    #         #Prints out the name of every record.
-    #         _logger.info('line: ' + scheduler_line.name)
-    #         #Update the record
-    #         scheduler_line_obj.write(cr, uid, scheduler_line_id, {'numberOfUpdates': (numberOfUpdates +1), 'lastModified': datetime.date.today()}, context=context)
 
 class P_Management(models.Model):
     _name = 'performancemanagement.performance'
