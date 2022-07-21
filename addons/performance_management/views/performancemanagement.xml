@@ -27,11 +27,13 @@
                         <group>
                             <group name="group_left">
                                 <field name="agreement_start"/>
-                                <field name="monitoring_start"/>
+                                <field name="monitoring_start1"/>
+                                <field name="monitoring_start2"/>
                             </group>
                             <group name="group_right">
                                 <field name="agreement_end"/>
-                                <field name="monitoring_end"/>
+                                <field name="monitoring_end1"/>
+                                <field name="monitoring_end2"/>
                             </group>
                         </group>
                         <notebook>
@@ -41,7 +43,7 @@
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
                         <field name="activity_ids" widget="mail_activity"/>
                         <field name="message_ids" widget="mail_thread"/>
                     </div>
@@ -58,20 +60,6 @@
                     <field name="name"/>
                 </calendar>
             </field>
-        </record>
-
-        <!-- compliance agreement card cron -->
-        <record model="ir.cron" id="ir_cron_agreement_card">
-            <!-- <field name="function" eval="'_check_date'"/> -->
-            <field name="code">
-                agreement_info = {
-                    'name': result.name,
-                    'date_start': result.agreement_start,
-                    'compliance_id': result.id,
-                    'priority': result.priority
-                }
-            </field>
-            <field name="state">code</field>
         </record>
 
         <!-- PERFORMANCE AGREEMENT -->
@@ -100,23 +88,19 @@
                 <form string="Agreement Form">
                     <header>
                         <!-- Buttons for NEW stage -->
-                        <button id="send_to_lm" name="action_to_lm" string="Send to Line Manager" type="object" states="new" class="btn-primary" groups="monitoring_and_evaluation.group_nyda_employees"/>
-                        <!-- Buttons for REVIEW stage -->
-                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <button id="send_to_int" name="action_to_int" string="Training Intervention" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <!-- Buttons for PERFORMANCE DIALOGUE stage -->
-                        <button id="scheduling_activity" name="schedule_activiy" string="Schedule" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <button id="send_to_con" name="action_to_con" string="Approve" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <!-- Buttons for PERFORMANCE CONTRACT stage -->
-                        <button id="send_to_grieve" name="action_to_grieve" string="Grievance" type="object" states="performance contract" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
-                        <button id="send_complete" name="action_completed" string="Signed" type="object" states="performance contract" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
-                        <!-- Buttons for COMPLETED stage -->
-                        <button id="send_to_monitoring" name="action_to_monitoring" string="HR Approved" type="object" states="completed" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <!-- Buttons for TRAINING INTERVENTION stage -->
-                        <button id="send_to_dia" name="action_to_dia" string="Dialogue" type="object" states="training intervention" class="btn-primary" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
-                        <!-- Buttons for GRIEVANCE stage -->
-                        <button id="send_complete" name="action_completed" string="Signed" type="object" states="grievance" class="btn-primary" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
-                        <field name="state" widget="statusbar" statusbar_visible="new,review,performance dialogue,performance contract,completed"/>
+                        <button id="send_to_lm" name="action_to_lm" string="SEND TO LINE MANAGER" type="object" states="new" class="btn-primary" groups="monitoring_and_evaluation.group_nyda_employees"/>
+                        <!-- Buttons for LINE REVIEW stage -->
+                        <button id="send_to_ed" name="action_to_ed" string="AGREE" type="object" states="line review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_new" name="action_to_new" string="DISAGREE" type="object" states="line review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <!-- Buttons for ED REVIEW stage -->
+                        <button id="send_to_hr" name="action_to_hr" string="APPROVED" type="object" states="ed review" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        <button id="send_to_lm" name="action_to_lm" string="DISAPPROVED" type="object" states="ed review" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        <!-- Buttons for HR stage -->
+                        <button id="send_to_confirm" name="action_to_confirm" string="CONFIRM" type="object" states="hr" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        
+                        <button id="send_to_monitoring" name="action_to_monitoring" string="monitoring" type="object" states="confirmed" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                       
+                        <field name="state" widget="statusbar" clickable="True" statusbar_visible="new,line review,ed review,hr,confirmed"/>
                     </header>
                     <sheet>
                         <span><h1><field name="priority" widget="priority"/><field name="name"/></h1></span>
@@ -134,7 +118,7 @@
                                         <field name="perspective"/>
                                         <field name="kpa"/>
                                         <field name="kpi"/>
-                                        <field name="weight" sum="Total" style="color:Red;"/>
+                                        <field name="weight" sum="Total"/>
                                     </tree>
                                 </field>
                             </page>
@@ -279,22 +263,21 @@
                 <form string="Monitoring Form">
                     <header>
                         <!-- Buttons for NEW stage -->
-                        <button id="send_to_review" name="action_to_review" string="Proceed" type="object" states="new" class="btn-primary" groups="monitoring_and_evaluation.group_nyda_employees"/>
-                        <!-- Buttons for REVIEW stage -->
-                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <!-- Buttons for MODERATE PERFORMANCE stage -->
-                        <button id="send_to_hr" name="action_to_hr" string="Send to HR" type="object" states="moderate performance" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
-                        <button id="send_to_dialogue" name="action_disagree" string="Disagree" type="object" states="moderate performance" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
-                        <!-- Buttons for HR stage -->
-                        <button id="send_to_complete" name="action_to_complete" string="HR Approved" type="object" states="hr" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <!-- Buttons for PERFORMANCE DIALOGUE stage -->
-                        <button id="scheduling_activity" name="schedule_activiy" string="Schedule" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <button id="send_to_grieve" name="action_to_grieve" string="Grievance" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="performance dialogue" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
-                        <!-- Buttons for GRIEVANCE stage -->
-                        <button id="send_to_moderate" name="action_agree" string="Agree" type="object" states="grievance" class="btn-primary" groups="strategy_and_planning.group_line_manager,strategy_and_planning.group_executive_director"/>
-                        <field name="state" widget="statusbar" statusbar_visible="new,review,moderate performance,hr"/>
+                        <button id="send_to_lm" name="action_to_lm" string="SEND TO LINE MANAGER" type="object" states="new" class="btn-primary" groups="monitoring_and_evaluation.group_nyda_employees"/>
+                        <!-- Buttons for LINE REVIEW stage -->
+                        <button id="send_to_hod" name="action_to_hod" string="REVIEWED" type="object" states="line review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_new" name="action_to_new" string="QUERY" type="object" states="line review" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <!-- Buttons for HOD MODERATE stage -->
+                        <button id="send_to_hr" name="action_to_hr" string="MODERATED" type="object" states="hod moderation" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        <button id="send_to_new" name="action_to_new" string="QUERY" type="object" states="hod moderatione" class="btn-primary" groups="strategy_and_planning.group_executive_director"/>
+                        <!-- Buttons for HR VERIFICATION stage -->
+                        <button id="send_to_mod" name="action_to_mod" string="VERIFIED" type="object" states="hr verification" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <button id="send_to_new" name="action_to_new" string="QUERY" type="object" states="hr verification" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <!-- Buttons for MODERATION stage -->
+                        <button id="send_to_audit" name="action_to_audit" string="MODERATED" type="object" states="moderation" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <!-- Buttons for AUDITING stage -->
+                        <button id="send_to_complete" name="action_to_complete" string="AUDITED" type="object" states="auditing" class="btn-primary" groups="strategy_and_planning.group_line_manager"/>
+                        <field name="state" widget="statusbar" clickable="True" statusbar_visible="new,line review,hod moderation,hr verification,moderation,auditing,completed"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -303,7 +286,7 @@
                             </button>
                         </div>
                         <span><h1><field name="priority" widget="priority"/><field name="name"/></h1></span>
-                        <group>
+                        <group string="Employee Details">
                                 <field name="employee_id"/>
                                 <field name="employee_pos"/>
                                 <field name="line_manager"/>
@@ -317,13 +300,16 @@
                                         <field name="perspective"/>
                                         <field name="kpa"/>
                                         <field name="kpi"/>
-                                        <field name="weight"/>
+                                        <field name="weight" sum="Total"/>
                                         <field name="readonly_individual" invisible="1"/>
                                         <field name="i_score" attrs="{'readonly':[('readonly_individual','=',False),('id','>',0)]}"/>
+                                        <field name="cal_i_score" sum="Total"/>
                                         <field name="readonly_lmanager" invisible="1"/>
                                         <field name="lm_score" attrs="{'readonly':[('readonly_lmanager','=',False),('id','>',0)]}"/>
+                                        <field name="cal_lm_score" sum="Total"/>
                                         <field name="readonly_exec" invisible="1"/>
                                         <field name="m_score" attrs="{'readonly':[('readonly_exec','=',False),('id','>',0)]}"/>
+                                        <field name="cal_m_score" sum="Total"/>
                                     </tree>
                                 </field>
                             </page>
@@ -412,7 +398,7 @@
             <field name="name">Complaince Calendar</field>
             <field name="res_model">performancemanagement.compliance</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,form,calendar,pivot,graph</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Here, you can create a new Compliance Calender
                 for Performance Management.</p>
@@ -424,7 +410,8 @@
             <field name="name">Performance Agreement</field>
             <field name="res_model">performancemanagement.agreement</field>
             <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph</field>
+            <field name="context">{'group_by':'state'}</field>
         </record>
 
         <!-- window action Agreement Report-->
@@ -440,7 +427,8 @@
             <field name="name">Performance Monitoring</field>
             <field name="res_model">performancemanagement.monitoring</field>
             <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph</field>
+            <field name="context">{'group_by':'state'}</field>
         </record>
 
         <!-- window action Monitoring Report-->

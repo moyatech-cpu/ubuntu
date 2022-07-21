@@ -10,6 +10,7 @@ _logger = logging.getLogger(__name__)
 class Compliance(models.Model):
     _name = 'performancemanagement.compliance'
     _inherit = ['mail.thread','mail.activity.mixin']
+    _description = "Compliance calender for employee is created"
     
     @api.multi 
     def _default_comp_title(self):
@@ -31,41 +32,64 @@ class Compliance(models.Model):
     agreement_end = fields.Date(
         string="Agreement End"
         )
-    monitoring_start = fields.Date(
-        string="Monitoring Start"
+    monitoring_start1 = fields.Date(
+        string="Monitoring Start (1)"
         )
-    monitoring_end = fields.Date(
-        string="Monitoring End"
+    monitoring_end1 = fields.Date(
+        string="Monitoring End (1)"
+        )
+    monitoring_start2 = fields.Date(
+        string="Monitoring Start (2)"
+        )
+    monitoring_end2 = fields.Date(
+        string="Monitoring End (2)"
         )
     description = fields.Html()
     priority = fields.Selection(
         [
             ('level 1', 'LEVEL 1'), 
             ('level 2', 'LEVEL 2')
-        ])
+        ],
+        default='level 1'
+        )
 
     @api.model
     def create(self, vals):
         result = super(Compliance, self).create(vals)
+
         cron_info = {
-            'name': 'Agreement Card Scheduler',
+            'name': 'Agreement Card Scheduler'+str(result.id),
             'active': True,
-            'user_id': 'base.user_root',
+            'user_id': self.env.ref('base.user_root').id,
             'interval_number': 0,
             'interval_type': 'hours',
             'numbercall': -1,
             'doall': False,
             'nextcall': result.agreement_start,
-            'model_id': 'performance_management.model_performancemanagement_agreement'
+            'model_id': self.env.ref('performance_management.model_performancemanagement_compliance').id,
+            'code': "model.create_agreement('"+str(result['name'])+"','"+str(result['agreement_start'])+"','"+str(result['id'])+"','"+str(result['priority'])+"')",
+            'state': 'code'
         }
+        
         self.env['ir.cron'].create(cron_info)
 
         return result
+
+    def create_agreement(self,name,agreement_start,id,priority):
+        agreement_info = {
+            'name': name,
+            'date_start': agreement_start,
+            'compliance_id': int(id),
+            'priority': priority
+        }
+
+        self.env['performancemanagement.agreement'].create(agreement_info)
 
 class Agreement(models.Model):
     _name = 'performancemanagement.agreement'
     _inherit = ['mail.thread','mail.activity.mixin', 'mail.mail']
     _rec_name = "name"
+    _description = "Performance Agreement Created"
 
     compliance_id = fields.Many2one(
         'performancemanagement.compliance', 
@@ -73,7 +97,8 @@ class Agreement(models.Model):
         )
     employee_id = fields.Many2one(
         'hr.employee',
-        string="Employee"
+        string="Employee",
+        track_visibility='always'
         )
     image_small = fields.Binary('Image', related='employee_id.image_small')
     date_start = fields.Datetime(
@@ -87,7 +112,8 @@ class Agreement(models.Model):
         )
     name = fields.Char(
         string="Title",
-        related="compliance_id.name"
+        related="compliance_id.name",
+        track_visibility='always'
         )
     employee_pos = fields.Many2one(
         string="Employee Position",
@@ -124,17 +150,15 @@ class Agreement(models.Model):
     state = fields.Selection(
         [
             ('new', 'NEW'),
-            ('review', 'REVIEW'),
-            ('performance dialogue', 'PERFORMANCE DIALOGUE'),
-            ('performance contract', 'PERFORMANCE CONTRACT'),
-            ('completed', 'COMPLETED'),
-            ('training intervention', 'TRAINING INTERVENTION'),
-            ('grievance', 'GRIEVANCE')
+            ('line review', 'LINE REVIEW'),
+            ('ed review', 'ED REVIEW'),
+            ('hr', 'HR'),
+            ('confirmed', 'CONFIRMED')
         ],
         string='Status',
-        readonly=True,
         group_expand='_expand_states',
-        default='new'
+        default='new',
+        track_visibility='onchange'
         )
     priority = fields.Selection(
         [
@@ -175,22 +199,19 @@ class Agreement(models.Model):
             raise ValidationError('Weight total cannot be lesser than 100.')
 
     def action_to_lm(self):
-        self.state = 'review'
+        self.state = 'line review'
 
-    def action_to_dia(self):
-        self.state = 'performance dialogue'
+    def action_to_ed(self):
+        self.state = 'ed review'
 
-    def action_to_int(self):
-        self.state = 'training intervention'
+    def action_to_new(self):
+        self.state = 'new'
 
-    def action_to_con(self):
-        self.state = 'performance contract'
+    def action_to_hr(self):
+        self.state = 'hr'
 
-    def action_to_grieve(self):
-        self.state = 'grievance'
-
-    def action_completed(self):
-        self.state = 'completed'
+    def action_to_confirm(self):
+        self.state = 'confirmed'
 
     @api.multi
     def action_to_monitoring(self):
@@ -222,18 +243,18 @@ class Agreement(models.Model):
                 'scores_id': monitoring_record.id,
             })
 
-    def schedule_activiy(self):
-        action = {
-            'type': 'ir.actions.act_window',
-            'name': 'Schedule',
-            'res_model': 'mail.activity',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {'form_view_initial_mode': 'edit'},
-        }
+    # def schedule_activiy(self):
+    #     action = {
+    #         'type': 'ir.actions.act_window',
+    #         'name': 'Schedule',
+    #         'res_model': 'mail.activity',
+    #         'view_type': 'form',
+    #         'view_mode': 'form',
+    #         'target': 'new',
+    #         'context': {'form_view_initial_mode': 'edit'},
+    #     }
 
-        return action
+    #     return action
 
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
@@ -328,7 +349,8 @@ class P_Scores(models.Model):
             ('1', '1'),
             ('2', '2'),
             ('3', '3'),
-            ('4', '4')
+            ('4', '4'),
+            ('5', '5')
         ],
         string="Inidividual Score"
         )
@@ -337,19 +359,51 @@ class P_Scores(models.Model):
             ('1', '1'),
             ('2', '2'),
             ('3', '3'),
-            ('4', '4')
+            ('4', '4'),
+            ('5', '5')
         ],
-        string="Line Manager Score"
+        string="Manager Score"
         )
     m_score = fields.Selection(
         [
             ('1', '1'),
             ('2', '2'),
             ('3', '3'),
-            ('4', '4')
+            ('4', '4'),
+            ('5', '5')
         ],
-        string="Moderated Score"
+        string="Executive Score"
         )
+    cal_i_score = fields.Float(
+        string="Calculated Individual Score",
+        compute="_individual_calculated_score",
+        readonly=True
+    )
+    cal_lm_score = fields.Float(
+        string="Calculated Manager Score",
+        compute="_manager_calculated_score",
+        readonly=True
+    )
+    cal_m_score = fields.Float(
+        string="Calculated Executive Score",
+        compute="_executive_calculated_score",
+        readonly=True
+    )
+
+    @api.depends('weight')
+    def _individual_calculated_score(self):
+        for rec in self:
+            rec.cal_i_score = (rec.weight / 100) * int(rec.i_score)
+
+    @api.depends('weight')
+    def _manager_calculated_score(self):
+        for rec in self:
+            rec.cal_lm_score = (rec.weight / 100) * int(rec.lm_score)
+
+    @api.depends('weight')
+    def _executive_calculated_score(self):
+        for rec in self:
+            rec.cal_m_score = (rec.weight / 100) * int(rec.m_score)
 
     readonly_individual = fields.Boolean(compute="_check_individual", store=False)
     readonly_lmanager = fields.Boolean(compute="_check_lmanager", store=False)
@@ -375,6 +429,7 @@ class P_Scores(models.Model):
 class Monitoring(models.Model):
     _name = 'performancemanagement.monitoring'
     _inherit = ['mail.thread','mail.activity.mixin']
+    _description = "Performance Monitoring Created"
 
     active = fields.Boolean('Active', default=True)
 
@@ -382,7 +437,6 @@ class Monitoring(models.Model):
         'performancemanagement.compliance', 
         string="Related CC"
         )
-    
     agreement_id = fields.Many2one(
         'performancemanagement.agreement', 
         string="Related Agreement"
@@ -402,15 +456,14 @@ class Monitoring(models.Model):
     state = fields.Selection(
         [
             ('new', 'NEW'),
-            ('review', 'REVIEW'),
-            ('moderate performance', 'MODERATE PERFORMANCE'),
-            ('hr', 'HR'),
-            ('completed', 'COMPLETED'),
-            ('performance dialogue', 'PERFORMANCE DIALOGUE'),
-            ('grievance', 'GRIEVANCE')
+            ('line review', 'LINE REVIEW'),
+            ('hod moderation', 'HOD MODERATION'),
+            ('hr verification', 'HR VERIFICATION'),
+            ('moderation', 'MODERATION'),
+            ('auditing', 'AUDITING'),
+            ('completed', 'COMPLETED')
         ],
         string='Status',
-        readonly=True,
         group_expand='_expand_states',
         default='new'
         )
@@ -446,6 +499,7 @@ class Monitoring(models.Model):
         "scores_id", 
         string="Scores"
         )
+
     readonly_employee = fields.Boolean(compute="_check_user_role", store=False)
     emp_comments = fields.Html()
     readonly_manager = fields.Boolean(compute="_check_manager_role", store=False)
@@ -476,33 +530,36 @@ class Monitoring(models.Model):
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
 
-    def action_to_review(self):
-        self.state = 'review'
+    def action_to_lm(self):
+        self.state = 'line review'
 
-    def action_agree(self):
-        self.state = 'moderate performance'
+    def action_to_hod(self):
+        self.state = 'hod moderation'
 
-    def action_disagree(self):
-        self.state = 'performance dialogue'
+    def action_to_new(self):
+        self.state = 'new'
 
     def action_to_hr(self):
-        self.state = 'hr'
+        self.state = 'hr verification'
+
+    def action_to_mod(self):
+        self.state = 'moderation'
+
+    def action_to_audit(self):
+        self.state = 'auditing'
 
     def action_to_complete(self):
         self.state = 'completed'
 
-    def action_to_grieve(self):
-        self.state = 'grievance'
+    # def schedule_activiy(self):
+    #     action = {
+    #         'type': 'ir.actions.act_window',
+    #         'name': 'Schedule',
+    #         'res_model': 'mail.activity',
+    #         'view_type': 'form',
+    #         'view_mode': 'form',
+    #         'target': 'new',
+    #         'context': {'form_view_initial_mode': 'edit'},
+    #     }
 
-    def schedule_activiy(self):
-        action = {
-            'type': 'ir.actions.act_window',
-            'name': 'Schedule',
-            'res_model': 'mail.activity',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {'form_view_initial_mode': 'edit'},
-        }
-
-        return action
+    #     return action
